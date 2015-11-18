@@ -1,3 +1,5 @@
+### Travis CI Status : [![Build Status](https://travis-ci.org/quangbahoa/Beans.svg)](https://travis-ci.org/quangbahoa/Beans)
+
 # Beans WordPress theme framework
 [Beans](http://www.getbeans.io/) is an incredibly powerful and flexible WordPress theme, yet light weight and unbelievably fast. Whether you are a pro or a beginner, you will enjoy the simplicity of it. The magic is under the hood!
 # Documentation
