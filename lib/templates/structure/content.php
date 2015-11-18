@@ -8,7 +8,7 @@
 $content_attributes = array(
 	'class' => 'tm-content',
 	'role' => 'main',
-	'itemprop' => 'mainContentOfPage'
+	'itemprop' => 'mainEntityOfPage'
 );
 
 // Blog specific attributes.
