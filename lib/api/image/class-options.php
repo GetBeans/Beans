@@ -33,7 +33,7 @@ class _Beans_Image_Options {
 			array(
 				'id' => 'beans_edited_images_directories',
 				'type' => 'flush_edited_images',
-				'description' => 'Clear all edited images. New images will be created on page load.'
+				'description' => __( 'Clear all edited images. New images will be created on page load.', 'tm-beans' )
 			)
 		);
 
