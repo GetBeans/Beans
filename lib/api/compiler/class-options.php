@@ -32,7 +32,7 @@ class _Beans_Compiler_Options {
 			array(
 				'id' => 'beans_compiler_items',
 				'type' => 'flush_cache',
-				'description' => 'Clear CSS and Javascript cached files. New cached versions will be compiled on page load.'
+				'description' => __( 'Clear CSS and Javascript cached files. New cached versions will be compiled on page load.', 'tm-beans' )
 			)
 		);
 
@@ -45,7 +45,7 @@ class _Beans_Compiler_Options {
 					'checkbox_label' => __( 'Compile all WordPress styles', 'tm-beans' ),
 					'type' => 'checkbox',
 					'default' => false,
-					'description' => 'Compile and cache all the CSS files that have been enqueued to the WordPress head.'
+					'description' => __( 'Compile and cache all the CSS files that have been enqueued to the WordPress head.', 'tm-beans' )
 				)
 			) );
 
@@ -58,7 +58,7 @@ class _Beans_Compiler_Options {
 					'checkbox_label' => __( 'Compile all WordPress scripts', 'tm-beans' ),
 					'type' => 'checkbox',
 					'default' => false,
-					'description' => 'Compile and cache all the Javascript files that have been enqueued to the WordPress head.'
+					'description' => __( 'Compile and cache all the Javascript files that have been enqueued to the WordPress head.', 'tm-beans' )
 				)
 			) );
 
