@@ -55,7 +55,7 @@ class _Beans_Admin {
 				'id' => 'beans_dev_mode',
 				'checkbox_label' => __( 'Enable development mode', 'tm-beans' ),
 				'type' => 'checkbox',
-				'description' => 'This option should be enabled while your website is in development.'
+				'description' => __( 'This option should be enabled while your website is in development.', 'tm-beans' )
 			)
 		);
 
