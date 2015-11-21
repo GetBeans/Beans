@@ -41,7 +41,7 @@ do_action( 'beans_before_loop' );
 				$article_attributes['itemtype']  = 'http://schema.org/BlogPosting';
 
 				// Only add to blogPost attribute to the main query,
-				if ( is_main_query() )
+				if ( is_main_query() && ! is_search() )
 					$article_attributes['itemprop']  = 'blogPost';
 
 			}
