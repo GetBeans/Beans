@@ -10,7 +10,7 @@ echo beans_open_markup( 'beans_comment', 'article', array(
 	'class' => 'uk-comment',
 	'itemprop' => 'comment',
 	'itemscope' => 'itemscope',
-	'itemtype' => 'http://schema.org/Comment'
+	'itemtype' => 'http://schema.org/UserComments'
 ) );
 
 	echo beans_open_markup( 'beans_comment_header', 'header', array( 'class' => 'uk-comment-header' ) );
@@ -24,7 +24,7 @@ echo beans_open_markup( 'beans_comment', 'article', array(
 
 	echo beans_close_markup( 'beans_comment_header', 'header' );
 
-	echo beans_open_markup( 'beans_comment_body', 'div', array( 'class' => 'uk-comment-body', 'itemprop' => 'text' ) );
+	echo beans_open_markup( 'beans_comment_body', 'div', array( 'class' => 'uk-comment-body', 'itemprop' => 'commentText' ) );
 
 		/**
 		 * Fires in the comment body.

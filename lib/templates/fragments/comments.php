@@ -61,7 +61,7 @@ function beans_comment_author() {
 
 	echo beans_open_markup( 'beans_comment_title', 'div', array(
 		'class' => 'uk-comment-title',
-		'itemprop' => 'author',
+		'itemprop' => 'creator',
 		'itemscope' => 'itemscope',
 		'itemtype' => 'http://schema.org/Person'
 	) );
@@ -147,7 +147,7 @@ function beans_comment_metadata() {
 
 		echo beans_open_markup( 'beans_comment_time', 'time', array(
 			'datetime' => get_comment_time( 'c' ),
-			'itemprop' => 'datePublished'
+			'itemprop' => 'commentTime'
 		) );
 
 			echo beans_output( 'beans_comment_time_text', sprintf(

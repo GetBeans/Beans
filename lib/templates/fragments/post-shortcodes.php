@@ -43,6 +43,7 @@ function beans_post_meta_author_shortcode() {
 		'href' => esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
 		'rel' => 'author',
 		'itemprop' => 'author',
+		'itemscope' => 'itemscope',
 		'itemtype' => 'http://schema.org/Person'
 	) );
 
