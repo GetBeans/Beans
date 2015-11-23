@@ -235,7 +235,7 @@ function beans_get_layout_class( $id ) {
  */
 function beans_get_layouts_for_options( $add_default = false ) {
 
-	$base = BEANS_ADMIN_ASSETS_URL . 'images/layouts/';
+	$base = 'images/layouts/';
 
 	$layouts = array(
 		'c' =>  $base . 'c.png'
