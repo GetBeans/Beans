@@ -14,7 +14,7 @@ add_action( 'beans_init', 'beans_load_dependencies', -1 );
  */
 function beans_load_dependencies() {
 
-	require_once( trailingslashit( dirname( __FILE__ ) ) . 'api/init.php' );
+	require_once( trailingslashit( dirname( __FILE__ ) ) . '/api/init.php' );
 
 	// Load the necessary Beans components.
 	beans_load_api_components( array(
@@ -102,6 +102,7 @@ function beans_define_constants() {
 
 	// Define admin paths.
 	define( 'BEANS_ADMIN_PATH', BEANS_PATH . 'admin/' );
+	define( 'BEANS_ADMIN_ASSETS_PATH', BEANS_ADMIN_PATH . 'assets/' );
 
 	// Define admin url */
 	define( 'BEANS_ADMIN_URL', BEANS_URL . 'admin/' );
@@ -138,7 +139,9 @@ function beans_includes() {
 	if ( is_admin() ) {
 
 		require_once( BEANS_ADMIN_PATH . 'options.php' );
-		require_once( BEANS_ADMIN_PATH . 'updater.php' );
+
+		if ( is_super_admin() )
+			require_once( BEANS_ADMIN_PATH . 'updater.php' );
 
 	}
 

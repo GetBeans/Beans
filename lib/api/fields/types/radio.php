@@ -35,12 +35,12 @@ function beans_field_radio( $field ) {
 
 			$checked = $id == $field['value'] ? ' checked="checked"' : null;
 
-			$has_image = @getimagesize( $radio ) ? 'bs-has-image' : false;
+			$has_image = @getimagesize( BEANS_ADMIN_ASSETS_PATH . '/' . $radio ) ? 'bs-has-image' : false;
 
 			echo '<label class="' . $has_image . '">';
 
 				if ( $has_image )
-					echo '<img src="' . $radio . '" />';
+					echo '<img src="' BEANS_ADMIN_ASSETS_URL . '/' . $radio . '" />';
 
 				echo '<input type="radio" name="' . $field['name'] . '" value="' . $id . '" ' . $checked . ' ' . beans_sanatize_attributes( $field['attributes'] ) . '/>';
 
