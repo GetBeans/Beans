@@ -16,7 +16,7 @@ function beans_footer_content() {
 
 	beans_open_markup_e( 'beans_footer_credit', 'div', array( 'class' => 'uk-clearfix uk-text-small uk-text-muted' ) );
 
-		beans_open_markup_e( 'beans_footer_credit_left', 'span', array(
+		beans_open_markup_e( 'beans_footer_credit_left', 'div', array(
 			'class' => 'uk-align-medium-left uk-margin-small-bottom'
 		) );
 
@@ -26,7 +26,7 @@ function beans_footer_content() {
 				get_bloginfo( 'name' )
 			) );
 
-		beans_close_markup_e( 'beans_footer_credit_left', 'span' );
+		beans_close_markup_e( 'beans_footer_credit_left', 'div' );
 
 		$framework_link = beans_open_markup( 'beans_footer_credit_framework_link', 'a', array(
 			'href' => 'http://www.getbeans.io', // Automatically escaped.
@@ -37,7 +37,7 @@ function beans_footer_content() {
 
 		$framework_link .= beans_close_markup( 'beans_footer_credit_framework_link', 'a' );
 
-		beans_open_markup_e( 'beans_footer_credit_right', 'span', array(
+		beans_open_markup_e( 'beans_footer_credit_right', 'div', array(
 			'class' => 'uk-align-medium-right uk-margin-bottom-remove'
 		) );
 
@@ -46,7 +46,7 @@ function beans_footer_content() {
 				$framework_link
 			) );
 
-		beans_close_markup_e( 'beans_footer_credit_right', 'span' );
+		beans_close_markup_e( 'beans_footer_credit_right', 'div' );
 
 
 	beans_close_markup_e( 'beans_footer_credit', 'div' );
