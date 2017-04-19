@@ -128,11 +128,6 @@ class _Beans_Walker_Nav_Menu extends Walker_Nav_Menu {
 
 		$link_attr = apply_filters( 'nav_menu_link_attributes', $_link_attr, $item, $args );
 
-		// Set wp item attributes as defaults.
-		$item_attr = array(
-			'class'    => array( $_classes ),
-			'itemprop' => 'name',
-		);
 
 		// Add UIKit active class.
 		if ( in_array( 'current-menu-item', $classes ) ) {
@@ -166,7 +161,11 @@ class _Beans_Walker_Nav_Menu extends Walker_Nav_Menu {
 
 				$item_output .= beans_open_markup( "beans_menu_item_link[_{$item_id}]", 'a', $link_attr, $item, $depth, $args );
 
-					$item_output .= beans_output( "beans_menu_item_text[_{$item_id}]", $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after );
+					$item_output .= beans_open_markup( "beans_menu_item_span[_{$item_id}]", 'span', array( 'itemprop' => 'name' ));
+
+						$item_output .= beans_output( "beans_menu_item_text[_{$item_id}]", $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after );
+
+					$item_output .= beans_close_markup( "beans_menu_item_span[_{$item_id}]", 'span');
 
 					if ( isset( $child_indicator ) ) {
 
