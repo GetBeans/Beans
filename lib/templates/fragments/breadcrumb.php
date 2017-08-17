@@ -99,6 +99,13 @@ function beans_breadcrumb() {
 		$breadcrumbs[] = __( '404', 'tm-beans' );
 
 	}
+	
+	/**
+	 * Filter the breadcrumbs prior to Beans output.
+	 *
+	 * @param array $breadcrumbs An array of breadcrumbs which Beans will output.
+	 */
+	$breadcrumbs = apply_filters( 'beans_breadcrumbs', $breadcrumbs );
 
 	// Open breadcrumb.
 	beans_open_markup_e( 'beans_breadcrumb', 'ul', array( 'class' => 'uk-breadcrumb uk-width-1-1' ) );
