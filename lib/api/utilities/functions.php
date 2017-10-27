@@ -260,15 +260,22 @@ function beans_url_to_path( $url, $force_rebuild = false ) {
 		$blogdetails = '';
 	}
 
+	// It's not an internal URL. Bail out.
+	if ( false === stripos( parse_url( $url, PHP_URL_HOST ), parse_url( $site_url, PHP_URL_HOST ) ) ) {
+		if ( false === stripos( $url, parse_url( site_url(), PHP_URL_SCHEME ) ) ) {
+			// If no url scheme found, it's local path instead of url.
+			// Also path is actually relative path instead of absolute.
+			// Add ./ in front of the relative url to make it relative path.
+			// After sanitize it will be converted to absolute path.
+			$url = beans_sanitize_path( './' . $url );
+		}
+		return $url;
+	}
+
 	// Fix protocol. It isn't needed to set SSL as it is only used to parse the URL.
 	if ( ! parse_url( $url, PHP_URL_SCHEME ) ) {
 		$original_url = $url;
 		$url          = 'http://' . ltrim( $url, '/' );
-	}
-
-	// It's not an internal URL. Bail out.
-	if ( false === stripos( parse_url( $url, PHP_URL_HOST ), parse_url( $site_url, PHP_URL_HOST ) ) ) {
-		return isset( $original_url ) ? $original_url : $url;
 	}
 
 	// Parse url and standardize backslashes.
