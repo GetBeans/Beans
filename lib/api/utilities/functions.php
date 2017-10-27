@@ -180,7 +180,10 @@ function beans_url_to_path( $url ) {
 
 	// Stop here if it is not an internal url.
 	if ( false === stripos( $url, parse_url( site_url(), PHP_URL_HOST ) ) ) {
-		return beans_sanitize_path( $url );
+		// If it is not an internal url we are having relative url instead.
+		// Add ./ in front of the relative url to make it relative path.
+		// After sanitize it will be converted to absolute path.
+		return beans_sanitize_path( './' . $url );
 	}
 
 	// Fix protocole. It isn't needed to set SSL as it is only used to parse the URL.
