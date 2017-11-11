@@ -1,0 +1,32 @@
+{
+    "name": "beans/beans",
+    "description": "The most innovative theme for WordPress. The real magic is under the hood.",
+    "type": "wordpress-theme",
+    "license": "GPL-2.0+",
+    "homepage": "http://www.getbeans.io/",
+    "support": {
+        "issues": "https://github.com/GetBeans/Beans/issues",
+        "source": "https://github.com/GetBeans/Beans"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^5.2|^7",
+        "composer/installers": "^1.4",
+        "roave/security-advisories": "dev-master"
+    },
+    "require-dev": {
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.4",
+        "sirbrillig/phpcs-variable-analysis": "^2.0",
+        "wimg/php-compatibility": "^8.0",
+        "wp-coding-standards/wpcs": "^0.14.0"
+    },
+    "config": {
+        "sort-order": true
+    },
+    "scripts": {
+        "install-codestandards": [
+            "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run"
+        ]
+    }
+}
