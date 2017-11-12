@@ -1,20 +1,32 @@
 <?xml version="1.0"?>
 <ruleset name="Beans">
     <description>The code standard for Beans.</description>
+
     <file>.</file>
+
+    <!-- Ignore these directories -->
     <exclude-pattern>dist/*</exclude-pattern>
     <exclude-pattern>node_modules/*</exclude-pattern>
     <exclude-pattern>vendor/*</exclude-pattern>
+
+    <!-- PHP only. We'll use other validators for JS, CSS, etc. -->
     <arg name="extensions" value="php"/>
+
+    <!-- Reporting Configuration -->
     <arg value="sp"/>
     <arg name="report" value="full"/>
     <arg name="report" value="summary"/>
     <arg name="report" value="source"/>
+
+    <!-- PHP Rules -->
     <rule ref="PHPCompatibility" />
     <config name="testVersion" value="5.2-"/>
+
+    <!-- WordPress Rules -->
     <rule ref="WordPress">
         <exclude name="WordPress.VIP"/>
     </rule>
+
     <rule ref="WordPress.Files.FileName">
         <properties>
             <property name="is_theme" value="true"/>
@@ -22,21 +34,25 @@
         </properties>
         <exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
     </rule>
+
     <rule ref="WordPress.NamingConventions.PrefixAllGlobals">
         <properties>
             <property name="prefixes" type="array" value="beans,_beans,_Beans" />
         </properties>
     </rule>
+
     <rule ref="WordPress.WhiteSpace.ControlStructureSpacing">
         <properties>
             <property name="blank_line_check" value="true" />
         </properties>
     </rule>
+
     <rule ref="WordPress.WP.DeprecatedFunctions">
         <properties>
             <property name="minimum_supported_version" value="4.8" />
         </properties>
     </rule>
+
     <rule ref="WordPress.WP.I18n">
         <properties>
             <property name="text_domain" type="array" value="tm-beans" />
