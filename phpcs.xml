@@ -5,9 +5,11 @@
     <file>.</file>
 
     <!-- Ignore these directories -->
-    <exclude-pattern>dist/*</exclude-pattern>
+    <exclude-pattern>*/dist/*</exclude-pattern>
     <exclude-pattern>node_modules/*</exclude-pattern>
-    <exclude-pattern>vendor/*</exclude-pattern>
+    <exclude-pattern>*/tests/*</exclude-pattern>
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/vendors/*</exclude-pattern>
 
     <!-- PHP only. We'll use other validators for JS, CSS, etc. -->
     <arg name="extensions" value="php"/>
@@ -21,10 +23,29 @@
     <!-- PHP Rules -->
     <rule ref="PHPCompatibility" />
     <config name="testVersion" value="5.2-"/>
+    <rule ref="Squiz.PHP.DisallowMultipleAssignments.Found">
+        <severity>0</severity>
+    </rule>
 
     <!-- WordPress Rules -->
     <rule ref="WordPress">
         <exclude name="WordPress.VIP"/>
+        <!-- In the API, we process the requests. Nonce verification is to be done
+            at the form processing level prior to calling our API. -->
+        <exclude name="WordPress.CSRF.NonceVerification.NoNonceVerification"/>
+        <exclude name="WordPress.PHP.StrictInArray.MissingTrueStrict"/>
+        <!-- We have functions that can receive more arguments than declared
+            in the function's parameter list. -->
+        <exclude name="Squiz.Commenting.FunctionComment.ExtraParamComment"/>
+        <!-- Will fix in v2 -->
+        <exclude name="PEAR.NamingConventions.ValidClassName.StartWithCapital"/>
+        <!-- Not every file needs a file header comment, e.g. Views -->
+        <exclude name="Squiz.Commenting.FileComment.Missing"/>
+        <!-- There are valid areas requiring errors to be silenced. -->
+        <exclude name="Generic.PHP.NoSilencedErrors.Discouraged"/>
+
+        <!-- Exclude until v2 as this applies after WP 4.4 with upgrades in PHP 5.3 -->
+        <exclude name="WordPress.WP.AlternativeFunctions.parse_url_parse_url"/>
     </rule>
 
     <rule ref="WordPress.Files.FileName">

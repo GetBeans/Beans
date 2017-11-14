@@ -10,6 +10,16 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
+    "autoload": {
+        "exclude-from-classmap": [
+            "/tests/"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Beans\\BeansFramework\\Tests\\": "tests/"
+        }
+    },
     "require": {
         "php": "^5.2|^7",
         "composer/installers": "^1.4",
@@ -19,7 +29,12 @@
         "dealerdirect/phpcodesniffer-composer-installer": "^0.4",
         "sirbrillig/phpcs-variable-analysis": "^2.0",
         "wimg/php-compatibility": "^8.0",
-        "wp-coding-standards/wpcs": "^0.14.0"
+        "wp-coding-standards/wpcs": "^0.14.0",
+        "phpunit/phpunit": "^6.2",
+        "antecedent/patchwork": "2.0.8",
+        "brain/monkey": "^2.0",
+        "mockery/mockery": "~0.9",
+        "wpfulcrum/extender": "^3.0"
     },
     "config": {
         "sort-order": true
