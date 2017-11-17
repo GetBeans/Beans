@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2b600bb09258b46cbe2e64f7cfc59d88",
-    "content-hash": "50f08c49572784742fc60a10e427fb2a",
+    "hash": "3dc25971116a622806baeccacf15a2fc",
+    "content-hash": "1e6bbf2afd4221feac472a40d71464f7",
     "packages": [
         {
             "name": "composer/installers",
@@ -2047,33 +2047,24 @@
         },
         {
             "name": "wpfulcrum/extender",
-            "version": "dev-master",
+            "version": "3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wpfulcrum/extender.git",
-                "reference": "1c3cbe98df99eec1d990781aae64b5428c390f10"
+                "reference": "a0bb86d4367a32cbe9b66ceb7072766a76c7831b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wpfulcrum/extender/zipball/1c3cbe98df99eec1d990781aae64b5428c390f10",
-                "reference": "1c3cbe98df99eec1d990781aae64b5428c390f10",
+                "url": "https://api.github.com/repos/wpfulcrum/extender/zipball/a0bb86d4367a32cbe9b66ceb7072766a76c7831b",
+                "reference": "a0bb86d4367a32cbe9b66ceb7072766a76c7831b",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.6.0"
             },
             "require-dev": {
-                "antecedent/patchwork": "2.0.8",
-                "jakub-onderka/php-parallel-lint": "^0.9.2",
                 "mockery/mockery": "~0.9",
-                "nikic/php-parser": "^3.0",
-                "phpmd/phpmd": "^2.6",
-                "phpro/grumphp": "^0.11.6",
-                "phpstan/phpstan": "^0.8.0",
-                "phpunit/phpunit": "^6.2",
-                "povils/phpmnd": "^1.1",
-                "sebastian/phpcpd": "^3.0",
-                "sensiolabs/security-checker": "^4.0",
+                "phpunit/phpunit": "~5.7.9",
                 "squizlabs/php_codesniffer": "^3.0"
             },
             "type": "library",
@@ -2106,7 +2097,7 @@
             ],
             "description": "Fulcrum Extender Module - extending the PHP functionality for arrays and strings.",
             "homepage": "https://github.com/wpfulcrum/extender",
-            "time": "2017-10-25 10:52:13"
+            "time": "2017-11-17 14:05:54"
         }
     ],
     "aliases": [],

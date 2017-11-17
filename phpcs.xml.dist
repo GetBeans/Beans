@@ -36,6 +36,10 @@
         <exclude name="WordPress.CSRF.NonceVerification.NoNonceVerification"/>
         <exclude name="WordPress.PHP.StrictInArray.MissingTrueStrict"/>
 
+        <!-- There are valid areas requiring errors to be silenced.
+             Remove when PHPCS 3.2.0 is released. -->
+        <exclude name="Generic.PHP.NoSilencedErrors.Discouraged"/>
+
         <!-- Runs that we'll fix in v2 -->
 
         <!-- Exclude until v2 as this applies after WP 4.4 with upgrades in PHP 5.3 -->
