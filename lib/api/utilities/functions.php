@@ -86,11 +86,11 @@ function beans_remove_dir( $dir_path ) {
 		if ( is_dir( $path ) ) {
 			beans_remove_dir( $path );
 		} else {
-			@unlink( $path );
+			@unlink( $path ); // phpcs:disable Generic.PHP.NoSilencedErrors.Discouraged - This is a valid use case.
 		}
 	}
 
-	return @rmdir( $dir_path );
+	return @rmdir( $dir_path ); // phpcs:disable Generic.PHP.NoSilencedErrors.Discouraged - This is a valid use case.
 }
 
 /**

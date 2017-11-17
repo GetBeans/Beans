@@ -8,8 +8,8 @@
  * @license     GNU-2.0+
  */
 
-if ( version_compare( phpversion(), '5.3.0', '<' ) ) {
-	die( 'Beans Unit Tests require PHP 5.3 or higher.' );
+if ( version_compare( phpversion(), '5.6.0', '<' ) ) {
+	die( 'Beans Unit Tests require PHP 5.6 or higher.' );
 }
 
 define( 'BEANS_TESTS_DIR', dirname( __FILE__ ) );

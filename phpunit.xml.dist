@@ -1,15 +1,17 @@
-<phpunit
-        bootstrap="tests/bootstrap.php"
-        backupGlobals="false"
-        colors="true"
-        beStrictAboutCoversAnnotation="true"
-        beStrictAboutOutputDuringTests="true"
-        beStrictAboutTestsThatDoNotTestAnything="true"
-        beStrictAboutTodoAnnotatedTests="true"
-        convertErrorsToExceptions="true"
-        convertNoticesToExceptions="true"
-        convertWarningsToExceptions="true"
-        verbose="true">
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/6.3/phpunit.xsd"
+         bootstrap="tests/bootstrap.php"
+         backupGlobals="false"
+         colors="true"
+         beStrictAboutCoversAnnotation="true"
+         beStrictAboutOutputDuringTests="true"
+         beStrictAboutTestsThatDoNotTestAnything="true"
+         beStrictAboutTodoAnnotatedTests="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         verbose="true">
 
     <testsuite name="beans">
         <directory suffix=".php">./tests/</directory>
@@ -22,14 +24,6 @@
     </filter>
 
     <logging>
-        <log type="coverage-html" target="reports/report" lowUpperBound="35" highLowerBound="70"/>
-        <log type="coverage-clover" target="reports/coverage.xml"/>
-        <log type="coverage-php" target="reports/coverage.serialized"/>
         <log type="coverage-text" target="php://stdout" showUncoveredFiles="false"/>
-        <log type="json" target="reports/logfile.json"/>
-        <log type="tap" target="reports/logfile.tap"/>
-        <log type="junit" target="reports/logfile.xml" logIncompleteSkipped="false"/>
-        <log type="testdox-html" target="reports/testdox.html"/>
-        <log type="testdox-text" target="reports/testdox.txt"/>
     </logging>
 </phpunit>

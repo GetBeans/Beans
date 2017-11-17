@@ -15,6 +15,7 @@
     <arg name="extensions" value="php"/>
 
     <!-- Reporting Configuration -->
+    <arg name="colors" />
     <arg value="sp"/>
     <arg name="report" value="full"/>
     <arg name="report" value="summary"/>
@@ -34,14 +35,6 @@
             at the form processing level prior to calling our API. -->
         <exclude name="WordPress.CSRF.NonceVerification.NoNonceVerification"/>
         <exclude name="WordPress.PHP.StrictInArray.MissingTrueStrict"/>
-        <!-- We have functions that can receive more arguments than declared
-            in the function's parameter list. -->
-        <exclude name="Squiz.Commenting.FunctionComment.ExtraParamComment"/>
-        <!-- Not every file needs a file header comment, e.g. Views -->
-        <exclude name="Squiz.Commenting.FileComment.Missing"/>
-        <!-- There are valid areas requiring errors to be silenced. -->
-        <exclude name="Generic.PHP.NoSilencedErrors.Discouraged"/>
-
 
         <!-- Runs that we'll fix in v2 -->
 

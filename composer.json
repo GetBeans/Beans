@@ -26,14 +26,12 @@
         "roave/security-advisories": "dev-master"
     },
     "require-dev": {
-        "dealerdirect/phpcodesniffer-composer-installer": "^0.4",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.4.3",
         "sirbrillig/phpcs-variable-analysis": "^2.0",
         "wimg/php-compatibility": "^8.0",
         "wp-coding-standards/wpcs": "^0.14.0",
-        "phpunit/phpunit": "^6.2",
-        "antecedent/patchwork": "2.0.8",
+        "phpunit/phpunit": "^5.7.9",
         "brain/monkey": "^2.0",
-        "mockery/mockery": "~0.9",
         "wpfulcrum/extender": "^3.0"
     },
     "config": {
@@ -43,7 +41,7 @@
         "install-codestandards": [
             "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run"
         ],
-        "cs-check": "vendor/bin/phpcs --colors",
-        "test": "vendor/bin/phpunit --colors"
+        "cs-check": "vendor/bin/phpcs",
+        "test": "vendor/bin/phpunit"
     }
 }
