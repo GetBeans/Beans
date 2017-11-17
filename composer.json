@@ -42,6 +42,8 @@
     "scripts": {
         "install-codestandards": [
             "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run"
-        ]
+        ],
+        "cs-check": "vendor/bin/phpcs --colors",
+        "test": "vendor/bin/phpunit --colors"
     }
 }
