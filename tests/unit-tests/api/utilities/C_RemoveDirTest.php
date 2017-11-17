@@ -10,7 +10,7 @@ class RenderFunctionTest extends BeansTestCase {
 
 	protected function setUp() {
 		parent::setUp();
-		$this->dir = dirname( __FILE__ ) . '/removeDir';
+		$this->dir = __DIR__ . '/removeDir';
 		require_once BEANS_TESTS_LIB_DIR . '/api/utilities/functions.php';
 	}
 
@@ -25,7 +25,7 @@ class RenderFunctionTest extends BeansTestCase {
 	}
 
 	public function testBailsForNonDir() {
-		$dir = dirname( __FILE__ ) . '/';
+		$dir = __DIR__ . '/';
 		$this->assertFalse( beans_remove_dir( $dir . 'this-dir-doesnot-exist' ) );
 		$this->assertFalse( beans_remove_dir( $dir . 'foo' ) );
 		$this->assertFalse( beans_remove_dir( __FILE__ ) );

@@ -36,7 +36,7 @@ class D_PathToUrlTest extends BeansTestCase {
 		$path = __FILE__;
 		$this->assertSame( "{$url}{$path}", beans_path_to_url( $path, true ) );
 
-		$path = dirname( __FILE__ );
+		$path = __DIR__;
 		$this->assertSame( "{$url}{$path}", beans_path_to_url( $path, true ) );
 
 		// Relative path
@@ -56,7 +56,7 @@ class D_PathToUrlTest extends BeansTestCase {
 		$path = __FILE__;
 		$this->assertSame( "{$url}{$path}", beans_path_to_url( $path, true ) );
 
-		$path = dirname( __FILE__ );
+		$path = __DIR__;
 		$this->assertSame( "{$url}{$path}", beans_path_to_url( $path, true ) );
 
 		// Relative path

@@ -15,7 +15,7 @@ class F_SanitizePathTest extends BeansTestCase {
 
 	public function testFilesystemPath() {
 		$this->assertSame( BEANS_TESTS_DIR, beans_sanitize_path( BEANS_TESTS_DIR ) );
-		$this->assertSame( dirname( __FILE__ ), beans_sanitize_path( dirname( __FILE__ ) ) );
+		$this->assertSame( __DIR__, beans_sanitize_path( __DIR__ ) );
 		$this->assertSame( BEANS_TESTS_DIR, beans_sanitize_path( __DIR__ . '/../../../' ) );
 		$this->assertSame( BEANS_TESTS_DIR . '/bootstrap.php', beans_sanitize_path( __DIR__ . '/../../../bootstrap.php' ) );
 	}

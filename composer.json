@@ -30,9 +30,9 @@
         "sirbrillig/phpcs-variable-analysis": "^2.0",
         "wimg/php-compatibility": "^8.0",
         "wp-coding-standards/wpcs": "^0.14.0",
-        "phpunit/phpunit": "^5.7.9",
+        "phpunit/phpunit": "~5.7.9",
         "brain/monkey": "^2.0",
-        "wpfulcrum/extender": "^3.0"
+        "wpfulcrum/extender": "^3.0.1"
     },
     "config": {
         "sort-order": true
