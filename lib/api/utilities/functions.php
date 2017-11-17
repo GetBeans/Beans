@@ -5,13 +5,10 @@
  * Since these functions are used throughout the Beans framework and are therefore required, they are
  * loaded automatically when the Beans framework is included.
  *
- * @package API\Utilities
+ * @package Beans\BeansFramework\API\Utilities
  *
  * @since   1.5.0
  */
-
-// Load the dependencies.
-require_once dirname( __FILE__ ) . '/polyfills.php';
 
 /**
  * Calls function given by the first parameter and passes the remaining parameters as arguments.
@@ -21,11 +18,12 @@ require_once dirname( __FILE__ ) . '/polyfills.php';
  * @since 1.0.0
  *
  * @param Callable $callback The callback to be called.
- * @param mixed    $args,... (Optional) Additional parameters to be passed to the callback.
+ * @param mixed    $args,... Optional. Additional parameters to be passed to the callback.
  *
  * @return string The callback content.
  */
 function beans_render_function( $callback ) {
+
 	if ( ! is_callable( $callback ) ) {
 		return;
 	}
@@ -47,11 +45,12 @@ function beans_render_function( $callback ) {
  * @since 1.0.0
  *
  * @param Callable $callback The callback to be called.
- * @param array    $params   (Optional) The parameters to be passed to the callback, as an indexed array.
+ * @param array    $params   Optional. The parameters to be passed to the callback, as an indexed array.
  *
  * @return string The callback content.
  */
 function beans_render_function_array( $callback, $params = array() ) {
+
 	if ( ! is_callable( $callback ) ) {
 		return;
 	}
@@ -73,6 +72,7 @@ function beans_render_function_array( $callback, $params = array() ) {
  * @return bool Returns true if the directory was removed; else, return false.
  */
 function beans_remove_dir( $dir_path ) {
+
 	if ( ! is_dir( $dir_path ) ) {
 		return false;
 	}
@@ -101,7 +101,7 @@ function beans_remove_dir( $dir_path ) {
  * @since 1.5.0
  *
  * @param string $path          Path to be converted. Accepts absolute and relative internal paths.
- * @param bool   $force_rebuild (Optional) Forces the rebuild of the root url and path.
+ * @param bool   $force_rebuild Optional. Forces the rebuild of the root url and path.
  *
  * @return string Url.
  */
@@ -125,6 +125,7 @@ function beans_path_to_url( $path, $force_rebuild = false ) {
 
 		// Remove subfolder if necessary.
 		$subfolder = parse_url( $root_url, PHP_URL_PATH );
+
 		if ( $subfolder && '/' !== $subfolder ) {
 			$pattern   = '#' . untrailingslashit( preg_quote( $subfolder ) ) . '$#';
 			$root_path = preg_replace( $pattern, '', $root_path );
@@ -134,6 +135,7 @@ function beans_path_to_url( $path, $force_rebuild = false ) {
 		// If it's a multisite and not the main site, then add the site's path.
 		if ( ! is_main_site() ) {
 			$blogdetails = get_blog_details( get_current_blog_id() );
+
 			if ( $blogdetails && ( ! defined( 'WP_SITEURL' ) || ( defined( 'WP_SITEURL' ) && WP_SITEURL === site_url() ) ) ) {
 				$root_url = untrailingslashit( $root_url ) . $blogdetails->path;
 			}
@@ -141,6 +143,7 @@ function beans_path_to_url( $path, $force_rebuild = false ) {
 
 		// Maybe re-add tilde from host.
 		$maybe_tilde = beans_get( 0, explode( '/', trailingslashit( ltrim( $subfolder, '/' ) ) ) );
+
 		if ( false !== stripos( $maybe_tilde, '~' ) ) {
 			$root_url = trailingslashit( $root_url ) . $maybe_tilde;
 		}
@@ -164,27 +167,26 @@ function beans_path_to_url( $path, $force_rebuild = false ) {
  * @since 1.5.0
  *
  * @param string $url           Url to be converted. Accepts only internal urls.
- * @param bool   $force_rebuild (Optional) Forces the rebuild of the root url and path.
+ * @param bool   $force_rebuild Optional. Forces the rebuild of the root url and path.
  *
  * @return string Absolute path.
  */
 function beans_url_to_path( $url, $force_rebuild = false ) {
 	static $root_path, $blogdetails;
 	$site_url = site_url();
+
 	if ( true === $force_rebuild ) {
 		$root_path   = '';
 		$blogdetails = '';
 	}
 
 	// Fix protocol. It isn't needed to set SSL as it is only used to parse the URL.
-	// Issue #63. Fixed.
 	if ( ! parse_url( $url, PHP_URL_SCHEME ) ) {
 		$original_url = $url;
 		$url          = 'http://' . ltrim( $url, '/' );
 	}
 
 	// It's not an internal URL. Bail out.
-	// Issue #64. #65. Fixed.
 	if ( false === stripos( parse_url( $url, PHP_URL_HOST ), parse_url( $site_url, PHP_URL_HOST ) ) ) {
 		return isset( $original_url ) ? $original_url : $url;
 	}
@@ -193,12 +195,14 @@ function beans_url_to_path( $url, $force_rebuild = false ) {
 	$url  = parse_url( $url, PHP_URL_PATH );
 	$path = wp_normalize_path( $url );
 
-	// Maybe remove tilde from path. -> Issue #66 - Fixed.
+	// Maybe remove tilde from path.
 	$trimmed_path = trailingslashit( ltrim( $path, '/' ) );
 	$maybe_tilde  = beans_get( 0, explode( '/', $trimmed_path ) );
+
 	if ( false !== stripos( $maybe_tilde, '~' ) ) {
 		$ends_with_slash = substr( $path, - 1 ) === '/';
 		$path            = preg_replace( '#\~[^/]*\/#', '', $trimmed_path );
+
 		if ( $path && ! $ends_with_slash ) {
 			$path = rtrim( $path, '/' );
 		}
@@ -211,15 +215,19 @@ function beans_url_to_path( $url, $force_rebuild = false ) {
 		$set_root  = true;
 	}
 
-	// If the subfolder exists for the root URL, then strip it off of the root path.
-	// Why? We don't want a double subfolder in the final path.
+	/*
+	 * If the subfolder exists for the root URL, then strip it off of the root path.
+	 * Why? We don't want a double subfolder in the final path.
+	 */
 	$subfolder = parse_url( $site_url, PHP_URL_PATH );
+
 	if ( isset( $set_root ) && $subfolder && '/' !== $subfolder ) {
 		$root_path = preg_replace( '#' . untrailingslashit( preg_quote( $subfolder ) ) . '$#', '', $root_path );
 
 		// Add an extra step which is only used for extremely rare case.
 		if ( defined( 'WP_SITEURL' ) ) {
 			$subfolder = parse_url( WP_SITEURL, PHP_URL_PATH );
+
 			if ( '' !== $subfolder ) {
 				$root_path = preg_replace( '#' . untrailingslashit( preg_quote( $subfolder ) ) . '$#', '', $root_path );
 			}
@@ -260,6 +268,7 @@ function beans_url_to_path( $url, $force_rebuild = false ) {
  * @return string Sanitize path.
  */
 function beans_sanitize_path( $path ) {
+
 	// Try to convert it to real path.
 	if ( false !== realpath( $path ) ) {
 		$path = realpath( $path );
@@ -277,12 +286,13 @@ function beans_sanitize_path( $path ) {
  * @since 1.0.0
  *
  * @param string $needle   Name of the searched key.
- * @param mixed  $haystack (Optional) The target to search. If false, $_GET is set to be the $haystack.
- * @param mixed  $default  (Optional) Value to return if the needle isn't found.
+ * @param mixed  $haystack Optional. The target to search. If false, $_GET is set to be the $haystack.
+ * @param mixed  $default  Optional. Value to return if the needle isn't found.
  *
  * @return string Returns the value if found; else $default is returned.
  */
 function beans_get( $needle, $haystack = false, $default = null ) {
+
 	if ( false === $haystack ) {
 		$haystack = $_GET;
 	}
@@ -302,7 +312,7 @@ function beans_get( $needle, $haystack = false, $default = null ) {
  * @since 1.0.0
  *
  * @param string $needle  Name of the searched key.
- * @param mixed  $default (Optional) Value to return if the needle isn't found.
+ * @param mixed  $default Optional. Value to return if the needle isn't found.
  *
  * @return string Returns the value if found; else $default is returned.
  */
@@ -316,17 +326,19 @@ function beans_post( $needle, $default = null ) {
  * @since 1.0.0
  *
  * @param string $needle  Name of the searched key.
- * @param mixed  $default (Optional) Value to return if the needle isn't found.
+ * @param mixed  $default Optional. Value to return if the needle isn't found.
  *
  * @return string Returns the value if found; else $default is returned.
  */
 function beans_get_or_post( $needle, $default = null ) {
 	$get = beans_get( $needle );
+
 	if ( $get ) {
 		return $get;
 	}
 
 	$post = beans_post( $needle );
+
 	if ( $post ) {
 		return $post;
 	}
@@ -344,12 +356,13 @@ function beans_get_or_post( $needle, $default = null ) {
  * @since 1.0.0
  *
  * @param string   $array        The array.
- * @param int|bool $depth        (Optional) Depth until which the entries should be counted.
- * @param bool     $count_parent (Optional) Whether the parent should be counted or not.
+ * @param int|bool $depth        Optional. Depth until which the entries should be counted.
+ * @param bool     $count_parent Optional. Whether the parent should be counted or not.
  *
  * @return int Number of entries found.
  */
 function beans_count_recursive( $array, $depth = false, $count_parent = true ) {
+
 	if ( ! is_array( $array ) ) {
 		return 0;
 	}
@@ -365,6 +378,7 @@ function beans_count_recursive( $array, $depth = false, $count_parent = true ) {
 	$count = $count_parent ? count( $array ) : 0;
 
 	foreach ( $array as $_array ) {
+
 		if ( is_array( $_array ) ) {
 			$count += beans_count_recursive( $_array, $depth - 1, $count_parent );
 		} else {
@@ -388,11 +402,13 @@ function beans_count_recursive( $array, $depth = false, $count_parent = true ) {
  * @return bool Returns true if needle is found in the array; else, false is returned.
  */
 function beans_in_multi_array( $needle, $haystack, $strict = false ) {
+
 	if ( in_array( $needle, $haystack, $strict ) ) {
 		return true;
 	}
 
 	foreach ( (array) $haystack as $value ) {
+
 		if ( is_array( $value ) && beans_in_multi_array( $needle, $value ) ) {
 			return true;
 		}
@@ -412,11 +428,13 @@ function beans_in_multi_array( $needle, $haystack, $strict = false ) {
  * @return bool Returns true if needle is found in the array; else, false is returned.
  */
 function beans_multi_array_key_exists( $needle, array $haystack ) {
+
 	if ( array_key_exists( $needle, $haystack ) ) {
 		return true;
 	}
 
 	foreach ( $haystack as $value ) {
+
 		if ( is_array( $value ) && beans_multi_array_key_exists( $needle, $value ) ) {
 			return true;
 		}
@@ -440,7 +458,9 @@ function beans_multi_array_key_exists( $needle, array $haystack ) {
  * @return string Content with shortcodes filtered out.
  */
 function beans_array_shortcodes( $content, $haystack ) {
+
 	if ( preg_match_all( '#{(.*?)}#', $content, $matches ) ) {
+
 		foreach ( $matches[1] as $needle ) {
 			$sub_keys = explode( '.', $needle );
 			$value    = false;
@@ -518,11 +538,13 @@ function beans_esc_attributes( $attributes ) {
 	$string = '';
 
 	foreach ( (array) $attributes as $attribute => $value ) {
+
 		if ( null === $value ) {
 			continue;
 		}
 
 		$method = beans_get( $attribute, $methods );
+
 		if ( $method ) {
 			$value = call_user_func( $method, $value );
 		} else {

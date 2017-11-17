@@ -2,7 +2,7 @@
 /**
  * Deprecated utility functions.
  *
- * @package API\Utilities
+ * @package Beans\BeansFramework\API\Utilities
  */
 
 /**
@@ -23,5 +23,4 @@ function beans_sanatize_attributes( $attributes ) {
 	_deprecated_function( __FUNCTION__, '1.3.1', 'beans_esc_attributes()' );
 
 	return beans_esc_attributes( $attributes );
-
 }
