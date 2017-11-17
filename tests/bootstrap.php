@@ -12,7 +12,7 @@ if ( version_compare( phpversion(), '5.6.0', '<' ) ) {
 	die( 'Beans Unit Tests require PHP 5.6 or higher.' );
 }
 
-define( 'BEANS_TESTS_DIR', dirname( __FILE__ ) );
+define( 'BEANS_TESTS_DIR', __DIR__ );
 
 define( 'BEANS_TESTS_LIB_DIR', BEANS_TESTS_DIR . '/../lib/' );
 
@@ -31,3 +31,5 @@ if ( ! file_exists( $beans_autoload_path . 'autoload.php' ) ) {
 }
 require_once $beans_autoload_path . 'autoload.php';
 unset( $beans_autoload_path );
+
+require_once BEANS_TESTS_DIR . '/unit-tests/class-beans-test-case.php';

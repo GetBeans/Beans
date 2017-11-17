@@ -2,9 +2,9 @@
 
 namespace Beans\BeansFramework\Tests\API\Utilities;
 
-use Beans\BeansFramework\Tests\BeansTestCase;
+use Beans\BeansFramework\Tests\Beans_Test_Case;
 
-class RenderFunctionTest extends BeansTestCase {
+class Tests_Functions_RemoveDir extends Beans_Test_Case {
 
 	protected $dir;
 

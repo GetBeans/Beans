@@ -5,7 +5,7 @@ namespace Beans\BeansFramework\Tests;
 use Brain\Monkey;
 use PHPUnit\Framework\TestCase;
 
-abstract class BeansTestCase extends TestCase {
+abstract class Beans_Test_Case extends TestCase {
 
 	/**
 	 * Prepares the test environment before each test.
