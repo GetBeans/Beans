@@ -2,7 +2,7 @@
 /**
  * PHP Polyfills
  *
- * @package     Beans\BeansFramework\API\Utilities
+ * @package     Beans\Framework\API\Utilities
  * @since       1.5.0
  * @link        https://www.getbeans.io
  * @license     GNU-2.0+
@@ -37,8 +37,10 @@ if ( ! function_exists( 'array_replace_recursive' ) ) {
 	 * @return array Returns an array, or NULL if an error occurs.
 	 */
 	function array_replace_recursive( array $array1, array $array2 ) {
+
 		foreach ( $array2 as $key => $value ) {
 			$from_base = beans_get( $key, $array1 );
+
 			if ( is_array( $value ) && is_array( $from_base ) ) {
 				// @codingStandardsIgnoreStart
 				$array1[ $key ] = array_replace_recursive( $from_base, $value );

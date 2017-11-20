@@ -5,7 +5,7 @@
  * Since these functions are used throughout the Beans framework and are therefore required, they are
  * loaded automatically when the Beans framework is included.
  *
- * @package Beans\BeansFramework\API\Utilities
+ * @package Beans\Framework\API\Utilities
  *
  * @since   1.5.0
  */
@@ -353,7 +353,7 @@ function beans_get_or_post( $needle, $default = null ) {
  * counted. For instance, if $depth is defined and $count_parent is set to false, only the level of the
  * defined depth will be counted.
  *
- * @since 1.0.0
+ * @since 1.5.0
  *
  * @param string   $array        The array.
  * @param int|bool $depth        Optional. Depth until which the entries should be counted.
@@ -362,7 +362,6 @@ function beans_get_or_post( $needle, $default = null ) {
  * @return int Number of entries found.
  */
 function beans_count_recursive( $array, $depth = false, $count_parent = true ) {
-
 	if ( ! is_array( $array ) ) {
 		return 0;
 	}

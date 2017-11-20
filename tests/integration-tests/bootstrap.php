@@ -2,18 +2,18 @@
 /**
  * Bootstraps the WordPress Integration Tests
  *
- * @package     Beans\Beans\Tests
+ * @package     Beans\Framework\Tests
  * @since       1.5.0
  * @link        http://www.getbeans.io
  * @license     GNU-2.0+
+ *
+ * @group       integrationtests
  */
-
-if ( true !== BEANS_RUN_INTEGRATION_TESTS ) {
-	return;
-}
 
 // Require patchwork early so that functions can be monkey patched in Unit tests.
 require __DIR__ . '/../../vendor/antecedent/patchwork/Patchwork.php';
+
+define( 'BEANS_INTEGRATION_TESTS_DIR', __DIR__ );
 
 // Give access to tests_add_filter() function.
 require_once getenv( 'WP_TESTS_DIR' ) . '/includes/functions.php';
@@ -55,3 +55,5 @@ tests_add_filter( 'setup_theme', 'beans_testing_manually_load_theme' );
 
 // Start up the WP testing environment.
 require getenv( 'WP_TESTS_DIR' ) . '/includes/bootstrap.php';
+
+require __DIR__ . '/class-test-case.php';

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3dc25971116a622806baeccacf15a2fc",
-    "content-hash": "1e6bbf2afd4221feac472a40d71464f7",
+    "hash": "fd519171be3f04b2ed6bca41c0676f48",
+    "content-hash": "8eedeb84b37d0361c9be0190fe2c7d00",
     "packages": [
         {
             "name": "composer/installers",
@@ -541,6 +541,52 @@
                 "test"
             ],
             "time": "2015-05-11 14:41:42"
+        },
+        {
+            "name": "mikey179/vfsStream",
+            "version": "v1.6.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mikey179/vfsStream.git",
+                "reference": "d5fec95f541d4d71c4823bb5e30cf9b9e5b96145"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mikey179/vfsStream/zipball/d5fec95f541d4d71c4823bb5e30cf9b9e5b96145",
+                "reference": "d5fec95f541d4d71c4823bb5e30cf9b9e5b96145",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.6.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "org\\bovigo\\vfs\\": "src/main/php"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Frank Kleine",
+                    "homepage": "http://frankkleine.de/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Virtual file system to mock the real file system in unit tests.",
+            "homepage": "http://vfs.bovigo.org/",
+            "time": "2017-08-01 08:02:14"
         },
         {
             "name": "mockery/mockery",
@@ -2044,60 +2090,6 @@
                 "wordpress"
             ],
             "time": "2017-11-01 15:10:46"
-        },
-        {
-            "name": "wpfulcrum/extender",
-            "version": "3.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/wpfulcrum/extender.git",
-                "reference": "a0bb86d4367a32cbe9b66ceb7072766a76c7831b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/wpfulcrum/extender/zipball/a0bb86d4367a32cbe9b66ceb7072766a76c7831b",
-                "reference": "a0bb86d4367a32cbe9b66ceb7072766a76c7831b",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.6.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "~0.9",
-                "phpunit/phpunit": "~5.7.9",
-                "squizlabs/php_codesniffer": "^3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Fulcrum\\Extender\\": ""
-                },
-                "files": [
-                    "Arr/api.php",
-                    "Str/api.php"
-                ],
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Tonya Mork",
-                    "email": "hello@hellofromtonya.com"
-                }
-            ],
-            "description": "Fulcrum Extender Module - extending the PHP functionality for arrays and strings.",
-            "homepage": "https://github.com/wpfulcrum/extender",
-            "time": "2017-11-17 14:05:54"
         }
     ],
     "aliases": [],

@@ -13,9 +13,19 @@
          convertWarningsToExceptions="true"
          verbose="true">
 
-    <testsuite name="beans">
-        <directory suffix=".php">./tests/</directory>
-    </testsuite>
+    <!-- The listener handles loading the called testsuite's bootstrap file. -->
+    <listeners>
+        <listener class="\Beans\Framework\Tests\Bootstrap" file="./tests/class-bootstrap.php"/>
+    </listeners>
+
+    <testsuites>
+        <testsuite name="unit">
+            <directory suffix=".php">./tests/unit-tests/</directory>
+        </testsuite>
+        <testsuite name="integration">
+            <directory suffix=".php">./tests/integration-tests/</directory>
+        </testsuite>
+    </testsuites>
 
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">

@@ -2,7 +2,7 @@
 /**
  * Deprecated utility functions.
  *
- * @package Beans\BeansFramework\API\Utilities
+ * @package Beans\Framework\API\Utilities
  */
 
 /**
