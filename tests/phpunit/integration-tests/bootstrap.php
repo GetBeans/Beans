@@ -10,21 +10,24 @@
  * @group       integrationtests
  */
 
-// Require patchwork early so that functions can be monkey patched in Unit tests.
-require __DIR__ . '/../../vendor/antecedent/patchwork/Patchwork.php';
+if ( ! file_exists( getenv( 'WP_TESTS_DIR' ) . '/includes/functions.php' ) ) {
+	return;
+}
 
 define( 'BEANS_INTEGRATION_TESTS_DIR', __DIR__ );
+define( 'BEANS_THEME_DIR', basename( dirname( dirname( dirname( __DIR__ ) ) ) ) );
+
+// Require patchwork early so that functions can be monkey patched in Unit tests.
+require BEANS_THEME_DIR . '/vendor/antecedent/patchwork/Patchwork.php';
 
 // Give access to tests_add_filter() function.
 require_once getenv( 'WP_TESTS_DIR' ) . '/includes/functions.php';
-
-define( 'BEANS_THEME_DIR', basename( dirname( dirname( __DIR__ ) ) ) );
 
 /**
  * Manually load the theme being tested.
  */
 function beans_testing_manually_load_theme() {
-	register_theme_directory( dirname( dirname( dirname( __FILE__ ) ) ) );
+	register_theme_directory( BEANS_THEME_DIR );
 	add_filter( 'stylesheet', 'beans_testing_override_stylesheet' );
 	add_filter( 'template', 'beans_testing_override_template' );
 }
@@ -37,7 +40,7 @@ function beans_testing_manually_load_theme() {
  * @return string Amended stylesheet name.
  */
 function beans_testing_override_stylesheet( $stylesheet ) {
-	return wp_get_theme( THIS_THEME_DIR )->get_stylesheet();
+	return wp_get_theme( BEANS_THEME_DIR )->get_stylesheet();
 }
 
 /**
@@ -48,7 +51,7 @@ function beans_testing_override_stylesheet( $stylesheet ) {
  * @return string Amended template name.
  */
 function beans_testing_override_template( $template ) {
-	return wp_get_theme( THIS_THEME_DIR )->get_template();
+	return wp_get_theme( BEANS_THEME_DIR )->get_template();
 }
 
 tests_add_filter( 'setup_theme', 'beans_testing_manually_load_theme' );

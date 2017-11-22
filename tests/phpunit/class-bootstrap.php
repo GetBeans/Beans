@@ -28,7 +28,7 @@ class Bootstrap extends PHPUnit_Framework_BaseTestListener {
 
 		// Load the integration testsuite's bootstrap file.
 		if ( 'integration' === $suite->getName() ) {
-			require __DIR__ . '/integration-tests/bootstrap.php';
+			require_once __DIR__ . '/integration-tests/bootstrap.php';
 		}
 	}
 }
