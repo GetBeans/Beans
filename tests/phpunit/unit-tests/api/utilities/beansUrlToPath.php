@@ -1,4 +1,11 @@
 <?php
+/**
+ * Tests for beans_url_to_path()
+ *
+ * @package Beans\Framework\Tests\UnitTests\API\Utilities
+ *
+ * @since   1.5.0
+ */
 
 namespace Beans\Framework\Tests\UnitTests\API\Utilities;
 
@@ -6,13 +13,13 @@ use Beans\Framework\Tests\UnitTests\Test_Case;
 use Brain\Monkey\Functions;
 
 /**
- * Class Tests_Beans_Url_To_Path
+ * Class Tests_BeansUrlToPath
  *
- * @package Beans\Framework\Tests\API\Utilities
+ * @package Beans\Framework\Tests\UnitTests\API\Utilities
  * @group   unit-tests
  * @group   api
  */
-class Tests_Beans_Url_To_Path extends Test_Case {
+class Tests_BeansUrlToPath extends Test_Case {
 
 	/**
 	 * Setup test fixture.
@@ -339,7 +346,7 @@ class Tests_Beans_Url_To_Path extends Test_Case {
 		Functions\expect( 'site_url' )->once()->andReturn( 'http://shop.example.com' );
 		$this->assertSame( rtrim( ABSPATH, '/' ), beans_url_to_path( 'http://shop.example.com', true ) );
 
-		Functions\expect( 'site_url' )->once()->andReturn( 'http://shop.example.com/image.jpg' . '/foo' );
+		Functions\expect( 'site_url' )->once()->andReturn( 'http://shop.example.com/image.jpg/foo' );
 		$this->assertSame( ABSPATH . 'image.jpg', beans_url_to_path( 'http://shop.example.com/image.jpg', true ) );
 	}
 
@@ -354,7 +361,7 @@ class Tests_Beans_Url_To_Path extends Test_Case {
 		Functions\expect( 'site_url' )->once()->andReturn( 'http://shop.255.147.55.10' );
 		$this->assertSame( rtrim( ABSPATH, '/' ), beans_url_to_path( 'http://shop.255.147.55.10', true ) );
 
-		Functions\expect( 'site_url' )->once()->andReturn( 'http://shop.1.2.3.4/image.jpg' . '/foo' );
+		Functions\expect( 'site_url' )->once()->andReturn( 'http://shop.1.2.3.4/image.jpg/foo' );
 		$this->assertSame( ABSPATH . 'image.jpg', beans_url_to_path( 'http://shop.1.2.3.4/image.jpg', true ) );
 	}
 }

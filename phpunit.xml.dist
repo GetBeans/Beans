@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/6.3/phpunit.xsd"
-         bootstrap="tests/bootstrap.php"
+         bootstrap="tests/phpunit/bootstrap.php"
          backupGlobals="false"
          colors="true"
          beStrictAboutCoversAnnotation="true"
@@ -15,15 +15,15 @@
 
     <!-- The listener handles loading the called testsuite's bootstrap file. -->
     <listeners>
-        <listener class="\Beans\Framework\Tests\Bootstrap" file="./tests/class-bootstrap.php"/>
+        <listener class="\Beans\Framework\Tests\Bootstrap" file="./tests/phpunit/class-bootstrap.php"/>
     </listeners>
 
     <testsuites>
         <testsuite name="unit">
-            <directory suffix=".php">./tests/unit-tests/</directory>
+            <directory suffix=".php">./tests/phpunit/unit-tests/</directory>
         </testsuite>
         <testsuite name="integration">
-            <directory suffix=".php">./tests/integration-tests/</directory>
+            <directory suffix=".php">./tests/phpunit/integration-tests/</directory>
         </testsuite>
     </testsuites>
 

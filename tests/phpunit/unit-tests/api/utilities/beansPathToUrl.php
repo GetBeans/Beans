@@ -1,4 +1,11 @@
 <?php
+/**
+ * Tests for beans_path_to_url()
+ *
+ * @package Beans\Framework\Tests\UnitTests\API\Utilities
+ *
+ * @since   1.5.0
+ */
 
 namespace Beans\Framework\Tests\UnitTests\API\Utilities;
 
@@ -6,13 +13,13 @@ use Beans\Framework\Tests\UnitTests\Test_Case;
 use Brain\Monkey\Functions;
 
 /**
- * Class Tests_Beans_Get
+ * Class Tests_BeansPathToUrl
  *
- * @package Beans\Framework\Tests\API\Utilities
+ * @package Beans\Framework\Tests\UnitTests\API\Utilities
  * @group   unit-tests
  * @group   api
  */
-class Tests_Beans_Path_To_Url extends Test_Case {
+class Tests_BeansPathToUrl extends Test_Case {
 
 	/**
 	 * Setup test fixture.
@@ -39,9 +46,6 @@ class Tests_Beans_Path_To_Url extends Test_Case {
 	public function test_should_bail_out_when_relative_url() {
 		$this->assertSame( '//getbeans.io', beans_path_to_url( '//getbeans.io' ) );
 		$this->assertSame( '//www.getbeans.io', beans_path_to_url( '//www.getbeans.io' ) );
-
-//		$this->assertSame( 'getbeans.io', beans_path_to_url( 'getbeans.io' ) );
-//		$this->assertSame( 'www.getbeans.io', beans_path_to_url( 'www.getbeans.io' ) );
 	}
 
 	/**
@@ -102,8 +106,6 @@ class Tests_Beans_Path_To_Url extends Test_Case {
 		Functions\expect( 'site_url' )->andReturn( $url );
 
 		$this->assertSame( "{$url}/api/utilities/beansPathToUrl.php", beans_path_to_url( __FILE__, true ) );
-
-		$path = __DIR__;
 		$this->assertSame( "{$url}/api/utilities", beans_path_to_url( __DIR__, true ) );
 	}
 

@@ -1,17 +1,24 @@
 <?php
+/**
+ * Tests for beans_sanitize_path()
+ *
+ * @package Beans\Framework\Tests\UnitTests\API\Utilities
+ *
+ * @since   1.5.0
+ */
 
 namespace Beans\Framework\Tests\UnitTests\API\Utilities;
 
 use Beans\Framework\Tests\UnitTests\Test_Case;
 
 /**
- * Class Tests_Beans_Sanitize_Path
+ * Class Tests_BeansSanitizePath
  *
- * @package Beans\Framework\Tests\API\Utilities
+ * @package Beans\Framework\Tests\UnitTests\API\Utilities
  * @group   unit-tests
  * @group   api
  */
-class Tests_Beans_Sanitize_Path extends Test_Case {
+class Tests_BeansSanitizePath extends Test_Case {
 
 	/**
 	 * Setup test fixture.

@@ -1,17 +1,24 @@
 <?php
+/**
+ * Tests for beans_render_function_array()
+ *
+ * @package Beans\Framework\Tests\UnitTests\API\Utilities
+ *
+ * @since   1.5.0
+ */
 
 namespace Beans\Framework\Tests\UnitTests\API\Utilities;
 
 use Beans\Framework\Tests\UnitTests\Test_Case;
 
 /**
- * Class Tests_Beans_Render_Function_Array
+ * Class Tests_BeansRenderFunctionArray
  *
  * @package Beans\Framework\Tests\API\Utilities
  * @group   unit-tests
  * @group   api
  */
-class Tests_Beans_Render_Function_Array extends Test_Case {
+class Tests_BeansRenderFunctionArray extends Test_Case {
 
 	/**
 	 * Setup test fixture.
@@ -44,7 +51,7 @@ class Tests_Beans_Render_Function_Array extends Test_Case {
 	public function test_should_work_with_arguments() {
 
 		$callback = function ( $foo, $bar, $baz ) {
-			echo "{$foo} {$bar} {$baz}";
+			echo "{$foo} {$bar} {$baz}"; // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped - reason: we are not testing escaping functionality.
 		};
 		$this->assertSame(
 			'foo bar baz',
@@ -53,7 +60,7 @@ class Tests_Beans_Render_Function_Array extends Test_Case {
 
 		$callback = function ( $array, $baz ) {
 			$this->assertCount( 2, $array );
-			echo join( ' ', $array ) . ' ' . $baz;
+			echo join( ' ', $array ) . ' ' . $baz; // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped - reason: we are not testing escaping functionality.
 		};
 		$this->assertSame(
 			'foo bar baz',
@@ -65,7 +72,7 @@ class Tests_Beans_Render_Function_Array extends Test_Case {
 			$this->assertArrayHasKey( 'bar', $array1 );
 			$this->assertCount( 1, $array2 );
 			$this->assertArrayHasKey( 'baz', $array2 );
-			echo $array1['foo'];
+			echo $array1['foo']; // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped - reason: we are not testing escaping functionality.
 		};
 		$this->assertSame(
 			'oof',

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * DO NOT REMOVE THIS FILE!
  *
@@ -21,6 +20,10 @@ use PHPUnit\Framework\TestCase;
  * @package Beans\Framework\Tests\IntegrationTests
  */
 class Tests_Integration_Setup extends TestCase {
+
+	/**
+	 * Sample integration test.
+	 */
 	public function test_trigger_the_listener() {
 		$this->assertTrue( true );
 	}

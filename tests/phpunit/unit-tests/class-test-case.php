@@ -1,4 +1,11 @@
 <?php
+/**
+ * Test Case for the unit tests.
+ *
+ * @package Beans\Framework\Tests\UnitTests
+ *
+ * @since   1.5.0
+ */
 
 namespace Beans\Framework\Tests\UnitTests;
 
@@ -9,7 +16,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Abstract Class Test_Case
  *
- * @package Beans\Framework\Tests
+ * @package Beans\Framework\Tests\UnitTests
  */
 abstract class Test_Case extends TestCase {
 
@@ -21,7 +28,7 @@ abstract class Test_Case extends TestCase {
 		Monkey\setUp();
 
 		if ( ! defined( 'ABSPATH' ) ) {
-			define( 'ABSPATH', dirname( __FILE__ ) . '/' );
+			define( 'ABSPATH', dirname( __FILE__ ) . '/' ); // @codingStandardsIgnoreLine - WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound - ABSPATH is required.
 		}
 
 		Functions\when( 'wp_normalize_path' )->alias( function ( $path ) {

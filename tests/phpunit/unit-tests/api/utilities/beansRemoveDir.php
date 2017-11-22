@@ -1,4 +1,11 @@
 <?php
+/**
+ * Tests for beans_remove_dir()
+ *
+ * @package Beans\Framework\Tests\UnitTests\API\Utilities
+ *
+ * @since   1.5.0
+ */
 
 namespace Beans\Framework\Tests\UnitTests\API\Utilities;
 
@@ -6,13 +13,13 @@ use Beans\Framework\Tests\UnitTests\Test_Case;
 use org\bovigo\vfs\vfsStream;
 
 /**
- * Class Tests_Beans_Remove_Dir
+ * Class Tests_BeansRemoveDir
  *
- * @package Beans\Framework\Tests\API\Utilities
+ * @package Beans\Framework\Tests\UnitTests\API\Utilities
  * @group   unit-tests
  * @group   api
  */
-class Tests_Beans_Remove_Dir extends Test_Case {
+class Tests_BeansRemoveDir extends Test_Case {
 
 	/**
 	 * Setup test fixture.

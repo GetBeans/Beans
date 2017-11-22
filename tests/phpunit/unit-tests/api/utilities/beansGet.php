@@ -1,19 +1,24 @@
 <?php
+/**
+ * Tests for beans_get()
+ *
+ * @package Beans\Framework\Tests\UnitTests\API\Utilities
+ *
+ * @since   1.5.0
+ */
 
 namespace Beans\Framework\Tests\UnitTests\API\Utilities;
 
 use Beans\Framework\Tests\UnitTests\Test_Case;
-use Brain\Monkey\Functions;
-use org\bovigo\vfs\vfsStream;
 
 /**
- * Class Tests_Beans_Get
+ * Class Tests_BeansGet
  *
- * @package Beans\Framework\Tests\API\Utilities
+ * @package Beans\Framework\Tests\UnitTests\API\Utilities
  * @group   unit-tests
  * @group   api
  */
-class Tests_Beans_Get extends Test_Case {
+class Tests_BeansGet extends Test_Case {
 
 	/**
 	 * Setup test fixture.
@@ -39,12 +44,21 @@ class Tests_Beans_Get extends Test_Case {
 	 */
 	public function test_should_find_needle() {
 		$this->assertEquals( 'bar', beans_get( 0, 'bar', 10 ) );
-		$this->assertEquals( 'found me', beans_get( 'foo', array( 'foo' => 'found me' ), 10 ) );
-		$this->assertEquals( 'red', beans_get( 0, array( 'baz' => 'zab', 'rab' => 'bar', 'red' ) ) );
-		$this->assertEquals( 'zab', beans_get( 'baz', array( 'baz' => 'zab', 'rab' => 'bar', 'red' ) ) );
 
-		$this->assertEquals( 'found me', beans_get( 'foo', (object) array( 'foo' => 'found me' ), 10 ) );
-		$this->assertEquals( 'red', beans_get( 0, (object) array( 'baz' => 'zab', 'rab' => 'bar', 'red' ) ) );
-		$this->assertEquals( 'zab', beans_get( 'baz', (object) array( 'baz' => 'zab', 'rab' => 'bar', 'red' ) ) );
+		$data = array(
+			'foo' => 'found me',
+		);
+		$this->assertEquals( 'found me', beans_get( 'foo', $data, 10 ) );
+		$this->assertEquals( 'found me', beans_get( 'foo', (object) $data, 10 ) );
+
+		$data = array(
+			'baz' => 'zab',
+			'rab' => 'bar',
+			'red',
+		);
+		$this->assertEquals( 'red', beans_get( 0, $data ) );
+		$this->assertEquals( 'zab', beans_get( 'baz', $data ) );
+		$this->assertEquals( 'red', beans_get( 0, (object) $data ) );
+		$this->assertEquals( 'zab', beans_get( 'baz', (object) $data ) );
 	}
 }

@@ -18,7 +18,7 @@ define( 'BEANS_INTEGRATION_TESTS_DIR', __DIR__ );
 // Give access to tests_add_filter() function.
 require_once getenv( 'WP_TESTS_DIR' ) . '/includes/functions.php';
 
-define( 'THIS_THEME_DIR', basename( dirname( dirname( __DIR__ ) ) ) );
+define( 'BEANS_THEME_DIR', basename( dirname( dirname( __DIR__ ) ) ) );
 
 /**
  * Manually load the theme being tested.
