@@ -41,8 +41,12 @@
     "install-codestandards": [
       "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run"
     ],
-    "phpcs": "vendor/bin/phpcs",
+    "phpcs-src": "vendor/bin/phpcs",
     "phpcs-tests": "vendor/bin/phpcs --runtime-set testVersion 5.6 tests/phpunit/",
+    "phpcs": [
+      "@phpcs-src",
+      "@phpcs-tests"
+    ],
     "test-unit": "vendor/bin/phpunit --testsuite unit",
     "test-integration": "vendor/bin/phpunit --testsuite integration"
   }
