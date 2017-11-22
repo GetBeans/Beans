@@ -294,7 +294,7 @@ function beans_sanitize_path( $path ) {
 function beans_get( $needle, $haystack = false, $default = null ) {
 
 	if ( false === $haystack ) {
-		$haystack = $_GET; // phpcs:disable WordPress.CSRF.NonceVerification.NoNonceVerification as the nonce verification check should be at the form processing level.
+		$haystack = $_GET; // @codingStandardsIgnoreLine - WordPress.CSRF.NonceVerification.NoNonceVerification as the nonce verification check should be at the form processing level.
 	}
 
 	$haystack = (array) $haystack;
@@ -317,7 +317,7 @@ function beans_get( $needle, $haystack = false, $default = null ) {
  * @return string Returns the value if found; else $default is returned.
  */
 function beans_post( $needle, $default = null ) {
-	return beans_get( $needle, $_POST, $default ); // phpcs:disable WordPress.CSRF.NonceVerification.NoNonceVerification as the nonce verification check should be at the form processing level.
+	return beans_get( $needle, $_POST, $default ); // @codingStandardsIgnoreLine - WordPress.CSRF.NonceVerification.NoNonceVerification as the nonce verification check should be at the form processing level.
 }
 
 /**
