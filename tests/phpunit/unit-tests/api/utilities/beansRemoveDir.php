@@ -27,7 +27,7 @@ class Tests_BeansRemoveDir extends Test_Case {
 	protected function setUp() {
 		parent::setUp();
 
-		require_once BEANS_TESTS_LIB_DIR . '/api/utilities/functions.php';
+		require_once BEANS_TESTS_LIB_DIR . 'api/utilities/functions.php';
 	}
 
 	/**

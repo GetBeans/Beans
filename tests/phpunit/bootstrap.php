@@ -13,7 +13,6 @@ if ( version_compare( phpversion(), '5.6.0', '<' ) ) {
 }
 
 define( 'BEANS_TESTS_DIR', __DIR__ );
-
 define( 'BEANS_TESTS_LIB_DIR', dirname( dirname( __DIR__ ) ) . '/lib/' );
 
 /**
