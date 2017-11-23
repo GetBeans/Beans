@@ -1,0 +1,50 @@
+# Travis CI (MIT license) configuration file for Beans.
+# @link https://travis-ci.org/
+
+# For use with the Beans Theme Framework
+# @link https://github.com/Getbeans/Beans
+
+# This version does not include sniffers. Why? The codebase would fail.
+# Once we get the codebase compliant, then we'll update this file.
+
+sudo: false
+dist: precise
+language: php
+
+cache:
+  directories:
+    - node_modules
+    - vendor
+    - $HOME/phpunit-bin
+
+php:
+    - 5.6
+    - 7.0
+    - 7.1
+    - 7.2
+
+env:
+  - WP_VERSION=latest WP_MULTISITE=0
+  - WP_VERSION=latest WP_MULTISITE=1
+  - WP_VERSION=trunk WP_MULTISITE=0
+  - WP_VERSION=trunk WP_MULTISITE=1
+
+install:
+    - export DEV_LIB_PATH=dev-lib
+    - if [ ! -e "$DEV_LIB_PATH" ] && [ -L .travis.yml ]; then export DEV_LIB_PATH=$( dirname $( readlink .travis.yml ) ); fi
+    - if [ ! -e "$DEV_LIB_PATH" ]; then git clone https://github.com/xwp/wp-dev-lib.git $DEV_LIB_PATH; fi
+    - source $DEV_LIB_PATH/travis.install.sh
+
+after_wp_install:
+    - composer dumpautoload
+
+script:
+  - source $DEV_LIB_PATH/travis.script.sh
+
+after_script:
+  - source $DEV_LIB_PATH/travis.after_script.sh
+
+notifications:
+  email:
+    on_success: never
+    on_failure: change
