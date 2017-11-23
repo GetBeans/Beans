@@ -15,10 +15,7 @@ if ( ! file_exists( getenv( 'WP_TESTS_DIR' ) . '/includes/functions.php' ) ) {
 }
 
 define( 'BEANS_INTEGRATION_TESTS_DIR', __DIR__ );
-define( 'BEANS_THEME_DIR', basename( dirname( dirname( dirname( __DIR__ ) ) ) ) );
-
-// Require patchwork early so that functions can be monkey patched in Unit tests.
-require BEANS_THEME_DIR . '/vendor/antecedent/patchwork/Patchwork.php';
+define( 'BEANS_THEME_DIR', basename( BEANS_THEME_ROOT_DIR ) );
 
 // Give access to tests_add_filter() function.
 require_once getenv( 'WP_TESTS_DIR' ) . '/includes/functions.php';

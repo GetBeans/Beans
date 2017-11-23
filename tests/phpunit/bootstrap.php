@@ -12,9 +12,12 @@ if ( version_compare( phpversion(), '5.6.0', '<' ) ) {
 	die( 'Beans Unit Tests require PHP 5.6 or higher.' );
 }
 
-define( 'BEANS_TESTS_DIR', __DIR__ );
+if ( ! defined( 'BEANS_THEME_ROOT_DIR' ) ) {
+	define( 'BEANS_THEME_ROOT_DIR', dirname( dirname( __DIR__ ) ) );
+}
 
-define( 'BEANS_TESTS_LIB_DIR', dirname( dirname( __DIR__ ) ) . '/lib/' );
+define( 'BEANS_TESTS_DIR', __DIR__ );
+define( 'BEANS_TESTS_LIB_DIR', BEANS_THEME_ROOT_DIR . '/lib/' );
 
 /**
  * Time to load Composer's autoloader.
