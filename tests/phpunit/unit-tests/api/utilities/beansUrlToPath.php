@@ -22,12 +22,22 @@ use Brain\Monkey\Functions;
 class Tests_BeansUrlToPath extends Test_Case {
 
 	/**
+	 * Sanitized ABSPATH - to ensure it works on both OSX and Windows.
+	 *
+	 * @var string
+	 */
+	protected static $abspath;
+
+	/**
 	 * Setup test fixture.
 	 */
 	protected function setUp() {
 		parent::setUp();
 
 		require_once BEANS_TESTS_LIB_DIR . 'api/utilities/functions.php';
+		if ( is_null( self::$abspath ) ) {
+			self::$abspath = beans_sanitize_path( ABSPATH ) . '/';
+		}
 	}
 
 	/**
@@ -95,24 +105,24 @@ class Tests_BeansUrlToPath extends Test_Case {
 		Functions\expect( 'is_main_site' )->andReturn( true );
 
 		Functions\expect( 'site_url' )->twice()->andReturn( 'https://example.com' );
-		$this->assertSame( rtrim( ABSPATH, '/' ), beans_url_to_path( 'https://example.com', true ) );
-		$this->assertSame( rtrim( ABSPATH, '/' ), beans_url_to_path( 'https://example.com/', true ) );
+		$this->assertSame( rtrim( self::$abspath, '/' ), beans_url_to_path( 'https://example.com', true ) );
+		$this->assertSame( rtrim( self::$abspath, '/' ), beans_url_to_path( 'https://example.com/', true ) );
 
 		Functions\expect( 'site_url' )->twice()->andReturn( 'http://foo.com/' );
-		$this->assertSame( rtrim( ABSPATH, '/' ), beans_url_to_path( 'http://foo.com', true ) );
-		$this->assertSame( rtrim( ABSPATH, '/' ), beans_url_to_path( 'http://foo.com/', true ) );
+		$this->assertSame( rtrim( self::$abspath, '/' ), beans_url_to_path( 'http://foo.com', true ) );
+		$this->assertSame( rtrim( self::$abspath, '/' ), beans_url_to_path( 'http://foo.com/', true ) );
 
 		Functions\expect( 'site_url' )->times( 3 )->andReturn( 'https://example.com' );
 		$this->assertSame(
-			ABSPATH . 'foo/bar/index.php',
+			self::$abspath . 'foo/bar/index.php',
 			beans_url_to_path( 'https://example.com/foo/bar/index.php', true )
 		);
 		$this->assertSame(
-			ABSPATH . 'foo/bar/',
+			self::$abspath . 'foo/bar/',
 			beans_url_to_path( 'https://example.com/foo/bar/', true )
 		);
 		$this->assertSame(
-			ABSPATH . 'foo/bar/baz/',
+			self::$abspath . 'foo/bar/baz/',
 			beans_url_to_path( 'https://example.com/foo/bar/baz/', true )
 		);
 	}
@@ -124,24 +134,24 @@ class Tests_BeansUrlToPath extends Test_Case {
 		Functions\expect( 'is_main_site' )->andReturn( true );
 
 		Functions\expect( 'site_url' )->twice()->andReturn( 'https://8.8.8.8' );
-		$this->assertSame( rtrim( ABSPATH, '/' ), beans_url_to_path( 'https://8.8.8.8', true ) );
-		$this->assertSame( rtrim( ABSPATH, '/' ), beans_url_to_path( 'https://8.8.8.8/', true ) );
+		$this->assertSame( rtrim( self::$abspath, '/' ), beans_url_to_path( 'https://8.8.8.8', true ) );
+		$this->assertSame( rtrim( self::$abspath, '/' ), beans_url_to_path( 'https://8.8.8.8/', true ) );
 
 		Functions\expect( 'site_url' )->twice()->andReturn( 'https://8.8.8.8/' );
-		$this->assertSame( rtrim( ABSPATH, '/' ), beans_url_to_path( 'https://8.8.8.8', true ) );
-		$this->assertSame( rtrim( ABSPATH, '/' ), beans_url_to_path( 'https://8.8.8.8/', true ) );
+		$this->assertSame( rtrim( self::$abspath, '/' ), beans_url_to_path( 'https://8.8.8.8', true ) );
+		$this->assertSame( rtrim( self::$abspath, '/' ), beans_url_to_path( 'https://8.8.8.8/', true ) );
 
 		Functions\expect( 'site_url' )->andReturn( 'https://8.8.8.8' );
 		$this->assertSame(
-			ABSPATH . 'foo/bar/index.php',
+			self::$abspath . 'foo/bar/index.php',
 			beans_url_to_path( 'https://8.8.8.8/foo/bar/index.php', true )
 		);
 		$this->assertSame(
-			ABSPATH . 'foo/bar/',
+			self::$abspath . 'foo/bar/',
 			beans_url_to_path( 'https://8.8.8.8/foo/bar/', true )
 		);
 		$this->assertSame(
-			ABSPATH . 'foo/bar/baz/',
+			self::$abspath . 'foo/bar/baz/',
 			beans_url_to_path( 'https://8.8.8.8/foo/bar/baz/', true )
 		);
 	}
@@ -154,17 +164,17 @@ class Tests_BeansUrlToPath extends Test_Case {
 		Functions\expect( 'site_url' )->times( 3 )->andReturn( 'https://example.com/blog/' );
 
 		$this->assertSame(
-			ABSPATH . 'blog/',
+			self::$abspath . 'blog/',
 			beans_url_to_path( 'https://example.com/blog/', true )
 		);
 
 		$this->assertSame(
-			ABSPATH . 'blog/foo/bar/',
+			self::$abspath . 'blog/foo/bar/',
 			beans_url_to_path( 'https://example.com/blog/foo/bar/', true )
 		);
 
 		$this->assertSame(
-			ABSPATH . 'blog/foo/bar/baz/',
+			self::$abspath . 'blog/foo/bar/baz/',
 			beans_url_to_path( 'https://example.com/blog/foo/bar/baz/', true )
 		);
 	}
@@ -177,17 +187,17 @@ class Tests_BeansUrlToPath extends Test_Case {
 		Functions\expect( 'site_url' )->andReturn( 'https://8.8.8.8/blog/' );
 
 		$this->assertSame(
-			ABSPATH . 'blog/',
+			self::$abspath . 'blog/',
 			beans_url_to_path( 'https://8.8.8.8/blog/', true )
 		);
 
 		$this->assertSame(
-			ABSPATH . 'blog/foo/bar/',
+			self::$abspath . 'blog/foo/bar/',
 			beans_url_to_path( 'https://8.8.8.8/blog/foo/bar/', true )
 		);
 
 		$this->assertSame(
-			ABSPATH . 'blog/foo/bar/baz/',
+			self::$abspath . 'blog/foo/bar/baz/',
 			beans_url_to_path( 'https://8.8.8.8/blog/foo/bar/baz/', true )
 		);
 	}
@@ -201,17 +211,17 @@ class Tests_BeansUrlToPath extends Test_Case {
 		Functions\expect( 'site_url' )->times( 3 )->andReturn( 'https://example.com/blog/' );
 
 		$this->assertSame(
-			ABSPATH . 'blog/',
+			self::$abspath . 'blog/',
 			beans_url_to_path( 'https://example.com/blog/', true )
 		);
 
 		$this->assertSame(
-			ABSPATH . 'blog/foo/bar/',
+			self::$abspath . 'blog/foo/bar/',
 			beans_url_to_path( 'https://example.com/blog/foo/bar/', true )
 		);
 
 		$this->assertSame(
-			ABSPATH . 'blog/foo/bar/baz/',
+			self::$abspath . 'blog/foo/bar/baz/',
 			beans_url_to_path( 'https://example.com/blog/foo/bar/baz/', true )
 		);
 	}
@@ -224,17 +234,17 @@ class Tests_BeansUrlToPath extends Test_Case {
 		Functions\expect( 'site_url' )->andReturn( 'https://8.8.8.8/blog/foo' );
 
 		$this->assertSame(
-			ABSPATH . 'blog/',
+			self::$abspath . 'blog/',
 			beans_url_to_path( 'https://8.8.8.8/blog/', true )
 		);
 
 		$this->assertSame(
-			ABSPATH . 'blog/foo/bar/',
+			self::$abspath . 'blog/foo/bar/',
 			beans_url_to_path( 'https://8.8.8.8/blog/foo/bar/', true )
 		);
 
 		$this->assertSame(
-			ABSPATH . 'blog/foo/bar/baz/',
+			self::$abspath . 'blog/foo/bar/baz/',
 			beans_url_to_path( 'https://8.8.8.8/blog/foo/bar/baz/', true )
 		);
 	}
@@ -248,12 +258,12 @@ class Tests_BeansUrlToPath extends Test_Case {
 		Functions\expect( 'is_main_site' )->andReturn( true );
 
 		Functions\expect( 'site_url' )->times( 6 )->andReturn( 'https://example.com' );
-		$this->assertSame( rtrim( ABSPATH, '/' ), beans_url_to_path( '//example.com', true ) );
-		$this->assertSame( rtrim( ABSPATH, '/' ), beans_url_to_path( 'example.com', true ) );
-		$this->assertSame( rtrim( ABSPATH, '/' ), beans_url_to_path( 'example.com/', true ) );
-		$this->assertSame( rtrim( ABSPATH, '/' ), beans_url_to_path( 'www.example.com/', true ) );
-		$this->assertSame( ABSPATH . 'foo', beans_url_to_path( 'example.com/foo', true ) );
-		$this->assertSame( ABSPATH . 'foo/', beans_url_to_path( 'example.com/foo/', true ) );
+		$this->assertSame( rtrim( self::$abspath, '/' ), beans_url_to_path( '//example.com', true ) );
+		$this->assertSame( rtrim( self::$abspath, '/' ), beans_url_to_path( 'example.com', true ) );
+		$this->assertSame( rtrim( self::$abspath, '/' ), beans_url_to_path( 'example.com/', true ) );
+		$this->assertSame( rtrim( self::$abspath, '/' ), beans_url_to_path( 'www.example.com/', true ) );
+		$this->assertSame( self::$abspath . 'foo', beans_url_to_path( 'example.com/foo', true ) );
+		$this->assertSame( self::$abspath . 'foo/', beans_url_to_path( 'example.com/foo/', true ) );
 	}
 
 
@@ -266,12 +276,12 @@ class Tests_BeansUrlToPath extends Test_Case {
 		Functions\expect( 'is_main_site' )->andReturn( true );
 
 		Functions\expect( 'site_url' )->times( 6 )->andReturn( 'https://8.8.8.8' );
-		$this->assertSame( rtrim( ABSPATH, '/' ), beans_url_to_path( '//8.8.8.8', true ) );
-		$this->assertSame( rtrim( ABSPATH, '/' ), beans_url_to_path( '8.8.8.8', true ) );
-		$this->assertSame( rtrim( ABSPATH, '/' ), beans_url_to_path( '8.8.8.8/', true ) );
-		$this->assertSame( rtrim( ABSPATH, '/' ), beans_url_to_path( 'www.8.8.8.8/', true ) );
-		$this->assertSame( ABSPATH . 'foo', beans_url_to_path( '8.8.8.8/foo', true ) );
-		$this->assertSame( ABSPATH . 'foo/', beans_url_to_path( '8.8.8.8/foo/', true ) );
+		$this->assertSame( rtrim( self::$abspath, '/' ), beans_url_to_path( '//8.8.8.8', true ) );
+		$this->assertSame( rtrim( self::$abspath, '/' ), beans_url_to_path( '8.8.8.8', true ) );
+		$this->assertSame( rtrim( self::$abspath, '/' ), beans_url_to_path( '8.8.8.8/', true ) );
+		$this->assertSame( rtrim( self::$abspath, '/' ), beans_url_to_path( 'www.8.8.8.8/', true ) );
+		$this->assertSame( self::$abspath . 'foo', beans_url_to_path( '8.8.8.8/foo', true ) );
+		$this->assertSame( self::$abspath . 'foo/', beans_url_to_path( '8.8.8.8/foo/', true ) );
 	}
 
 	/**
@@ -282,11 +292,11 @@ class Tests_BeansUrlToPath extends Test_Case {
 
 		Functions\expect( 'site_url' )->andReturn( 'https://foo.com' );
 
-		$this->assertSame( rtrim( ABSPATH, '/' ), beans_url_to_path( 'https://foo.com/~subdomain', true ) );
-		$this->assertSame( rtrim( ABSPATH, '/' ), beans_url_to_path( 'https://foo.com/~subdomain/', true ) );
-		$this->assertSame( ABSPATH . 'foo', beans_url_to_path( 'https://foo.com/~subdomain/foo', true ) );
-		$this->assertSame( ABSPATH . 'foo/', beans_url_to_path( 'https://foo.com/~subdomain/foo/', true ) );
-		$this->assertSame( ABSPATH . 'bar/~subdomain/foo/', beans_url_to_path( 'https://foo.com/bar/~subdomain/foo/', true ) );
+		$this->assertSame( rtrim( self::$abspath, '/' ), beans_url_to_path( 'https://foo.com/~subdomain', true ) );
+		$this->assertSame( rtrim( self::$abspath, '/' ), beans_url_to_path( 'https://foo.com/~subdomain/', true ) );
+		$this->assertSame( self::$abspath . 'foo', beans_url_to_path( 'https://foo.com/~subdomain/foo', true ) );
+		$this->assertSame( self::$abspath . 'foo/', beans_url_to_path( 'https://foo.com/~subdomain/foo/', true ) );
+		$this->assertSame( self::$abspath . 'bar/~subdomain/foo/', beans_url_to_path( 'https://foo.com/bar/~subdomain/foo/', true ) );
 	}
 
 	/**
@@ -296,11 +306,11 @@ class Tests_BeansUrlToPath extends Test_Case {
 		Functions\expect( 'is_main_site' )->andReturn( true );
 
 		Functions\expect( 'site_url' )->andReturn( 'https://255.255.255.255' );
-		$this->assertSame( rtrim( ABSPATH, '/' ), beans_url_to_path( 'https://255.255.255.255/~subdomain', true ) );
-		$this->assertSame( rtrim( ABSPATH, '/' ), beans_url_to_path( 'https://255.255.255.255/~subdomain/', true ) );
-		$this->assertSame( ABSPATH . 'foo', beans_url_to_path( 'https://255.255.255.255/~subdomain/foo', true ) );
-		$this->assertSame( ABSPATH . 'foo/', beans_url_to_path( 'https://255.255.255.255/~subdomain/foo/', true ) );
-		$this->assertSame( ABSPATH . 'bar/~subdomain/foo/', beans_url_to_path( 'https://255.255.255.255/bar/~subdomain/foo/', true ) );
+		$this->assertSame( rtrim( self::$abspath, '/' ), beans_url_to_path( 'https://255.255.255.255/~subdomain', true ) );
+		$this->assertSame( rtrim( self::$abspath, '/' ), beans_url_to_path( 'https://255.255.255.255/~subdomain/', true ) );
+		$this->assertSame( self::$abspath . 'foo', beans_url_to_path( 'https://255.255.255.255/~subdomain/foo', true ) );
+		$this->assertSame( self::$abspath . 'foo/', beans_url_to_path( 'https://255.255.255.255/~subdomain/foo/', true ) );
+		$this->assertSame( self::$abspath . 'bar/~subdomain/foo/', beans_url_to_path( 'https://255.255.255.255/bar/~subdomain/foo/', true ) );
 	}
 
 	/**
@@ -313,10 +323,10 @@ class Tests_BeansUrlToPath extends Test_Case {
 		Functions\expect( 'get_blog_details' )->andReturn( (object) array( 'path' => '/shop/' ) );
 
 		Functions\expect( 'site_url' )->once()->andReturn( 'http://example.com/shop/' );
-		$this->assertSame( rtrim( ABSPATH, '/' ), beans_url_to_path( 'http://example.com/shop/', true ) );
+		$this->assertSame( rtrim( self::$abspath, '/' ), beans_url_to_path( 'http://example.com/shop/', true ) );
 
 		Functions\expect( 'site_url' )->once()->andReturn( 'http://example.com/shop/image.png' );
-		$this->assertSame( ABSPATH . 'image.png', beans_url_to_path( 'http://example.com/shop/image.png', true ) );
+		$this->assertSame( self::$abspath . 'image.png', beans_url_to_path( 'http://example.com/shop/image.png', true ) );
 	}
 
 	/**
@@ -329,10 +339,10 @@ class Tests_BeansUrlToPath extends Test_Case {
 		Functions\expect( 'get_blog_details' )->andReturn( (object) array( 'path' => '/shop/' ) );
 
 		Functions\expect( 'site_url' )->once()->andReturn( 'http://8.8.8.8/shop/' );
-		$this->assertSame( rtrim( ABSPATH, '/' ), beans_url_to_path( 'http://8.8.8.8/shop/', true ) );
+		$this->assertSame( rtrim( self::$abspath, '/' ), beans_url_to_path( 'http://8.8.8.8/shop/', true ) );
 
 		Functions\expect( 'site_url' )->once()->andReturn( 'http://50.50.50.50/shop/image.png' );
-		$this->assertSame( ABSPATH . 'image.png', beans_url_to_path( 'http://50.50.50.50/shop/image.png', true ) );
+		$this->assertSame( self::$abspath . 'image.png', beans_url_to_path( 'http://50.50.50.50/shop/image.png', true ) );
 	}
 
 	/**
@@ -344,10 +354,10 @@ class Tests_BeansUrlToPath extends Test_Case {
 
 		Functions\expect( 'get_blog_details' )->andReturn( (object) array( 'path' => '/' ) );
 		Functions\expect( 'site_url' )->once()->andReturn( 'http://shop.example.com' );
-		$this->assertSame( rtrim( ABSPATH, '/' ), beans_url_to_path( 'http://shop.example.com', true ) );
+		$this->assertSame( rtrim( self::$abspath, '/' ), beans_url_to_path( 'http://shop.example.com', true ) );
 
 		Functions\expect( 'site_url' )->once()->andReturn( 'http://shop.example.com/image.jpg/foo' );
-		$this->assertSame( ABSPATH . 'image.jpg', beans_url_to_path( 'http://shop.example.com/image.jpg', true ) );
+		$this->assertSame( self::$abspath . 'image.jpg', beans_url_to_path( 'http://shop.example.com/image.jpg', true ) );
 	}
 
 	/**
@@ -359,9 +369,9 @@ class Tests_BeansUrlToPath extends Test_Case {
 
 		Functions\expect( 'get_blog_details' )->andReturn( (object) array( 'path' => '/' ) );
 		Functions\expect( 'site_url' )->once()->andReturn( 'http://shop.255.147.55.10' );
-		$this->assertSame( rtrim( ABSPATH, '/' ), beans_url_to_path( 'http://shop.255.147.55.10', true ) );
+		$this->assertSame( rtrim( self::$abspath, '/' ), beans_url_to_path( 'http://shop.255.147.55.10', true ) );
 
 		Functions\expect( 'site_url' )->once()->andReturn( 'http://shop.1.2.3.4/image.jpg/foo' );
-		$this->assertSame( ABSPATH . 'image.jpg', beans_url_to_path( 'http://shop.1.2.3.4/image.jpg', true ) );
+		$this->assertSame( self::$abspath . 'image.jpg', beans_url_to_path( 'http://shop.1.2.3.4/image.jpg', true ) );
 	}
 }

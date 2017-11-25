@@ -30,7 +30,7 @@
     "sirbrillig/phpcs-variable-analysis": "^2.0",
     "wimg/php-compatibility": "^8.0",
     "wp-coding-standards/wpcs": "^0.14.0",
-    "phpunit/phpunit": "~5.7.9",
+    "phpunit/phpunit": "~4.8 || ~5.7.9",
     "brain/monkey": "^2.0",
     "mikey179/vfsStream": "^1.6"
   },
@@ -41,13 +41,13 @@
     "install-codestandards": [
       "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run"
     ],
-    "phpcs-src": "vendor/bin/phpcs",
-    "phpcs-tests": "vendor/bin/phpcs --runtime-set testVersion 5.6 tests/phpunit/",
+    "phpcs-src": "\"vendor/bin/phpcs\"",
+    "phpcs-tests": "\"vendor/bin/phpcs\" --runtime-set testVersion 5.6 tests/phpunit/",
     "phpcs": [
       "@phpcs-src",
       "@phpcs-tests"
     ],
-    "test-unit": "vendor/bin/phpunit --testsuite unit",
-    "test-integration": "vendor/bin/phpunit --testsuite integration"
+    "test-unit": "\"vendor/bin/phpunit\" --testsuite unit",
+    "test-integration": "\"vendor/bin/phpunit\" --testsuite integration"
   }
 }
