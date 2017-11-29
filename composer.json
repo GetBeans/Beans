@@ -20,6 +20,20 @@
       "Beans\\Framework\\Tests\\": "tests/"
     }
   },
+  "repositories": [
+    {
+      "type": "package",
+      "package": {
+      "name": "xwp/wp-dev-lib",
+      "version": "1.0.1",
+        "source": {
+          "url": "https://github.com/xwp/wp-dev-lib.git",
+          "type": "git",
+          "reference": "master"
+        }
+      }
+    }
+  ],
   "require": {
     "php": "^5.2|^7",
     "composer/installers": "^1.4",
@@ -32,7 +46,8 @@
     "wp-coding-standards/wpcs": "^0.14.0",
     "phpunit/phpunit": "~5.7.9",
     "brain/monkey": "^2.0",
-    "mikey179/vfsStream": "^1.6"
+    "mikey179/vfsStream": "^1.6",
+    "xwp/wp-dev-lib": "^1.0.1"
   },
   "config": {
     "sort-order": true

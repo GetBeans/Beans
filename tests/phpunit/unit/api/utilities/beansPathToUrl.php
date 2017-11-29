@@ -2,20 +2,20 @@
 /**
  * Tests for beans_path_to_url()
  *
- * @package Beans\Framework\Tests\UnitTests\API\Utilities
+ * @package Beans\Framework\Tests\Unit\API\Utilities
  *
  * @since   1.5.0
  */
 
-namespace Beans\Framework\Tests\UnitTests\API\Utilities;
+namespace Beans\Framework\Tests\Unit\API\Utilities;
 
-use Beans\Framework\Tests\UnitTests\Test_Case;
+use Beans\Framework\Tests\Unit\Test_Case;
 use Brain\Monkey\Functions;
 
 /**
  * Class Tests_BeansPathToUrl
  *
- * @package Beans\Framework\Tests\UnitTests\API\Utilities
+ * @package Beans\Framework\Tests\Unit\API\Utilities
  * @group   unit-tests
  * @group   api
  */

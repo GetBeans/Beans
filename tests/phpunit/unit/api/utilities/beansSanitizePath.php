@@ -2,19 +2,19 @@
 /**
  * Tests for beans_sanitize_path()
  *
- * @package Beans\Framework\Tests\UnitTests\API\Utilities
+ * @package Beans\Framework\Tests\Unit\API\Utilities
  *
  * @since   1.5.0
  */
 
-namespace Beans\Framework\Tests\UnitTests\API\Utilities;
+namespace Beans\Framework\Tests\Unit\API\Utilities;
 
-use Beans\Framework\Tests\UnitTests\Test_Case;
+use Beans\Framework\Tests\Unit\Test_Case;
 
 /**
  * Class Tests_BeansSanitizePath
  *
- * @package Beans\Framework\Tests\UnitTests\API\Utilities
+ * @package Beans\Framework\Tests\Unit\API\Utilities
  * @group   unit-tests
  * @group   api
  */
@@ -35,8 +35,8 @@ class Tests_BeansSanitizePath extends Test_Case {
 	public function test_should_sanitize_for_filesystem() {
 		$this->assertSame( BEANS_TESTS_DIR, beans_sanitize_path( BEANS_TESTS_DIR ) );
 		$this->assertSame( __DIR__, beans_sanitize_path( __DIR__ ) );
-		$this->assertSame( BEANS_TESTS_DIR, beans_sanitize_path( __DIR__ . '/../../../' ) );
-		$this->assertSame( BEANS_TESTS_DIR . '/bootstrap.php', beans_sanitize_path( __DIR__ . '/../../../bootstrap.php' ) );
+		$this->assertSame( BEANS_TESTS_DIR, beans_sanitize_path( __DIR__ . '/../../' ) );
+		$this->assertSame( BEANS_TESTS_DIR . '/bootstrap.php', beans_sanitize_path( __DIR__ . '/../../bootstrap.php' ) );
 	}
 
 	/**
