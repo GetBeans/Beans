@@ -8,10 +8,6 @@ sudo: false
 php:
     - "7.1"
 
-# WordPress version used in first build configuration.
-env:
-    - WP_VERSION=latest
-
 # Newer versions like trusty don't have PHP 5.2 or 5.3
 # https://blog.travis-ci.com/2017-07-11-trusty-as-default-linux-is-coming
 dist: precise
@@ -30,24 +26,10 @@ cache:
 matrix:
   include:
    - php: "5.2"
-     env: WP_VERSION=latest
-   - php: "5.2"
-     env: WP_VERSION=4.7
    - php: "5.3"
-     env: WP_VERSION=latest
-   - php: "5.3"
-     env: WP_VERSION=4.7
    - php: "5.4"
-     env: WP_VERSION=latest
-   - php: "5.4"
-     env: WP_VERSION=4.7
    - php: "7.0"
-     env: WP_VERSION=latest
-   - php: "7.0"
-     env: WP_VERSION=4.7
-     # 7.1 / latest already included above as first build.
    - php: "7.1"
-     env: WP_VERSION=4.7
 
 install:
   - nvm install 6 && nvm use 6
