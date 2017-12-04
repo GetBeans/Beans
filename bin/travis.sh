@@ -20,8 +20,7 @@ else
     echo '## Running unit tests:'
     phpunit --testsuite unit
 
-    # Run integration tests.
-    # echo '## Running integration tests:'
-    # export DEV_LIB_ONLY=phpunit
-    # run_phpunit_travisci
+    # Run integration tests.
+    echo '## Running integration tests:'
+    run_phpunit_travisci
 fi
