@@ -63,6 +63,6 @@
       "@phpcs-tests"
     ],
     "test-unit": "vendor/bin/phpunit --testsuite unit",
-	"test-integration": "vendor/bin/phpunit --testsuite integration --configuration tests/phpunit/integration/phpunit.xml.dist"
+    "test-integration": "vendor/bin/phpunit --testsuite integration --configuration tests/phpunit/integration/phpunit.xml.dist"
   }
 }
