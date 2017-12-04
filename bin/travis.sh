@@ -1,17 +1,23 @@
 #!/bin/bash
-DEV_LIB_TRAVIS_PATH='./vendor/xwp/wp-dev-lib/travis.script.sh'
+set -e
+
+export PATH="./vendor/bin:$PATH"
 
 # Exit if the dev lib isn't installed
 if [ ! -f $DEV_LIB_TRAVIS_PATH ]; then
-   echo "Oops, the Dev Library is not install, please run composer install!"
+    echo "Oops, the Dev Library is not install, please run composer install!"
 else
-   # Run sniffers and unit tests
-   export PATH="./vendor/bin:$PATH"
-   export WP_TESTS_DIR='exclude'
-   source $DEV_LIB_TRAVIS_PATH
+    echo "## Checking files, scope $CHECK_SCOPE:"
+    if [[ $CHECK_SCOPE != "all" ]]; then
+        cat "$TEMP_DIRECTORY/paths-scope"
+    fi
 
-   # Run integration tests.
-   export WP_TESTS_DIR=''
-   export DEV_LIB_ONLY=phpunit
-   source $DEV_LIB_TRAVIS_PATH
+    # Run sniffers and unit tests.
+    lint_js_files
+	lint_php_files
+    phpunit --testsuite unit
+
+    # Run integration tests.
+    export DEV_LIB_ONLY=phpunit
+    run_phpunit_travisci
 fi
