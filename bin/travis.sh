@@ -12,12 +12,16 @@ else
         cat "$TEMP_DIRECTORY/paths-scope"
     fi
 
-    # Run sniffers and unit tests.
+    # Run sniffers.
     lint_js_files
-	lint_php_files
+    lint_php_files
+
+    # Run unit tests.
+    echo '## Running unit tests:'
     phpunit --testsuite unit
 
     # Run integration tests.
-    export DEV_LIB_ONLY=phpunit
-    run_phpunit_travisci
+    # echo '## Running integration tests:'
+    # export DEV_LIB_ONLY=phpunit
+    # run_phpunit_travisci
 fi
