@@ -1,41 +1,22 @@
 # Tell Travis CI we're using PHP
 language: php
 
-# Opt to use Travis container-based environment.
-sudo: false
-
-# PHP version used in first build configuration.
-php:
-    - "7.1"
-
-# Newer versions like trusty don't have PHP 5.2 or 5.3
-# https://blog.travis-ci.com/2017-07-11-trusty-as-default-linux-is-coming
-dist: precise
-
-notifications:
-  email:
-    on_success: never
-    on_failure: change
-
 cache:
   directories:
-    - node_modules
-    - vendor
-    - $HOME/phpunit-bin
+    node_modules
+    endor
+    HOME/phpunit-bin
 
 matrix:
   include:
-   - php: "5.2"
-   - php: "5.3"
-   - php: "5.4"
+   - php: "5.6"
    - php: "7.0"
    - php: "7.1"
+   - php: "7.2"
 
 install:
-  - nvm install 6 && nvm use 6
+  - composer install
   - export DEV_LIB_PATH=vendor/xwp/wp-dev-lib
-  - if [ ! -e "$DEV_LIB_PATH" ] && [ -L .travis.yml ]; then export DEV_LIB_PATH=$( dirname $( readlink .travis.yml ) ); fi
-  - if [ ! -e "$DEV_LIB_PATH" ]; then git clone https://github.com/xwp/wp-dev-lib.git $DEV_LIB_PATH; fi
   - source $DEV_LIB_PATH/travis.install.sh
 
 script:
