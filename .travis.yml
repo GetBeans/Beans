@@ -6,6 +6,7 @@ cache:
   directories:
     node_modules
     vendor
+
 php:
   - "5.6"
 
@@ -17,10 +18,12 @@ matrix:
     - php: "7.1"
     - php: "7.2"
 
-install:
+before_install:
   - phpenv global 5.6
   - composer install
   - phpenv global "$TRAVIS_PHP_VERSION"
+
+install:
   - export DEV_LIB_PATH=vendor/xwp/wp-dev-lib
   - source $DEV_LIB_PATH/travis.install.sh
 
