@@ -22,5 +22,6 @@ else
 
     # Run integration tests.
     echo '## Running integration tests:'
+    export PHPUNIT_CONFIG=tests/phpunit/integration/phpunit.xml.dist
     run_phpunit_travisci
 fi

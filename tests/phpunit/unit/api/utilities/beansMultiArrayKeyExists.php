@@ -33,22 +33,10 @@ class Tests_BeansMultiArrayKeyExists extends Test_Case {
 	 * Test beans_multi_array_key_exists() should throw an error for non-array data type.
 	 */
 	public function test_should_throws_error_for_non_array() {
-		$args = array(
-			0     => 'bar',
-			'foo' => 10,
-			'bar' => new \stdClass(),
-		);
-
-		foreach ( $args as $arg1 => $arg2 ) {
-			try {
-				beans_multi_array_key_exists( $arg1, $arg2 );
-			} catch ( \Exception $e ) {
-				$catch = $e;
-			}
-
-			$this->assertNotEmpty( $catch );
-			unset( $catch );
-		}
+		$this->setExpectedException( \TypeError::class );
+		$this->assertFalse( beans_multi_array_key_exists( 0, 'bar' ) );
+		$this->assertFalse( beans_multi_array_key_exists( 'foo', 10 ) );
+		$this->assertFalse( beans_multi_array_key_exists( 'bar', new \stdClass() ) );
 	}
 
 	/**
