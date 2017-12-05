@@ -14,6 +14,7 @@ matrix:
     - php: '7.2'
 
 install:
+  - composer install
   - export DEV_LIB_PATH=vendor/xwp/wp-dev-lib
   - source $DEV_LIB_PATH/travis.install.sh
 
