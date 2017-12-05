@@ -43,8 +43,8 @@ class Tests_BeansPathToUrl extends Test_Case {
 
 		require_once BEANS_TESTS_LIB_DIR . 'api/utilities/functions.php';
 
-		self::$beans_relative_path       = 'wp-content/themes/' . basename( BEANS_ROOT_DIR );
-		self::$beans_tests_relative_path = self::$beans_relative_path . '/tests/phpunit/unit';
+		self::$beans_relative_path       = rtrim( str_replace( ABSPATH, '', BEANS_ROOT_DIR ), DIRECTORY_SEPARATOR );
+		self::$beans_tests_relative_path = str_replace( ABSPATH, '', BEANS_TESTS_DIR );
 	}
 
 	/**
