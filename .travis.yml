@@ -1,29 +1,22 @@
 language: php
 sudo: false
-dist: precise
 
 cache:
   directories:
     node_modules
     vendor
 
-php:
-  - '5.2'
-  - '5.6'
-  - '7.0'
-  - '7.1'
-  - nightly
-
 matrix:
   include:
     - php: '5.2'
+      dist: precise
     - php: '5.6'
     - php: '7.0'
     - php: '7.1'
     - php: '7.2'
 
 before_install:
-  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "5.2" ]]; then `phpenv global 5.6`; fi
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "5.2" ]]; then `phpenv global 5.3`; fi
   - composer install
   - if [[ ${TRAVIS_PHP_VERSION:0:3} == "5.2" ]]; then `phpenv global "$TRAVIS_PHP_VERSION"`; fi
 
