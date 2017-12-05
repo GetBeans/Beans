@@ -67,43 +67,24 @@ class Tests_BeansSanitizePath extends Test_Case {
 	 * Test beans_sanitize_path() should sanitize for filesystem symbolic links.
 	 */
 	public function test_should_sanitize_for_filesystem_symbolic_links() {
-		// test in the ./tests/api directory.
+		// Test in the ./tests/phpunit/unit/api directory.
 		$path = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR;
 		$this->assertSame(
-			$this->prepare_path( BEANS_TESTS_DIR ) . '/unit-tests/api',
+			$this->prepare_path( BEANS_TESTS_DIR ) . '/api',
 			beans_sanitize_path( $path )
 		);
 
-		// test in the ./tests directory.
-		$path .= '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR;
-		$this->assertSame( $this->prepare_path( BEANS_TESTS_DIR ), beans_sanitize_path( $path ) );
+		// Test in the ./tests/phpunit/unit directory.
+		$path .= '..' . DIRECTORY_SEPARATOR;
+		$this->assertSame(
+			$this->prepare_path( BEANS_TESTS_DIR ),
+			beans_sanitize_path( $path )
+		);
 		$this->assertSame(
 			$this->prepare_path( BEANS_TESTS_DIR ) . '/bootstrap.php',
 			beans_sanitize_path( $path . 'bootstrap.php' )
 		);
 
-		// test in the ./tests/integration-tests directory.
-		$path .= 'integration-tests' . DIRECTORY_SEPARATOR;
-		$this->assertSame(
-			$this->prepare_path( BEANS_TESTS_DIR ) . '/integration-tests',
-			beans_sanitize_path( $path )
-		);
-		$this->assertSame(
-			$this->prepare_path( BEANS_TESTS_DIR ) . '/integration-tests/bootstrap.php',
-			beans_sanitize_path( $path . 'bootstrap.php' )
-		);
-
-		// test in the Beans root directory.
-		$path = BEANS_TESTS_DIR . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR;
-		$this->assertSame(
-			$this->prepare_path( rtrim( BEANS_ROOT_DIR, DIRECTORY_SEPARATOR ) ),
-			beans_sanitize_path( $path )
-		);
-		$directory_separator = '\\' === DIRECTORY_SEPARATOR ? '/' : '';
-		$this->assertSame(
-			$this->prepare_path( BEANS_ROOT_DIR ) . $directory_separator . 'functions.php',
-			beans_sanitize_path( $path . 'functions.php' )
-		);
 	}
 
 	/**
