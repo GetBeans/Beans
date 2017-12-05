@@ -84,7 +84,6 @@ class Tests_BeansSanitizePath extends Test_Case {
 			$this->prepare_path( BEANS_TESTS_DIR ) . '/bootstrap.php',
 			beans_sanitize_path( $path . 'bootstrap.php' )
 		);
-
 	}
 
 	/**
