@@ -22,12 +22,29 @@ use Brain\Monkey\Functions;
 class Tests_BeansPathToUrl extends Test_Case {
 
 	/**
+	 * Relative path to the Beans directory starting from `wp-content`.
+	 *
+	 * @var string
+	 */
+	protected static $beans_relative_path;
+
+	/**
+	 * Relative path to the Unit Tests directory starting from `wp-content`.
+	 *
+	 * @var string
+	 */
+	protected static $beans_tests_relative_path;
+
+	/**
 	 * Setup test fixture.
 	 */
 	protected function setUp() {
 		parent::setUp();
 
 		require_once BEANS_TESTS_LIB_DIR . 'api/utilities/functions.php';
+
+		self::$beans_relative_path       = 'wp-content/themes/' . basename( BEANS_ROOT_DIR );
+		self::$beans_tests_relative_path = self::$beans_relative_path . '/tests/phpunit/unit';
 	}
 
 	/**
@@ -75,6 +92,7 @@ class Tests_BeansPathToUrl extends Test_Case {
 
 		$url = 'https://getbeans.io';
 		Functions\expect( 'site_url' )->andReturn( $url );
+		$url .= '/' . self::$beans_tests_relative_path;
 
 		$this->assertSame( "{$url}/api/utilities/beansPathToUrl.php", beans_path_to_url( __FILE__, true ) );
 		$this->assertSame( "{$url}/api/utilities", beans_path_to_url( __DIR__, true ) );
@@ -92,7 +110,7 @@ class Tests_BeansPathToUrl extends Test_Case {
 		$path = '/wp-content/themes';
 		$this->assertSame( "{$url}{$path}", beans_path_to_url( $path, true ) );
 
-		$path = 'wp-content/themes/tm-beans/';
+		$path = self::$beans_relative_path;
 		$this->assertSame( "{$url}/{$path}", beans_path_to_url( $path, true ) );
 	}
 
@@ -104,6 +122,7 @@ class Tests_BeansPathToUrl extends Test_Case {
 
 		$url = 'https://8.8.8.8';
 		Functions\expect( 'site_url' )->andReturn( $url );
+		$url .= '/' . self::$beans_tests_relative_path;
 
 		$this->assertSame( "{$url}/api/utilities/beansPathToUrl.php", beans_path_to_url( __FILE__, true ) );
 		$this->assertSame( "{$url}/api/utilities", beans_path_to_url( __DIR__, true ) );
@@ -121,7 +140,7 @@ class Tests_BeansPathToUrl extends Test_Case {
 		$path = '/wp-content/themes';
 		$this->assertSame( "{$url}{$path}", beans_path_to_url( $path, true ) );
 
-		$path = 'wp-content/themes/tm-beans/';
+		$path = self::$beans_relative_path;
 		$this->assertSame( "{$url}/{$path}", beans_path_to_url( $path, true ) );
 	}
 
@@ -133,6 +152,7 @@ class Tests_BeansPathToUrl extends Test_Case {
 
 		$url = 'https://getbeans.io';
 		Functions\expect( 'site_url' )->andReturn( $url . '/' );
+		$url .= '/' . self::$beans_tests_relative_path;
 
 		$this->assertSame( "{$url}/api/utilities/beansPathToUrl.php", beans_path_to_url( __FILE__, true ) );
 		$this->assertSame( "{$url}/api/utilities", beans_path_to_url( __DIR__, true ) );
@@ -146,11 +166,12 @@ class Tests_BeansPathToUrl extends Test_Case {
 
 		$url = 'https://getbeans.io';
 		Functions\expect( 'site_url' )->andReturn( $url . '/' );
+
 		$path = 'wp-content/themes';
 		$this->assertSame( "{$url}/{$path}", beans_path_to_url( $path, true ) );
 
-		$path = '/wp-content/themes/tm-beans/';
-		$this->assertSame( "{$url}{$path}", beans_path_to_url( $path, true ) );
+		$path = self::$beans_relative_path;
+		$this->assertSame( "{$url}/{$path}", beans_path_to_url( $path, true ) );
 	}
 
 	/**
@@ -161,6 +182,7 @@ class Tests_BeansPathToUrl extends Test_Case {
 
 		$url = 'https://8000:10.127.47.355';
 		Functions\expect( 'site_url' )->andReturn( $url . '/' );
+		$url .= '/' . self::$beans_tests_relative_path;
 
 		$this->assertSame( "{$url}/api/utilities/beansPathToUrl.php", beans_path_to_url( __FILE__, true ) );
 		$this->assertSame( "{$url}/api/utilities", beans_path_to_url( __DIR__, true ) );
@@ -178,8 +200,8 @@ class Tests_BeansPathToUrl extends Test_Case {
 		$path = 'wp-content/themes';
 		$this->assertSame( "{$url}/{$path}", beans_path_to_url( $path, true ) );
 
-		$path = '/wp-content/themes/tm-beans/';
-		$this->assertSame( "{$url}{$path}", beans_path_to_url( $path, true ) );
+		$path = self::$beans_relative_path;
+		$this->assertSame( "{$url}/{$path}", beans_path_to_url( $path, true ) );
 	}
 
 	/**
@@ -231,7 +253,10 @@ class Tests_BeansPathToUrl extends Test_Case {
 		Functions\expect( 'is_main_site' )->andReturn( true );
 
 		Functions\expect( 'site_url' )->once()->andReturn( 'https://getbeans.io' );
-		$this->assertSame( 'https://getbeans.io/api/utilities/beansPathToUrl.php', beans_path_to_url( __FILE__, true ) );
+		$this->assertSame(
+			'https://getbeans.io/' . self::$beans_tests_relative_path . '/api/utilities/beansPathToUrl.php',
+			beans_path_to_url( __FILE__, true )
+		);
 
 		Functions\expect( 'site_url' )->once()->andReturn( 'https://example.com/~subdomain' );
 		$this->assertSame( 'https://example.com/~subdomain/foo', beans_path_to_url( 'foo', true ) );
@@ -253,7 +278,10 @@ class Tests_BeansPathToUrl extends Test_Case {
 		Functions\expect( 'is_main_site' )->andReturn( true );
 
 		Functions\expect( 'site_url' )->once()->andReturn( 'https://8.8.8.8' );
-		$this->assertSame( 'https://8.8.8.8/api/utilities/beansPathToUrl.php', beans_path_to_url( __FILE__, true ) );
+		$this->assertSame(
+			'https://8.8.8.8/' . self::$beans_tests_relative_path . '/api/utilities/beansPathToUrl.php',
+			beans_path_to_url( __FILE__, true )
+		);
 
 		Functions\expect( 'site_url' )->once()->andReturn( 'https://17.17.17.17/~subdomain' );
 		$this->assertSame( 'https://17.17.17.17/~subdomain/foo', beans_path_to_url( 'foo', true ) );
