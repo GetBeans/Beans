@@ -1,0 +1,17 @@
+#!/bin/bash
+DEV_LIB_HOOK_PATH='./vendor/xwp/wp-dev-lib/pre-commit'
+
+# Exit if the dev lib isn't installed
+if [ ! -f $DEV_LIB_HOOK_PATH ]; then
+    echo "Oops, the Dev Library is not install, please run composer install!"
+else
+    # Run sniffers and unit tests.
+    export PATH="./vendor/bin:$PATH"
+    export WP_TESTS_DIR='exclude'
+    $DEV_LIB_HOOK_PATH
+
+    # Run integration tests.
+    export WP_TESTS_DIR=''
+    export DEV_LIB_ONLY=phpunit
+    $DEV_LIB_HOOK_PATH
+fi

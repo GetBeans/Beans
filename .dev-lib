@@ -1,0 +1,11 @@
+PROJECT_TYPE=theme
+CHECK_SCOPE=changed-files
+WPCS_STANDARD=phpcs.xml.dist
+PATH_EXCLUDES_PATTERN='^(.*/)?(vendors|vendor|node_modules)/.*'
+DEV_LIB_SKIP=yuicompressor,codeception,grunt,jshint
+
+# Run integration tests when the DEV_LIB_ONLY is set to phpunit
+# This is the only flag we can use to change the config file
+if [ 'phpunit' == "$DEV_LIB_ONLY" ]; then
+	PHPUNIT_CONFIG=tests/phpunit/integration/phpunit.xml.dist
+fi

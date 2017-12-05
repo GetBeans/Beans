@@ -2,12 +2,12 @@
 /**
  * Test Case for the unit tests.
  *
- * @package Beans\Framework\Tests\UnitTests
+ * @package Beans\Framework\Tests\Unit
  *
  * @since   1.5.0
  */
 
-namespace Beans\Framework\Tests\UnitTests;
+namespace Beans\Framework\Tests\Unit;
 
 use Brain\Monkey;
 use Brain\Monkey\Functions;
@@ -16,7 +16,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Abstract Class Test_Case
  *
- * @package Beans\Framework\Tests\UnitTests
+ * @package Beans\Framework\Tests\Unit
  */
 abstract class Test_Case extends TestCase {
 
@@ -26,10 +26,6 @@ abstract class Test_Case extends TestCase {
 	protected function setUp() {
 		parent::setUp();
 		Monkey\setUp();
-
-		if ( ! defined( 'ABSPATH' ) ) {
-			define( 'ABSPATH', dirname( __FILE__ ) . '/' ); // @codingStandardsIgnoreLine - WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound - ABSPATH is required.
-		}
 
 		Functions\when( 'wp_normalize_path' )->alias( function ( $path ) {
 			$path = str_replace( '\\', '/', $path );
@@ -41,6 +37,10 @@ abstract class Test_Case extends TestCase {
 
 			return $path;
 		} );
+
+		if ( ! defined( 'ABSPATH' ) ) {
+			define( 'ABSPATH', wp_normalize_path( dirname( __FILE__ ) . '/' ) ); // @codingStandardsIgnoreLine - WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound - ABSPATH is required.
+		}
 	}
 
 	/**

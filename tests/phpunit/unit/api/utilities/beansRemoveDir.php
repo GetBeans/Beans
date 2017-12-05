@@ -2,20 +2,20 @@
 /**
  * Tests for beans_remove_dir()
  *
- * @package Beans\Framework\Tests\UnitTests\API\Utilities
+ * @package Beans\Framework\Tests\Unit\API\Utilities
  *
  * @since   1.5.0
  */
 
-namespace Beans\Framework\Tests\UnitTests\API\Utilities;
+namespace Beans\Framework\Tests\Unit\API\Utilities;
 
-use Beans\Framework\Tests\UnitTests\Test_Case;
+use Beans\Framework\Tests\Unit\Test_Case;
 use org\bovigo\vfs\vfsStream;
 
 /**
  * Class Tests_BeansRemoveDir
  *
- * @package Beans\Framework\Tests\UnitTests\API\Utilities
+ * @package Beans\Framework\Tests\Unit\API\Utilities
  * @group   unit-tests
  * @group   api
  */

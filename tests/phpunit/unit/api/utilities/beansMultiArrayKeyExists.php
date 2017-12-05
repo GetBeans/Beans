@@ -2,19 +2,19 @@
 /**
  * Tests for beans_multi_array_key_exists()
  *
- * @package Beans\Framework\Tests\UnitTests\API\Utilities
+ * @package Beans\Framework\Tests\Unit\API\Utilities
  *
  * @since   1.5.0
  */
 
-namespace Beans\Framework\Tests\UnitTests\API\Utilities;
+namespace Beans\Framework\Tests\Unit\API\Utilities;
 
-use Beans\Framework\Tests\UnitTests\Test_Case;
+use Beans\Framework\Tests\Unit\Test_Case;
 
 /**
  * Class Tests_BeansMultiArrayKeyExists
  *
- * @package Beans\Framework\Tests\UnitTests\API\Utilities
+ * @package Beans\Framework\Tests\Unit\API\Utilities
  * @group   unit-tests
  * @group   api
  */
@@ -33,10 +33,24 @@ class Tests_BeansMultiArrayKeyExists extends Test_Case {
 	 * Test beans_multi_array_key_exists() should throw an error for non-array data type.
 	 */
 	public function test_should_throws_error_for_non_array() {
-		$this->expectException( \TypeError::class );
-		$this->assertFalse( beans_multi_array_key_exists( 0, 'bar' ) );
-		$this->assertFalse( beans_multi_array_key_exists( 'foo', 10 ) );
-		$this->assertFalse( beans_multi_array_key_exists( 'bar', new \stdClass() ) );
+		$args = array(
+			0     => 'bar',
+			'foo' => 10,
+			'bar' => new \stdClass(),
+		);
+
+		foreach ( $args as $arg1 => $arg2 ) {
+			try {
+				beans_multi_array_key_exists( $arg1, $arg2 );
+			} catch ( \Throwable $t ) {
+				$catch = $t;
+			} catch ( \Exception $e ) {
+				$catch = $e;
+			}
+
+			$this->assertNotEmpty( $catch );
+			unset( $catch );
+		}
 	}
 
 	/**
