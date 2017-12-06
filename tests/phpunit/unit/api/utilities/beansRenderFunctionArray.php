@@ -37,7 +37,7 @@ class Tests_BeansRenderFunctionArray extends Test_Case {
 	}
 
 	/**
-	 * Test beans_render_function_array() should work when there no arguments.
+	 * Test beans_render_function_array() should work when there are no arguments.
 	 */
 	public function test_should_work_when_no_arguments() {
 		$this->assertEquals( 'You called me!', beans_render_function_array( function () {

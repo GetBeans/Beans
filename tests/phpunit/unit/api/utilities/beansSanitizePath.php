@@ -44,14 +44,14 @@ class Tests_BeansSanitizePath extends Test_Case {
 		$this->assertSame( $this->prepare_path( BEANS_TESTS_DIR ), beans_sanitize_path( BEANS_TESTS_DIR ) );
 		$this->assertSame( $this->prepare_path( __DIR__ ), beans_sanitize_path( __DIR__ ) );
 
-		// test phpunit's path.
+		// Test phpunit's path.
 		$this->assertSame(
 			$this->prepare_path( BEANS_TESTS_DIR ) . '/bootstrap.php',
 			beans_sanitize_path( BEANS_TESTS_DIR . DIRECTORY_SEPARATOR . 'bootstrap.php' )
 		);
 		$this->assertSame( $this->prepare_path( __FILE__ ), beans_sanitize_path( __FILE__ ) );
 
-		// test beans' theme root path.
+		// Test Beans' theme root path.
 		$this->assertSame(
 			$this->prepare_path( rtrim( BEANS_ROOT_DIR, DIRECTORY_SEPARATOR ) ),
 			beans_sanitize_path( BEANS_ROOT_DIR )

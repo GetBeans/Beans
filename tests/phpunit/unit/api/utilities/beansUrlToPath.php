@@ -41,7 +41,7 @@ class Tests_BeansUrlToPath extends Test_Case {
 	}
 
 	/**
-	 * Test beans_url_to_path() bails out for an external URL.
+	 * Test beans_url_to_path() should bail out for an external URL.
 	 */
 	public function test_should_bail_out_when_external_url() {
 		Functions\expect( 'site_url' )->andReturn( 'http://getbeans.io' );
@@ -61,7 +61,7 @@ class Tests_BeansUrlToPath extends Test_Case {
 	}
 
 	/**
-	 * Test beans_url_to_path() bails out for an external URL that has an internal path, i.e.
+	 * Test beans_url_to_path() should bail out for an external URL that has an internal path, i.e.
 	 * meaning the site's URL is within the URL's path.
 	 *
 	 * @ticket 65
@@ -99,7 +99,7 @@ class Tests_BeansUrlToPath extends Test_Case {
 	}
 
 	/**
-	 * Test beans_url_to_path() converts the URL.
+	 * Test beans_url_to_path() should convert the domain URL.
 	 */
 	public function test_should_convert_domain_url() {
 		Functions\expect( 'is_main_site' )->andReturn( true );
@@ -128,7 +128,7 @@ class Tests_BeansUrlToPath extends Test_Case {
 	}
 
 	/**
-	 * Test beans_url_to_path() should converts IP addresses.
+	 * Test beans_url_to_path() should convert the IP address.
 	 */
 	public function test_should_convert_ip_address() {
 		Functions\expect( 'is_main_site' )->andReturn( true );
@@ -157,9 +157,9 @@ class Tests_BeansUrlToPath extends Test_Case {
 	}
 
 	/**
-	 * Test beans_url_to_path() converts for domain and removes the subfolder.
+	 * Test beans_url_to_path() should convert for domain URL and remove the subfolder.
 	 */
-	public function test_should_convert_domain_and_removes_subfolder() {
+	public function test_should_convert_domain_and_remove_subfolder() {
 		Functions\expect( 'is_main_site' )->andReturn( true );
 		Functions\expect( 'site_url' )->times( 3 )->andReturn( 'https://example.com/blog/' );
 
@@ -180,9 +180,9 @@ class Tests_BeansUrlToPath extends Test_Case {
 	}
 
 	/**
-	 * Test beans_url_to_path() converts for IP address and removes the subfolder.
+	 * Test beans_url_to_path() should convert for IP address and remove the subfolder.
 	 */
-	public function test_should_convert_ip_and_removes_subfolder() {
+	public function test_should_convert_ip_and_remove_subfolder() {
 		Functions\expect( 'is_main_site' )->andReturn( true );
 		Functions\expect( 'site_url' )->andReturn( 'https://8.8.8.8/blog/' );
 
@@ -203,9 +203,9 @@ class Tests_BeansUrlToPath extends Test_Case {
 	}
 
 	/**
-	 * Test beans_url_to_path() converts for domain and removes all subfolders.
+	 * Test beans_url_to_path() should convert for domain URL and remove all subfolders.
 	 */
-	public function test_should_convert_domain_and_removes_subfolders() {
+	public function test_should_convert_domain_and_remove_subfolders() {
 		Functions\expect( 'is_main_site' )->andReturn( true );
 
 		Functions\expect( 'site_url' )->times( 3 )->andReturn( 'https://example.com/blog/' );
@@ -227,9 +227,9 @@ class Tests_BeansUrlToPath extends Test_Case {
 	}
 
 	/**
-	 * Test beans_url_to_path() converts for domain and removes all subfolders.
+	 * Test beans_url_to_path() should convert for IP address and remove all subfolders.
 	 */
-	public function test_should_convert_ip_and_removes_subfolders() {
+	public function test_should_convert_ip_and_remove_subfolders() {
 		Functions\expect( 'is_main_site' )->andReturn( true );
 		Functions\expect( 'site_url' )->andReturn( 'https://8.8.8.8/blog/foo' );
 
@@ -250,11 +250,11 @@ class Tests_BeansUrlToPath extends Test_Case {
 	}
 
 	/**
-	 * Test beans_url_to_path() converts a relative URL.
+	 * Test beans_url_to_path() should convert a relative URL.
 	 *
 	 * @ticket 63
 	 */
-	public function test_should_convert_relative_urls() {
+	public function test_should_convert_relative_url() {
 		Functions\expect( 'is_main_site' )->andReturn( true );
 
 		Functions\expect( 'site_url' )->times( 6 )->andReturn( 'https://example.com' );
@@ -268,7 +268,7 @@ class Tests_BeansUrlToPath extends Test_Case {
 
 
 	/**
-	 * Test beans_url_to_path() converts a relative URL.
+	 * Test beans_url_to_path() should convert a relative IP address.
 	 *
 	 * @ticket 63
 	 */
@@ -285,7 +285,7 @@ class Tests_BeansUrlToPath extends Test_Case {
 	}
 
 	/**
-	 * Test beans_url_to_path() converts the domain URL and removes the tilde.
+	 * Test beans_url_to_path() should convert the domain URL and remove the tilde.
 	 */
 	public function test_should_convert_url_and_remove_tilde() {
 		Functions\expect( 'is_main_site' )->andReturn( true );
@@ -300,7 +300,7 @@ class Tests_BeansUrlToPath extends Test_Case {
 	}
 
 	/**
-	 * Test beans_url_to_path() converts the IP address and removes the tilde.
+	 * Test beans_url_to_path() should convert the IP address and remove the tilde.
 	 */
 	public function test_should_convert_ip_and_remove_tilde() {
 		Functions\expect( 'is_main_site' )->andReturn( true );
@@ -314,9 +314,9 @@ class Tests_BeansUrlToPath extends Test_Case {
 	}
 
 	/**
-	 * Test beans_url_to_path() converts domain for subdirectory multisite.
+	 * Test beans_url_to_path() should convert domain URL for subdirectory multisite.
 	 */
-	public function test_converts_domain_for_subdirectory_multisite() {
+	public function test_should_convert_domain_for_subdirectory_multisite() {
 		Functions\expect( 'is_main_site' )->andReturn( false );
 		Functions\expect( 'get_current_blog_id' )->andReturn( 5 );
 
@@ -330,9 +330,9 @@ class Tests_BeansUrlToPath extends Test_Case {
 	}
 
 	/**
-	 * Test beans_url_to_path() converts IP address for subdirectory multisite.
+	 * Test beans_url_to_path() should convert IP address for subdirectory multisite.
 	 */
-	public function test_converts_ip_for_subdirectory_multisite() {
+	public function test_should_convert_ip_for_subdirectory_multisite() {
 		Functions\expect( 'is_main_site' )->andReturn( false );
 		Functions\expect( 'get_current_blog_id' )->andReturn( 5 );
 
@@ -346,9 +346,9 @@ class Tests_BeansUrlToPath extends Test_Case {
 	}
 
 	/**
-	 * Test beans_url_to_path() converts domain for subdomain multisite.
+	 * Test beans_url_to_path() should convert domain URL for subdomain multisite.
 	 */
-	public function test_converts_domain_for_subdomain_multisite() {
+	public function test_should_convert_domain_for_subdomain_multisite() {
 		Functions\expect( 'is_main_site' )->andReturn( false );
 		Functions\expect( 'get_current_blog_id' )->andReturn( 5 );
 
@@ -361,9 +361,9 @@ class Tests_BeansUrlToPath extends Test_Case {
 	}
 
 	/**
-	 * Test beans_url_to_path() converts IP Address for subdomain multisite.
+	 * Test beans_url_to_path() should convert IP address for subdomain multisite.
 	 */
-	public function test_converts_ip_for_subdomain_multisite() {
+	public function test_should_convert_ip_for_subdomain_multisite() {
 		Functions\expect( 'is_main_site' )->andReturn( false );
 		Functions\expect( 'get_current_blog_id' )->andReturn( 5 );
 

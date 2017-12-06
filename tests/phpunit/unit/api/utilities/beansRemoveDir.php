@@ -31,7 +31,7 @@ class Tests_BeansRemoveDir extends Test_Case {
 	}
 
 	/**
-	 * Test beans_remove_dir() bails out for a non-directory.
+	 * Test beans_remove_dir() should bail out for a non-directory.
 	 */
 	public function test_should_bail_for_non_dir() {
 		$dir = __DIR__ . '/';

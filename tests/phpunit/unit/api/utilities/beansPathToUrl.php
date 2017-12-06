@@ -92,7 +92,7 @@ class Tests_BeansPathToUrl extends Test_Case {
 	}
 
 	/**
-	 * Test beans_path_to_url() converts path.
+	 * Test beans_path_to_url() should convert absolute path.
 	 */
 	public function test_should_convert_absolute_path() {
 		Functions\expect( 'is_main_site' )->andReturn( true );
@@ -106,7 +106,7 @@ class Tests_BeansPathToUrl extends Test_Case {
 	}
 
 	/**
-	 * Test beans_path_to_url() converts path.
+	 * Test beans_path_to_url() should convert relative path.
 	 */
 	public function test_should_convert_relative_path() {
 		Functions\expect( 'is_main_site' )->andReturn( true );
@@ -233,7 +233,7 @@ class Tests_BeansPathToUrl extends Test_Case {
 	}
 
 	/**
-	 * Test beans_path_to_url() should remove the IP Address' subfolder.
+	 * Test beans_path_to_url() should remove the IP address' subfolder.
 	 */
 	public function test_should_remove_ip_subfolder() {
 		Functions\expect( 'is_main_site' )->andReturn( true );
@@ -279,7 +279,7 @@ class Tests_BeansPathToUrl extends Test_Case {
 	}
 
 	/**
-	 * Test beans_path_to_url() should re-add the domain URL's tilde upon conversion.
+	 * Test beans_path_to_url() should re-add the IP address' tilde upon conversion.
 	 */
 	public function test_should_re_add_ip_tilde() {
 		Functions\expect( 'is_main_site' )->andReturn( true );
@@ -322,7 +322,7 @@ class Tests_BeansPathToUrl extends Test_Case {
 	}
 
 	/**
-	 * Test beans_path_to_url() should convert for IP Address's subdirectory multisite.
+	 * Test beans_path_to_url() should convert for IP address' subdirectory multisite.
 	 */
 	public function test_should_convert_for_ip_subdirectory_multisite() {
 		$path = 'wp-content/themes';
@@ -357,7 +357,7 @@ class Tests_BeansPathToUrl extends Test_Case {
 	}
 
 	/**
-	 * Test beans_path_to_url() should convert for domain URL's subdomain multisite.
+	 * Test beans_path_to_url() should convert for IP address' subdomain multisite.
 	 */
 	public function test_should_convert_for_ip_subdomain_multisite() {
 		$path = 'wp-content/themes';

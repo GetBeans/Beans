@@ -30,7 +30,7 @@ class Tests_BeansGet extends Test_Case {
 	}
 
 	/**
-	 * Test beans_get() returns the default value.
+	 * Test beans_get() should return the default value.
 	 */
 	public function test_should_return_default() {
 		$this->assertEquals( 10, beans_get( 'foo', 'bar', 10 ) );

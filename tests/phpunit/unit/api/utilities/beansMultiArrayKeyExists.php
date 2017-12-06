@@ -32,7 +32,7 @@ class Tests_BeansMultiArrayKeyExists extends Test_Case {
 	/**
 	 * Test beans_multi_array_key_exists() should throw an error for non-array data type.
 	 */
-	public function test_should_throws_error_for_non_array() {
+	public function test_should_throw_error_for_non_array() {
 		$args = array(
 			0     => 'bar',
 			'foo' => 10,
@@ -110,7 +110,7 @@ class Tests_BeansMultiArrayKeyExists extends Test_Case {
 	}
 
 	/**
-	 * Test beans_multi_array_key_exists() should return true when key exists within a multi-dimensional array.
+	 * Test beans_multi_array_key_exists() should return false when key does not exist within a multi-dimensional array.
 	 */
 	public function test_should_return_false_when_key_does_not_exist_multidimensional() {
 		$data = array(
