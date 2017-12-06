@@ -33,10 +33,9 @@ class Tests_BeansRenderAction extends Test_Case {
 	}
 
 	/**
-	 * Test _beans_render_action() returns false when no subhook is passed and
-	 * the event's name (hook)
+	 * Test _beans_render_action() should return false when a callback is not registered to the hook/sub-hook.
 	 */
-	public function test_should_return_false_when_no_subhook_or_hook() {
+	public function test_should_return_false_when_a_callback_is_not_registered() {
 		$this->assertFalse( _beans_render_action( 'foo' ) );
 		$this->assertFalse( _beans_render_action( 'foo', 'bar' ) );
 		$this->assertFalse( _beans_render_action( 'foo', 'bar', array( 'baz' => 'zab' ) ) );
@@ -47,7 +46,7 @@ class Tests_BeansRenderAction extends Test_Case {
 	}
 
 	/**
-	 * Test _beans_render_action() returns after calling the hook with no subhook.
+	 * Test _beans_render_action() should return after calling the hook with no sub-hook.
 	 */
 	public function test_should_return_after_calling_hook_no_subhook() {
 		// Testing with a closure.
@@ -93,19 +92,19 @@ class Tests_BeansRenderAction extends Test_Case {
 	}
 
 	/**
-	 * Test _beans_render_action() returns null when it has a subhook, but the hook is not registered.
+	 * Test _beans_render_action() should return null for a sub-hook(s) when no callback is registered.
 	 */
-	public function test_should_return_null_with_subhook_but_no_hook_registered() {
+	public function test_should_return_null_for_subhook_when_no_callback_registered() {
 		$this->assertNull( _beans_render_action( 'beans_stub[beans_subhook_stub]' ) );
 		$this->assertNull( _beans_render_action( 'beans_stub[subhook][subhook]' ) );
 		$this->assertNull( _beans_render_action( 'beans_stub[beans_subhook_stub]_after_test' ) );
 	}
 
 	/**
-	 * Test _beans_render_action() returns message when it has a subhook, but only the base hook is registered.
-	 * Hint: the subhook(s) is(are) not registered via add_action().  Therefore, it will not be called.
+	 * Test _beans_render_action() should render the base hook and not the sub-hooks.
+	 * Why? No callbacks are registered to the sub-hooks.
 	 */
-	public function test_should_return_message_when_subhooks_but_only_base_hook_registered() {
+	public function test_should_render_base_hook() {
 		$stub = Actions_Stub::class;
 
 		// Test with a single sub-hook.
@@ -138,7 +137,7 @@ class Tests_BeansRenderAction extends Test_Case {
 	}
 
 	/**
-	 * Test _beans_render_action() renders one level of sub-hooks.
+	 * Test _beans_render_action() should render one level of sub-hooks.
 	 */
 	public function test_should_render_one_level_of_sub_hooks() {
 		$stub    = Actions_Stub::class;
@@ -160,8 +159,8 @@ class Tests_BeansRenderAction extends Test_Case {
 	}
 
 	/**
-	 * Test _beans_render_action() renders two levels of sub-hooks,
-	 * but the original hook is not rendered.
+	 * Test _beans_render_action() should render two levels of sub-hooks, but not the original.
+	 * Why? A callback is not registered to the original hook.
 	 */
 	public function test_should_render_two_levels_of_sub_hooks_but_not_original() {
 		$stub    = Actions_Stub::class;
@@ -187,9 +186,9 @@ class Tests_BeansRenderAction extends Test_Case {
 	}
 
 	/**
-	 * Test _beans_render_action() renders two levels of sub-hooks and the the original hook.
+	 * Test _beans_render_action() should render the base hook and all sub-hooks.
 	 */
-	public function test_should_render_two_levels_of_sub_hooks_and_original() {
+	public function test_should_render_hook_and_all_subhooks() {
 		$stub    = Actions_Stub::class;
 		$hook    = 'foo[bar][baz]';
 		$message = 'Called me. ';

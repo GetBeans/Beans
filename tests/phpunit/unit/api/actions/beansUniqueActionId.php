@@ -31,9 +31,9 @@ class Tests_BeansUniqueActionId extends Test_Case {
 	}
 
 	/**
-	 * Test _beans_unique_action_id() returns the given argument when it's a string.
+	 * Test _beans_unique_action_id() should return when string given.
 	 */
-	public function test_should_return_when_string() {
+	public function test_should_return_when_string_given() {
 		$this->assertEquals( "I'm a string", _beans_unique_action_id( "I'm a string" ) );
 		$this->assertEquals( 'I\'m a string', _beans_unique_action_id( 'I\'m a string' ) );
 		$this->assertEquals( 'foo', _beans_unique_action_id( 'foo' ) );
