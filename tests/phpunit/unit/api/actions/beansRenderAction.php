@@ -74,9 +74,9 @@ class Tests_BeansRenderAction extends Test_Case {
 		// Testing with a stubbed method.
 		$stub    = new Actions_Stub();
 		$message = 'Beans rocks!';
-		add_action( 'beans_stub_with_object', array( $stub, 'echo' ) );
+		add_action( 'beans_stub_with_object', array( $stub, 'echo_static' ) );
 		$this->assertTrue( has_action( 'beans_stub_with_object' ) );
-		Actions\expectDone( 'beans_stub_with_object' )->whenHappen( array( $stub, 'echo' ) );
+		Actions\expectDone( 'beans_stub_with_object' )->whenHappen( array( $stub, 'echo_static' ) );
 		$this->assertEquals( $message, _beans_render_action( 'beans_stub_with_object', $message ) );
 
 		// Testing with a stubbed static method.

@@ -35,15 +35,6 @@ class Actions_Stub {
 	 *
 	 * @param string|int $message Message to echo.
 	 */
-	public function echo( $message ) {
-		echo $message;   // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped - reason: we are not testing escaping functionality.
-	}
-
-	/**
-	 * Echo what you send me.
-	 *
-	 * @param string|int $message Message to echo.
-	 */
 	public static function echo_static( $message ) {
 		echo $message;   // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped - reason: we are not testing escaping functionality.
 	}
