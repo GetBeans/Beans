@@ -570,7 +570,6 @@ function _beans_render_action( $hook ) {
 
 		// Cascade sub-hooks.
 		if ( $index > 0 ) {
-			$levels[] = str_replace( $sub_hook, '', $hook );
 			$levels[] = $variable_prefix . $suffix;
 		}
 

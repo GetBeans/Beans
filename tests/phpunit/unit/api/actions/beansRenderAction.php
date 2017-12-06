@@ -173,10 +173,6 @@ class Tests_BeansRenderAction extends Test_Case {
 		Actions\expectDone( 'foo' )->once()->whenHappen( array( $stub, 'echo_static' ) );
 		$expected = $message;
 
-		/**
-		 * Bug #78 - Should only call once.
-		 * Nate is working on this issue.
-		 */
 		// The 1st sub-hook renders.
 		add_action( 'foo[bar]', array( $stub, 'echo_static' ) );
 		Actions\expectDone( 'foo[bar]' )->once()->whenHappen( array( $stub, 'echo_static' ) );
@@ -203,10 +199,6 @@ class Tests_BeansRenderAction extends Test_Case {
 		Actions\expectDone( 'foo' )->once()->whenHappen( array( $stub, 'echo_static' ) );
 		$expected = $message;
 
-		/**
-		 * Bug #78 - Should only call once.
-		 * Nate is working on this issue.
-		 */
 		// The 1st sub-hook renders.
 		add_action( 'foo[bar]', array( $stub, 'echo_static' ) );
 		Actions\expectDone( 'foo[bar]' )->once()->whenHappen( array( $stub, 'echo_static' ) );
