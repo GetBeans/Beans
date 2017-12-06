@@ -5,8 +5,12 @@
  * While WordPress requires two or three arguments to remove an action, Beans
  * actions can be modified, replaced, removed or reset using only the ID as a reference.
  *
- * @package API\Actions
+ * @package Beans\Framework\API\Actions
+ *
+ * @since   1.5.0
  */
+
+// @codingStandardsIgnoreStart - Skipping over non-compliant code.
 
 /**
  * Hooks a function on to a specific action.
@@ -536,12 +540,14 @@ function _beans_add_anonymous_action( $hook, $callback, $priority = 10, $args = 
 
 }
 
+// @codingStandardsIgnoreEnd
+
 /**
  * Render action which can therefore be stored in a variable.
  *
  * @since 1.5.0
  *
- * @param mixed $hook
+ * @param mixed $hook Hook and possibly sub-hooks to be rendered.
  *
  * @return bool|null|string
  */
@@ -566,7 +572,8 @@ function _beans_render_action( $hook ) {
 
 	foreach ( (array) $sub_hooks[0] as $index => $sub_hook ) {
 		$variable_prefix .= $sub_hook;
-		$levels          = array( $prefix . $sub_hook . $suffix );
+
+		$levels = array( $prefix . $sub_hook . $suffix );
 
 		// Cascade sub-hooks.
 		if ( $index > 0 ) {
@@ -596,8 +603,8 @@ function _beans_render_action( $hook ) {
  *
  * @since 1.5.0
  *
- * @param array       $args
- * @param string|null $output
+ * @param array  $args   Array of arguments.
+ * @param string $output The output to be updated.
  *
  * @return string|bool
  */
@@ -644,7 +651,6 @@ function _beans_unique_action_id( $callback ) {
 
 	// Treat static method.
 	if ( is_string( $callback[0] ) ) {
-
 		return $callback[0] . '::' . $callback[1];
 	}
 
