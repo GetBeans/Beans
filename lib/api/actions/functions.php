@@ -98,14 +98,14 @@ function beans_add_smart_action( $hook, $callback, $priority = 10, $args = 1 ) {
  *
  * @since 1.0.0
  *
- * @param string $id         The action ID.
- * @param string $hook       Optional. The name of the new action to which the $callback is hooked.
+ * @param string   $id       The action ID.
+ * @param string   $hook     Optional. The name of the new action to which the $callback is hooked.
  *                           Use NULL to keep the original value.
  * @param callback $callback Optional. The name of the new function you wish to be called.
  *                           Use NULL to keep the original value.
- * @param int $priority      Optional. The new priority.
+ * @param int      $priority Optional. The new priority.
  *                           Use NULL to keep the original value.
- * @param int $args          Optional. The new number of arguments the function accept.
+ * @param int      $args     Optional. The new number of arguments the function accept.
  *                           Use NULL to keep the original value.
  *
  * @return bool Will always return true.
@@ -185,8 +185,8 @@ function beans_modify_action_callback( $id, $callback ) {
  *
  * @since 1.0.0
  *
- * @param string $id    The action ID.
- * @param int $priority Optional. The new priority. Use NULL to keep the original value.
+ * @param string $id       The action ID.
+ * @param int    $priority Optional. The new priority. Use NULL to keep the original value.
  *
  * @return bool Will always return true.
  */
@@ -203,9 +203,9 @@ function beans_modify_action_priority( $id, $callback ) {
  *
  * @since 1.0.0
  *
- * @param string $id The action ID.
- * @param int $args  Optional. The new number of arguments the function accepts. Use NULL to keep the
- *                   original value.
+ * @param string $id   The action ID.
+ * @param int    $args Optional. The new number of arguments the function accepts. Use NULL to keep the
+ *                     original value.
  *
  * @return bool Will always return true.
  */
@@ -228,14 +228,14 @@ function beans_modify_action_arguments( $id, $args ) {
  *
  * @since 1.0.0
  *
- * @param string $id         The action ID.
- * @param string $hook       Optional. The name of the new action to which the $callback is hooked.
+ * @param string   $id       The action ID.
+ * @param string   $hook     Optional. The name of the new action to which the $callback is hooked.
  *                           Use NULL to keep the original value.
  * @param callback $callback Optional. The name of the new function you wish to be called.
  *                           Use NULL to keep the original value.
- * @param int $priority      Optional. The new priority.
+ * @param int      $priority Optional. The new priority.
  *                           Use NULL to keep the original value.
- * @param int $args          Optional. The new number of arguments the function accepts.
+ * @param int      $args     Optional. The new number of arguments the function accepts.
  *                           Use NULL to keep the original value.
  *
  * @return bool Will always return true.
@@ -304,8 +304,8 @@ function beans_replace_action_callback( $id, $callback ) {
  *
  * @since 1.0.0
  *
- * @param string $id    The action ID.
- * @param int $priority Optional. The new priority. Use NULL to keep the original value.
+ * @param string $id       The action ID.
+ * @param int    $priority Optional. The new priority. Use NULL to keep the original value.
  *
  * @return bool Will always return true.
  */
@@ -322,9 +322,9 @@ function beans_replace_action_priority( $id, $callback ) {
  *
  * @since 1.0.0
  *
- * @param string $id The action ID.
- * @param int $args  Optional. The new number of arguments the function accepts. Use NULL to keep the original
- *                   value.
+ * @param string $id   The action ID.
+ * @param int    $args Optional. The new number of arguments the function accepts. Use NULL to keep the original
+ *                     value.
  *
  * @return bool Will always return true.
  */
@@ -539,73 +539,87 @@ function _beans_add_anonymous_action( $hook, $callback, $priority = 10, $args = 
 /**
  * Render action which can therefore be stored in a variable.
  *
- * @ignore
+ * @since 1.5.0
+ *
+ * @param mixed $hook
+ *
+ * @return bool|null|string
  */
 function _beans_render_action( $hook ) {
-
 	$args = func_get_args();
 
-	// Return simple action if no sub-hook is set.
-	if ( ! preg_match_all( '#\[(.*?)\]#', $args[0], $matches ) ) {
-
-		if ( has_filter( $args[0] ) ) {
-			return call_user_func_array( 'beans_render_function', array_merge( array( 'do_action' ), $args ) );
-		} else {
-			return false;
-		}
+	// Return simple action if no sub-hook(s) is(are) set.
+	if ( ! preg_match_all( '#\[(.*?)\]#', $args[0], $sub_hooks ) ) {
+		return _beans_when_has_action_do_render( $args );
 	}
 
-	$output = null;
-	$prefix = current( explode( '[', $args[0] ) );
+	$output          = null;
+	$prefix          = current( explode( '[', $args[0] ) );
 	$variable_prefix = $prefix;
-	$suffix = preg_replace( '/^.*\]\s*/', '', $args[0] );
+	$suffix          = preg_replace( '/^.*\]\s*/', '', $args[0] );
 
 	// Base hook.
 	$args[0] = $prefix . $suffix;
 
-	if ( has_filter( $args[0] ) ) {
-		$output .= call_user_func_array( 'beans_render_function', array_merge( array( 'do_action' ), $args ) );
-	}
+	// If the base hook is registered, render it.
+	_beans_when_has_action_do_render( $args, $output );
 
-	foreach ( $matches[0] as $i => $subhook ) {
-
-		$variable_prefix = $variable_prefix . $subhook;
-		$levels = array( $prefix . $subhook . $suffix );
+	foreach ( (array) $sub_hooks[0] as $index => $sub_hook ) {
+		$variable_prefix .= $sub_hook;
+		$levels          = array( $prefix . $sub_hook . $suffix );
 
 		// Cascade sub-hooks.
-		if ( $i > 0 ) {
-
-			$levels[] = str_replace( $subhook, '', $hook );
+		if ( $index > 0 ) {
+			$levels[] = str_replace( $sub_hook, '', $hook );
 			$levels[] = $variable_prefix . $suffix;
-
 		}
 
 		// Apply sub-hooks.
 		foreach ( $levels as $level ) {
-
 			$args[0] = $level;
 
-			if ( has_filter( $args[0] ) ) {
-				$output .= call_user_func_array( 'beans_render_function', array_merge( array( 'do_action' ), $args ) );
-			}
+			// If the level is registered, render it.
+			_beans_when_has_action_do_render( $args, $output );
 
-			// Apply filter whithout square brackets for backwards compatibility.
+			// Apply filter without square brackets for backwards compatibility.
 			$args[0] = preg_replace( '#(\[|\])#', '', $args[0] );
 
-			if ( has_filter( $args[0] ) ) {
-				$output .= call_user_func_array( 'beans_render_function', array_merge( array( 'do_action' ), $args ) );
-			}
+			// If the backwards compatible $args[0] is registered, render it.
+			_beans_when_has_action_do_render( $args, $output );
 		}
 	}
 
 	return $output;
+}
 
+/**
+ * Calls beans_render_function when the hook is registered.
+ *
+ * @since 1.5.0
+ *
+ * @param array       $args
+ * @param string|null $output
+ *
+ * @return string|bool
+ */
+function _beans_when_has_action_do_render( array $args, &$output = '' ) {
+
+	if ( has_action( $args[0] ) ) {
+		$output .= call_user_func_array( 'beans_render_function', array_merge( array( 'do_action' ), $args ) );
+		return $output;
+	}
+
+	return false;
 }
 
 /**
  * Make sure the action ID is unique.
  *
- * @ignore
+ * @since 1.5.0
+ *
+ * @param mixed $callback Callback to convert into a unique ID.
+ *
+ * @return array|string
  */
 function _beans_unique_action_id( $callback ) {
 
@@ -627,13 +641,13 @@ function _beans_unique_action_id( $callback ) {
 		}
 
 		return get_class( $callback[0] ) . $callback[1];
+	}
 
-	} elseif ( is_string( $callback[0] ) ) { // Treat static method.
+	// Treat static method.
+	if ( is_string( $callback[0] ) ) {
 
 		return $callback[0] . '::' . $callback[1];
-
 	}
 
 	return md5( $callback );
-
 }
