@@ -110,7 +110,7 @@ class Tests_BeansUniqueActionId extends Test_Case {
 
 		$this->assertEquals( spl_object_hash( $closure ), _beans_unique_action_id( $closure ) );
 		$this->assertNotEquals( spl_object_hash( function() {
-			// nothing here.
+			// Nothing here.
 		} ), _beans_unique_action_id( $closure ) );
 	}
 }
