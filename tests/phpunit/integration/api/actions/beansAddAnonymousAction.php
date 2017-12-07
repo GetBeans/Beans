@@ -43,7 +43,7 @@ class Tests_BeansAddAnonymousAction extends WP_UnitTestCase {
 	}
 
 	/**
-	 * Test _beans_add_anonymous_action() should register callback to the given hook.
+	 * Test _beans_add_anonymous_action() should call callback on the given hook.
 	 */
 	public function test_should_call_callback() {
 		_beans_add_anonymous_action( 'beans_test_do_foo', array( 'foo_test_callback', array( 'foo' ) ) );
