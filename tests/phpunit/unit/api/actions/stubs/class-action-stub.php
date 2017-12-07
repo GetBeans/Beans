@@ -20,14 +20,14 @@ class Actions_Stub {
 	 * Dummy static method.
 	 */
 	public static function dummy_static_method() {
-		// nothing happening here.
+		// Nothing happening here.
 	}
 
 	/**
 	 * Dummy method.
 	 */
 	public function dummy_method() {
-		// nothing happening here.
+		// Nothing happening here.
 	}
 
 	/**
@@ -36,6 +36,6 @@ class Actions_Stub {
 	 * @param string|int $message Message to echo.
 	 */
 	public static function echo_static( $message ) {
-		echo $message;   // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped - reason: we are not testing escaping functionality.
+		echo $message; // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped - reason: we are not testing escaping functionality.
 	}
 }
