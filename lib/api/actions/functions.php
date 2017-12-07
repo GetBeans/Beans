@@ -546,6 +546,7 @@ function _beans_add_anonymous_action( $hook, $callback, $priority = 10, $args = 
  * Render action which can therefore be stored in a variable.
  *
  * @since 1.5.0
+ * @ignore
  * @access private
  *
  * @param mixed $hook Hook and possibly sub-hooks to be rendered.
@@ -603,6 +604,7 @@ function _beans_render_action( $hook ) {
  * Calls beans_render_function when the hook is registered.
  *
  * @since 1.5.0
+ * @ignore
  * @access private
  *
  * @param array  $args   Array of arguments.
@@ -624,6 +626,7 @@ function _beans_when_has_action_do_render( array $args, &$output = '' ) {
  * Make sure the action ID is unique.
  *
  * @since 1.5.0
+ * @ignore
  * @access private
  *
  * @param mixed $callback Callback to convert into a unique ID.
