@@ -1,5 +1,4 @@
 PROJECT_TYPE=theme
-CHECK_SCOPE=changed-files
 WPCS_STANDARD=phpcs.xml.dist
 PATH_EXCLUDES_PATTERN='^(.*/)?(vendors|vendor|node_modules)/.*'
 DEV_LIB_SKIP=yuicompressor,codeception,grunt,jshint

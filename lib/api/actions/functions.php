@@ -10,8 +10,6 @@
  * @since   1.5.0
  */
 
-// @codingStandardsIgnoreStart - Skipping over non-compliant code.
-
 /**
  * Hooks a function on to a specific action.
  *
@@ -194,9 +192,9 @@ function beans_modify_action_callback( $id, $callback ) {
  *
  * @return bool Will always return true.
  */
-function beans_modify_action_priority( $id, $callback ) {
+function beans_modify_action_priority( $id, $priority ) {
 
-	return beans_modify_action( $id, null, null, $callback );
+	return beans_modify_action( $id, null, null, $priority );
 
 }
 
@@ -313,7 +311,7 @@ function beans_replace_action_callback( $id, $callback ) {
  *
  * @return bool Will always return true.
  */
-function beans_replace_action_priority( $id, $callback ) {
+function beans_replace_action_priority( $id, $priority ) {
 
 	return beans_replace_action( $id, null, null, $priority );
 
@@ -539,8 +537,6 @@ function _beans_add_anonymous_action( $hook, $callback, $priority = 10, $args = 
 	new _Beans_Anonymous_Actions( $hook, $callback, $priority, $args );
 
 }
-
-// @codingStandardsIgnoreEnd
 
 /**
  * Render action which can therefore be stored in a variable.
