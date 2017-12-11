@@ -22,18 +22,6 @@ use WP_UnitTestCase;
 class Tests_BeansAddAnonymousAction extends WP_UnitTestCase {
 
 	/**
-	 * Setup test fixture.
-	 */
-	public function setUp() {
-		parent::setUp();
-
-		if ( ! defined( 'BEANS_API_PATH' ) ) {
-			define( 'BEANS_API_PATH', BEANS_THEME_DIR . '/lib/api/' );
-		}
-		require_once BEANS_THEME_DIR . '/lib/api/actions/functions.php';
-	}
-
-	/**
 	 * Test _beans_add_anonymous_action() should register callback to the given hook.
 	 */
 	public function test_should_register_callback_to_hook() {
