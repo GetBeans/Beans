@@ -410,9 +410,16 @@ if ( ! isset( $_beans_registered_actions ) ) {
 }
 
 /**
- * Get action.
+ * Get the action's configuration for the given ID and status. Returns `false` if the action is not registered with Beans.
  *
+ * @since  1.5.0
  * @ignore
+ * @access private
+ *
+ * @param string $id     A unique string used as a reference.
+ * @param string $status Status for which to get the action.
+ *
+ * @return array|bool
  */
 function _beans_get_action( $id, $status ) {
 
@@ -420,16 +427,19 @@ function _beans_get_action( $id, $status ) {
 
 	$id = _beans_unique_action_id( $id );
 
-	if ( ! $registered = beans_get( $status, $_beans_registered_actions ) ) {
+	$registered_actions = beans_get( $status, $_beans_registered_actions );
+	// If the status is empty, return false, as no actions are registered.
+	if ( empty( $registered_actions ) ) {
 		return false;
 	}
 
-	if ( ! $action = beans_get( $id, $registered ) ) {
+	$action = beans_get( $id, $registered_actions );
+	// If the action is null, return false.
+	if ( is_null( $action ) ) {
 		return false;
 	}
 
 	return (array) json_decode( $action );
-
 }
 
 /**
