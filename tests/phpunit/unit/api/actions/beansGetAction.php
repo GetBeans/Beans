@@ -28,6 +28,20 @@ class Tests_BeansGetAction extends Test_Case {
 	protected $action_status;
 
 	/**
+	 * Action to be/is registered.
+	 *
+	 * @var array
+	 */
+	protected $action;
+
+	/**
+	 * The json_encode() version of the above action.
+	 *
+	 * @var string
+	 */
+	protected $encoded_action;
+
+	/**
 	 * Setup test fixture.
 	 */
 	protected function setUp() {
@@ -36,6 +50,14 @@ class Tests_BeansGetAction extends Test_Case {
 		$this->action_status = array( 'added', 'modified', 'removed', 'replaced' );
 		require_once BEANS_TESTS_LIB_DIR . 'api/actions/functions.php';
 		require_once BEANS_TESTS_LIB_DIR . 'api/utilities/functions.php';
+
+		$this->action         = array(
+			'hook'     => 'foo',
+			'callback' => 'callback',
+			'priority' => 10,
+			'args'     => 1,
+		);
+		$this->encoded_action = wp_json_encode( $this->action );
 	}
 
 	/**
@@ -68,13 +90,7 @@ class Tests_BeansGetAction extends Test_Case {
 	 */
 	public function test_should_return_false_when_action_is_not_registered() {
 		global $_beans_registered_actions;
-		// @codingStandardsIgnoreLine - WordPress.WP.AlternativeFunctions.json_encode_json_encode as json_encode is appropriate here for testing.
-		$_beans_registered_actions['added']['foo'] = json_encode( array(
-			'hook'     => 'foo',
-			'callback' => 'callback',
-			'priority' => 10,
-			'args'     => 1,
-		) );
+		$_beans_registered_actions['added']['foo'] = $this->encoded_action;
 
 		$this->assertFalse( _beans_get_action( 'foobar', 'added' ) );
 
@@ -96,16 +112,9 @@ class Tests_BeansGetAction extends Test_Case {
 	public function test_should_return_action_when_registered() {
 		global $_beans_registered_actions;
 
-		$action_configuration = array(
-			'hook'     => 'foo',
-			'callback' => 'callback',
-			'priority' => 10,
-			'args'     => 1,
-		);
-
 		foreach ( $this->action_status as $action_status ) {
-			$_beans_registered_actions[ $action_status ]['foo'] = json_encode( $action_configuration ); // @codingStandardsIgnoreLine - WordPress.WP.AlternativeFunctions.json_encode_json_encode as json_encode is appropriate here for testing.
-			$this->assertEquals( $action_configuration, _beans_get_action( 'foo', $action_status ) );
+			$_beans_registered_actions[ $action_status ]['foo'] = $this->encoded_action;
+			$this->assertEquals( $this->action, _beans_get_action( 'foo', $action_status ) );
 		}
 	}
 }
