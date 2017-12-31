@@ -410,7 +410,8 @@ if ( ! isset( $_beans_registered_actions ) ) {
 }
 
 /**
- * Get the action's configuration for the given ID and status. Returns `false` if the action is not registered with Beans.
+ * Get the action's configuration for the given ID and status. Returns `false` if the action is not registered with
+ * Beans.
  *
  * @since  1.5.0
  * @ignore
@@ -443,25 +444,42 @@ function _beans_get_action( $id, $status ) {
 }
 
 /**
- * Set action.
+ * Store the action's configuration for the given ID and status.
  *
+ * What happens if the action's configuration is already registered?  If the `$overwrite` flag is set to `true`,
+ * then the new action's configuration is stored, overwriting the previous one. Else, the registered action's
+ * configuration is returned.
+ *
+ * @since  1.5.0
  * @ignore
+ * @access private
+ *
+ * @param string $id        A unique string used as a reference.
+ * @param array  $action    The action configuration to store.
+ * @param string $status    Status for which to get the action.
+ * @param bool   $overwrite Optional. When set to `true`, the new action's configuration is stored, overwriting a
+ *                          previously stored configuration (if one exists).
+ *
+ * @return array
  */
-function _beans_set_action( $id, $action, $status, $overwrite = false ) {
-
-	global $_beans_registered_actions;
+function _beans_set_action( $id, array $action, $status, $overwrite = false ) {
 
 	$id = _beans_unique_action_id( $id );
 
-	// Return action which already exist unless overwrite is set to true.
-	if ( ! $overwrite && ( $_action = _beans_get_action( $id, $status ) ) ) {
-		return $_action;
+	// Get the action, if it's already registered.
+	$registered_action = _beans_get_action( $id, $status );
+
+	// If the action is registered and we are not overwriting, return it.
+	if ( true !== $overwrite && ! empty( $registered_action ) ) {
+		return $registered_action;
 	}
 
-	$_beans_registered_actions[ $status ][ $id ] = json_encode( $action );
+	// Let's set (or overwrite) the action.
+	global $_beans_registered_actions;
+
+	$_beans_registered_actions[ $status ][ $id ] = wp_json_encode( $action );
 
 	return $action;
-
 }
 
 /**

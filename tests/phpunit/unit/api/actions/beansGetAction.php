@@ -12,7 +12,7 @@ namespace Beans\Framework\Tests\Unit\API\Actions;
 use Beans\Framework\Tests\Unit\Test_Case;
 
 /**
- * Class Tests_BeansRenderAction
+ * Class Tests_BeansGetAction
  *
  * @package Beans\Framework\Tests\Unit\API\Actions
  * @group   unit-tests
