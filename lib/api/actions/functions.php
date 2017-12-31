@@ -425,9 +425,9 @@ if ( ! isset( $_beans_registered_actions ) ) {
 function _beans_get_action( $id, $status ) {
 	global $_beans_registered_actions;
 
-	$id = _beans_unique_action_id( $id );
-
+	$id                 = _beans_unique_action_id( $id );
 	$registered_actions = beans_get( $status, $_beans_registered_actions );
+
 	// If the status is empty, return false, as no actions are registered.
 	if ( empty( $registered_actions ) ) {
 		return false;
@@ -455,7 +455,7 @@ function _beans_get_action( $id, $status ) {
  *
  * @param string $id        A unique string used as a reference.
  * @param array  $action    The action configuration to store.
- * @param string $status    Status for which to get the action.
+ * @param string $status    Status for which to store the action.
  * @param bool   $overwrite Optional. When set to `true`, the new action's configuration is stored, overwriting a
  *                          previously stored configuration (if one exists).
  *
@@ -474,7 +474,6 @@ function _beans_set_action( $id, array $action, $status, $overwrite = false ) {
 
 	// Let's set (or overwrite) the action.
 	global $_beans_registered_actions;
-
 	$_beans_registered_actions[ $status ][ $id ] = wp_json_encode( $action );
 
 	return $action;
@@ -502,29 +501,37 @@ function _beans_unset_action( $id, $status ) {
 	}
 
 	global $_beans_registered_actions;
-
 	unset( $_beans_registered_actions[ $status ][ $id ] );
 
 	return true;
 }
 
 /**
- * Merge action.
+ * Merge the action's configuration and then store it for the given ID and status.
  *
+ * If the action's configuration has not already be registered with Beans, just store it.
+ *
+ * @since  1.5.0
  * @ignore
+ * @access private
+ *
+ * @param string $id     A unique string used as a reference.
+ * @param array  $action The new action's configuration to merge and then store.
+ * @param string $status Status for which to merge/store this action.
+ *
+ * @return array
  */
-function _beans_merge_action( $id, $action, $status ) {
+function _beans_merge_action( $id, array $action, $status ) {
+	$id                = _beans_unique_action_id( $id );
+	$registered_action = _beans_get_action( $id, $status );
 
-	global $_beans_registered_actions;
-
-	$id = _beans_unique_action_id( $id );
-
-	if ( $_action = _beans_get_action( $id, $status ) ) {
-		$action = array_merge( $_action, $action );
+	// If the action's configuration is already registered with Beans, merge the new configuration with it.
+	if ( false !== $registered_action ) {
+		$action = array_merge( $registered_action, $action );
 	}
 
+	// Now store/register it.
 	return _beans_set_action( $id, $action, $status, true );
-
 }
 
 /**
