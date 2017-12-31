@@ -423,7 +423,6 @@ if ( ! isset( $_beans_registered_actions ) ) {
  * @return array|bool
  */
 function _beans_get_action( $id, $status ) {
-
 	global $_beans_registered_actions;
 
 	$id = _beans_unique_action_id( $id );
@@ -463,7 +462,6 @@ function _beans_get_action( $id, $status ) {
  * @return array
  */
 function _beans_set_action( $id, array $action, $status, $overwrite = false ) {
-
 	$id = _beans_unique_action_id( $id );
 
 	// Get the action, if it's already registered.
@@ -483,25 +481,31 @@ function _beans_set_action( $id, array $action, $status, $overwrite = false ) {
 }
 
 /**
- * Unset action.
+ * Unset the action's configuration for the given ID and status. Returns `false` if there are is no action
+ * registered with Beans actions for the given ID and status. Else, returns true when complete.
  *
+ * @since  1.5.0
  * @ignore
+ * @access private
+ *
+ * @param string $id     A unique string used as a reference.
+ * @param string $status Status for which to get the action.
+ *
+ * @return bool
  */
 function _beans_unset_action( $id, $status ) {
-
-	global $_beans_registered_actions;
-
 	$id = _beans_unique_action_id( $id );
 
-	// Stop here if the action doesn't exist.
-	if ( ! _beans_get_action( $id, $status ) ) {
+	// Bail out if the ID is not registered for the given status.
+	if ( false === _beans_get_action( $id, $status ) ) {
 		return false;
 	}
+
+	global $_beans_registered_actions;
 
 	unset( $_beans_registered_actions[ $status ][ $id ] );
 
 	return true;
-
 }
 
 /**
