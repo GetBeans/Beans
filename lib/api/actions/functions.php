@@ -567,7 +567,7 @@ function _beans_get_current_action( $id ) {
 	}
 
 	// Stop here if the action is invalid.
-	if ( 4 !== count( $action ) ) {
+	if ( ! _beans_is_action_valid( $action ) ) {
 		return false;
 	}
 
