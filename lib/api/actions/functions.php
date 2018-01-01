@@ -535,33 +535,43 @@ function _beans_merge_action( $id, array $action, $status ) {
 }
 
 /**
- * Check all action status and return the current action.
+ * Get the current action, meaning get from the "added" and/or "modified" statuses.
  *
+ * @since  1.5.0
  * @ignore
+ * @access private
+ *
+ * @param string $id A unique string used as a reference.
+ *
+ * @return array|bool
  */
 function _beans_get_current_action( $id ) {
 
-	$action = array();
-
+	// Bail out if the action is "removed".
 	if ( _beans_get_action( $id, 'removed' ) ) {
 		return false;
 	}
 
-	if ( $added = _beans_get_action( $id, 'added' ) ) {
+	$action = array();
+
+	$added = _beans_get_action( $id, 'added' );
+	if ( false !== $added ) {
 		$action = $added;
 	}
 
-	if ( $modified = _beans_get_action( $id, 'modified' ) ) {
-		$action = array_merge( $action, $modified );
+	$modified = _beans_get_action( $id, 'modified' );
+	if ( false !== $modified ) {
+		$action = is_array( $action )
+			? array_merge( $action, $modified )
+			: $modified;
 	}
 
 	// Stop here if the action is invalid.
-	if ( 4 != count( $action ) ) {
+	if ( 4 !== count( $action ) ) {
 		return false;
 	}
 
 	return $action;
-
 }
 
 /**
