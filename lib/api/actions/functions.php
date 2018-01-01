@@ -575,6 +575,22 @@ function _beans_get_current_action( $id ) {
 }
 
 /**
+ * Validates the action's configuration to ensure "hook", "callback", "priority", and "args" are
+ * set and not null.
+ *
+ * @since  1.5.0
+ * @ignore
+ * @access private
+ *
+ * @param array $action Action's configuration.
+ *
+ * @return bool
+ */
+function _beans_is_action_valid( array $action ) {
+	return isset( $action['hook'], $action['callback'], $action['priority'], $action['args'] );
+}
+
+/**
  * Add anonymous callback using a class since php 5.2 is still supported.
  *
  * @since  1.5.0
