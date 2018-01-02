@@ -17,6 +17,7 @@
  * with the exception of being registered by ID in order to be manipulated by the other Beans Actions functions.
  *
  * @since 1.0.0
+ * @since 1.5.0 Made WPCS compliant.
  *
  * @param string   $id       A unique string used as a reference.
  * @param string   $hook     The name of the action to which the $callback is hooked.
@@ -73,6 +74,7 @@ function beans_add_action( $id, $hook, $callback, $priority = 10, $args = 1 ) {
  * to be specified and uses the callback argument instead.
  *
  * @since 1.0.0
+ * @since 1.5.0 Made WPCS compliant.
  *
  * @param string   $hook     The name of the action to which the $callback is hooked.
  * @param callback $callback The name of the function you wish to be called. Used to set the action ID.
