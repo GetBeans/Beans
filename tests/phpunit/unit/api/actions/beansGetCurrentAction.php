@@ -61,7 +61,7 @@ class Tests_BeansGetCurrentAction extends Test_Case {
 	}
 
 	/**
-	 * Test _beans_get_current_action() should return false when the ID is registered with the "removed" status.
+	 * Test _beans_get_current_action() should return false when the action is invalid.
 	 */
 	public function test_should_return_false_when_action_is_invalid() {
 		global $_beans_registered_actions;
