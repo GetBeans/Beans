@@ -100,16 +100,16 @@ class Tests_BeansAddAction extends WP_UnitTestCase {
 	}
 
 	/**
-	 * Test beans_add_action() should return null when the ID is registered to the "removed" status.
+	 * Test beans_add_action() should return false when the ID is registered to the "removed" status.
 	 */
-	public function test_should_return_null_when_removed() {
+	public function test_should_return_false_when_removed() {
 		$this->check_not_added( 'foo', $this->action['hook'] );
 
 		// Setup by storing in the "removed" status.
 		_beans_set_action( 'foo', $this->action, 'removed', true );
 
 		// Add the action.
-		$this->assertNull( beans_add_action( 'foo', $this->action['hook'], $this->action['callback'] ) );
+		$this->assertFalse( beans_add_action( 'foo', $this->action['hook'], $this->action['callback'] ) );
 
 		// Now check that it was not registered in WordPress.
 		$this->assertFalse( has_action( $this->action['hook'] ) );

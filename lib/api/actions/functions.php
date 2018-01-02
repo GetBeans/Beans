@@ -29,7 +29,7 @@
  *                           are executed in the order in which they were added to the action.
  * @param int      $args     Optional. The number of arguments the callback accepts. Default is 1.
  *
- * @return bool|null
+ * @return bool
  */
 function beans_add_action( $id, $hook, $callback, $priority = 10, $args = 1 ) {
 	$action = array(
@@ -49,7 +49,7 @@ function beans_add_action( $id, $hook, $callback, $priority = 10, $args = 1 ) {
 
 	// If the ID is set to be "removed", then bail out.
 	if ( _beans_get_action( $id, 'removed' ) ) {
-		return;
+		return false;
 	}
 
 	// If the ID is set to be "modified", then modify that(those) parameter(s).
@@ -60,7 +60,7 @@ function beans_add_action( $id, $hook, $callback, $priority = 10, $args = 1 ) {
 
 	// Bail out if it's not a valid action.
 	if ( ! _beans_is_action_valid( $action ) ) {
-		return;
+		return false;
 	}
 
 	return add_action( $action['hook'], $action['callback'], $action['priority'], $action['args'] );
