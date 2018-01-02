@@ -305,7 +305,7 @@ function beans_post_more_link() {
 		$output .= beans_open_markup( 'beans_next_icon[_more_link]', 'i', array(
 			'class' => 'uk-icon-angle-double-right uk-margin-small-left',
 		) );
-		$output .= beans_close_markup( 'beans_previous_icon[_more_link]', 'i' );
+		$output .= beans_close_markup( 'beans_next_icon[_more_link]', 'i' );
 
 	$output .= beans_close_markup( 'beans_post_more_link', 'a' );
 
@@ -429,7 +429,7 @@ function beans_next_post_link( $output, $format, $link, $post ) {
 			'class' => 'uk-icon-angle-double-right uk-margin-small-left',
 		) );
 
-		$output .= beans_close_markup( 'beans_previous_icon[_post_navigation]', 'i' );
+		$output .= beans_close_markup( 'beans_next_icon[_post_navigation]', 'i' );
 
 	$output .= beans_close_markup( 'beans_next_link[_post_navigation]', 'a' );
 
