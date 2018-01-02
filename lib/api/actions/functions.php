@@ -32,7 +32,6 @@
  * @return bool|null
  */
 function beans_add_action( $id, $hook, $callback, $priority = 10, $args = 1 ) {
-
 	$action = array(
 		'hook'     => $hook,
 		'callback' => $callback,
