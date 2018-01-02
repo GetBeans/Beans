@@ -43,6 +43,18 @@ class Tests_BeansModifyAction extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Test beans_modify_action_callback() should return false when there's nothing to modify,
+	 * i.e. no arguments passed.
+	 */
+	public function test_should_return_false_when_nothing_to_modify() {
+		$this->setup_original_action();
+		$this->assertFalse( beans_modify_action( 'foo' ) );
+
+		$this->setup_original_action( 'beans' );
+		$this->assertFalse( beans_modify_action( 'beans' ) );
+	}
+
+	/**
 	 * Test beans_modify_action() should register with Beans as modified, but not with WordPress.
 	 */
 	public function test_should_register_with_beans_as_modified_but_not_with_wp() {
@@ -68,7 +80,7 @@ class Tests_BeansModifyAction extends WP_UnitTestCase {
 	 * Test beans_modify_action() should modify the registered action's callback.
 	 */
 	public function test_should_modify_the_action_callback() {
-		$action          = $this->setup_original_action();
+		$action          = $this->setup_original_action( 'beans' );
 		$modified_action = array(
 			'callback' => 'my_callback',
 		);
@@ -82,7 +94,7 @@ class Tests_BeansModifyAction extends WP_UnitTestCase {
 	 * Test beans_modify_action() should modify the registered action's priority level.
 	 */
 	public function test_should_modify_the_action_priority() {
-		$action          = $this->setup_original_action();
+		$action          = $this->setup_original_action( 'beans' );
 		$modified_action = array(
 			'priority' => 20,
 		);
@@ -96,7 +108,7 @@ class Tests_BeansModifyAction extends WP_UnitTestCase {
 	 * Test beans_modify_action() should modify the registered action's number of arguments.
 	 */
 	public function test_should_modify_the_action_args() {
-		$action          = $this->setup_original_action();
+		$action          = $this->setup_original_action( 'beans' );
 		$modified_action = array(
 			'args' => 2,
 		);
@@ -147,20 +159,22 @@ class Tests_BeansModifyAction extends WP_UnitTestCase {
 	 *
 	 * @since 1.5.0
 	 *
+	 * @param string $id Optional. Beans ID to register. Default is 'foo'.
+	 *
 	 * @return array
 	 */
-	protected function setup_original_action() {
+	protected function setup_original_action( $id = 'foo' ) {
 		$action = array(
-			'hook'     => 'beans_hook',
-			'callback' => 'callback_beans',
+			'hook'     => "{$id}_hook",
+			'callback' => "callback_{$id}",
 			'priority' => 10,
 			'args'     => 1,
 		);
 
-		$this->check_not_added( 'beans', $action['hook'] );
+		$this->check_not_added( $id, $action['hook'] );
 
 		// Add the original action to get us rolling.
-		beans_add_action( 'beans', $action['hook'], $action['callback'] );
+		beans_add_action( $id, $action['hook'], $action['callback'] );
 		$this->assertTrue( has_action( $action['hook'] ) );
 		$this->check_parameters_registered_in_wp( $action );
 

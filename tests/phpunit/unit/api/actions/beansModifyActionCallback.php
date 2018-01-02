@@ -51,6 +51,19 @@ class Tests_BeansModifyActionCallback extends Test_Case {
 	 */
 	public function test_should_return_false_when_id_not_registered() {
 		$this->assertFalse( beans_modify_action_callback( 'foo', null ) );
+		$this->assertFalse( beans_modify_action_callback( 'foo', 'my_new_callback' ) );
+		$this->assertFalse( beans_modify_action_callback( 'beans', 'beans_callback' ) );
+	}
+
+	/**
+	 * Test beans_modify_action_callback() should return false when null is the new callback.
+	 */
+	public function test_should_return_false_when_null_is_new_callback() {
+		$this->setup_original_action();
+		$this->assertFalse( beans_modify_action_callback( 'foo', null ) );
+
+		$this->setup_original_action( 'beans' );
+		$this->assertFalse( beans_modify_action_callback( 'beans', null ) );
 	}
 
 	/**
@@ -114,8 +127,8 @@ class Tests_BeansModifyActionCallback extends Test_Case {
 	protected function setup_original_action( $id = 'foo' ) {
 		$container = Monkey\Container::instance();
 		$action    = array(
-			'hook'     => 'beans_hook',
-			'callback' => 'callback_beans',
+			'hook'     => "{$id}_hook",
+			'callback' => "callback_{$id}",
 			'priority' => 10,
 			'args'     => 1,
 		);
@@ -125,7 +138,13 @@ class Tests_BeansModifyActionCallback extends Test_Case {
 		// Add the original action to get us rolling.
 		beans_add_action( $id, $action['hook'], $action['callback'] );
 		$this->assertTrue( has_action( $action['hook'] ) );
-		$this->assertTrue( $container->hookStorage()->isHookAdded( Monkey\Hook\HookStorage::ACTIONS, $action['hook'], $action['callback'] ) );
+		$this->assertTrue(
+			$container->hookStorage()->isHookAdded(
+				Monkey\Hook\HookStorage::ACTIONS,
+				$action['hook'],
+				$action['callback']
+			)
+		);
 
 		return $action;
 	}

@@ -36,6 +36,14 @@ class Tests_BeansModifyActionCallback extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Test beans_modify_action_callback() should return false when the ID is not registered.
+	 */
+	public function test_should_return_false_when_id_not_registered() {
+		$this->assertFalse( beans_modify_action_callback( 'foo', null ) );
+		$this->assertFalse( beans_modify_action_callback( 'foo', 'my_new_callback' ) );
+	}
+
+	/**
 	 * Test beans_modify_action_callback() should return false when null is the new callback.
 	 */
 	public function test_should_return_false_when_null_is_new_callback() {
@@ -107,13 +115,13 @@ class Tests_BeansModifyActionCallback extends WP_UnitTestCase {
 	 */
 	protected function setup_original_action( $id = 'foo' ) {
 		$action = array(
-			'hook'     => 'beans_hook',
-			'callback' => 'callback_beans',
+			'hook'     => "{$id}_hook",
+			'callback' => "callback_{$id}",
 			'priority' => 10,
 			'args'     => 1,
 		);
 
-		$this->check_not_added( 'beans', $action['hook'] );
+		$this->check_not_added( $id, $action['hook'] );
 
 		// Add the original action to get us rolling.
 		beans_add_action( $id, $action['hook'], $action['callback'] );

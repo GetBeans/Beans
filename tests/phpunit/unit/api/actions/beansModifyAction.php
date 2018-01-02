@@ -50,7 +50,43 @@ class Tests_BeansModifyAction extends Test_Case {
 	 * Test beans_modify_action() should return false when the ID is not registered.
 	 */
 	public function test_should_return_false_when_id_not_registered() {
-		$this->assertFalse( beans_modify_action( 'foo' ) );
+		$ids = array(
+			'foo',
+			'bar',
+			'baz',
+			'beans',
+		);
+		foreach ( $ids as $id ) {
+			$this->assertFalse( _beans_get_action( $id, 'modified' ) );
+
+			$modified_action = array(
+				'hook'     => "{$id}_hook",
+				'callback' => "{$id}_callback",
+			);
+			$this->assertFalse( beans_modify_action( $id, $modified_action['hook'], $modified_action['callback'] ) );
+			$this->assertEquals( $modified_action, _beans_get_action( $id, 'modified' ) );
+			$this->assertFalse( has_action( $modified_action['hook'] ) );
+		}
+	}
+
+	/**
+	 * Test beans_modify_action_callback() should return false when there's nothing to modify,
+	 * i.e. no arguments passed.
+	 */
+	public function test_should_return_false_when_nothing_to_modify() {
+		$ids = array(
+			'foo',
+			'bar',
+			'baz',
+			'beans',
+		);
+		foreach ( $ids as $id ) {
+			$this->assertFalse( beans_modify_action( $id ) );
+
+			// Check after we setup the original action...just to make sure.
+			$this->setup_original_action( $id );
+			$this->assertFalse( beans_modify_action( $id ) );
+		}
 	}
 
 	/**
@@ -78,7 +114,7 @@ class Tests_BeansModifyAction extends Test_Case {
 	 */
 	public function test_should_modify_the_action_callback() {
 		$container       = Monkey\Container::instance();
-		$action          = $this->setup_original_action();
+		$action          = $this->setup_original_action( 'beans' );
 		$modified_action = array(
 			'callback' => 'my_callback',
 		);
@@ -93,7 +129,7 @@ class Tests_BeansModifyAction extends Test_Case {
 	 */
 	public function test_should_modify_the_action_priority() {
 		$container       = Monkey\Container::instance();
-		$action          = $this->setup_original_action();
+		$action          = $this->setup_original_action( 'beans' );
 		$modified_action = array(
 			'priority' => 20,
 		);
@@ -108,7 +144,7 @@ class Tests_BeansModifyAction extends Test_Case {
 	 */
 	public function test_should_modify_the_action_args() {
 		$container       = Monkey\Container::instance();
-		$action          = $this->setup_original_action();
+		$action          = $this->setup_original_action( 'beans' );
 		$modified_action = array(
 			'args' => 2,
 		);
@@ -138,23 +174,31 @@ class Tests_BeansModifyAction extends Test_Case {
 	 *
 	 * @since 1.5.0
 	 *
+	 * @param string $id Optional. Beans ID to register. Default is 'foo'.
+	 *
 	 * @return array
 	 */
-	protected function setup_original_action() {
+	protected function setup_original_action( $id = 'foo' ) {
 		$container = Monkey\Container::instance();
 		$action    = array(
-			'hook'     => 'beans_hook',
-			'callback' => 'callback_beans',
+			'hook'     => "{$id}_hook",
+			'callback' => "callback_{$id}",
 			'priority' => 10,
 			'args'     => 1,
 		);
 
-		$this->check_not_added( 'beans', $action['hook'] );
+		$this->check_not_added( $id, $action['hook'] );
 
 		// Add the original action to get us rolling.
-		beans_add_action( 'beans', $action['hook'], $action['callback'] );
+		beans_add_action( $id, $action['hook'], $action['callback'] );
 		$this->assertTrue( has_action( $action['hook'] ) );
-		$this->assertTrue( $container->hookStorage()->isHookAdded( Monkey\Hook\HookStorage::ACTIONS, $action['hook'], $action['callback'] ) );
+		$this->assertTrue(
+			$container->hookStorage()->isHookAdded(
+				Monkey\Hook\HookStorage::ACTIONS,
+				$action['hook'],
+				$action['callback']
+			)
+		);
 
 		return $action;
 	}

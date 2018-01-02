@@ -114,6 +114,17 @@ function beans_add_smart_action( $hook, $callback, $priority = 10, $args = 1 ) {
  * @return bool
  */
 function beans_modify_action( $id, $hook = null, $callback = null, $priority = null, $args = null ) {
+	$action = array_filter( array(
+		'hook'     => $hook,
+		'callback' => $callback,
+		'priority' => $priority,
+		'args'     => $args,
+	) );
+	// If no changes were passed in, there's nothing to modify. Bail out.
+	if ( empty( $action ) ) {
+		return false;
+	}
+
 	$current_action     = _beans_get_current_action( $id );
 	$has_current_action = ! empty( $current_action ) && is_array( $current_action );
 
@@ -121,13 +132,6 @@ function beans_modify_action( $id, $hook = null, $callback = null, $priority = n
 	if ( $has_current_action ) {
 		remove_action( $current_action['hook'], $current_action['callback'], $current_action['priority'], $current_action['args'] );
 	}
-
-	$action = array_filter( array(
-		'hook'     => $hook,
-		'callback' => $callback,
-		'priority' => $priority,
-		'args'     => $args,
-	) );
 
 	// Merge the modified parameters and register with Beans.
 	$action = _beans_merge_action( $id, $action, 'modified' );
