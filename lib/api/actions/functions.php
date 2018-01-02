@@ -20,7 +20,7 @@
  * @since 1.0.0
  * @since 1.5.0 Made WPCS compliant.
  *
- * @param string   $id       The action's Beans ID, a unique ID for tracked within Beans for this action.
+ * @param string   $id       The action's Beans ID, a unique ID tracked within Beans for this action.
  * @param string   $hook     The name of the action to which the `$callback` is hooked.
  * @param callable $callback The name of the function|method you wish to be called when the action event fires.
  * @param int      $priority Optional. Used to specify the order in which the callbacks associated with a particular
