@@ -69,20 +69,19 @@ function beans_add_action( $id, $hook, $callback, $priority = 10, $args = 1 ) {
 /**
  * Set {@see beans_add_action()} using the callback argument as the action ID.
  *
- * This function is a shortcut of {@see beans_add_action()}. It does't require an ID
- * to be specified and uses the callback argument instead.
+ * This function is a shortcut of {@see beans_add_action()}. It does't require a Beans ID as it uses the
+ * callback argument instead.
  *
  * @since 1.0.0
  * @since 1.5.0 Made WPCS compliant.
  *
- * @param string   $hook     The name of the action to which the $callback is hooked.
- * @param callback $callback The name of the function you wish to be called. Used to set the action ID.
- * @param int      $priority Optional. Used to specify the order in which the functions
- *                           associated with a particular action are executed. Default 10.
- *                           Lower numbers correspond with earlier execution,
- *                           and functions with the same priority are executed
- *                           in the order in which they were added to the action.
- * @param int      $args     Optional. The number of arguments the function accept. Default 1.
+ * @param string   $hook     The name of the action to which the `$callback` is hooked.
+ * @param callable $callback The name of the function|method you wish to be called when the action event fires.
+ * @param int      $priority Optional. Used to specify the order in which the callbacks associated with a particular
+ *                           action are executed. Default is 10.
+ *                           Lower numbers correspond with earlier execution.  Callbacks with the same priority
+ *                           are executed in the order in which they were added to the action.
+ * @param int      $args     Optional. The number of arguments the callback accepts. Default is 1.
  *
  * @return bool
  */
