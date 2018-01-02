@@ -78,7 +78,7 @@ class Tests_BeansUnsetAction extends Test_Case {
 	/**
 	 * Test _beans_unset_action() should return false when action's configuration is not registered.
 	 */
-	public function test_should_set_and_return_action() {
+	public function test_should_return_false_when_not_registered() {
 
 		foreach ( $this->action_status as $action_status ) {
 			$this->assertFalse( _beans_unset_action( 'foo', $action_status ) );
@@ -97,7 +97,7 @@ class Tests_BeansUnsetAction extends Test_Case {
 			_beans_set_action( 'foo', $this->action, $action_status );
 			$this->assertTrue( isset( $_beans_registered_actions[ $action_status ]['foo'] ) );
 
-			// Then test that unset does it's job.
+			// Then test that unset does its job.
 			$this->assertTrue( _beans_unset_action( 'foo', $action_status ) );
 			$this->assertFalse( isset( $_beans_registered_actions[ $action_status ]['foo'] ) );
 		}
