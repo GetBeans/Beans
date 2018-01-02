@@ -101,7 +101,7 @@ function beans_add_smart_action( $hook, $callback, $priority = 10, $args = 1 ) {
  * @since 1.0.0
  * @since 1.5.0 Made WPCS compliant.
  *
- * @param string        $id       The action's Beans ID, a unique ID for tracked within Beans for this action.
+ * @param string        $id       The action's Beans ID, a unique ID tracked within Beans for this action.
  * @param string|null   $hook     Optional. The new action's event name to which the $callback is hooked.
  *                                Use NULL to keep the original value.
  * @param callable|null $callback Optional. The new callback (function or method) you wish to be called.
