@@ -161,22 +161,21 @@ function beans_modify_action_hook( $id, $hook ) {
 }
 
 /**
- * Modify an action callback.
+ * Modify callback for the given action, i.e. referenced by its Bean's ID.
  *
  * This function is a shortcut of {@see beans_modify_action()}.
  *
  * @since 1.0.0
+ * @since 1.5.0 Made WPCS compliant.
  *
- * @param string $id       The action ID.
- * @param string $callback Optional. The name of the new function you wish to be called. Use NULL to keep
- *                         the original value.
+ * @param string        $id       The action's Beans ID, a unique ID tracked within Beans for this action.
+ * @param callable|null $callback Optional. The new callback (function or method) you wish to be called.
+ *                                Use NULL to keep the original value.
  *
  * @return bool Will always return true.
  */
 function beans_modify_action_callback( $id, $callback ) {
-
 	return beans_modify_action( $id, null, $callback );
-
 }
 
 /**
