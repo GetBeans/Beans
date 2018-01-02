@@ -39,30 +39,31 @@ function beans_add_action( $id, $hook, $callback, $priority = 10, $args = 1 ) {
 		'args'     => $args,
 	);
 
-	// Replace original if set.
-	if ( $replaced = _beans_get_action( $id, 'replaced' ) ) {
-		$action = array_merge( $action, $replaced );
+	// If the ID is set to be "replaced", then replace that(those) parameter(s).
+	$replaced_action = _beans_get_action( $id, 'replaced' );
+	if ( ! empty( $replaced_action ) && is_array( $replaced_action ) ) {
+		$action = array_merge( $action, $replaced_action );
 	}
 
 	$action = _beans_set_action( $id, $action, 'added', true );
 
-	// Stop here if removed.
+	// If the ID is set to be "removed", then bail out.
 	if ( _beans_get_action( $id, 'removed' ) ) {
 		return;
 	}
 
-	// Merge modified.
-	if ( $modified = _beans_get_action( $id, 'modified' ) ) {
-		$action = array_merge( $action, $modified );
+	// If the ID is set to be "modified", then modify that(those) parameter(s).
+	$modified_action = _beans_get_action( $id, 'modified' );
+	if ( ! empty( $modified_action ) && is_array( $modified_action ) ) {
+		$action = array_merge( $action, $modified_action );
 	}
 
-	// Validate action arguments.
-	if ( count( $action ) == 4 ) {
+	// Add (register) the action with WordPress, if it's valid.
+	if ( _beans_is_action_valid( $action ) ) {
 		add_action( $action['hook'], $action['callback'], $action['priority'], $action['args'] );
 	}
 
 	return true;
-
 }
 
 /**
