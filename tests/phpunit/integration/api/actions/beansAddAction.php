@@ -91,7 +91,7 @@ class Tests_BeansAddAction extends WP_UnitTestCase {
 		// Add the action.
 		$this->assertTrue( beans_add_action( 'foo', $this->action['hook'], $this->action['callback'] ) );
 
-		// Now check that it was not registered in WordPress.
+		// Now check that it was registered in WordPress.
 		$this->assertTrue( has_action( $replaced_action['hook'] ) );
 		$this->check_parameters_registered_in_wp( $replaced_action );
 
@@ -111,7 +111,7 @@ class Tests_BeansAddAction extends WP_UnitTestCase {
 		// Add the action.
 		$this->assertNull( beans_add_action( 'foo', $this->action['hook'], $this->action['callback'] ) );
 
-		// Now check that it was registered in WordPress.
+		// Now check that it was not registered in WordPress.
 		$this->assertFalse( has_action( $this->action['hook'] ) );
 		global $wp_filter;
 		$this->assertFalse( array_key_exists( $this->action['hook'], $wp_filter ) );
