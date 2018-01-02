@@ -91,7 +91,7 @@ function beans_add_smart_action( $hook, $callback, $priority = 10, $args = 1 ) {
 }
 
 /**
- * Modify an action.
+ * Modify one or more of the arguments for the given action, i.e. referenced by its Bean's ID.
  *
  * This function modifies a registered action using {@see beans_add_action()} or
  * {@see beans_add_smart_action()}. Each optional argument must be set to NULL to keep the original value.
@@ -101,14 +101,14 @@ function beans_add_smart_action( $hook, $callback, $priority = 10, $args = 1 ) {
  * @since 1.0.0
  * @since 1.5.0 Made WPCS compliant.
  *
- * @param string        $id       The action ID.
- * @param string|null   $hook     Optional. The name of the new action to which the $callback is hooked.
+ * @param string        $id       The action's Beans ID, a unique ID for tracked within Beans for this action.
+ * @param string|null   $hook     Optional. The new action's event name to which the $callback is hooked.
  *                                Use NULL to keep the original value.
- * @param callable|null $callback Optional. The name of the new function you wish to be called.
+ * @param callable|null $callback Optional. The new callback (function or method) you wish to be called.
  *                                Use NULL to keep the original value.
  * @param int|null      $priority Optional. The new priority.
  *                                Use NULL to keep the original value.
- * @param int|null      $args     Optional. The new number of arguments the function accept.
+ * @param int|null      $args     Optional. The new number of arguments the $callback accepts.
  *                                Use NULL to keep the original value.
  *
  * @return bool
