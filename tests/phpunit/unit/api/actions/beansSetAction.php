@@ -117,7 +117,8 @@ class Tests_BeansSetAction extends Test_Case {
 	}
 
 	/**
-	 * Test _beans_set_action() should overwrite an existing registered action.
+	 * Test _beans_set_action() should overwrite the existing registered action when the "overwrite"
+	 * argument is set to true.
 	 */
 	public function test_should_overwrite_existing_registered_action() {
 		global $_beans_registered_actions;
