@@ -93,30 +93,33 @@ function beans_add_smart_action( $hook, $callback, $priority = 10, $args = 1 ) {
 /**
  * Modify an action.
  *
- * This function modifies an action registered using {@see beans_add_action()} or
- * {@see beans_add_smart_action()}. Each optional argument must be set to NULL to keep the orginal value.
+ * This function modifies a registered action using {@see beans_add_action()} or
+ * {@see beans_add_smart_action()}. Each optional argument must be set to NULL to keep the original value.
  *
  * The original action can be reset using {@see beans_reset_action()}.
  *
  * @since 1.0.0
+ * @since 1.5.0 Made WPCS compliant.
  *
- * @param string   $id       The action ID.
- * @param string   $hook     Optional. The name of the new action to which the $callback is hooked.
- *                           Use NULL to keep the original value.
- * @param callback $callback Optional. The name of the new function you wish to be called.
- *                           Use NULL to keep the original value.
- * @param int      $priority Optional. The new priority.
- *                           Use NULL to keep the original value.
- * @param int      $args     Optional. The new number of arguments the function accept.
- *                           Use NULL to keep the original value.
+ * @param string        $id       The action ID.
+ * @param string|null   $hook     Optional. The name of the new action to which the $callback is hooked.
+ *                                Use NULL to keep the original value.
+ * @param callable|null $callback Optional. The name of the new function you wish to be called.
+ *                                Use NULL to keep the original value.
+ * @param int|null      $priority Optional. The new priority.
+ *                                Use NULL to keep the original value.
+ * @param int|null      $args     Optional. The new number of arguments the function accept.
+ *                                Use NULL to keep the original value.
  *
- * @return bool Will always return true.
+ * @return bool
  */
 function beans_modify_action( $id, $hook = null, $callback = null, $priority = null, $args = null ) {
+	$current_action     = _beans_get_current_action( $id );
+	$has_current_action = ! empty( $current_action ) && is_array( $current_action );
 
-	// Remove action.
-	if ( $current = _beans_get_current_action( $id ) ) {
-		remove_action( $current['hook'], $current['callback'], $current['priority'], $current['args'] );
+	// If the action is registered, let's remove it.
+	if ( $has_current_action ) {
+		remove_action( $current_action['hook'], $current_action['callback'], $current_action['priority'], $current_action['args'] );
 	}
 
 	$action = array_filter( array(
@@ -126,20 +129,17 @@ function beans_modify_action( $id, $hook = null, $callback = null, $priority = n
 		'args'     => $args,
 	) );
 
-	// Merge modified.
+	// Merge the modified parameters and register with Beans.
 	$action = _beans_merge_action( $id, $action, 'modified' );
 
-	// Replace if needed.
-	if ( $current ) {
-
-		$action = array_merge( $current, $action );
-
-		add_action( $action['hook'], $action['callback'], $action['priority'], $action['args'] );
-
+	// If there is no action to modify, bail out.
+	if ( ! $has_current_action ) {
+		return false;
 	}
 
-	return true;
-
+	// Overwrite the modified parameters.
+	$action = array_merge( $current_action, $action );
+	return add_action( $action['hook'], $action['callback'], $action['priority'], $action['args'] );
 }
 
 /**
