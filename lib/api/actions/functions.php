@@ -11,23 +11,23 @@
  */
 
 /**
- * Hooks a function on to a specific action.
+ * Hooks a callback (function or method) to a specific action event.
  *
  * This function is similar to {@link http://codex.wordpress.org/Function_Reference/add_action add_action()}
- * with the exception of being registered by ID in order to be manipulated by the other Beans Actions functions.
+ * with the exception of being registered by ID within Beans in order to be manipulated by the other Beans
+ * Actions functions.
  *
  * @since 1.0.0
  * @since 1.5.0 Made WPCS compliant.
  *
- * @param string   $id       A unique string used as a reference.
- * @param string   $hook     The name of the action to which the $callback is hooked.
- * @param callback $callback The name of the function you wish to be called.
- * @param int      $priority Optional. Used to specify the order in which the functions
- *                           associated with a particular action are executed. Default 10.
- *                           Lower numbers correspond with earlier execution,
- *                           and functions with the same priority are executed
- *                           in the order in which they were added to the action.
- * @param int      $args     Optional. The number of arguments the function accepts. Default 1.
+ * @param string   $id       The action's Beans ID, a unique ID for tracked within Beans for this action.
+ * @param string   $hook     The name of the action to which the `$callback` is hooked.
+ * @param callable $callback The name of the function|method you wish to be called when the action event fires.
+ * @param int      $priority Optional. Used to specify the order in which the callbacks associated with a particular
+ *                           action are executed. Default is 10.
+ *                           Lower numbers correspond with earlier execution.  Callbacks with the same priority
+ *                           are executed in the order in which they were added to the action.
+ * @param int      $args     Optional. The number of arguments the callback accepts. Default is 1.
  *
  * @return bool|null
  */
