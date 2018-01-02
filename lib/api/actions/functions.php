@@ -28,7 +28,7 @@
  *                           in the order in which they were added to the action.
  * @param int      $args     Optional. The number of arguments the function accepts. Default 1.
  *
- * @return bool Will always return true.
+ * @return bool|null
  */
 function beans_add_action( $id, $hook, $callback, $priority = 10, $args = 1 ) {
 
@@ -83,12 +83,10 @@ function beans_add_action( $id, $hook, $callback, $priority = 10, $args = 1 ) {
  *                           in the order in which they were added to the action.
  * @param int      $args     Optional. The number of arguments the function accept. Default 1.
  *
- * @return bool Will always return true.
+ * @return bool
  */
 function beans_add_smart_action( $hook, $callback, $priority = 10, $args = 1 ) {
-
 	return beans_add_action( $callback, $hook, $callback, $priority, $args );
-
 }
 
 /**
