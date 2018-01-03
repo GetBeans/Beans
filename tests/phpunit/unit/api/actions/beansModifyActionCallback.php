@@ -33,9 +33,9 @@ class Tests_BeansModifyActionCallback extends Actions_Test_Case {
 	}
 
 	/**
-	 * Test beans_modify_action_callback() should return false when null is the new callback.
+	 * Test beans_modify_action_callback() should return false when the new callback is null.
 	 */
-	public function test_should_return_false_when_null_is_new_callback() {
+	public function test_should_return_false_when_new_callback_is_null() {
 		$this->setup_original_action();
 		$this->assertFalse( beans_modify_action_callback( 'foo', null ) );
 

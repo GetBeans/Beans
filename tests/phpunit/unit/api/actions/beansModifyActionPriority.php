@@ -23,31 +23,6 @@ require_once __DIR__ . '/includes/class-actions-test-case.php';
 class Tests_BeansModifyActionPriority extends Actions_Test_Case {
 
 	/**
-	 * Setup test fixture.
-	 */
-	protected function setUp() {
-		parent::setUp();
-
-		require_once BEANS_TESTS_LIB_DIR . 'api/actions/functions.php';
-		require_once BEANS_TESTS_LIB_DIR . 'api/utilities/functions.php';
-	}
-
-	/**
-	 * Reset the test fixture.
-	 */
-	protected function tearDown() {
-		parent::tearDown();
-
-		global $_beans_registered_actions;
-		$_beans_registered_actions = array(
-			'added'    => array(),
-			'modified' => array(),
-			'removed'  => array(),
-			'replaced' => array(),
-		);
-	}
-
-	/**
 	 * Test beans_modify_action_priority() should return false when the ID is not registered.
 	 */
 	public function test_should_return_false_when_id_not_registered() {
@@ -63,7 +38,7 @@ class Tests_BeansModifyActionPriority extends Actions_Test_Case {
 	}
 
 	/**
-	 * Test beans_modify_action_callback() should return false when null is new priority.
+	 * Test beans_modify_action_callback() should return false new priority is a non-integer.
 	 */
 	public function test_should_return_false_when_priority_is_non_integer() {
 		$ids = array(
