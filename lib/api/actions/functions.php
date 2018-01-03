@@ -414,7 +414,7 @@ if ( ! isset( $_beans_registered_actions ) ) {
  * Beans.
  *
  * @since  1.0.0
- * @since  1.5.0 Made WPCS compliant.
+ * @since  1.5.0
  * @ignore
  * @access private
  *
@@ -452,7 +452,7 @@ function _beans_get_action( $id, $status ) {
  * configuration is returned.
  *
  * @since  1.0.0
- * @since  1.5.0 Made WPCS compliant.
+ * @since  1.5.0
  * @ignore
  * @access private
  *
@@ -487,7 +487,7 @@ function _beans_set_action( $id, array $action, $status, $overwrite = false ) {
  * registered with Beans actions for the given ID and status. Else, returns true when complete.
  *
  * @since  1.0.0
- * @since  1.5.0 Made WPCS compliant.
+ * @since  1.5.0
  * @ignore
  * @access private
  *
@@ -516,7 +516,7 @@ function _beans_unset_action( $id, $status ) {
  * If the action's configuration has not already been registered with Beans, just store it.
  *
  * @since  1.0.0
- * @since  1.5.0 Made WPCS compliant.
+ * @since  1.5.0
  * @ignore
  * @access private
  *
@@ -543,7 +543,7 @@ function _beans_merge_action( $id, array $action, $status ) {
  * Get the current action, meaning get from the "added" and/or "modified" statuses.
  *
  * @since  1.0.0
- * @since  1.5.0 Made WPCS compliant.
+ * @since  1.5.0
  * @ignore
  * @access private
  *
