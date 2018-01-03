@@ -560,6 +560,7 @@ function _beans_get_current_action( $id ) {
 	$action = array();
 
 	$added = _beans_get_action( $id, 'added' );
+
 	if ( false !== $added ) {
 		$action = $added;
 	}
