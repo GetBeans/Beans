@@ -114,12 +114,7 @@ function beans_add_smart_action( $hook, $callback, $priority = 10, $args = 1 ) {
  * @return bool
  */
 function beans_modify_action( $id, $hook = null, $callback = null, $priority = null, $args = null ) {
-	$action = array_filter( array(
-		'hook'     => $hook,
-		'callback' => $callback,
-		'priority' => $priority,
-		'args'     => $args,
-	) );
+	$action = _beans_build_action_for_valid_args( $hook, $callback, $priority, $args );
 	// If no changes were passed in, there's nothing to modify. Bail out.
 	if ( empty( $action ) ) {
 		return false;
@@ -195,9 +190,7 @@ function beans_modify_action_callback( $id, $callback ) {
  * @return bool Will always return true.
  */
 function beans_modify_action_priority( $id, $priority ) {
-
 	return beans_modify_action( $id, null, null, $priority );
-
 }
 
 /**
@@ -525,6 +518,45 @@ function _beans_get_current_action( $id ) {
 
 	return $action;
 
+}
+
+/**
+ * Build the action's array for only the valid given arguments.  Valid arguments are:
+ *
+ * @since 1.5.0
+ *
+ * @param string|null   $hook     Optional. The action event's name to which the $callback is hooked.
+ *                                Valid when not falsey,
+ *                                i.e. (meaning not `null`, `false`, `0`, `0.0`, an empty string, or empty array).
+ * @param callable|null $callback Optional. The callback (function or method) you wish to be called when the event
+ *                                fires. Valid when not falsey, i.e. (meaning not `null`, `false`, `0`, `0.0`, an empty
+ *                                string, or empty array).
+ * @param int|null      $priority Optional. Used to specify the order in which the functions associated with a
+ *                                particular action are executed. Valid when it's numeric, including 0.
+ * @param int|null      $args     Optional. The number of arguments the callback accepts.
+ *                                Valid when it's numeric, including 0.
+ *
+ * @return array
+ */
+function _beans_build_action_for_valid_args( $hook = null, $callback = null, $priority = null, $args = null ) {
+	$action = array();
+
+	if ( ! empty( $hook ) ) {
+		$action['hook'] = $hook;
+	}
+
+	if ( ! empty( $callback ) ) {
+		$action['callback'] = $callback;
+	}
+
+	foreach ( array( 'priority', 'args' ) as $arg_name ) {
+		$arg = ${$arg_name};
+		if ( is_numeric( $arg ) ) {
+			$action[ $arg_name ] = (int) $arg;
+		}
+	}
+
+	return $action;
 }
 
 /**
