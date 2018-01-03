@@ -99,7 +99,7 @@ function beans_add_smart_action( $hook, $callback, $priority = 10, $args = 1 ) {
  * The original action can be reset using {@see beans_reset_action()}.
  *
  * @since 1.0.0
- * @since 1.5.0 Made WPCS compliant.
+ * @since 1.5.0 Made WPCS compliant and improved action parameter filtering.
  *
  * @param string        $id       The action's Beans ID, a unique ID tracked within Beans for this action.
  * @param string|null   $hook     Optional. The new action's event name to which the $callback is hooked.
@@ -160,7 +160,7 @@ function beans_modify_action_hook( $id, $hook ) {
 }
 
 /**
- * Modify callback for the given action, i.e. referenced by its Bean's ID.
+ * Modify the callback of the given action, i.e. referenced by its Bean's ID.
  *
  * This function is a shortcut of {@see beans_modify_action()}.
  *
@@ -178,38 +178,39 @@ function beans_modify_action_callback( $id, $callback ) {
 }
 
 /**
- * Modify an action priority.
+ * Modify the priority of the given action, i.e. referenced by its Bean's ID.
  *
  * This function is a shortcut of {@see beans_modify_action()}.
  *
  * @since 1.0.0
+ * @since 1.5.0 Made WPCS compliant.
  *
- * @param string $id       The action ID.
- * @param int    $priority Optional. The new priority. Use NULL to keep the original value.
+ * @param string   $id            The action's Beans ID, a unique ID tracked within Beans for this action.
+ * @param int|null $priority      Optional. The new priority.
+ *                                Use NULL to keep the original value.
  *
- * @return bool Will always return true.
+ * @return bool
  */
 function beans_modify_action_priority( $id, $priority ) {
 	return beans_modify_action( $id, null, null, $priority );
 }
 
 /**
- * Modify an action arguments.
+ * Modify the number of arguments of the given action, i.e. referenced by its Bean's ID.
  *
  * This function is a shortcut of {@see beans_modify_action()}.
  *
  * @since 1.0.0
+ * @since 1.5.0 Made WPCS compliant.
  *
- * @param string $id   The action ID.
- * @param int    $args Optional. The new number of arguments the function accepts. Use NULL to keep the
- *                     original value.
+ * @param string   $id            The action's Beans ID, a unique ID tracked within Beans for this action.
+ * @param int|null $args          Optional. The new number of arguments the $callback accepts.
+ *                                Use NULL to keep the original value.
  *
- * @return bool Will always return true.
+ * @return bool
  */
 function beans_modify_action_arguments( $id, $args ) {
-
 	return beans_modify_action( $id, null, null, null, $args );
-
 }
 
 /**
@@ -521,7 +522,7 @@ function _beans_get_current_action( $id ) {
 }
 
 /**
- * Build the action's array for only the valid given arguments.  Valid arguments are:
+ * Build the action's array for only the valid given arguments.
  *
  * @since 1.5.0
  *
