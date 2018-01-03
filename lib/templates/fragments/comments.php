@@ -293,7 +293,7 @@ function beans_comments_navigation() {
 				$next_icon = beans_open_markup( 'beans_next_icon[_comments_navigation]', 'i', array(
 					'class' => 'uk-icon-angle-double-right uk-margin-small-right',
 				) );
-				$next_icon .= beans_close_markup( 'beans_previous_icon[_comments_navigation]', 'i' );
+				$next_icon .= beans_close_markup( 'beans_next_icon[_comments_navigation]', 'i' );
 
 				echo get_next_comments_link(
 					beans_output( 'beans_next_text[_comments_navigation]', __( 'Next', 'tm-beans' ) ) . $next_icon

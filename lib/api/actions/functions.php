@@ -414,11 +414,11 @@ if ( ! isset( $_beans_registered_actions ) ) {
  * Get the action's configuration for the given ID and status. Returns `false` if the action is not registered with
  * Beans.
  *
- * @since  1.5.0
+ * @since  1.0.0
  * @ignore
  * @access private
  *
- * @param string $id     A unique string used as a reference.
+ * @param string $id     The action's Beans ID, a unique ID tracked within Beans for this action.
  * @param string $status Status for which to get the action.
  *
  * @return array|bool
@@ -435,8 +435,9 @@ function _beans_get_action( $id, $status ) {
 	}
 
 	$action = beans_get( $id, $registered_actions );
-	// If the action is null, return false.
-	if ( is_null( $action ) ) {
+
+	// If the action is empty, return false.
+	if ( empty( $action ) ) {
 		return false;
 	}
 
@@ -450,19 +451,19 @@ function _beans_get_action( $id, $status ) {
  * then the new action's configuration is stored, overwriting the previous one. Else, the registered action's
  * configuration is returned.
  *
- * @since  1.5.0
+ * @since  1.0.0
  * @ignore
  * @access private
  *
- * @param string $id        A unique string used as a reference.
- * @param array  $action    The action configuration to store.
- * @param string $status    Status for which to store the action.
- * @param bool   $overwrite Optional. When set to `true`, the new action's configuration is stored, overwriting a
- *                          previously stored configuration (if one exists).
+ * @param string      $id        The action's Beans ID, a unique ID tracked within Beans for this action.
+ * @param array|mixed $action    The action configuration to store.
+ * @param string      $status    Status for which to store the action.
+ * @param bool        $overwrite Optional. When set to `true`, the new action's configuration is stored, overwriting a
+ *                               previously stored configuration (if one exists).
  *
- * @return array
+ * @return array|mixed
  */
-function _beans_set_action( $id, array $action, $status, $overwrite = false ) {
+function _beans_set_action( $id, $action, $status, $overwrite = false ) {
 	$id = _beans_unique_action_id( $id );
 
 	// Get the action, if it's already registered.
@@ -484,11 +485,11 @@ function _beans_set_action( $id, array $action, $status, $overwrite = false ) {
  * Unset the action's configuration for the given ID and status. Returns `false` if there are is no action
  * registered with Beans actions for the given ID and status. Else, returns true when complete.
  *
- * @since  1.5.0
+ * @since  1.0.0
  * @ignore
  * @access private
  *
- * @param string $id     A unique string used as a reference.
+ * @param string $id     The action's Beans ID, a unique ID tracked within Beans for this action.
  * @param string $status Status for which to get the action.
  *
  * @return bool
@@ -510,13 +511,13 @@ function _beans_unset_action( $id, $status ) {
 /**
  * Merge the action's configuration and then store it for the given ID and status.
  *
- * If the action's configuration has not already be registered with Beans, just store it.
+ * If the action's configuration has not already been registered with Beans, just store it.
  *
- * @since  1.5.0
+ * @since  1.0.0
  * @ignore
  * @access private
  *
- * @param string $id     A unique string used as a reference.
+ * @param string $id     The action's Beans ID, a unique ID tracked within Beans for this action.
  * @param array  $action The new action's configuration to merge and then store.
  * @param string $status Status for which to merge/store this action.
  *
@@ -538,16 +539,15 @@ function _beans_merge_action( $id, array $action, $status ) {
 /**
  * Get the current action, meaning get from the "added" and/or "modified" statuses.
  *
- * @since  1.5.0
+ * @since  1.0.0
  * @ignore
  * @access private
  *
- * @param string $id A unique string used as a reference.
+ * @param string $id The action's Beans ID, a unique ID tracked within Beans for this action.
  *
  * @return array|bool
  */
 function _beans_get_current_action( $id ) {
-
 	// Bail out if the action is "removed".
 	if ( _beans_get_action( $id, 'removed' ) ) {
 		return false;
@@ -556,11 +556,13 @@ function _beans_get_current_action( $id ) {
 	$action = array();
 
 	$added = _beans_get_action( $id, 'added' );
+
 	if ( false !== $added ) {
 		$action = $added;
 	}
 
 	$modified = _beans_get_action( $id, 'modified' );
+
 	if ( false !== $modified ) {
 		$action = is_array( $action )
 			? array_merge( $action, $modified )
