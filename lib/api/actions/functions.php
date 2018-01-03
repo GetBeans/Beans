@@ -18,7 +18,7 @@
  * Actions functions.
  *
  * @since 1.0.0
- * @since 1.5.0 Made WPCS compliant.
+ * @since 1.5.0
  *
  * @param string   $id       The action's Beans ID, a unique ID tracked within Beans for this action.
  * @param string   $hook     The name of the action to which the `$callback` is hooked.
@@ -39,8 +39,9 @@ function beans_add_action( $id, $hook, $callback, $priority = 10, $args = 1 ) {
 		'args'     => $args,
 	);
 
-	// If the ID is set to be "replaced", then replace that(those) parameter(s).
 	$replaced_action = _beans_get_action( $id, 'replaced' );
+
+	// If the ID is set to be "replaced", then replace that(those) parameter(s).
 	if ( ! empty( $replaced_action ) && is_array( $replaced_action ) ) {
 		$action = array_merge( $action, $replaced_action );
 	}
@@ -52,8 +53,9 @@ function beans_add_action( $id, $hook, $callback, $priority = 10, $args = 1 ) {
 		return false;
 	}
 
-	// If the ID is set to be "modified", then modify that(those) parameter(s).
 	$modified_action = _beans_get_action( $id, 'modified' );
+
+	// If the ID is set to be "modified", then modify that(those) parameter(s).
 	if ( ! empty( $modified_action ) && is_array( $modified_action ) ) {
 		$action = array_merge( $action, $modified_action );
 	}
@@ -73,7 +75,7 @@ function beans_add_action( $id, $hook, $callback, $priority = 10, $args = 1 ) {
  * callback argument instead.
  *
  * @since 1.0.0
- * @since 1.5.0 Made WPCS compliant.
+ * @since 1.5.0
  *
  * @param string   $hook     The name of the action to which the `$callback` is hooked.
  * @param callable $callback The name of the function|method you wish to be called when the action event fires.
