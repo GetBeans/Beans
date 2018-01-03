@@ -38,7 +38,7 @@ class Tests_BeansModifyActionPriority extends Actions_Test_Case {
 	}
 
 	/**
-	 * Test beans_modify_action_callback() should return false when new priority is a non-integer.
+	 * Test beans_modify_action_priority() should return false when new priority is a non-integer.
 	 */
 	public function test_should_return_false_when_priority_is_non_integer() {
 		$ids = array(
