@@ -79,7 +79,6 @@ class Tests_BeansGetAction extends Test_Case {
 	 * Test _beans_get_action() should return false when the status is empty, i.e. no actions are registered.
 	 */
 	public function test_should_return_false_when_status_is_empty() {
-
 		foreach ( $this->action_status as $action_status ) {
 			$this->assertFalse( _beans_get_action( 'foo', $action_status ) );
 		}

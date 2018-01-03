@@ -435,8 +435,9 @@ function _beans_get_action( $id, $status ) {
 	}
 
 	$action = beans_get( $id, $registered_actions );
-	// If the action is null, return false.
-	if ( is_null( $action ) ) {
+
+	// If the action is empty, return false.
+	if ( empty( $action ) ) {
 		return false;
 	}
 
@@ -551,7 +552,6 @@ function _beans_merge_action( $id, array $action, $status ) {
  * @return array|bool
  */
 function _beans_get_current_action( $id ) {
-
 	// Bail out if the action is "removed".
 	if ( _beans_get_action( $id, 'removed' ) ) {
 		return false;
@@ -565,6 +565,7 @@ function _beans_get_current_action( $id ) {
 	}
 
 	$modified = _beans_get_action( $id, 'modified' );
+
 	if ( false !== $modified ) {
 		$action = is_array( $action )
 			? array_merge( $action, $modified )
