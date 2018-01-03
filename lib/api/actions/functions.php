@@ -149,9 +149,8 @@ function beans_modify_action( $id, $hook = null, $callback = null, $priority = n
  * @since 1.0.0
  * @since 1.5.0 Made WPCS compliant.
  *
- * @param string      $id         The action's Beans ID, a unique ID tracked within Beans for this action.
- * @param string|null $hook       Optional. The new action's event name to which the $callback is hooked.
- *                                Use NULL to keep the original value.
+ * @param string $id   The action's Beans ID, a unique ID tracked within Beans for this action.
+ * @param string $hook The new action's event name to which the callback is hooked.
  *
  * @return bool
  */
@@ -167,11 +166,10 @@ function beans_modify_action_hook( $id, $hook ) {
  * @since 1.0.0
  * @since 1.5.0 Made WPCS compliant.
  *
- * @param string        $id       The action's Beans ID, a unique ID tracked within Beans for this action.
- * @param callable|null $callback Optional. The new callback (function or method) you wish to be called.
- *                                Use NULL to keep the original value.
+ * @param string   $id       The action's Beans ID, a unique ID tracked within Beans for this action.
+ * @param callable $callback The new callback (function or method) you wish to be called.
  *
- * @return bool Will always return true.
+ * @return bool
  */
 function beans_modify_action_callback( $id, $callback ) {
 	return beans_modify_action( $id, null, $callback );
@@ -185,9 +183,8 @@ function beans_modify_action_callback( $id, $callback ) {
  * @since 1.0.0
  * @since 1.5.0 Made WPCS compliant.
  *
- * @param string   $id            The action's Beans ID, a unique ID tracked within Beans for this action.
- * @param int|null $priority      Optional. The new priority.
- *                                Use NULL to keep the original value.
+ * @param string     $id       The action's Beans ID, a unique ID tracked within Beans for this action.
+ * @param int|string $priority The new priority.
  *
  * @return bool
  */
@@ -203,14 +200,13 @@ function beans_modify_action_priority( $id, $priority ) {
  * @since 1.0.0
  * @since 1.5.0 Made WPCS compliant.
  *
- * @param string   $id            The action's Beans ID, a unique ID tracked within Beans for this action.
- * @param int|null $args          Optional. The new number of arguments the $callback accepts.
- *                                Use NULL to keep the original value.
+ * @param string     $id             The action's Beans ID, a unique ID tracked within Beans for this action.
+ * @param int|string $number_of_args The new number of arguments the $callback accepts.
  *
  * @return bool
  */
-function beans_modify_action_arguments( $id, $args ) {
-	return beans_modify_action( $id, null, null, null, $args );
+function beans_modify_action_arguments( $id, $number_of_args ) {
+	return beans_modify_action( $id, null, null, null, $number_of_args );
 }
 
 /**
