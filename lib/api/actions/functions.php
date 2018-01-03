@@ -456,15 +456,15 @@ function _beans_get_action( $id, $status ) {
  * @ignore
  * @access private
  *
- * @param string $id        The action's Beans ID, a unique ID tracked within Beans for this action.
- * @param array  $action    The action configuration to store.
- * @param string $status    Status for which to store the action.
- * @param bool   $overwrite Optional. When set to `true`, the new action's configuration is stored, overwriting a
- *                          previously stored configuration (if one exists).
+ * @param string      $id        The action's Beans ID, a unique ID tracked within Beans for this action.
+ * @param array|mixed $action    The action configuration to store.
+ * @param string      $status    Status for which to store the action.
+ * @param bool        $overwrite Optional. When set to `true`, the new action's configuration is stored, overwriting a
+ *                               previously stored configuration (if one exists).
  *
- * @return array
+ * @return array|mixed
  */
-function _beans_set_action( $id, array $action, $status, $overwrite = false ) {
+function _beans_set_action( $id, $action, $status, $overwrite = false ) {
 	$id = _beans_unique_action_id( $id );
 
 	// Get the action, if it's already registered.
