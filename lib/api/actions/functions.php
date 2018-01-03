@@ -418,7 +418,7 @@ if ( ! isset( $_beans_registered_actions ) ) {
  * @ignore
  * @access private
  *
- * @param string $id     A unique string used as a reference.
+ * @param string $id     The action's Beans ID, a unique ID tracked within Beans for this action.
  * @param string $status Status for which to get the action.
  *
  * @return array|bool
@@ -456,7 +456,7 @@ function _beans_get_action( $id, $status ) {
  * @ignore
  * @access private
  *
- * @param string $id        A unique string used as a reference.
+ * @param string $id        The action's Beans ID, a unique ID tracked within Beans for this action.
  * @param array  $action    The action configuration to store.
  * @param string $status    Status for which to store the action.
  * @param bool   $overwrite Optional. When set to `true`, the new action's configuration is stored, overwriting a
@@ -491,7 +491,7 @@ function _beans_set_action( $id, array $action, $status, $overwrite = false ) {
  * @ignore
  * @access private
  *
- * @param string $id     A unique string used as a reference.
+ * @param string $id     The action's Beans ID, a unique ID tracked within Beans for this action.
  * @param string $status Status for which to get the action.
  *
  * @return bool
@@ -520,7 +520,7 @@ function _beans_unset_action( $id, $status ) {
  * @ignore
  * @access private
  *
- * @param string $id     A unique string used as a reference.
+ * @param string $id     The action's Beans ID, a unique ID tracked within Beans for this action.
  * @param array  $action The new action's configuration to merge and then store.
  * @param string $status Status for which to merge/store this action.
  *
@@ -547,7 +547,7 @@ function _beans_merge_action( $id, array $action, $status ) {
  * @ignore
  * @access private
  *
- * @param string $id A unique string used as a reference.
+ * @param string $id The action's Beans ID, a unique ID tracked within Beans for this action.
  *
  * @return array|bool
  */
