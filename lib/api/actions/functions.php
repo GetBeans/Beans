@@ -18,7 +18,7 @@
  * Actions functions.
  *
  * @since 1.0.0
- * @since 1.5.0
+ * @since 1.5.0 Returns false when action is not added via add_action.
  *
  * @param string   $id       The action's Beans ID, a unique ID tracked within Beans for this action.
  * @param string   $hook     The name of the action to which the `$callback` is hooked.
@@ -75,7 +75,7 @@ function beans_add_action( $id, $hook, $callback, $priority = 10, $args = 1 ) {
  * callback argument instead.
  *
  * @since 1.0.0
- * @since 1.5.0
+ * @since 1.5.0 Returns false when action is not added via add_action.
  *
  * @param string   $hook     The name of the action to which the `$callback` is hooked.
  * @param callable $callback The name of the function|method you wish to be called when the action event fires.
