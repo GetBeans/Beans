@@ -9,7 +9,9 @@
 
 namespace Beans\Framework\Tests\Unit\API\Actions;
 
-use Beans\Framework\Tests\Unit\Test_Case;
+use Beans\Framework\Tests\Unit\API\Actions\Includes\Actions_Test_Case;
+
+require_once __DIR__ . '/includes/class-actions-test-case.php';
 
 /**
  * Class Tests_BeansUnsetAction
@@ -18,7 +20,7 @@ use Beans\Framework\Tests\Unit\Test_Case;
  * @group   unit-tests
  * @group   api
  */
-class Tests_BeansUnsetAction extends Test_Case {
+class Tests_BeansUnsetAction extends Actions_Test_Case {
 
 	/**
 	 * Available action statuses.
@@ -47,10 +49,7 @@ class Tests_BeansUnsetAction extends Test_Case {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->action_status = array( 'added', 'modified', 'removed', 'replaced' );
-		require_once BEANS_TESTS_LIB_DIR . 'api/actions/functions.php';
-		require_once BEANS_TESTS_LIB_DIR . 'api/utilities/functions.php';
-
+		$this->action_status  = array( 'added', 'modified', 'removed', 'replaced' );
 		$this->action         = array(
 			'hook'     => 'foo',
 			'callback' => 'callback',
@@ -58,21 +57,6 @@ class Tests_BeansUnsetAction extends Test_Case {
 			'args'     => 1,
 		);
 		$this->encoded_action = wp_json_encode( $this->action );
-	}
-
-	/**
-	 * Reset the test fixture.
-	 */
-	protected function tearDown() {
-		parent::tearDown();
-
-		global $_beans_registered_actions;
-		$_beans_registered_actions = array(
-			'added'    => array(),
-			'modified' => array(),
-			'removed'  => array(),
-			'replaced' => array(),
-		);
 	}
 
 	/**

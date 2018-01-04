@@ -9,8 +9,10 @@
 
 namespace Beans\Framework\Tests\Unit\API\Actions;
 
-use Beans\Framework\Tests\Unit\Test_Case;
+use Beans\Framework\Tests\Unit\API\Actions\Includes\Actions_Test_Case;
 use Brain\Monkey;
+
+require_once __DIR__ . '/includes/class-actions-test-case.php';
 
 /**
  * Class Tests_BeansAddAction
@@ -19,7 +21,7 @@ use Brain\Monkey;
  * @group   unit-tests
  * @group   api
  */
-class Tests_BeansAddAction extends Test_Case {
+class Tests_BeansAddAction extends Actions_Test_Case {
 
 	/**
 	 * The action.
@@ -34,29 +36,11 @@ class Tests_BeansAddAction extends Test_Case {
 	protected function setUp() {
 		parent::setUp();
 
-		require_once BEANS_TESTS_LIB_DIR . 'api/actions/functions.php';
-		require_once BEANS_TESTS_LIB_DIR . 'api/utilities/functions.php';
-
 		$this->action = array(
 			'hook'     => 'foo_hook',
 			'callback' => 'callback_foo',
 			'priority' => 10,
 			'args'     => 1,
-		);
-	}
-
-	/**
-	 * Reset the test fixture.
-	 */
-	protected function tearDown() {
-		parent::tearDown();
-
-		global $_beans_registered_actions;
-		$_beans_registered_actions = array(
-			'added'    => array(),
-			'modified' => array(),
-			'removed'  => array(),
-			'replaced' => array(),
 		);
 	}
 
@@ -141,20 +125,5 @@ class Tests_BeansAddAction extends Test_Case {
 		// Finally, check that the "modified" action is registered via add_action.
 		$container = Monkey\Container::instance();
 		$this->assertTrue( $container->hookStorage()->isHookAdded( Monkey\Hook\HookStorage::ACTIONS, 'foo_hook', 'my_callback' ) );
-	}
-
-	/**
-	 * Check that is not registered first.
-	 *
-	 * @since 1.5.0
-	 *
-	 * @param string $id   The ID to check.
-	 * @param string $hook The hook (event name) to check.
-	 *
-	 * @return void
-	 */
-	protected function check_not_added( $id, $hook ) {
-		$this->assertFalse( _beans_get_action( $id, 'added' ) );
-		$this->assertFalse( has_action( $hook ) );
 	}
 }
