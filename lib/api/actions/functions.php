@@ -402,119 +402,186 @@ if ( ! isset( $_beans_registered_actions ) ) {
 }
 
 /**
- * Get action.
+ * Get the action's configuration for the given ID and status. Returns `false` if the action is not registered with
+ * Beans.
  *
+ * @since  1.0.0
  * @ignore
+ * @access private
+ *
+ * @param string $id     The action's Beans ID, a unique ID tracked within Beans for this action.
+ * @param string $status Status for which to get the action.
+ *
+ * @return array|bool
  */
 function _beans_get_action( $id, $status ) {
-
 	global $_beans_registered_actions;
 
-	$id = _beans_unique_action_id( $id );
+	$id                 = _beans_unique_action_id( $id );
+	$registered_actions = beans_get( $status, $_beans_registered_actions );
 
-	if ( ! $registered = beans_get( $status, $_beans_registered_actions ) ) {
+	// If the status is empty, return false, as no actions are registered.
+	if ( empty( $registered_actions ) ) {
 		return false;
 	}
 
-	if ( ! $action = beans_get( $id, $registered ) ) {
+	$action = beans_get( $id, $registered_actions );
+
+	// If the action is empty, return false.
+	if ( empty( $action ) ) {
 		return false;
 	}
 
 	return (array) json_decode( $action );
-
 }
 
 /**
- * Set action.
+ * Store the action's configuration for the given ID and status.
  *
+ * What happens if the action's configuration is already registered?  If the `$overwrite` flag is set to `true`,
+ * then the new action's configuration is stored, overwriting the previous one. Else, the registered action's
+ * configuration is returned.
+ *
+ * @since  1.0.0
  * @ignore
+ * @access private
+ *
+ * @param string      $id        The action's Beans ID, a unique ID tracked within Beans for this action.
+ * @param array|mixed $action    The action configuration to store.
+ * @param string      $status    Status for which to store the action.
+ * @param bool        $overwrite Optional. When set to `true`, the new action's configuration is stored, overwriting a
+ *                               previously stored configuration (if one exists).
+ *
+ * @return array|mixed
  */
 function _beans_set_action( $id, $action, $status, $overwrite = false ) {
-
-	global $_beans_registered_actions;
-
 	$id = _beans_unique_action_id( $id );
 
-	// Return action which already exist unless overwrite is set to true.
-	if ( ! $overwrite && ( $_action = _beans_get_action( $id, $status ) ) ) {
-		return $_action;
+	// Get the action, if it's already registered.
+	$registered_action = _beans_get_action( $id, $status );
+
+	// If the action is registered and we are not overwriting, return it.
+	if ( true !== $overwrite && ! empty( $registered_action ) ) {
+		return $registered_action;
 	}
 
-	$_beans_registered_actions[ $status ][ $id ] = json_encode( $action );
+	// Let's set (or overwrite) the action.
+	global $_beans_registered_actions;
+	$_beans_registered_actions[ $status ][ $id ] = wp_json_encode( $action );
 
 	return $action;
-
 }
 
 /**
- * Unset action.
+ * Unset the action's configuration for the given ID and status. Returns `false` if there are is no action
+ * registered with Beans actions for the given ID and status. Else, returns true when complete.
  *
+ * @since  1.0.0
  * @ignore
+ * @access private
+ *
+ * @param string $id     The action's Beans ID, a unique ID tracked within Beans for this action.
+ * @param string $status Status for which to get the action.
+ *
+ * @return bool
  */
 function _beans_unset_action( $id, $status ) {
-
-	global $_beans_registered_actions;
-
 	$id = _beans_unique_action_id( $id );
 
-	// Stop here if the action doesn't exist.
-	if ( ! _beans_get_action( $id, $status ) ) {
+	// Bail out if the ID is not registered for the given status.
+	if ( false === _beans_get_action( $id, $status ) ) {
 		return false;
 	}
 
+	global $_beans_registered_actions;
 	unset( $_beans_registered_actions[ $status ][ $id ] );
 
 	return true;
-
 }
 
 /**
- * Merge action.
+ * Merge the action's configuration and then store it for the given ID and status.
  *
+ * If the action's configuration has not already been registered with Beans, just store it.
+ *
+ * @since  1.0.0
  * @ignore
+ * @access private
+ *
+ * @param string $id     The action's Beans ID, a unique ID tracked within Beans for this action.
+ * @param array  $action The new action's configuration to merge and then store.
+ * @param string $status Status for which to merge/store this action.
+ *
+ * @return array
  */
-function _beans_merge_action( $id, $action, $status ) {
+function _beans_merge_action( $id, array $action, $status ) {
+	$id                = _beans_unique_action_id( $id );
+	$registered_action = _beans_get_action( $id, $status );
 
-	global $_beans_registered_actions;
-
-	$id = _beans_unique_action_id( $id );
-
-	if ( $_action = _beans_get_action( $id, $status ) ) {
-		$action = array_merge( $_action, $action );
+	// If the action's configuration is already registered with Beans, merge the new configuration with it.
+	if ( false !== $registered_action ) {
+		$action = array_merge( $registered_action, $action );
 	}
 
+	// Now store/register it.
 	return _beans_set_action( $id, $action, $status, true );
-
 }
 
 /**
- * Check all action status and return the current action.
+ * Get the current action, meaning get from the "added" and/or "modified" statuses.
  *
+ * @since  1.0.0
  * @ignore
+ * @access private
+ *
+ * @param string $id The action's Beans ID, a unique ID tracked within Beans for this action.
+ *
+ * @return array|bool
  */
 function _beans_get_current_action( $id ) {
-
-	$action = array();
-
+	// Bail out if the action is "removed".
 	if ( _beans_get_action( $id, 'removed' ) ) {
 		return false;
 	}
 
-	if ( $added = _beans_get_action( $id, 'added' ) ) {
+	$action = array();
+
+	$added = _beans_get_action( $id, 'added' );
+
+	if ( false !== $added ) {
 		$action = $added;
 	}
 
-	if ( $modified = _beans_get_action( $id, 'modified' ) ) {
-		$action = array_merge( $action, $modified );
+	$modified = _beans_get_action( $id, 'modified' );
+
+	if ( false !== $modified ) {
+		$action = is_array( $action )
+			? array_merge( $action, $modified )
+			: $modified;
 	}
 
 	// Stop here if the action is invalid.
-	if ( 4 != count( $action ) ) {
+	if ( ! _beans_is_action_valid( $action ) ) {
 		return false;
 	}
 
 	return $action;
+}
 
+/**
+ * Validates the action's configuration to ensure "hook", "callback", "priority", and "args" are
+ * set and not null.
+ *
+ * @since  1.5.0
+ * @ignore
+ * @access private
+ *
+ * @param array $action Action's configuration.
+ *
+ * @return bool
+ */
+function _beans_is_action_valid( array $action ) {
+	return isset( $action['hook'], $action['callback'], $action['priority'], $action['args'] );
 }
 
 /**
