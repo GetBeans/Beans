@@ -33,6 +33,7 @@ class Tests_BeansModifyAction extends Actions_Test_Case {
 			'baz',
 			'beans',
 		);
+
 		foreach ( $ids as $id ) {
 			$this->assertFalse( _beans_get_action( $id, 'modified' ) );
 
@@ -57,6 +58,7 @@ class Tests_BeansModifyAction extends Actions_Test_Case {
 			'baz',
 			'beans',
 		);
+
 		foreach ( $ids as $id ) {
 			$this->assertFalse( beans_modify_action( $id ) );
 

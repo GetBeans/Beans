@@ -16,26 +16,11 @@ require_once __DIR__ . '/includes/class-actions-test-case.php';
 /**
  * Class Tests_BeansModifyAction
  *
- * @package Beans\Framework\Tests\Unit\API\Actions
+ * @package Beans\Framework\Tests\Integration\API\Actions
  * @group   unit-integration
  * @group   api
  */
 class Tests_BeansModifyAction extends Actions_Test_Case {
-
-	/**
-	 * Reset the test fixture.
-	 */
-	public function tearDown() {
-		parent::tearDown();
-
-		global $_beans_registered_actions;
-		$_beans_registered_actions = array(
-			'added'    => array(),
-			'modified' => array(),
-			'removed'  => array(),
-			'replaced' => array(),
-		);
-	}
 
 	/**
 	 * Test beans_modify_action() should return false when the ID is not registered.

@@ -16,7 +16,7 @@ require_once __DIR__ . '/includes/class-actions-test-case.php';
 /**
  * Class Tests_BeansModifyActionHook
  *
- * @package Beans\Framework\Tests\Unit\API\Actions
+ * @package Beans\Framework\Tests\Integration\API\Actions
  * @group   unit-integration
  * @group   api
  */

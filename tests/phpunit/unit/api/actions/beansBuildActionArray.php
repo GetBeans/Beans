@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for _beans_build_action_for_valid_args()
+ * Tests for _beans_build_action_array()
  *
  * @package Beans\Framework\Tests\Unit\API\Actions
  *
@@ -13,13 +13,13 @@ use Beans\Framework\Tests\Unit\Test_Case;
 use Brain\Monkey;
 
 /**
- * Class Tests_BeansBuildActionForValidArgs
+ * Class Tests_BeansBuildActionArray
  *
  * @package Beans\Framework\Tests\Unit\API\Actions
  * @group   unit-tests
  * @group   api
  */
-class Tests_BeansBuildActionForValidArgs extends Test_Case {
+class Tests_BeansBuildActionArray extends Test_Case {
 
 	/**
 	 * Setup test fixture.
@@ -31,65 +31,68 @@ class Tests_BeansBuildActionForValidArgs extends Test_Case {
 	}
 
 	/**
-	 * Test _beans_build_action_for_valid_args() should return empty array when all of the arguments are invalid.
+	 * Test _beans_build_action_array() should return empty array when all of the arguments are invalid.
 	 */
 	public function test_should_return_empty_array_when_invalid_arguments() {
-		$this->assertEmpty( _beans_build_action_for_valid_args() );
-		$this->assertEmpty( _beans_build_action_for_valid_args( '', '' ) );
-		$this->assertEmpty( _beans_build_action_for_valid_args( null, false, '', array( 1 ) ) );
+		$this->assertEmpty( _beans_build_action_array() );
+		$this->assertEmpty( _beans_build_action_array( '', '' ) );
+		$this->assertEmpty( _beans_build_action_array( null, false, '', array( 1 ) ) );
 	}
 
 	/**
-	 * Test _beans_build_action_for_valid_args() should return only the "hook" parameter.
+	 * Test _beans_build_action_array() should return only the "hook" parameter.
 	 */
 	public function test_should_return_only_hook() {
 		$hooks = array( 'foo', 'bar', 'baz', 'beans' );
+
 		foreach ( $hooks as $hook ) {
-			$this->assertEquals( array( 'hook' => $hook ), _beans_build_action_for_valid_args( $hook ) );
+			$this->assertEquals( array( 'hook' => $hook ), _beans_build_action_array( $hook ) );
 		}
 	}
 
 	/**
-	 * Test _beans_build_action_for_valid_args() should return only the "callback" parameter.
+	 * Test _beans_build_action_array() should return only the "callback" parameter.
 	 */
 	public function test_should_return_only_callback() {
 		$callbacks = array( 'foo_callback', 'my_callback', 'Foo::cb', array( $this, __FUNCTION__ ) );
+
 		foreach ( $callbacks as $callback ) {
 			$this->assertEquals(
 				array( 'callback' => $callback ),
-				_beans_build_action_for_valid_args( null, $callback )
+				_beans_build_action_array( null, $callback )
 			);
 		}
 	}
 
 	/**
-	 * Test _beans_build_action_for_valid_args() should return only the "priority" parameter.
+	 * Test _beans_build_action_array() should return only the "priority" parameter.
 	 */
 	public function test_should_return_only_priority() {
 		$priorities = array( 10, 0, 50, '20' );
+
 		foreach ( $priorities as $priority ) {
 			$this->assertEquals(
 				array( 'priority' => (int) $priority ),
-				_beans_build_action_for_valid_args( null, null, $priority )
+				_beans_build_action_array( null, null, $priority )
 			);
 		}
 	}
 
 	/**
-	 * Test _beans_build_action_for_valid_args() should return only the "args" parameter.
+	 * Test _beans_build_action_array() should return only the "args" parameter.
 	 */
 	public function test_should_return_only_args() {
 
 		foreach ( array( 0, 1, 2, '3', '4.1' ) as $args ) {
 			$this->assertEquals(
 				array( 'args' => (int) $args ),
-				_beans_build_action_for_valid_args( null, null, null, $args )
+				_beans_build_action_array( null, null, null, $args )
 			);
 		}
 	}
 
 	/**
-	 * Test _beans_build_action_for_valid_args() should return only the valid arguments.
+	 * Test _beans_build_action_array() should return only the valid arguments.
 	 */
 	public function test_should_return_valid_args() {
 		$this->assertEquals(
@@ -97,7 +100,7 @@ class Tests_BeansBuildActionForValidArgs extends Test_Case {
 				'hook'     => 'foo',
 				'callback' => 'cb',
 			),
-			_beans_build_action_for_valid_args( 'foo', 'cb', '', false )
+			_beans_build_action_array( 'foo', 'cb', '', false )
 		);
 
 		$this->assertEquals(
@@ -106,7 +109,7 @@ class Tests_BeansBuildActionForValidArgs extends Test_Case {
 				'callback' => 'cb',
 				'args'     => 1,
 			),
-			_beans_build_action_for_valid_args( 'foo', 'cb', '', 1 )
+			_beans_build_action_array( 'foo', 'cb', '', 1 )
 		);
 
 		$this->assertEquals(
@@ -114,7 +117,7 @@ class Tests_BeansBuildActionForValidArgs extends Test_Case {
 				'hook'     => 'foo',
 				'priority' => 50,
 			),
-			_beans_build_action_for_valid_args( 'foo', '', '50' )
+			_beans_build_action_array( 'foo', '', '50' )
 		);
 
 		$this->assertEquals(
@@ -124,7 +127,7 @@ class Tests_BeansBuildActionForValidArgs extends Test_Case {
 				'priority' => 0,
 				'args'     => 0,
 			),
-			_beans_build_action_for_valid_args( 'foo', 'my_callback', 0, '0.0' )
+			_beans_build_action_array( 'foo', 'my_callback', 0, '0.0' )
 		);
 
 		$this->assertEquals(
@@ -134,7 +137,7 @@ class Tests_BeansBuildActionForValidArgs extends Test_Case {
 				'priority' => 20,
 				'args'     => 2,
 			),
-			_beans_build_action_for_valid_args( 'baz', 'baz_cb', 20, 2 )
+			_beans_build_action_array( 'baz', 'baz_cb', 20, 2 )
 		);
 	}
 }

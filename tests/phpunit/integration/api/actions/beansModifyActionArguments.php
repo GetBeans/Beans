@@ -16,7 +16,7 @@ require_once __DIR__ . '/includes/class-actions-test-case.php';
 /**
  * Class Tests_BeansModifyActionArguments
  *
- * @package Beans\Framework\Tests\Unit\API\Actions
+ * @package Beans\Framework\Tests\Integration\API\Actions
  * @group   unit-integration
  * @group   api
  */
@@ -32,6 +32,7 @@ class Tests_BeansModifyActionArguments extends Actions_Test_Case {
 			'baz'   => 1,
 			'beans' => '3',
 		);
+
 		foreach ( $ids as $id => $number_of_args ) {
 			$this->assertFalse( beans_modify_action_arguments( $id, $number_of_args ) );
 		}
@@ -47,6 +48,7 @@ class Tests_BeansModifyActionArguments extends Actions_Test_Case {
 			'baz'   => false,
 			'beans' => '',
 		);
+
 		foreach ( $ids as $id => $number_of_args ) {
 			$action = $this->setup_original_action( $id, true );
 
@@ -68,6 +70,7 @@ class Tests_BeansModifyActionArguments extends Actions_Test_Case {
 			'baz'   => '0',
 			'beans' => '0.0',
 		);
+
 		foreach ( $ids as $id => $number_of_args ) {
 			$action = $this->setup_original_action( $id );
 			$this->assertTrue( beans_modify_action_arguments( $id, $number_of_args ) );

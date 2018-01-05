@@ -99,7 +99,7 @@ function beans_add_smart_action( $hook, $callback, $priority = 10, $args = 1 ) {
  * The original action can be reset using {@see beans_reset_action()}.
  *
  * @since 1.0.0
- * @since 1.5.0 Made WPCS compliant and improved action parameter filtering.
+ * @since 1.5.0 Improved action parameter filtering.
  *
  * @param string        $id       The action's Beans ID, a unique ID tracked within Beans for this action.
  * @param string|null   $hook     Optional. The new action's event name to which the $callback is hooked.
@@ -114,7 +114,8 @@ function beans_add_smart_action( $hook, $callback, $priority = 10, $args = 1 ) {
  * @return bool
  */
 function beans_modify_action( $id, $hook = null, $callback = null, $priority = null, $args = null ) {
-	$action = _beans_build_action_for_valid_args( $hook, $callback, $priority, $args );
+	$action = _beans_build_action_array( $hook, $callback, $priority, $args );
+
 	// If no changes were passed in, there's nothing to modify. Bail out.
 	if ( empty( $action ) ) {
 		return false;
@@ -147,7 +148,6 @@ function beans_modify_action( $id, $hook = null, $callback = null, $priority = n
  * This function is a shortcut of {@see beans_modify_action()}.
  *
  * @since 1.0.0
- * @since 1.5.0 Made WPCS compliant.
  *
  * @param string $id   The action's Beans ID, a unique ID tracked within Beans for this action.
  * @param string $hook The new action's event name to which the callback is hooked.
@@ -164,7 +164,6 @@ function beans_modify_action_hook( $id, $hook ) {
  * This function is a shortcut of {@see beans_modify_action()}.
  *
  * @since 1.0.0
- * @since 1.5.0 Made WPCS compliant.
  *
  * @param string   $id       The action's Beans ID, a unique ID tracked within Beans for this action.
  * @param callable $callback The new callback (function or method) you wish to be called.
@@ -181,7 +180,6 @@ function beans_modify_action_callback( $id, $callback ) {
  * This function is a shortcut of {@see beans_modify_action()}.
  *
  * @since 1.0.0
- * @since 1.5.0 Made WPCS compliant.
  *
  * @param string     $id       The action's Beans ID, a unique ID tracked within Beans for this action.
  * @param int|string $priority The new priority.
@@ -198,7 +196,6 @@ function beans_modify_action_priority( $id, $priority ) {
  * This function is a shortcut of {@see beans_modify_action()}.
  *
  * @since 1.0.0
- * @since 1.5.0 Made WPCS compliant.
  *
  * @param string     $id             The action's Beans ID, a unique ID tracked within Beans for this action.
  * @param int|string $number_of_args The new number of arguments the $callback accepts.
@@ -602,7 +599,7 @@ function _beans_is_action_valid( array $action ) {
  *
  * @return array
  */
-function _beans_build_action_for_valid_args( $hook = null, $callback = null, $priority = null, $args = null ) {
+function _beans_build_action_array( $hook = null, $callback = null, $priority = null, $args = null ) {
 	$action = array();
 
 	if ( ! empty( $hook ) ) {
@@ -615,6 +612,7 @@ function _beans_build_action_for_valid_args( $hook = null, $callback = null, $pr
 
 	foreach ( array( 'priority', 'args' ) as $arg_name ) {
 		$arg = ${$arg_name};
+
 		if ( is_numeric( $arg ) ) {
 			$action[ $arg_name ] = (int) $arg;
 		}

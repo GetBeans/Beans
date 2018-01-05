@@ -32,6 +32,7 @@ class Tests_BeansModifyActionPriority extends Actions_Test_Case {
 			'baz'   => 10,
 			'beans' => '20',
 		);
+
 		foreach ( $ids as $id => $priority ) {
 			$this->assertFalse( beans_modify_action_priority( $id, $priority ) );
 		}
@@ -47,6 +48,7 @@ class Tests_BeansModifyActionPriority extends Actions_Test_Case {
 			'baz'   => false,
 			'beans' => '',
 		);
+
 		foreach ( $ids as $id => $priority ) {
 			$this->setup_original_action( $id );
 			$this->assertFalse( beans_modify_action_priority( $id, $priority ) );
@@ -63,6 +65,7 @@ class Tests_BeansModifyActionPriority extends Actions_Test_Case {
 			'baz'   => '0',
 			'beans' => '0.0',
 		);
+
 		foreach ( $ids as $id => $priority ) {
 			$this->setup_original_action( $id );
 			$this->assertTrue( beans_modify_action_priority( $id, $priority ) );
