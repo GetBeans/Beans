@@ -4,4 +4,3 @@ composer.lock
 /vendor/
 /logs/
 /reports/
-composer.lock
