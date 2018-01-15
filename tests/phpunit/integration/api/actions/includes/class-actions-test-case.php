@@ -19,10 +19,45 @@ use WP_UnitTestCase;
 abstract class Actions_Test_Case extends WP_UnitTestCase {
 
 	/**
+	 * When true, reset $_beans_registered_actions at tear down.
+	 *
+	 * @var bool
+	 */
+	protected $reset_beans_registry = true;
+
+	/**
+	 * An array of actions to test.
+	 *
+	 * @var array
+	 */
+	protected static $test_actions;
+
+	/**
+	 * An array of Beans' IDs for our test actions.
+	 *
+	 * @var array
+	 */
+	protected static $test_ids;
+
+	/**
+	 * Setup the test before we run the test setups.
+	 */
+	public static function setUpBeforeClass() {
+		parent::setUpBeforeClass();
+
+		static::$test_actions = require dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'fixtures/test-actions.php';
+		static::$test_ids     = array_keys( static::$test_actions );
+	}
+
+	/**
 	 * Reset the test fixture.
 	 */
 	public function tearDown() {
 		parent::tearDown();
+
+		if ( false === $this->reset_beans_registry ) {
+			return;
+		}
 
 		global $_beans_registered_actions;
 		$_beans_registered_actions = array(
@@ -97,5 +132,14 @@ abstract class Actions_Test_Case extends WP_UnitTestCase {
 		$this->check_parameters_registered_in_wp( $action, false );
 
 		return $action;
+	}
+
+	/**
+	 * Create a post, load it, and force the "template redirect" to fire.
+	 */
+	protected function go_to_post() {
+		$post_id = self::factory()->post->create( array( 'post_title' => 'Hello Beans' ) );
+		$this->go_to( get_permalink( $post_id ) );
+		do_action( 'template_redirect' ); // @codingStandardsIgnoreLine
 	}
 }

@@ -20,10 +20,27 @@ use Brain\Monkey;
 abstract class Actions_Test_Case extends Test_Case {
 
 	/**
-	 * Setup test fixture.
+	 * An array of actions to test.
+	 *
+	 * @var array
 	 */
-	protected function setUp() {
-		parent::setUp();
+	protected static $test_actions;
+
+	/**
+	 * An array of Beans' IDs for our test actions.
+	 *
+	 * @var array
+	 */
+	protected static $test_ids;
+
+	/**
+	 * Setup the test before we run the test setups.
+	 */
+	public static function setUpBeforeClass() {
+		parent::setUpBeforeClass();
+
+		static::$test_actions = require dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'fixtures/test-actions.php';
+		static::$test_ids     = array_keys( static::$test_actions );
 
 		require_once BEANS_TESTS_LIB_DIR . 'api/actions/functions.php';
 		require_once BEANS_TESTS_LIB_DIR . 'api/utilities/functions.php';
@@ -42,6 +59,8 @@ abstract class Actions_Test_Case extends Test_Case {
 			'removed'  => array(),
 			'replaced' => array(),
 		);
+
+		$this->remove_test_actions();
 	}
 
 	/**
@@ -91,5 +110,53 @@ abstract class Actions_Test_Case extends Test_Case {
 		);
 
 		return $action;
+	}
+
+	/**
+	 * Simulate going to the post and loading in the template and fragments.
+	 */
+	protected function go_to_post() {
+
+		foreach ( static::$test_actions as $beans_id => $action ) {
+			beans_add_action( $beans_id, $action['hook'], $action['callback'], $action['priority'], $action['args'] );
+		}
+	}
+
+	/**
+	 * Remove the test actions.
+	 */
+	protected function remove_test_actions() {
+
+		foreach ( static::$test_actions as $beans_id => $action ) {
+			_beans_unset_action( $beans_id, 'added' );
+			remove_action( $action['hook'], $action['callback'], $action['priority'] );
+		}
+	}
+
+	/**
+	 * Check that the right parameters are registered in WordPress.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @param array $action        The action that should be registered.
+	 * @param bool  $remove_action When true, it removes the action automatically to clean up this test.
+	 *
+	 * @return void
+	 */
+	protected function check_parameters_registered_in_wp( array $action, $remove_action = true ) {
+		$container = Monkey\Container::instance();
+		$this->assertTrue( has_action( $action['hook'] ) );
+		$this->assertTrue(
+			$container->hookStorage()->isHookAdded(
+				Monkey\Hook\HookStorage::ACTIONS,
+				$action['hook'],
+				$action['callback']
+			)
+		);
+
+		// Then remove the action.
+		if ( $remove_action ) {
+			remove_action( $action['hook'], $action['callback'], $action['priority'] );
+		}
 	}
 }

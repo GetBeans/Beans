@@ -208,122 +208,112 @@ function beans_modify_action_arguments( $id, $number_of_args ) {
 }
 
 /**
- * Replace an action.
+ * Replace one or more of the arguments for the given action, i.e. referenced by its Bean's ID.
  *
  * This function replaces an action registered using {@see beans_add_action()} or
  * {@see beans_add_smart_action()}. Each optional argument must be set to NULL to keep
- * the orginal value.
+ * the original value.
  *
- * While {@see beans_modify_action()} will keep the original value registered, this function
- * will overwrite the original action. If the action is reset using {@see beans_reset_action()},
- * the replaced values will be used.
+ * This function is not resettable as it overwrites the original action's argument(s).
+ * That means using {@see beans_reset_action()} will not restore the original action.
  *
  * @since 1.0.0
+ * @since 1.5.0 Returns false when no replacement arguments are passed.
  *
- * @param string   $id       The action ID.
- * @param string   $hook     Optional. The name of the new action to which the $callback is hooked.
- *                           Use NULL to keep the original value.
- * @param callback $callback Optional. The name of the new function you wish to be called.
- *                           Use NULL to keep the original value.
- * @param int      $priority Optional. The new priority.
- *                           Use NULL to keep the original value.
- * @param int      $args     Optional. The new number of arguments the function accepts.
- *                           Use NULL to keep the original value.
+ * @param string        $id       The action's Beans ID, a unique ID tracked within Beans for this action.
+ * @param string|null   $hook     Optional. The new action's event name to which the $callback is hooked.
+ *                                Use NULL to keep the original value.
+ * @param callable|null $callback Optional. The new callback (function or method) you wish to be called.
+ *                                Use NULL to keep the original value.
+ * @param int|null      $priority Optional. The new priority.
+ *                                Use NULL to keep the original value.
+ * @param int|null      $args     Optional. The new number of arguments the $callback accepts.
+ *                                Use NULL to keep the original value.
  *
- * @return bool Will always return true.
+ * @return bool
  */
 function beans_replace_action( $id, $hook = null, $callback = null, $priority = null, $args = null ) {
+	$action = _beans_build_action_array( $hook, $callback, $priority, $args );
 
-	$action = array(
-		'hook'     => $hook,
-		'callback' => $callback,
-		'priority' => $priority,
-		'args'     => $args,
-	);
+	// If no changes were passed in, there's nothing to modify. Bail out.
+	if ( empty( $action ) ) {
+		return false;
+	}
 
-	// Set and get the latest replaced.
-	$action = _beans_merge_action( $id, array_filter( $action ), 'replaced' );
+	// Set and get the latest "replaced" action.
+	$action = _beans_merge_action( $id, $action, 'replaced' );
 
-	// Set and get the latest added.
-	$action = _beans_merge_action( $id, $action, 'added' );
+	// Modify the action.
+	$is_modified = beans_modify_action( $id, $hook, $callback, $priority, $args );
 
-	return beans_modify_action( $id, $hook, $callback, $priority, $args );
+	// Now merge the current action with the replaced one.
+	_beans_merge_action( $id, $action, 'added' );
 
+	return $is_modified;
 }
 
 /**
- * Replace an action hook.
+ * Replace the action's event name (hook) for the given action, i.e. referenced by its Bean's ID.
  *
  * This function is a shortcut of {@see beans_replace_action()}.
  *
  * @since 1.0.0
  *
- * @param string $id   The action ID.
- * @param string $hook Optional. The name of the new action to which the $callback is hooked. Use NULL to keep
- *                     the original value.
+ * @param string $id   The action's Beans ID, a unique ID tracked within Beans for this action.
+ * @param string $hook The new action's event name to which the callback is hooked.
  *
- * @return bool Will always return true.
+ * @return bool
  */
 function beans_replace_action_hook( $id, $hook ) {
-
 	return beans_replace_action( $id, $hook );
-
 }
 
 /**
- * Replace an action callback.
+ * Replace the callback of the given action, i.e. referenced by its Bean's ID.
  *
  * This function is a shortcut of {@see beans_replace_action()}.
  *
  * @since 1.0.0
  *
- * @param string $id       The action ID.
- * @param string $callback Optional. The name of the new function you wish to be called. Use NULL to keep
- *                         the original value.
+ * @param string $id       The action's Beans ID, a unique ID tracked within Beans for this action.
+ * @param string $callback The new callback (function or method) you wish to be called.
  *
- * @return bool Will always return true.
+ * @return bool
  */
 function beans_replace_action_callback( $id, $callback ) {
-
 	return beans_replace_action( $id, null, $callback );
-
 }
 
 /**
- * Replace an action priority.
+ * Replace the priority of the given action, i.e. referenced by its Bean's ID.
  *
  * This function is a shortcut of {@see beans_replace_action()}.
  *
  * @since 1.0.0
  *
- * @param string $id       The action ID.
- * @param int    $priority Optional. The new priority. Use NULL to keep the original value.
+ * @param string $id       The action's Beans ID, a unique ID tracked within Beans for this action.
+ * @param int    $priority The new priority.
  *
- * @return bool Will always return true.
+ * @return bool
  */
 function beans_replace_action_priority( $id, $priority ) {
-
 	return beans_replace_action( $id, null, null, $priority );
-
 }
 
 /**
- * Replace an action argument.
+ * Replace the number of arguments of the given action, i.e. referenced by its Bean's ID.
  *
  * This function is a shortcut of {@see beans_replace_action()}.
  *
  * @since 1.0.0
  *
- * @param string $id   The action ID.
- * @param int    $args Optional. The new number of arguments the function accepts. Use NULL to keep the original
- *                     value.
+ * @param string $id   The action's Beans ID, a unique ID tracked within Beans for this action.
+ * @param int    $args The new number of arguments the $callback accepts.
  *
- * @return bool Will always return true.
+ * @return bool
  */
 function beans_replace_action_arguments( $id, $args ) {
-
 	return beans_replace_action( $id, null, null, null, $args );
-
 }
 
 /**
