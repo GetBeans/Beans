@@ -34,7 +34,7 @@ class Tests_BeansResetAction extends Actions_Test_Case {
 	}
 
 	/**
-	 * Test beans_reset_action() should reset the original action after it was "removed" via beans_remove_action().
+	 * Test beans_reset_action() should reset the original action after it was "removed".
 	 */
 	public function test_should_reset_after_remove() {
 		$this->go_to_post();

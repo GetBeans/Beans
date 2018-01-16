@@ -24,7 +24,7 @@ class Tests_BeansRemoveAction extends Actions_Test_Case {
 
 	/**
 	 * Test beans_remove_action() should store the "removed" action when the original action
-	 * has not yet been registered.
+	 * is not registered.
 	 *
 	 * Intent: We are testing to ensure Beans is "load order" agnostic.
 	 */
@@ -53,18 +53,19 @@ class Tests_BeansRemoveAction extends Actions_Test_Case {
 	}
 
 	/**
-	 * Test beans_remove_action() should store the "removed" action when the original action
-	 * has not yet been registered.  Once the original action is registered, then it should be removed.
+	 * Test beans_remove_action() should store the "removed" action before the original action is "added".
+	 * Once the original action is registered, then it should be removed.
 	 *
 	 * Intent: We are testing to ensure Beans is "load order" agnostic.
 	 */
-	public function test_should_store_and_then_replace_action() {
+	public function test_should_store_and_then_remove_action() {
 
 		// Remove the actions.
 		foreach ( static::$test_actions as $beans_id => $action ) {
 			beans_remove_action( $beans_id );
 		}
 
+		// Load the post, which runs beans_add_action for each of our test actions.
 		$this->go_to_post();
 
 		foreach ( static::$test_actions as $beans_id => $action ) {
