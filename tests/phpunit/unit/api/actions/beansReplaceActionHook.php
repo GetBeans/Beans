@@ -109,7 +109,7 @@ class Tests_BeansReplaceActionHook extends Replace_Action_Test_Case {
 			// Make sure the callback is what we think before we get rolling.
 			$this->assertEquals( $action_config['hook'], $original_action['hook'] );
 
-			// Setup what will get stored in Beans.
+			// Set up what will get stored in Beans.
 			$replaced_action = array(
 				'hook' => 'beans_foo',
 			);
