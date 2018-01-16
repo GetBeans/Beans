@@ -114,6 +114,10 @@ abstract class Actions_Test_Case extends Test_Case {
 
 	/**
 	 * Simulate going to the post and loading in the template and fragments.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @return void
 	 */
 	protected function go_to_post() {
 

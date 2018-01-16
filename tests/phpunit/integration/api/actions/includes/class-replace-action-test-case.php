@@ -119,40 +119,4 @@ abstract class Replace_Action_Test_Case extends Actions_Test_Case {
 		$this->assertTrue( has_action( $hook, $new_action['callback'] ) !== false );
 		$this->check_parameters_registered_in_wp( $new_action, $remove_action );
 	}
-
-	/**
-	 * Restore the original action after the replace.
-	 *
-	 * @since 1.5.0
-	 *
-	 * @param string $beans_id The Beans unique ID.
-	 *
-	 * @return void
-	 */
-	protected function restore_original( $beans_id ) {
-		$action = static::$test_actions[ $beans_id ];
-
-		_beans_unset_action( $beans_id, 'added' );
-
-		beans_add_smart_action( $action['hook'], $action['callback'], $action['priority'], $action['args'] );
-	}
-
-	/**
-	 * Create a post, load it, and force the "template redirect" to fire.
-	 *
-	 * @since 1.5.0
-	 *
-	 * @return void
-	 */
-	protected function go_to_post() {
-		parent::go_to_post();
-
-		/**
-		 * Restore the actions. Why? The file loads once and initially adds the actions. But then we remove them
-		 * during our tests.
-		 */
-		foreach ( static::$test_ids as $beans_id ) {
-			$this->restore_original( $beans_id );
-		}
-	}
 }

@@ -322,24 +322,35 @@ function beans_replace_action_arguments( $id, $args ) {
  * This function removes an action registered using {@see beans_add_action()} or
  * {@see beans_add_smart_action()}. The original action can be re-added using {@see beans_reset_action()}.
  *
+ * This function is "load order" agnostic, meaning that you can remove an action before it's added.
+ *
  * @since 1.0.0
+ * @since 1.5.0 When no current action, sets "removed" to default configuration.
  *
- * @param string $id The action ID.
+ * @param string $id The action's Beans ID, a unique ID tracked within Beans for this action.
  *
- * @return bool Will always return true.
+ * @return bool
  */
 function beans_remove_action( $id ) {
+	$action = _beans_get_current_action( $id );
 
-	// Remove.
-	if ( $action = _beans_get_current_action( $id ) ) {
+	// If the action is not registered yet, set it to a default configuration.
+	if ( empty( $action ) ) {
+		$action = array(
+			'hook'     => null,
+			'callback' => null,
+			'priority' => null,
+			'args'     => null,
+		);
+	}
+
+	// When there is a current action, remove it.
+	if ( _beans_is_action_valid( $action ) ) {
 		remove_action( $action['hook'], $action['callback'], $action['priority'], $action['args'] );
 	}
 
-	// Register as removed.
-	_beans_set_action( $id, $action, 'removed' );
-
-	return true;
-
+	// Store as "removed".
+	return _beans_set_action( $id, $action, 'removed' );
 }
 
 /**

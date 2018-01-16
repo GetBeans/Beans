@@ -69,6 +69,23 @@ abstract class Actions_Test_Case extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Restore the original action.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @param string $beans_id The Beans unique ID.
+	 *
+	 * @return void
+	 */
+	protected function restore_original( $beans_id ) {
+		$action = static::$test_actions[ $beans_id ];
+
+		_beans_unset_action( $beans_id, 'added' );
+
+		beans_add_action( $beans_id, $action['hook'], $action['callback'], $action['priority'], $action['args'] );
+	}
+
+	/**
 	 * Check that it is not registered first.
 	 *
 	 * @since 1.5.0
@@ -135,9 +152,22 @@ abstract class Actions_Test_Case extends WP_UnitTestCase {
 	}
 
 	/**
-	 * Create a post, load it, and force the "template redirect" to fire.
+	 * Simulate going to the post and loading in the template and fragments.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @return void
 	 */
 	protected function go_to_post() {
+
+		/**
+		 * Restore the actions. Why? The file loads once and initially adds the actions. But then we remove them
+		 * during our tests.
+		 */
+		foreach ( static::$test_ids as $beans_id ) {
+			$this->restore_original( $beans_id );
+		}
+
 		$post_id = self::factory()->post->create( array( 'post_title' => 'Hello Beans' ) );
 		$this->go_to( get_permalink( $post_id ) );
 		do_action( 'template_redirect' ); // @codingStandardsIgnoreLine
