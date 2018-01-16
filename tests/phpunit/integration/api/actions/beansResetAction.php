@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for beans_remove_action()
+ * Tests for beans_reset_action()
  *
  * @package Beans\Framework\Tests\Integration\API\Actions
  *
@@ -14,13 +14,13 @@ use Beans\Framework\Tests\Integration\API\Actions\Includes\Actions_Test_Case;
 require_once __DIR__ . '/includes/class-actions-test-case.php';
 
 /**
- * Class Tests_BeansRemoveAction
+ * Class Tests_BeansResetAction
  *
  * @package Beans\Framework\Tests\Integration\API\Actions
  * @group   integration-tests
  * @group   api
  */
-class Tests_BeansRemoveAction extends Actions_Test_Case {
+class Tests_BeansResetAction extends Actions_Test_Case {
 
 	/**
 	 * Test beans_remove_action() should store the "removed" action when the original action
@@ -44,10 +44,10 @@ class Tests_BeansRemoveAction extends Actions_Test_Case {
 			// Now do the remove and test that it returns on empty action.
 			$this->assertSame( $empty_action, beans_remove_action( $beans_id ) );
 
-			// Check that the "empty" action was stored as "removed".
+			// Check that stored.
 			$this->assertSame( $empty_action, _beans_get_action( $beans_id, 'removed' ) );
 
-			// Check that the action is not registered in WordPress.
+			// Check that it is not registered in WordPress.
 			$this->assertFalse( has_action( $action['hook'], $action['callback'] ) );
 		}
 	}

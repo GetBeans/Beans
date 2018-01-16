@@ -41,7 +41,7 @@ class Tests_BeansReplaceActionArguments extends Replace_Action_Test_Case {
 			// Now store away the "replace" args.
 			$this->assertFalse( beans_replace_action_arguments( $beans_id, $replaced_action['args'] ) );
 
-			// Check that it stored.
+			// Check that it was stored as "modified".
 			$this->assertEquals( $replaced_action, _beans_get_action( $beans_id, 'modified' ) );
 		}
 	}

@@ -40,7 +40,7 @@ class Tests_BeansReplaceActionHook extends Replace_Action_Test_Case {
 			// Now store away the "replace" hook.
 			$this->assertFalse( beans_replace_action_hook( $beans_id, $replaced_action['hook'] ) );
 
-			// Check that stored.
+			// Check that it was stored as "modified".
 			$this->assertEquals( $replaced_action, _beans_get_action( $beans_id, 'modified' ) );
 		}
 	}
