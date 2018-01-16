@@ -40,21 +40,21 @@ class Tests_BeansResetAction extends Actions_Test_Case {
 		$this->go_to_post();
 
 		foreach ( static::$test_actions as $beans_id => $action ) {
-			// Check that the action is registered before we start.
+			// Before we start, check that the action is registered.
 			$this->assertSame( $action, _beans_get_action( $beans_id, 'added' ) );
 			$this->assertTrue( has_action( $action['hook'], $action['callback'] ) !== false );
 
-			// Now remove it.
+			// Remove the action.
 			beans_remove_action( $beans_id );
 
-			// Check that it did get removed.
+			// Check that the action was removed.
 			$this->assertSame( $action, _beans_get_action( $beans_id, 'removed' ) );
 			$this->assertFalse( has_action( $action['hook'], $action['callback'] ) );
 
 			// Let's reset the action.
 			$this->assertSame( $action, beans_reset_action( $beans_id ) );
 
-			// Check that it was reset.
+			// Check that the action was reset.
 			$this->assertFalse( _beans_get_action( $beans_id, 'removed' ) );
 			$this->check_the_action( $beans_id, $action );
 		}
@@ -71,11 +71,11 @@ class Tests_BeansResetAction extends Actions_Test_Case {
 		$this->go_to_post();
 
 		foreach ( static::$test_actions as $beans_id => $action ) {
-			// Check that the action is registered before we start.
+			// Before we start, check that the action is registered.
 			$this->assertSame( $action, _beans_get_action( $beans_id, 'added' ) );
 			$this->assertTrue( has_action( $action['hook'], $action['callback'] ) !== false );
 
-			// Now modify the hook.
+			// Modify the hook.
 			beans_modify_action_hook( $beans_id, $modified_action['hook'] );
 
 			// Check that the hook was modified.
@@ -86,7 +86,7 @@ class Tests_BeansResetAction extends Actions_Test_Case {
 			// Let's reset the action.
 			$this->assertSame( $action, beans_reset_action( $beans_id ) );
 
-			// Check that it was reset.
+			// Check that the action was reset.
 			$this->assertFalse( _beans_get_action( $beans_id, 'modified' ) );
 			$this->check_the_action( $beans_id, $action );
 		}
@@ -103,19 +103,19 @@ class Tests_BeansResetAction extends Actions_Test_Case {
 		$this->go_to_post();
 
 		foreach ( static::$test_actions as $beans_id => $action ) {
-			// Test the original callback.
+			// Before we start, check that the action is registered.
 			$this->assertTrue( has_action( $action['hook'], $action['callback'] ) !== false );
 
-			// Now modify the callback.
+			// Modify the callback.
 			beans_modify_action_callback( $beans_id, $modified_action['callback'] );
 
-			// Check that it did get modified.
+			// Check that the action's callback was modified.
 			$this->assertSame( $modified_action, _beans_get_action( $beans_id, 'modified' ) );
 
 			// Let's reset the action.
 			$this->assertSame( $action, beans_reset_action( $beans_id ) );
 
-			// Check that it was reset.
+			// Check that the action was reset.
 			$this->assertFalse( _beans_get_action( $beans_id, 'modified' ) );
 			$this->check_the_action( $beans_id, $action );
 		}
@@ -132,7 +132,7 @@ class Tests_BeansResetAction extends Actions_Test_Case {
 		$this->go_to_post();
 
 		foreach ( static::$test_actions as $beans_id => $action ) {
-			// Test the action before we start.
+			// Before we start, check that the action is registered.
 			$this->assertTrue( has_action( $action['hook'], $action['callback'] ) !== false );
 
 			// Run the replace.
@@ -141,7 +141,7 @@ class Tests_BeansResetAction extends Actions_Test_Case {
 			// Let's try to reset the action.
 			$this->assertSame( $hook, beans_reset_action( $beans_id )['hook'] );
 
-			// Check that it was not reset.
+			// Check that the action was not reset.
 			$this->assertFalse( has_action( $action['hook'], $action['callback'] ) );
 			$this->assertTrue( has_action( $hook, $action['callback'] ) !== false );
 		}
@@ -158,7 +158,7 @@ class Tests_BeansResetAction extends Actions_Test_Case {
 		$this->go_to_post();
 
 		foreach ( static::$test_actions as $beans_id => $action ) {
-			// Test the action before we start.
+			// Before we start, check that the action is registered.
 			$this->assertTrue( has_action( $action['hook'], $action['callback'] ) !== false );
 
 			// Run the replace.
@@ -167,7 +167,7 @@ class Tests_BeansResetAction extends Actions_Test_Case {
 			// Let's try to reset the action.
 			$this->assertSame( $callback, beans_reset_action( $beans_id )['callback'] );
 
-			// Check that it was not reset.
+			// Check that the action was not reset.
 			$this->assertFalse( has_action( $action['hook'], $action['callback'] ) );
 			$this->assertTrue( has_action( $action['hook'], $callback ) !== false );
 		}

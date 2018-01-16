@@ -40,13 +40,13 @@ class Tests_BeansRemoveAction extends Replace_Action_Test_Case {
 			$this->assertFalse( _beans_get_action( $beans_id, 'added' ) );
 			$this->assertFalse( _beans_get_current_action( $beans_id ) );
 
-			// Now do the remove and test that it returns on empty action.
+			// Remove the action. Test that an empty action is returned.
 			$this->assertSame( $empty_action, beans_remove_action( $beans_id ) );
 
-			// Check that stored.
+			// Check that the "empty" action is registered as "removed".
 			$this->assertSame( $empty_action, _beans_get_action( $beans_id, 'removed' ) );
 
-			// Check that it is not registered in WordPress.
+			// Check that the original action is not registered in WordPress.
 			$this->assertFalse( has_action( $action['hook'], $action['callback'] ) );
 		}
 	}
@@ -68,10 +68,10 @@ class Tests_BeansRemoveAction extends Replace_Action_Test_Case {
 		$this->go_to_post();
 
 		foreach ( static::$test_actions as $beans_id => $action ) {
-			// Check if it the action is stored as "added".
+			// Check that the action is registered as "added".
 			$this->assertSame( $action, _beans_get_action( $beans_id, 'added' ) );
 
-			// Check that it is not registered in WordPress.
+			// Check that the action is not registered in WordPress.
 			$this->assertFalse( has_action( $action['hook'], $action['callback'] ) );
 		}
 	}
@@ -89,13 +89,13 @@ class Tests_BeansRemoveAction extends Replace_Action_Test_Case {
 			// Check that the action is registered with WordPress.
 			$this->assertTrue( has_action( $action['hook'], $action['callback'] ) !== false );
 
-			// Do the remove.
+			// Remove it.
 			$this->assertSame( $action, beans_remove_action( $beans_id ) );
 
-			// Check what is stored in "removed".
+			// Check that the action is registered as "removed".
 			$this->assertSame( $action, _beans_get_action( $beans_id, 'removed' ) );
 
-			// Check that is no longer registered with WordPress, i.e. that `remove_action` did run.
+			// Check that the action is no longer registered with WordPress.
 			$this->assertFalse( has_action( $action['hook'], $action['callback'] ) );
 		}
 	}
