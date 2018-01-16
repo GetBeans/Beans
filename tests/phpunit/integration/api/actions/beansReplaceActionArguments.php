@@ -65,7 +65,7 @@ class Tests_BeansReplaceActionArguments extends Replace_Action_Test_Case {
 		$this->go_to_post();
 
 		foreach ( static::$test_actions as $beans_id => $original_action ) {
-			// Check if it replaced the hook.
+			// Check if it replaced the args.
 			$new_action = _beans_get_action( $beans_id, 'added' );
 			$this->assertEquals( $original_action['hook'], $new_action['hook'] );
 			$this->assertEquals( $original_action['callback'], $new_action['callback'] );
@@ -81,7 +81,7 @@ class Tests_BeansReplaceActionArguments extends Replace_Action_Test_Case {
 	/**
 	 * Test beans_replace_action_arguments() should return false when "args" is not passed.
 	 */
-	public function test_should_return_false_when_no_hook() {
+	public function test_should_return_false_when_no_args() {
 		$this->go_to_post();
 
 		foreach ( static::$test_actions as $beans_id => $action_config ) {

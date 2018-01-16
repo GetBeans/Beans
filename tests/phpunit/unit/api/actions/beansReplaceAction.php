@@ -184,7 +184,7 @@ class Tests_BeansReplaceAction extends Replace_Action_Test_Case {
 			// Run the replace.
 			$this->assertTrue( beans_replace_action( $beans_id, null, null, $replaced_action['priority'] ) );
 
-			// Check if it replaced only the callback.
+			// Check if it replaced only the priority.
 			$new_action = _beans_get_action( $beans_id, 'added' );
 			$this->assertEquals( $original_action['hook'], $new_action['hook'] );
 			$this->assertEquals( $original_action['callback'], $new_action['callback'] );
@@ -217,7 +217,7 @@ class Tests_BeansReplaceAction extends Replace_Action_Test_Case {
 			// Run the replace.
 			$this->assertTrue( beans_replace_action( $beans_id, null, null, null, $replaced_action['args'] ) );
 
-			// Check if it replaced only the callback.
+			// Check if it replaced only the args.
 			$new_action = _beans_get_action( $beans_id, 'added' );
 			$this->assertEquals( $original_action['hook'], $new_action['hook'] );
 			$this->assertEquals( $original_action['callback'], $new_action['callback'] );
