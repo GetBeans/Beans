@@ -34,7 +34,7 @@ abstract class Actions_Test_Case extends Test_Case {
 	protected static $test_ids;
 
 	/**
-	 * Setup the test before we run the test setups.
+	 * Set up the test before we run the test setups.
 	 */
 	public static function setUpBeforeClass() {
 		parent::setUpBeforeClass();
@@ -44,6 +44,29 @@ abstract class Actions_Test_Case extends Test_Case {
 
 		require_once BEANS_TESTS_LIB_DIR . 'api/actions/functions.php';
 		require_once BEANS_TESTS_LIB_DIR . 'api/utilities/functions.php';
+	}
+
+	/**
+	 * Tear down the test before we exit this class.
+	 */
+	public static function tearDownAfterClass() {
+		parent::tearDownAfterClass();
+
+		global $_beans_registered_actions;
+		$_beans_registered_actions = array(
+			'added'    => array(),
+			'modified' => array(),
+			'removed'  => array(),
+			'replaced' => array(),
+		);
+
+		// Remove the test actions.
+		foreach ( static::$test_actions as $beans_id => $action ) {
+			remove_action( $action['hook'], $action['callback'], $action['priority'] );
+		}
+
+		static::$test_actions = null;
+		static::$test_ids     = null;
 	}
 
 	/**

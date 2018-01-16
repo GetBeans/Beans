@@ -47,8 +47,8 @@ class Tests_BeansReplaceActionArguments extends Replace_Action_Test_Case {
 	}
 
 	/**
-	 * Test beans_replace_action_arguments() should store the "replaced" hook when the original action
-	 * has not yet been registered.  Once the original action is registered, then the hook should be replaced.
+	 * Test beans_replace_action_arguments() should store the "replaced" args when the original action
+	 * has not yet been registered.  Once the original action is registered, then the args should be replaced.
 	 *
 	 * Intent: We are testing to ensure Beans is "load order" agnostic.
 	 */

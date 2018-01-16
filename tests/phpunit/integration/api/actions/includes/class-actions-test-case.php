@@ -40,13 +40,36 @@ abstract class Actions_Test_Case extends WP_UnitTestCase {
 	protected static $test_ids;
 
 	/**
-	 * Setup the test before we run the test setups.
+	 * Set up the test before we run the test setups.
 	 */
 	public static function setUpBeforeClass() {
 		parent::setUpBeforeClass();
 
 		static::$test_actions = require dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'fixtures/test-actions.php';
 		static::$test_ids     = array_keys( static::$test_actions );
+	}
+
+	/**
+	 * Tear down the test before we exit this class.
+	 */
+	public static function tearDownAfterClass() {
+		parent::tearDownAfterClass();
+
+		global $_beans_registered_actions;
+		$_beans_registered_actions = array(
+			'added'    => array(),
+			'modified' => array(),
+			'removed'  => array(),
+			'replaced' => array(),
+		);
+
+		// Remove the test actions.
+		foreach ( static::$test_actions as $beans_id => $action ) {
+			remove_action( $action['hook'], $action['callback'], $action['priority'] );
+		}
+
+		static::$test_actions = null;
+		static::$test_ids     = null;
 	}
 
 	/**

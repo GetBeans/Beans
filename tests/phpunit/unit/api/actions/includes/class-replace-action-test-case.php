@@ -9,9 +9,6 @@
 
 namespace Beans\Framework\Tests\Unit\API\Actions\Includes;
 
-use Beans\Framework\Tests\Unit\Test_Case;
-use Brain\Monkey;
-
 /**
  * Abstract Class Replace_Action_Test_Case
  *

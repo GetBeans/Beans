@@ -60,7 +60,7 @@ class Tests_BeansRemoveAction extends Actions_Test_Case {
 	 */
 	public function test_should_store_and_then_replace_action() {
 
-		// Replace the actions.
+		// Remove the actions.
 		foreach ( static::$test_actions as $beans_id => $action ) {
 			beans_remove_action( $beans_id );
 		}

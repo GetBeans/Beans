@@ -19,7 +19,7 @@ use WP_UnitTestCase;
 abstract class Replace_Action_Test_Case extends Actions_Test_Case {
 
 	/**
-	 * Setup the test fixture.
+	 * Set up the test fixture.
 	 */
 	public function setUp() {
 		$this->reset_beans_registry = false;
@@ -49,7 +49,7 @@ abstract class Replace_Action_Test_Case extends Actions_Test_Case {
 	}
 
 	/**
-	 * Store the original action and then remove it.  These steps allow us to setup an
+	 * Store the original action and then remove it.  These steps allow us to set up an
 	 * initial test where the action is not registered.  Then when we're doing testing, we can
 	 * restore it.
 	 *
@@ -105,7 +105,7 @@ abstract class Replace_Action_Test_Case extends Actions_Test_Case {
 	}
 
 	/**
-	 * Check that the "replaced" action has been stored in Beans.
+	 * Check that the "replaced" action has been registered in WordPress.
 	 *
 	 * @since 1.5.0
 	 *
