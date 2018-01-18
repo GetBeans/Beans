@@ -14,7 +14,7 @@
  *
  * @since 1.0.0
  *
- * @param string   $id       The filter ID.
+ * @param string   $hook     The filter ID.
  * @param callback $callback The name of the function you wish to be called. Inline content will automatically
  *                           create an anonymous function.
  * @param int      $priority Optional. Used to specify the order in which the functions
@@ -26,14 +26,13 @@
  *
  * @return bool Will always return true.
  */
-function beans_add_filter( $id, $callback, $priority = 10, $args = 1 ) {
+function beans_add_filter( $hook, $callback, $priority = 10, $args = 1 ) {
 
 	if ( is_callable( $callback ) ) {
-		return add_filter( $id, $callback, $priority, $args );
+		return add_filter( $hook, $callback, $priority, $args );
 	}
 
-	return _beans_add_anonymous_filter( $id, $callback, $priority, $args );
-
+	return _beans_add_anonymous_filter( $hook, $callback, $priority, $args );
 }
 
 /**
@@ -69,18 +68,18 @@ function beans_apply_filters( $id, $value ) {
 		return call_user_func_array( 'apply_filters', $args );
 	}
 
-	$prefix = current( explode( '[', $args[0] ) );
+	$prefix          = current( explode( '[', $args[0] ) );
 	$variable_prefix = $prefix;
-	$suffix = preg_replace( '/^.*\]\s*/', '', $args[0] );
+	$suffix          = preg_replace( '/^.*\]\s*/', '', $args[0] );
 
 	// Base filter.
 	$args[0] = $prefix . $suffix;
-	$value = call_user_func_array( 'apply_filters', $args );
+	$value   = call_user_func_array( 'apply_filters', $args );
 
 	foreach ( $matches[0] as $i => $subhook ) {
 
 		$variable_prefix = $variable_prefix . $subhook;
-		$levels = array( $prefix . $subhook . $suffix );
+		$levels          = array( $prefix . $subhook . $suffix );
 
 		// Cascade sub-hooks.
 		if ( $i > 0 ) {
@@ -98,12 +97,12 @@ function beans_apply_filters( $id, $value ) {
 
 			$args[0] = $level;
 			$args[1] = $value;
-			$value = call_user_func_array( 'apply_filters', $args );
+			$value   = call_user_func_array( 'apply_filters', $args );
 
 			// Apply filter whithout square brackets for backwards compatibility.
 			$args[0] = preg_replace( '#(\[|\])#', '', $args[0] );
 			$args[1] = $value;
-			$value = call_user_func_array( 'apply_filters', $args );
+			$value   = call_user_func_array( 'apply_filters', $args );
 
 		}
 	}
@@ -120,7 +119,7 @@ function beans_apply_filters( $id, $value ) {
  *
  * @since 1.0.0
  *
- * @param string   $id       	  The filter ID.
+ * @param string        $id       The filter ID.
  * @param callback|bool $callback Optional. The callback to check for. Default false.
  *
  * @return bool|int If $callback is omitted, returns boolean for whether the hook has
@@ -137,9 +136,9 @@ function beans_has_filters( $id, $callback = false ) {
 		return has_filter( $id, $callback );
 	}
 
-	$prefix = current( explode( '[', $id ) );
+	$prefix          = current( explode( '[', $id ) );
 	$variable_prefix = $prefix;
-	$suffix = preg_replace( '/^.*\]\s*/', '', $id );
+	$suffix          = preg_replace( '/^.*\]\s*/', '', $id );
 
 	// Check base filter.
 	if ( has_filter( $prefix . $suffix, $callback ) ) {
@@ -149,7 +148,7 @@ function beans_has_filters( $id, $callback = false ) {
 	foreach ( $matches[0] as $i => $subhook ) {
 
 		$variable_prefix = $variable_prefix . $subhook;
-		$levels = array( $prefix . $subhook . $suffix );
+		$levels          = array( $prefix . $subhook . $suffix );
 
 		// Cascade sub-hooks.
 		if ( $i > 0 ) {
@@ -180,12 +179,24 @@ function beans_has_filters( $id, $callback = false ) {
 /**
  * Add anonymous callback using a class since php 5.2 is still supported.
  *
+ * @since  1.0.0
+ * @since  1.5.0 Returns the object.
  * @ignore
+ * @access private
+ *
+ * @param string $hook        The name of the filter to which the $callback is hooked.
+ * @param mixed  $value    The value that will be returned when the anonymous callback runs.
+ * @param int    $priority    Optional. Used to specify the order in which the functions
+ *                            associated with a particular filter are executed. Default 10.
+ *                            Lower numbers correspond with earlier execution,
+ *                            and functions with the same priority are executed
+ *                            in the order in which they were added to the filter.
+ * @param int    $args        Optional. The number of arguments the function accepts. Default 1.
+ *
+ * @return _Beans_Anonymous_Filters
  */
-function _beans_add_anonymous_filter( $id, $callback, $priority = 10, $args = 1 ) {
+function _beans_add_anonymous_filter( $hook, $value, $priority = 10, $args = 1 ) {
+	require_once( BEANS_API_PATH . 'filters/class-beans-anonymous-filters.php' );
 
-	require_once( BEANS_API_PATH . 'filters/class.php' );
-
-	new _Beans_Anonymous_Filters( $id, $callback, $priority, $args );
-
+	return new _Beans_Anonymous_Filters( $hook, $value, $priority, $args );
 }
