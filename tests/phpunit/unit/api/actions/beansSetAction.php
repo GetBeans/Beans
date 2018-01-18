@@ -23,56 +23,31 @@ require_once __DIR__ . '/includes/class-actions-test-case.php';
 class Tests_BeansSetAction extends Actions_Test_Case {
 
 	/**
-	 * Available action statuses.
+	 * The registered actions' status.
 	 *
 	 * @var array
 	 */
-	protected $action_status;
+	protected $statuses = array( 'added', 'modified', 'removed', 'replaced' );
 
 	/**
-	 * Action to be/is registered.
-	 *
-	 * @var array
-	 */
-	protected $action;
-
-	/**
-	 * The json_encode() version of the above action.
-	 *
-	 * @var string
-	 */
-	protected $encoded_action;
-
-	/**
-	 * Setup test fixture.
-	 */
-	protected function setUp() {
-		parent::setUp();
-
-		$this->action_status  = array( 'added', 'modified', 'removed', 'replaced' );
-		$this->action         = array(
-			'hook'     => 'foo',
-			'callback' => 'callback',
-			'priority' => 10,
-			'args'     => 1,
-		);
-		$this->encoded_action = wp_json_encode( $this->action );
-	}
-
-	/**
-	 * Test _beans_set_action() should set the action into the registered actions and then return it.
+	 * Test _beans_set_action() should set (registered) the action and then return it.
 	 */
 	public function test_should_set_and_return_action() {
 		global $_beans_registered_actions;
 
-		foreach ( $this->action_status as $action_status ) {
-			// Check that it's not set before we start.
-			$this->assertFalse( isset( $_beans_registered_actions[ $action_status ]['foo'] ) );
+		foreach ( static::$test_actions as $beans_id => $action ) {
+			$encoded_action = wp_json_encode( $action );
 
-			// Now test that it does properly set the action for the given status.
-			$this->assertEquals( $this->action, _beans_set_action( 'foo', $this->action, $action_status ) );
-			$this->assertArrayHasKey( 'foo', $_beans_registered_actions[ $action_status ] );
-			$this->assertEquals( $this->encoded_action, $_beans_registered_actions[ $action_status ]['foo'] );
+			// Test each status.
+			foreach ( $this->statuses as $status ) {
+				// Before we start, check that the action is not set.
+				$this->assertArrayNotHasKey( $beans_id, $_beans_registered_actions[ $status ] );
+
+				// Now do the tests.
+				$this->assertSame( $action, _beans_set_action( $beans_id, $action, $status ) );
+				$this->assertArrayHasKey( $beans_id, $_beans_registered_actions[ $status ] );
+				$this->assertSame( $encoded_action, $_beans_registered_actions[ $status ][ $beans_id ] );
+			}
 		}
 	}
 
@@ -89,14 +64,18 @@ class Tests_BeansSetAction extends Actions_Test_Case {
 			'args'     => 2,
 		);
 
-		foreach ( $this->action_status as $action_status ) {
+		foreach ( static::$test_actions as $beans_id => $action ) {
+			$encoded_action = wp_json_encode( $action );
 
-			// Register the original one first.
-			_beans_set_action( 'foo', $this->action, $action_status );
+			// Test each status.
+			foreach ( $this->statuses as $status ) {
+				// Register the original action.
+				$this->assertSame( $action, _beans_set_action( $beans_id, $action, $status ) );
 
-			// Now test that it does not overwrite the previously registered action.
-			$this->assertEquals( $this->action, _beans_set_action( 'foo', $new_action, $action_status ) );
-			$this->assertEquals( $this->encoded_action, $_beans_registered_actions[ $action_status ]['foo'] );
+				// Now test that it does not overwrite the previously registered action.
+				$this->assertSame( $action, _beans_set_action( $beans_id, $new_action, $status ) );
+				$this->assertSame( $encoded_action, $_beans_registered_actions[ $status ][ $beans_id ] );
+			}
 		}
 	}
 
@@ -115,14 +94,17 @@ class Tests_BeansSetAction extends Actions_Test_Case {
 		);
 		$encoded_new_action = wp_json_encode( $new_action );
 
-		foreach ( $this->action_status as $action_status ) {
+		foreach ( static::$test_actions as $beans_id => $action ) {
 
-			// Register the original one first.
-			_beans_set_action( 'foo', $this->action, $action_status );
+			// Test each status.
+			foreach ( $this->statuses as $status ) {
+				// Register the original action.
+				$this->assertSame( $action, _beans_set_action( $beans_id, $action, $status ) );
 
-			// Now test that it does overwrite the previously registered action.
-			$this->assertEquals( $new_action, _beans_set_action( 'foo', $new_action, $action_status, true ) );
-			$this->assertEquals( $encoded_new_action, $_beans_registered_actions[ $action_status ]['foo'] );
+				// Now test that it does overwrite the previously registered action.
+				$this->assertSame( $new_action, _beans_set_action( $beans_id, $new_action, $status, true ) );
+				$this->assertSame( $encoded_new_action, $_beans_registered_actions[ $status ][ $beans_id ] );
+			}
 		}
 	}
 }
