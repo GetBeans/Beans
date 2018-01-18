@@ -34,7 +34,7 @@ abstract class Actions_Test_Case extends Test_Case {
 	protected static $test_ids;
 
 	/**
-	 * Setup the test before we run the test setups.
+	 * Set up the test before we run the test setups.
 	 */
 	public static function setUpBeforeClass() {
 		parent::setUpBeforeClass();
@@ -44,6 +44,29 @@ abstract class Actions_Test_Case extends Test_Case {
 
 		require_once BEANS_TESTS_LIB_DIR . 'api/actions/functions.php';
 		require_once BEANS_TESTS_LIB_DIR . 'api/utilities/functions.php';
+	}
+
+	/**
+	 * Tear down the test before we exit this class.
+	 */
+	public static function tearDownAfterClass() {
+		parent::tearDownAfterClass();
+
+		global $_beans_registered_actions;
+		$_beans_registered_actions = array(
+			'added'    => array(),
+			'modified' => array(),
+			'removed'  => array(),
+			'replaced' => array(),
+		);
+
+		// Remove the test actions.
+		foreach ( static::$test_actions as $beans_id => $action ) {
+			remove_action( $action['hook'], $action['callback'], $action['priority'] );
+		}
+
+		static::$test_actions = null;
+		static::$test_ids     = null;
 	}
 
 	/**
@@ -114,6 +137,10 @@ abstract class Actions_Test_Case extends Test_Case {
 
 	/**
 	 * Simulate going to the post and loading in the template and fragments.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @return void
 	 */
 	protected function go_to_post() {
 
@@ -131,6 +158,22 @@ abstract class Actions_Test_Case extends Test_Case {
 			_beans_unset_action( $beans_id, 'added' );
 			remove_action( $action['hook'], $action['callback'], $action['priority'] );
 		}
+	}
+
+	/**
+	 * Check that the action has been registered in WordPress.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @param string $hook          The event's name (hook) that is registered in WordPress.
+	 * @param array  $action        The action to be checked.
+	 * @param bool   $remove_action When true, it removes the action automatically to clean up this test.
+	 *
+	 * @return void
+	 */
+	protected function check_registered_in_wp( $hook, array $action, $remove_action = true ) {
+		$this->assertTrue( has_action( $hook, $action['callback'] ) !== false );
+		$this->check_parameters_registered_in_wp( $action, $remove_action );
 	}
 
 	/**

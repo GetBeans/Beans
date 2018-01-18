@@ -19,7 +19,7 @@ use WP_UnitTestCase;
 abstract class Replace_Action_Test_Case extends Actions_Test_Case {
 
 	/**
-	 * Setup the test fixture.
+	 * Set up the test fixture.
 	 */
 	public function setUp() {
 		$this->reset_beans_registry = false;
@@ -49,7 +49,7 @@ abstract class Replace_Action_Test_Case extends Actions_Test_Case {
 	}
 
 	/**
-	 * Store the original action and then remove it.  These steps allow us to setup an
+	 * Store the original action and then remove it.  These steps allow us to set up an
 	 * initial test where the action is not registered.  Then when we're doing testing, we can
 	 * restore it.
 	 *
@@ -102,57 +102,5 @@ abstract class Replace_Action_Test_Case extends Actions_Test_Case {
 	protected function check_stored_in_beans( $beans_id, array $replaced_action ) {
 		$this->assertEquals( $replaced_action, _beans_get_action( $beans_id, 'replaced' ) );
 		$this->assertEquals( $replaced_action, _beans_get_action( $beans_id, 'modified' ) );
-	}
-
-	/**
-	 * Check that the "replaced" action has been stored in Beans.
-	 *
-	 * @since 1.5.0
-	 *
-	 * @param string $hook          The event's name (hook) that is registered in WordPress.
-	 * @param array  $new_action    The "new" action's configuration (after the replace).
-	 * @param bool   $remove_action When true, it removes the action automatically to clean up this test.
-	 *
-	 * @return void
-	 */
-	protected function check_registered_in_wp( $hook, array $new_action, $remove_action = true ) {
-		$this->assertTrue( has_action( $hook, $new_action['callback'] ) !== false );
-		$this->check_parameters_registered_in_wp( $new_action, $remove_action );
-	}
-
-	/**
-	 * Restore the original action after the replace.
-	 *
-	 * @since 1.5.0
-	 *
-	 * @param string $beans_id The Beans unique ID.
-	 *
-	 * @return void
-	 */
-	protected function restore_original( $beans_id ) {
-		$action = static::$test_actions[ $beans_id ];
-
-		_beans_unset_action( $beans_id, 'added' );
-
-		beans_add_smart_action( $action['hook'], $action['callback'], $action['priority'], $action['args'] );
-	}
-
-	/**
-	 * Create a post, load it, and force the "template redirect" to fire.
-	 *
-	 * @since 1.5.0
-	 *
-	 * @return void
-	 */
-	protected function go_to_post() {
-		parent::go_to_post();
-
-		/**
-		 * Restore the actions. Why? The file loads once and initially adds the actions. But then we remove them
-		 * during our tests.
-		 */
-		foreach ( static::$test_ids as $beans_id ) {
-			$this->restore_original( $beans_id );
-		}
 	}
 }
