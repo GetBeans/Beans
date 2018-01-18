@@ -23,67 +23,64 @@ require_once __DIR__ . '/includes/class-actions-test-case.php';
 class Tests_BeansModifyActionArguments extends Actions_Test_Case {
 
 	/**
-	 * Test beans_modify_action_arguments() should return false when the ID is not registered.
-	 */
-	public function test_should_return_false_when_id_not_registered() {
-		$ids = array(
-			'foo'   => null,
-			'bar'   => 0,
-			'baz'   => 1,
-			'beans' => '3',
-		);
-
-		foreach ( $ids as $id => $number_of_args ) {
-			$this->assertFalse( beans_modify_action_arguments( $id, $number_of_args ) );
-		}
-	}
-
-	/**
 	 * Test beans_modify_action_arguments() should return false when new args is a non-integer value.
 	 */
 	public function test_should_return_false_when_args_is_non_integer() {
-		$ids = array(
-			'foo'   => null,
-			'bar'   => array( 10 ),
-			'baz'   => false,
-			'beans' => '',
+		$arguments = array(
+			null,
+			array( 10 ),
+			false,
+			'',
 		);
 
-		foreach ( $ids as $id => $number_of_args ) {
-			$action = $this->setup_original_action( $id, true );
+		$this->go_to_post();
 
-			$this->assertFalse( beans_modify_action_arguments( $id, $number_of_args ) );
-			$this->assertTrue( has_action( $action['hook'] ) );
+		foreach ( static::$test_actions as $beans_id => $original_action ) {
+
+			foreach ( $arguments as $number_of_args ) {
+				$this->assertFalse( beans_modify_action_arguments( $beans_id, $number_of_args ) );
+
+				// Check that the args did not get stored as "modified" in Beans.
+				$this->assertFalse( _beans_get_action( $beans_id, 'modified' ) );
+			}
 		}
 	}
 
 	/**
-	 * Test beans_modify_action_priority() should return true when "args" is zero.
+	 * Test beans_modify_action_arguments() should modify the action's "args" when the new one is zero.
 	 */
-	public function test_should_return_true_when_args_is_zero() {
-		$ids = array(
-			'foo'   => 0,
-			'bar'   => 0.0,
-			'baz'   => '0',
-			'beans' => '0.0',
-		);
+	public function test_should_modify_action_when_args_is_zero() {
+		$arguments = array( 0, 0.0, '0', '0.0' );
 
-		foreach ( $ids as $id => $number_of_args ) {
-			$this->setup_original_action( $id );
-			$this->assertTrue( beans_modify_action_arguments( $id, $number_of_args ) );
+		$this->go_to_post();
+
+		foreach ( static::$test_actions as $beans_id => $original_action ) {
+
+			foreach ( $arguments as $number_of_args ) {
+				$this->assertTrue( beans_modify_action_arguments( $beans_id, $number_of_args ) );
+				$this->assertEquals( array( 'args' => (int) $number_of_args ), _beans_get_action( $beans_id, 'modified' ) );
+			}
 		}
 	}
 
 	/**
-	 * Test beans_modify_action_arguments() should modify the registered action's args.
+	 * Test beans_modify_action() should register with Beans as "modified", but not add the action.
 	 */
-	public function test_should_modify_the_action_args() {
-		$action          = $this->setup_original_action( 'beans' );
-		$modified_action = array(
-			'args' => 3,
-		);
-		$this->assertTrue( beans_modify_action_arguments( 'beans', $modified_action['args'] ) );
-		$this->assertEquals( $modified_action, _beans_get_action( 'beans', 'modified' ) );
-		$this->assertTrue( has_action( $action['hook'] ) );
+	public function test_should_register_as_modified_but_not_add_action() {
+
+		foreach ( static::$test_actions as $beans_id => $action ) {
+			// Check the starting state.
+			$this->assertFalse( has_action( $action['hook'], $action['callback'] ) );
+			$this->assertFalse( _beans_get_action( $beans_id, 'modified' ) );
+
+			// Check that it returns false.
+			$this->assertFalse( beans_modify_action_arguments( $beans_id, $action['args'] ) );
+
+			// Check that it did register as "modified" in Beans.
+			$this->assertEquals( array( 'args' => $action['args'] ), _beans_get_action( $beans_id, 'modified' ) );
+
+			// Check that the action was not added in WordPress.
+			$this->assertFalse( has_action( $action['hook'], $action['callback'] ) );
+		}
 	}
 }

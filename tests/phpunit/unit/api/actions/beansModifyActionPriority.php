@@ -23,65 +23,62 @@ require_once __DIR__ . '/includes/class-actions-test-case.php';
 class Tests_BeansModifyActionPriority extends Actions_Test_Case {
 
 	/**
-	 * Test beans_modify_action_priority() should return false when the ID is not registered.
-	 */
-	public function test_should_return_false_when_id_not_registered() {
-		$ids = array(
-			'foo'   => null,
-			'bar'   => 0,
-			'baz'   => 10,
-			'beans' => '20',
-		);
-
-		foreach ( $ids as $id => $priority ) {
-			$this->assertFalse( beans_modify_action_priority( $id, $priority ) );
-		}
-	}
-
-	/**
-	 * Test beans_modify_action_priority() should return false new priority is a non-integer.
+	 * Test beans_modify_action_priority() should return false when new priority is a non-integer.
 	 */
 	public function test_should_return_false_when_priority_is_non_integer() {
-		$ids = array(
-			'foo'   => null,
-			'bar'   => array( 10 ),
-			'baz'   => false,
-			'beans' => '',
+		$priorities = array(
+			null,
+			array( 10 ),
+			false,
+			'',
 		);
 
-		foreach ( $ids as $id => $priority ) {
-			$this->setup_original_action( $id );
-			$this->assertFalse( beans_modify_action_priority( $id, $priority ) );
+		$this->go_to_post();
+
+		foreach ( static::$test_actions as $beans_id => $original_action ) {
+			foreach ( $priorities as $priority ) {
+				$this->assertFalse( beans_modify_action_priority( $beans_id, $priority ) );
+
+				// Check that the priority did not get stored as "modified" in Beans.
+				$this->assertFalse( _beans_get_action( $beans_id, 'modified' ) );
+			}
 		}
 	}
 
 	/**
-	 * Test beans_modify_action_priority() should return true when priority is zero.
+	 * Test beans_modify_action_priority() should modify the action's priority when the new one is zero.
 	 */
-	public function test_should_return_true_when_priority_is_zero() {
-		$ids = array(
-			'foo'   => 0,
-			'bar'   => 0.0,
-			'baz'   => '0',
-			'beans' => '0.0',
-		);
+	public function test_should_modify_action_when_priority_is_zero() {
+		$priorities = array( 0, 0.0, '0', '0.0' );
 
-		foreach ( $ids as $id => $priority ) {
-			$this->setup_original_action( $id );
-			$this->assertTrue( beans_modify_action_priority( $id, $priority ) );
+		$this->go_to_post();
+
+		foreach ( static::$test_actions as $beans_id => $original_action ) {
+			foreach ( $priorities as $priority ) {
+				$this->assertTrue( beans_modify_action_priority( $beans_id, $priority ) );
+				$this->assertEquals( array( 'priority' => (int) $priority ), _beans_get_action( $beans_id, 'modified' ) );
+			}
 		}
 	}
 
 	/**
-	 * Test beans_modify_action_priority() should modify the registered action's priority.
+	 * Test beans_modify_action_priority() should register with Beans as "modified", but not add the action.
 	 */
-	public function test_should_modify_the_action_priority() {
-		$action          = $this->setup_original_action( 'beans' );
-		$modified_action = array(
-			'priority' => 20,
-		);
-		$this->assertTrue( beans_modify_action_priority( 'beans', $modified_action['priority'] ) );
-		$this->assertEquals( $modified_action, _beans_get_action( 'beans', 'modified' ) );
-		$this->assertTrue( has_action( $action['hook'] ) );
+	public function test_should_register_as_modified_but_not_add_action() {
+
+		foreach ( static::$test_actions as $beans_id => $action ) {
+			// Check the starting state.
+			$this->assertFalse( has_action( $action['hook'], $action['callback'] ) );
+			$this->assertFalse( _beans_get_action( $beans_id, 'modified' ) );
+
+			// Check that it returns false.
+			$this->assertFalse( beans_modify_action_priority( $beans_id, $action['priority'] ) );
+
+			// Check that it did register as "modified" in Beans.
+			$this->assertEquals( array( 'priority' => $action['priority'] ), _beans_get_action( $beans_id, 'modified' ) );
+
+			// Check that the action was not added in WordPress.
+			$this->assertFalse( has_action( $action['hook'], $action['callback'] ) );
+		}
 	}
 }

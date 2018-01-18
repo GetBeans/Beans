@@ -24,56 +24,80 @@ require_once __DIR__ . '/includes/class-actions-test-case.php';
 class Tests_BeansModifyActionCallback extends Actions_Test_Case {
 
 	/**
-	 * Test beans_modify_action_callback() should return false when the ID is not registered.
+	 * Test beans_modify_action_callback() should not modify when the callback is invalid.
 	 */
-	public function test_should_return_false_when_id_not_registered() {
-		$this->assertFalse( beans_modify_action_callback( 'foo', null ) );
-		$this->assertFalse( beans_modify_action_callback( 'foo', 'my_new_callback' ) );
-		$this->assertFalse( beans_modify_action_callback( 'beans', 'beans_callback' ) );
-	}
-
-	/**
-	 * Test beans_modify_action_callback() should return false when the new callback is null.
-	 */
-	public function test_should_return_false_when_new_callback_is_null() {
-		$this->setup_original_action();
-		$this->assertFalse( beans_modify_action_callback( 'foo', null ) );
-
-		$this->setup_original_action( 'beans' );
-		$this->assertFalse( beans_modify_action_callback( 'beans', null ) );
-	}
-
-	/**
-	 * Test beans_modify_action_callback() should register with Beans as modified, but not with WordPress.
-	 */
-	public function test_should_register_with_beans_as_modified_but_not_with_wp() {
-		$action = array(
-			'callback' => 'my_callback',
+	public function test_should_not_modify_when_invalid_callback() {
+		$callbacks = array(
+			null,
+			false,
+			'',
 		);
 
-		$this->check_not_added( 'foo', 'foo_hook' );
+		$this->go_to_post();
 
-		$this->assertFalse( beans_modify_action_callback( 'foo', $action['callback'] ) );
+		foreach ( static::$test_actions as $beans_id => $original_action ) {
+			// Test the action before we start.
+			$this->assertTrue( has_action( $original_action['hook'], $original_action['callback'] ) !== false );
 
-		// Check that it did register with Beans.
-		$this->assertEquals( $action, _beans_get_action( 'foo', 'modified' ) );
+			foreach ( $callbacks as $callback ) {
+				$this->assertFalse( beans_modify_action_callback( $beans_id, $callback ) );
 
-		// Check that it did not add the action.
-		$this->assertFalse( has_action( 'foo_hook' ) );
+				// Check that the callback did not get stored as "modified" in Beans.
+				$this->assertFalse( _beans_get_action( $beans_id, 'modified' ) );
+
+				// Check that the callback did not change.
+				$this->assertTrue( has_action( $original_action['hook'], $original_action['callback'] ) !== false );
+			}
+		}
 	}
 
 	/**
-	 * Test beans_modify_action() should modify the registered action's callback.
+	 * Test beans_modify_action_callback() should register with Beans as "modified", but not add the action.
+	 */
+	public function test_should_register_as_modified_but_add_action() {
+
+		foreach ( static::$test_actions as $beans_id => $action ) {
+			// Check the starting state.
+			$this->assertFalse( has_action( $action['hook'], $action['callback'] ) );
+			$this->assertFalse( _beans_get_action( $beans_id, 'modified' ) );
+
+			// Check that it returns false.
+			$this->assertFalse( beans_modify_action_callback( $beans_id, $action['callback'] ) );
+
+			// Check that it did register as "modified" in Beans.
+			$this->assertEquals( array( 'callback' => $action['callback'] ), _beans_get_action( $beans_id, 'modified' ) );
+
+			// Check that the action was not added in WordPress.
+			$this->assertFalse( has_action( $action['hook'], $action['callback'] ) );
+		}
+	}
+
+	/**
+	 * Test beans_modify_action_callback() should modify the registered action's callback.
 	 */
 	public function test_should_modify_the_action_callback() {
-		$container       = Monkey\Container::instance();
-		$action          = $this->setup_original_action( 'beans' );
 		$modified_action = array(
 			'callback' => 'my_callback',
 		);
-		$this->assertTrue( beans_modify_action_callback( 'beans', $modified_action['callback'] ) );
-		$this->assertEquals( $modified_action, _beans_get_action( 'beans', 'modified' ) );
-		$this->assertTrue( has_action( $action['hook'] ) );
-		$this->assertTrue( $container->hookStorage()->isHookAdded( Monkey\Hook\HookStorage::ACTIONS, $action['hook'], $modified_action['callback'] ) );
+
+		$this->go_to_post();
+
+		foreach ( static::$test_actions as $beans_id => $original_action ) {
+
+			// Check that the original action is registered in WordPress and in Beans as "added".
+			$this->check_registered_in_wp( $original_action['hook'], $original_action );
+			$this->assertSame( $original_action, _beans_get_action( $beans_id, 'added' ) );
+
+			// Modify the callback.
+			$this->assertTrue( beans_modify_action_callback( $beans_id, $modified_action['callback'] ) );
+
+			// Check that the modified action is registered as "modified" in Beans.
+			$this->assertEquals( $modified_action, _beans_get_action( $beans_id, 'modified' ) );
+
+			// Check that the original action was removed from WordPress.
+			$this->assertFalse( has_action( $original_action['hook'], $original_action['callback'] ) );
+			// Check that the modified action was added in WordPress.
+			$this->assertTrue( has_action( $original_action['hook'], $modified_action['callback'] ) !== false );
+		}
 	}
 }
