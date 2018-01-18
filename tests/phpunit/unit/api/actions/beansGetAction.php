@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Unit\API\Actions;
 
-use Beans\Framework\Tests\Unit\Test_Case;
+use Beans\Framework\Tests\Unit\API\Actions\Includes\Actions_Test_Case;
 
 /**
  * Class Tests_BeansGetAction
@@ -18,69 +18,17 @@ use Beans\Framework\Tests\Unit\Test_Case;
  * @group   unit-tests
  * @group   api
  */
-class Tests_BeansGetAction extends Test_Case {
+class Tests_BeansGetAction extends Actions_Test_Case {
 
 	/**
-	 * Available action statuses.
-	 *
-	 * @var array
+	 * Test _beans_get_action() should return false when registry is empty.
 	 */
-	protected $action_status;
-
-	/**
-	 * Action to be/is registered.
-	 *
-	 * @var array
-	 */
-	protected $action;
-
-	/**
-	 * The json_encode() version of the above action.
-	 *
-	 * @var string
-	 */
-	protected $encoded_action;
-
-	/**
-	 * Setup test fixture.
-	 */
-	protected function setUp() {
-		parent::setUp();
-
-		$this->action_status = array( 'added', 'modified', 'removed', 'replaced' );
-		require_once BEANS_TESTS_LIB_DIR . 'api/actions/functions.php';
-		require_once BEANS_TESTS_LIB_DIR . 'api/utilities/functions.php';
-
-		$this->action         = array(
-			'hook'     => 'foo',
-			'callback' => 'callback',
-			'priority' => 10,
-			'args'     => 1,
-		);
-		$this->encoded_action = wp_json_encode( $this->action );
-	}
-
-	/**
-	 * Reset the test fixture.
-	 */
-	protected function tearDown() {
-		parent::tearDown();
-
+	public function test_should_return_false_when_registry_is_empty() {
 		global $_beans_registered_actions;
-		$_beans_registered_actions = array(
-			'added'    => array(),
-			'modified' => array(),
-			'removed'  => array(),
-			'replaced' => array(),
-		);
-	}
 
-	/**
-	 * Test _beans_get_action() should return false when the status is empty, i.e. no actions are registered.
-	 */
-	public function test_should_return_false_when_status_is_empty() {
-		foreach ( $this->action_status as $action_status ) {
-			$this->assertFalse( _beans_get_action( 'foo', $action_status ) );
+		foreach ( array_keys( $_beans_registered_actions ) as $status ) {
+			$this->assertEmpty( $_beans_registered_actions[ $status ] );
+			$this->assertFalse( _beans_get_action( 'foo', $status ) );
 		}
 	}
 
@@ -88,32 +36,92 @@ class Tests_BeansGetAction extends Test_Case {
 	 * Test _beans_get_action() should return false when the action is not registered.
 	 */
 	public function test_should_return_false_when_action_is_not_registered() {
-		global $_beans_registered_actions;
-		$_beans_registered_actions['added']['foo'] = $this->encoded_action;
 
-		$this->assertFalse( _beans_get_action( 'foobar', 'added' ) );
-
-		// Make sure we get false on the other statuses.
-		foreach ( $this->action_status as $action_status ) {
-
-			// Skip the 'added' status.
-			if ( 'added' === $action_status ) {
-				continue;
-			}
-
-			$this->assertFalse( _beans_get_action( 'foo', $action_status ) );
+		foreach ( static::$test_ids as $beans_id ) {
+			$this->assertFalse( _beans_get_action( $beans_id, 'added' ) );
+			$this->assertFalse( _beans_get_action( $beans_id, 'modified' ) );
+			$this->assertFalse( _beans_get_action( $beans_id, 'removed' ) );
+			$this->assertFalse( _beans_get_action( $beans_id, 'replaced' ) );
 		}
 	}
 
 	/**
-	 * Test _beans_get_action() should return the action's configuration when it's registered.
+	 * Test _beans_get_action() should return the "added" action.
 	 */
-	public function test_should_return_action_when_registered() {
+	public function test_should_return_added_action() {
 		global $_beans_registered_actions;
 
-		foreach ( $this->action_status as $action_status ) {
-			$_beans_registered_actions[ $action_status ]['foo'] = $this->encoded_action;
-			$this->assertEquals( $this->action, _beans_get_action( 'foo', $action_status ) );
+		foreach ( static::$test_actions as $beans_id => $action ) {
+			// Store the action in the registry.
+			$_beans_registered_actions['added'][ $beans_id ] = wp_json_encode( $action );
+
+			// Test that we get the "added" action.
+			$this->assertSame( $action, _beans_get_action( $beans_id, 'added' ) );
+
+			// Make sure that it is not stored in the other registries.
+			$this->assertFalse( _beans_get_action( $beans_id, 'modified' ) );
+			$this->assertFalse( _beans_get_action( $beans_id, 'removed' ) );
+			$this->assertFalse( _beans_get_action( $beans_id, 'replaced' ) );
+		}
+	}
+
+	/**
+	 * Test _beans_get_action() should return the "modified" action.
+	 */
+	public function test_should_return_modified_action() {
+		global $_beans_registered_actions;
+
+		foreach ( static::$test_actions as $beans_id => $action ) {
+			// Store the action in the registry.
+			$_beans_registered_actions['modified'][ $beans_id ] = wp_json_encode( $action );
+
+			// Test that we get the "modified" action.
+			$this->assertSame( $action, _beans_get_action( $beans_id, 'modified' ) );
+
+			// Make sure that it is not stored in the other registries.
+			$this->assertFalse( _beans_get_action( $beans_id, 'added' ) );
+			$this->assertFalse( _beans_get_action( $beans_id, 'removed' ) );
+			$this->assertFalse( _beans_get_action( $beans_id, 'replaced' ) );
+		}
+	}
+
+	/**
+	 * Test _beans_get_action() should return the "removed" action.
+	 */
+	public function test_should_return_removed_action() {
+		global $_beans_registered_actions;
+
+		foreach ( static::$test_actions as $beans_id => $action ) {
+			// Store the action in the registry.
+			$_beans_registered_actions['removed'][ $beans_id ] = wp_json_encode( $action );
+
+			// Test that we get the "removed" action.
+			$this->assertSame( $action, _beans_get_action( $beans_id, 'removed' ) );
+
+			// Make sure that it is not stored in the other registries.
+			$this->assertFalse( _beans_get_action( $beans_id, 'added' ) );
+			$this->assertFalse( _beans_get_action( $beans_id, 'modified' ) );
+			$this->assertFalse( _beans_get_action( $beans_id, 'replaced' ) );
+		}
+	}
+
+	/**
+	 * Test _beans_get_action() should return the "replaced" action.
+	 */
+	public function test_should_return_replaced_action() {
+		global $_beans_registered_actions;
+
+		foreach ( static::$test_actions as $beans_id => $action ) {
+			// Store the action in the registry.
+			$_beans_registered_actions['replaced'][ $beans_id ] = wp_json_encode( $action );
+
+			// Test that we get the "replaced" action.
+			$this->assertSame( $action, _beans_get_action( $beans_id, 'replaced' ) );
+
+			// Make sure that it is not stored in the other registries.
+			$this->assertFalse( _beans_get_action( $beans_id, 'added' ) );
+			$this->assertFalse( _beans_get_action( $beans_id, 'modified' ) );
+			$this->assertFalse( _beans_get_action( $beans_id, 'removed' ) );
 		}
 	}
 }

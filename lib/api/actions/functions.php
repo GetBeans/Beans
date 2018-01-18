@@ -417,7 +417,6 @@ if ( ! isset( $_beans_registered_actions ) ) {
 function _beans_get_action( $id, $status ) {
 	global $_beans_registered_actions;
 
-	$id                 = _beans_unique_action_id( $id );
 	$registered_actions = beans_get( $status, $_beans_registered_actions );
 
 	// If the status is empty, return false, as no actions are registered.
@@ -425,6 +424,7 @@ function _beans_get_action( $id, $status ) {
 		return false;
 	}
 
+	$id     = _beans_unique_action_id( $id );
 	$action = beans_get( $id, $registered_actions );
 
 	// If the action is empty, return false.
