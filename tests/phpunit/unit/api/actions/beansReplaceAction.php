@@ -40,7 +40,7 @@ class Tests_BeansReplaceAction extends Replace_Action_Test_Case {
 			// Now store away the "replace" hook.
 			$this->assertFalse( beans_replace_action( $beans_id, null, $replaced_action['callback'] ) );
 
-			// Check that stored.
+			// Check that it was stored as "modified" and "added".
 			$this->assertEquals( $replaced_action, _beans_get_action( $beans_id, 'modified' ) );
 			$this->assertEquals( $replaced_action, _beans_get_action( $beans_id, 'added' ) );
 		}
@@ -110,7 +110,7 @@ class Tests_BeansReplaceAction extends Replace_Action_Test_Case {
 			// Make sure the callback is what we think before we get rolling.
 			$this->assertEquals( $action_config['hook'], $original_action['hook'] );
 
-			// Setup what will get stored in Beans.
+			// Set up what will get stored in Beans.
 			$replaced_action = array(
 				'hook' => 'foo',
 			);
@@ -143,7 +143,7 @@ class Tests_BeansReplaceAction extends Replace_Action_Test_Case {
 			// Make sure the callback is what we think before we get rolling.
 			$this->assertEquals( $action_config['callback'], $original_action['callback'] );
 
-			// Setup what will get stored in Beans.
+			// Set up what will get stored in Beans.
 			$replaced_action = array(
 				'callback' => 'foo',
 			);
@@ -176,7 +176,7 @@ class Tests_BeansReplaceAction extends Replace_Action_Test_Case {
 			// Make sure the priority is what we think before we get rolling.
 			$this->assertEquals( $action_config['priority'], $original_action['priority'] );
 
-			// Setup what will get stored in Beans.
+			// Set up what will get stored in Beans.
 			$replaced_action = array(
 				'priority' => 50,
 			);
@@ -184,7 +184,7 @@ class Tests_BeansReplaceAction extends Replace_Action_Test_Case {
 			// Run the replace.
 			$this->assertTrue( beans_replace_action( $beans_id, null, null, $replaced_action['priority'] ) );
 
-			// Check if it replaced only the callback.
+			// Check if it replaced only the priority.
 			$new_action = _beans_get_action( $beans_id, 'added' );
 			$this->assertEquals( $original_action['hook'], $new_action['hook'] );
 			$this->assertEquals( $original_action['callback'], $new_action['callback'] );
@@ -209,7 +209,7 @@ class Tests_BeansReplaceAction extends Replace_Action_Test_Case {
 			// Make sure the args are what we think before we get rolling.
 			$this->assertEquals( $action_config['args'], $original_action['args'] );
 
-			// Setup what will get stored in Beans.
+			// Set up what will get stored in Beans.
 			$replaced_action = array(
 				'args' => 5,
 			);
@@ -217,7 +217,7 @@ class Tests_BeansReplaceAction extends Replace_Action_Test_Case {
 			// Run the replace.
 			$this->assertTrue( beans_replace_action( $beans_id, null, null, null, $replaced_action['args'] ) );
 
-			// Check if it replaced only the callback.
+			// Check if it replaced only the args.
 			$new_action = _beans_get_action( $beans_id, 'added' );
 			$this->assertEquals( $original_action['hook'], $new_action['hook'] );
 			$this->assertEquals( $original_action['callback'], $new_action['callback'] );
@@ -234,7 +234,7 @@ class Tests_BeansReplaceAction extends Replace_Action_Test_Case {
 	 * Test beans_replace_action() should replace the original registered action.
 	 */
 	public function test_should_replace_the_action() {
-		// Setup what will get stored in Beans.
+		// Set up what will get stored in Beans.
 		$replaced_action = array(
 			'hook'     => 'new_hook',
 			'callback' => 'new_callback',

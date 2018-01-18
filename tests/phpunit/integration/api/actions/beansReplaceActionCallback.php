@@ -40,7 +40,7 @@ class Tests_BeansReplaceActionCallback extends Replace_Action_Test_Case {
 			// Now store away the "replace" callback.
 			$this->assertFalse( beans_replace_action_callback( $beans_id, $replaced_action['callback'] ) );
 
-			// Check that stored.
+			// Check that it was stored as "modified".
 			$this->assertEquals( $replaced_action, _beans_get_action( $beans_id, 'modified' ) );
 		}
 	}

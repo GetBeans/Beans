@@ -40,14 +40,14 @@ class Tests_BeansReplaceActionPriority extends Replace_Action_Test_Case {
 			// Now store away the "replace" priority.
 			$this->assertFalse( beans_replace_action_priority( $beans_id, $replaced_action['priority'] ) );
 
-			// Check that stored.
+			// Check that it was stored as "modified".
 			$this->assertEquals( $replaced_action, _beans_get_action( $beans_id, 'modified' ) );
 		}
 	}
 
 	/**
-	 * Test beans_replace_action_priority() should store the "replaced" hook when the original action
-	 * has not yet been registered.  Once the original action is registered, then the hook should be replaced.
+	 * Test beans_replace_action_priority() should store the "replaced" priority when the original action
+	 * has not yet been registered.  Once the original action is registered, then the priority should be replaced.
 	 *
 	 * Intent: We are testing to ensure Beans is "load order" agnostic.
 	 */
@@ -64,7 +64,7 @@ class Tests_BeansReplaceActionPriority extends Replace_Action_Test_Case {
 		$this->go_to_post();
 
 		foreach ( static::$test_actions as $beans_id => $original_action ) {
-			// Check if it replaced the hook.
+			// Check if it replaced the priority.
 			$new_action = _beans_get_action( $beans_id, 'added' );
 			$this->assertEquals( $original_action['hook'], $new_action['hook'] );
 			$this->assertEquals( $original_action['callback'], $new_action['callback'] );
@@ -80,7 +80,7 @@ class Tests_BeansReplaceActionPriority extends Replace_Action_Test_Case {
 	/**
 	 * Test beans_replace_action_priority() should return false when no priority is passed.
 	 */
-	public function test_should_return_false_when_no_hook() {
+	public function test_should_return_false_when_no_priority() {
 		$this->go_to_post();
 
 		foreach ( static::$test_actions as $beans_id => $action_config ) {
