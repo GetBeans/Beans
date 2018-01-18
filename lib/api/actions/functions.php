@@ -539,6 +539,7 @@ function _beans_merge_action( $id, array $action, $status ) {
  * @return array|bool
  */
 function _beans_get_current_action( $id ) {
+
 	// Bail out if the action is "removed".
 	if ( _beans_get_action( $id, 'removed' ) ) {
 		return false;
