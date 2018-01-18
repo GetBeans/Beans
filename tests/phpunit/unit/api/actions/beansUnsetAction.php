@@ -23,67 +23,46 @@ require_once __DIR__ . '/includes/class-actions-test-case.php';
 class Tests_BeansUnsetAction extends Actions_Test_Case {
 
 	/**
-	 * Available action statuses.
+	 * The registered actions' status.
 	 *
 	 * @var array
 	 */
-	protected $action_status;
+	protected $statuses = array( 'added', 'modified', 'removed', 'replaced' );
 
 	/**
-	 * Action to be/is registered.
-	 *
-	 * @var array
-	 */
-	protected $action;
-
-	/**
-	 * The json_encode() version of the above action.
-	 *
-	 * @var string
-	 */
-	protected $encoded_action;
-
-	/**
-	 * Setup test fixture.
-	 */
-	protected function setUp() {
-		parent::setUp();
-
-		$this->action_status  = array( 'added', 'modified', 'removed', 'replaced' );
-		$this->action         = array(
-			'hook'     => 'foo',
-			'callback' => 'callback',
-			'priority' => 10,
-			'args'     => 1,
-		);
-		$this->encoded_action = wp_json_encode( $this->action );
-	}
-
-	/**
-	 * Test _beans_unset_action() should return false when action's configuration is not registered.
+	 * Test _beans_unset_action() should return false when action is not registered.
 	 */
 	public function test_should_return_false_when_not_registered() {
+		global $_beans_registered_actions;
 
-		foreach ( $this->action_status as $action_status ) {
-			$this->assertFalse( _beans_unset_action( 'foo', $action_status ) );
+		foreach ( static::$test_actions as $beans_id => $action ) {
+
+			// Test each status.
+			foreach ( $this->statuses as $status ) {
+				$this->assertFalse( _beans_unset_action( $beans_id, $status ) );
+				$this->assertArrayNotHasKey( $beans_id, $_beans_registered_actions[ $status ] );
+			}
 		}
 	}
 
 	/**
-	 * Test _beans_unset_action() should unset the registered action's configuration.
+	 * Test _beans_unset_action() should unset the registered action.
 	 */
 	public function test_should_unset_registered_action() {
 		global $_beans_registered_actions;
 
-		foreach ( $this->action_status as $action_status ) {
+		foreach ( static::$test_actions as $beans_id => $action ) {
 
-			// First, register the action.
-			_beans_set_action( 'foo', $this->action, $action_status );
-			$this->assertTrue( isset( $_beans_registered_actions[ $action_status ]['foo'] ) );
+			// Test each status.
+			foreach ( $this->statuses as $status ) {
+				// Register the action first.
+				_beans_set_action( $beans_id, $action, $status );
+				$this->assertArrayHasKey( $beans_id, $_beans_registered_actions[ $status ] );
 
-			// Then test that unset does its job.
-			$this->assertTrue( _beans_unset_action( 'foo', $action_status ) );
-			$this->assertFalse( isset( $_beans_registered_actions[ $action_status ]['foo'] ) );
+				// Test that it unsets the action.
+				$this->assertTrue( _beans_unset_action( $beans_id, $status ) );
+				$this->assertArrayNotHasKey( $beans_id, $_beans_registered_actions[ $status ] );
+			}
 		}
 	}
 
@@ -91,17 +70,22 @@ class Tests_BeansUnsetAction extends Actions_Test_Case {
 	 * Test _beans_unset_action() should return false when the status is invalid.
 	 */
 	public function test_should_return_false_when_status_is_invalid() {
-		$this->assertFalse( _beans_unset_action( 'foo', 'invalid_status' ) );
-		$this->assertFalse( _beans_unset_action( 'foo', 'foo' ) );
-		$this->assertFalse( _beans_unset_action( 'foo', 'not_valid_either' ) );
 
-		// Now store some configurations and test it again.
-		foreach ( $this->action_status as $action_status ) {
-			_beans_set_action( 'foo', $this->action, $action_status );
+		foreach ( static::$test_actions as $beans_id => $action ) {
+
+			$this->assertFalse( _beans_unset_action( $beans_id, 'invalid_status' ) );
+			$this->assertFalse( _beans_unset_action( $beans_id, 'foo' ) );
+			$this->assertFalse( _beans_unset_action( $beans_id, 'not_valid_either' ) );
+
+			// Now store the action in each status.
+			foreach ( $this->statuses as $status ) {
+				_beans_set_action( $beans_id, $action, $status );
+			}
+
+			// Run the tests again.
+			$this->assertFalse( _beans_unset_action( $beans_id, 'invalid_status' ) );
+			$this->assertFalse( _beans_unset_action( $beans_id, 'foo' ) );
+			$this->assertFalse( _beans_unset_action( $beans_id, 'not_valid_either' ) );
 		}
-
-		$this->assertFalse( _beans_unset_action( 'foo', 'invalid_status' ) );
-		$this->assertFalse( _beans_unset_action( 'foo', 'foo' ) );
-		$this->assertFalse( _beans_unset_action( 'foo', 'not_valid_either' ) );
 	}
 }
