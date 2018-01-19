@@ -6,33 +6,34 @@
  */
 
 /**
- * Hooks a function or method to a specific filter action.
+ * Hooks a callback (function or method) to a specific filter event.
  *
  * This function is similar to {@link http://codex.wordpress.org/Function_Reference/add_filter add_filter()}
- * with the exception that it accepts a $callback argument which is used to automatically create an
+ * with the exception that it accepts a $callback_or_value argument which is used to automatically create an
  * anonymous function.
  *
  * @since 1.0.0
  *
- * @param string   $hook     The filter ID.
- * @param callback $callback The name of the function you wish to be called. Inline content will automatically
- *                           create an anonymous function.
- * @param int      $priority Optional. Used to specify the order in which the functions
- *                           associated with a particular action are executed. Default 10.
- *                           Lower numbers correspond with earlier execution,
- *                           and functions with the same priority are executed
- *                           in the order in which they were added to the action.
- * @param int      $args     Optional. The number of arguments the function accepts. Default 1.
+ * @param string         $hook              The name of the filter event to which the callback is hooked.
+ * @param callable|mixed $callback_or_value For a callback, specify the name of the function|method you wish to be
+ *                                          called when the filter event fires.
+ *                                          For a value, specify the value to be returned when the filter event fires.
+ *                                          Beans creates an anonymous function to hook into the filter event.
+ * @param int            $priority          Optional. Used to specify the order in which the callbacks associated with
+ *                                          a particular action are executed. Default is 10. Lower numbers correspond
+ *                                          with earlier execution.  Callbacks with the same priority are executed in
+ *                                          the order in which they were added to the filter.
+ * @param int            $args              Optional. The number of arguments the callback accepts. Default is 1.
  *
- * @return bool Will always return true.
+ * @return bool
  */
-function beans_add_filter( $hook, $callback, $priority = 10, $args = 1 ) {
+function beans_add_filter( $hook, $callback_or_value, $priority = 10, $args = 1 ) {
 
-	if ( is_callable( $callback ) ) {
-		return add_filter( $hook, $callback, $priority, $args );
+	if ( is_callable( $callback_or_value ) ) {
+		return add_filter( $hook, $callback_or_value, $priority, $args );
 	}
 
-	return _beans_add_anonymous_filter( $hook, $callback, $priority, $args );
+	return _beans_add_anonymous_filter( $hook, $callback_or_value, $priority, $args );
 }
 
 /**
@@ -184,8 +185,8 @@ function beans_has_filters( $id, $callback = false ) {
  * @ignore
  * @access private
  *
- * @param string $hook        The name of the filter to which the $callback is hooked.
- * @param mixed  $value    The value that will be returned when the anonymous callback runs.
+ * @param string $hook        The name of the filter event to which the callback is hooked.
+ * @param mixed  $value       The value that will be returned when the anonymous callback runs.
  * @param int    $priority    Optional. Used to specify the order in which the functions
  *                            associated with a particular filter are executed. Default 10.
  *                            Lower numbers correspond with earlier execution,
