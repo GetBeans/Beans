@@ -311,7 +311,7 @@ class Tests_BeansResetAction extends Actions_Test_Case {
 					$this->assertSame( $modified_action['args'], $args );
 				} );
 
-			// Modify the action's callback and priority.
+			// Modify the action.
 			beans_modify_action( $beans_id, null, $modified_action['callback'], $modified_action['priority'], $modified_action['args'] );
 
 			// Check that the action was modified in Beans.
