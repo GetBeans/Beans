@@ -140,12 +140,29 @@ abstract class Actions_Test_Case extends Test_Case {
 	 *
 	 * @since 1.5.0
 	 *
+	 * @param bool $expect_added Optional. When true, runs tests to ensure it's been added.
+	 *
 	 * @return void
+	 * @throws Monkey\Expectation\Exception\NotAllowedMethod Thrown from Monkey.
 	 */
-	protected function go_to_post() {
+	protected function go_to_post( $expect_added = false ) {
 
 		foreach ( static::$test_actions as $beans_id => $action ) {
+			if ( $expect_added ) {
+				Monkey\Actions\expectAdded( $action['hook'] )
+					->once()
+					->whenHappen( function( $callback, $priority, $args ) use ( $action ) {
+						$this->assertSame( $action['callback'], $callback );
+						$this->assertSame( $action['priority'], $priority );
+						$this->assertSame( $action['args'], $args );
+					} );
+			}
+
 			beans_add_action( $beans_id, $action['hook'], $action['callback'], $action['priority'], $action['args'] );
+
+			if ( $expect_added ) {
+				$this->assertTrue( has_action( $action['hook'], $action['callback'] ) !== false );
+			}
 		}
 	}
 
