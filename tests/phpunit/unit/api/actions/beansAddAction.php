@@ -33,12 +33,22 @@ class Tests_BeansAddAction extends Actions_Test_Case {
 			$this->assertFalse( _beans_get_action( $beans_id, 'added' ) );
 			$this->assertFalse( has_action( $action['hook'], $action['callback'] ) );
 
-			// Let's add it.
+			// Set up the WordPress simulator before we add the action.
+			Monkey\Actions\expectAdded( $action['hook'] )
+				->once()
+				->whenHappen( function( $callback, $priority, $args ) use ( $action ) {
+					// Check that the parameters were added in WordPress.
+					$this->assertSame( $action['callback'], $callback );
+					$this->assertSame( $action['priority'], $priority );
+					$this->assertSame( $action['args'], $args );
+				} );
+
+			// Let's add the action.
 			$this->assertTrue( beans_add_action( $beans_id, $action['hook'], $action['callback'], $action['priority'], $action['args'] ) );
 
-			// Now check that it was registered in Beans and WordPress.
+			// Check that it was registered in Beans and WordPress.
 			$this->assertEquals( $action, _beans_get_action( $beans_id, 'added' ) );
-			$this->check_registered_in_wp( $action['hook'], $action );
+			$this->assertTrue( has_action( $action['hook'], $action['callback'] ) !== false );
 		}
 	}
 
@@ -59,7 +69,7 @@ class Tests_BeansAddAction extends Actions_Test_Case {
 
 			// Now check that it's still registered in both Beans and WordPress.
 			$this->assertEquals( $action, _beans_get_action( $beans_id, 'added' ) );
-			$this->check_registered_in_wp( $action['hook'], $action );
+			$this->assertTrue( has_action( $action['hook'], $action['callback'] ) !== false );
 		}
 	}
 
@@ -76,6 +86,17 @@ class Tests_BeansAddAction extends Actions_Test_Case {
 			// We want to store the "replaced" action first, before we add the original action.
 			_beans_set_action( $beans_id, $replaced_action, 'replaced', true );
 
+			// Set up the WordPress simulator before we add the action.
+			Monkey\Actions\expectAdded( $original_action['hook'] )
+				->once()
+				->whenHappen( function( $callback, $priority, $args ) use ( $original_action, $replaced_action ) {
+					// Check that the callback and priority were replaced in WordPress.
+					$this->assertSame( $replaced_action['callback'], $callback );
+					$this->assertSame( $replaced_action['priority'], $priority );
+					// Check that the number of arguments remains unchanged in WordPress.
+					$this->assertSame( $original_action['args'], $args );
+				} );
+
 			// Next, add the original action.
 			beans_add_action( $beans_id, $original_action['hook'], $original_action['callback'], $original_action['priority'], $original_action['args'] );
 
@@ -89,7 +110,7 @@ class Tests_BeansAddAction extends Actions_Test_Case {
 			$this->assertEquals( $original_action['args'], $new_action['args'] );
 
 			// Now check that the action was replaced in WordPress.
-			$this->check_registered_in_wp( $new_action['hook'], $new_action );
+			$this->assertTrue( has_action( $original_action['hook'], $replaced_action['callback'] ) !== false );
 		}
 	}
 
@@ -132,6 +153,17 @@ class Tests_BeansAddAction extends Actions_Test_Case {
 			// We want to store the "modified" action first, before we add the original action.
 			_beans_set_action( $beans_id, $modified_action, 'modified', true );
 
+			// Set up the WordPress simulator before we add the action.
+			Monkey\Actions\expectAdded( $original_action['hook'] )
+				->once()
+				->whenHappen( function( $callback, $priority, $args ) use ( $original_action, $modified_action ) {
+					// Check that the callback and priority were modified in WordPress.
+					$this->assertSame( $modified_action['callback'], $callback );
+					$this->assertSame( $modified_action['priority'], $priority );
+					// Check that the number of arguments remains unchanged in WordPress.
+					$this->assertSame( $original_action['args'], $args );
+				} );
+
 			// Next, add the original action.
 			beans_add_action( $beans_id, $original_action['hook'], $original_action['callback'], $original_action['priority'], $original_action['args'] );
 
@@ -139,8 +171,7 @@ class Tests_BeansAddAction extends Actions_Test_Case {
 			$this->assertSame( $original_action, _beans_get_action( $beans_id, 'added' ) );
 
 			// Now check that the action was modified in WordPress.
-			$new_action = array_merge( $original_action, $modified_action );
-			$this->check_registered_in_wp( $original_action['hook'], $new_action );
+			$this->assertTrue( has_action( $original_action['hook'], $modified_action['callback'] ) !== false );
 		}
 	}
 }

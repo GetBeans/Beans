@@ -17,7 +17,7 @@ require_once __DIR__ . '/includes/class-actions-test-case.php';
  * Class Tests_BeansModifyActionArguments
  *
  * @package Beans\Framework\Tests\Integration\API\Actions
- * @group   unit-integration
+ * @group   integration-tests
  * @group   api
  */
 class Tests_BeansModifyActionArguments extends Actions_Test_Case {
@@ -38,19 +38,20 @@ class Tests_BeansModifyActionArguments extends Actions_Test_Case {
 		$this->go_to_post();
 
 		foreach ( static::$test_actions as $beans_id => $original_action ) {
-			// Test the action before we start.
+			// Check the starting state.
 			$this->assertEquals(
 				$original_action['args'],
 				$wp_filter[ $original_action['hook'] ]->callbacks[ $original_action['priority'] ][ $original_action['callback'] ]['accepted_args']
 			);
 
 			foreach ( $arguments as $number_of_args ) {
+				// Check that it returns false.
 				$this->assertFalse( beans_modify_action_arguments( $beans_id, $number_of_args ) );
 
-				// Check that the args did not get stored as "modified" in Beans.
+				// Check that the modification was not stored in Beans.
 				$this->assertFalse( _beans_get_action( $beans_id, 'modified' ) );
 
-				// Check that the args did not change.
+				// Check that the number of arguments did not change in WordPress.
 				$this->assertEquals(
 					$original_action['args'],
 					$wp_filter[ $original_action['hook'] ]->callbacks[ $original_action['priority'] ][ $original_action['callback'] ]['accepted_args']
@@ -70,14 +71,17 @@ class Tests_BeansModifyActionArguments extends Actions_Test_Case {
 		$this->go_to_post();
 
 		foreach ( static::$test_actions as $beans_id => $original_action ) {
-			// Test the action before we start.
+			// Check the starting state.
 			$this->assertEquals(
 				$original_action['args'],
 				$wp_filter[ $original_action['hook'] ]->callbacks[ $original_action['priority'] ][ $original_action['callback'] ]['accepted_args']
 			);
 
 			foreach ( $arguments as $number_of_args ) {
+				// Modify the action's callback.
 				$this->assertTrue( beans_modify_action_arguments( $beans_id, $number_of_args ) );
+
+				// Check that the modified action is registered as "modified" in Beans.
 				$this->assertEquals( array( 'args' => (int) $number_of_args ), _beans_get_action( $beans_id, 'modified' ) );
 
 				// Check that the action's number of arguments was modified in WordPress.
@@ -102,7 +106,7 @@ class Tests_BeansModifyActionArguments extends Actions_Test_Case {
 			// Check that it returns false.
 			$this->assertFalse( beans_modify_action_arguments( $beans_id, $action['args'] ) );
 
-			// Check that it did register as "modified" in Beans.
+			// Check that the modified action is registered as "modified" in Beans.
 			$this->assertEquals( array( 'args' => $action['args'] ), _beans_get_action( $beans_id, 'modified' ) );
 
 			// Check that the action was not added in WordPress.
@@ -129,7 +133,7 @@ class Tests_BeansModifyActionArguments extends Actions_Test_Case {
 				$wp_filter[ $original_action['hook'] ]->callbacks[ $original_action['priority'] ][ $original_action['callback'] ]['accepted_args']
 			);
 
-			// Modify the args.
+			// Modify the action's number of arguments.
 			$this->assertTrue( beans_modify_action_arguments( $beans_id, $modified_action['args'] ) );
 
 			// Check that the modified action is registered as "modified" in Beans.

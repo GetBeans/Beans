@@ -87,65 +87,33 @@ abstract class Actions_Test_Case extends Test_Case {
 	}
 
 	/**
-	 * Check that is not registered first.
-	 *
-	 * @since 1.5.0
-	 *
-	 * @param string $id   The ID to check.
-	 * @param string $hook The hook (event name) to check.
-	 *
-	 * @return void
-	 */
-	protected function check_not_added( $id, $hook ) {
-		$this->assertFalse( _beans_get_action( $id, 'added' ) );
-		$this->assertFalse( has_action( $hook ) );
-	}
-
-	/**
-	 * Setup the original action.
-	 *
-	 * @since 1.5.0
-	 *
-	 * @param string $id Optional. Beans ID to register. Default is 'foo'.
-	 *
-	 * @return array
-	 */
-	protected function setup_original_action( $id = 'foo' ) {
-		$container = Monkey\Container::instance();
-		$action    = array(
-			'hook'     => "{$id}_hook",
-			'callback' => "callback_{$id}",
-			'priority' => 10,
-			'args'     => 1,
-		);
-
-		$this->check_not_added( $id, $action['hook'] );
-
-		// Add the original action to get us rolling.
-		beans_add_action( $id, $action['hook'], $action['callback'] );
-		$this->assertTrue( has_action( $action['hook'] ) );
-		$this->assertTrue(
-			$container->hookStorage()->isHookAdded(
-				Monkey\Hook\HookStorage::ACTIONS,
-				$action['hook'],
-				$action['callback']
-			)
-		);
-
-		return $action;
-	}
-
-	/**
 	 * Simulate going to the post and loading in the template and fragments.
 	 *
 	 * @since 1.5.0
 	 *
+	 * @param bool $expect_added Optional. When true, runs tests to ensure it's been added.
+	 *
 	 * @return void
+	 * @throws Monkey\Expectation\Exception\NotAllowedMethod Thrown from Monkey.
 	 */
-	protected function go_to_post() {
+	protected function go_to_post( $expect_added = false ) {
 
 		foreach ( static::$test_actions as $beans_id => $action ) {
+			if ( $expect_added ) {
+				Monkey\Actions\expectAdded( $action['hook'] )
+					->once()
+					->whenHappen( function( $callback, $priority, $args ) use ( $action ) {
+						$this->assertSame( $action['callback'], $callback );
+						$this->assertSame( $action['priority'], $priority );
+						$this->assertSame( $action['args'], $args );
+					} );
+			}
+
 			beans_add_action( $beans_id, $action['hook'], $action['callback'], $action['priority'], $action['args'] );
+
+			if ( $expect_added ) {
+				$this->assertTrue( has_action( $action['hook'], $action['callback'] ) !== false );
+			}
 		}
 	}
 
@@ -156,49 +124,6 @@ abstract class Actions_Test_Case extends Test_Case {
 
 		foreach ( static::$test_actions as $beans_id => $action ) {
 			_beans_unset_action( $beans_id, 'added' );
-			remove_action( $action['hook'], $action['callback'], $action['priority'] );
-		}
-	}
-
-	/**
-	 * Check that the action has been registered in WordPress.
-	 *
-	 * @since 1.5.0
-	 *
-	 * @param string $hook          The event's name (hook) that is registered in WordPress.
-	 * @param array  $action        The action to be checked.
-	 * @param bool   $remove_action When true, it removes the action automatically to clean up this test.
-	 *
-	 * @return void
-	 */
-	protected function check_registered_in_wp( $hook, array $action, $remove_action = true ) {
-		$this->assertTrue( has_action( $hook, $action['callback'] ) !== false );
-		$this->check_parameters_registered_in_wp( $action, $remove_action );
-	}
-
-	/**
-	 * Check that the right parameters are registered in WordPress.
-	 *
-	 * @since 1.5.0
-	 *
-	 * @param array $action        The action that should be registered.
-	 * @param bool  $remove_action When true, it removes the action automatically to clean up this test.
-	 *
-	 * @return void
-	 */
-	protected function check_parameters_registered_in_wp( array $action, $remove_action = true ) {
-		$container = Monkey\Container::instance();
-		$this->assertTrue( has_action( $action['hook'] ) );
-		$this->assertTrue(
-			$container->hookStorage()->isHookAdded(
-				Monkey\Hook\HookStorage::ACTIONS,
-				$action['hook'],
-				$action['callback']
-			)
-		);
-
-		// Then remove the action.
-		if ( $remove_action ) {
 			remove_action( $action['hook'], $action['callback'], $action['priority'] );
 		}
 	}

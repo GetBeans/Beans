@@ -10,6 +10,7 @@
 namespace Beans\Framework\Tests\Unit\API\Actions;
 
 use Beans\Framework\Tests\Unit\API\Actions\Includes\Replace_Action_Test_Case;
+use Brain\Monkey;
 
 require_once __DIR__ . '/includes/class-replace-action-test-case.php';
 
@@ -61,19 +62,30 @@ class Tests_BeansReplaceActionPriority extends Replace_Action_Test_Case {
 			beans_replace_action_priority( $beans_id, $replaced_action['priority'] );
 		}
 
-		$this->go_to_post();
-
 		foreach ( static::$test_actions as $beans_id => $original_action ) {
-			// Check if it replaced the priority.
+			// Set up the WordPress simulator before we add the action.
+			Monkey\Actions\expectAdded( $original_action['hook'] )
+				->once()
+				->whenHappen( function( $callback, $priority, $args ) use ( $original_action, $replaced_action ) {
+					// Check that the priority was replaced in WordPress.
+					$this->assertSame( $replaced_action['priority'], $priority );
+					// Check that the other parameters remain unchanged.
+					$this->assertSame( $original_action['callback'], $callback );
+					$this->assertSame( $original_action['args'], $args );
+				} );
+
+			// Now add the original action.
+			beans_add_action( $beans_id, $original_action['hook'], $original_action['callback'], $original_action['priority'], $original_action['args'] );
+
+			// Check that only the priority was replaced.
 			$new_action = _beans_get_action( $beans_id, 'added' );
 			$this->assertEquals( $original_action['hook'], $new_action['hook'] );
 			$this->assertEquals( $original_action['callback'], $new_action['callback'] );
 			$this->assertEquals( $replaced_action['priority'], $new_action['priority'] );
 			$this->assertEquals( $original_action['args'], $new_action['args'] );
 
-			// Check that the "replaced" action has been stored in Beans and WordPress.
+			// Check that the "replaced" action has been stored in Beans.
 			$this->check_stored_in_beans( $beans_id, $replaced_action );
-			$this->check_registered_in_wp( $original_action['hook'], $new_action );
 		}
 	}
 
@@ -84,6 +96,7 @@ class Tests_BeansReplaceActionPriority extends Replace_Action_Test_Case {
 		$this->go_to_post();
 
 		foreach ( static::$test_actions as $beans_id => $action_config ) {
+			// Check it returns false.
 			$this->assertFalse( beans_replace_action_priority( $beans_id, '' ) );
 
 			// Verify that it did not get stored in "replaced" or "modified".
@@ -101,30 +114,35 @@ class Tests_BeansReplaceActionPriority extends Replace_Action_Test_Case {
 	 */
 	public function test_should_replace_the_action_priority() {
 		$replaced_action = array(
-			'priority' => 999,
+			'priority' => 52,
 		);
 
-		$this->go_to_post();
+		$this->go_to_post( true );
 
-		foreach ( static::$test_actions as $beans_id => $action_config ) {
-			$original_action = _beans_get_action( $beans_id, 'added' );
-
-			// Make sure the priority is what we think before we get rolling.
-			$this->assertEquals( $action_config['priority'], $original_action['priority'] );
+		foreach ( static::$test_actions as $beans_id => $original_action ) {
+			// Set up the WordPress simulator before we replace the action.
+			Monkey\Actions\expectAdded( $original_action['hook'] )
+				->once()
+				->whenHappen( function( $callback, $priority, $args ) use ( $original_action, $replaced_action ) {
+					// Check that the priority was replaced in WordPress.
+					$this->assertSame( $replaced_action['priority'], $priority );
+					// Check that the other parameters remain unchanged.
+					$this->assertSame( $original_action['callback'], $callback );
+					$this->assertSame( $original_action['args'], $args );
+				} );
 
 			// Run the replace.
-			$this->assertTrue( beans_replace_action_priority( $beans_id, $replaced_action['priority'] ) );
+			$this->assertTrue( beans_replace_action( $beans_id, null, null, $replaced_action['priority'] ) );
 
-			// Check if it replaced only the priority.
+			// Check that only the priority was replaced.
 			$new_action = _beans_get_action( $beans_id, 'added' );
 			$this->assertEquals( $original_action['hook'], $new_action['hook'] );
 			$this->assertEquals( $original_action['callback'], $new_action['callback'] );
 			$this->assertEquals( $replaced_action['priority'], $new_action['priority'] );
 			$this->assertEquals( $original_action['args'], $new_action['args'] );
 
-			// Check that the "replaced" action has been stored in Beans and WordPress.
+			// Check that the "replaced" action has been stored in Beans.
 			$this->check_stored_in_beans( $beans_id, $replaced_action );
-			$this->check_registered_in_wp( $new_action['hook'], $new_action );
 		}
 	}
 }

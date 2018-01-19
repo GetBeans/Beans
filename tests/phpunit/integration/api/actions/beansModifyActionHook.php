@@ -17,7 +17,7 @@ require_once __DIR__ . '/includes/class-actions-test-case.php';
  * Class Tests_BeansModifyActionHook
  *
  * @package Beans\Framework\Tests\Integration\API\Actions
- * @group   unit-integration
+ * @group   integration-tests
  * @group   api
  */
 class Tests_BeansModifyActionHook extends Actions_Test_Case {
@@ -39,16 +39,17 @@ class Tests_BeansModifyActionHook extends Actions_Test_Case {
 		$this->go_to_post();
 
 		foreach ( static::$test_actions as $beans_id => $original_action ) {
-			// Test the action before we start.
+			// Check the starting state.
 			$this->assertTrue( has_action( $original_action['hook'], $original_action['callback'] ) !== false );
 
 			foreach ( $hooks as $hook ) {
+				// Check that it returns false.
 				$this->assertFalse( beans_modify_action_hook( $beans_id, $hook ) );
 
 				// Check that the hook did not get stored as "modified" in Beans.
 				$this->assertFalse( _beans_get_action( $beans_id, 'modified' ) );
 
-				// Check that the hook did not change.
+				// Check that the hook did not change in WordPress.
 				$this->assertTrue( has_action( $original_action['hook'], $original_action['callback'] ) !== false );
 			}
 		}
@@ -90,7 +91,7 @@ class Tests_BeansModifyActionHook extends Actions_Test_Case {
 			$this->check_registered_in_wp( $original_action['hook'], $original_action );
 			$this->assertSame( $original_action, _beans_get_action( $beans_id, 'added' ) );
 
-			// Modify the hook.
+			// Modify the action's hook.
 			$this->assertTrue( beans_modify_action_hook( $beans_id, $modified_action['hook'] ) );
 
 			// Check that the modified action is registered as "modified" in Beans.
@@ -98,6 +99,7 @@ class Tests_BeansModifyActionHook extends Actions_Test_Case {
 
 			// Check that the original action was removed from WordPress.
 			$this->assertFalse( has_action( $original_action['hook'], $original_action['callback'] ) );
+
 			// Check that the modified action was added in WordPress.
 			$this->assertTrue( has_action( $modified_action['hook'], $original_action['callback'] ) !== false );
 		}

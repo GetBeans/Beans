@@ -17,7 +17,7 @@ require __DIR__ . '/includes/class-actions-test-case.php';
  * Class Tests_BeansAddAction
  *
  * @package Beans\Framework\Tests\Integration\API\Actions
- * @group   unit-integration
+ * @group   integration-tests
  * @group   api
  */
 class Tests_BeansAddAction extends Actions_Test_Case {

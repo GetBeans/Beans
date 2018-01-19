@@ -17,7 +17,7 @@ require_once __DIR__ . '/includes/class-actions-test-case.php';
  * Class Tests_BeansModifyActionCallback
  *
  * @package Beans\Framework\Tests\Unit\API\Actions
- * @group   unit-integration
+ * @group   integration-tests
  * @group   api
  */
 class Tests_BeansModifyActionCallback extends Actions_Test_Case {
@@ -35,10 +35,11 @@ class Tests_BeansModifyActionCallback extends Actions_Test_Case {
 		$this->go_to_post();
 
 		foreach ( static::$test_actions as $beans_id => $original_action ) {
-			// Test the action before we start.
+			// Check the starting state.
 			$this->assertTrue( has_action( $original_action['hook'], $original_action['callback'] ) !== false );
 
 			foreach ( $callbacks as $callback ) {
+				// Check that it returns false.
 				$this->assertFalse( beans_modify_action_callback( $beans_id, $callback ) );
 
 				// Check that the callback did not get stored as "modified" in Beans.
@@ -82,7 +83,6 @@ class Tests_BeansModifyActionCallback extends Actions_Test_Case {
 		$this->go_to_post();
 
 		foreach ( static::$test_actions as $beans_id => $original_action ) {
-
 			// Check that the original action is registered in WordPress and in Beans as "added".
 			$this->check_registered_in_wp( $original_action['hook'], $original_action );
 			$this->assertSame( $original_action, _beans_get_action( $beans_id, 'added' ) );
@@ -95,6 +95,7 @@ class Tests_BeansModifyActionCallback extends Actions_Test_Case {
 
 			// Check that the original action was removed from WordPress.
 			$this->assertFalse( has_action( $original_action['hook'], $original_action['callback'] ) );
+
 			// Check that the modified action was added in WordPress.
 			$this->assertTrue( has_action( $original_action['hook'], $modified_action['callback'] ) !== false );
 		}

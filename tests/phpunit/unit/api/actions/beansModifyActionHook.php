@@ -37,11 +37,9 @@ class Tests_BeansModifyActionHook extends Actions_Test_Case {
 			'0',
 		);
 
-		$this->go_to_post();
+		$this->go_to_post( true );
 
 		foreach ( static::$test_actions as $beans_id => $original_action ) {
-			// Test the action before we start.
-			$this->assertTrue( has_action( $original_action['hook'], $original_action['callback'] ) !== false );
 
 			foreach ( $hooks as $hook ) {
 				$this->assertFalse( beans_modify_action_hook( $beans_id, $hook ) );
@@ -84,15 +82,20 @@ class Tests_BeansModifyActionHook extends Actions_Test_Case {
 			'hook' => 'foo',
 		);
 
-		$this->go_to_post();
+		$this->go_to_post( true );
 
 		foreach ( static::$test_actions as $beans_id => $original_action ) {
+			// Set up the WordPress simulator before we modify the action.
+			Monkey\Actions\expectAdded( $modified_action['hook'] )
+				->once()
+				->whenHappen( function( $callback, $priority, $args ) use ( $original_action ) {
+					// Check that the parameters remain unchanged in WordPress.
+					$this->assertSame( $original_action['callback'], $callback );
+					$this->assertSame( $original_action['priority'], $priority );
+					$this->assertSame( $original_action['args'], $args );
+				} );
 
-			// Check that the original action is registered in WordPress and in Beans as "added".
-			$this->check_registered_in_wp( $original_action['hook'], $original_action );
-			$this->assertSame( $original_action, _beans_get_action( $beans_id, 'added' ) );
-
-			// Modify the hook.
+			// Modify the callback.
 			$this->assertTrue( beans_modify_action_hook( $beans_id, $modified_action['hook'] ) );
 
 			// Check that the modified action is registered as "modified" in Beans.
@@ -100,6 +103,7 @@ class Tests_BeansModifyActionHook extends Actions_Test_Case {
 
 			// Check that the original action was removed from WordPress.
 			$this->assertFalse( has_action( $original_action['hook'], $original_action['callback'] ) );
+
 			// Check that the modified action was added in WordPress.
 			$this->assertTrue( has_action( $modified_action['hook'], $original_action['callback'] ) !== false );
 		}

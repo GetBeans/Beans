@@ -17,7 +17,7 @@ require_once __DIR__ . '/includes/class-actions-test-case.php';
  * Class Tests_BeansModifyActionPriority
  *
  * @package Beans\Framework\Tests\Integration\API\Actions
- * @group   unit-integration
+ * @group   integration-tests
  * @group   api
  */
 class Tests_BeansModifyActionPriority extends Actions_Test_Case {
@@ -142,7 +142,7 @@ class Tests_BeansModifyActionPriority extends Actions_Test_Case {
 				$wp_filter[ $original_action['hook'] ]->callbacks[ $original_action['priority'] ][ $original_action['callback'] ]
 			);
 
-			// Modify the priority.
+			// Modify the action's priority.
 			$this->assertTrue( beans_modify_action_priority( $beans_id, $modified_action['priority'] ) );
 
 			// Check that the modified action is registered as "modified" in Beans.
