@@ -45,7 +45,7 @@ class Tests_BeansModifyAction extends Actions_Test_Case {
 	/**
 	 * Test beans_modify_action() should register with Beans as "modified", but not add the action.
 	 */
-	public function test_should_register_as_modified_but_add_action() {
+	public function test_should_register_as_modified_but_not_add_action() {
 
 		foreach ( static::$test_actions as $beans_id => $action ) {
 			// Check the starting state.
@@ -193,7 +193,7 @@ class Tests_BeansModifyAction extends Actions_Test_Case {
 			// Check that the modified action is registered as "modified" in Beans.
 			$this->assertEquals( $modified_action, _beans_get_action( $beans_id, 'modified' ) );
 
-			// Check that the action's args was modified in WordPress.
+			// Check that the action's number of arguments was modified in WordPress.
 			$this->assertEquals(
 				$modified_action['args'],
 				$wp_filter[ $original_action['hook'] ]->callbacks[ $original_action['priority'] ][ $original_action['callback'] ]['accepted_args']

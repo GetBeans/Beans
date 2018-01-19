@@ -44,7 +44,7 @@ class Tests_BeansModifyActionCallback extends Actions_Test_Case {
 				// Check that the callback did not get stored as "modified" in Beans.
 				$this->assertFalse( _beans_get_action( $beans_id, 'modified' ) );
 
-				// Check that the callback did not change.
+				// Check that the callback did not change in WordPress.
 				$this->assertTrue( has_action( $original_action['hook'], $original_action['callback'] ) !== false );
 			}
 		}
@@ -53,7 +53,7 @@ class Tests_BeansModifyActionCallback extends Actions_Test_Case {
 	/**
 	 * Test beans_modify_action_callback() should register with Beans as "modified", but not add the action.
 	 */
-	public function test_should_register_as_modified_but_add_action() {
+	public function test_should_register_as_modified_but_not_add_action() {
 
 		foreach ( static::$test_actions as $beans_id => $action ) {
 			// Check the starting state.

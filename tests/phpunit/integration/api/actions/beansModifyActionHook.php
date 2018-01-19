@@ -23,7 +23,7 @@ require_once __DIR__ . '/includes/class-actions-test-case.php';
 class Tests_BeansModifyActionHook extends Actions_Test_Case {
 
 	/**
-	 * Test beans_modify_action_hook() should not modify when the hook is invalid.
+	 * Test beans_modify_action_hook() should not modify the action when the hook is invalid.
 	 */
 	public function test_should_not_modify_when_invalid_callback() {
 		$hooks = array(
@@ -57,7 +57,7 @@ class Tests_BeansModifyActionHook extends Actions_Test_Case {
 	/**
 	 * Test beans_modify_action_hook() should register with Beans as "modified", but not add the action.
 	 */
-	public function test_should_register_as_modified_but_add_action() {
+	public function test_should_register_as_modified_but_not_add_action() {
 
 		foreach ( static::$test_actions as $beans_id => $action ) {
 			// Check the starting state.
@@ -86,7 +86,6 @@ class Tests_BeansModifyActionHook extends Actions_Test_Case {
 		$this->go_to_post();
 
 		foreach ( static::$test_actions as $beans_id => $original_action ) {
-
 			// Check that the original action is registered in WordPress and in Beans as "added".
 			$this->check_registered_in_wp( $original_action['hook'], $original_action );
 			$this->assertSame( $original_action, _beans_get_action( $beans_id, 'added' ) );

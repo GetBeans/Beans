@@ -38,7 +38,7 @@ class Tests_BeansModifyActionPriority extends Actions_Test_Case {
 		$this->go_to_post();
 
 		foreach ( static::$test_actions as $beans_id => $original_action ) {
-			// Test the action before we start.
+			// Check the starting state.
 			$this->assertEquals(
 				array(
 					'function'      => $original_action['callback'],
@@ -48,12 +48,13 @@ class Tests_BeansModifyActionPriority extends Actions_Test_Case {
 			);
 
 			foreach ( $priorities as $priority ) {
+				// Check that it returns false.
 				$this->assertFalse( beans_modify_action_priority( $beans_id, $priority ) );
 
 				// Check that the priority did not get stored as "modified" in Beans.
 				$this->assertFalse( _beans_get_action( $beans_id, 'modified' ) );
 
-				// Check that the priority did not change.
+				// Check that the priority did not change in WordPress.
 				$this->assertEquals(
 					array(
 						'function'      => $original_action['callback'],
@@ -76,7 +77,7 @@ class Tests_BeansModifyActionPriority extends Actions_Test_Case {
 		$this->go_to_post();
 
 		foreach ( static::$test_actions as $beans_id => $original_action ) {
-			// Test the action before we start.
+			// Check the starting state.
 			$this->assertEquals(
 				array(
 					'function'      => $original_action['callback'],
@@ -86,10 +87,13 @@ class Tests_BeansModifyActionPriority extends Actions_Test_Case {
 			);
 
 			foreach ( $priorities as $priority ) {
+				// Modify the priority.
 				$this->assertTrue( beans_modify_action_priority( $beans_id, $priority ) );
+
+				// Check that the modified action is registered as "modified" in Beans.
 				$this->assertEquals( array( 'priority' => (int) $priority ), _beans_get_action( $beans_id, 'modified' ) );
 
-				// Check that the priority did change.
+				// Check that the priority did change in WordPress.
 				$this->check_modified_in_wp( $original_action, (int) $priority );
 			}
 		}
@@ -129,7 +133,7 @@ class Tests_BeansModifyActionPriority extends Actions_Test_Case {
 		$this->go_to_post();
 
 		foreach ( static::$test_actions as $beans_id => $original_action ) {
-			// Test the action before we start.
+			// Check the starting state.
 			$this->assertEquals(
 				array(
 					'function'      => $original_action['callback'],
@@ -144,7 +148,7 @@ class Tests_BeansModifyActionPriority extends Actions_Test_Case {
 			// Check that the modified action is registered as "modified" in Beans.
 			$this->assertEquals( $modified_action, _beans_get_action( $beans_id, 'modified' ) );
 
-			// Check that the priority did change.
+			// Check that the priority did change in WordPress.
 			$this->check_modified_in_wp( $original_action, $modified_action['priority'] );
 		}
 	}

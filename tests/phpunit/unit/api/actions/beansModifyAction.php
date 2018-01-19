@@ -45,7 +45,7 @@ class Tests_BeansModifyAction extends Actions_Test_Case {
 	/**
 	 * Test beans_modify_action() should register with Beans as "modified", but not add the action.
 	 */
-	public function test_should_register_as_modified_but_add_action() {
+	public function test_should_register_as_modified_but_not_add_action() {
 
 		foreach ( static::$test_actions as $beans_id => $action ) {
 			// Check the starting state.

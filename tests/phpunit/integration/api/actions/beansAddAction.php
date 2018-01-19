@@ -45,7 +45,7 @@ class Tests_BeansAddAction extends Actions_Test_Case {
 	 * Test beans_add_action() should overwrite the action in both Beans and WordPress.
 	 *
 	 * This test makes sure nothing breaks if beans_add_action() is called more than once
-	 * on the exact same set of conditions.
+	 * with the exact same set of conditions.
 	 */
 	public function test_should_overwrite_add_action() {
 
@@ -75,7 +75,7 @@ class Tests_BeansAddAction extends Actions_Test_Case {
 			// We want to store the "replaced" action first, before we add the original action.
 			_beans_set_action( $beans_id, $replaced_action, 'replaced', true );
 
-			// Next, add the action.
+			// Next, add the original action.
 			beans_add_action( $beans_id, $original_action['hook'], $original_action['callback'], $original_action['priority'], $original_action['args'] );
 
 			// Get the newly created action.
@@ -131,7 +131,7 @@ class Tests_BeansAddAction extends Actions_Test_Case {
 			// We want to store the "modified" action first, before we add the original action.
 			_beans_set_action( $beans_id, $modified_action, 'modified', true );
 
-			// Next, add the action.
+			// Next, add the original action.
 			beans_add_action( $beans_id, $original_action['hook'], $original_action['callback'], $original_action['priority'], $original_action['args'] );
 
 			// Test that the original action is stored away, which allows us to reset it (if we want).
