@@ -42,6 +42,7 @@ class Tests_BeansAddFilter extends Filters_Test_Case {
 			// Check that the filter was registered.
 			$this->assertTrue( has_filter( $filter['hook'], $filter['callback'] ) !== false );
 
+			// Clean up.
 			remove_filter( $filter['hook'], $filter['callback'], $filter['priority'] );
 		}
 	}
@@ -69,6 +70,7 @@ class Tests_BeansAddFilter extends Filters_Test_Case {
 			// Check that the filter was registered.
 			$this->assertTrue( has_filter( $filter['hook'], array( $object, 'callback' ) ) !== false );
 
+			// Clean up.
 			remove_filter( $filter['hook'], array( $object, 'callback' ), $filter['priority'] );
 		}
 	}

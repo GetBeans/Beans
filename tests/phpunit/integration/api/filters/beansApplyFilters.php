@@ -68,7 +68,7 @@ class Tests_BeansApplyFilters extends Filters_Test_Case {
 	}
 
 	/**
-	 * Test beans_apply_filters() should return value after three levels of sub-hooks.
+	 * Test beans_apply_filters() should return value after calling three levels of sub-hooks.
 	 */
 	public function test_should_return_value_after_calling_three_levels_of_sub_hooks() {
 		add_filter( 'beans_loop_query_args', 'beans_loop_query_args_base' );

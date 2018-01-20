@@ -1,8 +1,8 @@
 <?php
 /**
- * Array of test actions, which is used to test Beans Actions API against the original action configurations.
+ * Array of test filters, which is used to test Beans Actions API against the original filter configurations.
  *
- * @package Beans\Framework\Tests\Integration\API\Actions\Fixtures
+ * @package Beans\Framework\Tests\Integration\API\Filters\Fixtures
  *
  * @since   1.5.0
  */
