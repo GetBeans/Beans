@@ -25,7 +25,7 @@ class Tests_BeansModifyActionHook extends Actions_Test_Case {
 	/**
 	 * Test beans_modify_action_hook() should not modify the action when the hook is invalid.
 	 */
-	public function test_should_not_modify_when_invalid_callback() {
+	public function test_should_not_modify_when_invalid_hook() {
 		$hooks = array(
 			null,
 			false,
