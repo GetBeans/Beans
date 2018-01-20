@@ -40,18 +40,10 @@ if ( ! function_exists( 'beans_loop_query_args_base' ) ) {
 	 *
 	 * @since 1.5.0
 	 *
-	 * @param mixed $args The query's arguments.
-	 *
 	 * @return array
 	 */
-	function beans_loop_query_args_base( $args ) {
-		$new_args = array( 'base' );
-
-		if ( ! is_array( $args ) ) {
-			return $new_args;
-		}
-
-		return array_merge( $args, $new_args );
+	function beans_loop_query_args_base() {
+		return array( 'base' );
 	}
 }
 
@@ -61,17 +53,13 @@ if ( ! function_exists( 'beans_loop_query_args_main' ) ) {
 	 *
 	 * @since 1.5.0
 	 *
-	 * @param mixed $args The query's arguments.
+	 * @param array $args The query's arguments.
 	 *
 	 * @return array
 	 */
-	function beans_loop_query_args_main( $args ) {
-		$new_args = array( 'main' );
+	function beans_loop_query_args_main( array $args ) {
+		$args[] = '_main';
 
-		if ( ! is_array( $args ) ) {
-			return $new_args;
-		}
-
-		return array_merge( $args, $new_args );
+		return $args;
 	}
 }
