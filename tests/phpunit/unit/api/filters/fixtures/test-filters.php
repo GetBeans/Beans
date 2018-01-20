@@ -20,6 +20,18 @@ return array(
 		'priority' => 10,
 		'args'     => 1,
 	),
+	'beans_loop_query_args[_main]'           => array(
+		'hook'     => 'beans_loop_query_args[_main]',
+		'callback' => 'beans_loop_query_args_base',
+		'priority' => 20,
+		'args'     => 1,
+	),
+	'beans_loop_query_args[_main]'           => array(
+		'hook'     => 'beans_loop_query_args[_main]',
+		'callback' => 'beans_loop_query_args_main',
+		'priority' => 20,
+		'args'     => 1,
+	),
 	'the_content'                            => array(
 		'hook'     => 'the_content',
 		'callback' => 'beans_test_the_content',

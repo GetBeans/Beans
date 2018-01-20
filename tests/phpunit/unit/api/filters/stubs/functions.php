@@ -33,3 +33,45 @@ if ( ! function_exists( 'beans_modify_widget_count' ) ) {
 		return 20;
 	}
 }
+
+if ( ! function_exists( 'beans_loop_query_args_base' ) ) {
+	/**
+	 * Modify the Bean's loop query arguments.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @param mixed $args The query's arguments.
+	 *
+	 * @return array
+	 */
+	function beans_loop_query_args_base( $args ) {
+		$new_args = array( 'base' );
+
+		if ( ! is_array( $args ) ) {
+			return $new_args;
+		}
+
+		return array_merge( $args, $new_args );
+	}
+}
+
+if ( ! function_exists( 'beans_loop_query_args_main' ) ) {
+	/**
+	 * Modify the Bean's loop query arguments. Callback for the sub-hook.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @param mixed $args The query's arguments.
+	 *
+	 * @return array
+	 */
+	function beans_loop_query_args_main( $args ) {
+		$new_args = array( 'main' );
+
+		if ( ! is_array( $args ) ) {
+			return $new_args;
+		}
+
+		return array_merge( $args, $new_args );
+	}
+}

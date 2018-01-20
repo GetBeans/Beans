@@ -61,11 +61,10 @@ function beans_add_filter( $hook, $callback_or_value, $priority = 10, $args = 1 
  * @return mixed The filtered value after all hooked functions are applied to it.
  */
 function beans_apply_filters( $id, $value ) {
-
 	$args = func_get_args();
 
-	// Return simple filter if no sub-hook is set.
-	if ( ! preg_match_all( '#\[(.*?)\]#', $args[0], $matches ) ) {
+	// Return simple filter if no sub-hook(s) is(are) set.
+	if ( ! preg_match_all( '#\[(.*?)\]#', $args[0], $sub_hooks ) ) {
 		return call_user_func_array( 'apply_filters', $args );
 	}
 
@@ -77,39 +76,35 @@ function beans_apply_filters( $id, $value ) {
 	$args[0] = $prefix . $suffix;
 	$value   = call_user_func_array( 'apply_filters', $args );
 
-	foreach ( $matches[0] as $i => $subhook ) {
+	foreach ( (array) $sub_hooks[0] as $index => $sub_hook ) {
 
-		$variable_prefix = $variable_prefix . $subhook;
-		$levels          = array( $prefix . $subhook . $suffix );
+		// If there are more than 3 sub-hooks, stop processing.
+		if ( $index > 2 ) {
+			break;
+		}
+
+		$variable_prefix .= $sub_hook;
+		$levels          = array( $prefix . $sub_hook . $suffix );
 
 		// Cascade sub-hooks.
-		if ( $i > 0 ) {
-
-			if ( count( $matches[0] ) > 2 ) {
-				$levels[] = str_replace( $subhook, '', $id );
-			}
-
+		if ( $index > 0 ) {
 			$levels[] = $variable_prefix . $suffix;
-
 		}
 
 		// Apply sub-hooks.
 		foreach ( $levels as $level ) {
-
 			$args[0] = $level;
 			$args[1] = $value;
 			$value   = call_user_func_array( 'apply_filters', $args );
 
-			// Apply filter whithout square brackets for backwards compatibility.
+			// Apply filter without square brackets for backwards compatibility.
 			$args[0] = preg_replace( '#(\[|\])#', '', $args[0] );
 			$args[1] = $value;
 			$value   = call_user_func_array( 'apply_filters', $args );
-
 		}
 	}
 
 	return $value;
-
 }
 
 /**
