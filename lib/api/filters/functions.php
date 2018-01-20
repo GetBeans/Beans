@@ -115,20 +115,19 @@ function beans_apply_filters( $id, $value ) {
  *
  * @since 1.0.0
  *
- * @param string        $id       The filter ID.
- * @param callback|bool $callback Optional. The callback to check for. Default false.
+ * @param string        $id       A unique string used as a reference. Sub-hook(s) must be set in square brackets.
+ * @param callable|bool $callback Optional. The callback to check for. Default false.
  *
- * @return bool|int If $callback is omitted, returns boolean for whether the hook has
- *                  anything registered. When checking a specific function, the priority of that
- *                  hook is returned, or false if the function is not attached. When using the
- *                  $callback argument, this function may return a non-boolean value
- *                  that evaluates to false (e.g. 0), so use the === operator for testing the
- *                  return value.
+ * @return bool|int If $callback is omitted, returns boolean for whether the hook has any callbacks registered.
+ *                  When checking a specific callback, returns the priority of that hook when a callback is registered;
+ *                  else, it returns false. When using the `$callback` argument, this function may return a non-boolean
+ *                  value that evaluates to false (e.g. 0). Make sure you use the === operator for testing the return
+ *                  value.
  */
 function beans_has_filters( $id, $callback = false ) {
 
-	// Check simple filter if no subhook is set.
-	if ( ! preg_match_all( '#\[(.*?)\]#', $id, $matches ) ) {
+	// Check simple filter if no sub-hook is set.
+	if ( ! preg_match_all( '#\[(.*?)\]#', $id, $sub_hooks ) ) {
 		return has_filter( $id, $callback );
 	}
 
@@ -137,39 +136,45 @@ function beans_has_filters( $id, $callback = false ) {
 	$suffix          = preg_replace( '/^.*\]\s*/', '', $id );
 
 	// Check base filter.
-	if ( has_filter( $prefix . $suffix, $callback ) ) {
-		return true;
+	$priority_number = has_filter( $prefix . $suffix, $callback );
+
+	if ( false !== $priority_number ) {
+		return $priority_number;
 	}
 
-	foreach ( $matches[0] as $i => $subhook ) {
+	foreach ( (array) $sub_hooks[0] as $index => $sub_hook ) {
 
-		$variable_prefix = $variable_prefix . $subhook;
-		$levels          = array( $prefix . $subhook . $suffix );
+		// If there are more than 3 sub-hooks, return false.
+		if ( $index > 2 ) {
+			return false;
+		}
+
+		$variable_prefix .= $sub_hook;
+		$levels          = array( $prefix . $sub_hook . $suffix );
 
 		// Cascade sub-hooks.
-		if ( $i > 0 ) {
-
-			$levels[] = str_replace( $subhook, '', $id );
+		if ( $index > 0 ) {
 			$levels[] = $variable_prefix . $suffix;
-
 		}
 
 		// Apply sub-hooks.
 		foreach ( $levels as $level ) {
+			$priority_number = has_filter( $level, $callback );
 
-			if ( has_filter( $level, $callback ) ) {
-				return true;
+			if ( false !== $priority_number ) {
+				return $priority_number;
 			}
 
-			// Check filter whithout square brackets for backwards compatibility.
-			if ( has_filter( preg_replace( '#(\[|\])#', '', $level ), $callback ) ) {
-				return true;
+			// Check filter without square brackets for backwards compatibility.
+			$priority_number = has_filter( preg_replace( '#(\[|\])#', '', $level ), $callback );
+
+			if ( false !== $priority_number ) {
+				return $priority_number;
 			}
 		}
 	}
 
 	return false;
-
 }
 
 /**
