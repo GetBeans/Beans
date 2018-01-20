@@ -84,7 +84,7 @@ function beans_apply_filters( $id, $value ) {
 		}
 
 		$variable_prefix .= $sub_hook;
-		$levels          = array( $prefix . $sub_hook . $suffix );
+		$levels           = array( $prefix . $sub_hook . $suffix );
 
 		// Cascade sub-hooks.
 		if ( $index > 0 ) {
@@ -150,7 +150,7 @@ function beans_has_filters( $id, $callback = false ) {
 		}
 
 		$variable_prefix .= $sub_hook;
-		$levels          = array( $prefix . $sub_hook . $suffix );
+		$levels           = array( $prefix . $sub_hook . $suffix );
 
 		// Cascade sub-hooks.
 		if ( $index > 0 ) {
