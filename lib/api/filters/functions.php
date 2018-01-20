@@ -197,7 +197,7 @@ function beans_has_filters( $id, $callback = false ) {
  * @return _Beans_Anonymous_Filters
  */
 function _beans_add_anonymous_filter( $hook, $value, $priority = 10, $args = 1 ) {
-	require_once( BEANS_API_PATH . 'filters/class-beans-anonymous-filters.php' );
+	require_once BEANS_API_PATH . 'filters/class-beans-anonymous-filters.php';
 
 	return new _Beans_Anonymous_Filters( $hook, $value, $priority, $args );
 }
