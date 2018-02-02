@@ -139,7 +139,7 @@ class Tests_BeansReplaceAction extends Replace_Action_Test_Case {
 		);
 
 		$this->go_to_post();
-    
+		
 		foreach ( static::$test_actions as $beans_id => $original_action ) {
 			// Check that the original action is registered in WordPress and in Beans as "added".
 			$this->check_registered_in_wp( $original_action['hook'], $original_action );
@@ -180,7 +180,6 @@ class Tests_BeansReplaceAction extends Replace_Action_Test_Case {
 			$this->assertTrue( beans_replace_action( $beans_id, null, null, $replaced_action['priority'] ) );
 
 			// Check that only the priority was replaced.
-
 			$new_action = _beans_get_action( $beans_id, 'added' );
 			$this->assertEquals( $original_action['hook'], $new_action['hook'] );
 			$this->assertEquals( $original_action['callback'], $new_action['callback'] );
