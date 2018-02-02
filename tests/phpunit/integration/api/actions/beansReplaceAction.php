@@ -139,7 +139,7 @@ class Tests_BeansReplaceAction extends Replace_Action_Test_Case {
 		);
 
 		$this->go_to_post();
-		
+
 		foreach ( static::$test_actions as $beans_id => $original_action ) {
 			// Check that the original action is registered in WordPress and in Beans as "added".
 			$this->check_registered_in_wp( $original_action['hook'], $original_action );
