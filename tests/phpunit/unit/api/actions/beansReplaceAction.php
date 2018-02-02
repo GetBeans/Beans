@@ -121,7 +121,7 @@ class Tests_BeansReplaceAction extends Replace_Action_Test_Case {
 		);
 
 		$this->go_to_post( true );
-    
+		
 		foreach ( static::$test_actions as $beans_id => $original_action ) {
 			// Set up the WordPress simulator before we replace the action.
 			Monkey\Actions\expectAdded( $replaced_action['hook'] )
