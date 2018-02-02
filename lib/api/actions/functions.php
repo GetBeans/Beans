@@ -346,55 +346,75 @@ function beans_replace_action_arguments( $id, $args ) {
  * This function removes an action registered using {@see beans_add_action()} or
  * {@see beans_add_smart_action()}. The original action can be re-added using {@see beans_reset_action()}.
  *
+ * This function is "load order" agnostic, meaning that you can remove an action before it's added.
+ *
  * @since 1.0.0
+ * @since 1.5.0 When no current action, sets "removed" to default configuration.
  *
- * @param string $id The action ID.
+ * @param string $id The action's Beans ID, a unique ID tracked within Beans for this action.
  *
- * @return bool Will always return true.
+ * @return bool
  */
 function beans_remove_action( $id ) {
+	$action = _beans_get_current_action( $id );
 
-	// Remove.
-	if ( $action = _beans_get_current_action( $id ) ) {
+	// If the action is not registered yet, set it to a default configuration.
+	if ( empty( $action ) ) {
+		$action = array(
+			'hook'     => null,
+			'callback' => null,
+			'priority' => null,
+			'args'     => null,
+		);
+	}
+
+	// When there is a current action, remove it.
+	if ( _beans_is_action_valid( $action ) ) {
 		remove_action( $action['hook'], $action['callback'], $action['priority'], $action['args'] );
 	}
 
-	// Register as removed.
-	_beans_set_action( $id, $action, 'removed' );
-
-	return true;
-
+	// Store as "removed".
+	return _beans_set_action( $id, $action, 'removed' );
 }
 
 /**
  * Reset an action.
  *
  * This function resets an action registered using {@see beans_add_action()} or
- * {@see beans_add_smart_action()}. If the original values were replaced using
- * {@see beans_replace_action()}, these values will be used.
+ * {@see beans_add_smart_action()}.
+ *
+ * If the original values were replaced using {@see beans_replace_action()}, these values will be used, as
+ * {@see beans_replace_action()} is not resettable.
  *
  * @since 1.0.0
+ * @since 1.5.0 Bail out if the action does not need to be reset.
  *
- * @param string $id The action ID.
+ * @param string $id The action's Beans ID, a unique ID tracked within Beans for this action.
  *
- * @return bool Will always return true.
+ * @return bool
  */
 function beans_reset_action( $id ) {
-
 	_beans_unset_action( $id, 'modified' );
 	_beans_unset_action( $id, 'removed' );
 
 	$action = _beans_get_action( $id, 'added' );
 
-	if ( $current = _beans_get_current_action( $id ) ) {
-
-		remove_action( $current['hook'], $current['callback'], $current['priority'], $current['args'] );
-		add_action( $action['hook'], $action['callback'], $action['priority'], $action['args'] );
-
+	// Bail out if there is no action.
+	if ( ! _beans_is_action_valid( $action ) ) {
+		return false;
 	}
 
-	return $action;
+	$current = _beans_get_current_action( $id );
 
+	// Return the action if there is no current action.
+	if ( ! _beans_is_action_valid( $current ) ) {
+		return $action;
+	}
+
+	remove_action( $current['hook'], $current['callback'], $current['priority'], $current['args'] );
+	add_action( $action['hook'], $action['callback'], $action['priority'], $action['args'] );
+
+	return $action;
 }
 
 /**
@@ -589,11 +609,19 @@ function _beans_get_current_action( $id ) {
  * @ignore
  * @access private
  *
- * @param array $action Action's configuration.
+ * @param array|mixed $action Action's configuration.
  *
  * @return bool
  */
-function _beans_is_action_valid( array $action ) {
+function _beans_is_action_valid( $action ) {
+	if ( empty( $action ) ) {
+		return false;
+	}
+
+	if ( ! is_array( $action ) ) {
+		return;
+	}
+
 	return isset( $action['hook'], $action['callback'], $action['priority'], $action['args'] );
 }
 
