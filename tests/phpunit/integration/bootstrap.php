@@ -18,7 +18,7 @@ define( 'BEANS_TESTS_DIR', __DIR__ );
 define( 'BEANS_THEME_DIR', dirname( dirname( dirname( __DIR__ ) ) ) );
 define( 'WP_CONTENT_DIR', dirname( dirname( dirname( getcwd() ) ) ) . '/wp-content/' ); // @codingStandardsIgnoreLine.
 
-if ( defined( 'WP_CONTENT_DIR' ) && ! defined( 'WP_PLUGIN_DIR' ) ) {
+if ( ! defined( 'WP_PLUGIN_DIR' ) ) {
 	define( 'WP_PLUGIN_DIR', WP_CONTENT_DIR . 'plugins/' ); // @codingStandardsIgnoreLine.
 }
 
