@@ -62,7 +62,7 @@ require_once $beans_tests_dir . '/includes/functions.php';
  * and load the Beans framework.
  */
 tests_add_filter( 'setup_theme', function() {
-	register_theme_directory( WP_CONTENT_DIR . '/themes' );
+	register_theme_directory( WP_CONTENT_DIR . 'themes' );
 	switch_theme( basename( BEANS_THEME_DIR ) );
 } );
 
