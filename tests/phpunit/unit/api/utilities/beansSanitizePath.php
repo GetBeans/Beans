@@ -53,13 +53,13 @@ class Tests_BeansSanitizePath extends Test_Case {
 
 		// Test Beans' theme root path.
 		$this->assertSame(
-			$this->prepare_path( rtrim( BEANS_ROOT_DIR, DIRECTORY_SEPARATOR ) ),
-			beans_sanitize_path( BEANS_ROOT_DIR )
+			$this->prepare_path( rtrim( BEANS_THEME_DIR, DIRECTORY_SEPARATOR ) ),
+			beans_sanitize_path( BEANS_THEME_DIR )
 		);
 		$directory_separator = '\\' === DIRECTORY_SEPARATOR ? '/' : '';
 		$this->assertSame(
-			$this->prepare_path( BEANS_ROOT_DIR ) . $directory_separator . 'functions.php',
-			beans_sanitize_path( BEANS_ROOT_DIR . 'functions.php' )
+			$this->prepare_path( BEANS_THEME_DIR ) . $directory_separator . 'functions.php',
+			beans_sanitize_path( BEANS_THEME_DIR . 'functions.php' )
 		);
 	}
 

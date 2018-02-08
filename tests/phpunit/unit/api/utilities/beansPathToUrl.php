@@ -46,7 +46,7 @@ class Tests_BeansPathToUrl extends Test_Case {
 		if ( ! $this->beans_relative_path ) {
 			$abspath                         = rtrim( ABSPATH, '/' );
 			$this->beans_relative_path       = wp_normalize_path(
-				rtrim( str_replace( $abspath, '', BEANS_ROOT_DIR ), DIRECTORY_SEPARATOR )
+				rtrim( str_replace( $abspath, '', BEANS_THEME_DIR ), DIRECTORY_SEPARATOR )
 			);
 			$this->beans_tests_relative_path = wp_normalize_path(
 				str_replace( $abspath, '', BEANS_TESTS_DIR )
