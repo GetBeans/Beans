@@ -30,7 +30,7 @@ class Tests_BeansGet extends Test_Case {
 	}
 
 	/**
-	 * Test beans_get() should find the needle when array is given.
+	 * Test beans_get() should find the needle when an array is given.
 	 */
 	public function test_should_find_needle_when_array_given() {
 		$haystack = array(
@@ -43,7 +43,7 @@ class Tests_BeansGet extends Test_Case {
 	}
 
 	/**
-	 * Test beans_get() should return default value when array is given.
+	 * Test beans_get() should return default value when an array is given.
 	 */
 	public function test_should_return_default_when_array_given() {
 		$haystack = array(
@@ -57,7 +57,7 @@ class Tests_BeansGet extends Test_Case {
 	}
 
 	/**
-	 * Test beans_get() should find the needle when object is given.
+	 * Test beans_get() should find the needle when an object is given.
 	 */
 	public function test_should_find_needle_when_object_given() {
 		$haystack = (object) array(
@@ -70,7 +70,7 @@ class Tests_BeansGet extends Test_Case {
 	}
 
 	/**
-	 * Test beans_get() should return default value when object is given.
+	 * Test beans_get() should return default value when an object is given.
 	 */
 	public function test_should_return_default_when_object_given() {
 		$haystack = (object) array(
