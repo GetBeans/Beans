@@ -17,7 +17,8 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Beans\\Framework\\Tests\\": "tests/"
+      "Beans\\Framework\\Tests\\Unit\\": "tests/phpunit/unit/",
+      "Beans\\Framework\\Tests\\Integration\\": "tests/phpunit/integration/"
     }
   },
   "repositories": [
