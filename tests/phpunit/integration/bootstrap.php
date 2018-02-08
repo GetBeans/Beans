@@ -11,7 +11,7 @@
  */
 
 if ( ! file_exists( '../../../wp-content' ) ) {
-	trigger_error( 'Unable to run the integration tests, as the wp-content folder does not exist.', E_USER_ERROR );  // @codingStandardsIgnoreLine.
+	trigger_error( 'Unable to run the integration tests, because the wp-content folder does not exist.', E_USER_ERROR );  // @codingStandardsIgnoreLine.
 }
 
 define( 'BEANS_TESTS_DIR', __DIR__ );
@@ -37,14 +37,14 @@ function beans_get_wp_tests_dir() {
 		$tests_dir = '/tmp/wordpress-tests';
 	}
 
-	// If the tests' includes directory does not exist, try a relative path to Core tests directory.
+	// If the tests' includes directory does not exist, try a relative path to the Core tests directory.
 	if ( ! file_exists( $tests_dir . '/includes/' ) ) {
 		$tests_dir = '../../../../tests/phpunit';
 	}
 
 	// Check it again. If it doesn't exist, stop here and post a message as to why we stopped.
 	if ( ! file_exists( $tests_dir . '/includes/' ) ) {
-		trigger_error( 'Unable to run the integration tests, as the WordPress test suite could not be located.', E_USER_ERROR );  // @codingStandardsIgnoreLine.
+		trigger_error( 'Unable to run the integration tests, because the WordPress test suite could not be located.', E_USER_ERROR );  // @codingStandardsIgnoreLine.
 	}
 
 	// Strip off the trailing directory separator, if it exists.
