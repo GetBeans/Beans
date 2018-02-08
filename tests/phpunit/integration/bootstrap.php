@@ -67,4 +67,4 @@ tests_add_filter( 'setup_theme', function() {
 } );
 
 // Start up the WP testing environment.
-require $beans_tests_dir . '/includes/bootstrap.php';
+require_once $beans_tests_dir . '/includes/bootstrap.php';
