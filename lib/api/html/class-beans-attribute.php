@@ -105,9 +105,10 @@ final class _Beans_Attribute {
 	}
 
 	/**
-	 * Replace a specific value from the attribute. If the attribute does not exist, it is added with the new value.
+	 * Replace the attribute's value. If the attribute does not exist, it is added with the new value.
 	 *
 	 * @since 1.0.0
+	 * @since 1.5.0 Allows replacement of all values.
 	 *
 	 * @param array $attributes Array of HTML markup attributes.
 	 *
@@ -115,14 +116,11 @@ final class _Beans_Attribute {
 	 */
 	public function replace( array $attributes ) {
 
-		if ( ! $this->new_value ) {
-			$attributes[ $this->attribute ] = $this->value;
-			return $attributes;
+		if ( $this->has_attribute( $attributes ) && ! empty( $this->value ) ) {
+			$attributes[ $this->attribute ] = $this->replace_value( $attributes[ $this->attribute ] );
+		} else {
+			$attributes[ $this->attribute ] = $this->new_value;
 		}
-
-		$attributes[ $this->attribute ] = $this->has_attribute( $attributes )
-			? $this->replace_value( $attributes[ $this->attribute ] )
-			: $this->new_value;
 
 		return $attributes;
 	}

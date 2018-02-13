@@ -535,10 +535,14 @@ function beans_add_attribute( $id, $attribute, $value ) {
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Replace the attribute's value. If the attribute does not exist, it is added with the new value.
 =======
  * Replace a specific value from the attribute. If the attribute does not exist, it is added with the new value.
 >>>>>>> 116762d... Refactored and improved documentation.
+=======
+ * Replace the attribute's value. If the attribute does not exist, it is added with the new value.
+>>>>>>> eb2cb2c... Improved beans_replace_attribute.
  *
  * This function must be called before the targeted markup is called.
  *
@@ -548,14 +552,12 @@ function beans_add_attribute( $id, $attribute, $value ) {
  * @since 1.0.0
  * @since 1.5.0 Return the object. Allows replacement of all values.
  *
- * @param string      $id        The markup ID.
- * @param string      $attribute Name of the HTML attribute to target.
- * @param string      $value     Value of the HTML attribute to be replaced. Setting it to an empty (i.e. empty string,
- *                               false, or null) replaces all of the values for this attribute.
- * @param string|null $new_value Optional. Replacement (new) value of the HTML attribute. Setting it to an empty string
- *                               ('') or null will remove the $value (e.g. class=""). Setting it to 'false', the
- *                               browser will display only the attribute name
- *                               (e.g. data-example).
+ * @param string $id        The markup ID.
+ * @param string $attribute Name of the HTML attribute to target.
+ * @param string $value     Value which should be replaced. When empty ('', false, or null), it replaces all of the values for this attribute.
+ * @param string $new_value Optional. Replacement value. If set to '' will display the attribute value as empty
+ *                          (e.g. class=""). Setting it to 'false' will only display the attribute name
+ *                          (e.g. data-example). Setting it to 'null' will not display anything.
  *
  * @return _Beans_Attribute
  */
