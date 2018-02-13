@@ -93,7 +93,7 @@ final class _Beans_Attribute {
 	 *
 	 * @return array
 	 */
-	public function add( $attributes ) {
+	public function add( array $attributes ) {
 
 		if ( ! isset( $attributes[ $this->attribute ] ) ) {
 			$attributes[ $this->attribute ] = $this->value;
@@ -113,7 +113,7 @@ final class _Beans_Attribute {
 	 *
 	 * @return array
 	 */
-	public function replace( $attributes ) {
+	public function replace( array $attributes ) {
 
 		if ( $this->new_value ) {
 
@@ -138,7 +138,7 @@ final class _Beans_Attribute {
 	 *
 	 * @return array
 	 */
-	public function remove( $attributes ) {
+	public function remove( array $attributes ) {
 
 		if ( ! isset( $attributes[ $this->attribute ] ) ) {
 			return $attributes;
