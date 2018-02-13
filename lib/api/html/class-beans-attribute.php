@@ -1,6 +1,6 @@
 <?php
 /**
- * This class controls the HTML attributes.
+ * This class provides the means to add, replace, and remove a HTML attribute and its value(s).
  *
  * @package Beans\Framework\API\Actions
  *
@@ -8,15 +8,16 @@
  */
 
 /**
- * Control HTML attributes.
+ * Control a HTML attribute.
  *
  * @since   1.0.0
+ * @since   1.5.0 Changed class name.
  * @ignore
  * @access  private
  *
  * @package Beans\Framework\API\HTML
  */
-final class _Beans_Attributes {
+final class _Beans_Attribute {
 
 	/**
 	 * The markup ID.

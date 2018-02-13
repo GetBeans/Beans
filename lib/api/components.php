@@ -31,7 +31,7 @@ function beans_load_api_components( $components ) {
 	$common = array(
 		'html'         => array(
 			$root . 'html/functions.php',
-			$root . 'html/class-beans-attributes.php',
+			$root . 'html/class-beans-attribute.php',
 		),
 		'actions'      => $root . 'actions/functions.php',
 		'filters'      => $root . 'filters/functions.php',
