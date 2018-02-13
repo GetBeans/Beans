@@ -85,71 +85,97 @@ final class _Beans_Attribute {
 	}
 
 	/**
-	 * Add the given attribute(s).
+	 * Add a value to an existing attribute or add a new attribute.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $attributes Array of attributes to add.
+	 * @param array $attributes Array of HTML markup attributes.
 	 *
 	 * @return array
 	 */
 	public function add( array $attributes ) {
 
-		if ( ! isset( $attributes[ $this->attribute ] ) ) {
-			$attributes[ $this->attribute ] = $this->value;
+		if ( $this->has_attribute( $attributes ) ) {
+			$attributes[ $this->attribute ] .= ' ' . $this->value;
 		} else {
-			$attributes[ $this->attribute ] = $attributes[ $this->attribute ] . ' ' . $this->value;
+			$attributes[ $this->attribute ] = $this->value;
 		}
 
 		return $attributes;
 	}
 
 	/**
-	 * Add the given attribute(s).
+	 * Replace a specific value from the attribute. If the attribute does not exist, it is added with the new value.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $attributes Array of attributes to add.
+	 * @param array $attributes Array of HTML markup attributes.
 	 *
 	 * @return array
 	 */
 	public function replace( array $attributes ) {
 
-		if ( $this->new_value ) {
-
-			if ( isset( $attributes[ $this->attribute ] ) ) {
-				$attributes[ $this->attribute ] = str_replace( $this->value, $this->new_value, $attributes[ $this->attribute ] );
-			} else {
-				$attributes[ $this->attribute ] = $this->new_value;
-			}
-		} else {
+		if ( ! $this->new_value ) {
 			$attributes[ $this->attribute ] = $this->value;
+			return $attributes;
 		}
+
+		$attributes[ $this->attribute ] = $this->has_attribute( $attributes )
+			? $this->replace_value( $attributes[ $this->attribute ] )
+			: $this->new_value;
 
 		return $attributes;
 	}
 
 	/**
-	 * Remove the given attribute(s).
+	 * Remove a specific value from the attribute or remove the entire attribute.
+	 *
+	 * When the attribute value to remove is null, the attribute is removed; else, the value is removed.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $attributes Array of attributes to remove.
+	 * @param array $attributes Array of HTML markup attributes.
 	 *
 	 * @return array
 	 */
 	public function remove( array $attributes ) {
 
-		if ( ! isset( $attributes[ $this->attribute ] ) ) {
+		if ( ! $this->has_attribute( $attributes ) ) {
 			return $attributes;
 		}
 
 		if ( is_null( $this->value ) ) {
 			unset( $attributes[ $this->attribute ] );
 		} else {
-			$attributes[ $this->attribute ] = str_replace( $this->value, '', $attributes[ $this->attribute ] );
+			$attributes[ $this->attribute ] = $this->replace_value( $attributes[ $this->attribute ] );
 		}
 
 		return $attributes;
+	}
+
+	/**
+	 * Checks if the attribute exists in the given attributes.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @param array $attributes Array of HTML markup attributes.
+	 *
+	 * @return bool
+	 */
+	private function has_attribute( array $attributes ) {
+		return isset( $attributes[ $this->attribute ] );
+	}
+
+	/**
+	 * Replace the attribute's value.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @param string $value The current attribute's value.
+	 *
+	 * @return string
+	 */
+	private function replace_value( $value ) {
+		return str_replace( $this->value, $this->new_value, $value );
 	}
 }

@@ -534,7 +534,11 @@ function beans_add_attribute( $id, $attribute, $value ) {
 }
 
 /**
+<<<<<<< HEAD
  * Replace the attribute's value. If the attribute does not exist, it is added with the new value.
+=======
+ * Replace a specific value from the attribute. If the attribute does not exist, it is added with the new value.
+>>>>>>> 116762d... Refactored and improved documentation.
  *
  * This function must be called before the targeted markup is called.
  *
@@ -572,10 +576,9 @@ function beans_replace_attribute( $id, $attribute, $value, $new_value = null ) {
  * @since 1.0.0
  * @since 1.5.0 Return the object.
  *
- * @param string      $id        The markup ID.
- * @param string      $attribute Name of the HTML attribute to target.
- * @param string|null $value     Optional. The attribute value to remove. Set it to 'false' or null to completely
- *                               remove the attribute.
+ * @param string $id        The markup ID.
+ * @param string $attribute Name of the HTML attribute to target.
+ * @param string $value     Optional. The attribute value to remove. Set it to 'false' or null to completely remove the attribute.
  *
  * @return _Beans_Attribute
  */
