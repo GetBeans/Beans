@@ -30,16 +30,16 @@ class Tests_BeansReplaceAttribute extends HTML_Test_Case {
 		foreach ( static::$test_markup as $beans_id => $markup ) {
 			$markup_attributes = isset( $markup['attributes'] ) ? $markup['attributes'] : array();
 			$attributes        = beans_replace_attribute( $beans_id, 'data-test', '' );
-			$event             = $beans_id . '_attributes';
+			$hook              = $beans_id . '_attributes';
 
 			// Run the tests.
-			$this->assertSame( 10, has_filter( $event, array( $attributes, 'replace' ), 10 ) );
+			$this->assertSame( 10, has_filter( $hook, array( $attributes, 'replace' ), 10 ) );
 			$expected              = $markup_attributes;
 			$expected['data-test'] = '';
-			$this->assertSame( $expected, apply_filters( $event, $markup_attributes ) );
+			$this->assertSame( $expected, apply_filters( $hook, $markup_attributes ) ); // @codingStandardsIgnoreLine - WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound  The hook's name is in the value.
 
 			// Clean up.
-			remove_filter( $event, array( $attributes, 'replace' ), 10 );
+			remove_filter( $hook, array( $attributes, 'replace' ), 10 );
 		}
 	}
 
@@ -53,16 +53,16 @@ class Tests_BeansReplaceAttribute extends HTML_Test_Case {
 			$attribute = key( $markup['attributes'] );
 
 			$attributes = beans_replace_attribute( $beans_id, $attribute, $value, 'beans-test' );
-			$event      = $beans_id . '_attributes';
+			$hook       = $beans_id . '_attributes';
 
 			// Run the tests.
-			$this->assertSame( 10, has_filter( $event, array( $attributes, 'replace' ), 10 ) );
+			$this->assertSame( 10, has_filter( $hook, array( $attributes, 'replace' ), 10 ) );
 			$expected               = $markup['attributes'];
 			$expected[ $attribute ] = str_replace( $value, 'beans-test', $expected[ $attribute ] );
-			$this->assertSame( $expected, apply_filters( $event, $markup['attributes'] ) );
+			$this->assertSame( $expected, apply_filters( $hook, $markup['attributes'] ) ); // @codingStandardsIgnoreLine - WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound  The hook's name is in the value.
 
 			// Clean up.
-			remove_filter( $event, array( $attributes, 'replace' ), 10 );
+			remove_filter( $hook, array( $attributes, 'replace' ), 10 );
 		}
 	}
 }

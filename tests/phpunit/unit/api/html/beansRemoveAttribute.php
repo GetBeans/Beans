@@ -32,22 +32,22 @@ class Tests_BeansRemoveAttribute extends HTML_Test_Case {
 			$attribute = key( $markup['attributes'] );
 
 			$attributes = beans_remove_attribute( $beans_id, $attribute );
-			$event      = $beans_id . '_attributes';
+			$hook       = $beans_id . '_attributes';
 
 			// Set up the WordPress simulator.
-			Monkey\Filters\expectApplied( $event )
+			Monkey\Filters\expectApplied( $hook )
 				->once()
 				->with( $markup['attributes'] )
 				->andReturn( $attributes->remove( $markup['attributes'] ) );
 
 			// Run the tests.
-			$this->assertTrue( has_filter( $event, array( $attributes, 'remove' ), 10 ) );
+			$this->assertTrue( has_filter( $hook, array( $attributes, 'remove' ), 10 ) );
 			$expected = $markup['attributes'];
 			unset( $expected[ $attribute ] );
-			$this->assertSame( $expected, apply_filters( $event, $markup['attributes'] ) );
+			$this->assertSame( $expected, apply_filters( $hook, $markup['attributes'] ) ); // @codingStandardsIgnoreLine - WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound  The hook's name is in the value.
 
 			// Clean up.
-			remove_filter( $event, array( $attributes, 'remove' ), 10 );
+			remove_filter( $hook, array( $attributes, 'remove' ), 10 );
 		}
 	}
 
@@ -61,22 +61,22 @@ class Tests_BeansRemoveAttribute extends HTML_Test_Case {
 			$attribute = key( $markup['attributes'] );
 
 			$attributes = beans_remove_attribute( $beans_id, $attribute, $value );
-			$event      = $beans_id . '_attributes';
+			$hook       = $beans_id . '_attributes';
 
 			// Set up the WordPress simulator.
-			Monkey\Filters\expectApplied( $event )
+			Monkey\Filters\expectApplied( $hook )
 				->once()
 				->with( $markup['attributes'] )
 				->andReturn( $attributes->remove( $markup['attributes'] ) );
 
 			// Run the tests.
-			$this->assertTrue( has_filter( $event, array( $attributes, 'remove' ), 10 ) );
+			$this->assertTrue( has_filter( $hook, array( $attributes, 'remove' ), 10 ) );
 			$expected               = $markup['attributes'];
 			$expected[ $attribute ] = str_replace( $value, '', $expected[ $attribute ] );
-			$this->assertSame( $expected, apply_filters( $event, $markup['attributes'] ) );
+			$this->assertSame( $expected, apply_filters( $hook, $markup['attributes'] ) ); // @codingStandardsIgnoreLine - WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound  The hook's name is in the value.
 
 			// Clean up.
-			remove_filter( $event, array( $attributes, 'remove' ), 10 );
+			remove_filter( $hook, array( $attributes, 'remove' ), 10 );
 		}
 	}
 }
