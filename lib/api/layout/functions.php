@@ -18,7 +18,7 @@
  */
 
 /**
- * Get the default layout.
+ * Get the default layout ID.
  *
  * @since 1.0.0
  *
@@ -28,50 +28,50 @@ function beans_get_default_layout() {
 	$default_layout = beans_has_widget_area( 'sidebar_primary' ) ? 'c_sp' : 'c';
 
 	/**
-	 * Filter the default layout.
+	 * Filter the default layout ID.
 	 *
-	 * The default layout is set to "c_sp" (content + sidebar primary). If the sidebar primary is unregistered, the default layout is "c" (content only).
+	 * The default layout ID is set to "c_sp" (content + sidebar primary). If the sidebar primary is unregistered, then it is set to "c" (content only).
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string $layout The default layout.
+	 * @param string $layout The default layout ID.
 	 */
 	return apply_filters( 'beans_default_layout', $default_layout );
 }
 
 /**
- * Get the current layout.
- *
- * This function return the current layout according the the view it is called from.
+ * Get the current web page's layout ID.
  *
  * @since 1.0.0
  *
- * @return bool Layout, false if no layout found.
+ * @return string
  */
 function beans_get_layout() {
 
 	if ( is_singular() ) {
 		$layout = beans_get_post_meta( 'beans_layout' );
-	} elseif ( is_home() && ( 0 != ( $posts_page = get_option( 'page_for_posts' ) ) ) ) {
-		$layout = beans_get_post_meta( 'beans_layout', false, $posts_page );
+	} elseif ( is_home() ) {
+		$posts_page = (int) get_option( 'page_for_posts' );
+		if ( 0 !== $posts_page ) {
+			$layout = beans_get_post_meta( 'beans_layout', false, $posts_page );
+		}
 	} elseif ( is_category() || is_tag() || is_tax() ) {
 		$layout = beans_get_term_meta( 'beans_layout' );
 	}
 
-	// Fallback onto the global theme layout option if value is false or default_fallback.
+	// When the layout is not found or is set to "default_fallback", use the theme's default layout.
 	if ( ! isset( $layout ) || ! $layout || 'default_fallback' === $layout ) {
 		$layout = get_theme_mod( 'beans_layout', beans_get_default_layout() );
 	}
 
 	/**
-	 * Filter the layout id.
+	 * Filter the web page's layout ID.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string $layout The layout id.
+	 * @param string $layout The layout ID.
 	 */
 	return apply_filters( 'beans_layout', $layout );
-
 }
 
 /**
