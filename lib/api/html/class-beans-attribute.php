@@ -2,7 +2,7 @@
 /**
  * This class provides the means to add, replace, and remove a HTML attribute and its value(s).
  *
- * @package Beans\Framework\API\Actions
+ * @package Beans\Framework\API\HTML
  *
  * @since   1.5.0
  */
@@ -34,20 +34,14 @@ final class _Beans_Attribute {
 	private $attribute;
 
 	/**
-	 * Value of the HTML attribute.
-	 *
-	 * If set to '' will display the attribute value as empty (e.g. class=""). Setting it to 'false' will only display
-	 * the attribute name (e.g. data-example). Setting it to 'null' will not display anything.
+	 * Value of the HTML attribute (i.e. value to be replaced or removed).
 	 *
 	 * @var string
 	 */
 	private $value;
 
 	/**
-	 * Attribute replacement value.
-	 *
-	 * If set to '' will display the attribute value as empty (e.g. class=""). Setting it to 'false' will only display
-	 * the attribute name (e.g. data-example). Setting it to 'null' will not display anything.
+	 * Replacement (new) value of the HTML attribute.
 	 *
 	 * @var string
 	 */
@@ -60,9 +54,8 @@ final class _Beans_Attribute {
 	 *
 	 * @param string      $id              The markup ID.
 	 * @param string      $attribute       Name of the HTML attribute.
-	 * @param string|null $value           Optional.  Value of the HTML attribute.
-	 * @param string|null $new_value       Optional. Attribute replacement value, which is a query string or an array of
-	 *                                     attributes.
+	 * @param string|null $value           Optional. Value of the HTML attribute (i.e. value to be replaced or removed).
+	 * @param string|null $new_value       Optional. Replacement (new) value of the HTML attribute.
 	 */
 	public function __construct( $id, $attribute, $value = null, $new_value = null ) {
 		$this->id        = $id;
