@@ -2,7 +2,19 @@
 /**
  * The Beans Layout API controls what and how Beans main section elements are displayed.
  *
- * @package API\Layout
+ * Layouts are:
+ *      - "c" - content only
+ *      - "c_sp" - content + sidebar primary
+ *      - "sp_c" - sidebar primary + content
+ *      - "c_ss" - content + sidebar secondary
+ *      - "c_sp_ss" - content + sidebar primary + sidebar secondary
+ *      - "ss_c" - sidebar secondary + content
+ *      - "sp_ss_c" - sidebar primary + sidebar secondary + content
+ *      - "sp_c_ss" - sidebar primary + content + sidebar secondary
+ *
+ * @package Beans\Framework\API\Layout
+ *
+ * @since   1.5.0
  */
 
 /**
@@ -10,24 +22,21 @@
  *
  * @since 1.0.0
  *
- * @return string The defautl layout.
+ * @return string
  */
 function beans_get_default_layout() {
-
 	$default_layout = beans_has_widget_area( 'sidebar_primary' ) ? 'c_sp' : 'c';
 
 	/**
-	 * Filter the default layout id.
+	 * Filter the default layout.
 	 *
-	 * The default id is set to "c_sp" (content with sidebar primary). If the sidebar primary is deregistered, it fallback
-	 * to "c" (content only).
+	 * The default layout is set to "c_sp" (content + sidebar primary). If the sidebar primary is unregistered, the default layout is "c" (content only).
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string $layout The default layout id.
+	 * @param string $layout The default layout.
 	 */
 	return apply_filters( 'beans_default_layout', $default_layout );
-
 }
 
 /**
@@ -86,13 +95,13 @@ function beans_get_layout_class( $id ) {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $args {
-	 *     An array of arguments.
+	 * @param array $args              {
+	 *                                 An array of arguments.
 	 *
-	 *     @type int    $grid              Total number of columns the grid contains. Default 4.
-	 *     @type int    $sidebar_primary   The number of columns the sidebar primary takes. Default 1.
-	 *     @type int    $sidebar_secondary The number of columns the sidebar secondary takes. Default 1.
-	 *     @type string $breakpoint        The UIkit grid breakpoint which may be set to 'small', 'medium' or 'large'. Default 'medium'.
+	 * @type int    $grid              Total number of columns the grid contains. Default 4.
+	 * @type int    $sidebar_primary   The number of columns the sidebar primary takes. Default 1.
+	 * @type int    $sidebar_secondary The number of columns the sidebar secondary takes. Default 1.
+	 * @type string $breakpoint        The UIkit grid breakpoint which may be set to 'small', 'medium' or 'large'. Default 'medium'.
 	 * }
 	 */
 	$args = apply_filters( 'beans_layout_grid_settings', array(
@@ -102,10 +111,10 @@ function beans_get_layout_class( $id ) {
 		'breakpoint'        => 'medium',
 	) );
 
-	$g = beans_get( 'grid', $args ); // $g stands for grid.
-	$c = $g; // $c stands for content. Same value as grid by default
-	$sp = beans_get( 'sidebar_primary', $args ); // $sp stands for sidebar primary.
-	$ss = beans_get( 'sidebar_secondary', $args ); // $ss stands for 'sidebar secondary.
+	$g      = beans_get( 'grid', $args ); // $g stands for grid.
+	$c      = $g; // $c stands for content. Same value as grid by default
+	$sp     = beans_get( 'sidebar_primary', $args ); // $sp stands for sidebar primary.
+	$ss     = beans_get( 'sidebar_secondary', $args ); // $ss stands for 'sidebar secondary.
 	$prefix = 'uk-width-' . beans_get( 'breakpoint', $args, 'medium' );
 
 	$classes = array();
@@ -133,7 +142,7 @@ function beans_get_layout_class( $id ) {
 
 				$c = $g - $sp;
 
-				$classes['content'] = "$prefix-$c-$g";
+				$classes['content']         = "$prefix-$c-$g";
 				$classes['sidebar_primary'] = "$prefix-$sp-$g";
 
 				break;
@@ -142,7 +151,7 @@ function beans_get_layout_class( $id ) {
 
 				$c = $g - $sp;
 
-				$classes['content'] = "$prefix-$c-$g uk-push-$sp-$g";
+				$classes['content']         = "$prefix-$c-$g uk-push-$sp-$g";
 				$classes['sidebar_primary'] = "$prefix-$sp-$g uk-pull-$c-$g";
 
 				break;
@@ -159,7 +168,7 @@ function beans_get_layout_class( $id ) {
 
 				$c = $g - $sp;
 
-				$classes['content'] = "$prefix-$c-$g";
+				$classes['content']           = "$prefix-$c-$g";
 				$classes['sidebar_secondary'] = "$prefix-$sp-$g";
 
 				break;
@@ -168,8 +177,8 @@ function beans_get_layout_class( $id ) {
 
 				$c = $g - ( $sp + $ss );
 
-				$classes['content'] = "$prefix-$c-$g";
-				$classes['sidebar_primary'] = "$prefix-$sp-$g";
+				$classes['content']           = "$prefix-$c-$g";
+				$classes['sidebar_primary']   = "$prefix-$sp-$g";
 				$classes['sidebar_secondary'] = "$prefix-$ss-$g";
 
 				break;
@@ -178,18 +187,18 @@ function beans_get_layout_class( $id ) {
 
 				$c = $g - $sp;
 
-				$classes['content'] = "$prefix-$c-$g uk-push-$sp-$g";
+				$classes['content']           = "$prefix-$c-$g uk-push-$sp-$g";
 				$classes['sidebar_secondary'] = "$prefix-$sp-$g uk-pull-$c-$g";
 
 				break;
 
 			case 'sp_ss_c':
 
-				$c = $g - ( $sp + $ss );
+				$c            = $g - ( $sp + $ss );
 				$push_content = $sp + $ss;
 
-				$classes['content'] = "$prefix-$c-$g uk-push-$push_content-$g";
-				$classes['sidebar_primary'] = "$prefix-$sp-$g uk-pull-$c-$g";
+				$classes['content']           = "$prefix-$c-$g uk-push-$push_content-$g";
+				$classes['sidebar_primary']   = "$prefix-$sp-$g uk-pull-$c-$g";
 				$classes['sidebar_secondary'] = "$prefix-$ss-$g uk-pull-$c-$g";
 
 				break;
@@ -198,8 +207,8 @@ function beans_get_layout_class( $id ) {
 
 				$c = $g - ( $sp + $ss );
 
-				$classes['content'] = "$prefix-$c-$g uk-push-$sp-$g";
-				$classes['sidebar_primary'] = "$prefix-$sp-$g uk-pull-$c-$g";
+				$classes['content']           = "$prefix-$c-$g uk-push-$sp-$g";
+				$classes['sidebar_primary']   = "$prefix-$sp-$g uk-pull-$c-$g";
 				$classes['sidebar_secondary'] = "$prefix-$ss-$g";
 
 				break;
@@ -273,7 +282,7 @@ function beans_get_layouts_for_options( $add_default = false ) {
 	if ( $add_default ) {
 		$layouts = array_merge( array(
 			'default_fallback' => sprintf(
-				__( 'Use Default Layout (%s)',  'tm-beans' ),
+				__( 'Use Default Layout (%s)', 'tm-beans' ),
 				'<a href="' . admin_url( 'customize.php?autofocus[control]=beans_layout' ) . '">' . _x( 'Modify', 'Default layout', 'tm-beans' ) . '</a>'
 			),
 		), $layouts );
