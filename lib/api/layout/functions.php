@@ -110,7 +110,6 @@ function beans_get_layout_class( $id ) {
 		'breakpoint'        => 'medium',
 	) );
 
-
 	/**
 	 * Filter the layout class.
 	 *
@@ -175,9 +174,8 @@ function _beans_get_layout_classes( array $args ) {
 			}
 			break;
 
-
 		case 'c_ss':
-
+			// If we don't have a secondary sidebar, bail out.
 			if ( ! $has_secondary ) {
 				return $classes;
 			}
@@ -187,7 +185,7 @@ function _beans_get_layout_classes( array $args ) {
 			break;
 
 		case 'ss_c':
-
+			// If we don't have a secondary sidebar, bail out.
 			if ( ! $has_secondary ) {
 				return $classes;
 			}
@@ -197,16 +195,13 @@ function _beans_get_layout_classes( array $args ) {
 			break;
 
 		case 'sp_ss_c':
-
-			if ( $has_secondary ) {
-				$push_content                 = $sp + $ss;
-				$classes['sidebar_secondary'] = "{$prefix}-{$ss}-{$grid} uk-pull-{$c}-{$grid}";
-			} else {
-				$push_content = $sp;
-			}
-
+			$push_content               = $has_secondary ? $sp + $ss : $sp;
 			$classes['content']         = "{$prefix}-{$c}-{$grid} uk-push-{$push_content}-{$grid}";
 			$classes['sidebar_primary'] = "{$prefix}-{$sp}-{$grid} uk-pull-{$c}-{$grid}";
+
+			if ( $has_secondary ) {
+				$classes['sidebar_secondary'] = "{$prefix}-{$ss}-{$grid} uk-pull-{$c}-{$grid}";
+			}
 
 			break;
 	}
@@ -227,28 +222,24 @@ function _beans_get_layout_classes( array $args ) {
  * @return array Layouts ready for Beans 'imageradio' option type.
  */
 function beans_get_layouts_for_options( $add_default = false ) {
-
-	$base = BEANS_ADMIN_ASSETS_URL . 'images/layouts/';
-
+	$base    = BEANS_ADMIN_ASSETS_URL . 'images/layouts/';
 	$layouts = array(
 		'c' => $base . 'c.png',
 	);
 
 	// Add sidebar primary layouts if the primary widget area is registered.
-	if ( $has_primary = beans_has_widget_area( 'sidebar_primary' ) ) {
+	$has_primary = beans_has_widget_area( 'sidebar_primary' );
 
+	if ( $has_primary ) {
 		$layouts['c_sp'] = $base . 'cs.png';
 		$layouts['sp_c'] = $base . 'sc.png';
-
 	}
 
 	// Add sidebar secondary layouts if the primary and secondary widget area are registered.
 	if ( $has_primary && beans_has_widget_area( 'sidebar_secondary' ) ) {
-
 		$layouts['c_sp_ss'] = $base . 'css.png';
 		$layouts['sp_ss_c'] = $base . 'ssc.png';
 		$layouts['sp_c_ss'] = $base . 'scs.png';
-
 	}
 
 	/**
@@ -264,15 +255,17 @@ function beans_get_layouts_for_options( $add_default = false ) {
 	 */
 	$layouts = apply_filters( 'beans_layouts', $layouts );
 
-	if ( $add_default ) {
-		$layouts = array_merge( array(
-			'default_fallback' => sprintf(
-				__( 'Use Default Layout (%s)', 'tm-beans' ),
-				'<a href="' . admin_url( 'customize.php?autofocus[control]=beans_layout' ) . '">' . _x( 'Modify', 'Default layout', 'tm-beans' ) . '</a>'
-			),
-		), $layouts );
+	if ( ! $add_default ) {
+		return $layouts;
 	}
 
-	return $layouts;
+	$layouts = array_merge( array(
+		'default_fallback' => sprintf(
+			// translators: The (%s) placeholder is for the "Modify" hyperlink.
+			__( 'Use Default Layout (%s)', 'tm-beans' ),
+			'<a href="' . admin_url( 'customize.php?autofocus[control]=beans_layout' ) . '">' . _x( 'Modify', 'Default layout', 'tm-beans' ) . '</a>'
+		),
+	), $layouts );
 
+	return $layouts;
 }
