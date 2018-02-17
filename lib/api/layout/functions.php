@@ -135,14 +135,14 @@ function beans_get_layout_class( $id ) {
  * @return array
  */
 function _beans_get_layout_classes( array $args ) {
-	$g      = beans_get( 'grid', $args ); // $g stands for grid.
-	$c      = $g; // $c stands for content. Same value as grid by default
-	$sp     = beans_get( 'sidebar_primary', $args ); // $sp stands for sidebar primary.
-	$ss     = beans_get( 'sidebar_secondary', $args ); // $ss stands for 'sidebar secondary.
+	$grid   = beans_get( 'grid', $args );
+	$c      = $grid; // $c stands for "content".
+	$sp     = beans_get( 'sidebar_primary', $args );
+	$ss     = beans_get( 'sidebar_secondary', $args );
 	$prefix = 'uk-width-' . beans_get( 'breakpoint', $args, 'medium' );
 
 	$classes = array(
-		'content' => "$prefix-$c-$g",
+		'content' => "{$prefix}-{$c}-{$grid}",
 	);
 
 	if ( ! beans_has_widget_area( 'sidebar_primary' ) ) {
@@ -151,20 +151,30 @@ function _beans_get_layout_classes( array $args ) {
 
 	$layout        = beans_get_layout();
 	$has_secondary = beans_has_widget_area( 'sidebar_secondary' );
+	$c             = $has_secondary && strlen( trim( $layout ) ) > 4 ? $grid - ( $sp + $ss ) : $grid - $sp;
 
 	switch ( $layout ) {
 
 		case 'c_sp':
-			$c                          = $g - $sp;
-			$classes['content']         = "$prefix-$c-$g";
-			$classes['sidebar_primary'] = "$prefix-$sp-$g";
+		case 'c_sp_ss':
+			$classes['content']         = "{$prefix}-{$c}-{$grid}";
+			$classes['sidebar_primary'] = "{$prefix}-{$sp}-{$grid}";
+
+			if ( $has_secondary && 'c_sp_ss' === $layout ) {
+				$classes['sidebar_secondary'] = "{$prefix}-{$ss}-{$grid}";
+			}
 			break;
 
 		case 'sp_c':
-			$c                          = $g - $sp;
-			$classes['content']         = "$prefix-$c-$g uk-push-$sp-$g";
-			$classes['sidebar_primary'] = "$prefix-$sp-$g uk-pull-$c-$g";
+		case 'sp_c_ss':
+			$classes['content']         = "{$prefix}-{$c}-{$grid} uk-push-{$sp}-{$grid}";
+			$classes['sidebar_primary'] = "{$prefix}-{$sp}-{$grid} uk-pull-{$c}-{$grid}";
+
+			if ( $has_secondary && 'sp_c_ss' === $layout ) {
+				$classes['sidebar_secondary'] = "{$prefix}-{$ss}-{$grid}";
+			}
 			break;
+
 
 		case 'c_ss':
 
@@ -172,19 +182,8 @@ function _beans_get_layout_classes( array $args ) {
 				return $classes;
 			}
 
-			$c                            = $g - $sp;
-			$classes['content']           = "$prefix-$c-$g";
-			$classes['sidebar_secondary'] = "$prefix-$sp-$g";
-			break;
-
-		case 'c_sp_ss':
-			$c                          = $has_secondary ? $g - ( $sp + $ss ) : $g - $sp;
-			$classes['content']         = "$prefix-$c-$g";
-			$classes['sidebar_primary'] = "$prefix-$sp-$g";
-
-			if ( $has_secondary ) {
-				$classes['sidebar_secondary'] = "$prefix-$ss-$g";
-			}
+			$classes['content']           = "{$prefix}-{$c}-{$grid}";
+			$classes['sidebar_secondary'] = "{$prefix}-{$ss}-{$grid}";
 			break;
 
 		case 'ss_c':
@@ -193,35 +192,23 @@ function _beans_get_layout_classes( array $args ) {
 				return $classes;
 			}
 
-			$c                            = $g - $sp;
-			$classes['content']           = "$prefix-$c-$g uk-push-$sp-$g";
-			$classes['sidebar_secondary'] = "$prefix-$sp-$g uk-pull-$c-$g";
+			$classes['content']           = "{$prefix}-{$c}-{$grid} uk-push-{$ss}-{$grid}";
+			$classes['sidebar_secondary'] = "{$prefix}-{$ss}-{$grid} uk-pull-{$c}-{$grid}";
 			break;
 
 		case 'sp_ss_c':
 
 			if ( $has_secondary ) {
-				$c                            = $g - ( $sp + $ss );
 				$push_content                 = $sp + $ss;
-				$classes['sidebar_secondary'] = "$prefix-$ss-$g uk-pull-$c-$g";
+				$classes['sidebar_secondary'] = "{$prefix}-{$ss}-{$grid} uk-pull-{$c}-{$grid}";
 			} else {
-				$c            = $g - $sp;
 				$push_content = $sp;
 			}
 
-			$classes['content']         = "{$prefix}-{$c}-{$g} uk-push-{$push_content}-{$g}";
-			$classes['sidebar_primary'] = "$prefix-$sp-$g uk-pull-$c-$g";
+			$classes['content']         = "{$prefix}-{$c}-{$grid} uk-push-{$push_content}-{$grid}";
+			$classes['sidebar_primary'] = "{$prefix}-{$sp}-{$grid} uk-pull-{$c}-{$grid}";
 
 			break;
-
-		case 'sp_c_ss':
-			$c                          = $has_secondary ? $g - ( $sp + $ss ) : $g - $sp;
-			$classes['content']         = "$prefix-$c-$g uk-push-$sp-$g";
-			$classes['sidebar_primary'] = "$prefix-$sp-$g uk-pull-$c-$g";
-
-			if ( $has_secondary ) {
-				$classes['sidebar_secondary'] = "$prefix-$ss-$g";
-			}
 	}
 
 	return $classes;
