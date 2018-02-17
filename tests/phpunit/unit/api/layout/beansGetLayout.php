@@ -31,7 +31,7 @@ class Tests_BeansGetLayout extends Test_Case {
 	}
 
 	/**
-	 * Test beans_get_layout() should return a single post or page's layout.
+	 * Test beans_get_layout() should return the layout for a single post or page.
 	 */
 	public function test_should_return_layout_for_singular() {
 		Monkey\Functions\expect( 'is_singular' )

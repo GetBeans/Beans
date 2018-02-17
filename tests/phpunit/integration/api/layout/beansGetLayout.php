@@ -21,7 +21,7 @@ use WP_UnitTestCase;
 class Tests_BeansGetLayout extends WP_UnitTestCase {
 
 	/**
-	 * Test beans_get_layout() should return a single post or page's layout.
+	 * Test beans_get_layout() should return the layout for a single post or page.
 	 */
 	public function test_should_return_layout_for_singular() {
 		$post_id = self::factory()->post->create();

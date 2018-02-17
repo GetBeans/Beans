@@ -77,7 +77,7 @@ function beans_get_layout() {
 /**
  * Get the current web page's layout class.
  *
- * This function generate the layout class base on the current layout.
+ * This function generates the layout class(es) based on the current layout.
  *
  * @since 1.0.0
  *
