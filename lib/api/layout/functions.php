@@ -116,19 +116,14 @@ function beans_get_layout_class( $id ) {
 	$ss     = beans_get( 'sidebar_secondary', $args ); // $ss stands for 'sidebar secondary.
 	$prefix = 'uk-width-' . beans_get( 'breakpoint', $args, 'medium' );
 
-	$classes     = array();
-	$layout      = beans_get_layout();
-	$has_primary = beans_has_widget_area( 'sidebar_primary' );
-
-	switch ( $layout ) {
-
-		case 'c':
-			$classes['content'] = "$prefix-$c-$g";
-			break;
-
-		default:
-			$classes['content'] = "$prefix-$c-$g";
-	}
+	$classes       = array(
+		'content'           => "$prefix-$c-$g",
+		'sidebar_primary'   => null,
+		'sidebar_secondary' => null,
+	);
+	$layout        = beans_get_layout();
+	$has_primary   = beans_has_widget_area( 'sidebar_primary' );
+	$has_both_sidebars = $has_primary && beans_has_widget_area( 'sidebar_secondary' );
 
 	// Add sidebar primary layouts if the primary widget area is registered.
 	if ( $has_primary ) {
@@ -150,7 +145,7 @@ function beans_get_layout_class( $id ) {
 	}
 
 	// Add sidebar secondary layouts if the primary and secondary widget area are registered.
-	if ( $has_primary && beans_has_widget_area( 'sidebar_secondary' ) ) {
+	if ( $has_both_sidebars ) {
 
 		switch ( $layout ) {
 
