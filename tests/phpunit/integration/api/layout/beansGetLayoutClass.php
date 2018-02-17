@@ -245,11 +245,10 @@ class Tests_BeansGetLayoutClass extends WP_UnitTestCase {
 				'sidebar_primary'   => false,
 				'sidebar_secondary' => false,
 			),
-			// @TONYA - Is this right? The page is set to display "c_sp_ss".
 			array(
 				'expected'          => array(
-					'content'           => 'uk-width-medium-4-4',
-					'sidebar_primary'   => null,
+					'content'           => 'uk-width-medium-3-4',
+					'sidebar_primary'   => 'uk-width-medium-1-4',
 					'sidebar_secondary' => null,
 				),
 				'sidebar_primary'   => true,
@@ -320,11 +319,10 @@ class Tests_BeansGetLayoutClass extends WP_UnitTestCase {
 				'sidebar_primary'   => false,
 				'sidebar_secondary' => false,
 			),
-			// @TONYA - This isn't right.
 			array(
 				'expected'          => array(
-					'content'           => 'uk-width-medium-4-4',
-					'sidebar_primary'   => null,
+					'content'           => 'uk-width-medium-3-4 uk-push-1-4',
+					'sidebar_primary'   => 'uk-width-medium-1-4 uk-pull-3-4',
 					'sidebar_secondary' => null,
 				),
 				'sidebar_primary'   => true,
@@ -358,11 +356,10 @@ class Tests_BeansGetLayoutClass extends WP_UnitTestCase {
 				'sidebar_primary'   => false,
 				'sidebar_secondary' => false,
 			),
-			// @TONYA - This isn't right.
 			array(
 				'expected'          => array(
-					'content'           => 'uk-width-medium-4-4',
-					'sidebar_primary'   => null,
+					'content'           => 'uk-width-medium-3-4 uk-push-1-4',
+					'sidebar_primary'   => 'uk-width-medium-1-4 uk-pull-3-4',
 					'sidebar_secondary' => null,
 				),
 				'sidebar_primary'   => true,

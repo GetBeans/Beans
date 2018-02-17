@@ -110,82 +110,6 @@ function beans_get_layout_class( $id ) {
 		'breakpoint'        => 'medium',
 	) );
 
-	$g      = beans_get( 'grid', $args ); // $g stands for grid.
-	$c      = $g; // $c stands for content. Same value as grid by default
-	$sp     = beans_get( 'sidebar_primary', $args ); // $sp stands for sidebar primary.
-	$ss     = beans_get( 'sidebar_secondary', $args ); // $ss stands for 'sidebar secondary.
-	$prefix = 'uk-width-' . beans_get( 'breakpoint', $args, 'medium' );
-
-	$classes       = array(
-		'content'           => "$prefix-$c-$g",
-		'sidebar_primary'   => null,
-		'sidebar_secondary' => null,
-	);
-	$layout        = beans_get_layout();
-	$has_primary   = beans_has_widget_area( 'sidebar_primary' );
-	$has_both_sidebars = $has_primary && beans_has_widget_area( 'sidebar_secondary' );
-
-	// Add sidebar primary layouts if the primary widget area is registered.
-	if ( $has_primary ) {
-
-		switch ( $layout ) {
-
-			case 'c_sp':
-				$c                          = $g - $sp;
-				$classes['content']         = "$prefix-$c-$g";
-				$classes['sidebar_primary'] = "$prefix-$sp-$g";
-				break;
-
-			case 'sp_c':
-				$c                          = $g - $sp;
-				$classes['content']         = "$prefix-$c-$g uk-push-$sp-$g";
-				$classes['sidebar_primary'] = "$prefix-$sp-$g uk-pull-$c-$g";
-				break;
-		}
-	}
-
-	// Add sidebar secondary layouts if the primary and secondary widget area are registered.
-	if ( $has_both_sidebars ) {
-
-		switch ( $layout ) {
-
-			case 'c_ss':
-				$c                            = $g - $sp;
-				$classes['content']           = "$prefix-$c-$g";
-				$classes['sidebar_secondary'] = "$prefix-$sp-$g";
-				break;
-
-			case 'c_sp_ss':
-				$c                            = $g - ( $sp + $ss );
-				$classes['content']           = "$prefix-$c-$g";
-				$classes['sidebar_primary']   = "$prefix-$sp-$g";
-				$classes['sidebar_secondary'] = "$prefix-$ss-$g";
-				break;
-
-			case 'ss_c':
-				$c = $g - $sp;
-
-				$classes['content']           = "$prefix-$c-$g uk-push-$sp-$g";
-				$classes['sidebar_secondary'] = "$prefix-$sp-$g uk-pull-$c-$g";
-				break;
-
-			case 'sp_ss_c':
-				$c            = $g - ( $sp + $ss );
-				$push_content = $sp + $ss;
-
-				$classes['content']           = "$prefix-$c-$g uk-push-$push_content-$g";
-				$classes['sidebar_primary']   = "$prefix-$sp-$g uk-pull-$c-$g";
-				$classes['sidebar_secondary'] = "$prefix-$ss-$g uk-pull-$c-$g";
-				break;
-
-			case 'sp_c_ss':
-				$c                            = $g - ( $sp + $ss );
-				$classes['content']           = "$prefix-$c-$g uk-push-$sp-$g";
-				$classes['sidebar_primary']   = "$prefix-$sp-$g uk-pull-$c-$g";
-				$classes['sidebar_secondary'] = "$prefix-$ss-$g";
-				break;
-		}
-	}
 
 	/**
 	 * Filter the layout class.
@@ -196,7 +120,111 @@ function beans_get_layout_class( $id ) {
 	 *
 	 * @param string $layout The layout class.
 	 */
-	return apply_filters( "beans_layout_class_{$id}", beans_get( $id, $classes ) );
+	return apply_filters( "beans_layout_class_{$id}", beans_get( $id, _beans_get_layout_classes( $args ) ) );
+}
+
+/**
+ * Get the layout's class attribute values.
+ *
+ * @since  1.5.0
+ * @ignore
+ * @access private
+ *
+ * @param array $args Grid configuration.
+ *
+ * @return array
+ */
+function _beans_get_layout_classes( array $args ) {
+	$g      = beans_get( 'grid', $args ); // $g stands for grid.
+	$c      = $g; // $c stands for content. Same value as grid by default
+	$sp     = beans_get( 'sidebar_primary', $args ); // $sp stands for sidebar primary.
+	$ss     = beans_get( 'sidebar_secondary', $args ); // $ss stands for 'sidebar secondary.
+	$prefix = 'uk-width-' . beans_get( 'breakpoint', $args, 'medium' );
+
+	$classes = array(
+		'content' => "$prefix-$c-$g",
+	);
+
+	if ( ! beans_has_widget_area( 'sidebar_primary' ) ) {
+		return $classes;
+	}
+
+	$layout        = beans_get_layout();
+	$has_secondary = beans_has_widget_area( 'sidebar_secondary' );
+
+	switch ( $layout ) {
+
+		case 'c_sp':
+			$c                          = $g - $sp;
+			$classes['content']         = "$prefix-$c-$g";
+			$classes['sidebar_primary'] = "$prefix-$sp-$g";
+			break;
+
+		case 'sp_c':
+			$c                          = $g - $sp;
+			$classes['content']         = "$prefix-$c-$g uk-push-$sp-$g";
+			$classes['sidebar_primary'] = "$prefix-$sp-$g uk-pull-$c-$g";
+			break;
+
+		case 'c_ss':
+
+			if ( ! $has_secondary ) {
+				return $classes;
+			}
+
+			$c                            = $g - $sp;
+			$classes['content']           = "$prefix-$c-$g";
+			$classes['sidebar_secondary'] = "$prefix-$sp-$g";
+			break;
+
+		case 'c_sp_ss':
+			$c                          = $has_secondary ? $g - ( $sp + $ss ) : $g - $sp;
+			$classes['content']         = "$prefix-$c-$g";
+			$classes['sidebar_primary'] = "$prefix-$sp-$g";
+
+			if ( $has_secondary ) {
+				$classes['sidebar_secondary'] = "$prefix-$ss-$g";
+			}
+			break;
+
+		case 'ss_c':
+
+			if ( ! $has_secondary ) {
+				return $classes;
+			}
+
+			$c                            = $g - $sp;
+			$classes['content']           = "$prefix-$c-$g uk-push-$sp-$g";
+			$classes['sidebar_secondary'] = "$prefix-$sp-$g uk-pull-$c-$g";
+			break;
+
+		case 'sp_ss_c':
+
+			if ( $has_secondary ) {
+				$c                            = $g - ( $sp + $ss );
+				$push_content                 = $sp + $ss;
+				$classes['sidebar_secondary'] = "$prefix-$ss-$g uk-pull-$c-$g";
+			} else {
+				$c            = $g - $sp;
+				$push_content = $sp;
+			}
+
+			$classes['content']         = "{$prefix}-{$c}-{$g} uk-push-{$push_content}-{$g}";
+			$classes['sidebar_primary'] = "$prefix-$sp-$g uk-pull-$c-$g";
+
+			break;
+
+		case 'sp_c_ss':
+			$c                          = $has_secondary ? $g - ( $sp + $ss ) : $g - $sp;
+			$classes['content']         = "$prefix-$c-$g uk-push-$sp-$g";
+			$classes['sidebar_primary'] = "$prefix-$sp-$g uk-pull-$c-$g";
+
+			if ( $has_secondary ) {
+				$classes['sidebar_secondary'] = "$prefix-$ss-$g";
+			}
+	}
+
+	return $classes;
 }
 
 /**
