@@ -309,6 +309,8 @@ final class _Beans_Fields {
 			case 'wp_customize':
 				return get_theme_mod( $field_id, $default );
 		}
+
+		return $default;
 	}
 
 	/**
