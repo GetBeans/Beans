@@ -100,16 +100,20 @@ function beans_field( $field ) {
 }
 
 /**
- * Standardize fields.
+ * Pre-standardize the fields by keying each field by its ID.
  *
+ * @since  1.0.0
  * @ignore
+ * @access private
+ *
+ * @param array $fields An array of fields to be standardized.
+ *
+ * @return array
  */
-function _beans_pre_standardize_fields( $fields ) {
-
+function _beans_pre_standardize_fields( array $fields ) {
 	$_fields = array();
 
 	foreach ( $fields as $field ) {
-
 		$_fields[ $field['id'] ] = $field;
 
 		if ( 'group' === beans_get( 'type', $field ) ) {
@@ -118,5 +122,4 @@ function _beans_pre_standardize_fields( $fields ) {
 	}
 
 	return $_fields;
-
 }

@@ -31,24 +31,23 @@ class Tests_BeansRegisterFields extends Fields_Test_Case {
 	}
 
 	/**
-	 * Test beans_register_fields() should register the fields.
+	 * Test beans_register_fields() should register the single fields.
 	 */
-	public function test_should_register_fields() {
+	public function test_should_register_single_fields() {
+		$test_data = static::$test_data['single_fields'];
 
-		foreach ( static::$test_data as $test_data ) {
-			$this->assertTrue( beans_register_fields( $test_data['fields'], 'beans_tests', $test_data['section'] ) );
+		$this->assertTrue( beans_register_fields( $test_data['fields'], 'beans_tests', $test_data['section'] ) );
 
-			// Check what was registered.
-			$registered = $this->get_reflective_property_value( 'registered' );
-			$this->assertArrayHasKey( 'beans_tests', $registered );
-			$this->assertArrayHasKey( $test_data['section'], $registered['beans_tests'] );
+		// Check what was registered.
+		$registered = $this->get_reflective_property_value( 'registered' );
+		$this->assertArrayHasKey( 'beans_tests', $registered );
+		$this->assertArrayHasKey( $test_data['section'], $registered['beans_tests'] );
 
-			foreach ( $test_data['fields'] as $index => $field ) {
-				$this->assertSame(
-					$this->merge_field_with_default( $field ),
-					$registered['beans_tests'][ $test_data['section'] ][ $index ]
-				);
-			}
+		foreach ( $test_data['fields'] as $index => $field ) {
+			$this->assertSame(
+				$this->merge_field_with_default( $field ),
+				$registered['beans_tests'][ $test_data['section'] ][ $index ]
+			);
 		}
 	}
 }
