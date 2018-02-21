@@ -1,32 +1,32 @@
 <?php
 /**
- * @package API\Fields
+ * Renders the field's label and description.
+ *
+ * @package Beans\Framework\API\Fields\Types
  */
 
 beans_add_smart_action( 'beans_field_wrap_prepend_markup', 'beans_field_label' );
 /**
- * Echo field label.
+ * Render the field's label.
  *
  * @since 1.0.0
  *
  * @param array $field {
  *      Array of data.
  *
- *      @type string $label The field label. Default false.
+ * @type string $label The field label. Default false.
  * }
  */
-function beans_field_label( $field ) {
+function beans_field_label( array $field ) {
+	$label = beans_get( 'label', $field );
 
-	if ( ! $label = beans_get( 'label', $field ) ) {
+	if ( ! $label ) {
 		return;
 	}
 
 	beans_open_markup_e( 'beans_field_label[_' . $field['id'] . ']', 'label' );
-
-		echo $field['label'];
-
+	    echo esc_html( $field['label'] );
 	beans_close_markup_e( 'beans_field_label[_' . $field['id'] . ']', 'label' );
-
 }
 
 beans_add_smart_action( 'beans_field_wrap_append_markup', 'beans_field_description' );
@@ -35,36 +35,34 @@ beans_add_smart_action( 'beans_field_wrap_append_markup', 'beans_field_descripti
  *
  * @since 1.0.0
  *
- * @param array $field {
+ * @param array $field       {
  *      Array of data.
  *
- *      @type string $description The field description. The description can be truncated using <!--more-->
- *            					  as a delimiter. Default false.
+ * @type string $description The field description. The description can be truncated using <!--more--> as a delimiter.
+ *       Default false.
  * }
  */
-function beans_field_description( $field ) {
+function beans_field_description( array $field ) {
+	$description = beans_get( 'description', $field );
 
-	if ( ! $description = beans_get( 'description', $field ) ) {
+	if ( ! $description ) {
 		return;
+	}
+	// Escape the description here.
+	$description = wp_kses_post( $description );
+
+	if ( preg_match( '#<!--more-->#', $description, $matches ) ) {
+		list( $description, $extended ) = explode( $matches[0], $description, 2 );
 	}
 
 	beans_open_markup_e( 'beans_field_description[_' . $field['id'] . ']', 'div', array( 'class' => 'bs-field-description' ) );
+	echo wp_kses_post( $description );
 
-		if ( preg_match( '#<!--more-->#', $description, $matches ) ) {
-			list( $description, $extended ) = explode( $matches[0], $description, 2 );
-		}
-
-		echo $description;
-
-		if ( isset( $extended ) ) {
-
-			?>
-			<br /><a class="bs-read-more" href="#"><?php _e( 'More...', 'tm-beans' ); ?></a>
-			<div class="bs-extended-content"><?php echo $extended; ?></div>
-			<?php
-
-		}
+	if ( isset( $extended ) ) : ?>
+		<br /><a class="bs-read-more" href="#"><?php _e( 'More...', 'tm-beans' ); ?></a>
+        <div class="bs-extended-content"><?php echo $extended; ?></div>
+	<?php
+    endif;
 
 	beans_close_markup_e( 'beans_field_description[_' . $field['id'] . ']', 'div' );
-
 }
