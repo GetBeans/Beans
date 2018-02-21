@@ -56,13 +56,11 @@ function beans_field_description( array $field ) {
 	}
 
 	beans_open_markup_e( 'beans_field_description[_' . $field['id'] . ']', 'div', array( 'class' => 'bs-field-description' ) );
-	echo wp_kses_post( $description );
+		echo wp_kses_post( $description );
 
-	if ( isset( $extended ) ) : ?>
-		<br /><a class="bs-read-more" href="#"><?php _e( 'More...', 'tm-beans' ); ?></a>
-        <div class="bs-extended-content"><?php echo $extended; ?></div>
-	<?php
-    endif;
+	if ( isset( $extended ) ) {
+		include dirname( __FILE__ ) . '/views/field-description.php';
+	}
 
 	beans_close_markup_e( 'beans_field_description[_' . $field['id'] . ']', 'div' );
 }
