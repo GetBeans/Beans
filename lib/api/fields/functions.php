@@ -79,7 +79,7 @@ function beans_get_fields( $context, $section = false ) {
 }
 
 /**
- * Echo a field.
+ * Render (echo) a field.
  *
  * This function echos the field content. Must be used in the loop of fields obtained using
  * {@see beans_get_fields()}.
@@ -87,6 +87,8 @@ function beans_get_fields( $context, $section = false ) {
  * @since 1.0.0
  *
  * @param array $field Array of data obtained using {@see beans_get_fields()}.
+ *
+ * @return void
  */
 function beans_field( $field ) {
 
@@ -96,7 +98,6 @@ function beans_field( $field ) {
 
 	$class = new _Beans_Fields();
 	$class->field_content( $field );
-
 }
 
 /**

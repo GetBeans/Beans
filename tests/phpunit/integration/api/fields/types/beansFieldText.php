@@ -45,10 +45,10 @@ class Tests_BeansFieldText extends Fields_Test_Case {
 	 * Test beans_field_text() should render the text field.
 	 */
 	public function test_should_render_text_field() {
-		$field = $this->merge_field_with_default( array(
-			'id'             => 'beans_text_test',
-			'type'           => 'text',
-			'default'        => '',
+		$field          = $this->merge_field_with_default( array(
+			'id'      => 'beans_text_test',
+			'type'    => 'text',
+			'default' => '',
 		) );
 		$field['value'] = 'Testing the text field.';
 
@@ -64,11 +64,11 @@ class Tests_BeansFieldText extends Fields_Test_Case {
 	 * Test beans_field_text() should render the text field with attributes when given.
 	 */
 	public function test_should_render_text_field_with_attributes_when_given() {
-		$field = $this->merge_field_with_default( array(
-			'id'             => 'beans_text_test',
-			'type'           => 'text',
-			'default'        => '',
-			'attributes'     => array(
+		$field          = $this->merge_field_with_default( array(
+			'id'         => 'beans_text_test',
+			'type'       => 'text',
+			'default'    => '',
+			'attributes' => array(
 				'data-test' => 'foo',
 			),
 		) );
@@ -80,6 +80,5 @@ class Tests_BeansFieldText extends Fields_Test_Case {
 
 		// Run the test.
 		$this->assertSame( '<input type="text" name="beans_fields[beans_text_test]" value="Testing the text field with attributes." data-test="foo">', $html );
-
 	}
 }

@@ -45,10 +45,10 @@ class Tests_BeansFieldTextarea extends Fields_Test_Case {
 	 * Test beans_field_textarea() should render the textarea field.
 	 */
 	public function test_should_render_text_field() {
-		$field = $this->merge_field_with_default( array(
-			'id'             => 'beans_textarea_test',
-			'type'           => 'textarea',
-			'default'        => '',
+		$field          = $this->merge_field_with_default( array(
+			'id'      => 'beans_textarea_test',
+			'type'    => 'textarea',
+			'default' => '',
 		) );
 		$field['value'] = 'Testing the textarea field.';
 
@@ -64,11 +64,11 @@ class Tests_BeansFieldTextarea extends Fields_Test_Case {
 	 * Test beans_field_textarea() should render the textarea field with attributes when given.
 	 */
 	public function test_should_render_text_field_with_attributes_when_given() {
-		$field = $this->merge_field_with_default( array(
-			'id'             => 'beans_textarea_test',
-			'type'           => 'textarea',
-			'default'        => '',
-			'attributes'     => array(
+		$field          = $this->merge_field_with_default( array(
+			'id'         => 'beans_textarea_test',
+			'type'       => 'textarea',
+			'default'    => '',
+			'attributes' => array(
 				'data-test' => 'foo',
 			),
 		) );

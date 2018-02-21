@@ -157,7 +157,7 @@ final class _Beans_Fields {
 		}
 
 		// Add required attributes for wp_customizer.
-		if ( 'wp_customize' == $this->context ) {
+		if ( 'wp_customize' === $this->context ) {
 			$field['attributes'] = array_merge(
 				$field['attributes'],
 				array( 'data-customize-setting-link' => $field['name'] )
@@ -188,7 +188,6 @@ final class _Beans_Fields {
 				$this->field_types[ $_field['type'] ] = $_field['type'];
 			}
 		}
-
 	}
 
 	/**
@@ -226,7 +225,7 @@ final class _Beans_Fields {
 		foreach ( $this->field_types as $type ) {
 
 			// Stop here if the field type has already been loaded.
-			if ( in_array( $type, self::$field_types_loaded ) ) {
+			if ( in_array( $type, self::$field_types_loaded, true ) ) {
 				continue;
 			}
 
@@ -253,7 +252,7 @@ final class _Beans_Fields {
 		foreach ( $this->field_types as $type ) {
 
 			// Stop here if the field type has already been loaded.
-			if ( in_array( $type, self::$field_assets_hook_loaded ) ) {
+			if ( in_array( $type, self::$field_assets_hook_loaded, true ) ) {
 				continue;
 			}
 
@@ -357,6 +356,7 @@ final class _Beans_Fields {
 	 * Get the registered fields.
 	 *
 	 * @since 1.0.0
+	 * @since 1.5.0 Changed to static method.
 	 *
 	 * @param string $context The context in which the fields are used. 'option' for options/settings pages,
 	 *                        'post_meta' for post fields, 'term_meta' for taxonomies fields and 'wp_customize' for WP

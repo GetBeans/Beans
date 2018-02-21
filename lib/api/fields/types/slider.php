@@ -21,8 +21,8 @@ beans_add_smart_action( 'beans_field_slider', 'beans_field_slider' );
  *
  * @since 1.0.0
  *
- * @param array    $field      {
- *                             For best practices, pass the array of data obtained using {@see beans_get_fields()}.
+ * @param array $field {
+ *      For best practices, pass the array of data obtained using {@see beans_get_fields()}.
  *
  * @type mixed     $value      The field's current value.
  * @type string    $name       The field's "name" value.
@@ -35,7 +35,7 @@ beans_add_smart_action( 'beans_field_slider', 'beans_field_slider' );
  * @type string    $unit       The slider's units, which is displayed after the current value. Default null.
  * }
  */
-function beans_field_slider( $field ) {
+function beans_field_slider( array $field ) {
 	$defaults = array(
 		'min'      => 0,
 		'max'      => 100,

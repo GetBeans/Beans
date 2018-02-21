@@ -46,10 +46,10 @@ class Tests_BeansFieldSelect extends Fields_Test_Case {
 	 */
 	public function test_should_render_select_field() {
 		$field = $this->merge_field_with_default( array(
-			'id'             => 'beans_compile_all_scripts_mode',
-			'type'           => 'select',
-			'default'        => 'aggressive',
-			'options'    => array(
+			'id'      => 'beans_compile_all_scripts_mode',
+			'type'    => 'select',
+			'default' => 'aggressive',
+			'options' => array(
 				'aggressive' => 'Aggressive',
 				'standard'   => 'Standard',
 			),
@@ -74,14 +74,14 @@ EOB;
 	 */
 	public function test_should_render_select_field_with_attributes_when_given() {
 		$field = $this->merge_field_with_default( array(
-			'id'             => 'beans_compile_all_scripts_mode',
-			'type'           => 'select',
-			'default'        => 'standard',
+			'id'         => 'beans_compile_all_scripts_mode',
+			'type'       => 'select',
+			'default'    => 'standard',
 			'options'    => array(
 				'aggressive' => 'Aggressive',
 				'standard'   => 'Standard',
 			),
-			'attributes'     => array(
+			'attributes' => array(
 				'style' => 'margin: -3px 0 0 -8px;',
 			),
 		) );

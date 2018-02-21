@@ -63,10 +63,10 @@ class Tests_BeansFieldDescription extends Fields_Test_Case {
 	 */
 	public function test_should_render_field_description() {
 		$field = $this->merge_field_with_default( array(
-			'id'      => 'beans_text_test',
-			'type'    => 'text',
-			'description'   => 'Testing the text field.',
-			'default' => '',
+			'id'          => 'beans_text_test',
+			'type'        => 'text',
+			'description' => 'Testing the text field.',
+			'default'     => '',
 		) );
 
 		ob_start();
@@ -86,10 +86,10 @@ EOB;
 	 */
 	public function test_should_render_extended_description() {
 		$field = $this->merge_field_with_default( array(
-			'id'      => 'beans_text_test',
-			'type'    => 'text',
-			'description'   => 'Testing the text field.<!--more-->This is the extended part of the description.',
-			'default' => '',
+			'id'          => 'beans_text_test',
+			'type'        => 'text',
+			'description' => 'Testing the text field.<!--more-->This is the extended part of the description.',
+			'default'     => '',
 		) );
 
 		ob_start();
