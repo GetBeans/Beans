@@ -25,10 +25,5 @@ beans_add_smart_action( 'beans_field_checkbox', 'beans_field_checkbox' );
 function beans_field_checkbox( array $field ) {
 	$checkbox_label = beans_get( 'checkbox_label', $field, __( 'Enable', 'tm-beans' ) );
 
-	?>
-    <input type="hidden" value="0" name="<?php echo esc_attr( $field['name'] ); ?>" />
-    <input type="checkbox" name="<?php echo esc_attr( $field['name'] ); ?>" value="1"<?php checked( $field['value'], 1 ); ?> <?php echo beans_esc_attributes( $field['attributes'] ); ?>/><?php // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped - Escaping is handled in the function. ?>
-	<?php if ( $checkbox_label ) : ?>
-        <span class="bs-checkbox-label"><?php esc_html( $checkbox_label ); ?></span>
-	<?php endif;
+	include dirname( __FILE__ ) . '/views/checkbox.php';
 }
