@@ -366,7 +366,7 @@ final class _Beans_Fields {
 	 *
 	 * @return array|bool Array of register fields on success, false on failure.
 	 */
-	public function get_fields( $context, $section ) {
+	public static function get_fields( $context, $section ) {
 		$fields = beans_get( $section, self::$registered[ $context ] );
 
 		if ( ! $fields ) {

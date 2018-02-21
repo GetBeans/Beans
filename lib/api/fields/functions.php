@@ -32,6 +32,7 @@
  * @type bool    $db_group    Must only be used for 'group' field type. It defines whether the group of fields
  *       registered should be saved as a group in the database or as individual entries. Default false.
  * }
+ *
  * @param string $context     The context in which the fields are used. 'option' for options/settings pages,
  *                            'post_meta' for post fields, 'term_meta' for taxonomies fields and 'wp_customize' for WP
  *                            customizer fields.
@@ -74,8 +75,7 @@ function beans_get_fields( $context, $section = false ) {
 		return;
 	}
 
-	$class = new _Beans_Fields();
-	return $class->get_fields( $context, $section );
+	return _Beans_Fields::get_fields( $context, $section );
 }
 
 /**
