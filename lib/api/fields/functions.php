@@ -53,7 +53,7 @@ function beans_register_fields( array $fields, $context, $section ) {
 }
 
 /**
- * Get registered fields.
+ * Get the registered fields.
  *
  * This function is used to get the previously registered fields in order to display them using
  * {@see beans_field()}.
@@ -63,8 +63,8 @@ function beans_register_fields( array $fields, $context, $section ) {
  * @param string $context The context in which the fields are used. 'option' for options/settings pages, 'post_meta'
  *                        for post fields, 'term_meta' for taxonomies fields and 'wp_customize' for WP customizer
  *                        fields.
- * @param string $section Optional. A section id to define a group of fields. This is mostly used for metaboxes
- *                        and WP Customizer sections.
+ * @param string $section Optional. A section ID to define a group of fields. This is mostly used for metaboxes and WP
+ *                        Customizer sections.
  *
  * @return array|bool Array of register fields on success, false on failure.
  */
@@ -76,7 +76,6 @@ function beans_get_fields( $context, $section = false ) {
 
 	$class = new _Beans_Fields();
 	return $class->get_fields( $context, $section );
-
 }
 
 /**
