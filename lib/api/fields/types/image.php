@@ -35,57 +35,47 @@ beans_add_smart_action( 'beans_field_image', 'beans_field_image' );
  * }
  */
 function beans_field_image( array $field ) {
-	// Set the images variable and add placeholder to the array.
-	$images = array_merge( (array) $field['value'], array( 'placeholder' ) );
+	$images      = array_merge( (array) $field['value'], array( 'placeholder' ) );
 	$is_multiple = beans_get( 'multiple', $field );
 	$link_text   = _n( 'Add Image', 'Add Images', ( $is_multiple ? 2 : 1 ), 'tm-beans' );
 
 	// If this is a single image and it already exists, then hide the "add image" hyperlink.
-	$hide_add_link = ! $is_multiple && is_numeric( $field['value'] ) ? 'style="display: none"' : '';
+	$hide_add_link = ! $is_multiple && is_numeric( $field['value'] );
 
-	?>
-	<a href="#" class="bs-add-image button button-small" <?php echo $hide_add_link; ?>><?php echo esc_html( $link_text ); ?></a>
-	<input type="hidden" name="<?php echo esc_attr( $field['name'] ); ?>" value="">
-	<div class="bs-images-wrap" data-multiple="<?php echo esc_attr( $is_multiple ); ?>">
-		<?php foreach ( $images as $id ) :
+	// Render the view file.
+	include dirname( __FILE__ ) . '/views/image.php';
+}
 
-			// Stop here if the id is false.
-			if ( ! $id ) {
-				continue;
-			}
+/**
+ * Get the Image ID's attributes.
+ *
+ * @since 1.5.0
+ * @ignore
+ * @access private
+ *
+ * @param string $id          The given image ID.
+ * @param array  $field       The field's configuration parameters.
+ * @param bool   $is_multiple Multiple flag.
+ *
+ * @return array
+ */
+function _beans_get_image_id_attributes( $id, array $field, $is_multiple ) {
+	$attributes = array_merge( array(
+		'class' => 'image-id',
+		'type'  => 'hidden',
+		'name'  => $is_multiple ? $field['name'] . '[]' : $field['name'], // Return single value if not multiple.
+		'value' => $id,
+	), $field['attributes'] );
 
-			$class = '';
-			$img = wp_get_attachment_image_src( $id, 'thumbnail' );
+	if ( 'placeholder' === $id ) {
+		$attributes = array_merge(
+			$attributes,
+			array(
+				'disabled' => 'disabled',
+				'value'    => false,
+			)
+		);
+	}
 
-			$attributes = array_merge( array(
-				'class' => 'image-id',
-				'type'  => 'hidden',
-				'name'  => $is_multiple ? $field['name'] . '[]' : $field['name'], // Return single value if not multiple.
-				'value' => $id,
-			), $field['attributes'] );
-
-			// Set placeholder.
-			if ( 'placeholder' == $id ) {
-
-				$class = 'bs-image-template';
-				$attributes = array_merge( $attributes, array( 'disabled' => 'disabled', 'value' => false ) );
-
-			}
-
-			?>
-			<div class="bs-image-wrap <?php echo esc_attr( $class ); ?>">
-				<input <?php echo beans_esc_attributes( $attributes ); ?> />
-				<img src="<?php echo esc_url( beans_get( 0, $img ) ); ?>">
-				<div class="bs-toolbar">
-					<?php if ( $is_multiple ) : ?>
-						<a href="#" class="dashicons dashicons-menu"></a>
-					<?php endif; ?>
-					<a href="#" class="dashicons dashicons-edit"></a>
-					<a href="#" class="dashicons dashicons-post-trash"></a>
-				</div>
-			</div>
-
-		<?php endforeach; ?>
-	</div>
-	<?php
+	return $attributes;
 }
