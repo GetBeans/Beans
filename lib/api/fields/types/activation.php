@@ -24,8 +24,5 @@ beans_add_smart_action( 'beans_field_activation', 'beans_field_activation' );
  * }
  */
 function beans_field_activation( array $field ) {
-	?>
-	<input type="hidden" value="0" name="<?php echo esc_attr( $field['name'] ); ?>" />
-	<input type="checkbox" name="<?php echo esc_attr( $field['name'] ); ?>" value="1"<?php checked( $field['value'], 1 ); ?> <?php echo beans_esc_attributes( $field['attributes'] ); ?>/><?php // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped - Escaping is handled in the function. ?>
-	<?php
+	include dirname( __FILE__ ) . '/views/activation.php';
 }
