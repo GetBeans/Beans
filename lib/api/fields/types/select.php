@@ -29,11 +29,5 @@ function beans_field_select( array $field ) {
 		return;
 	}
 
-	?>
-	<select name="<?php echo esc_attr( $field['name'] ); ?>" <?php echo beans_esc_attributes( $field['attributes'] );?>><?php // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped - Escaping is handled in the function. ?>
-		<?php foreach ( $field['options'] as $value => $label ) : ?>
-			<option value="<?php echo esc_attr( $value ); ?>"<?php selected( $value, $field['value'] ); ?>><?php echo esc_html( $label ); ?></option>
-		<?php endforeach; ?>
-	</select>
-	<?php
+	include dirname( __FILE__ ) . '/views/select.php';
 }
