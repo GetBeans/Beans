@@ -17,6 +17,9 @@
 	padding-bottom: 0;
 }
 
+.bs-field-wrap a {
+}
+
 .bs-field {
 	display: block;
 	position: relative;
@@ -101,26 +104,31 @@
 	text-align: center;
 	-moz-transition: background-color 0.1s ease-in 0;
 	-webkit-transition: background-color 0.1s ease-in 0;
+	transition: background-color 0.1s ease-in 0;
 }
 
 .bs-field a.dashicons-edit {
 	font-size: 20px;
 }
 
-.bs-field a.dashicons:hover {
+.bs-field a.dashicons:hover,
+.bs-field a.dashicons:focus {
 	color: #fff;
 }
 
-.bs-field a:hover.dashicons-edit {
+.bs-field a:hover.dashicons-edit,
+.bs-field a:focus.dashicons-edit {
 	background-color: #76b031;
 }
 
-.bs-field a:hover.dashicons-menu {
+.bs-field a:hover.dashicons-menu,
+.bs-field a:focus.dashicons-menu {
 	background-color: #2991c0;
 	cursor: move;
 }
 
-.bs-field a:hover.dashicons-post-trash {
+.bs-field a:hover.dashicons-post-trash,
+.bs-field a:focus.dashicons-post-trash {
 	background-color: #dd4b39;
 }
 
