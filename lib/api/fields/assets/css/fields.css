@@ -183,6 +183,7 @@
 }
 
 .bs-field .bs-image-template {
+	display: none;
 }
 
 .bs-field .bs-image-wrap .bs-toolbar {
