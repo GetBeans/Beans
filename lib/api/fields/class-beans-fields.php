@@ -313,46 +313,6 @@ final class _Beans_Fields {
 	}
 
 	/**
-	 * Render the field content.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param array $field The given field to be rendered.
-	 *
-	 * @return void
-	 */
-	public function field_content( $field ) {
-		beans_open_markup_e( 'beans_field_wrap', 'div', array(
-			'class' => 'bs-field-wrap bs-' . $field['type'] . ' ' . $field['context'],
-		), $field );
-
-		// Set fields loop to cater for groups.
-		if ( 'group' === $field['type'] ) {
-			$fields = $field['fields'];
-		} else {
-			$fields = array( $field );
-		}
-
-		beans_open_markup_e( 'beans_field_inside', 'div', array(
-			'class' => 'bs-field-inside',
-		), $fields );
-
-		// Loop through fields.
-		foreach ( $fields as $single_field ) {
-			beans_open_markup_e( 'beans_field[_' . $single_field['id'] . ']', 'div', array(
-				'class' => 'bs-field bs-' . $single_field['type'],
-			), $single_field );
-
-			do_action( 'beans_field_' . $single_field['type'], $single_field );
-
-			beans_close_markup_e( 'beans_field[_' . $single_field['id'] . ']', 'div', $single_field );
-		}
-
-		beans_close_markup_e( 'beans_field_inside', 'div', $fields );
-		beans_close_markup_e( 'beans_field_wrap', 'div', $field );
-	}
-
-	/**
 	 * Get the registered fields.
 	 *
 	 * @since 1.0.0

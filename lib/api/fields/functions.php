@@ -85,19 +85,46 @@ function beans_get_fields( $context, $section = false ) {
  * {@see beans_get_fields()}.
  *
  * @since 1.0.0
+ * @since 1.5.0 Moved rendering code out of _Beans_Fields.
  *
- * @param array $field Array of data obtained using {@see beans_get_fields()}.
+ * @param array $field The given field to render, obtained using {@see beans_get_fields()}.
  *
  * @return void
  */
-function beans_field( $field ) {
+function beans_field( array $field ) {
 
 	if ( ! class_exists( '_Beans_Fields' ) ) {
 		return;
 	}
 
-	$class = new _Beans_Fields();
-	$class->field_content( $field );
+	beans_open_markup_e( 'beans_field_wrap', 'div', array(
+		'class' => 'bs-field-wrap bs-' . $field['type'] . ' ' . $field['context'],
+	), $field );
+
+	// Set fields loop to cater for groups.
+	if ( 'group' === $field['type'] ) {
+		$fields = $field['fields'];
+	} else {
+		$fields = array( $field );
+	}
+
+	beans_open_markup_e( 'beans_field_inside', 'div', array(
+		'class' => 'bs-field-inside',
+	), $fields );
+
+	// Loop through fields.
+	foreach ( $fields as $single_field ) {
+		beans_open_markup_e( 'beans_field[_' . $single_field['id'] . ']', 'div', array(
+			'class' => 'bs-field bs-' . $single_field['type'],
+		), $single_field );
+
+		do_action( 'beans_field_' . $single_field['type'], $single_field );
+
+		beans_close_markup_e( 'beans_field[_' . $single_field['id'] . ']', 'div', $single_field );
+	}
+
+	beans_close_markup_e( 'beans_field_inside', 'div', $fields );
+	beans_close_markup_e( 'beans_field_wrap', 'div', $field );
 }
 
 /**

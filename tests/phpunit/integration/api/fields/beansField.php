@@ -45,7 +45,6 @@ class Tests_BeansField extends Fields_Test_Case {
 	 */
 	public function setUp() {
 		parent::setUp();
-		Monkey\setUp();
 
 		// Make sure the radio is hooked into Beans.
 		beans_add_smart_action( 'beans_field_checkbox', 'beans_field_checkbox' );
@@ -55,16 +54,15 @@ class Tests_BeansField extends Fields_Test_Case {
 	 * Cleans up the test environment after each test.
 	 */
 	public function tearDown() {
-		Monkey\tearDown();
 		parent::tearDown();
 
 		beans_remove_action( 'beans_field_checkbox', 'beans_field_checkbox' );
 	}
 
 	/**
-	 * Test beans_field() should render a checkbox field.
+	 * Test beans_field() should render the checkbox field.
 	 */
-	public function test_should_render_a_checkbox_field() {
+	public function test_should_render_checkbox_field() {
 		$field = $this->merge_field_with_default( array(
 			'id'             => 'beans_compile_all_styles',
 			'label'          => false,
