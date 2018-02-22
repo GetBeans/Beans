@@ -94,7 +94,7 @@
 }
 
 /* Dashicons */
-.bs-field a.dashicons {
+.bs-field button {
 	display: inline-block;
 	margin-left: 5px;
 	padding: 4px;
@@ -107,28 +107,28 @@
 	transition: background-color 0.1s ease-in 0;
 }
 
-.bs-field a.dashicons-edit {
-	font-size: 20px;
+.bs-field button .dashicons-edit {
+	font-size: 22px;
 }
 
-.bs-field a.dashicons:hover,
-.bs-field a.dashicons:focus {
+.bs-field button:hover .dashicons,
+.bs-field button:focus .dashicons {
 	color: #fff;
 }
 
-.bs-field a:hover.dashicons-edit,
-.bs-field a:focus.dashicons-edit {
+.bs-field .bs-button-edit:hover,
+.bs-field .bs-button-edit:focus {
 	background-color: #76b031;
 }
 
-.bs-field a:hover.dashicons-menu,
-.bs-field a:focus.dashicons-menu {
+.bs-field .bs-button-menu:hover,
+.bs-field .bs-button-menu:focus {
 	background-color: #2991c0;
 	cursor: move;
 }
 
-.bs-field a:hover.dashicons-post-trash,
-.bs-field a:focus.dashicons-post-trash {
+.bs-field .bs-button-trash:hover,
+.bs-field .bs-button-trash:focus {
 	background-color: #dd4b39;
 }
 
@@ -192,7 +192,7 @@
 	right: 0;
 	box-sizing: border-box;
 	width: 100%;
-	padding: 6px 0;
+	padding: 5px 0;
 	background-color: #e6e6e6;
 	text-align: center;
 }
@@ -201,8 +201,8 @@
 	margin: 0 3px 0 1px;
 }
 
-.bs-field .bs-image-wrap:hover .bs-toolbar {
-	display: block;
+.bs-field .bs-image-wrap:hover .bs-toolbar,
+.bs-field .bs-image-wrap:focus .bs-toolbar {
 }
 
 /* Radio/Imageradio */
