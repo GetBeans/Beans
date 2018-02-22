@@ -26,10 +26,13 @@ foreach ( $field['options'] as $value => $radio ) : // @codingStandardsIgnoreLin
 		?>
 			<span class="screen-reader-text"><?php echo esc_html( $image['screen_reader_text'] ); ?></span>
 			<img src="<?php echo esc_url( $image['src'] ); ?>" alt="<?php echo esc_html( $image['alt'] ); ?>" />
+			<input id="radio_<?php echo $clean_value; ?>" class="screen-reader-text" type="radio" name="<?php echo esc_attr( $field['name'] ); ?>" value="<?php echo $clean_value; ?>"<?php checked( $value, $field['value'], 1 ); echo beans_esc_attributes( $field['attributes'] ); ?> /> <?php // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped - Escaped above. ?>
 		<?php endif; ?>
-			<input id="radio_<?php echo $clean_value; ?>" type="radio" name="<?php echo esc_attr( $field['name'] ); ?>" value="<?php echo $clean_value; ?>"<?php checked( $value, $field['value'], 1 ); echo beans_esc_attributes( $field['attributes'] ); ?> /> <?php // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped - Escaped above. ?>
+
 <?php
 if ( ! $is_image ) {
+?>
+	<input id="radio_<?php echo $clean_value; ?>" type="radio" name="<?php echo esc_attr( $field['name'] ); ?>" value="<?php echo $clean_value; ?>"<?php checked( $value, $field['value'], 1 ); echo beans_esc_attributes( $field['attributes'] ); ?> /> <?php // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped - Escaped above.
 	echo wp_kses_post( $radio );
 }
 ?>
