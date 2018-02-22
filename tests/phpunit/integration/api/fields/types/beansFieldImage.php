@@ -51,6 +51,7 @@ class Tests_BeansFieldImage extends Fields_Test_Case {
 			'post_mime_type' => 'image/jpeg',
 			'post_type'      => 'attachment',
 		) );
+		update_post_meta( $image_id, '_wp_attachment_image_alt', 'This is the alt value.', true );
 
 		$field = $this->merge_field_with_default( array(
 			'id'    => 'beans_image_test',
@@ -69,7 +70,7 @@ class Tests_BeansFieldImage extends Fields_Test_Case {
 <div class="bs-images-wrap" data-multiple="">
     <div class="bs-image-wrap">
         <input class="image-id" type="hidden" name="beans_fields[beans_image_test]" value="1" />
-        <img src="http://example.org/wp-content/uploads/image.png">
+        <img src="http://example.org/wp-content/uploads/image.png" alt="This is the alt value.">
         <div class="bs-toolbar">
             <a href="#" class="dashicons dashicons-edit"></a>
             <a href="#" class="dashicons dashicons-post-trash"></a>
@@ -77,7 +78,7 @@ class Tests_BeansFieldImage extends Fields_Test_Case {
     </div>
     <div class="bs-image-wrap bs-image-template">
         <input class="image-id" type="hidden" name="beans_fields[beans_image_test]" value="" disabled="disabled" />
-        <img src="">
+        <img src="" alt="">
         <div class="bs-toolbar">
             <a href="#" class="dashicons dashicons-edit"></a>
             <a href="#" class="dashicons dashicons-post-trash"></a>
@@ -101,10 +102,12 @@ EOB;
 			'post_mime_type' => 'image/jpeg',
 			'post_type'      => 'attachment',
 		) );
+		update_post_meta( $images[0], '_wp_attachment_image_alt', 'Image 1 alt.', true );
 		$images[] = self::factory()->attachment->create_object( 'image-2.png', $post_id, array(
 			'post_mime_type' => 'image/jpeg',
 			'post_type'      => 'attachment',
 		) );
+		update_post_meta( $images[1], '_wp_attachment_image_alt', 'Image 2 alt.', true );
 
 		$field = $this->merge_field_with_default( array(
 			'id'       => 'beans_image_test',
@@ -124,7 +127,7 @@ EOB;
 <div class="bs-images-wrap" data-multiple="1">
     <div class="bs-image-wrap">
         <input class="image-id" type="hidden" name="beans_fields[beans_image_test][]" value="1" />
-        <img src="http://example.org/wp-content/uploads/image-1.png">
+        <img src="http://example.org/wp-content/uploads/image-1.png" alt="Image 1 alt.">
         <div class="bs-toolbar">
             <a href="#" class="dashicons dashicons-menu"></a>
             <a href="#" class="dashicons dashicons-edit"></a>
@@ -133,7 +136,7 @@ EOB;
     </div>
     <div class="bs-image-wrap">
         <input class="image-id" type="hidden" name="beans_fields[beans_image_test][]" value="2" />
-        <img src="http://example.org/wp-content/uploads/image-2.png">
+        <img src="http://example.org/wp-content/uploads/image-2.png" alt="Image 2 alt.">
         <div class="bs-toolbar">
             <a href="#" class="dashicons dashicons-menu"></a>
             <a href="#" class="dashicons dashicons-edit"></a>
@@ -142,7 +145,7 @@ EOB;
     </div>
     <div class="bs-image-wrap bs-image-template">
         <input class="image-id" type="hidden" name="beans_fields[beans_image_test][]" value="" disabled="disabled" />
-        <img src="">
+        <img src="" alt="">
         <div class="bs-toolbar">
             <a href="#" class="dashicons dashicons-menu"></a>
             <a href="#" class="dashicons dashicons-edit"></a>
@@ -153,6 +156,55 @@ EOB;
 EOB;
 		$expected = str_replace( 'value="1"', 'value="' . $images[0] . '"', $expected );
 		$expected = str_replace( 'value="2"', 'value="' . $images[1] . '"', $expected );
+
+		// Run the test.
+		$this->assertSame( $this->format_the_html( $expected ), $this->format_the_html( $html ) );
+	}
+
+	/**
+	 * Test beans_field_image() should render a single image field with the default alt when none exists.
+	 */
+	public function test_should_render_single_image_field_with_default_alt_when_none_exists() {
+		$post_id  = self::factory()->post->create();
+		$image_id = self::factory()->attachment->create_object( 'image.png', $post_id, array(
+			'post_mime_type' => 'image/jpeg',
+			'post_type'      => 'attachment',
+		) );
+
+		$field = $this->merge_field_with_default( array(
+			'id'    => 'beans_image_test',
+			'type'  => 'image',
+			'label' => 'Image Test',
+			'value' => $image_id,
+		), false );
+
+		ob_start();
+		beans_field_image( $field );
+		$html = ob_get_clean();
+
+		$expected = <<<EOB
+<a href="#" class="bs-add-image button button-small" style="display: none">Add Image</a>
+<input type="hidden" name="beans_fields[beans_image_test]" value="">
+<div class="bs-images-wrap" data-multiple="">
+    <div class="bs-image-wrap">
+        <input class="image-id" type="hidden" name="beans_fields[beans_image_test]" value="1" />
+        <img src="http://example.org/wp-content/uploads/image.png" alt="Sorry, no alt was given for this image.">
+        <div class="bs-toolbar">
+            <a href="#" class="dashicons dashicons-edit"></a>
+            <a href="#" class="dashicons dashicons-post-trash"></a>
+        </div>
+    </div>
+    <div class="bs-image-wrap bs-image-template">
+        <input class="image-id" type="hidden" name="beans_fields[beans_image_test]" value="" disabled="disabled" />
+        <img src="" alt="">
+        <div class="bs-toolbar">
+            <a href="#" class="dashicons dashicons-edit"></a>
+            <a href="#" class="dashicons dashicons-post-trash"></a>
+        </div>
+    </div>
+</div>
+EOB;
+		$expected = str_replace( 'value="1"', 'value="' . $image_id . '"', $expected );
 
 		// Run the test.
 		$this->assertSame( $this->format_the_html( $expected ), $this->format_the_html( $html ) );

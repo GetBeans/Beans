@@ -47,8 +47,13 @@ class Tests_BeansFieldImage extends Fields_Test_Case {
 	 * Test beans_field_image() should render a single image field.
 	 */
 	public function test_should_render_single_image_field() {
-		Monkey\Functions\expect( 'wp_get_attachment_image_src' )->with( 1, 'thumbnail' )->once()
+		Monkey\Functions\expect( 'wp_get_attachment_image_src' )
+			->with( 1, 'thumbnail' )
+			->once()
 			->andReturn( 'image.png' );
+		Monkey\Functions\expect( 'get_post_meta' )
+			->once()
+			->andReturn( 'This is the image alt value.' );
 
 		$field = $this->merge_field_with_default( array(
 			'id'    => 'beans_image_test',
@@ -67,7 +72,7 @@ class Tests_BeansFieldImage extends Fields_Test_Case {
 <div class="bs-images-wrap" data-multiple="">
     <div class="bs-image-wrap">
         <input class="image-id" type="hidden" name="beans_fields[beans_image_test]" value="1" />
-        <img src="image.png">
+        <img src="image.png" alt="This is the image alt value.">
         <div class="bs-toolbar">
             <a href="#" class="dashicons dashicons-edit"></a>
             <a href="#" class="dashicons dashicons-post-trash"></a>
@@ -75,7 +80,7 @@ class Tests_BeansFieldImage extends Fields_Test_Case {
     </div>
     <div class="bs-image-wrap bs-image-template">
         <input class="image-id" type="hidden" name="beans_fields[beans_image_test]" value="" disabled="disabled" />
-        <img src="">
+        <img src="" alt="">
         <div class="bs-toolbar">
             <a href="#" class="dashicons dashicons-edit"></a>
             <a href="#" class="dashicons dashicons-post-trash"></a>
@@ -93,13 +98,16 @@ EOB;
 	 */
 	public function test_should_render_multiple_images_field() {
 		Monkey\Functions\expect( 'wp_get_attachment_image_src' )
-			->times( 3 )
+			->times( 2 )
 			->andReturnUsing( function( $image_id ) {
 				if ( 'placeholder' === $image_id ) {
 					return '';
 				}
 				return "image-{$image_id}.png";
 			} );
+		Monkey\Functions\expect( 'get_post_meta' )
+			->times( 2 )
+			->andReturn( 'This is the image alt value.' );
 
 		$field = $this->merge_field_with_default( array(
 			'id'       => 'beans_image_test',
@@ -119,7 +127,7 @@ EOB;
 <div class="bs-images-wrap" data-multiple="1">
     <div class="bs-image-wrap">
         <input class="image-id" type="hidden" name="beans_fields[beans_image_test][]" value="1" />
-        <img src="image-1.png">
+        <img src="image-1.png" alt="This is the image alt value.">
         <div class="bs-toolbar">
             <a href="#" class="dashicons dashicons-menu"></a>
             <a href="#" class="dashicons dashicons-edit"></a>
@@ -128,7 +136,7 @@ EOB;
     </div>
     <div class="bs-image-wrap">
         <input class="image-id" type="hidden" name="beans_fields[beans_image_test][]" value="2" />
-        <img src="image-2.png">
+        <img src="image-2.png" alt="This is the image alt value.">
         <div class="bs-toolbar">
             <a href="#" class="dashicons dashicons-menu"></a>
             <a href="#" class="dashicons dashicons-edit"></a>
@@ -137,7 +145,7 @@ EOB;
     </div>
     <div class="bs-image-wrap bs-image-template">
         <input class="image-id" type="hidden" name="beans_fields[beans_image_test][]" value="" disabled="disabled" />
-        <img src="">
+        <img src="" alt="">
         <div class="bs-toolbar">
             <a href="#" class="dashicons dashicons-menu"></a>
             <a href="#" class="dashicons dashicons-edit"></a>
@@ -146,6 +154,56 @@ EOB;
     </div>
 </div>
 EOB;
+		// Run the test.
+		$this->assertSame( $this->format_the_html( $expected ), $this->format_the_html( $html ) );
+	}
+
+	/**
+	 * Test beans_field_image() should render a single image field with the default alt when none exists.
+	 */
+	public function test_should_render_single_image_field_with_default_alt_when_none_exists() {
+		Monkey\Functions\expect( 'wp_get_attachment_image_src' )
+			->with( 1, 'thumbnail' )
+			->once()
+			->andReturn( 'image.png' );
+		Monkey\Functions\expect( 'get_post_meta' )
+			->once()
+			->andReturn( '' );
+
+		$field = $this->merge_field_with_default( array(
+			'id'    => 'beans_image_test',
+			'type'  => 'image',
+			'label' => 'Image Test',
+			'value' => 1, // attachment ID.
+		), false );
+
+		ob_start();
+		beans_field_image( $field );
+		$html = ob_get_clean();
+
+		$expected = <<<EOB
+<a href="#" class="bs-add-image button button-small" style="display: none">Add Image</a>
+<input type="hidden" name="beans_fields[beans_image_test]" value="">
+<div class="bs-images-wrap" data-multiple="">
+    <div class="bs-image-wrap">
+        <input class="image-id" type="hidden" name="beans_fields[beans_image_test]" value="1" />
+        <img src="image.png" alt="Sorry, no alt was given for this image.">
+        <div class="bs-toolbar">
+            <a href="#" class="dashicons dashicons-edit"></a>
+            <a href="#" class="dashicons dashicons-post-trash"></a>
+        </div>
+    </div>
+    <div class="bs-image-wrap bs-image-template">
+        <input class="image-id" type="hidden" name="beans_fields[beans_image_test]" value="" disabled="disabled" />
+        <img src="" alt="">
+        <div class="bs-toolbar">
+            <a href="#" class="dashicons dashicons-edit"></a>
+            <a href="#" class="dashicons dashicons-post-trash"></a>
+        </div>
+    </div>
+</div>
+EOB;
+
 		// Run the test.
 		$this->assertSame( $this->format_the_html( $expected ), $this->format_the_html( $html ) );
 	}

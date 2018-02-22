@@ -23,10 +23,11 @@ foreach ( $images as $id ) :
 	}
 
 	$attributes = _beans_get_image_id_attributes( $id, $field, $is_multiple ); // @codingStandardsIgnoreLine. WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound - Called from within a function and not within global scope.
+	list( $image_url, $image_alt ) = _beans_get_image_url_and_alt( $id );
 ?>
 	<div class="bs-image-wrap<?php echo 'placeholder' === $id ? ' bs-image-template' : ''; ?>">
         <input <?php echo beans_esc_attributes( $attributes ); ?> /><?php // @codingStandardsIgnoreLine phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped - Escaping is handled in the function. ?>
-		<img src="<?php echo esc_url( beans_get( 0, wp_get_attachment_image_src( $id, 'thumbnail' ) ) ); ?>">
+		<img src="<?php echo $image_url ? esc_url( $image_url ) : ''; ?>" alt="<?php echo $image_alt ? esc_attr( $image_alt ) : ''; ?>">
 		<div class="bs-toolbar">
 		<?php if ( $is_multiple ) : ?>
 			<a href="#" class="dashicons dashicons-menu"></a>

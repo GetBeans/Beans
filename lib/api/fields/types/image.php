@@ -27,7 +27,7 @@ beans_add_smart_action( 'beans_field_image', 'beans_field_image' );
  * @since 1.5.0 Moved the HTML to a view file.
  *
  * @param array $field       {
- *      For best practices, pass the array of data obtained using {@see beans_get_fields()}.
+ *                           For best practices, pass the array of data obtained using {@see beans_get_fields()}.
  *
  * @type mixed  $value       The image's or images' ID.
  * @type string $name        The field's "name" value.
@@ -81,4 +81,38 @@ function _beans_get_image_id_attributes( $id, array $field, $is_multiple ) {
 	}
 
 	return $attributes;
+}
+
+/**
+ * Get the image's URL and alt values.
+ *
+ * @since 1.5.0
+ *
+ * @param mixed $image_id The image's attachment ID.
+ *
+ * @return array|void
+ */
+function _beans_get_image_url_and_alt( $image_id ) {
+	$image_id = (int) $image_id;
+
+	// If this is not a valid image ID, bail out.
+	if ( $image_id < 1 ) {
+		return;
+	}
+
+	$image_url = beans_get( 0, wp_get_attachment_image_src( $image_id, 'thumbnail' ) );
+
+	// If no URL is retrieved, bail out.
+	if ( ! $image_url ) {
+		return;
+	}
+
+	$image_alt = get_post_meta( $image_id, '_wp_attachment_image_alt', true );
+
+	// If no alt value is given, set a default.
+	if ( ! $image_alt ) {
+		$image_alt = __( 'Sorry, no alt was given for this image.', 'tm-beans' );
+	}
+
+	return array( $image_url, $image_alt );
 }
