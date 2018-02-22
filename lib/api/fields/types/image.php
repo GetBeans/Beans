@@ -1,15 +1,17 @@
 <?php
 /**
- * Renders the image field type.
+ * Handler for rendering the image field.
  *
  * @package Beans\Framework\API\Fields\Types
  */
 
 beans_add_smart_action( 'beans_field_enqueue_scripts_image', 'beans_field_image_assets' );
 /**
- * Enqueued assets required by the beans image field.
+ * Enqueued the assets for the image field.
  *
  * @since 1.0.0
+ *
+ * @return void
  */
 function beans_field_image_assets() {
 	wp_enqueue_media();
@@ -19,19 +21,20 @@ function beans_field_image_assets() {
 
 beans_add_smart_action( 'beans_field_image', 'beans_field_image' );
 /**
- * Echo image field type.
+ * Render the image field, which handles a single ime or a gallery of images.
  *
  * @since 1.0.0
+ * @since 1.5.0 Moved the HTML to a view file.
  *
- * @param array $field      {
+ * @param array $field       {
  *      For best practices, pass the array of data obtained using {@see beans_get_fields()}.
  *
- * @type mixed  $value      The image's or images' ID.
- * @type string $name       The field name value.
- * @type array  $attributes An array of attributes to add to the field. The array key defines the attribute name and
- *       the array value defines the attribute value. Default is array.
- * @type mixed  $default    The default value. Default is false.
- * @type string $is_multiple   Set to true to enable multiple images (gallery). Default is false.
+ * @type mixed  $value       The image's or images' ID.
+ * @type string $name        The field's "name" value.
+ * @type array  $attributes  An array of attributes to add to the field. The array's key defines the attribute name
+ *                           and the array's value defines the attribute value. Default is an empty array.
+ * @type mixed  $default     The default value. Default is false.
+ * @type string $is_multiple Set to true to enable multiple images (gallery). Default is false.
  * }
  */
 function beans_field_image( array $field ) {
@@ -49,11 +52,11 @@ function beans_field_image( array $field ) {
 /**
  * Get the Image ID's attributes.
  *
- * @since 1.5.0
+ * @since  1.5.0
  * @ignore
  * @access private
  *
- * @param string $id          The given image ID.
+ * @param string $id          The given image's ID.
  * @param array  $field       The field's configuration parameters.
  * @param bool   $is_multiple Multiple flag.
  *

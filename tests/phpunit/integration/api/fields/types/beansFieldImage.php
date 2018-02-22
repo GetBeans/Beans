@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for beans_field_image_assets()
+ * Tests for beans_field_image()
  *
  * @package Beans\Framework\Tests\Integration\API\Fields\Types
  *
@@ -43,7 +43,7 @@ class Tests_BeansFieldImage extends Fields_Test_Case {
 	}
 
 	/**
-	 * Test beans_field_image_assets() should render a single image field.
+	 * Test beans_field_image() should render a single image field.
 	 */
 	public function test_should_render_single_image_field() {
 		$post_id  = self::factory()->post->create();
@@ -92,7 +92,7 @@ EOB;
 	}
 
 	/**
-	 * Test beans_field_image_assets() should render multiple images field.
+	 * Test beans_field_image() should render multiple images field.
 	 */
 	public function test_should_render_multiple_images_field() {
 		$images   = array();

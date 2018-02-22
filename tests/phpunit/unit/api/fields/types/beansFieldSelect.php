@@ -14,7 +14,7 @@ use Beans\Framework\Tests\Unit\API\Fields\Includes\Fields_Test_Case;
 require_once dirname( __DIR__ ) . '/includes/class-fields-test-case.php';
 
 /**
- * Class Tests_BeansFieldSelect
+ * Class Tests_BeansFieldSelectV
  *
  * @package Beans\Framework\Tests\Unit\API\Fields
  * @group   unit-tests
@@ -70,7 +70,7 @@ EOB;
 	}
 
 	/**
-	 * Test beans_field_checkbox() should render the select field with attributes when given.
+	 * Test beans_field_select() should render the select field with attributes when given.
 	 */
 	public function test_should_render_select_field_with_attributes_when_given() {
 		$field = $this->merge_field_with_default( array(

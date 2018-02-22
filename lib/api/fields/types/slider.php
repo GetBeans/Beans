@@ -1,8 +1,8 @@
 <?php
 /**
- * Renders the slider field type.
+ * Handler for rendering the slider field.
  *
- * @package Beans\Framework\API\Options
+ * @package Beans\Framework\API\Fields\Types
  */
 
 beans_add_smart_action( 'beans_field_enqueue_scripts_slider', 'beans_field_slider_assets' );
@@ -17,17 +17,18 @@ function beans_field_slider_assets() {
 
 beans_add_smart_action( 'beans_field_slider', 'beans_field_slider' );
 /**
- * Echo slider field type.
+ * Render the slider field.
  *
  * @since 1.0.0
+ * @since 1.5.0 Moved the HTML to a view file.
  *
- * @param array $field {
+ * @param array $field       {
  *      For best practices, pass the array of data obtained using {@see beans_get_fields()}.
  *
  * @type mixed     $value      The field's current value.
  * @type string    $name       The field's "name" value.
- * @type array     $attributes An array of attributes to add to the field. The array key defines the
- *                                 attribute name and the array value defines the attribute value. Default array.
+ * @type array     $attributes An array of attributes to add to the field. The array's key defines the attribute name
+ *                             and the array's value defines the attribute value. Default is an empty array.
  * @type int|float $default    The default value.
  * @type string    $min        The slider's minimum value. Default 0.
  * @type string    $max        The slider's maximum value. Default 100.

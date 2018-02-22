@@ -44,7 +44,7 @@ class Tests_BeansFieldTextarea extends Fields_Test_Case {
 	/**
 	 * Test beans_field_textarea() should render the textarea field.
 	 */
-	public function test_should_render_text_field() {
+	public function test_should_render_textarea_field() {
 		$field          = $this->merge_field_with_default( array(
 			'id'      => 'beans_textarea_test',
 			'type'    => 'textarea',
@@ -63,7 +63,7 @@ class Tests_BeansFieldTextarea extends Fields_Test_Case {
 	/**
 	 * Test beans_field_textarea() should render the textarea field with attributes when given.
 	 */
-	public function test_should_render_text_field_with_attributes_when_given() {
+	public function test_should_render_textarea_field_with_attributes_when_given() {
 		$field          = $this->merge_field_with_default( array(
 			'id'         => 'beans_textarea_test',
 			'type'       => 'textarea',

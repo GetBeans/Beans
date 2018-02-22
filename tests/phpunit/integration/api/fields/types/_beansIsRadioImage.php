@@ -33,13 +33,13 @@ class Tests_BeansIsRadioImage extends Fields_Test_Case {
 	}
 
 	/**
-	 * Test _beans_is_radio_image() should return true when an array configuration is given.
+	 * Test _beans_is_radio_image() should return true when image source is given.
 	 */
 	public function test_should_return_true_when_image_src_given() {
 		$test_data = array(
-			'c'    => BEANS_THEME_DIR . 'lib/admin/assets/images/layouts/c.png',
-			'c_sp' => BEANS_THEME_DIR . 'lib/admin/assets/images/layouts/c_sp.png',
-			'sp_c' => BEANS_THEME_DIR . 'lib/admin/assets/images/layouts/sp_c.png',
+			'c'    => 'http://example.com/images/layouts/c.png',
+			'c_sp' => 'http://example.com/images/layouts/c_sp.png',
+			'sp_c' => 'http://example.com/images/layouts/sp_c.png',
 		);
 
 		foreach ( $test_data as $src ) {
@@ -64,21 +64,21 @@ class Tests_BeansIsRadioImage extends Fields_Test_Case {
 	}
 
 	/**
-	 * Test _beans_is_radio_image() should return true when an array configuration is given.
+	 * Test _beans_is_radio_image() should return true when an array is given, an array that configures the image.
 	 */
 	public function test_should_return_true_when_array_is_given() {
 		$test_data = array(
 			'c'    => array(
-				'src'                => 'images/layouts/c.png',
+				'src'                => 'http://example.com/images/layouts/c.png',
 				'screen_reader_text' => 'Content Only Layout',
 			),
 			'c_sp' => array(
-				'src'                => 'images/layouts/c_sp.png',
+				'src'                => 'http://example.com/images/layouts/c_sp.png',
 				'alt'                => 'Content + Sidebar Primary Layout',
 				'screen_reader_text' => 'Option for the Content + Sidebar Primary Layout',
 			),
 			'sp_c' => array(
-				'src' => 'images/layouts/c_sp.png',
+				'src' => 'http://example.com/images/layouts/c_sp.png',
 				'alt' => 'Sidebar Primary + Content Layout',
 			),
 		);

@@ -44,7 +44,7 @@ class Tests_BeansFieldCheckbox extends Fields_Test_Case {
 	/**
 	 * Test beans_field_checkbox() should render the checkbox with the label when given.
 	 */
-	public function test_should_render_a_checkbox_with_label_when_given() {
+	public function test_should_render_checkbox_with_label_when_given() {
 		$field = $this->merge_field_with_default( array(
 			'id'             => 'beans_compile_all_styles',
 			'label'          => false,
@@ -69,7 +69,7 @@ EOB;
 	/**
 	 * Test beans_field_checkbox() should render the checkbox with the default label when none is given.
 	 */
-	public function test_should_render_a_checkbox_with_default_label_when_none_is_given() {
+	public function test_should_render_checkbox_with_default_label_when_none_is_given() {
 		$field = $this->merge_field_with_default( array(
 			'id'      => 'beans_compile_all_styles',
 			'type'    => 'checkbox',
@@ -92,7 +92,7 @@ EOB;
 	/**
 	 * Test beans_field_checkbox() should render the checkbox with attributes when given.
 	 */
-	public function test_should_render_a_checkbox_with_attributes_when_given() {
+	public function test_should_render_checkbox_with_attributes_when_given() {
 		$field = $this->merge_field_with_default( array(
 			'id'             => 'beans_compile_all_styles',
 			'checkbox_label' => 'Compile all WordPress styles',

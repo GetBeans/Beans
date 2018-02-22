@@ -42,9 +42,9 @@ class Tests_BeansFieldRadio extends Fields_Test_Case {
 	}
 
 	/**
-	 * Test beans_field_radio() should render a radio field with image options.
+	 * Test beans_field_radio() should render the radio field with image options.
 	 */
-	public function test_should_render_a_radio_field_with_image_options() {
+	public function test_should_render_radio_field_with_image_options() {
 		$field = $this->merge_field_with_default( array(
 			'id'      => 'beans_layout',
 			'label'   => 'Layout',
@@ -90,10 +90,9 @@ EOB;
 	}
 
 	/**
-	 * Test beans_field_Radio() should render the accessible images when accessible parameters are not
-	 * given.
+	 * Test beans_field_radio() should render the accessible images when accessible parameters are given.
 	 */
-	public function test_should_render_when_accessible_parameters_given() {
+	public function test_should_render_accessible_images_when_given() {
 		$field = $this->merge_field_with_default( array(
 			'id'      => 'beans_layout',
 			'label'   => 'Layout',

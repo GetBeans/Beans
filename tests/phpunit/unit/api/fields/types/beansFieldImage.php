@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for beans_field_image_assets()
+ * Tests for beans_field_image()
  *
  * @package Beans\Framework\Tests\Unit\API\Fields\Types
  *
@@ -44,7 +44,7 @@ class Tests_BeansFieldImage extends Fields_Test_Case {
 	}
 
 	/**
-	 * Test beans_field_image_assets() should render a single image field.
+	 * Test beans_field_image() should render a single image field.
 	 */
 	public function test_should_render_single_image_field() {
 		Monkey\Functions\expect( 'wp_get_attachment_image_src' )->with( 1, 'thumbnail' )->once()
@@ -89,7 +89,7 @@ EOB;
 	}
 
 	/**
-	 * Test beans_field_image_assets() should render multiple images field.
+	 * Test beans_field_image() should render multiple images field.
 	 */
 	public function test_should_render_multiple_images_field() {
 		Monkey\Functions\expect( 'wp_get_attachment_image_src' )
@@ -146,7 +146,6 @@ EOB;
     </div>
 </div>
 EOB;
-
 		// Run the test.
 		$this->assertSame( $this->format_the_html( $expected ), $this->format_the_html( $html ) );
 	}

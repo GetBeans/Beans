@@ -37,9 +37,9 @@ class Tests_BeansStandardizeRadioImage extends Fields_Test_Case {
 	 */
 	public function test_should_standardize_when_only_src_given() {
 		$test_data = array(
-			'c'    => BEANS_THEME_DIR . 'lib/admin/assets/images/layouts/c.png',
-			'c_sp' => BEANS_THEME_DIR . 'lib/admin/assets/images/layouts/c_sp.png',
-			'sp_c' => BEANS_THEME_DIR . 'lib/admin/assets/images/layouts/sp_c.png',
+			'c'    => 'http://example.com/images/layouts/c.png',
+			'c_sp' => 'http://example.com/images/layouts/c_sp.png',
+			'sp_c' => 'http://example.com/images/layouts/sp_c.png',
 		);
 
 		foreach ( $test_data as $value => $radio ) {
@@ -58,15 +58,15 @@ class Tests_BeansStandardizeRadioImage extends Fields_Test_Case {
 	public function test_should_standardize_when_alt_is_not_given() {
 		$test_data = array(
 			'c'    => array(
-				'src'                => 'images/layouts/c.png',
+				'src'                => 'http://example.com/images/layouts/c.png',
 				'screen_reader_text' => 'Content Only Layout',
 			),
 			'c_sp' => array(
-				'src'                => 'images/layouts/c_sp.png',
+				'src'                => 'http://example.com/images/layouts/c_sp.png',
 				'screen_reader_text' => 'Content + Sidebar Primary Layout',
 			),
 			'sp_c' => array(
-				'src'                => 'images/layouts/c_sp.png',
+				'src'                => 'http://example.com/images/layouts/c_sp.png',
 				'screen_reader_text' => 'Sidebar Primary + Content Layout',
 			),
 		);
@@ -87,15 +87,15 @@ class Tests_BeansStandardizeRadioImage extends Fields_Test_Case {
 	public function test_should_standardize_when_screen_reader_text_is_not_given() {
 		$test_data = array(
 			'c'    => array(
-				'src' => 'images/layouts/c.png',
+				'src' => 'http://example.com/images/layouts/c.png',
 				'alt' => 'Content Only Layout',
 			),
 			'c_sp' => array(
-				'src' => 'images/layouts/c_sp.png',
+				'src' => 'http://example.com/images/layouts/c_sp.png',
 				'alt' => 'Content + Sidebar Primary Layout',
 			),
 			'sp_c' => array(
-				'src' => 'images/layouts/c_sp.png',
+				'src' => 'http://example.com/images/layouts/c_sp.png',
 				'alt' => 'Sidebar Primary + Content Layout',
 			),
 		);

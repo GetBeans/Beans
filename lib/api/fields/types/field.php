@@ -1,6 +1,6 @@
 <?php
 /**
- * Renders the field's label and description.
+ * Handler for rendering the field's label and description.
  *
  * @package Beans\Framework\API\Fields\Types
  */
@@ -12,7 +12,7 @@ beans_add_smart_action( 'beans_field_wrap_prepend_markup', 'beans_field_label' )
  * @since 1.0.0
  *
  * @param array $field {
- *                     Array of data.
+ *      Array of data.
  *
  * @type string $label The field label. Default false.
  * }
@@ -25,21 +25,22 @@ function beans_field_label( array $field ) {
 	}
 
 	beans_open_markup_e( 'beans_field_label[_' . $field['id'] . ']', 'label' );
-	echo esc_html( $field['label'] );
+		echo esc_html( $field['label'] );
 	beans_close_markup_e( 'beans_field_label[_' . $field['id'] . ']', 'label' );
 }
 
 beans_add_smart_action( 'beans_field_wrap_append_markup', 'beans_field_description' );
 /**
- * Echo field description.
+ * Render the field's description.
  *
  * @since 1.0.0
+ * @since 1.5.0 Moved the HTML to a view file.
  *
  * @param array $field       {
- *                           Array of data.
+ *      Array of data.
  *
  * @type string $description The field description. The description can be truncated using <!--more--> as a delimiter.
- *       Default false.
+ *                           Default false.
  * }
  */
 function beans_field_description( array $field ) {
@@ -51,6 +52,7 @@ function beans_field_description( array $field ) {
 	// Escape the description here.
 	$description = wp_kses_post( $description );
 
+	// If the description has <!--more-->, split it.
 	if ( preg_match( '#<!--more-->#', $description, $matches ) ) {
 		list( $description, $extended ) = explode( $matches[0], $description, 2 );
 	}

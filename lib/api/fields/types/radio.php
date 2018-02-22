@@ -1,26 +1,28 @@
 <?php
 /**
- * Renders the radio field type.
+ * Handler for rendering the radio field.
  *
  * @package Beans\Framework\API\Fields\Types
  */
 
 beans_add_smart_action( 'beans_field_radio', 'beans_field_radio' );
 /**
- * Echo radio field type.
+ * Render the radio field.
  *
  * @since 1.0.0
+ * @since 1.5.0 Moved the HTML to a view file.
  *
  * @param array $field      {
  *                          For best practices, pass the array of data obtained using {@see beans_get_fields()}.
  *
- * @type mixed  $value      The field value.
- * @type string $name       The field name value.
- * @type array  $attributes An array of attributes to add to the field. The array key defines the attribute name and
- *       the array value defines the attribute value. Default array.
+ * @type mixed  $value      The field's current value.
+ * @type string $name       The field's "name" value.
+ * @type array  $attributes An array of attributes to add to the field. The array's key defines the attribute name
+ *                           and the array's value defines the attribute value. Default is an empty array.
  * @type mixed  $default    The default value. Default false.
- * @type array  $options    An array used to populate the radio options. The array key defines radio value and the
- *       array value defines the radio label or image path.
+ * @type array  $options    An array used to populate the radio options. The array's key defines radio value. The
+ *                          and the array's value defines the radio's label, image source (src), or an array to define
+ *                          the image's src, alt, and screen text reader value.
  * }
  */
 function beans_field_radio( array $field ) {
@@ -88,18 +90,28 @@ function _beans_standardize_radio_image( $value, $radio ) {
 		'screen_reader_text' => '',
 	), $radio );
 
-	if ( ! $radio['screen_reader_text'] && ! $radio['alt'] ) {
-		$radio['alt']                = "Option for {$value}";
-		$radio['screen_reader_text'] = "Option for {$value}";
+	if ( isset( $GLOBALS['tonya'] ) ) {
+		var_dump( $radio );
 	}
 
+	if ( $radio['screen_reader_text'] && $radio['alt'] ) {
+		return $radio;
+	}
+
+	// Use the "alt" attribute when the "screen_reader_text" is not set.
 	if ( ! $radio['screen_reader_text'] && $radio['alt'] ) {
 		$radio['screen_reader_text'] = $radio['alt'];
+		return $radio;
 	}
 
+	// Use the "screen_reader_text" attribute when the "alt" is not set.
 	if ( ! $radio['alt'] && $radio['screen_reader_text'] ) {
 		$radio['alt'] = $radio['screen_reader_text'];
+		return $radio;
 	}
 
+	// Set the default accessibility values.
+	$radio['alt']                = "Option for {$value}";
+	$radio['screen_reader_text'] = "Option for {$value}";
 	return $radio;
 }

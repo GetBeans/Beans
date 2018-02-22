@@ -1,27 +1,25 @@
 <?php
 /**
- * Renders the activation field type.
+ * Handler for rendering the activation field.
  *
- * @package Beans\Framework\API\Options
+ * @package Beans\Framework\API\Fields\Types
  */
 
 beans_add_smart_action( 'beans_field_activation', 'beans_field_activation' );
 /**
- * Echo activation field type.
+ * Render the activation field.
  *
  * @since 1.0.0
+ * @since 1.5.0 Moved the HTML to a view file.
  *
- * @param array $field       {
+ * @param array $field      {
  *      For best practices, pass the array of data obtained using {@see beans_get_fields()}.
  *
- * @type string $description The field description. The description can be truncated using <!--more--> as a delimiter.
- *       Default false.
- * @type mixed  $value       The field value.
- * @type string $name        The field name value.
- * @type array  $attributes  An array of attributes to add to the field. The array key defines the attribute name and
- *       the array value defines the attribute value. Default array.
- * @type mixed  $default     The default value. Default false.
- * }
+ * @type mixed  $value      The field's current value.
+ * @type string $name       The field's "name" value.
+ * @type array  $attributes An array of attributes to add to the field. The array's key defines the attribute name
+ *                          and the array's value defines the attribute value. Default is an empty array.
+ * @type int    $default    The default value.
  */
 function beans_field_activation( array $field ) {
 	include dirname( __FILE__ ) . '/views/activation.php';
