@@ -101,7 +101,7 @@ EOB;
 		$expected = <<<EOB
 <div class="bs-field-description">Testing the text field.<br />
 	<a class="bs-read-more" href="#">More...</a>
-	<div class="bs-extended-content">This is the extended part of the description.</div>
+	<div class="bs-extended-content" style="display: none;">This is the extended part of the description.</div>
 </div>
 EOB;
 		// Run the test.

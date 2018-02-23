@@ -69,8 +69,10 @@ function beans_field_description( array $field ) {
 		list( $description, $extended ) = explode( $matches[0], $description, 2 );
 	}
 
+
 	beans_open_markup_e( 'beans_field_description[_' . $field['id'] . ']', 'div', array( 'class' => 'bs-field-description' ) );
-	echo wp_kses_post( $description ); // @codingStandardsIgnoreStart - Generic.WhiteSpace.ScopeIndent.IncorrectExact - the indent is intentional to indicate HTML structure.
+
+	echo $description;  // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped - To optimize, escaping is handled above.
 
 	if ( isset( $extended ) ) {
 		include dirname( __FILE__ ) . '/views/field-description.php';

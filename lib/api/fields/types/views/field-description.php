@@ -11,4 +11,4 @@
 ?>
 
 <br /><a class="bs-read-more" href="#"><?php esc_html_e( 'More...', 'tm-beans' ); ?></a>
-<div class="bs-extended-content"><?php echo $extended; // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped - To optimize, escaping is handled in the calling function. ?></div>
+<div class="bs-extended-content" style="display: none;"><?php echo $extended; // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped - To optimize, escaping is handled in the calling function. ?></div>
