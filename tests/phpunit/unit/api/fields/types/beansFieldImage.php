@@ -68,7 +68,7 @@ class Tests_BeansFieldImage extends Fields_Test_Case {
 
 		$expected = <<<EOB
 <button class="bs-add-image button button-small" type="button" style="display: none">Add Image</button>
-<input type="hidden" name="beans_fields[beans_image_test]" value="">
+<input id="beans_image_test" type="hidden" name="beans_fields[beans_image_test]" value="">
 <div class="bs-images-wrap" data-multiple="">
     <div class="bs-image-wrap">
         <input class="image-id" type="hidden" name="beans_fields[beans_image_test]" value="1" />
@@ -123,7 +123,7 @@ EOB;
 
 		$expected = <<<EOB
 <button class="bs-add-image button button-small" type="button" style="display: none">Add Images</button>
-<input type="hidden" name="beans_fields[beans_image_test]" value="">
+<input id="beans_image_test" type="hidden" name="beans_fields[beans_image_test]" value="">
 <div class="bs-images-wrap" data-multiple="1">
     <div class="bs-image-wrap">
         <input class="image-id" type="hidden" name="beans_fields[beans_image_test][]" value="1" />
@@ -183,7 +183,7 @@ EOB;
 
 		$expected = <<<EOB
 <button class="bs-add-image button button-small" type="button" style="display: none">Add Image</button>
-<input type="hidden" name="beans_fields[beans_image_test]" value="">
+<input id="beans_image_test" type="hidden" name="beans_fields[beans_image_test]" value="">
 <div class="bs-images-wrap" data-multiple="">
     <div class="bs-image-wrap">
         <input class="image-id" type="hidden" name="beans_fields[beans_image_test]" value="1" />
