@@ -48,6 +48,11 @@ abstract class Fields_Test_Case extends Test_Case {
 		foreach ( array( 'esc_attr', 'esc_html', 'esc_textarea', 'esc_url', 'wp_kses_post', '__' ) as $wp_function ) {
 			Monkey\Functions\when( $wp_function )->returnArg();
 		}
+
+		foreach ( array( 'esc_attr_e', 'esc_html_e', '_e' ) as $wp_function ) {
+			Monkey\Functions\when( $wp_function )->echoArg();
+		}
+
 		Monkey\Functions\when( 'checked' )->alias( function( $actual, $value ) {
 			if ( $actual !== $value ) {
 				return;

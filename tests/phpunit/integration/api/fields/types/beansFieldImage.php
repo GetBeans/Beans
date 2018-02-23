@@ -65,23 +65,23 @@ class Tests_BeansFieldImage extends Fields_Test_Case {
 		$html = ob_get_clean();
 
 		$expected = <<<EOB
-<a href="#" class="bs-add-image button button-small" style="display: none">Add Image</a>
+<button class="bs-add-image button button-small" type="button" style="display: none">Add Image</button>
 <input type="hidden" name="beans_fields[beans_image_test]" value="">
 <div class="bs-images-wrap" data-multiple="">
     <div class="bs-image-wrap">
         <input class="image-id" type="hidden" name="beans_fields[beans_image_test]" value="1" />
         <img src="http://example.org/wp-content/uploads/image.png" alt="This is the alt value.">
         <div class="bs-toolbar">
-            <a href="#" class="dashicons dashicons-edit"></a>
-            <a href="#" class="dashicons dashicons-post-trash"></a>
+            <button aria-label="Edit Image" type="button" class="button bs-button-edit"></button>
+            <button aria-label="Delete Image" type="button" class="button bs-button-trash"></button>
         </div>
     </div>
     <div class="bs-image-wrap bs-image-template">
         <input class="image-id" type="hidden" name="beans_fields[beans_image_test]" value="" disabled="disabled" />
         <img src="" alt="">
         <div class="bs-toolbar">
-            <a href="#" class="dashicons dashicons-edit"></a>
-            <a href="#" class="dashicons dashicons-post-trash"></a>
+            <button aria-label="Edit Image" type="button" class="button bs-button-edit"></button>
+            <button aria-label="Delete Image" type="button" class="button bs-button-trash"></button>
         </div>
     </div>
 </div>
@@ -122,34 +122,34 @@ EOB;
 		$html = ob_get_clean();
 
 		$expected = <<<EOB
-<a href="#" class="bs-add-image button button-small" style="display: none">Add Images</a>
+<button class="bs-add-image button button-small" type="button" style="display: none">Add Images</button>
 <input type="hidden" name="beans_fields[beans_image_test]" value="">
 <div class="bs-images-wrap" data-multiple="1">
     <div class="bs-image-wrap">
         <input class="image-id" type="hidden" name="beans_fields[beans_image_test][]" value="1" />
         <img src="http://example.org/wp-content/uploads/image-1.png" alt="Image 1 alt.">
         <div class="bs-toolbar">
-            <a href="#" class="dashicons dashicons-menu"></a>
-            <a href="#" class="dashicons dashicons-edit"></a>
-            <a href="#" class="dashicons dashicons-post-trash"></a>
+            <button aria-label="Manage Images" type="button" class="button bs-button-menu"></button>
+        	<button aria-label="Edit Image" type="button" class="button bs-button-edit"></button>
+            <button aria-label="Delete Image" type="button" class="button bs-button-trash"></button>
         </div>
     </div>
     <div class="bs-image-wrap">
         <input class="image-id" type="hidden" name="beans_fields[beans_image_test][]" value="2" />
         <img src="http://example.org/wp-content/uploads/image-2.png" alt="Image 2 alt.">
         <div class="bs-toolbar">
-            <a href="#" class="dashicons dashicons-menu"></a>
-            <a href="#" class="dashicons dashicons-edit"></a>
-            <a href="#" class="dashicons dashicons-post-trash"></a>
+            <button aria-label="Manage Images" type="button" class="button bs-button-menu"></button>
+        	<button aria-label="Edit Image" type="button" class="button bs-button-edit"></button>
+            <button aria-label="Delete Image" type="button" class="button bs-button-trash"></button>
         </div>
     </div>
     <div class="bs-image-wrap bs-image-template">
         <input class="image-id" type="hidden" name="beans_fields[beans_image_test][]" value="" disabled="disabled" />
         <img src="" alt="">
         <div class="bs-toolbar">
-            <a href="#" class="dashicons dashicons-menu"></a>
-            <a href="#" class="dashicons dashicons-edit"></a>
-            <a href="#" class="dashicons dashicons-post-trash"></a>
+            <button aria-label="Manage Images" type="button" class="button bs-button-menu"></button>
+        	<button aria-label="Edit Image" type="button" class="button bs-button-edit"></button>
+            <button aria-label="Delete Image" type="button" class="button bs-button-trash"></button>
         </div>
     </div>
 </div>
@@ -183,23 +183,23 @@ EOB;
 		$html = ob_get_clean();
 
 		$expected = <<<EOB
-<a href="#" class="bs-add-image button button-small" style="display: none">Add Image</a>
+<button class="bs-add-image button button-small" type="button" style="display: none">Add Image</button>
 <input type="hidden" name="beans_fields[beans_image_test]" value="">
 <div class="bs-images-wrap" data-multiple="">
     <div class="bs-image-wrap">
         <input class="image-id" type="hidden" name="beans_fields[beans_image_test]" value="1" />
         <img src="http://example.org/wp-content/uploads/image.png" alt="Sorry, no alt was given for this image.">
         <div class="bs-toolbar">
-            <a href="#" class="dashicons dashicons-edit"></a>
-            <a href="#" class="dashicons dashicons-post-trash"></a>
+            <button aria-label="Edit Image" type="button" class="button bs-button-edit"></button>
+            <button aria-label="Delete Image" type="button" class="button bs-button-trash"></button>
         </div>
     </div>
     <div class="bs-image-wrap bs-image-template">
         <input class="image-id" type="hidden" name="beans_fields[beans_image_test]" value="" disabled="disabled" />
         <img src="" alt="">
         <div class="bs-toolbar">
-            <a href="#" class="dashicons dashicons-edit"></a>
-            <a href="#" class="dashicons dashicons-post-trash"></a>
+            <button aria-label="Edit Image" type="button" class="button bs-button-edit"></button>
+            <button aria-label="Delete Image" type="button" class="button bs-button-trash"></button>
         </div>
     </div>
 </div>

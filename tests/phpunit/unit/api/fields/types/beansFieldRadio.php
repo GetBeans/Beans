@@ -70,21 +70,20 @@ class Tests_BeansFieldRadio extends Fields_Test_Case {
     <label class="bs-has-image" for="radio_c">
         <span class="screen-reader-text">Option for c</span>
         <img src="http://example.com/images/layouts/c.png" alt="Option for c" />
-        <input id="radio_c" type="radio" name="beans_fields[beans_layout]" value="c" />
+        <input id="radio_c" class="screen-reader-text" type="radio" name="beans_fields[beans_layout]" value="c" />
     </label>
     <label class="bs-has-image" for="radio_c_sp">
         <span class="screen-reader-text">Option for c_sp</span>
         <img src="http://example.com/images/layouts/c_sp.png" alt="Option for c_sp" />
-        <input id="radio_c_sp" type="radio" name="beans_fields[beans_layout]" value="c_sp" />
+        <input id="radio_c_sp" class="screen-reader-text" type="radio" name="beans_fields[beans_layout]" value="c_sp" />
     </label>
     <label class="bs-has-image" for="radio_sp_c">
         <span class="screen-reader-text">Option for sp_c</span>
         <img src="http://example.com/images/layouts/sp_c.png" alt="Option for sp_c" />
-        <input id="radio_sp_c" type="radio" name="beans_fields[beans_layout]" value="sp_c" />
+        <input id="radio_sp_c" class="screen-reader-text" type="radio" name="beans_fields[beans_layout]" value="sp_c" />
     </label>
 </fieldset>
 EOB;
-
 		// Run the test.
 		$this->assertSame( $this->format_the_html( $expected ), $this->format_the_html( $html ) );
 	}
@@ -128,21 +127,20 @@ EOB;
     <label class="bs-has-image" for="radio_c">
         <span class="screen-reader-text">Option for the Content Only Layout</span>
         <img src="http://example.com/images/layouts/c.png" alt="Content Only Layout" />
-        <input id="radio_c" type="radio" name="beans_fields[beans_layout]" value="c" />
+        <input id="radio_c" class="screen-reader-text" type="radio" name="beans_fields[beans_layout]" value="c" />
     </label>
     <label class="bs-has-image" for="radio_c_sp">
         <span class="screen-reader-text">Option for the Content + Sidebar Primary Layout</span>
         <img src="http://example.com/images/layouts/c_sp.png" alt="Option for the Content + Sidebar Primary Layout" />
-        <input id="radio_c_sp" type="radio" name="beans_fields[beans_layout]" value="c_sp" />
+        <input id="radio_c_sp" class="screen-reader-text" type="radio" name="beans_fields[beans_layout]" value="c_sp" />
     </label>
     <label class="bs-has-image" for="radio_sp_c">
         <span class="screen-reader-text">Sidebar Primary + Content Layout</span>
         <img src="http://example.com/images/layouts/sp_c.png" alt="Sidebar Primary + Content Layout" />
-        <input id="radio_sp_c" type="radio" name="beans_fields[beans_layout]" value="sp_c" />
+        <input id="radio_sp_c" class="screen-reader-text" type="radio" name="beans_fields[beans_layout]" value="sp_c" />
     </label>
 </fieldset>
 EOB;
-
 		// Run the test.
 		$this->assertSame( $this->format_the_html( $expected ), $this->format_the_html( $html ) );
 	}
