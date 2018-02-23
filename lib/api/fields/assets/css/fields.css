@@ -118,6 +118,13 @@
 	content: "\f464";
 }
 
+.bs-field .bs-button-menu:before {
+	font-family: dashicons;
+	font-size: 22px;
+	text-align: center;
+	content: "\f333";
+}
+
 .bs-field .bs-button-trash {
 	margin-left: 5px;
 }
