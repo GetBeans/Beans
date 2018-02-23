@@ -11,6 +11,7 @@
 ?>
 
 <fieldset>
+	<legend><?php echo esc_html( $field['label'] ); ?></legend>
 <?php
 
 // Clean the field's ID prefix once before we start the loop.
@@ -33,12 +34,10 @@ foreach ( $field['options'] as $value => $radio ) : // @codingStandardsIgnoreLin
 			<input id="<?php echo $clean_id; ?>" class="screen-reader-text" type="radio" name="<?php echo esc_attr( $field['name'] ); ?>" value="<?php echo $clean_value; ?>"<?php checked( $value, $field['value'], 1 ); echo beans_esc_attributes( $field['attributes'] ); ?> /> <?php // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped - Escaped above. ?>
 		<?php endif; ?>
 
-<?php
-if ( ! $is_image ) {
-?>
+<?php if ( ! $is_image ) : ?>
 	<input id="<?php echo $clean_id; ?>" type="radio" name="<?php echo esc_attr( $field['name'] ); ?>" value="<?php echo $clean_value; ?>"<?php checked( $value, $field['value'], 1 ); echo beans_esc_attributes( $field['attributes'] ); ?> /> <?php // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped - Escaped above.
 	echo wp_kses_post( $radio );
-}
+endif;
 ?>
 		</label>
 <?php

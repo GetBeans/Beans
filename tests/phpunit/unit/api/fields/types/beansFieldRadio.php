@@ -64,6 +64,7 @@ class Tests_BeansFieldRadio extends Fields_Test_Case {
 
 		$expected = <<<EOB
 <fieldset>
+	<legend>Layout</legend>
     <label class="" for="beans_layout_default_fallback">
         <input id="beans_layout_default_fallback" type="radio" name="beans_fields[beans_layout]" value="default_fallback" checked='checked' />
         Use Default Layout</label>
@@ -121,6 +122,7 @@ EOB;
 
 		$expected = <<<EOB
 <fieldset>
+	<legend>Layout</legend>
     <label class="" for="beans_layout_default_fallback">
         <input id="beans_layout_default_fallback" type="radio" name="beans_fields[beans_layout]" value="default_fallback" checked='checked' />
         Use Default Layout</label>
