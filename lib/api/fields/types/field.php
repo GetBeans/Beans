@@ -24,7 +24,9 @@ function beans_field_label( array $field ) {
 		return;
 	}
 
-	beans_open_markup_e( 'beans_field_label[_' . $field['id'] . ']', 'label' );
+	beans_open_markup_e( 'beans_field_label[_' . $field['id'] . ']', 'label', array(
+		'id' => $field['id'],
+	) );
 		echo esc_html( $field['label'] );
 	beans_close_markup_e( 'beans_field_label[_' . $field['id'] . ']', 'label' );
 }

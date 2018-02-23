@@ -74,7 +74,7 @@ class Tests_BeansFieldLabel extends Fields_Test_Case {
 		$html = ob_get_clean();
 
 		$expected = <<<EOB
-<label >Testing the text field.</label>
+<label id="beans_text_test">Testing the text field.</label>
 EOB;
 		// Run the test.
 		$this->assertSame( $this->format_the_html( $expected ), $this->format_the_html( $html ) );
