@@ -30,10 +30,10 @@ foreach ( $images as $id ) :
 		<img src="<?php echo $image_url ? esc_url( $image_url ) : ''; ?>" alt="<?php echo $image_alt ? esc_attr( $image_alt ) : ''; ?>">
 		<div class="bs-toolbar">
 		<?php if ( $is_multiple ) : ?>
-			<button aria-label="Manage Images" type="button" class="bs-button-menu"></button>
+			<button aria-label="Manage Images" type="button" class="button bs-button-menu"></button>
 		<?php endif; ?>
-			<button aria-label="Edit Image" type="button" class="bs-button-edit"></button>
-			<button aria-label="Delete Image" type="button" class="bs-button-trash"></button>
+			<button aria-label="Edit Image" type="button" class="button bs-button-edit"></button>
+			<button aria-label="Delete Image" type="button" class="button bs-button-trash"></button>
 		</div>
 	</div>
 <?php endforeach; ?>

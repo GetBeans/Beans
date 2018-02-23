@@ -94,9 +94,9 @@
 }
 
 /* Dashicons */
-.bs-field button {
+.bs-field .button {
 	display: inline-block;
-	padding: 4px;
+	padding: 0 4px 1px;
 	border-radius: 4px;
 	color: #555;
 	background-color: #fff;
@@ -106,8 +106,8 @@
 	transition: background-color 0.1s ease-in 0;
 }
 
-.bs-field button:hover,
-.bs-field button:focus {
+.bs-field .button:hover,
+.bs-field .button:focus {
 	color: #fff;
 }
 
