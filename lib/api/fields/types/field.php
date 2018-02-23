@@ -12,7 +12,7 @@ beans_add_smart_action( 'beans_field_wrap_prepend_markup', 'beans_field_label' )
  * @since 1.0.0
  *
  * @param array $field {
- *      Array of data.
+ *                     Array of data.
  *
  * @type string $label The field label. Default false.
  * }
@@ -24,11 +24,20 @@ function beans_field_label( array $field ) {
 		return;
 	}
 
-	beans_open_markup_e( 'beans_field_label[_' . $field['id'] . ']', 'label', array(
-		'id' => $field['id'],
-	) );
+	$id = 'beans_field_label[_' . $field['id'] . ']';
+
+	// These field types do not use a label, as they are providing a header for the group of fields.
+	if ( in_array( $field['type'], array( 'radio', 'group' ), true ) ) {
+		$tag  = 'h4';
+		$args = array( 'class' => 'bs-fields-header' );
+	} else {
+		$tag  = 'label';
+		$args = array( 'for' => $field['id'] );
+	}
+
+	beans_open_markup_e( $id, $tag, $args );
 		echo esc_html( $field['label'] );
-	beans_close_markup_e( 'beans_field_label[_' . $field['id'] . ']', 'label' );
+	beans_close_markup_e( $id, $tag );
 }
 
 beans_add_smart_action( 'beans_field_wrap_append_markup', 'beans_field_description' );
@@ -39,7 +48,7 @@ beans_add_smart_action( 'beans_field_wrap_append_markup', 'beans_field_descripti
  * @since 1.5.0 Moved the HTML to a view file.
  *
  * @param array $field       {
- *      Array of data.
+ *                           Array of data.
  *
  * @type string $description The field description. The description can be truncated using <!--more--> as a delimiter.
  *                           Default false.
@@ -60,7 +69,7 @@ function beans_field_description( array $field ) {
 	}
 
 	beans_open_markup_e( 'beans_field_description[_' . $field['id'] . ']', 'div', array( 'class' => 'bs-field-description' ) );
-		echo wp_kses_post( $description ); // @codingStandardsIgnoreStart - Generic.WhiteSpace.ScopeIndent.IncorrectExact - the indent is intentional to indicate HTML structure.
+	echo wp_kses_post( $description ); // @codingStandardsIgnoreStart - Generic.WhiteSpace.ScopeIndent.IncorrectExact - the indent is intentional to indicate HTML structure.
 
 	if ( isset( $extended ) ) {
 		include dirname( __FILE__ ) . '/views/field-description.php';
