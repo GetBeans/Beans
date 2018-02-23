@@ -91,7 +91,6 @@ final class _Beans_Fields {
 		$this->section = $section;
 
 		$this->add();
-		$this->set_types();
 		$this->do_once();
 		$this->load_fields();
 
@@ -113,6 +112,7 @@ final class _Beans_Fields {
 
 		foreach ( $this->fields as $field ) {
 			$fields[] = $this->standardize_field( $field );
+			$this->set_type( $field );
 		}
 
 		// Register fields.
@@ -168,25 +168,24 @@ final class _Beans_Fields {
 	}
 
 	/**
-	 * Set the type for the field(s).
+	 * Set the type for the given field.
 	 *
-	 * @since 1.0.0
+	 * @since 1.5.0
+	 *
+	 * @param array $field The given field.
 	 *
 	 * @return void
 	 */
-	private function set_types() {
+	private function set_type( array $field ) {
 
-		foreach ( $this->fields as $field ) {
+		// Set the single field's type.
+		if ( 'group' !== $field['type'] ) {
+			$this->field_types[ $field['type'] ] = $field['type'];
+			return;
+		}
 
-			// Set the single field's type.
-			if ( 'group' !== $field['type'] ) {
-				$this->field_types[ $field['type'] ] = $field['type'];
-				continue;
-			}
-
-			foreach ( $field['fields'] as $_field ) {
-				$this->field_types[ $_field['type'] ] = $_field['type'];
-			}
+		foreach ( $field['fields'] as $_field ) {
+			$this->field_types[ $_field['type'] ] = $_field['type'];
 		}
 	}
 
