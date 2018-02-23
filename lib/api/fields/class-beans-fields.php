@@ -139,14 +139,14 @@ final class _Beans_Fields {
 		), $field );
 
 		// Set the field's name.
-		$field['name']      = 'wp_customize' === $this->context ? $field['id'] : 'beans_fields[' . $field['id'] . ']';
+		$field['name'] = 'wp_customize' === $this->context ? $field['id'] : 'beans_fields[' . $field['id'] . ']';
 
 		if ( 'group' === $field['type'] ) {
 
 			foreach ( $field['fields'] as $index => $_field ) {
 
 				if ( $field['db_group'] ) {
-					$_field['name']      = $field['name'] . '[' . $_field['id'] . ']';
+					$_field['name'] = $field['name'] . '[' . $_field['id'] . ']';
 				}
 
 				$field['fields'][ $index ] = $this->standardize_field( $_field );

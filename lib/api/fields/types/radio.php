@@ -90,10 +90,6 @@ function _beans_standardize_radio_image( $value, $radio ) {
 		'screen_reader_text' => '',
 	), $radio );
 
-	if ( isset( $GLOBALS['tonya'] ) ) {
-		var_dump( $radio );
-	}
-
 	if ( $radio['screen_reader_text'] && $radio['alt'] ) {
 		return $radio;
 	}

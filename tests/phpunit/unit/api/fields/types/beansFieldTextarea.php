@@ -52,10 +52,10 @@ class Tests_BeansFieldTextarea extends Fields_Test_Case {
 		) );
 		$field['value'] = 'Testing the textarea field.';
 
+		// Run the function and grab the HTML out of the buffer.
 		ob_start();
 		beans_field_textarea( $field );
 		$html = ob_get_clean();
-
 
 		$expected = <<<EOB
 <textarea id="beans_textarea_test" name="beans_fields[beans_textarea_test]" >Testing the textarea field.</textarea>
@@ -78,6 +78,7 @@ EOB;
 		) );
 		$field['value'] = 'Testing the textarea field with attributes.';
 
+		// Run the function and grab the HTML out of the buffer.
 		ob_start();
 		beans_field_textarea( $field );
 		$html = ob_get_clean();

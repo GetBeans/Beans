@@ -55,6 +55,7 @@ class Tests_BeansFieldSelect extends Fields_Test_Case {
 			),
 		) );
 
+		// Run the function and grab the HTML out of the buffer.
 		ob_start();
 		beans_field_select( $field );
 		$html = ob_get_clean();
@@ -86,6 +87,7 @@ EOB;
 			),
 		) );
 
+		// Run the function and grab the HTML out of the buffer.
 		ob_start();
 		beans_field_select( $field );
 		$html = ob_get_clean();

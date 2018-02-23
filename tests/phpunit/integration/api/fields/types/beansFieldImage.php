@@ -60,6 +60,7 @@ class Tests_BeansFieldImage extends Fields_Test_Case {
 			'value' => $image_id,
 		), false );
 
+		// Run the function and grab the HTML out of the buffer.
 		ob_start();
 		beans_field_image( $field );
 		$html = ob_get_clean();
@@ -117,6 +118,7 @@ EOB;
 			'multiple' => true,
 		), false );
 
+		// Run the function and grab the HTML out of the buffer.
 		ob_start();
 		beans_field_image( $field );
 		$html = ob_get_clean();
@@ -178,6 +180,7 @@ EOB;
 			'value' => $image_id,
 		), false );
 
+		// Run the function and grab the HTML out of the buffer.
 		ob_start();
 		beans_field_image( $field );
 		$html = ob_get_clean();

@@ -44,7 +44,7 @@ class Tests_BeansRegisterFields extends Fields_Test_Case {
 		$this->assertArrayHasKey( $test_data['section'], $registered['beans_tests'] );
 
 		foreach ( $test_data['fields'] as $index => $field ) {
-			$expected              = $this->merge_field_with_default( $field );
+			$expected = $this->merge_field_with_default( $field );
 			$this->assertSame( $expected, $registered['beans_tests'][ $test_data['section'] ][ $index ] );
 		}
 	}

@@ -53,6 +53,7 @@ class Tests_BeansFieldCheckbox extends Fields_Test_Case {
 			'default'        => false,
 		) );
 
+		// Run the function and grab the HTML out of the buffer.
 		ob_start();
 		beans_field_checkbox( $field );
 		$html = ob_get_clean();
@@ -76,6 +77,7 @@ EOB;
 			'default' => false,
 		) );
 
+		// Run the function and grab the HTML out of the buffer.
 		ob_start();
 		beans_field_checkbox( $field );
 		$html = ob_get_clean();
@@ -103,6 +105,7 @@ EOB;
 			),
 		) );
 
+		// Run the function and grab the HTML out of the buffer.
 		ob_start();
 		beans_field_checkbox( $field );
 		$html = ob_get_clean();

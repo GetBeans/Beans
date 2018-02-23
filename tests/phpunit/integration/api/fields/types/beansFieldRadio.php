@@ -59,6 +59,7 @@ class Tests_BeansFieldRadio extends Fields_Test_Case {
 			),
 		) );
 
+		// Run the function and grab the HTML out of the buffer.
 		ob_start();
 		beans_field_radio( $field );
 		$html = ob_get_clean();
@@ -118,6 +119,7 @@ EOB;
 			),
 		) );
 
+		// Run the function and grab the HTML out of the buffer.
 		ob_start();
 		beans_field_radio( $field );
 		$html = ob_get_clean();

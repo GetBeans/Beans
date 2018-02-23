@@ -52,6 +52,7 @@ class Tests_BeansFieldText extends Fields_Test_Case {
 		) );
 		$field['value'] = 'Testing the text field.';
 
+		// Run the function and grab the HTML out of the buffer.
 		ob_start();
 		beans_field_text( $field );
 		$html = ob_get_clean();
@@ -77,6 +78,7 @@ EOB;
 		) );
 		$field['value'] = 'Testing the text field with attributes.';
 
+		// Run the function and grab the HTML out of the buffer.
 		ob_start();
 		beans_field_text( $field );
 		$html = ob_get_clean();

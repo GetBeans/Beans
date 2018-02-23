@@ -69,6 +69,7 @@ class Tests_BeansFieldDescription extends Fields_Test_Case {
 			'default'     => '',
 		) );
 
+		// Run the function and grab the HTML out of the buffer.
 		ob_start();
 		beans_field_description( $field );
 		$html = ob_get_clean();
@@ -92,6 +93,7 @@ EOB;
 			'default'     => '',
 		) );
 
+		// Run the function and grab the HTML out of the buffer.
 		ob_start();
 		beans_field_description( $field );
 		$html = ob_get_clean();

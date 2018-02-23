@@ -57,6 +57,7 @@ class Tests_BeansFieldSlider extends Fields_Test_Case {
 			'interval'    => 1,
 		) );
 
+		// Run the function and grab the HTML out of the buffer.
 		ob_start();
 		beans_field_slider( $field );
 		$html = ob_get_clean();
@@ -87,6 +88,7 @@ EOB;
 			'unit'        => 'Number of beans',
 		) );
 
+		// Run the function and grab the HTML out of the buffer.
 		ob_start();
 		beans_field_slider( $field );
 		$html = ob_get_clean();
@@ -118,6 +120,7 @@ EOB;
 		) );
 		$field['value'] = 15;
 
+		// Run the function and grab the HTML out of the buffer.
 		ob_start();
 		beans_field_slider( $field );
 		$html = ob_get_clean();
@@ -151,6 +154,7 @@ EOB;
 			),
 		) );
 
+		// Run the function and grab the HTML out of the buffer.
 		ob_start();
 		beans_field_slider( $field );
 		$html = ob_get_clean();
