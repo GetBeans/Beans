@@ -55,7 +55,7 @@
 	display: block;
 	clear: both;
 	padding: 10px 0 0;
-	color: #888;
+	color: #333;
 	font-size: 11px;
 }
 
@@ -109,6 +109,11 @@
 .bs-field .button:hover,
 .bs-field .button:focus {
 	color: #fff;
+}
+
+.bs-field .button.dashicons {
+	width: auto;
+	font-size: 0;
 }
 
 .bs-field .bs-button-edit:before {
