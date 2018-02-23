@@ -79,4 +79,91 @@ EOB;
 		// Run the test.
 		$this->assertSame( $this->format_the_html( $expected ), $this->format_the_html( $html ) );
 	}
+
+	/**
+	 * Test beans_field_label() should render the radio field's group header.
+	 */
+	public function test_should_render_radio_group_header() {
+		$field = $this->merge_field_with_default( array(
+			'id'          => 'beans_layout',
+			'label'       => 'Layout',
+			'description' => 'The layout settings.',
+			'type'        => 'radio',
+			'default'     => 'default_fallback',
+			'options'     => array(
+				'default_fallback' => 'Use Default Layout',
+				'c'                => array(
+					'src'                => 'http://example.com/images/layouts/c.png',
+					'alt'                => 'Content Only Layout',
+					'screen_reader_text' => 'Option for the Content Only Layout',
+				),
+				'c_sp'             => array(
+					'src'                => 'http://example.com/images/layouts/c_sp.png',
+					'screen_reader_text' => 'Option for the Content + Sidebar Primary Layout',
+				),
+				'sp_c'             => array(
+					'src' => 'http://example.com/images/layouts/sp_c.png',
+					'alt' => 'Sidebar Primary + Content Layout',
+				),
+			),
+		) );
+
+		ob_start();
+		beans_field_label( $field );
+		$html = ob_get_clean();
+
+		$expected = <<<EOB
+<h3 class="bs-fields-header">Layout</h3>
+EOB;
+		// Run the test.
+		$this->assertSame( $this->format_the_html( $expected ), $this->format_the_html( $html ) );
+	}
+
+	/**
+	 * Test beans_field_label() should render the radio field's group header.
+	 */
+	public function test_should_render_group_header() {
+		$field = array(
+			'id'          => 'beans_group_test',
+			'label'       => 'Group of fields',
+			'description' => 'This is a group of fields.',
+			'type'        => 'group',
+			'fields'      => array(
+				array(
+					'id'      => 'beans_group_activation_test',
+					'label'   => 'Activate',
+					'type'    => 'activation',
+					'default' => false,
+				),
+				array(
+					'id'         => 'beans_group_select_test',
+					'label'      => 'Select',
+					'type'       => 'select',
+					'default'    => 'aggressive',
+					'attributes' => array( 'style' => 'margin: -3px 0 0 -8px;' ),
+					'options'    => array(
+						'aggressive' => 'Aggressive',
+						'standard'   => 'Standard',
+					),
+				),
+				array(
+					'id'             => 'beans_group_checkbox_test',
+					'label'          => false,
+					'checkbox_label' => 'Enable the checkbox test',
+					'type'           => 'checkbox',
+					'default'        => false,
+				),
+			),
+		);
+
+		ob_start();
+		beans_field_label( $field );
+		$html = ob_get_clean();
+
+		$expected = <<<EOB
+<h3 class="bs-fields-header">Group of fields</h3>
+EOB;
+		// Run the test.
+		$this->assertSame( $this->format_the_html( $expected ), $this->format_the_html( $html ) );
+	}
 }

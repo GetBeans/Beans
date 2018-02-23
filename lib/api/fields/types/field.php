@@ -28,7 +28,7 @@ function beans_field_label( array $field ) {
 
 	// These field types do not use a label, as they are providing a header for the group of fields.
 	if ( in_array( $field['type'], array( 'radio', 'group' ), true ) ) {
-		$tag  = 'h4';
+		$tag  = 'h3';
 		$args = array( 'class' => 'bs-fields-header' );
 	} else {
 		$tag  = 'label';
