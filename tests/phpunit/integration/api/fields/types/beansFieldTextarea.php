@@ -56,8 +56,11 @@ class Tests_BeansFieldTextarea extends Fields_Test_Case {
 		beans_field_textarea( $field );
 		$html = ob_get_clean();
 
+		$expected = <<<EOB
+<textarea id="beans_textarea_test" name="beans_fields[beans_textarea_test]" >Testing the textarea field.</textarea>
+EOB;
 		// Run the test.
-		$this->assertSame( '<textarea name="beans_fields[beans_textarea_test]" >Testing the textarea field.</textarea>', $html );
+		$this->assertSame( $expected, $html );
 	}
 
 	/**
@@ -78,7 +81,10 @@ class Tests_BeansFieldTextarea extends Fields_Test_Case {
 		beans_field_textarea( $field );
 		$html = ob_get_clean();
 
+		$expected = <<<EOB
+<textarea id="beans_textarea_test" name="beans_fields[beans_textarea_test]" data-test="foo">Testing the textarea field with attributes.</textarea>
+EOB;
 		// Run the test.
-		$this->assertSame( '<textarea name="beans_fields[beans_textarea_test]" data-test="foo">Testing the textarea field with attributes.</textarea>', $html );
+		$this->assertSame( $expected, $html );
 	}
 }

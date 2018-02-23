@@ -56,8 +56,11 @@ class Tests_BeansFieldText extends Fields_Test_Case {
 		beans_field_text( $field );
 		$html = ob_get_clean();
 
+		$expected = <<<EOB
+<input id="beans_text_test" type="text" name="beans_fields[beans_text_test]" value="Testing the text field." >
+EOB;
 		// Run the test.
-		$this->assertSame( '<input type="text" name="beans_fields[beans_text_test]" value="Testing the text field." >', $html );
+		$this->assertSame( $expected, $html );
 	}
 
 	/**
@@ -78,7 +81,10 @@ class Tests_BeansFieldText extends Fields_Test_Case {
 		beans_field_text( $field );
 		$html = ob_get_clean();
 
+		$expected = <<<EOB
+<input id="beans_text_test" type="text" name="beans_fields[beans_text_test]" value="Testing the text field with attributes." data-test="foo">
+EOB;
 		// Run the test.
-		$this->assertSame( '<input type="text" name="beans_fields[beans_text_test]" value="Testing the text field with attributes." data-test="foo">', $html );
+		$this->assertSame( $expected, $html );
 	}
 }

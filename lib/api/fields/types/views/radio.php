@@ -11,7 +11,7 @@
 ?>
 
 <fieldset>
-	<legend><?php echo esc_html( $field['label'] ); ?></legend>
+	<legend><?php echo esc_html( $field['description'] ); ?></legend>
 <?php
 
 // Clean the field's ID prefix once before we start the loop.

@@ -63,7 +63,7 @@ class Tests_BeansFieldSlider extends Fields_Test_Case {
 
 		$expected = <<<EOB
 <div class="bs-slider-wrap" slider_min="0" slider_max="100" slider_interval="1">
-    <input type="text" value="0" name="beans_fields[beans_test_slider]" style="display: none;" />
+    <input id="beans_test_slider" type="text" value="0" name="beans_fields[beans_test_slider]" style="display: none;" />
 </div>
 <span class="bs-slider-value">0</span>
 EOB;
@@ -93,7 +93,7 @@ EOB;
 
 		$expected = <<<EOB
 <div class="bs-slider-wrap" slider_min="10" slider_max="100" slider_interval="5">
-    <input type="text" value="0" name="beans_fields[beans_test_slider]" style="display: none;" />
+    <input id="beans_test_slider" type="text" value="0" name="beans_fields[beans_test_slider]" style="display: none;" />
 </div>
 <span class="bs-slider-value">0</span>
 <span class="bs-slider-unit">Number of beans</span>
@@ -124,7 +124,7 @@ EOB;
 
 		$expected = <<<EOB
 <div class="bs-slider-wrap" slider_min="10" slider_max="100" slider_interval="5">
-    <input type="text" value="15" name="beans_fields[beans_test_slider]" style="display: none;" />
+    <input id="beans_test_slider" type="text" value="15" name="beans_fields[beans_test_slider]" style="display: none;" />
 </div>
 <span class="bs-slider-value">15</span>
 EOB;
@@ -157,7 +157,7 @@ EOB;
 
 		$expected = <<<EOB
 <div class="bs-slider-wrap" slider_min="1" slider_max="20" slider_interval="1">
-    <input type="text" value="1" name="beans_fields[beans_test_slider]" style="display: none;" data-test="foo"/>
+    <input id="beans_test_slider" type="text" value="1" name="beans_fields[beans_test_slider]" style="display: none;" data-test="foo"/>
 </div>
 <span class="bs-slider-value">1</span>
 <span class="bs-slider-unit">Number of beans</span>

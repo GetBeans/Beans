@@ -59,7 +59,7 @@ class Tests_BeansFieldCheckbox extends Fields_Test_Case {
 
 		$expected = <<<EOB
 <input type="hidden" value="0" name="beans_fields[beans_compile_all_styles]" />
-<input type="checkbox" name="beans_fields[beans_compile_all_styles]" value="1" />
+<input id="beans_compile_all_styles" type="checkbox" name="beans_fields[beans_compile_all_styles]" value="1" />
 <span class="bs-checkbox-label">Compile all WordPress styles</span>
 EOB;
 		// Run the test.
@@ -82,7 +82,7 @@ EOB;
 
 		$expected = <<<EOB
 <input type="hidden" value="0" name="beans_fields[beans_compile_all_styles]" />
-<input type="checkbox" name="beans_fields[beans_compile_all_styles]" value="1" />
+<input id="beans_compile_all_styles" type="checkbox" name="beans_fields[beans_compile_all_styles]" value="1" />
 <span class="bs-checkbox-label">Enable</span>
 EOB;
 		// Run the test.
@@ -109,7 +109,7 @@ EOB;
 
 		$expected = <<<EOB
 <input type="hidden" value="0" name="beans_fields[beans_compile_all_styles]" />
-<input type="checkbox" name="beans_fields[beans_compile_all_styles]" value="1" data-test="foo"/>
+<input id="beans_compile_all_styles" type="checkbox" name="beans_fields[beans_compile_all_styles]" value="1" data-test="foo"/>
 <span class="bs-checkbox-label">Compile all WordPress styles</span>
 EOB;
 		// Run the test.

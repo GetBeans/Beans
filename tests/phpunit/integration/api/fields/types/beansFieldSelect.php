@@ -60,7 +60,7 @@ class Tests_BeansFieldSelect extends Fields_Test_Case {
 		$html = ob_get_clean();
 
 		$expected = <<<EOB
-<select name="beans_fields[beans_compile_all_scripts_mode]" >
+<select id="beans_compile_all_scripts_mode" name="beans_fields[beans_compile_all_scripts_mode]" >
 	<option value="aggressive" selected='selected'>Aggressive</option>
 	<option value="standard">Standard</option>
 </select>
@@ -91,7 +91,7 @@ EOB;
 		$html = ob_get_clean();
 
 		$expected = <<<EOB
-<select name="beans_fields[beans_compile_all_scripts_mode]" style="margin: -3px 0 0 -8px;">
+<select id="beans_compile_all_scripts_mode" name="beans_fields[beans_compile_all_scripts_mode]" style="margin: -3px 0 0 -8px;">
 	<option value="aggressive">Aggressive</option>
 	<option value="standard" selected='selected'>Standard</option>
 </select>

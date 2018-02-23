@@ -46,11 +46,12 @@ class Tests_BeansFieldRadio extends Fields_Test_Case {
 	 */
 	public function test_should_render_radio_field_with_image_options() {
 		$field = $this->merge_field_with_default( array(
-			'id'      => 'beans_layout',
-			'label'   => 'Layout',
-			'type'    => 'radio',
-			'default' => 'default_fallback',
-			'options' => array(
+			'id'          => 'beans_layout',
+			'label'       => 'Layout',
+			'description' => 'The layout settings.',
+			'type'        => 'radio',
+			'default'     => 'default_fallback',
+			'options'     => array(
 				'default_fallback' => 'Use Default Layout',
 				'c'                => 'http://example.com/images/layouts/c.png',
 				'c_sp'             => 'http://example.com/images/layouts/c_sp.png',
@@ -64,7 +65,7 @@ class Tests_BeansFieldRadio extends Fields_Test_Case {
 
 		$expected = <<<EOB
 <fieldset>
-	<legend>Layout</legend>
+	<legend>The layout settings.</legend>
     <label class="" for="beans_layout_default_fallback">
         <input id="beans_layout_default_fallback" type="radio" name="beans_fields[beans_layout]" value="default_fallback" checked='checked' />
         Use Default Layout</label>
@@ -94,11 +95,12 @@ EOB;
 	 */
 	public function test_should_render_accessible_images_when_given() {
 		$field = $this->merge_field_with_default( array(
-			'id'      => 'beans_layout',
-			'label'   => 'Layout',
-			'type'    => 'radio',
-			'default' => 'default_fallback',
-			'options' => array(
+			'id'          => 'beans_layout',
+			'label'       => 'Layout',
+			'description' => 'The layout settings.',
+			'type'        => 'radio',
+			'default'     => 'default_fallback',
+			'options'     => array(
 				'default_fallback' => 'Use Default Layout',
 				'c'                => array(
 					'src'                => 'http://example.com/images/layouts/c.png',
@@ -122,7 +124,7 @@ EOB;
 
 		$expected = <<<EOB
 <fieldset>
-	<legend>Layout</legend>
+	<legend>The layout settings.</legend>
     <label class="" for="beans_layout_default_fallback">
         <input id="beans_layout_default_fallback" type="radio" name="beans_fields[beans_layout]" value="default_fallback" checked='checked' />
         Use Default Layout</label>

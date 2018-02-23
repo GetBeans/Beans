@@ -81,7 +81,7 @@ class Tests_BeansField extends Fields_Test_Case {
 	<div class="bs-field-inside">
 		<div class="bs-field bs-checkbox">
 			<input type="hidden" value="0" name="beans_fields[beans_compile_all_styles]" />
-			<input type="checkbox" name="beans_fields[beans_compile_all_styles]" value="1" />
+			<input id="beans_compile_all_styles" type="checkbox" name="beans_fields[beans_compile_all_styles]" value="1" />
 			<span class="bs-checkbox-label">Compile all WordPress styles</span>
 		</div>
 	</div>

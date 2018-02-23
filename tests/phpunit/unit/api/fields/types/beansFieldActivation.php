@@ -57,7 +57,7 @@ class Tests_BeansFieldActivation extends Fields_Test_Case {
 
 		$expected = <<<EOB
 <input type="hidden" value="0" name="beans_fields[beans_compile_all_scripts]" />
-<input type="checkbox" name="beans_fields[beans_compile_all_scripts]" value="1" />
+<input id="beans_compile_all_scripts" type="checkbox" name="beans_fields[beans_compile_all_scripts]" value="1" />
 EOB;
 		// Run the test.
 		$this->assertSame( $this->format_the_html( $expected ), $this->format_the_html( $html ) );
@@ -82,7 +82,7 @@ EOB;
 
 		$expected = <<<EOB
 <input type="hidden" value="0" name="beans_fields[beans_compile_all_scripts]" />
-<input type="checkbox" name="beans_fields[beans_compile_all_scripts]" value="1" data-test="foo"/>
+<input id="beans_compile_all_scripts" type="checkbox" name="beans_fields[beans_compile_all_scripts]" value="1" data-test="foo"/>
 EOB;
 		// Run the test.
 		$this->assertSame( $this->format_the_html( $expected ), $this->format_the_html( $html ) );
