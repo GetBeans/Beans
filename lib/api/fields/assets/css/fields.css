@@ -96,7 +96,6 @@
 /* Dashicons */
 .bs-field button {
 	display: inline-block;
-	margin-left: 5px;
 	padding: 4px;
 	border-radius: 4px;
 	color: #555;
@@ -107,13 +106,27 @@
 	transition: background-color 0.1s ease-in 0;
 }
 
-.bs-field button .dashicons-edit {
-	font-size: 22px;
+.bs-field button:hover,
+.bs-field button:focus {
+	color: #fff;
 }
 
-.bs-field button:hover .dashicons,
-.bs-field button:focus .dashicons {
-	color: #fff;
+.bs-field .bs-button-edit:before {
+	font-family: dashicons;
+	font-size: 22px;
+	text-align: center;
+	content: "\f464";
+}
+
+.bs-field .bs-button-trash {
+	margin-left: 5px;
+}
+
+.bs-field .bs-button-trash:before {
+	font-family: dashicons;
+	font-size: 22px;
+	text-align: center;
+	content: "\f182";
 }
 
 .bs-field .bs-button-edit:hover,
@@ -188,11 +201,11 @@
 
 .bs-field .bs-image-wrap .bs-toolbar {
 	position: absolute;
-	top: 0;
 	right: 0;
+	bottom: 0;
 	box-sizing: border-box;
 	width: 100%;
-	padding: 5px 0;
+	padding: 3px 0;
 	background-color: #e6e6e6;
 	text-align: center;
 }
