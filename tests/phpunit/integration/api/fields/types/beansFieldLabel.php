@@ -113,7 +113,7 @@ EOB;
 		$html = ob_get_clean();
 
 		$expected = <<<EOB
-<h3 class="bs-fields-header">Layout</h3>
+<h3 class="bs-fields-header hndle">Layout</h3>
 EOB;
 		// Run the test.
 		$this->assertSame( $this->format_the_html( $expected ), $this->format_the_html( $html ) );
@@ -161,7 +161,7 @@ EOB;
 		$html = ob_get_clean();
 
 		$expected = <<<EOB
-<h3 class="bs-fields-header">Group of fields</h3>
+<h3 class="bs-fields-header hndle">Group of fields</h3>
 EOB;
 		// Run the test.
 		$this->assertSame( $this->format_the_html( $expected ), $this->format_the_html( $html ) );

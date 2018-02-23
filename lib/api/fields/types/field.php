@@ -5,6 +5,7 @@
  * @package Beans\Framework\API\Fields\Types
  */
 
+beans_add_smart_action( 'beans_field_group_label', 'beans_field_label' );
 beans_add_smart_action( 'beans_field_wrap_prepend_markup', 'beans_field_label' );
 /**
  * Render the field's label.
@@ -29,14 +30,14 @@ function beans_field_label( array $field ) {
 	// These field types do not use a label, as they are providing a header for the group of fields.
 	if ( in_array( $field['type'], array( 'radio', 'group' ), true ) ) {
 		$tag  = 'h3';
-		$args = array( 'class' => 'bs-fields-header' );
+		$args = array( 'class' => 'bs-fields-header hndle' );
 	} else {
 		$tag  = 'label';
 		$args = array( 'for' => $field['id'] );
 	}
 
 	beans_open_markup_e( $id, $tag, $args );
-		echo esc_html( $field['label'] );
+	echo esc_html( $field['label'] );
 	beans_close_markup_e( $id, $tag );
 }
 

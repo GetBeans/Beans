@@ -116,7 +116,7 @@ abstract class Fields_Test_Case extends WP_UnitTestCase {
 	 * @return array
 	 */
 	protected function merge_field_with_default( array $field, $set_value = true ) {
-		$merged_field              = array_merge( array(
+		$field         = array_merge( array(
 			'label'       => false,
 			'description' => false,
 			'default'     => false,
@@ -124,13 +124,18 @@ abstract class Fields_Test_Case extends WP_UnitTestCase {
 			'attributes'  => array(),
 			'db_group'    => false,
 		), $field );
-		$merged_field['name']      = 'beans_fields[' . $field['id'] . ']';
+		$field['name'] = 'beans_fields[' . $field['id'] . ']';
 
-		if ( $set_value ) {
-			$merged_field['value'] = $field['default'];
+		if ( 'group' === $field['type'] ) {
+
+			foreach ( $field['fields'] as $index => $_field ) {
+				$field['fields'][ $index ] = $this->merge_field_with_default( $_field, $set_value );
+			}
+		} elseif ( $set_value ) {
+			$field['value'] = $field['default'];
 		}
 
-		return $merged_field;
+		return $field;
 	}
 
 	/**

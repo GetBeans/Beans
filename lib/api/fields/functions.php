@@ -118,7 +118,25 @@ function beans_field( array $field ) {
 			'class' => 'bs-field bs-' . $single_field['type'],
 		), $single_field );
 
-		do_action( 'beans_field_' . $single_field['type'], $single_field );
+		if ( 'group' === $field['type'] ) {
+			/**
+			 * Fires the "beans_field_group_label" event to render this field's label.
+			 *
+			 * @since 1.5.0
+			 *
+			 * @param array $single_field The given single field.
+			 */
+			do_action( 'beans_field_group_label', $single_field );
+		}
+
+			/**
+			 * Fires the "beans_field_{type}" event to render this single field.
+			 *
+			 * @since 1.5.0
+			 *
+			 * @param array $single_field The given single field.
+			 */
+			do_action( 'beans_field_' . $single_field['type'], $single_field );
 
 		beans_close_markup_e( 'beans_field[_' . $single_field['id'] . ']', 'div', $single_field );
 	}
