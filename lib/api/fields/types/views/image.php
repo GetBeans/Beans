@@ -15,17 +15,18 @@
 <div class="bs-images-wrap" data-multiple="<?php echo esc_attr( $is_multiple ); ?>">
 <?php
 
-foreach ( $images as $id ) :
+foreach ( $images as $image_id ) :
 
 	// Skip this one if the ID is not set.
-	if ( ! $id ) {
+	if ( ! $image_id ) {
 		continue;
 	}
 
-	$attributes = _beans_get_image_id_attributes( $id, $field, $is_multiple ); // @codingStandardsIgnoreLine. WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound - Called from within a function and not within global scope.
-	list( $image_url, $image_alt ) = _beans_get_image_url_and_alt( $id );
+	$attributes = _beans_get_image_id_attributes( $image_id, $field, $is_multiple ); // @codingStandardsIgnoreLine. WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound - Called from within a function and not within global scope.
+	$image_url  = _beans_get_image_url( $image_id );  // @codingStandardsIgnoreLine. WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound - Called from within a function and not within global scope.
+	$image_alt  = $image_url ? _beans_get_image_alt( $image_id ) : '';  // @codingStandardsIgnoreLine. WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound - Called from within a function and not within global scope.
 ?>
-	<div class="bs-image-wrap<?php echo 'placeholder' === $id ? ' bs-image-template' : ''; ?>">
+	<div class="bs-image-wrap<?php echo 'placeholder' === $image_id ? ' bs-image-template' : ''; ?>">
         <input <?php echo beans_esc_attributes( $attributes ); ?> /><?php // @codingStandardsIgnoreLine. WordPress.XSS.EscapeOutput.OutputNotEscaped - Escaping is handled in the function. ?>
 		<img src="<?php echo $image_url ? esc_url( $image_url ) : ''; ?>" alt="<?php echo $image_alt ? esc_attr( $image_alt ) : ''; ?>">
 		<div class="bs-toolbar">
