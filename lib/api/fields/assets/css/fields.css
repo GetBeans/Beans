@@ -142,7 +142,9 @@
 }
 
 .bs-field .bs-button-edit:hover,
-.bs-field .bs-button-edit:focus {
+.bs-field .bs-button-edit:focus,
+.bs-field .bs-add-image:hover,
+.bs-field .bs-add-image:focus {
 	background-color: #76b031;
 }
 

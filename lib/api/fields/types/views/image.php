@@ -30,10 +30,10 @@ foreach ( $images as $id ) :
 		<img src="<?php echo $image_url ? esc_url( $image_url ) : ''; ?>" alt="<?php echo $image_alt ? esc_attr( $image_alt ) : ''; ?>">
 		<div class="bs-toolbar">
 		<?php if ( $is_multiple ) : ?>
-			<button aria-label="<?php esc_attr_e( 'Manage Images', 'tm-beans' ); ?>" type="button" class="button bs-button-menu dashicons dashicon-menu"></button>
+			<button aria-label="<?php esc_attr_e( 'Manage Images', 'tm-beans' ); ?>" type="button" class="button bs-button-menu dashicons dashicons-menu"></button>
 		<?php endif; ?>
-			<button aria-label="<?php esc_attr_e( 'Edit Image', 'tm-beans' ); ?>" type="button" class="button bs-button-edit dashicons dashicon-edit"></button>
-			<button aria-label="<?php esc_attr_e( 'Delete Image', 'tm-beans' ); ?>" type="button" class="button bs-button-trash dashicons dashicon-trash"></button>
+			<button aria-label="<?php esc_attr_e( 'Edit Image', 'tm-beans' ); ?>" type="button" class="button bs-button-edit dashicons dashicons-edit"></button>
+			<button aria-label="<?php esc_attr_e( 'Delete Image', 'tm-beans' ); ?>" type="button" class="button bs-button-trash dashicons dashicons-post-trash"></button>
 		</div>
 	</div>
 <?php endforeach; ?>
