@@ -1,6 +1,6 @@
 <?php
 /**
- * This class handles the Beans Fields workflow.
+ * Handles standardizing and registering the fields into the Beans Fields' Container.
  *
  * @package Beans\Framework\API\Fields
  *
@@ -8,7 +8,7 @@
  */
 
 /**
- * Handles the Beans Fields workflow.
+ * The Beans Fields' Container.
  *
  * @since   1.0.0
  * @ignore
@@ -120,7 +120,7 @@ final class _Beans_Fields {
 	}
 
 	/**
-	 * Standardize the field to the Beans format.
+	 * Standardize the field to include the default configuration parameters and fetching the current value.
 	 *
 	 * @since 1.0.0
 	 *
@@ -128,7 +128,7 @@ final class _Beans_Fields {
 	 *
 	 * @return array
 	 */
-	private function standardize_field( $field ) {
+	private function standardize_field( array $field ) {
 		$field = array_merge( array(
 			'label'       => false,
 			'description' => false,
