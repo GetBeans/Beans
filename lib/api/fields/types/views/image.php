@@ -29,11 +29,23 @@ foreach ( $images as $id ) :
         <input <?php echo beans_esc_attributes( $attributes ); ?> /><?php // @codingStandardsIgnoreLine. WordPress.XSS.EscapeOutput.OutputNotEscaped - Escaping is handled in the function. ?>
 		<img src="<?php echo $image_url ? esc_url( $image_url ) : ''; ?>" alt="<?php echo $image_alt ? esc_attr( $image_alt ) : ''; ?>">
 		<div class="bs-toolbar">
+			<?php
+			/**
+			 * The image toolbar's dashicons' class attributes are deprecated in Beans 1.5.  Instead, the .bs-button-{icon}
+			 * class attributes are used and the icon is defined in the CSS via .bs-button-{icon}:before pseudo-element.
+			 *
+			 * The dashicons' class attributes remain in Beans 1.x for backwards compatibility for customs scripts
+			 * or styling. However, these will be removed in Beans 2.0.
+			 *
+			 * @since 1.5.0
+			 * @deprecated
+			 */
+			?>
 		<?php if ( $is_multiple ) : ?>
 			<button aria-label="<?php esc_attr_e( 'Manage Images', 'tm-beans' ); ?>" type="button" class="button bs-button-menu dashicons dashicons-menu"></button>
 		<?php endif; ?>
 			<button aria-label="<?php esc_attr_e( 'Edit Image', 'tm-beans' ); ?>" type="button" class="button bs-button-edit dashicons dashicons-edit"></button>
-			<button aria-label="<?php esc_attr_e( 'Delete Image', 'tm-beans' ); ?>" type="button" class="button bs-button-trash dashicons dashicons-trash"></button>
+			<button aria-label="<?php esc_attr_e( 'Delete Image', 'tm-beans' ); ?>" type="button" class="button bs-button-trash dashicons dashicons-post-trash"></button>
 		</div>
 	</div>
 <?php endforeach; ?>
