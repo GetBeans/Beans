@@ -74,7 +74,7 @@ class Tests_BeansFieldImage extends Fields_Test_Case {
         <img src="http://example.org/wp-content/uploads/image.png" alt="This is the alt value.">
         <div class="bs-toolbar">
             <button aria-label="Edit Image" type="button" class="button bs-button-edit dashicons dashicons-edit"></button>
-            <button aria-label="Delete Image" type="button" class="button bs-button-trash dashicons dashicons-post-trash"></button>
+            <button aria-label="Delete Image" type="button" class="button bs-button-trash dashicons dashicons-trash"></button>
         </div>
     </div>
     <div class="bs-image-wrap bs-image-template">
@@ -82,7 +82,7 @@ class Tests_BeansFieldImage extends Fields_Test_Case {
         <img src="" alt="">
         <div class="bs-toolbar">
             <button aria-label="Edit Image" type="button" class="button bs-button-edit dashicons dashicons-edit"></button>
-            <button aria-label="Delete Image" type="button" class="button bs-button-trash dashicons dashicons-post-trash"></button>
+            <button aria-label="Delete Image" type="button" class="button bs-button-trash dashicons dashicons-trash"></button>
         </div>
     </div>
 </div>
@@ -133,7 +133,7 @@ EOB;
         <div class="bs-toolbar">
             <button aria-label="Manage Images" type="button" class="button bs-button-menu dashicons dashicons-menu"></button>
         	<button aria-label="Edit Image" type="button" class="button bs-button-edit dashicons dashicons-edit"></button>
-            <button aria-label="Delete Image" type="button" class="button bs-button-trash dashicons dashicons-post-trash"></button>
+            <button aria-label="Delete Image" type="button" class="button bs-button-trash dashicons dashicons-trash"></button>
         </div>
     </div>
     <div class="bs-image-wrap">
@@ -142,7 +142,7 @@ EOB;
         <div class="bs-toolbar">
             <button aria-label="Manage Images" type="button" class="button bs-button-menu dashicons dashicons-menu"></button>
         	<button aria-label="Edit Image" type="button" class="button bs-button-edit dashicons dashicons-edit"></button>
-            <button aria-label="Delete Image" type="button" class="button bs-button-trash dashicons dashicons-post-trash"></button>
+            <button aria-label="Delete Image" type="button" class="button bs-button-trash dashicons dashicons-trash"></button>
         </div>
     </div>
     <div class="bs-image-wrap bs-image-template">
@@ -151,7 +151,7 @@ EOB;
         <div class="bs-toolbar">
             <button aria-label="Manage Images" type="button" class="button bs-button-menu dashicons dashicons-menu"></button>
         	<button aria-label="Edit Image" type="button" class="button bs-button-edit dashicons dashicons-edit"></button>
-            <button aria-label="Delete Image" type="button" class="button bs-button-trash dashicons dashicons-post-trash"></button>
+            <button aria-label="Delete Image" type="button" class="button bs-button-trash dashicons dashicons-trash"></button>
         </div>
     </div>
 </div>
@@ -191,10 +191,10 @@ EOB;
 <div class="bs-images-wrap" data-multiple="">
     <div class="bs-image-wrap">
         <input class="image-id" type="hidden" name="beans_fields[beans_image_test]" value="1" />
-        <img src="http://example.org/wp-content/uploads/image.png" alt="Sorry, no alt was given for this image.">
+        <img src="http://example.org/wp-content/uploads/image.png" alt="Sorry, no description was given for this image.">
         <div class="bs-toolbar">
             <button aria-label="Edit Image" type="button" class="button bs-button-edit dashicons dashicons-edit"></button>
-            <button aria-label="Delete Image" type="button" class="button bs-button-trash dashicons dashicons-post-trash"></button>
+            <button aria-label="Delete Image" type="button" class="button bs-button-trash dashicons dashicons-trash"></button>
         </div>
     </div>
     <div class="bs-image-wrap bs-image-template">
@@ -202,7 +202,7 @@ EOB;
         <img src="" alt="">
         <div class="bs-toolbar">
             <button aria-label="Edit Image" type="button" class="button bs-button-edit dashicons dashicons-edit"></button>
-            <button aria-label="Delete Image" type="button" class="button bs-button-trash dashicons dashicons-post-trash"></button>
+            <button aria-label="Delete Image" type="button" class="button bs-button-trash dashicons dashicons-trash"></button>
         </div>
     </div>
 </div>

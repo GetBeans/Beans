@@ -26,14 +26,14 @@ foreach ( $images as $id ) :
 	list( $image_url, $image_alt ) = _beans_get_image_url_and_alt( $id );
 ?>
 	<div class="bs-image-wrap<?php echo 'placeholder' === $id ? ' bs-image-template' : ''; ?>">
-        <input <?php echo beans_esc_attributes( $attributes ); ?> /><?php // @codingStandardsIgnoreLine phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped - Escaping is handled in the function. ?>
+        <input <?php echo beans_esc_attributes( $attributes ); ?> /><?php // @codingStandardsIgnoreLine. WordPress.XSS.EscapeOutput.OutputNotEscaped - Escaping is handled in the function. ?>
 		<img src="<?php echo $image_url ? esc_url( $image_url ) : ''; ?>" alt="<?php echo $image_alt ? esc_attr( $image_alt ) : ''; ?>">
 		<div class="bs-toolbar">
 		<?php if ( $is_multiple ) : ?>
 			<button aria-label="<?php esc_attr_e( 'Manage Images', 'tm-beans' ); ?>" type="button" class="button bs-button-menu dashicons dashicons-menu"></button>
 		<?php endif; ?>
 			<button aria-label="<?php esc_attr_e( 'Edit Image', 'tm-beans' ); ?>" type="button" class="button bs-button-edit dashicons dashicons-edit"></button>
-			<button aria-label="<?php esc_attr_e( 'Delete Image', 'tm-beans' ); ?>" type="button" class="button bs-button-trash dashicons dashicons-post-trash"></button>
+			<button aria-label="<?php esc_attr_e( 'Delete Image', 'tm-beans' ); ?>" type="button" class="button bs-button-trash dashicons dashicons-trash"></button>
 		</div>
 	</div>
 <?php endforeach; ?>
