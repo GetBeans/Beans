@@ -20,9 +20,9 @@ beans_add_smart_action( 'beans_field_radio', 'beans_field_radio' );
  * @type array  $attributes An array of attributes to add to the field. The array's key defines the attribute name
  *                           and the array's value defines the attribute value. Default is an empty array.
  * @type mixed  $default    The default value. Default false.
- * @type array  $options    An array used to populate the radio options. The array's key defines radio value. The
- *                          and the array's value defines the radio's label, image source (src), or an array to define
- *                          the image's src, alt, and screen text reader value.
+ * @type array  $options    An array used to populate the radio options. The array's key defines the radio value. The
+ *                          array's value defines the radio's label, image source (src), or an array to define
+ *                          the image's src, alt, and screen text reader values.
  * }
  */
 function beans_field_radio( array $field ) {

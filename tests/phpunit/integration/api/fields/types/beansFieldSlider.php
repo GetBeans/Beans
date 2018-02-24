@@ -16,7 +16,7 @@ require_once dirname( __DIR__ ) . '/includes/class-fields-test-case.php';
 /**
  * Class Tests_BeansFieldSlider
  *
- * @package Beans\Framework\Tests\Integration\API\Fields
+ * @package Beans\Framework\Tests\Integration\API\Fields\Types
  * @group   integration-tests
  * @group   api
  */
@@ -136,7 +136,7 @@ EOB;
 	}
 
 	/**
-	 * Test beans_field_slider() should render the slider field with unit when given.
+	 * Test beans_field_slider() should render the slider field with attributes when given.
 	 */
 	public function test_should_render_slider_field_with_attributes_when_given() {
 		$field = $this->merge_field_with_default( array(

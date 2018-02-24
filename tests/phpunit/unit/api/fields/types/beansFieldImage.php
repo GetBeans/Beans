@@ -17,7 +17,7 @@ require_once dirname( __DIR__ ) . '/includes/class-fields-test-case.php';
 /**
  * Class Tests_BeansFieldImage
  *
- * @package Beans\Framework\Tests\Unit\API\Fields
+ * @package Beans\Framework\Tests\Unit\API\Fields\Types
  * @group   unit-tests
  * @group   api
  */
@@ -95,7 +95,7 @@ EOB;
 	}
 
 	/**
-	 * Test beans_field_image() should render multiple images field.
+	 * Test beans_field_image() should render a multiple images field.
 	 */
 	public function test_should_render_multiple_images_field() {
 		Monkey\Functions\expect( 'wp_get_attachment_image_src' )

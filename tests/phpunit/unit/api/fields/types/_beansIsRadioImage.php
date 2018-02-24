@@ -15,8 +15,8 @@ require_once dirname( __DIR__ ) . '/includes/class-fields-test-case.php';
 
 /**
  * Class Tests_BeansIsRadioImage
- *
- * @package Beans\Framework\Tests\Unit\API\Fields
+ *t
+ * @package Beans\Framework\Tests\Unit\API\Fields\Types
  * @group   unit-tests
  * @group   api
  */
@@ -33,7 +33,7 @@ class Tests_BeansIsRadioImage extends Fields_Test_Case {
 	}
 
 	/**
-	 * Test _beans_is_radio_image() should return true when image source is given.
+	 * Test _beans_is_radio_image() should return true when an image source is given.
 	 */
 	public function test_should_return_true_when_image_src_given() {
 		$test_data = array(

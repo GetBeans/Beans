@@ -21,7 +21,7 @@ function beans_field_image_assets() {
 
 beans_add_smart_action( 'beans_field_image', 'beans_field_image' );
 /**
- * Render the image field, which handles a single ime or a gallery of images.
+ * Render the image field, which handles a single image or a gallery of images.
  *
  * @since 1.0.0
  * @since 1.5.0 Moved the HTML to a view file.
@@ -111,7 +111,7 @@ function _beans_get_image_url_and_alt( $image_id ) {
 
 	// If no alt value is given, set a default.
 	if ( ! $image_alt ) {
-		$image_alt = __( 'Sorry, no alt was given for this image.', 'tm-beans' );
+		$image_alt = __( 'Sorry, no description was given for this image.', 'tm-beans' );
 	}
 
 	return array( $image_url, $image_alt );

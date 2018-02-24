@@ -16,7 +16,7 @@ require_once dirname( __DIR__ ) . '/includes/class-fields-test-case.php';
 /**
  * Class Tests_BeansFieldText
  *
- * @package Beans\Framework\Tests\Unit\API\Fields
+ * @package Beans\Framework\Tests\Unit\API\Fields\Types
  * @group   unit-tests
  * @group   api
  */

@@ -14,9 +14,9 @@ use Beans\Framework\Tests\Unit\API\Fields\Includes\Fields_Test_Case;
 require_once dirname( __DIR__ ) . '/includes/class-fields-test-case.php';
 
 /**
- * Class Tests_BeansFieldSelectV
+ * Class Tests_BeansFieldSelect
  *
- * @package Beans\Framework\Tests\Unit\API\Fields
+ * @package Beans\Framework\Tests\Unit\API\Fields\Types
  * @group   unit-tests
  * @group   api
  */

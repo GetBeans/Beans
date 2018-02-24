@@ -2,9 +2,9 @@
 /**
  * The Beans Fields component offers a range of fields which can be used in the WordPress admin.
  *
- * Fields can be used as Options, Post Meta, Term Meta or WP Customizer Options. Custom fields can easily be added too.
+ * Fields can be used as Options, Post Meta, Term Meta or WP Customizer Options. Custom fields can easily be added, too.
  *
- * @package Beans\Framework\API\Options
+ * @package Beans\Framework\API\Fields
  */
 
 /**
@@ -27,10 +27,10 @@
  * @type array   $attributes  An array of attributes to add to the field. The array key defines the attribute name and
  *       the array value defines the attribute value. Default array.
  * @type mixed   $default     The default field value. Default false.
- * @type array   $fields      Must only be used for 'group' field type. The array arguments are similar to the
+ * @type array   $fields      Must only be used for the 'group' field type. The array arguments are similar to the
  *       {@see beans_register_fields()} $fields arguments.
- * @type bool    $db_group    Must only be used for 'group' field type. It defines whether the group of fields
- *       registered should be saved as a group in the database or as individual entries. Default false.
+ * @type bool    $db_group    Must only be used for the 'group' field type. It defines whether the group of fields
+ *       should be saved as a group or as individual entries in the database. Default false.
  * }
  *
  * @param string $context     The context in which the fields are used. 'option' for options/settings pages,
@@ -67,7 +67,7 @@ function beans_register_fields( array $fields, $context, $section ) {
  * @param string $section Optional. A section ID to define a group of fields. This is mostly used for metaboxes and WP
  *                        Customizer sections.
  *
- * @return array|bool Array of register fields on success, false on failure.
+ * @return array|bool Array of registered fields on success, false on failure.
  */
 function beans_get_fields( $context, $section = false ) {
 

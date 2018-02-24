@@ -26,7 +26,7 @@ final class _Beans_Fields {
 	private $fields = array();
 
 	/**
-	 * Fields types.
+	 * Field types.
 	 *
 	 * @var array
 	 */
@@ -40,21 +40,21 @@ final class _Beans_Fields {
 	private $context;
 
 	/**
-	 * Fields section.
+	 * Field section.
 	 *
 	 * @var string
 	 */
 	private $section;
 
 	/**
-	 * Fields types loaded.
+	 * Field types loaded.
 	 *
 	 * @var array
 	 */
 	private static $field_types_loaded = array();
 
 	/**
-	 * Fields assets hook loaded.
+	 * Field assets hook loaded.
 	 *
 	 * @var array
 	 */
@@ -120,7 +120,7 @@ final class _Beans_Fields {
 	}
 
 	/**
-	 * Standardize the field to the Beans' format.
+	 * Standardize the field to the Beans format.
 	 *
 	 * @since 1.0.0
 	 *
@@ -152,7 +152,7 @@ final class _Beans_Fields {
 				$field['fields'][ $index ] = $this->standardize_field( $_field );
 			}
 		} else {
-			// Add value after the standardizing the field.
+			// Add value after standardizing the field.
 			$field['value'] = $this->get_field_value( $field['id'], $field['context'], $field['default'] );
 		}
 
@@ -234,13 +234,13 @@ final class _Beans_Fields {
 				require_once $path;
 			}
 
-			// Set flag that field is loaded.
+			// Set a flag that the field is loaded.
 			self::$field_types_loaded[ $type ] = $type;
 		}
 	}
 
 	/**
-	 * Load the fields assets hooks. This hook can then be used to load custom fields assets.
+	 * Load the field's assets hook. This hook can then be used to load custom assets for the field.
 	 *
 	 * @since 1.0.0
 	 *
@@ -257,13 +257,13 @@ final class _Beans_Fields {
 
 			do_action( "beans_field_enqueue_scripts_{$type}" );
 
-			// Set flag that field is loaded.
+			// Set a flag that the field is loaded.
 			self::$field_assets_hook_loaded[ $type ] = $type;
 		}
 	}
 
 	/**
-	 * Enqueue the default fields assets.
+	 * Enqueue the default assets for the fields.
 	 *
 	 * @since 1.0.0
 	 *
@@ -323,7 +323,7 @@ final class _Beans_Fields {
 	 * @param string $section Optional. A section ID to define a group of fields. This is mostly used for meta boxes
 	 *                        and WP Customizer sections.
 	 *
-	 * @return array|bool Array of register fields on success, false on failure.
+	 * @return array|bool Array of registered fields on success, false on failure.
 	 */
 	public static function get_fields( $context, $section ) {
 		$fields = beans_get( $section, self::$registered[ $context ] );

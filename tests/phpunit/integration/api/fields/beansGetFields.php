@@ -23,7 +23,7 @@ require_once __DIR__ . '/includes/class-fields-test-case.php';
 class Tests_BeansGetFields extends Fields_Test_Case {
 
 	/**
-	 * Test beans_register_fields() should return the registered fields.
+	 * Test beans_get_fields() should return the registered fields.
 	 */
 	public function test_should_return_registered_fields() {
 

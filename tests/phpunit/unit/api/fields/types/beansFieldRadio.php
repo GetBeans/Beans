@@ -16,7 +16,7 @@ require_once dirname( __DIR__ ) . '/includes/class-fields-test-case.php';
 /**
  * Class Tests_BeansFieldRadio
  *
- * @package Beans\Framework\Tests\Unit\API\Fields
+ * @package Beans\Framework\Tests\Unit\API\Fields\Types
  * @group   unit-tests
  * @group   api
  */
@@ -92,7 +92,7 @@ EOB;
 	}
 
 	/**
-	 * Test beans_field_radio() should render the accessible images when accessible parameters are given.
+	 * Test beans_field_radio() should render accessible images when accessibility parameters are given.
 	 */
 	public function test_should_render_accessible_images_when_given() {
 		$field = $this->merge_field_with_default( array(

@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests Case for Beans' Field API integration tests.
+ * Test Case for Beans' Field API integration tests.
  *
  * @package Beans\Framework\Tests\Integration\API\Fields\Includes
  *
@@ -143,9 +143,9 @@ abstract class Fields_Test_Case extends WP_UnitTestCase {
 	 * line.
 	 *
 	 * Why? We can then compare the actual vs. expected HTML patterns without worrying about tabs, new lines, and extra
-	 * spaces.z
+	 * spaces.
 	 *
-	 * @since 1.0.0
+	 * @since 1.5.0
 	 *
 	 * @param string $html HTML to strip.
 	 *

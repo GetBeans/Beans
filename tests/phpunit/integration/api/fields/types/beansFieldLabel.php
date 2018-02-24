@@ -16,7 +16,7 @@ require_once dirname( __DIR__ ) . '/includes/class-fields-test-case.php';
 /**
  * Class Tests_BeansFieldLabel
  *
- * @package Beans\Framework\Tests\Integration\API\Fields
+ * @package Beans\Framework\Tests\Integration\API\Fields\Types
  * @group   integration-tests
  * @group   api
  */
@@ -122,7 +122,7 @@ EOB;
 	}
 
 	/**
-	 * Test beans_field_label() should render the radio field's group header.
+	 * Test beans_field_label() should render the group field's header.
 	 */
 	public function test_should_render_group_header() {
 		$field = array(
