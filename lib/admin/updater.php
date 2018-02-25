@@ -2,7 +2,7 @@
 /**
  * Handles Beans updates.
  *
- * @package Beans
+ * @package Beans\Framework\Admin
  * @since 1.0.0
  */
 
@@ -13,6 +13,9 @@ add_filter( 'site_transient_update_themes', 'beans_updater' );
  * Data are cached in a 24 hours transients and will be returned if found to avoid long loading time.
  *
  * @ignore
+ *
+ * @param object $value Update check object.
+ * @return object Modified update check object.
  */
 function beans_updater( $value ) {
 
@@ -21,7 +24,7 @@ function beans_updater( $value ) {
 		return;
 	}
 
-	$data = get_site_transient( 'beans_updater' );
+	$data  = get_site_transient( 'beans_updater' );
 	$theme = wp_get_theme( 'tm-beans' );
 
 	if ( ! $theme->exists() ) {
@@ -45,11 +48,9 @@ function beans_updater( $value ) {
 			set_site_transient( 'beans_updater', array( 'version' => $current_version ), 30 * MINUTE_IN_SECONDS );
 
 			return $value;
-
 		}
 
 		set_site_transient( 'beans_updater', $data, 24 * HOUR_IN_SECONDS );
-
 	}
 
 	// Return data if Beans is not up to date.
@@ -66,11 +67,9 @@ function beans_updater( $value ) {
 		);
 
 		return $value;
-
 	}
 
 	return $value;
-
 }
 
 add_action( 'load-update-core.php', 'beans_updater_clear_transient' );
@@ -82,5 +81,4 @@ add_action( 'load-update-core.php', 'beans_updater_clear_transient' );
 function beans_updater_clear_transient() {
 
 	delete_site_transient( 'beans_updater' );
-
 }

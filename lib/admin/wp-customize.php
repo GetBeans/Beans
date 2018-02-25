@@ -2,7 +2,7 @@
 /**
  * Add Beans options to the WordPress Customizer.
  *
- * @package Admin
+ * @package Beans\Framework\Admin
  */
 
 beans_add_smart_action( 'customize_preview_init', 'beans_do_enqueue_wp_customize_assets' );
@@ -14,7 +14,6 @@ beans_add_smart_action( 'customize_preview_init', 'beans_do_enqueue_wp_customize
 function beans_do_enqueue_wp_customize_assets() {
 
 	wp_enqueue_script( 'beans-wp-customize-preview', BEANS_ADMIN_JS_URL . 'wp-customize-preview.js', array( 'jquery', 'customize-preview' ), BEANS_VERSION, true );
-
 }
 
 beans_add_smart_action( 'customize_register', 'beans_do_register_wp_customize_options' );
@@ -43,16 +42,22 @@ function beans_do_register_wp_customize_options() {
 
 		$fields = array(
 			array(
-				'id'        => 'beans_layout',
-				'label'     => __( 'Default Layout', 'tm-beans' ),
-				'type'      => 'radio',
-				'default'   => beans_get_default_layout(),
-				'options'   => $options,
+				'id'      => 'beans_layout',
+				'label'   => __( 'Default Layout', 'tm-beans' ),
+				'type'    => 'radio',
+				'default' => beans_get_default_layout(),
+				'options' => $options,
 			),
 		);
 
-		beans_register_wp_customize_options( $fields, 'beans_layout', array( 'title' => __( 'Default Layout', 'tm-beans' ), 'priority' => 1000 ) );
-
+		beans_register_wp_customize_options(
+			$fields,
+			'beans_layout',
+			array(
+				'title'    => __( 'Default Layout', 'tm-beans' ),
+				'priority' => 1000,
+			)
+		);
 	}
 
 	$fields = array(
@@ -100,6 +105,12 @@ function beans_do_register_wp_customize_options() {
 		),
 	);
 
-	beans_register_wp_customize_options( $fields, 'beans_preview', array( 'title' => __( 'Preview Tools', 'tm-beans' ), 'priority' => 1010 ) );
-
+	beans_register_wp_customize_options(
+		$fields,
+		'beans_preview',
+		array(
+			'title'    => __( 'Preview Tools', 'tm-beans' ),
+			'priority' => 1010,
+		)
+	);
 }

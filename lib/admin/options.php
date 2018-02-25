@@ -2,7 +2,7 @@
 /**
  * Add Beans admin options.
  *
- * @package Admin
+ * @package Beans\Framework\Admin
  */
 
 beans_add_smart_action( 'admin_init', 'beans_do_register_term_meta' );
@@ -32,7 +32,6 @@ function beans_do_register_term_meta() {
 	);
 
 	beans_register_term_meta( $fields, array( 'category', 'post_tag' ), 'tm-beans' );
-
 }
 
 beans_add_smart_action( 'admin_init', 'beans_do_register_post_meta' );
@@ -62,5 +61,4 @@ function beans_do_register_post_meta() {
 	);
 
 	beans_register_post_meta( $fields, array( 'post', 'page' ), 'tm-beans', array( 'title' => __( 'Post Options', 'tm-beans' ) ) );
-
 }
