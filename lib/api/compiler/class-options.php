@@ -135,6 +135,7 @@ final class _Beans_Compiler_Options {
 	 * @since 1.0.0
 	 *
 	 * @param array $field Registered options.
+	 *
 	 * @return void
 	 */
 	public function option( $field ) {
