@@ -3,7 +3,8 @@
  * Handles Beans updates.
  *
  * @package Beans\Framework\Admin
- * @since 1.0.0
+ *
+ * @since   1.0.0
  */
 
 add_filter( 'site_transient_update_themes', 'beans_updater' );
@@ -13,9 +14,12 @@ add_filter( 'site_transient_update_themes', 'beans_updater' );
  * Data is cached in a transient for 24 hours. Product data will only be retrieved
  * if no transient is found to avoid long loading times.
  *
+ * @since 1.0.0
  * @ignore
+ * @access private
  *
  * @param object $value Update check object.
+ *
  * @return object Modified update check object.
  */
 function beans_updater( $value ) {
@@ -71,7 +75,10 @@ add_action( 'load-update-core.php', 'beans_updater_clear_transient' );
 /**
  * Clear updater transient.
  *
+ * @since 1.0.0
  * @ignore
+ * @access private
+ *
  * @return void
  */
 function beans_updater_clear_transient() {

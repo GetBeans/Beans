@@ -3,6 +3,8 @@
  * Add Beans admin options.
  *
  * @package Beans\Framework\Admin
+ *
+ * @since   1.0.0
  */
 
 beans_add_smart_action( 'admin_init', 'beans_do_register_term_meta' );

@@ -3,6 +3,8 @@
  * Add Beans options to the WordPress Customizer.
  *
  * @package Beans\Framework\Admin
+ *
+ * @since   1.0.0
  */
 
 beans_add_smart_action( 'customize_preview_init', 'beans_do_enqueue_wp_customize_assets' );
