@@ -10,9 +10,10 @@ beans_add_smart_action( 'admin_init', 'beans_do_register_term_meta' );
  * Add Beans term meta.
  *
  * @since 1.0.0
+ *
+ * @return void
  */
 function beans_do_register_term_meta() {
-
 	// Get layout option without default for the count.
 	$options = beans_get_layouts_for_options();
 
@@ -39,13 +40,14 @@ beans_add_smart_action( 'admin_init', 'beans_do_register_post_meta' );
  * Add Beans post meta.
  *
  * @since 1.0.0
+ *
+ * @return void
  */
 function beans_do_register_post_meta() {
-
 	// Get layout option without default for the count.
 	$options = beans_get_layouts_for_options();
 
-	// Stop here if there is less than two layouts options.
+	// Stop here if there are less than two layout options.
 	if ( count( $options ) < 2 ) {
 		return;
 	}
