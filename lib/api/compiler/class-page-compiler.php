@@ -1,19 +1,27 @@
 <?php
 /**
+ * This class compiles and minifies CSS, LESS and JS on pages.
+ *
+ * @package Beans\Framework\API\Compiler
+ *
+ * @since   1.0.0
+ */
+
+/**
  * Page assets compiler.
  *
+ * @since   1.0.0
  * @ignore
+ * @access  private
  *
- * @package API\Compiler
+ * @package Beans\Framework\API\Compiler
  */
 final class _Beans_Page_Compiler {
 
 	/**
 	 * Compiler dequeued scripts.
 	 *
-	 * @ignore
-	 *
-	 * @type array
+	 * @var array
 	 */
 	private $dequeued_scripts = array();
 
@@ -21,14 +29,16 @@ final class _Beans_Page_Compiler {
 	 * Constructor.
 	 */
 	public function __construct() {
-
 		add_action( 'wp_enqueue_scripts', array( $this, 'compile_page_styles' ), 9999 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'compile_page_scripts' ), 9999 );
-
 	}
 
 	/**
 	 * Enqueue compiled wp styles.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
 	 */
 	public function compile_page_styles() {
 
@@ -36,14 +46,19 @@ final class _Beans_Page_Compiler {
 			return;
 		}
 
-		if ( $styles = $this->compile_enqueued( 'style' ) ) {
+		$styles = $this->compile_enqueued( 'style' );
+
+		if ( $styles ) {
 			beans_compile_css_fragments( 'beans', $styles, array( 'version' => null ) );
 		}
-
 	}
 
 	/**
 	 * Enqueue compiled wp scripts.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
 	 */
 	public function compile_page_scripts() {
 
@@ -51,42 +66,53 @@ final class _Beans_Page_Compiler {
 			return;
 		}
 
-		if ( $scripts = $this->compile_enqueued( 'script' ) ) {
+		$scripts = $this->compile_enqueued( 'script' );
+		if ( $scripts ) {
 			beans_compile_js_fragments( 'beans', $scripts, array(
 				'in_footer' => ( 'aggressive' === get_option( 'beans_compile_all_scripts_mode', 'aggressive' ) ) ? true : false,
 				'version'   => null,
 			) );
 		}
-
 	}
 
 	/**
 	 * Compile all wp enqueued assets.
+	 *
+	 * @since 1.0.0
+	 * @ignore
+	 * @access private
+	 *
+	 * @param string $type Type of asset, e.g. style or script.
+	 * @param string $dependencies Optional. Dependencies of the asset. Default is false.
+	 *
+	 * @return array
 	 */
-	private function compile_enqueued( $type, $depedencies = false ) {
+	private function compile_enqueued( $type, $dependencies = false ) {
 
-		if ( ! $assets = beans_get( "wp_{$type}s", $GLOBALS ) ) {
+		$assets = beans_get( "wp_{$type}s", $GLOBALS );
+		if ( ! $assets ) {
 			return array();
 		}
 
-		if ( 'script' == $type ) {
+		if ( 'script' === $type ) {
 			add_action( 'wp_print_scripts', array( $this, 'dequeue_scripts' ), 9999 );
 		}
 
-		if ( ! $depedencies ) {
-			$depedencies = $assets->queue;
+		if ( ! $dependencies ) {
+			$dependencies = $assets->queue;
 		}
 
 		$fragments = array();
 
-		foreach ( $depedencies as $id ) {
+		foreach ( $dependencies as $id ) {
 
 			// Don't compile admin bar assets.
-			if ( in_array( $id, array( 'admin-bar', 'open-sans', 'dashicons' ) ) ) {
+			if ( in_array( $id, array( 'admin-bar', 'open-sans', 'dashicons' ), true ) ) {
 				continue;
 			}
 
-			if ( ! $args = beans_get( $id, $assets->registered ) ) {
+			$args = beans_get( $id, $assets->registered );
+			if ( ! $args ) {
 				continue;
 			}
 
@@ -100,35 +126,33 @@ final class _Beans_Page_Compiler {
 				}
 			}
 
-			if ( 'style' == $type ) {
+			if ( 'style' === $type ) {
 
 				// Add compiler media query if set.
-				if ( 'all' != $args->args ) {
+				if ( 'all' !== $args->args ) {
 					$args->src = add_query_arg( array( 'beans_compiler_media_query' => $args->args ), $args->src );
 				}
 
 				$assets->done[] = $id;
-
-			} elseif ( 'script' == $type ) {
-
+			} elseif ( 'script' === $type ) {
 				$this->dequeued_scripts[ $id ] = $args->src;
-
 			}
 
 			$fragments[ $id ] = $args->src;
-
 		}
 
 		return $fragments;
-
 	}
 
 	/**
 	 * Dequeue scripts which have been compiled, grab localized
 	 * data and add it inline.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
 	 */
 	public function dequeue_scripts() {
-
 		global $wp_scripts;
 
 		if ( empty( $this->dequeued_scripts ) ) {
@@ -140,7 +164,8 @@ final class _Beans_Page_Compiler {
 		// Fetch the localized content and dequeue script.
 		foreach ( $this->dequeued_scripts as $id => $src ) {
 
-			if ( ! $args = beans_get( $id, $wp_scripts->registered ) ) {
+			$args = beans_get( $id, $wp_scripts->registered );
+			if ( ! $args ) {
 				continue;
 			}
 
@@ -149,7 +174,6 @@ final class _Beans_Page_Compiler {
 			}
 
 			$wp_scripts->done[] = $id;
-
 		}
 
 		// Stop here if there isn't any content to add.
@@ -158,8 +182,7 @@ final class _Beans_Page_Compiler {
 		}
 
 		// Add localized content since it was removed with dequeue scripts.
-		printf( "<script type='text/javascript'>\n%s\n</script>\n", $localized );
-
+		printf( "<script type='text/javascript'>\n%s\n</script>\n", $localized ); // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped.
 	}
 }
 
