@@ -1,18 +1,20 @@
 <?php
 /**
- * The Beans Component defines which API components of the framework is loaded.
+ * The Beans Component defines which API components of the framework are loaded.
  *
  * It can be different on a per page bases. This keeps Beans as performant and lightweight as possible
  * by only loading what is needed.
  *
- * @package API
+ * @package Beans\Framework\API
+ *
+ * @since 1.0.0
  */
 
 /**
  * Load Beans API components.
  *
  * This function loads Beans API components. Components are only loaded once, even if they are called many times.
- * Admin components/functions are automatically wrapped in an is_admin() check.
+ * Admin components and functions are automatically wrapped in an is_admin() check.
  *
  * @since 1.0.0
  *
@@ -22,7 +24,6 @@
  * @return bool Will always return true.
  */
 function beans_load_api_components( $components ) {
-
 	static $loaded = array();
 
 	$root = BEANS_API_PATH;
@@ -90,8 +91,8 @@ function beans_load_api_components( $components ) {
 
 	foreach ( (array) $components as $component ) {
 
-		// Stop here if the component is already loaded or doesn't exists.
-		if ( in_array( $component, $loaded ) || ( ! isset( $common[ $component ] ) && ! isset( $admin[ $component ] ) ) ) {
+		// Stop here if the component is already loaded or doesn't exist.
+		if ( in_array( $component, $loaded, true ) || ( ! isset( $common[ $component ] ) && ! isset( $admin[ $component ] ) ) ) {
 			continue;
 		}
 
@@ -116,8 +117,8 @@ function beans_load_api_components( $components ) {
 		}
 
 		// Load components.
-		foreach ( $_components as $component_path  ) {
-			require_once( $component_path );
+		foreach ( $_components as $component_path ) {
+			require_once $component_path;
 		}
 
 		/**
@@ -128,11 +129,9 @@ function beans_load_api_components( $components ) {
 		 * @since 1.0.0
 		 */
 		do_action( 'beans_loaded_api_component_' . $component );
-
 	}
 
 	return true;
-
 }
 
 /**
@@ -141,17 +140,15 @@ function beans_load_api_components( $components ) {
  * @since 1.0.0
  *
  * @param string $feature The feature to register.
- * @param mixed  $var     Additional variables passed to component support.
  *
  * @return bool Will always return true.
  */
 function beans_add_api_component_support( $feature ) {
-
 	global $_beans_api_components_support;
 
 	$args = func_get_args();
 
-	if ( 1 == func_num_args() ) {
+	if ( 1 === func_num_args() ) {
 		$args = true;
 	} else {
 		$args = array_slice( $args, 1 );
@@ -160,7 +157,6 @@ function beans_add_api_component_support( $feature ) {
 	$_beans_api_components_support[ $feature ] = $args;
 
 	return true;
-
 }
 
 /**
@@ -173,7 +169,6 @@ function beans_add_api_component_support( $feature ) {
  * @return mixed The argument(s) passed.
  */
 function beans_get_component_support( $feature ) {
-
 	global $_beans_api_components_support;
 
 	if ( ! isset( $_beans_api_components_support[ $feature ] ) ) {
@@ -181,7 +176,6 @@ function beans_get_component_support( $feature ) {
 	}
 
 	return $_beans_api_components_support[ $feature ];
-
 }
 
 /**
@@ -194,19 +188,16 @@ function beans_get_component_support( $feature ) {
  * @return bool Will always return true.
  */
 function beans_remove_api_component_support( $feature ) {
-
 	global $_beans_api_components_support;
-
 	unset( $_beans_api_components_support[ $feature ] );
-
 	return true;
-
 }
 
 /**
  * Initialize API components support global.
  *
  * @ignore
+ * @access private
  */
 global $_beans_api_components_support;
 
