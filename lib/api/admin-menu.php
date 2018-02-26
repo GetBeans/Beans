@@ -2,7 +2,7 @@
 /**
  * This class build the Beans admin page.
  *
- * @package Beans\Framework\Api
+ * @package Beans\Framework\API
  *
  * @since 1.0.0
  */
@@ -10,11 +10,11 @@
 /**
  * Beans admin page.
  *
- * @since 1.0.0
+ * @since   1.0.0
  * @ignore
- * @access private
+ * @access  private
  *
- * @package Beans\Framework\Api
+ * @package Beans\Framework\API
  */
 final class _Beans_Admin {
 
@@ -27,7 +27,7 @@ final class _Beans_Admin {
 	}
 
 	/**
-	 * Add beans menu.
+	 * Add Beans' menu.
 	 *
 	 * @since 1.0.0
 	 *

@@ -31,7 +31,7 @@ function beans_load_api_components( $components ) {
 	$common = array(
 		'html'         => array(
 			$root . 'html/functions.php',
-			$root . 'html/class-beans-attribute.php',
+			$root . 'html/class.php',
 		),
 		'actions'      => $root . 'actions/functions.php',
 		'filters'      => $root . 'filters/functions.php',
@@ -42,7 +42,7 @@ function beans_load_api_components( $components ) {
 		'image'        => $root . 'image/functions.php',
 		'compiler'     => array(
 			$root . 'compiler/functions.php',
-			$root . 'compiler/class-beans-compiler.php',
+			$root . 'compiler/class-compiler.php',
 			$root . 'compiler/class-page-compiler.php',
 		),
 		'uikit'        => array(
