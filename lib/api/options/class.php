@@ -1,67 +1,89 @@
 <?php
 /**
+ * This class provides the means to handle the Beans Options workflow.
+ *
+ * @package Beans\Framework\API\Options
+ *
+ * @since 1.0.0
+ */
+
+/**
  * Handle the Beans Options workflow.
  *
+ * @since 1.0.0
  * @ignore
+ * @access private
  *
- * @package API\Options
+ * @package Beans\Framework\API\Options
  */
 final class _Beans_Options {
 
 	/**
 	 * Metabox arguments.
 	 *
-	 * @type array
+	 * @var array
 	 */
 	private $args = array();
 
 	/**
 	 * Form submission status.
 	 *
-	 * @type bool
+	 * @var bool
 	 */
 	private $success = false;
 
 	/**
-	 * Fields section.
+	 * Field section.
 	 *
-	 * @type string
+	 * @var string
 	 */
 	private $section;
 
 	/**
 	 * Register options.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $section Section of the field.
+	 * @param array  $args Arguments of the option.
+	 *
+	 * @return void
 	 */
 	public function register( $section, $args ) {
-
 		$defaults = array(
 			'title'   => __( 'Undefined', 'tm-beans' ),
 			'context' => 'normal',
 		);
 
 		$this->section = $section;
-		$this->args = array_merge( $defaults, $args );
+		$this->args    = array_merge( $defaults, $args );
 
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_assets' ) );
 
 		$this->register_metabox();
-
 	}
 
 	/**
 	 * Enqueue assets.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
 	 */
 	public function enqueue_assets() {
-
 		wp_enqueue_script( 'postbox' );
-
 	}
 
 	/**
 	 * Register the Metabox.
+	 *
+	 * @since 1.0.0
+	 * @ignore
+	 * @access private
+	 *
+	 * @return void
 	 */
 	private function register_metabox() {
-
 		add_meta_box(
 			$this->section,
 			$this->args['title'],
@@ -70,32 +92,41 @@ final class _Beans_Options {
 			$this->args['context'],
 			'default'
 		);
-
 	}
 
 	/**
 	 * Metabox content.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
 	 */
 	public function metabox_content() {
 
 		foreach ( beans_get_fields( 'option', $this->section ) as $field ) {
 			beans_field( $field );
 		}
-
 	}
 
 	/**
 	 * Page content.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int $page Page ID.
+	 *
+	 * @return void
 	 */
 	public function page( $page ) {
-
 		global $wp_meta_boxes;
 
-		if ( ! $boxes = beans_get( $page, $wp_meta_boxes ) ) {
+		$boxes = beans_get( $page, $wp_meta_boxes );
+
+		if ( ! $boxes ) {
 			return;
 		}
 
-		// Only add column class if there is more than 1 metaboxes.
+		// Only add a column class if there is more than 1 metabox.
 		$column_class = beans_get( 'column', $boxes, array() ) ? ' column' : false;
 
 		// Set page data which will be used by the postbox.
@@ -119,32 +150,34 @@ final class _Beans_Options {
 			</p>
 		</form>
 		<?php
-
 	}
 
 	/**
 	 * Form actions.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
 	 */
 	public function actions() {
 
 		if ( beans_post( 'beans_save_options' ) ) {
-
 			$this->save();
 			add_action( 'admin_notices', array( $this, 'save_notices' ) );
-
 		}
 
 		if ( beans_post( 'beans_reset_options' ) ) {
-
 			$this->reset();
 			add_action( 'admin_notices', array( $this, 'reset_notices' ) );
-
 		}
-
 	}
 
 	/**
 	 * Save options.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return bool
 	 */
 	private function save() {
 
@@ -152,7 +185,9 @@ final class _Beans_Options {
 			return false;
 		}
 
-		if ( ! ( $fields = beans_post( 'beans_fields' ) ) ) {
+		$fields = beans_post( 'beans_fields' );
+
+		if ( ! ( $fields ) ) {
 			return false;
 		}
 
@@ -161,11 +196,14 @@ final class _Beans_Options {
 		}
 
 		$this->success = true;
-
 	}
 
 	/**
 	 * Reset options.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return bool
 	 */
 	private function reset() {
 
@@ -173,7 +211,9 @@ final class _Beans_Options {
 			return false;
 		}
 
-		if ( ! ( $fields = beans_post( 'beans_fields' ) ) ) {
+		$fields = beans_post( 'beans_fields' );
+
+		if ( ! ( $fields ) ) {
 			return false;
 		}
 
@@ -182,24 +222,27 @@ final class _Beans_Options {
 		}
 
 		$this->success = true;
-
 	}
 
 	/**
 	 * Save notice content.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
 	 */
 	public function save_notices() {
 
 		if ( $this->success ) {
 			?>
 			<div id="message" class="updated">
-				<p><?php _e( 'Settings saved successfully!', 'tm-beans' ); ?></p>
+				<p><?php esc_html_e( 'Settings saved successfully!', 'tm-beans' ); ?></p>
 			</div>
 			<?php
 		} else {
 			?>
 			<div id="message" class="error">
-				<p><?php _e( 'Settings could not be saved, please try again.', 'tm-beans' ); ?></p>
+				<p><?php esc_html_e( 'Settings could not be saved, please try again.', 'tm-beans' ); ?></p>
 			</div>
 			<?php
 		}
@@ -207,22 +250,25 @@ final class _Beans_Options {
 
 	/**
 	 * Reset notice content.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
 	 */
 	public function reset_notices() {
 
 		if ( $this->success ) {
 			?>
 			<div id="message" class="updated">
-				<p><?php _e( 'Settings reset successfully!', 'tm-beans' ); ?></p>
+				<p><?php esc_html_e( 'Settings reset successfully!', 'tm-beans' ); ?></p>
 			</div>
 			<?php
 		} else {
 			?>
 			<div id="message" class="error">
-				<p><?php _e( 'Settings could not be reset, please try again.', 'tm-beans' ); ?></p>
+				<p><?php esc_html_e( 'Settings could not be reset, please try again.', 'tm-beans' ); ?></p>
 			</div>
 			<?php
 		}
-
 	}
 }
