@@ -18,7 +18,7 @@ define( 'BEANS_API', true );
 
 // Mode.
 if ( ! defined( 'SCRIPT_DEBUG' ) ) {
-	define( 'SCRIPT_DEBUG', false );
+	define( 'SCRIPT_DEBUG', false ); // @codingStandardsIgnoreLine - WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound.
 }
 
 // Assets.
