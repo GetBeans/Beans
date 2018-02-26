@@ -2,17 +2,17 @@
 /**
  * This class handles the Beans WP Customize workflow.
  *
- * @package Beans\Framework\Api\WP_Customize
+ * @package Beans\Framework\API\WP_Customize
  *
- * @since 1.0.0
+ * @since   1.0.0
  */
 
 /**
  * Handle the Beans WP Customize workflow.
  *
- * @since 1.0.0
+ * @since   1.0.0
  * @ignore
- * @access private
+ * @access  private
  *
  * @package Beans\Framework\API\WP_Customize
  */
@@ -59,7 +59,6 @@ final class _Beans_WP_Customize {
 	 *
 	 * @since 1.0.0
 	 * @ignore
-	 * @access private
 	 *
 	 * @return void
 	 */
@@ -86,7 +85,6 @@ final class _Beans_WP_Customize {
 	 *
 	 * @since 1.0.0
 	 * @ignore
-	 * @access private
 	 *
 	 * @param WP_Customize_Manager $wp_customize WP Customizer Manager object.
 	 *
@@ -113,7 +111,6 @@ final class _Beans_WP_Customize {
 	 *
 	 * @since 1.0.0
 	 * @ignore
-	 * @access private
 	 *
 	 * @param WP_Customize_Manager $wp_customize WP Customizer Manager object.
 	 * @param array                $field Metabox settings.
@@ -146,7 +143,6 @@ final class _Beans_WP_Customize {
 	 *
 	 * @since 1.0.0
 	 * @ignore
-	 * @access private
 	 *
 	 * @param WP_Customize_Manager $wp_customize WP Customizer Manager object.
 	 * @param array                $field Metabox settings.
@@ -191,10 +187,12 @@ if ( class_exists( 'WP_Customize_Control' ) ) :
 	/**
 	 * Render Beans fields content for WP Customize.
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 *
 	 * @ignore
-	 * @access private
+	 * @access  private
+	 *
+	 * @package Beans\Framework\API\WP_Customize
 	 */
 	class _Beans_WP_Customize_Control extends WP_Customize_Control { // @codingStandardsIgnoreLine - Generic.Files.OneClassPerFile.MultipleFound.
 
