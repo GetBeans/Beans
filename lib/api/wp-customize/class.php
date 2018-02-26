@@ -59,7 +59,7 @@ final class _Beans_WP_Customize {
 	 *
 	 * @since 1.0.0
 	 * @ignore
-	 * @access  private
+	 * @access private
 	 *
 	 * @return void
 	 */
