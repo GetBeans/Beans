@@ -10,9 +10,9 @@
 /**
  * Compile UIkit components.
  *
- * @since 1.0.0
+ * @since   1.0.0
  * @ignore
- * @access private
+ * @access  private
  *
  * @package Beans\Framework\API\UIkit
  */
@@ -63,7 +63,8 @@ final class _Beans_Uikit {
 		 * @param array $components An array of UIkit script compiler arguments.
 		 */
 		$scripts_args = apply_filters(
-			'beans_uikit_euqueued_scripts_args', array(
+			'beans_uikit_euqueued_scripts_args',
+			array(
 				'depedencies' => array( 'jquery' ),
 			)
 		);
@@ -204,7 +205,7 @@ final class _Beans_Uikit {
 	 */
 	public function get_components_from_directory( $components, $directories, $format ) {
 
-		$extension = ( 'styles' === $format ) ? 'less' : 'min.js';
+		$extension = 'styles' === $format ? 'less' : 'min.js';
 
 		$return = array();
 
