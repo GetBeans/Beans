@@ -106,7 +106,7 @@ function beans_edit_post_attachment( $post_id, $args = array() ) {
 
 	// Get full size image.
 	$attachement = beans_get_post_attachment( $post_id, 'full' );
-	$edited = beans_edit_image( $attachement->src, $args, 'ARRAY_A' );
+	$edited      = beans_edit_image( $attachement->src, $args, 'ARRAY_A' );
 
 	if ( ! $edited ) {
 		return $attachement;
