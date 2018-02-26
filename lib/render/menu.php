@@ -4,7 +4,7 @@
  *
  * @package Beans\Framework\Render
  *
- * @since 1.0.0
+ * @since   1.0.0
  */
 
 beans_add_smart_action( 'after_setup_theme', 'beans_do_register_default_menu' );
@@ -132,7 +132,7 @@ function beans_modify_menu_args( $args ) {
 	// Adapt level to walker depth.
 	$level = beans_get( 'beans_start_level', $args );
 
-	$force['beans_start_level'] = $level ? ( $level - 1 ) : 0;
+	$force['beans_start_level'] = $level ? $level - 1 : 0;
 
 	return array_merge( $args, $force );
 }
