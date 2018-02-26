@@ -1,6 +1,10 @@
 <?php
 /**
- * @package API\Post_Meta
+ * Functions for post meta.
+ *
+ * @package Beans\Framework\API\Post_Meta
+ *
+ * @since 1.0.0
  */
 
 /**
@@ -19,7 +23,8 @@
 function beans_get_post_meta( $field_id, $default = false, $post_id = false ) {
 
 	if ( ! $post_id ) {
-		$post_id = ! ( $id = get_the_id() ) ? beans_get( 'post' ): $id;
+		$id      = get_the_id();
+		$post_id = ! $id ? beans_get( 'post' ) : $id;
 	}
 
 	$post_meta = get_post_meta( $post_id );
@@ -29,5 +34,4 @@ function beans_get_post_meta( $field_id, $default = false, $post_id = false ) {
 	}
 
 	return $default;
-
 }
