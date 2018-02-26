@@ -20,16 +20,16 @@
  * @param array  $args {
  *      Associative array of arguments used by the image editor.
  *
- * 		@type array $resize 	 Numeric array matching the {@link http://codex.wordpress.org/Class_Reference/WP_Image_Editor WP_Image_Editor} resize
- * 		      					 function arguments.
- * 		@type array $crop  	     Numeric array matching the {@link http://codex.wordpress.org/Class_Reference/WP_Image_Editor WP_Image_Editor} crop
- * 		      					 function arguments.
- * 		@type array $rotate      Numeric array matching the {@link http://codex.wordpress.org/Class_Reference/WP_Image_Editor WP_Image_Editor} rotate
- * 		      				     function arguments.
- * 		@type array $flip        Numeric array matching the {@link http://codex.wordpress.org/Class_Reference/WP_Image_Editor WP_Image_Editor} flip
- * 		      				     function arguments.
- * 		@type array $set_quality Numeric array matching the {@link http://codex.wordpress.org/Class_Reference/WP_Image_Editor WP_Image_Editor} set_quality
- * 		      					 function arguments.
+ *      @type array $resize      Numeric array matching the {@link http://codex.wordpress.org/Class_Reference/WP_Image_Editor WP_Image_Editor} resize
+ *                               function arguments.
+ *      @type array $crop        Numeric array matching the {@link http://codex.wordpress.org/Class_Reference/WP_Image_Editor WP_Image_Editor} crop
+ *                               function arguments.
+ *      @type array $rotate      Numeric array matching the {@link http://codex.wordpress.org/Class_Reference/WP_Image_Editor WP_Image_Editor} rotate
+ *                               function arguments.
+ *      @type array $flip        Numeric array matching the {@link http://codex.wordpress.org/Class_Reference/WP_Image_Editor WP_Image_Editor} flip
+ *                               function arguments.
+ *      @type array $set_quality Numeric array matching the {@link http://codex.wordpress.org/Class_Reference/WP_Image_Editor WP_Image_Editor} set_quality
+ *                               function arguments.
  * }
  * @param string $output Optional. Returned format. Accepts STRING, OBJECT, ARRAY_A, or ARRAY_N.
  *                            Default STRING.
@@ -37,13 +37,9 @@
  * @return string|array Image source if output set the STRING, image data otherwise.
  */
 function beans_edit_image( $src, array $args, $output = 'STRING' ) {
-
-	require_once( BEANS_API_PATH . 'image/class-images.php' );
-
+	require_once BEANS_API_PATH . 'image/class-images.php';
 	$instance = new _Beans_Image_Editor( $src, $args, $output );
-
 	return $instance->init();
-
 }
 
 /**
@@ -60,23 +56,21 @@ function beans_edit_image( $src, array $args, $output = 'STRING' ) {
  * @return object Post attachment data.
  */
 function beans_get_post_attachment( $post_id, $size = 'full' ) {
-
-	$id = get_post_thumbnail_id( $post_id );
+	$id   = get_post_thumbnail_id( $post_id );
 	$post = get_post( $id );
-	$src = wp_get_attachment_image_src( $id, $size );
+	$src  = wp_get_attachment_image_src( $id, $size );
 
-	$obj = new stdClass();
-	$obj->id = $id;
-	$obj->src = $src[0];
-	$obj->width = $src[1];
-	$obj->height = $src[2];
-	$obj->alt = trim( strip_tags( get_post_meta( $id, '_wp_attachment_image_alt', true ) ) );
-	$obj->title = $post->post_title;
-	$obj->caption = $post->post_excerpt;
+	$obj              = new stdClass();
+	$obj->id          = $id;
+	$obj->src         = $src[0];
+	$obj->width       = $src[1];
+	$obj->height      = $src[2];
+	$obj->alt         = trim( strip_tags( get_post_meta( $id, '_wp_attachment_image_alt', true ) ) );
+	$obj->title       = $post->post_title;
+	$obj->caption     = $post->post_excerpt;
 	$obj->description = $post->post_content;
 
 	return $obj;
-
 }
 
 /**
@@ -90,16 +84,16 @@ function beans_get_post_attachment( $post_id, $size = 'full' ) {
  * @param array  $args {
  *      Array of arguments used by the image editor.
  *
- * 		@type array $resize 	 Numeric array matching the {@link http://codex.wordpress.org/Class_Reference/WP_Image_Editor WP_Image_Editor} resize
- * 		      					 function arguments.
- * 		@type array $crop  	     Numeric array matching the {@link http://codex.wordpress.org/Class_Reference/WP_Image_Editor WP_Image_Editor} crop
- * 		      					 function arguments.
- * 		@type array $rotate      Numeric array matching the {@link http://codex.wordpress.org/Class_Reference/WP_Image_Editor WP_Image_Editor} rotate
- * 		      				     function arguments.
- * 		@type array $flip        Numeric array matching the {@link http://codex.wordpress.org/Class_Reference/WP_Image_Editor WP_Image_Editor} flip
- * 		      				     function arguments.
- * 		@type array $set_quality Numeric array matching the {@link http://codex.wordpress.org/Class_Reference/WP_Image_Editor WP_Image_Editor} set_quality
- * 		      					 function arguments.
+ *      @type array $resize      Numeric array matching the {@link http://codex.wordpress.org/Class_Reference/WP_Image_Editor WP_Image_Editor} resize
+ *                               function arguments.
+ *      @type array $crop        Numeric array matching the {@link http://codex.wordpress.org/Class_Reference/WP_Image_Editor WP_Image_Editor} crop
+ *                               function arguments.
+ *      @type array $rotate      Numeric array matching the {@link http://codex.wordpress.org/Class_Reference/WP_Image_Editor WP_Image_Editor} rotate
+ *                               function arguments.
+ *      @type array $flip        Numeric array matching the {@link http://codex.wordpress.org/Class_Reference/WP_Image_Editor WP_Image_Editor} flip
+ *                               function arguments.
+ *      @type array $set_quality Numeric array matching the {@link http://codex.wordpress.org/Class_Reference/WP_Image_Editor WP_Image_Editor} set_quality
+ *                               function arguments.
  * }
  *
  * @return object Edited post attachment data.
@@ -112,13 +106,13 @@ function beans_edit_post_attachment( $post_id, $args = array() ) {
 
 	// Get full size image.
 	$attachement = beans_get_post_attachment( $post_id, 'full' );
+	$edited = beans_edit_image( $attachement->src, $args, 'ARRAY_A' );
 
-	if ( ! $edited = beans_edit_image( $attachement->src, $args, 'ARRAY_A' ) ) {
+	if ( ! $edited ) {
 		return $attachement;
 	}
 
 	return (object) array_merge( (array) $attachement, $edited );
-
 }
 
 /**
@@ -129,7 +123,6 @@ function beans_edit_post_attachment( $post_id, $args = array() ) {
  * @return string Edited images directory.
  */
 function beans_get_images_dir() {
-
 	$wp_upload_dir = wp_upload_dir();
 
 	/**
@@ -140,5 +133,4 @@ function beans_get_images_dir() {
 	$dir = apply_filters( 'beans_images_dir', trailingslashit( $wp_upload_dir['basedir'] ) . 'beans/images/' );
 
 	return wp_normalize_path( trailingslashit( $dir ) );
-
 }
