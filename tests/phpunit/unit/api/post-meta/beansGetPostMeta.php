@@ -2,7 +2,7 @@
 /**
  * Tests for beans_get_post_meta()
  *
- * @package Beans\Framework\Tests\Unit\API\Utilities
+ * @package Beans\Framework\Tests\Unit\API\Post_Meta
  *
  * @since   1.5.0
  */
@@ -15,7 +15,7 @@ use Brain\Monkey;
 /**
  * Class Tests_BeansGetPostMeta
  *
- * @package Beans\Framework\Tests\Unit\API\Utilities
+ * @package Beans\Framework\Tests\Unit\API\Post_Meta
  * @group   unit-tests
  * @group   api
  */
@@ -44,7 +44,7 @@ class Tests_BeansGetPostMeta extends Test_Case {
 	/**
 	 * Test beans_get_post_meta() should get the post ID when none is provided.
 	 */
-	public function test_should_return_get_post_id_when_none_is_provided() {
+	public function test_should_get_post_id_when_none_is_provided() {
 		Monkey\Functions\expect( 'get_the_id' )->once()->andReturn( 47 );
 		Monkey\Functions\expect( 'get_post_meta' )->with( 47 )->once()->andReturn( array() );
 		$this->assertSame( 'c', beans_get_post_meta( 'beans_layout', 'c' ) );

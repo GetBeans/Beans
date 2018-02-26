@@ -2,7 +2,7 @@
 /**
  * Tests for beans_get_post_meta()
  *
- * @package Beans\Framework\Tests\Integration\API\Utilities
+ * @package Beans\Framework\Tests\Integration\API\Post_Meta
  *
  * @since   1.5.0
  */
@@ -14,7 +14,7 @@ use WP_UnitTestCase;
 /**
  * Class Tests_BeansGetPostMeta
  *
- * @package Beans\Framework\Tests\Integration\API\Utilities
+ * @package Beans\Framework\Tests\Integration\API\Post_Meta
  * @group   integration-tests
  * @group   api
  */
@@ -35,7 +35,7 @@ class Tests_BeansGetPostMeta extends WP_UnitTestCase {
 	/**
 	 * Test beans_get_post_meta() should get the post ID when none is provided.
 	 */
-	public function test_should_return_get_post_id_when_none_is_provided() {
+	public function test_should_get_post_id_when_none_is_provided() {
 		$post_id      = self::factory()->post->create( array( 'post_title' => 'Hello Beans' ) );
 		$_GET['post'] = $post_id;
 		$this->assertSame( 'c', beans_get_post_meta( 'beans_layout', 'c' ) );
