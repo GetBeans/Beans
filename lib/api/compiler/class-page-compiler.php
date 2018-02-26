@@ -67,6 +67,7 @@ final class _Beans_Page_Compiler {
 		}
 
 		$scripts = $this->compile_enqueued( 'script' );
+
 		if ( $scripts ) {
 			beans_compile_js_fragments( 'beans', $scripts, array(
 				'in_footer' => ( 'aggressive' === get_option( 'beans_compile_all_scripts_mode', 'aggressive' ) ) ? true : false,
@@ -90,6 +91,7 @@ final class _Beans_Page_Compiler {
 	private function compile_enqueued( $type, $dependencies = false ) {
 
 		$assets = beans_get( "wp_{$type}s", $GLOBALS );
+
 		if ( ! $assets ) {
 			return array();
 		}
@@ -112,6 +114,7 @@ final class _Beans_Page_Compiler {
 			}
 
 			$args = beans_get( $id, $assets->registered );
+
 			if ( ! $args ) {
 				continue;
 			}
@@ -165,6 +168,7 @@ final class _Beans_Page_Compiler {
 		foreach ( $this->dequeued_scripts as $id => $src ) {
 
 			$args = beans_get( $id, $wp_scripts->registered );
+
 			if ( ! $args ) {
 				continue;
 			}
