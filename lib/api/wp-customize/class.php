@@ -196,7 +196,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) :
 	 * @ignore
 	 * @access private
 	 */
-	class _Beans_WP_Customize_Control extends WP_Customize_Control {
+	class _Beans_WP_Customize_Control extends WP_Customize_Control { // @codingStandardsIgnoreLine - Generic.Files.OneClassPerFile.MultipleFound.
 
 		/**
 		 * Field data.
