@@ -2,7 +2,7 @@
 /**
  * The Beans Templates API allows to load Beans template files as well as loading the entire document.
  *
- * @package Beans\Framework\API\Actions
+ * @package Beans\Framework\API\Template
  *
  * @since   1.0.0
  */
