@@ -96,7 +96,7 @@ function beans_loop_template( $id = false ) {
 
 	// Only reset the query if a filter is set.
 	if ( $_has_filter ) {
-		wp_reset_query(); // @codingStandardIgnoreLine - WordPress.WP.DiscouragedFunctions.wp_reset_query_wp_reset_query.
+		wp_reset_query(); // @codingStandardsIgnoreLine - WordPress.WP.DiscouragedFunctions.wp_reset_query_wp_reset_query.
 	}
 }
 
