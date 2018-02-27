@@ -2,7 +2,9 @@
 /**
  * Add post shortcodes.
  *
- * @package Fragments\Post_Shortcodes
+ * @package Beans\Framework\Templates\Fragments
+ *
+ * @since 1.0.0
  */
 
 beans_add_smart_action( 'beans_post_meta_date', 'beans_post_meta_date_shortcode' );
@@ -10,20 +12,24 @@ beans_add_smart_action( 'beans_post_meta_date', 'beans_post_meta_date_shortcode'
  * Echo post meta date shortcode.
  *
  * @since 1.0.0
+ *
+ * @return void
  */
 function beans_post_meta_date_shortcode() {
-
 	beans_output_e( 'beans_post_meta_date_prefix', __( 'Posted on ', 'tm-beans' ) );
 
-	beans_open_markup_e( 'beans_post_meta_date', 'time', array(
-		'datetime' => get_the_time( 'c' ),
-		'itemprop' => 'datePublished',
-	) );
+	beans_open_markup_e(
+		'beans_post_meta_date',
+		'time',
+		array(
+			'datetime' => get_the_time( 'c' ),
+			'itemprop' => 'datePublished',
+		)
+	);
 
 		beans_output_e( 'beans_post_meta_date_text', get_the_time( get_option( 'date_format' ) ) );
 
 	beans_close_markup_e( 'beans_post_meta_date', 'time' );
-
 }
 
 beans_add_smart_action( 'beans_post_meta_author', 'beans_post_meta_author_shortcode' );
@@ -31,28 +37,36 @@ beans_add_smart_action( 'beans_post_meta_author', 'beans_post_meta_author_shortc
  * Echo post meta author shortcode.
  *
  * @since 1.0.0
+ *
+ * @return void
  */
 function beans_post_meta_author_shortcode() {
-
 	beans_output_e( 'beans_post_meta_author_prefix', __( 'By ', 'tm-beans' ) );
 
-	beans_open_markup_e( 'beans_post_meta_author', 'a', array(
-		'href'     => get_author_posts_url( get_the_author_meta( 'ID' ) ), // Automatically escaped.
-		'rel'      => 'author',
-		'itemprop' => 'author',
-		'itemscope' => '',
-		'itemtype' => 'http://schema.org/Person',
-	) );
+	beans_open_markup_e(
+		'beans_post_meta_author',
+		'a',
+		array(
+			'href'      => get_author_posts_url( get_the_author_meta( 'ID' ) ), // Automatically escaped.
+			'rel'       => 'author',
+			'itemprop'  => 'author',
+			'itemscope' => '',
+			'itemtype'  => 'http://schema.org/Person',
+		)
+	);
 
 		beans_output_e( 'beans_post_meta_author_text', get_the_author() );
 
-		beans_selfclose_markup_e( 'beans_post_meta_author_name_meta', 'meta', array(
-			'itemprop' => 'name',
-			'content'  => get_the_author(), // Automatically escaped.
-		) );
+		beans_selfclose_markup_e(
+			'beans_post_meta_author_name_meta',
+			'meta',
+			array(
+				'itemprop' => 'name',
+				'content'  => get_the_author(), // Automatically escaped.
+			)
+		);
 
 	beans_close_markup_e( 'beans_post_meta_author', 'a' );
-
 }
 
 beans_add_smart_action( 'beans_post_meta_comments', 'beans_post_meta_comments_shortcode' );
@@ -60,9 +74,10 @@ beans_add_smart_action( 'beans_post_meta_comments', 'beans_post_meta_comments_sh
  * Echo post meta comments shortcode.
  *
  * @since 1.0.0
+ *
+ * @return void
  */
 function beans_post_meta_comments_shortcode() {
-
 	global $post;
 
 	if ( post_password_required() || ! comments_open() ) {
@@ -76,17 +91,18 @@ function beans_post_meta_comments_shortcode() {
 	} elseif ( 1 === $comments_number ) {
 		$comment_text = beans_output( 'beans_post_meta_comments_text_singular', __( '1 comment', 'tm-beans' ) );
 	} else {
-		$comment_text = beans_output( 'beans_post_meta_comments_text_plurial', __( '%s comments', 'tm-beans' ) );
+		$comment_text = beans_output(
+			'beans_post_meta_comments_text_plural',
+			// translators: Number of comments. Plural.
+			__( '%s comments', 'tm-beans' )
+		);
 	}
 
-	beans_open_markup_e( 'beans_post_meta_comments', 'a', array(
-		'href' => get_comments_link(), // Automatically escaped.
-	) );
+	beans_open_markup_e( 'beans_post_meta_comments', 'a', array( 'href' => get_comments_link() ) ); // Automatically escaped.
 
-		printf( $comment_text, (int) get_comments_number( $post->ID ) );
+		printf( $comment_text, (int) get_comments_number( $post->ID ) ); // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped.
 
 	beans_close_markup_e( 'beans_post_meta_comments', 'a' );
-
 }
 
 beans_add_smart_action( 'beans_post_meta_tags', 'beans_post_meta_tags_shortcode' );
@@ -94,6 +110,8 @@ beans_add_smart_action( 'beans_post_meta_tags', 'beans_post_meta_tags_shortcode'
  * Echo post meta tags shortcode.
  *
  * @since 1.0.0
+ *
+ * @return void
  */
 function beans_post_meta_tags_shortcode() {
 
@@ -103,8 +121,7 @@ function beans_post_meta_tags_shortcode() {
 		return;
 	}
 
-	printf( '%1$s%2$s', beans_output( 'beans_post_meta_tags_prefix', __( 'Tagged with: ', 'tm-beans' ) ), $tags );
-
+	printf( '%1$s%2$s', beans_output( 'beans_post_meta_tags_prefix', __( 'Tagged with: ', 'tm-beans' ) ), $tags ); // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped.
 }
 
 beans_add_smart_action( 'beans_post_meta_categories', 'beans_post_meta_categories_shortcode' );
@@ -112,15 +129,15 @@ beans_add_smart_action( 'beans_post_meta_categories', 'beans_post_meta_categorie
  * Echo post meta categories shortcode.
  *
  * @since 1.0.0
+ *
+ * @return void
  */
 function beans_post_meta_categories_shortcode() {
-
 	$categories = get_the_category_list( ', ' );
 
 	if ( ! $categories || is_wp_error( $categories ) ) {
 		return;
 	}
 
-	printf( '%1$s%2$s', beans_output( 'beans_post_meta_categories_prefix', __( 'Filed under: ', 'tm-beans' ) ), $categories );
-
+	printf( '%1$s%2$s', beans_output( 'beans_post_meta_categories_prefix', __( 'Filed under: ', 'tm-beans' ) ), $categories ); // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped.
 }
