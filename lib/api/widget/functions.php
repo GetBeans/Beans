@@ -26,18 +26,18 @@
  * @since 1.0.0
  *
  * @param array $args {
- *     Optional. Arguments used by the widget area.
+ *      Optional. Arguments used by the widget area.
  *
- *     @type string $id                      Optional. The unique identifier by which the widget area will be called.
- *     @type string $name                    Optional. The name or title of the widget area displayed in the
- *                                           admin dashboard.
- *     @type string $description             Optional. The widget area description.
- *     @type string $beans_type                 Optional. The widget area type. Accepts 'stack', 'grid' or 'offcanvas'.
- *                                           Default stack.
- *     @type bool   $beans_show_widget_title    Optional. Whether to show the widget title or not. Default true.
- *     @type bool   $beans_show_widget_badge    Optional. Whether to show the widget badge or not. Default false.
- *     @type bool   $beans_widget_badge_content Optional. The badge content. This may contain widget shortcodes
- *                                           {@see beans_widget_shortcodes()}. Default 'Hello'.
+ *      @type string $id                         Optional. The unique identifier by which the widget area will be called.
+ *      @type string $name                       Optional. The name or title of the widget area displayed in the
+ *                                               admin dashboard.
+ *      @type string $description                Optional. The widget area description.
+ *      @type string $beans_type                 Optional. The widget area type. Accepts 'stack', 'grid' or 'offcanvas'.
+ *                                               Default is stack.
+ *      @type bool   $beans_show_widget_title    Optional. Whether to show the widget title or not. Default true.
+ *      @type bool   $beans_show_widget_badge    Optional. Whether to show the widget badge or not. Default false.
+ *      @type bool   $beans_widget_badge_content Optional. The badge content. This may contain widget shortcodes
+ *                                               {@see beans_widget_shortcodes()}. Default is 'Hello'.
  * }
  * @param array $widget_control Optional.
  *
@@ -111,8 +111,8 @@ function beans_is_active_widget_area( $id ) {
 /**
  * Check whether a widget area is registered.
  *
- * While {@see beans_is_active_widget_area()} checks if a widget area contains widgets, this function only checks if a widget
- * area is registered.
+ * While {@see beans_is_active_widget_area()} checks if a widget area contains widgets, this function only checks if a
+ * widget area is registered.
  *
  * @since 1.0.0
  *
@@ -155,16 +155,16 @@ function beans_widget_area( $id ) {
 	 */
 	do_action( 'beans_widget_area_init' );
 
-		ob_start();
+	ob_start();
 
-			/**
-			 * Fires when {@see beans_widget_area()} is called.
-			 *
-			 * @since 1.0.0
-			 */
-			do_action( 'beans_widget_area' );
+	/**
+	 * Fires when {@see beans_widget_area()} is called.
+	 *
+	 * @since 1.0.0
+	 */
+	do_action( 'beans_widget_area' );
 
-		$output = ob_get_clean();
+	$output = ob_get_clean();
 
 	// Reset widget area global to reduce memory usage.
 	_beans_reset_widget_area();
@@ -321,7 +321,7 @@ function beans_widget_shortcodes( $content ) {
 /**
  * Set up widget area global data.
  *
- * @since 1.0.0
+ * @since  1.0.0
  * @ignore
  * @access private
  *
@@ -337,12 +337,15 @@ function _beans_setup_widget_area( $id ) {
 	}
 
 	// Add widget area delimiters. This is used to split wp sidebar as well as the widgets title.
-	$wp_registered_sidebars[ $id ] = array_merge( $wp_registered_sidebars[ $id ], array( // @codingStandardsIgnoreLine - WordPress.Variables.GlobalVariables.OverrideProhibited.
-		'before_widget' => '<!--widget-%1$s-->',
-		'after_widget'  => '<!--widget-end-->',
-		'before_title'  => '<!--title-start-->',
-		'after_title'   => '<!--title-end-->',
-	) );
+	$wp_registered_sidebars[ $id ] = array_merge( // phpcs:ignore WordPress.Variables.GlobalVariables.OverrideProhibited -- Valid use case.
+		$wp_registered_sidebars[ $id ],
+		array(
+			'before_widget' => '<!--widget-%1$s-->',
+			'after_widget'  => '<!--widget-end-->',
+			'before_title'  => '<!--title-start-->',
+			'after_title'   => '<!--title-end-->',
+		)
+	);
 
 	// Start building widget area global before dynamic_sidebar is called.
 	$_beans_widget_area = $wp_registered_sidebars[ $id ];
@@ -359,7 +362,7 @@ function _beans_setup_widget_area( $id ) {
 	// Prepare widgets count.
 	preg_match_all( '#<!--widget-end-->#', $sidebar, $counter );
 
-	// Continue building widget area global with the splited sidebar elements.
+	// Continue building widget area global with the split sidebar elements.
 	$_beans_widget_area['widgets_count']  = count( $counter[0] );
 	$_beans_widget_area['current_widget'] = 0;
 
@@ -376,7 +379,7 @@ function _beans_setup_widget_area( $id ) {
 /**
  * Setup widget area global widgets data.
  *
- * @since 1.0.0
+ * @since  1.0.0
  * @ignore
  * @access private
  *
@@ -478,7 +481,7 @@ function _beans_setup_widgets( $widget_area_content ) {
 /**
  * Setup widget global data.
  *
- * @since 1.0.0
+ * @since  1.0.0
  * @ignore
  * @access private
  *
@@ -495,7 +498,7 @@ function _beans_setup_widget( $id ) {
 /**
  * Reset widget area global data.
  *
- * @since 1.0.0
+ * @since  1.0.0
  * @ignore
  * @access private
  *
@@ -508,7 +511,7 @@ function _beans_reset_widget_area() {
 /**
  * Reset widget global data.
  *
- * @since 1.0.0
+ * @since  1.0.0
  * @ignore
  * @access private
  *
@@ -519,13 +522,13 @@ function _beans_reset_widget() {
 }
 
 /**
- * Build widget area subfilters.
+ * Build widget area sub-filters.
  *
- * @since 1.0.0
+ * @since  1.0.0
  * @ignore
  * @access private
  *
- * @return array
+ * @return string
  */
 function _beans_widget_area_subfilters() {
 	global $_beans_widget_area;
@@ -535,13 +538,13 @@ function _beans_widget_area_subfilters() {
 }
 
 /**
- * Build widget subfilters.
+ * Build widget sub-filters.
  *
- * @since 1.0.0
+ * @since  1.0.0
  * @ignore
  * @access private
  *
- * @return array
+ * @return string
  */
 function _beans_widget_subfilters() {
 	global $_beans_widget_area, $_beans_widget;
@@ -559,13 +562,13 @@ add_action( 'the_widget', '_beans_force_the_widget', 10, 3 );
 /**
  * Force atypical widget added using the_widget() to have a correctly registered id.
  *
- * @since 1.0.0
+ * @since  1.0.0
  * @ignore
  * @access private
  *
- * @param string $widget The widget's PHP class name (see class-wp-widget.php).
+ * @param string $widget   The widget's PHP class name (see class-wp-widget.php).
  * @param array  $instance Optional. The widget's instance settings. Default empty array.
- * @param array  $args Array of arguments to configure the display of the widget.
+ * @param array  $args     Array of arguments to configure the display of the widget.
  *
  * @return void
  */

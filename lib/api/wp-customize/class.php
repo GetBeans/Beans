@@ -36,7 +36,7 @@ final class _Beans_WP_Customize {
 	 * Constructor.
 	 *
 	 * @param string $section Field section.
-	 * @param array  $args Metabox arguments.
+	 * @param array  $args Meta box arguments.
 	 */
 	public function __construct( $section, $args ) {
 		$defaults = array(
@@ -113,7 +113,7 @@ final class _Beans_WP_Customize {
 	 * @ignore
 	 *
 	 * @param WP_Customize_Manager $wp_customize WP Customizer Manager object.
-	 * @param array                $field Metabox settings.
+	 * @param array                $field Meta box settings.
 	 *
 	 * @return void
 	 */
@@ -145,7 +145,7 @@ final class _Beans_WP_Customize {
 	 * @ignore
 	 *
 	 * @param WP_Customize_Manager $wp_customize WP Customizer Manager object.
-	 * @param array                $field Metabox settings.
+	 * @param array                $field Meta box settings.
 	 *
 	 * @return void
 	 */
@@ -170,7 +170,7 @@ final class _Beans_WP_Customize {
 	}
 
 	/**
-	 * Sanatize value.
+	 * Sanitize the value.
 	 *
 	 * @since 1.0.0
 	 *
@@ -194,7 +194,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) :
 	 *
 	 * @package Beans\Framework\API\WP_Customize
 	 */
-	class _Beans_WP_Customize_Control extends WP_Customize_Control { // @codingStandardsIgnoreLine - Generic.Files.OneClassPerFile.MultipleFound.
+	class _Beans_WP_Customize_Control extends WP_Customize_Control { // phpcs:ignore Generic.Files.OneClassPerFile.MultipleFound, Generic.Classes.OpeningBraceSameLine.ContentAfterBrace -- Will be fixed.
 
 		/**
 		 * Field data.
