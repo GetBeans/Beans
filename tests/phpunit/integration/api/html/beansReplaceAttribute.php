@@ -84,7 +84,7 @@ class Tests_BeansReplaceAttribute extends HTML_Test_Case {
 			$this->assertSame( 10, has_filter( $hook, array( $attributes, 'replace' ), 10 ) );
 			$expected               = $markup['attributes'];
 			$expected[ $attribute ] = null;
-			$actual = apply_filters( $hook, $markup['attributes'] ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- The hook's name is in the value.
+			$actual                 = apply_filters( $hook, $markup['attributes'] ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- The hook's name is in the value.
 			$this->assertSame( $expected, $actual );
 			$this->assertNotSame( $value, $actual[ $attribute ] );
 			$this->assertNull( $actual[ $attribute ] );
@@ -110,7 +110,7 @@ class Tests_BeansReplaceAttribute extends HTML_Test_Case {
 			$this->assertSame( 10, has_filter( $hook, array( $attributes, 'replace' ), 10 ) );
 			$expected               = $markup['attributes'];
 			$expected[ $attribute ] = '';
-			$actual = apply_filters( $hook, $markup['attributes'] ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- The hook's name is in the value.
+			$actual                 = apply_filters( $hook, $markup['attributes'] ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- The hook's name is in the value.
 			$this->assertSame( $expected, $actual );
 			$this->assertNotSame( $value, $actual[ $attribute ] );
 			$this->assertSame( '', $actual[ $attribute ] );
