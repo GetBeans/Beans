@@ -3,7 +3,7 @@
  *
  * Load the API components.
  *
- * @since   1.5.0
+ * @since 1.5.0
  *
  * @package Beans\Framework\API
  */
