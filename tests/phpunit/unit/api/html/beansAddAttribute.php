@@ -43,7 +43,7 @@ class Tests_BeansAddAttribute extends HTML_Test_Case {
 			$this->assertTrue( has_filter( $hook, array( $attributes, 'add' ), 10 ) );
 			$expected              = $markup_attributes;
 			$expected['data-test'] = '';
-			$this->assertSame( $expected, apply_filters( $hook, $markup_attributes ) ); // @codingStandardsIgnoreLine - WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound  The hook's name is in the value.
+			$this->assertSame( $expected, apply_filters( $hook, $markup_attributes ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- The hook's name is in the value.
 
 			// Clean up.
 			remove_filter( $hook, array( $attributes, 'add' ), 10 );
@@ -75,7 +75,7 @@ class Tests_BeansAddAttribute extends HTML_Test_Case {
 			$this->assertTrue( has_filter( $hook, array( $attributes, 'add' ), 10 ) );
 			$expected           = $markup['attributes'];
 			$expected['class'] .= ' beans-test';
-			$this->assertSame( $expected, apply_filters( $hook, $markup['attributes'] ) ); // @codingStandardsIgnoreLine - WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound  The hook's name is in the value.
+			$this->assertSame( $expected, apply_filters( $hook, $markup['attributes'] ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- The hook's name is in the value.
 
 			// Clean up.
 			remove_filter( $hook, array( $attributes, 'add' ), 10 );

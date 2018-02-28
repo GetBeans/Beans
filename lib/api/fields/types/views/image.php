@@ -8,6 +8,7 @@
  * @since   1.5.0 Moved to view file.
  */
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Variables are used within a function's scope.
 ?>
 
 <button class="bs-add-image button button-small" type="button" <?php echo isset( $hide_add_link ) ? 'style="display: none"' : ''; ?>><?php echo esc_html( $link_text ); ?></button>
@@ -22,12 +23,12 @@ foreach ( $images as $image_id ) :
 		continue;
 	}
 
-	$attributes = _beans_get_image_id_attributes( $image_id, $field, $is_multiple ); // @codingStandardsIgnoreLine. WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound - Called from within a function and not within global scope.
-	$image_url  = _beans_get_image_url( $image_id );  // @codingStandardsIgnoreLine. WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound - Called from within a function and not within global scope.
-	$image_alt  = $image_url ? _beans_get_image_alt( $image_id ) : '';  // @codingStandardsIgnoreLine. WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound - Called from within a function and not within global scope.
+	$attributes = _beans_get_image_id_attributes( $image_id, $field, $is_multiple );
+	$image_url  = _beans_get_image_url( $image_id );
+	$image_alt  = $image_url ? _beans_get_image_alt( $image_id ) : '';
 ?>
 	<div class="bs-image-wrap<?php echo 'placeholder' === $image_id ? ' bs-image-template' : ''; ?>">
-        <input <?php echo beans_esc_attributes( $attributes ); ?> /><?php // @codingStandardsIgnoreLine. WordPress.XSS.EscapeOutput.OutputNotEscaped - Escaping is handled in the function. ?>
+		<input <?php echo beans_esc_attributes( $attributes ); ?> /><?php // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped -- Escaping is handled in the function. ?>
 		<img src="<?php echo $image_url ? esc_url( $image_url ) : ''; ?>" alt="<?php echo $image_alt ? esc_attr( $image_alt ) : ''; ?>">
 		<div class="bs-toolbar">
 			<?php
@@ -51,3 +52,5 @@ foreach ( $images as $image_id ) :
 	</div>
 <?php endforeach; ?>
 </div>
+<?php
+// phpcs:enable

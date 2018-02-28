@@ -15,24 +15,23 @@
  * @since 1.0.0
  *
  * @param array  $fields      {
- *                            Array of fields to register.
+ *      Array of fields to register.
  *
- * @type string  $id          A unique id used for the field. This id will also be used to save the value in the
- *       database.
- * @type string  $type        The type of field to use. Please refer to the Beans core field types for more
- *       information. Custom field types are accepted here.
- * @type string  $label       The field label. Default false.
- * @type string  $description The field description. The description can be truncated using <!--more--> as a delimiter.
- *       Default false.
- * @type array   $attributes  An array of attributes to add to the field. The array key defines the attribute name and
- *       the array value defines the attribute value. Default array.
- * @type mixed   $default     The default field value. Default false.
- * @type array   $fields      Must only be used for the 'group' field type. The array arguments are similar to the
- *       {@see beans_register_fields()} $fields arguments.
- * @type bool    $db_group    Must only be used for the 'group' field type. It defines whether the group of fields
- *       should be saved as a group or as individual entries in the database. Default false.
+ *      @type string  $id          A unique id used for the field. This id will also be used to save the value in the
+ *                                 database.
+ *      @type string  $type        The type of field to use. Please refer to the Beans core field types for more
+ *                                 information. Custom field types are accepted here.
+ *      @type string  $label       The field label. Default false.
+ *      @type string  $description The field description. The description can be truncated using <!--more--> as a
+ *                                 delimiter. Default false.
+ *      @type array   $attributes  An array of attributes to add to the field. The array key defines the attribute name
+ *                                 and the array value defines the attribute value. Default array.
+ *      @type mixed   $default     The default field value. Default false.
+ *      @type array   $fields      Must only be used for the 'group' field type. The array arguments are similar to the
+ *                                 {@see beans_register_fields()} $fields arguments.
+ *      @type bool    $db_group    Must only be used for the 'group' field type. It defines whether the group of fields
+ *                                 should be saved as a group or as individual entries in the database. Default false.
  * }
- *
  * @param string $context     The context in which the fields are used. 'option' for options/settings pages,
  *                            'post_meta' for post fields, 'term_meta' for taxonomies fields and 'wp_customize' for WP
  *                            customizer fields.
@@ -61,11 +60,11 @@ function beans_register_fields( array $fields, $context, $section ) {
  *
  * @since 1.0.0
  *
- * @param string $context The context in which the fields are used. 'option' for options/settings pages, 'post_meta'
- *                        for post fields, 'term_meta' for taxonomies fields and 'wp_customize' for WP customizer
- *                        fields.
- * @param string $section Optional. A section ID to define a group of fields. This is mostly used for metaboxes and WP
- *                        Customizer sections.
+ * @param string      $context The context in which the fields are used. 'option' for options/settings pages,
+ *                             'post_meta' for post fields, 'term_meta' for taxonomies fields and 'wp_customize' for WP
+ *                             customizer fields.
+ * @param string|bool $section Optional. A section ID to define a group of fields. This is mostly used for metaboxes
+ *                             and WP Customizer sections.
  *
  * @return array|bool Array of registered fields on success, false on failure.
  */

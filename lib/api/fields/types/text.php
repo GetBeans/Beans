@@ -26,6 +26,6 @@ function beans_field_text( array $field ) {
 		esc_attr( $field['id'] ),
 		esc_attr( $field['name'] ),
 		esc_attr( $field['value'] ),
-		beans_esc_attributes( $field['attributes'] ) // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped - Escaping is handled in the function.
+		beans_esc_attributes( $field['attributes'] ) // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped -- Escaping is handled in the function.
 	);
 }

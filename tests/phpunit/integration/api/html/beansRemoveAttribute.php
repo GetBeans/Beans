@@ -37,7 +37,7 @@ class Tests_BeansRemoveAttribute extends HTML_Test_Case {
 			$this->assertSame( 10, has_filter( $hook, array( $attributes, 'remove' ), 10 ) );
 			$expected = $markup['attributes'];
 			unset( $expected[ $attribute ] );
-			$this->assertSame( $expected, apply_filters( $hook, $markup['attributes'] ) ); // @codingStandardsIgnoreLine - WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound  The hook's name is in the value.
+			$this->assertSame( $expected, apply_filters( $hook, $markup['attributes'] ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- The hook's name is in the value.
 
 			// Clean up.
 			remove_filter( $hook, array( $attributes, 'remove' ), 10 );
@@ -60,7 +60,7 @@ class Tests_BeansRemoveAttribute extends HTML_Test_Case {
 			$this->assertSame( 10, has_filter( $hook, array( $attributes, 'remove' ), 10 ) );
 			$expected               = $markup['attributes'];
 			$expected[ $attribute ] = str_replace( $value, '', $expected[ $attribute ] );
-			$this->assertSame( $expected, apply_filters( $hook, $markup['attributes'] ) ); // @codingStandardsIgnoreLine - WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound  The hook's name is in the value.
+			$this->assertSame( $expected, apply_filters( $hook, $markup['attributes'] ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- The hook's name is in the value.
 
 			// Clean up.
 			remove_filter( $hook, array( $attributes, 'remove' ), 10 );
