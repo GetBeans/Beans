@@ -6,7 +6,7 @@
  *
  * @package Beans\Framework\API\Widgets
  *
- * @since   1.0.0
+ * @since 1.0.0
  */
 
 /**
@@ -25,22 +25,21 @@
  *
  * @since 1.0.0
  *
- * @param array $args                       {
- *                                          Optional. Arguments used by the widget area.
+ * @param array $args {
+ *      Optional. Arguments used by the widget area.
  *
- * @type string $id                         Optional. The unique identifier by which the widget area will be called.
- * @type string $name                       Optional. The name or title of the widget area displayed in the
- *                                           admin dashboard.
- * @type string $description                Optional. The widget area description.
- * @type string $beans_type                 Optional. The widget area type. Accepts 'stack', 'grid' or 'offcanvas'.
- *                                           Default stack.
- * @type bool   $beans_show_widget_title    Optional. Whether to show the widget title or not. Default true.
- * @type bool   $beans_show_widget_badge    Optional. Whether to show the widget badge or not. Default false.
- * @type bool   $beans_widget_badge_content Optional. The badge content. This may contain widget shortcodes
- *                                           {@see beans_widget_shortcodes()}. Default 'Hello'.
+ *      @type string $id                         Optional. The unique identifier by which the widget area will be called.
+ *      @type string $name                       Optional. The name or title of the widget area displayed in the
+ *                                               admin dashboard.
+ *      @type string $description                Optional. The widget area description.
+ *      @type string $beans_type                 Optional. The widget area type. Accepts 'stack', 'grid' or 'offcanvas'.
+ *                                               Default is stack.
+ *      @type bool   $beans_show_widget_title    Optional. Whether to show the widget title or not. Default true.
+ *      @type bool   $beans_show_widget_badge    Optional. Whether to show the widget badge or not. Default false.
+ *      @type bool   $beans_widget_badge_content Optional. The badge content. This may contain widget shortcodes
+ *                                               {@see beans_widget_shortcodes()}. Default is 'Hello'.
  * }
- *
- * @param array $widget_control             Optional.
+ * @param array $widget_control Optional.
  *
  * @return string The widget area ID is added to the $wp_registered_sidebars globals when the widget area is setup.
  */
