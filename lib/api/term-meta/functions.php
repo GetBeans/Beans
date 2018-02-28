@@ -26,5 +26,5 @@ function beans_get_term_meta( $field_id, $default = false, $term_id = false ) {
 		$term_id = $_term_id ? $_term_id : beans_get( 'tag_ID' );
 	}
 
-	return get_option( "beans_term_{$term_id}_{$field_id}", $default );
+	return $term_id ? get_option( "beans_term_{$term_id}_{$field_id}", $default ) : $default;
 }
