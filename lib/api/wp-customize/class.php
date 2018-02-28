@@ -194,7 +194,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) :
 	 *
 	 * @package Beans\Framework\API\WP_Customize
 	 */
-	class _Beans_WP_Customize_Control extends WP_Customize_Control { // phpcs:ignore Generic.Files.OneClassPerFile.MultipleFound -- Will be fixed.
+	class _Beans_WP_Customize_Control extends WP_Customize_Control { // phpcs:ignore Generic.Files.OneClassPerFile.MultipleFound, Generic.Classes.OpeningBraceSameLine.ContentAfterBrace -- Will be fixed.
 
 		/**
 		 * Field data.
