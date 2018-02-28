@@ -209,6 +209,6 @@ abstract class Actions_Test_Case extends WP_UnitTestCase {
 
 		$post_id = self::factory()->post->create( array( 'post_title' => 'Hello Beans' ) );
 		$this->go_to( get_permalink( $post_id ) );
-		do_action( 'template_redirect' ); // @codingStandardsIgnoreLine
+		do_action( 'template_redirect' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Valid use case as we need to fire this action as part of our tests.
 	}
 }

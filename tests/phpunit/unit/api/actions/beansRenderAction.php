@@ -61,7 +61,7 @@ class Tests_BeansRenderAction extends Test_Case {
 			$this->assertEquals( $expected_args[ $args[0] ], $args[1] );
 
 			// Let's echo out to ensure this callback will was called.
-			echo $args[1][0];  // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped - reason: we are not testing escaping functionality.
+			echo $args[1][0];  // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped -- Not testing escaping functionality.
 		};
 		add_action( 'beans_stub', $callback );
 		$this->assertTrue( has_action( 'beans_stub' ) );

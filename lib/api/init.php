@@ -3,7 +3,7 @@
  *
  * Load the API components.
  *
- * @since 1.5.0
+ * @since   1.5.0
  *
  * @package Beans\Framework\API
  */
@@ -18,7 +18,7 @@ define( 'BEANS_API', true );
 
 // Mode.
 if ( ! defined( 'SCRIPT_DEBUG' ) ) {
-	define( 'SCRIPT_DEBUG', false ); // @codingStandardsIgnoreLine - WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound.
+	define( 'SCRIPT_DEBUG', false ); // @phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound -- Valid use case as we need it defined.
 }
 
 // Assets.

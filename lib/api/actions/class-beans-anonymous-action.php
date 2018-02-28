@@ -51,6 +51,6 @@ final class _Beans_Anonymous_Actions {
 	 * @return void
 	 */
 	public function callback() {
-		echo call_user_func_array( $this->callback[0], $this->callback[1] ); // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped - reason: the callback should escape the output.
+		echo call_user_func_array( $this->callback[0], $this->callback[1] ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped -- The callback should escape the output.
 	}
 }

@@ -86,11 +86,11 @@ function beans_remove_dir( $dir_path ) {
 		if ( is_dir( $path ) ) {
 			beans_remove_dir( $path );
 		} else {
-			@unlink( $path ); // @codingStandardsIgnoreLine - Generic.PHP.NoSilencedErrors.Discouraged  This is a valid use case.
+			@unlink( $path ); // phpcs:disable Generic.PHP.NoSilencedErrors.Discouraged -- Valid use cases.
 		}
 	}
 
-	return @rmdir( $dir_path ); // @codingStandardsIgnoreLine - Generic.PHP.NoSilencedErrors.Discouraged This is a valid use case.
+	return @rmdir( $dir_path ); // phpcs:disable Generic.PHP.NoSilencedErrors.Discouraged -- Valid use cases.
 }
 
 /**
@@ -294,7 +294,7 @@ function beans_sanitize_path( $path ) {
 function beans_get( $needle, $haystack = false, $default = null ) {
 
 	if ( false === $haystack ) {
-		$haystack = $_GET; // @codingStandardsIgnoreLine - WordPress.CSRF.NonceVerification.NoNonceVerification as the nonce verification check should be at the form processing level.
+		$haystack = $_GET; // phpcs:ignore WordPress.CSRF.NonceVerification.NoNonceVerification -- The nonce verification check should be at the form processing level.
 	}
 
 	$haystack = (array) $haystack;
@@ -317,7 +317,7 @@ function beans_get( $needle, $haystack = false, $default = null ) {
  * @return string Returns the value if found; else $default is returned.
  */
 function beans_post( $needle, $default = null ) {
-	return beans_get( $needle, $_POST, $default ); // @codingStandardsIgnoreLine - WordPress.CSRF.NonceVerification.NoNonceVerification as the nonce verification check should be at the form processing level.
+	return beans_get( $needle, $_POST, $default ); // phpcs:ignore WordPress.CSRF.NonceVerification.NoNonceVerification -- The nonce verification check should be at the form processing level.
 }
 
 /**
@@ -360,7 +360,7 @@ function beans_get_or_post( $needle, $default = null ) {
  */
 function beans_in_multi_array( $needle, $haystack, $strict = false ) {
 
-	if ( in_array( $needle, $haystack, $strict ) ) { // @codingStandardsIgnoreLine - WordPress.PHP.StrictInArray.MissingTrueStrict requires 3rd argument to be true or false and not a variable.
+	if ( in_array( $needle, $haystack, $strict ) ) { // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict -- The rule does not account for when we are passing a boolean within a variable as the 3rd argument.
 		return true;
 	}
 
