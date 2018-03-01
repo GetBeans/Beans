@@ -7,11 +7,13 @@
  * @since   1.5.0
  */
 
+namespace Beans\Framework\Tests\Unit\API\Term_Meta;
+
 use Beans\Framework\Tests\Unit\Test_Case;
 use Brain\Monkey;
 
 /**
- * Class Tests_BeansGetPostMeta
+ * Class Tests_BeansGetTermMeta
  *
  * @package Beans\Framework\Tests\Unit\API\Term_Meta
  * @group   unit-tests
@@ -19,7 +21,6 @@ use Brain\Monkey;
  * @group   api-term-meta
  */
 class Tests_BeansGetTermMeta extends Test_Case {
-
 	/**
 	 * Setup test fixture.
 	 */
@@ -104,5 +105,4 @@ class Tests_BeansGetTermMeta extends Test_Case {
 
 		$this->assertSame( 'c-sp', beans_get_term_meta( 'beans_layout', 'default_fallback' ) );
 	}
-
 }
