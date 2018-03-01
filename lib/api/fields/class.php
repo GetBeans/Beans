@@ -98,7 +98,7 @@ final class _Beans_Fields {
 	}
 
 	/**
-	 * Standardize field to beans format.
+	 * Standadrize field to beans format.
 	 */
 	private function standardize_field( $field ) {
 
