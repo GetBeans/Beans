@@ -34,55 +34,74 @@ class Tests_BeansGetTermMeta extends Test_Case {
 	public function test_should_return_false_when_no_optional_arguments_given_and_term_meta_not_set() {
 		Monkey\Functions\expect( 'get_queried_object' )
 			->once()
-			->andReturn( (object) array( 'term_id' => 1 ) );
-		Monkey\Functions\expect( 'get_option' )
-			->with( 'beans_term_1_beans_layout', false )
-			->once()
-			->andReturn( false );
+			->andReturn( (object) array( 'post_id' => 1 ) ); // return an object with no term_id.
+		Monkey\Functions\expect( 'get_option' )->never();
 
-		// run the function without providing any optional parameters
 		$this->assertFalse( beans_get_term_meta( 'beans_layout' ) );
 	}
 
 	/**
-	 * Test beans_get_term_meta() should return default when given and term meta does not exist.
+	 * Test beans_get_term_meta() should return default when given and queried object has a term_id but term meta does not exist.
 	 */
-	public function test_should_return_default_when_default_given_and_term_meta_not_set() {
-		// get_queried_objects() will be called only when term_id is not provided.
+	public function test_should_return_default_when_default_given_and_queried_obj_has_term_id_but_term_meta_not_set() {
 		Monkey\Functions\expect( 'get_queried_object' )
 			->once()
 			->andReturn( (object) array( 'term_id' => 1 ) );
-		// get_option() will be called both times with and without term_id.
 		Monkey\Functions\expect( 'get_option' )
 			->with( 'beans_term_1_beans_layout', 'c' )
 			->twice()
 			->andReturn( 'c' );
 
-		// Run the function once without providing the term_id and once with term_id.
-		// In both cases, should return the default.
 		$this->assertSame( 'c', beans_get_term_meta( 'beans_layout', 'c' ) );
 		$this->assertSame( 'c', beans_get_term_meta( 'beans_layout', 'c', 1 ) );
 	}
 
 	/**
-	 * Test beans_get_term_meta() should return meta term's value when it exists.
+	 * Test beans_get_term_meta() should return meta term's value when queried object has a term_id and meta for that id exists.
 	 */
-
-	public function test_should_return_term_meta_when_meta_is_set() {
-		// get_queried_objects() will be called only when term_id is not provided.
+	public function test_should_return_term_meta_when_queried_object_has_term_id_and_meta_is_set() {
 		Monkey\Functions\expect( 'get_queried_object' )
 			->once()
 			->andReturn( (object) array( 'term_id' => 1 ) );
-		// get_option() will be called both times with and without term_id.
 		Monkey\Functions\expect( 'get_option' )
 			->with( 'beans_term_1_beans_layout', 'c' )
 			->twice()
 			->andReturn( 'r' );
 
-		// Run the function once without providing the term_id and once with term_id.
-		// In both cases, should return the term meta.
 		$this->assertSame( 'r', beans_get_term_meta( 'beans_layout', 'c' ) );
 		$this->assertSame( 'r', beans_get_term_meta( 'beans_layout', 'c', 1 ) );
+	}
+
+	/**
+	 * Test beans_get_term_meta() should return default when given and term_id is tag_ID but term meta does not exist.
+	 */
+	public function test_should_return_default_when_default_given_and_term_id_is_tag_id_but_term_meta_not_set() {
+		$_GET['tag_ID'] = 1;
+		Monkey\Functions\expect( 'get_queried_object' )
+			->once()
+			->andReturn( (object) array( 'post_id' => 1 ) );
+		Monkey\Functions\expect( 'get_option' )
+			->with( 'beans_term_1_beans_layout', 'c' )
+			->once()
+			->andReturn( 'c' );
+
+		$this->assertSame( 'c', beans_get_term_meta( 'beans_layout', 'c' ) );
+	}
+
+	/**
+	 * Test beans_get_term_meta() should return meta term's value when term_id is tag_ID and term meta for that id exists.
+	 */
+	public function test_should_return_term_meta_when_default_given_and_term_id_is_tag_id_and_term_meta_exists() {
+		$_GET['tag_ID'] = 1;
+		Monkey\Functions\expect( 'get_queried_object' )
+			->once()
+			->andReturn( (object) array( 'post_id' => 1 ) );
+		Monkey\Functions\expect( 'get_option' )
+			->with( 'beans_term_1_beans_layout', 'c' )
+			->once()
+			->andReturn( 'r' );
+
+		$this->assertSame( 'r', beans_get_term_meta( 'beans_layout', 'c' ) );
 	}
 
 }
