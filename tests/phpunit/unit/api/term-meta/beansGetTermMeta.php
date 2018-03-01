@@ -16,6 +16,7 @@ use Brain\Monkey;
  * @package Beans\Framework\Tests\Unit\API\Term_Meta
  * @group   unit-tests
  * @group   api
+ * @group   api-term-meta
  */
 class Tests_BeansGetTermMeta extends Test_Case {
 
@@ -48,12 +49,12 @@ class Tests_BeansGetTermMeta extends Test_Case {
 			->once()
 			->andReturn( (object) array( 'term_id' => 1 ) );
 		Monkey\Functions\expect( 'get_option' )
-			->with( 'beans_term_1_beans_layout', 'c' )
+			->with( 'beans_term_1_beans_layout', 'default_fallback' )
 			->twice()
-			->andReturn( 'c' );
+			->andReturn( 'default_fallback' );
 
-		$this->assertSame( 'c', beans_get_term_meta( 'beans_layout', 'c' ) );
-		$this->assertSame( 'c', beans_get_term_meta( 'beans_layout', 'c', 1 ) );
+		$this->assertSame( 'default_fallback', beans_get_term_meta( 'beans_layout', 'default_fallback' ) );
+		$this->assertSame( 'default_fallback', beans_get_term_meta( 'beans_layout', 'default_fallback', 1 ) );
 	}
 
 	/**
@@ -64,12 +65,12 @@ class Tests_BeansGetTermMeta extends Test_Case {
 			->once()
 			->andReturn( (object) array( 'term_id' => 1 ) );
 		Monkey\Functions\expect( 'get_option' )
-			->with( 'beans_term_1_beans_layout', 'c' )
+			->with( 'beans_term_1_beans_layout', 'default_fallback' )
 			->twice()
-			->andReturn( 'r' );
+			->andReturn( 'c-sp' );
 
-		$this->assertSame( 'r', beans_get_term_meta( 'beans_layout', 'c' ) );
-		$this->assertSame( 'r', beans_get_term_meta( 'beans_layout', 'c', 1 ) );
+		$this->assertSame( 'c-sp', beans_get_term_meta( 'beans_layout', 'default_fallback' ) );
+		$this->assertSame( 'c-sp', beans_get_term_meta( 'beans_layout', 'default_fallback', 1 ) );
 	}
 
 	/**
@@ -81,11 +82,11 @@ class Tests_BeansGetTermMeta extends Test_Case {
 			->once()
 			->andReturn( (object) array( 'post_id' => 1 ) );
 		Monkey\Functions\expect( 'get_option' )
-			->with( 'beans_term_1_beans_layout', 'c' )
+			->with( 'beans_term_1_beans_layout', 'default_fallback' )
 			->once()
-			->andReturn( 'c' );
+			->andReturn( 'default_fallback' );
 
-		$this->assertSame( 'c', beans_get_term_meta( 'beans_layout', 'c' ) );
+		$this->assertSame( 'default_fallback', beans_get_term_meta( 'beans_layout', 'default_fallback' ) );
 	}
 
 	/**
@@ -97,11 +98,11 @@ class Tests_BeansGetTermMeta extends Test_Case {
 			->once()
 			->andReturn( (object) array( 'post_id' => 1 ) );
 		Monkey\Functions\expect( 'get_option' )
-			->with( 'beans_term_1_beans_layout', 'c' )
+			->with( 'beans_term_1_beans_layout', 'default_fallback' )
 			->once()
-			->andReturn( 'r' );
+			->andReturn( 'c-sp' );
 
-		$this->assertSame( 'r', beans_get_term_meta( 'beans_layout', 'c' ) );
+		$this->assertSame( 'c-sp', beans_get_term_meta( 'beans_layout', 'default_fallback' ) );
 	}
 
 }

@@ -17,6 +17,7 @@ use WP_UnitTestCase;
  * @package Beans\Framework\Tests\Integration\API\Term_Meta
  * @group   integration-tests
  * @group   api
+ * @group   api-term-meta
  */
 class Tests_BeansGetTermMeta extends WP_UnitTestCase {
 
@@ -43,22 +44,22 @@ class Tests_BeansGetTermMeta extends WP_UnitTestCase {
 		$provided_term_id = $this->factory()->category->create();
 		$this->go_to( ( '?cat=' . $default_term_id ) );
 
-		$this->assertSame( 'c', beans_get_term_meta( 'beans_layout', 'c' ) );
-		$this->assertSame( 'c', beans_get_term_meta( 'beans_layout', 'c', $provided_term_id ) );
+		$this->assertSame( 'default_fallback', beans_get_term_meta( 'beans_layout', 'default_fallback' ) );
+		$this->assertSame( 'default_fallback', beans_get_term_meta( 'beans_layout', 'default_fallback', $provided_term_id ) );
 	}
 
 	/**
-	 * Test beans_get_term_meta() should return meta term's value when it exists.
+	 * Test beans_get_term_meta() should return term's meta value when it exists.
 	 */
 	public function test_should_return_term_meta_when_meta_is_set() {
 		$default_term_id = $this->factory()->category->create();
-		update_option( "beans_term_{$default_term_id}_beans_layout", 'l' );
+		update_option( "beans_term_{$default_term_id}_beans_layout", 'sp-c' );
 		$provided_term_id = $this->factory()->category->create();
-		update_option( "beans_term_{$provided_term_id}_beans_layout", 'r' );
+		update_option( "beans_term_{$provided_term_id}_beans_layout", 'c-sp' );
 		$this->go_to( ( '?cat=' . $default_term_id ) );
 
-		$this->assertSame( 'l', beans_get_term_meta( 'beans_layout', 'c' ) );
-		$this->assertSame( 'r', beans_get_term_meta( 'beans_layout', 'c', $provided_term_id ) );
+		$this->assertSame( 'sp-c', beans_get_term_meta( 'beans_layout', 'default_fallback' ) );
+		$this->assertSame( 'c-sp', beans_get_term_meta( 'beans_layout', 'default_fallback', $provided_term_id ) );
 	}
 
 	/**
@@ -67,7 +68,7 @@ class Tests_BeansGetTermMeta extends WP_UnitTestCase {
 	public function test_should_return_default_when_given_and_tag_id_exists_but_term_meta_not_set() {
 		$_GET['tag_ID'] = 2;
 
-		$this->assertSame( 'c', beans_get_term_meta( 'beans_layout', 'c' ) );
+		$this->assertSame( 'default_fallback', beans_get_term_meta( 'beans_layout', 'default_fallback' ) );
 	}
 
 	/**
@@ -75,8 +76,8 @@ class Tests_BeansGetTermMeta extends WP_UnitTestCase {
 	 */
 	public function test_should_return_term_meta_when_given_and_tag_id_exists_but_term_meta_not_set() {
 		$_GET['tag_ID'] = 3;
-		update_option( "beans_term_3_beans_layout", 'l' );
+		update_option( 'beans_term_3_beans_layout', 'sp-c' );
 
-		$this->assertSame( 'l', beans_get_term_meta( 'beans_layout', 'c' ) );
+		$this->assertSame( 'sp-c', beans_get_term_meta( 'beans_layout', 'default_fallback' ) );
 	}
 }
