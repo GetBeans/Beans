@@ -15,7 +15,6 @@ use WP_UnitTestCase;
  * Class Tests_BeansGetPostMeta
  *
  * @package Beans\Framework\Tests\Integration\API\Term_Meta
- * @group   integration-tests
  * @group   api
  * @group   api-term-meta
  */

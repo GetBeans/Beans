@@ -16,7 +16,6 @@ use Brain\Monkey;
  * Class Tests_BeansGetTermMeta
  *
  * @package Beans\Framework\Tests\Unit\API\Term_Meta
- * @group   unit-tests
  * @group   api
  * @group   api-term-meta
  */
