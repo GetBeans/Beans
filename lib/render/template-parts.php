@@ -86,7 +86,7 @@ function beans_loop_template( $id = false ) {
 		 * @since 1.0.0
 		 */
 		$args     = beans_apply_filters( "beans_loop_query_args[_{$id}]", false );
-		$wp_query = new WP_Query( $args ); // phpcs:ignore WordPress.Variables.GlobalVariables.OverrideProhibited -- Valid use case.
+		$wp_query = new WP_Query( $args ); // phpcs:ignore WordPress.Variables.GlobalVariables.OverrideProhibited -- Used inside a function scope.
 	}
 
 	// Allow overwrite. Require the default loop.php if no overwrite is found.

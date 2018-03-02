@@ -135,11 +135,11 @@ class _Beans_Walker_Nav_Menu extends Walker_Nav_Menu {
 		$item_id = $item->ID;
 
 		// WP item attributes.
-		$id        = apply_filters( 'nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args ); //phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Valid use case.
+		$id        = apply_filters( 'nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args ); //phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Used inside method scope.
 		$classes   = empty( $item->classes ) ? array() : (array) $item->classes;
 		$classes[] = 'menu-item-' . $item->ID;
 
-		$_classes = join( ' ', (array) apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Valid use case.
+		$_classes = join( ' ', (array) apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Used inside method scope.
 
 		// WP link attributes.
 		$_link_attr = array(
@@ -157,7 +157,7 @@ class _Beans_Walker_Nav_Menu extends Walker_Nav_Menu {
 			}
 		}
 
-		$link_attr = apply_filters( 'nav_menu_link_attributes', $_link_attr, $item, $args ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Valid use case.
+		$link_attr = apply_filters( 'nav_menu_link_attributes', $_link_attr, $item, $args ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Used inside method scope.
 
 		// Set WP item attributes as defaults.
 		$item_attr = array(
@@ -194,7 +194,7 @@ class _Beans_Walker_Nav_Menu extends Walker_Nav_Menu {
 
 				$item_output .= beans_open_markup( "beans_menu_item_link[_{$item_id}]", 'a', $link_attr, $item, $depth, $args );
 
-					$item_output .= beans_output( "beans_menu_item_text[_{$item_id}]", $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Valid use case.
+					$item_output .= beans_output( "beans_menu_item_text[_{$item_id}]", $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Used inside method scope.
 
 		if ( isset( $child_indicator ) ) {
 			$item_output .= beans_open_markup( "beans_menu_item_child_indicator[_{$item_id}]", 'i', array( 'class' => 'uk-icon-caret-down uk-margin-small-left' ), $item, $depth, $args );
@@ -205,7 +205,7 @@ class _Beans_Walker_Nav_Menu extends Walker_Nav_Menu {
 
 			$item_output .= $args->after;
 
-		$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Valid use case.
+		$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Used inside method scope.
 	}
 
 	/**
