@@ -5,7 +5,7 @@
  *
  * @package Beans\Framework\API\HTML
  *
- * @since 1.0.0
+ * @since   1.5.0
  */
 
 // phpcs:disable Squiz.Commenting.FunctionComment.ExtraParamComment -- The extra parameter is intentional for documentation.
@@ -509,7 +509,7 @@ function beans_reset_attributes( $id ) {
 }
 
 /**
- * Add attribute to markup.
+ * Add a value to an existing attribute or add a new attribute.
  *
  * This function must be called before the targeted markup is called.
  *
@@ -517,6 +517,7 @@ function beans_reset_attributes( $id ) {
  * easy to find the content ID when inspecting an element in a web browser.
  *
  * @since 1.0.0
+ * @since 1.5.0 Return the object.
  *
  * @param string $id        The markup ID.
  * @param string $attribute Name of the HTML attribute.
@@ -524,15 +525,16 @@ function beans_reset_attributes( $id ) {
  *                          (e.g. class=""). Setting it to 'false' will only display the attribute name
  *                          (e.g. data-example). Setting it to 'null' will not display anything.
  *
- * @return array All targeted markup attributes.
+ * @return _Beans_Attribute
  */
 function beans_add_attribute( $id, $attribute, $value ) {
-	$class = new _Beans_Attributes( $id, $attribute, $value );
-	return $class->init( 'add' );
+	$attribute = new _Beans_Attribute( $id, $attribute, $value );
+
+	return $attribute->init( 'add' );
 }
 
 /**
- * Replace attribute to markup.
+ * Replace the attribute's value. If the attribute does not exist, it is added with the new value.
  *
  * This function must be called before the targeted markup is called.
  *
@@ -540,23 +542,27 @@ function beans_add_attribute( $id, $attribute, $value ) {
  * easy to find the content ID when inspecting an element in a web browser.
  *
  * @since 1.0.0
+ * @since 1.5.0 Return the object. Allows replacement of all values.
  *
- * @param string $id        The markup ID.
- * @param string $attribute Name of the HTML attribute to target.
- * @param string $value     Value which should be replaced.
- * @param string $new_value Optional. Replacement value. If set to '' will display the attribute value as empty
- *                          (e.g. class=""). Setting it to 'false' will only display the attribute name
- *                          (e.g. data-example). Setting it to 'null' will not display anything.
+ * @param string      $id        The markup ID.
+ * @param string      $attribute Name of the HTML attribute to target.
+ * @param string      $value     Value of the HTML attribute to be replaced. Setting it to an empty (i.e. empty string,
+ *                               false, or null) replaces all of the values for this attribute.
+ * @param string|null $new_value Optional. Replacement (new) value of the HTML attribute. Setting it to an empty string
+ *                               ('') or null will remove the $value (e.g. class=""). Setting it to 'false', the
+ *                               browser will display only the attribute name
+ *                               (e.g. data-example).
  *
- * @return array All targeted markup attributes.
+ * @return _Beans_Attribute
  */
 function beans_replace_attribute( $id, $attribute, $value, $new_value = null ) {
-	$class = new _Beans_Attributes( $id, $attribute, $value, $new_value );
-	return $class->init( 'replace' );
+	$attribute = new _Beans_Attribute( $id, $attribute, $value, $new_value );
+
+	return $attribute->init( 'replace' );
 }
 
 /**
- * Remove markup attribute.
+ * Remove a specific value from the attribute or remove the entire attribute.
  *
  * This function must be called before the targeted markup is called.
  *
@@ -564,16 +570,19 @@ function beans_replace_attribute( $id, $attribute, $value, $new_value = null ) {
  * easy to find the content ID when inspecting an element in a web browser.
  *
  * @since 1.0.0
+ * @since 1.5.0 Return the object.
  *
- * @param string $id        The markup ID.
- * @param string $attribute Name of the HTML attribute to target.
- * @param string $value     Optional. Name of the value to remove. Set it to 'false' to completely remove the attribute.
+ * @param string      $id        The markup ID.
+ * @param string      $attribute Name of the HTML attribute to target.
+ * @param string|null $value     Optional. The attribute value to remove. Set it to 'false' or null to completely
+ *                               remove the attribute.
  *
- * @return array All targeted markup attributes remaining.
+ * @return _Beans_Attribute
  */
 function beans_remove_attribute( $id, $attribute, $value = null ) {
-	$class = new _Beans_Attributes( $id, $attribute, $value );
-	return $class->init( 'remove' );
+	$attribute = new _Beans_Attribute( $id, $attribute, $value, '' );
+
+	return $attribute->init( 'remove' );
 }
 
 /**

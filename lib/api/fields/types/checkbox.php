@@ -1,32 +1,30 @@
 <?php
 /**
- * @package API\Fields\Types
+ * Handler for rendering the checkbox field.
+ *
+ * @package Beans\Framework\API\Fields\Types
  */
 
 beans_add_smart_action( 'beans_field_checkbox', 'beans_field_checkbox' );
 /**
- * Echo checkbox field type.
+ * Echo checkbox field.
  *
  * @since 1.0.0
+ * @since 1.5.0 Moved the HTML to a view file.
  *
- * @param array $field {
+ * @param array $field          {
  *      For best practices, pass the array of data obtained using {@see beans_get_fields()}.
  *
- *      @type mixed  $value          The field value.
- *      @type string $name           The field name value.
- *      @type array  $attributes     An array of attributes to add to the field. The array key defines the
- *            					     attribute name and the array value defines the attribute value. Default array.
- *      @type mixed  $default        The default value. Default false.
- *      @type string $checkbox_label The field checkbox label. Default 'Enable'.
+ * @type mixed  $value          The field's current value.
+ * @type string $name           The field's "name" value.
+ * @type array  $attributes     An array of attributes to add to the field. The array's key defines the attribute name
+ *                              and the array's value defines the attribute value. Default is an empty array.
+ * @type mixed  $default        The default value. Default false.
+ * @type string $checkbox_label The field checkbox label. Default is 'Enable'.
  * }
  */
-function beans_field_checkbox( $field ) {
+function beans_field_checkbox( array $field ) {
+	$checkbox_label = beans_get( 'checkbox_label', $field, __( 'Enable', 'tm-beans' ) );
 
-	?>
-	<input type="hidden" value="0" name="<?php echo esc_attr( $field['name'] ); ?>" />
-	<input type="checkbox" name="<?php echo esc_attr( $field['name'] ); ?>" value="1" <?php checked( $field['value'], 1 ); ?> <?php echo beans_esc_attributes( $field['attributes'] ); ?>/>
-	<?php if ( $checkbox_label = beans_get( 'checkbox_label', $field, __( 'Enable', 'tm-beans' ) ) ) : ?>
-		<span class="bs-checkbox-label"><?php echo $checkbox_label; ?></span>
-	<?php endif;
-
+	include dirname( __FILE__ ) . '/views/checkbox.php';
 }

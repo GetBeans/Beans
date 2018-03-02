@@ -1,38 +1,41 @@
 /* Fields
  ========================================================================== */
 .bs-field-wrap {
-	width: 100%;
 	display: inline-block;
-	border-top: 1px solid #e8e8e8;
-	padding: 20px 0;
 	box-sizing: border-box;
+	width: 100%;
+	padding: 20px 0;
+	border-top: 1px solid #e8e8e8;
 }
+
 .bs-field-wrap:first-of-type {
-	border-top: 0;
 	padding-top: 10px;
+	border-top: 0;
 }
+
 .bs-field-wrap:last-of-type {
 	padding-bottom: 0;
 }
+
 .bs-field-wrap a {
-	text-decoration: none;
-	outline: none;
-	box-shadow: none;
 }
+
 .bs-field {
 	display: block;
+	position: relative;
 	width: 100%;
 	min-width: 200px;
-	position: relative;
 	padding: 0;
 }
-.bs-field input[type='text'],
+
+.bs-field input[type="text"],
 .bs-field textarea {
 	width: 100%;
 	max-width: 100%;
 	margin: 0;
 	color: #666;
 }
+
 .bs-field select {
 	width: 100%;
 	min-width: 200px;
@@ -51,29 +54,29 @@
 .bs-field-description {
 	display: block;
 	clear: both;
-	font-size: 11px;
-	color: #888;
 	padding: 10px 0 0;
+	color: #333;
+	font-size: 11px;
 }
+
 .bs-field-description .bs-read-more {
-	display: none;
-	text-decoration: none;
-	outline: none;
 }
+
 .bs-field-description .bs-extended-content p {
 	margin-top: 0;
 }
+
 .js .bs-field-description a.bs-read-more {
 	display: inline-block;
 }
+
 .js .bs-field-description .bs-extended-content {
-	display: none;
 	float: left;
 }
 
 /* Activation */
 .bs-field.deactivated {
-	opacity: .5;
+	opacity: 0.5;
 }
 
 /* Group fields */
@@ -81,6 +84,7 @@
 	display: inline-block;
 	margin: -10px 0 0 -10px;
 }
+
 .bs-group .bs-field-inside .bs-field {
 	display: inline-block;
 	width: auto;
@@ -90,31 +94,68 @@
 }
 
 /* Dashicons */
-.bs-field a.dashicons {
+.bs-field .button {
 	display: inline-block;
-	margin-left: 5px;
-	text-align: center;
-	background-color: #fff;
+	padding: 0 4px 1px;
 	border-radius: 4px;
-	padding: 4px;
 	color: #555;
-	-moz-transition: background-color .1s ease-in 0;
-	-webkit-transition: background-color .1s ease-in 0;
+	background-color: #fff;
+	text-align: center;
+	-moz-transition: background-color 0.1s ease-in 0;
+	-webkit-transition: background-color 0.1s ease-in 0;
+	transition: background-color 0.1s ease-in 0;
 }
-.bs-field a.dashicons-edit {
-	font-size: 20px;
-}
-.bs-field a.dashicons:hover {
+
+.bs-field .button:hover,
+.bs-field .button:focus {
 	color: #fff;
 }
-.bs-field a:hover.dashicons-edit {
-	background-color: #76B031;
+
+.bs-field .button.dashicons {
+	width: auto;
+	font-size: 0;
 }
-.bs-field a:hover.dashicons-menu {
-	background-color: #2991C0;
+
+.bs-field .bs-button-edit:before {
+	font-family: dashicons;
+	font-size: 22px;
+	text-align: center;
+	content: "\f464";
+}
+
+.bs-field .bs-button-menu:before {
+	font-family: dashicons;
+	font-size: 22px;
+	text-align: center;
+	content: "\f333";
+}
+
+.bs-field .bs-button-trash {
+	margin-left: 5px;
+}
+
+.bs-field .bs-button-trash:before {
+	font-family: dashicons;
+	font-size: 22px;
+	text-align: center;
+	content: "\f182";
+}
+
+.bs-field .bs-button-edit:hover,
+.bs-field .bs-button-edit:focus,
+.bs-field .bs-add-image:hover,
+.bs-field .bs-add-image:focus {
+	background-color: #76b031;
+}
+
+.bs-field .bs-button-menu:hover,
+.bs-field .bs-button-menu:focus {
+	background-color: #2991c0;
 	cursor: move;
 }
-.bs-field a:hover.dashicons-post-trash {
+
+.bs-field .bs-button-trash:hover,
+.bs-field .bs-button-trash:focus {
 	background-color: #dd4b39;
 }
 
@@ -128,83 +169,94 @@
 
 /* Image */
 .bs-field .bs-images-wrap {
-	margin-left:-10px;
+	margin-left: -10px;
 }
+
 .bs-field .bs-image-wrap,
 .bs-field .bs-image-placeholder {
-	position: relative;
 	display: inline-block;
+	position: relative;
 	margin: 10px 0 0 10px;
 }
+
 .bs-field .bs-images-wrap:not([data-multiple="1"]) .bs-image-wrap {
 	margin-top: 0;
 }
+
 .bs-field .bs-image-wrap {
-	border: 1px solid #ddd;
-	height: 110px;
 	width: 110px;
+	height: 110px;
+	border: 1px solid #ddd;
 	background: #eee;
 	box-shadow: inset 0 0 0 3px #fff;
 	text-align: center;
 }
+
 .bs-field .bs-image-placeholder {
 	border: 3px dashed #ddd;
 }
+
 .bs-field .bs-image-wrap img {
 	position: absolute;
-	margin: auto;
 	top: 0;
-	left: 0;
 	right: 0;
 	bottom: 0;
-	max-height: 100%;
-	max-width: 100%;
-	padding: 2px;
+	left: 0;
 	box-sizing: border-box;
+	max-width: 100%;
+	max-height: 100%;
+	margin: auto;
+	padding: 2px;
 }
+
 .bs-field .bs-image-template {
 	display: none;
 }
+
 .bs-field .bs-image-wrap .bs-toolbar {
-	width: 100%;
-	padding: 6px 0;
-	text-align: center;
-	box-sizing: border-box;
 	position: absolute;
 	right: 0;
-	top: 0;
+	bottom: 0;
+	box-sizing: border-box;
+	width: 100%;
+	padding: 3px 0;
 	background-color: #e6e6e6;
-	display: none;
+	text-align: center;
 }
+
 .bs-field .bs-image-wrap .bs-toolbar a {
 	margin: 0 3px 0 1px;
 }
-.bs-field .bs-image-wrap:hover .bs-toolbar  {
-	display: block;
-}
 
+.bs-field .bs-image-wrap:hover .bs-toolbar,
+.bs-field .bs-image-wrap:focus .bs-toolbar {
+}
 
 /* Radio/Imageradio */
 .bs-radio fieldset {
 	margin-left: -15px;
 }
+
 .bs-radio fieldset label {
 	padding-left: 15px;
 }
+
 .bs-radio .bs-has-image {
-	width: auto;
 	display: inline-block;
+	width: auto;
 	line-height: 0;
 }
+
 .bs-radio img {
 	padding: 1px;
 	border: 3px solid #eee;
 }
+
 .bs-radio .selected img {
 	border-color: #2ea2cc;
 }
+
 .bs-radio .bs-has-image input {
-	display: none;
 }
 
 /* Textarea */
@@ -214,57 +266,60 @@
 
 /* Slider */
 .bs-field .bs-slider-wrap {
-	border-radius: 5px;
-	width: 180px;
-	height: 10px;
-	border: 1px solid #ccc;
 	display: inline-block;
-	margin: 2px 0 0;
 	position: relative;
 	top: 2px;
+	width: 180px;
+	height: 10px;
+	margin: 2px 0 0;
+	border: 1px solid #ccc;
+	border-radius: 5px;
 }
+
 .bs-field .ui-slider-range {
-	background: #ddd;
 	height: 10px;
 	border-radius: 4px;
+	background: #ddd;
 }
+
 .bs-field .ui-slider-handle {
-	background: #bbb;
-	border-radius: 8px;
 	display: block;
-	height: 16px;
-	width: 16px;
-	margin: -13px 0 0 -8px;
 	position: absolute;
-	cursor: pointer;
+	width: 16px;
+	height: 16px;
+	margin: -13px 0 0 -8px;
+	border-radius: 8px;
+	background: #bbb;
 	box-shadow: none;
-	outline: 0;
+	cursor: pointer;
 }
+
 .bs-field .ui-slider-handle.ui-state-active {
 	background: #aaa;
-	outline: 0;
 }
+
 .bs-field .bs-slider-value,
 .bs-field .bs-slider-unit {
-	font-size: 11px;
 	display: inline-block;
 	margin: 0;
+	font-size: 11px;
 }
+
 .bs-field .bs-slider-value {
 	margin-left: 5px;
 }
 
-
 /* Options fields modifiers
  ========================================================================== */
 .bs-options-form-actions {
-	padding: 0;
-	margin: 0;
 	display: block;
 	clear: both;
 	width: 100%;
+	margin: 0;
 	margin-top: 20px;
+	padding: 0;
 }
+
 .bs-options-form-actions input {
 	display: inline-block;
 	margin-right: 10px;
@@ -274,24 +329,29 @@
 .bs-options .postbox-container {
 	min-height: 100px;
 }
+
 .bs-options .metabox-holder {
 	margin: 0 0 0 -20px;
 	padding: 0;
 }
+
 .bs-options .meta-box-sortables {
 	float: left;
-	padding-left: 20px;
-	margin: 0;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	width: 100%;
 	min-height: 100px;
 	min-height: 100px;
+	margin: 0;
+	padding-left: 20px;
 }
+
 @media (min-width: 768px) {
+
 	.bs-options .metabox-holder .meta-box-sortables {
 		width: 75%;
-	  }
+	}
+
 	.bs-options .metabox-holder.column .meta-box-sortables {
 		width: 50%;
 	}
@@ -302,24 +362,27 @@
 .form-field .bs-field-wrap {
 	padding: 0;
 }
-.form-field .bs-field input[type='text'],
+
+.form-field .bs-field input[type="text"],
 .form-field .bs-field textarea {
 	max-width: 95%;
 }
+
 /* Radio/Imageradio */
 .bs-field fieldset label:not(.bs-has-image) {
 	display: block;
 }
-
 
 /* WP customizer fields modifiers
  ========================================================================== */
 #customize-controls .bs-field-wrap label {
 	margin-bottom: 5px;
 }
+
 #customize-controls .bs-field-wrap:first-of-type {
 	padding-top: 5px;
 }
+
 #customize-controls .bs-field-wrap {
 	padding: 0;
 }
@@ -330,16 +393,19 @@
 	font-size: 14px;
 	font-weight: 600;
 }
+
 #customize-controls .bs-radio fieldset {
 	margin-left: -5px;
 }
+
 #customize-controls .bs-radio fieldset label {
-	padding: 0 0 0 5px;
 	margin-bottom: 0;
+	padding: 0 0 0 5px;
 }
+
 #customize-controls .bs-radio .bs-has-image img {
-	border-width: 2px;
 	width: 33px;
 	height: 33px;
 	margin-bottom: 0;
+	border-width: 2px;
 }

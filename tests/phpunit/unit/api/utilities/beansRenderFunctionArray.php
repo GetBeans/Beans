@@ -51,7 +51,7 @@ class Tests_BeansRenderFunctionArray extends Test_Case {
 	public function test_should_work_with_arguments() {
 
 		$callback = function ( $foo, $bar, $baz ) {
-			echo "{$foo} {$bar} {$baz}"; // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped - reason: we are not testing escaping functionality.
+			echo "{$foo} {$bar} {$baz}"; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped -- Not testing escaping functionality.
 		};
 		$this->assertSame(
 			'foo bar baz',
@@ -60,7 +60,7 @@ class Tests_BeansRenderFunctionArray extends Test_Case {
 
 		$callback = function ( $array, $baz ) {
 			$this->assertCount( 2, $array );
-			echo join( ' ', $array ) . ' ' . $baz; // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped - reason: we are not testing escaping functionality.
+			echo join( ' ', $array ) . ' ' . $baz; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped -- Not testing escaping functionality.
 		};
 		$this->assertSame(
 			'foo bar baz',
@@ -72,7 +72,7 @@ class Tests_BeansRenderFunctionArray extends Test_Case {
 			$this->assertArrayHasKey( 'bar', $array1 );
 			$this->assertCount( 1, $array2 );
 			$this->assertArrayHasKey( 'baz', $array2 );
-			echo $array1['foo']; // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped - reason: we are not testing escaping functionality.
+			echo $array1['foo']; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped -- Not testing escaping functionality.
 		};
 		$this->assertSame(
 			'oof',

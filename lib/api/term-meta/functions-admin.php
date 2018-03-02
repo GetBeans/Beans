@@ -1,8 +1,10 @@
 <?php
 /**
- * The Beans Term Meta component extends the Beans Fields and make it easy add fields to any Taxonomy.
+ * The Beans Term Meta component extends the Beans Fields API and makes it easy add fields to any Taxonomy.
  *
- * @package API\Term_Meta
+ * @package Beans\Framework\API\Term_Meta
+ *
+ * @since 1.0.0
  */
 
 /**
@@ -12,24 +14,24 @@
  *
  * @since 1.0.0
  *
- * @param array  $fields {
- *      Array of fields to register.
+ * @param array        $fields {
+ *            Array of fields to register.
  *
- * 		@type string $id          A unique id used for the field. This id will also be used to save the value in
- * 		      					  the database.
- * 		@type string $type 		  The type of field to use. Please refer to the Beans core field types for more
- * 		      					  information. Custom field types are accepted here.
- *      @type string $label 	  The field label. Default false.
+ *      @type string $id          A unique id used for the field. This id will also be used to save the value in
+ *                                the database.
+ *      @type string $type        The type of field to use. Please refer to the Beans core field types for more
+ *                                information. Custom field types are accepted here.
+ *      @type string $label       The field label. Default false.
  *      @type string $description The field description. The description can be truncated using <!--more-->
- *            					  as a delimiter. Default false.
+ *                                as a delimiter. Default false.
  *      @type array  $attributes  An array of attributes to add to the field. The array key defines the
- *            					  attribute name and the array value defines the attribute value. Default array.
+ *                                attribute name and the array value defines the attribute value. Default array.
  *      @type mixed  $default     The default field value. Default false.
  *      @type array  $fields      Must only be used for the 'group' field type. The array arguments are similar to the
- *            					  {@see beans_register_fields()} $fields arguments.
+ *                                {@see beans_register_fields()} $fields arguments.
  *      @type bool   $db_group    Must only be used for 'group' field type. Defines whether the group of fields
- *            					  registered should be saved as a group in the database or as individual
- *            					  entries. Default false.
+ *                                registered should be saved as a group in the database or as individual
+ *                                entries. Default false.
  * }
  * @param string|array $taxonomies Array of taxonomies for which the term meta should be registered.
  * @param string       $section    A section id to define the group of fields.
@@ -71,20 +73,25 @@ function beans_register_term_meta( array $fields, $taxonomies, $section ) {
 	}
 
 	// Load the class only if this function is called to prevent unnecessary memory usage.
-	require_once( BEANS_API_PATH . 'term-meta/class.php' );
+	require_once BEANS_API_PATH . 'term-meta/class.php';
 
 	new _Beans_Term_Meta( $section );
-
 }
 
 /**
  * Check if the current screen is a given term.
  *
+ * @since 1.0.0
  * @ignore
+ * @access private
+ *
+ * @param array $taxonomies Array of taxonomies.
+ * @return bool
  */
 function _beans_is_admin_term( $taxonomies ) {
+	$taxonomy = beans_get_or_post( 'taxonomy' );
 
-	if ( ! $taxonomy = beans_get_or_post( 'taxonomy' ) ) {
+	if ( ! $taxonomy ) {
 		return false;
 	}
 
@@ -92,10 +99,9 @@ function _beans_is_admin_term( $taxonomies ) {
 		return true;
 	}
 
-	if ( in_array( $taxonomy, (array) $taxonomies ) ) {
+	if ( in_array( $taxonomy, (array) $taxonomies, true ) ) {
 		return true;
 	}
 
 	return false;
-
 }

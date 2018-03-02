@@ -18,7 +18,7 @@ define( 'BEANS_API', true );
 
 // Mode.
 if ( ! defined( 'SCRIPT_DEBUG' ) ) {
-	define( 'SCRIPT_DEBUG', false );
+	define( 'SCRIPT_DEBUG', false ); // @phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound -- Valid use case as we need it defined.
 }
 
 // Assets.

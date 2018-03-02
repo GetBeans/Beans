@@ -1,70 +1,81 @@
 <?php
 /**
- * @package API\Fields
+ * Handler for rendering the field's label and description.
+ *
+ * @package Beans\Framework\API\Fields\Types
  */
 
+beans_add_smart_action( 'beans_field_group_label', 'beans_field_label' );
 beans_add_smart_action( 'beans_field_wrap_prepend_markup', 'beans_field_label' );
 /**
- * Echo field label.
+ * Render the field's label.
  *
  * @since 1.0.0
  *
  * @param array $field {
- *      Array of data.
+ *                     Array of data.
  *
- *      @type string $label The field label. Default false.
+ * @type string $label The field label. Default false.
  * }
  */
-function beans_field_label( $field ) {
+function beans_field_label( array $field ) {
+	$label = beans_get( 'label', $field );
 
-	if ( ! $label = beans_get( 'label', $field ) ) {
+	if ( ! $label ) {
 		return;
 	}
 
-	beans_open_markup_e( 'beans_field_label[_' . $field['id'] . ']', 'label' );
+	$id = 'beans_field_label[_' . $field['id'] . ']';
 
-		echo $field['label'];
+	// These field types do not use a label, as they are providing a header for the group of fields.
+	if ( in_array( $field['type'], array( 'radio', 'group' ), true ) ) {
+		$tag  = 'h3';
+		$args = array( 'class' => 'bs-fields-header hndle' );
+	} else {
+		$tag  = 'label';
+		$args = array( 'for' => $field['id'] );
+	}
 
-	beans_close_markup_e( 'beans_field_label[_' . $field['id'] . ']', 'label' );
-
+	beans_open_markup_e( $id, $tag, $args );
+	echo esc_html( $field['label'] );
+	beans_close_markup_e( $id, $tag );
 }
 
 beans_add_smart_action( 'beans_field_wrap_append_markup', 'beans_field_description' );
 /**
- * Echo field description.
+ * Render the field's description.
  *
  * @since 1.0.0
+ * @since 1.5.0 Moved the HTML to a view file.
  *
- * @param array $field {
- *      Array of data.
+ * @param array $field       {
+ *                           Array of data.
  *
- *      @type string $description The field description. The description can be truncated using <!--more-->
- *            					  as a delimiter. Default false.
+ * @type string $description The field description. The description can be truncated using <!--more--> as a delimiter.
+ *                           Default false.
  * }
  */
-function beans_field_description( $field ) {
+function beans_field_description( array $field ) {
+	$description = beans_get( 'description', $field );
 
-	if ( ! $description = beans_get( 'description', $field ) ) {
+	if ( ! $description ) {
 		return;
+	}
+	// Escape the description here.
+	$description = wp_kses_post( $description );
+
+	// If the description has <!--more-->, split it.
+	if ( preg_match( '#<!--more-->#', $description, $matches ) ) {
+		list( $description, $extended ) = explode( $matches[0], $description, 2 );
 	}
 
 	beans_open_markup_e( 'beans_field_description[_' . $field['id'] . ']', 'div', array( 'class' => 'bs-field-description' ) );
 
-		if ( preg_match( '#<!--more-->#', $description, $matches ) ) {
-			list( $description, $extended ) = explode( $matches[0], $description, 2 );
-		}
+		echo $description;  // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped - To optimize, escaping is handled above.
 
-		echo $description;
-
-		if ( isset( $extended ) ) {
-
-			?>
-			<br /><a class="bs-read-more" href="#"><?php _e( 'More...', 'tm-beans' ); ?></a>
-			<div class="bs-extended-content"><?php echo $extended; ?></div>
-			<?php
-
-		}
+	if ( isset( $extended ) ) {
+		include dirname( __FILE__ ) . '/views/field-description.php';
+	}
 
 	beans_close_markup_e( 'beans_field_description[_' . $field['id'] . ']', 'div' );
-
 }
