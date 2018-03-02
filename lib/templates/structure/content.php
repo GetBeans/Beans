@@ -2,9 +2,12 @@
 /**
  * Echo the structural markup for the main content. It also calls the content action hooks.
  *
- * @package Structure\Content
+ * @package Beans\Framework\Templates\Structure
+ *
+ * @since   1.0.0
  */
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Variable called in a function scope.
 $content_attributes = array(
 	'class'    => 'tm-content',
 	'role'     => 'main',
@@ -23,9 +26,10 @@ if ( is_home() || is_page_template( 'page_blog.php' ) || is_singular( 'post' ) |
 if ( is_search() ) {
 
 	$content_attributes['itemscope'] = 'itemscope'; // Automatically escaped.
-	$content_attributes['itemtype'] = 'http://schema.org/SearchResultsPage'; // Automatically escaped.
+	$content_attributes['itemtype']  = 'http://schema.org/SearchResultsPage'; // Automatically escaped.
 
 }
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 
 beans_open_markup_e( 'beans_content', 'div', $content_attributes );
 

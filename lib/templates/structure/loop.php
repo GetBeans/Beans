@@ -2,7 +2,9 @@
 /**
  * Echo the posts loop structural markup. It also calls the loop action hooks.
  *
- * @package Structure\Loop
+ * @package Beans\Framework\Templates\Structure
+ *
+ * @since   1.0.0
  */
 
 /**
@@ -13,7 +15,7 @@
  * @since 1.0.0
  */
 do_action( 'beans_before_loop' );
-
+	// phpcs:disable Generic.WhiteSpace.ScopeIndent -- Code structure mirrors HTML markup.
 	if ( have_posts() && ! is_404() ) :
 
 		/**
@@ -25,8 +27,10 @@ do_action( 'beans_before_loop' );
 		 */
 		do_action( 'beans_before_posts_loop' );
 
-		while ( have_posts() ) : the_post();
+		while ( have_posts() ) :
+			the_post();
 
+			// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Variable called in a function scope.
 			$article_attributes = array(
 				'id'        => get_the_ID(), // Automatically escaped.
 				'class'     => implode( ' ', get_post_class( array( 'uk-article', ( current_theme_supports( 'beans-default-styling' ) ? 'uk-panel-box' : null ) ) ) ), // Automatically escaped.
@@ -39,11 +43,12 @@ do_action( 'beans_before_loop' );
 
 				$article_attributes['itemtype'] = 'http://schema.org/BlogPosting';
 
-				// Only add to blogPost attribute to the main query,
+				// Only add to blogPost attribute to the main query.
 				if ( is_main_query() && ! is_search() ) {
-					$article_attributes['itemprop']  = 'blogPost';
+					$article_attributes['itemprop'] = 'blogPost';
 				}
 			}
+			// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 
 			beans_open_markup_e( 'beans_post', 'article', $article_attributes );
 
@@ -70,7 +75,6 @@ do_action( 'beans_before_loop' );
 				beans_close_markup_e( 'beans_post_body', 'div' );
 
 			beans_close_markup_e( 'beans_post', 'article' );
-
 		endwhile;
 
 		/**
@@ -81,16 +85,14 @@ do_action( 'beans_before_loop' );
 		 * @since 1.0.0
 		 */
 		do_action( 'beans_after_posts_loop' );
-
 	else :
 
-		/**
-		 * Fires if no posts exist.
-		 *
-		 * @since 1.0.0
-		 */
-		do_action( 'beans_no_post' );
-
+			/**
+			 * Fires if no posts exist.
+			 *
+			 * @since 1.0.0
+			 */
+			do_action( 'beans_no_post' );
 	endif;
 
 /**
@@ -100,4 +102,5 @@ do_action( 'beans_before_loop' );
  *
  * @since 1.0.0
  */
-do_action( 'beans_after_loop' );
+	do_action( 'beans_after_loop' );
+// phpcs:enable Generic.WhiteSpace.ScopeIndent -- Code structure mirrors HTML markup.
