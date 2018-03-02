@@ -534,15 +534,7 @@ function beans_add_attribute( $id, $attribute, $value ) {
 }
 
 /**
-<<<<<<< HEAD
-<<<<<<< HEAD
  * Replace the attribute's value. If the attribute does not exist, it is added with the new value.
-=======
- * Replace a specific value from the attribute. If the attribute does not exist, it is added with the new value.
->>>>>>> 116762d... Refactored and improved documentation.
-=======
- * Replace the attribute's value. If the attribute does not exist, it is added with the new value.
->>>>>>> eb2cb2c... Improved beans_replace_attribute.
  *
  * This function must be called before the targeted markup is called.
  *
