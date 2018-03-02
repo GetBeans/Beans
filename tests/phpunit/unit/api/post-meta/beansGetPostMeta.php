@@ -28,6 +28,10 @@ class Tests_BeansGetPostMeta extends Test_Case {
 		parent::setUp();
 
 		require_once BEANS_TESTS_LIB_DIR . 'api/post-meta/functions.php';
+
+		$this->load_original_functions( array(
+			'api/utilities/functions.php',
+		) );
 	}
 
 	/**

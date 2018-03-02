@@ -34,9 +34,8 @@ abstract class Fields_Test_Case extends Test_Case {
 
 		static::$test_data = require dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'fixtures/test-fields.php';
 
-		require_once BEANS_TESTS_LIB_DIR . 'api/utilities/functions.php';
 		require_once BEANS_TESTS_LIB_DIR . 'api/fields/functions.php';
-		require_once BEANS_THEME_DIR . 'lib/api/fields/class-beans-fields.php';
+		require_once BEANS_TESTS_LIB_DIR . 'api/fields/class-beans-fields.php';
 	}
 
 	/**
@@ -44,6 +43,10 @@ abstract class Fields_Test_Case extends Test_Case {
 	 */
 	public function setUp() {
 		parent::setUp();
+
+		$this->load_original_functions( array(
+			'api/utilities/functions.php',
+		) );
 
 		foreach ( array( 'esc_attr', 'esc_html', 'esc_textarea', 'esc_url', 'wp_kses_post', '__' ) as $wp_function ) {
 			Monkey\Functions\when( $wp_function )->returnArg();
