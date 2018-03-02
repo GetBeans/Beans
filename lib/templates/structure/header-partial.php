@@ -4,7 +4,7 @@
  *
  * @package Beans\Framework\Templates\Structure
  *
- * @since 1.0.0
+ * @since   1.0.0
  */
 
 beans_open_markup_e(

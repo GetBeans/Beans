@@ -4,10 +4,11 @@
  *
  * @package Beans\Framework\Templates\Structure
  *
- * @since 1.0.0
+ * @since   1.0.0
  */
 
-$content_attributes = array( // @codingStandardsIgnoreLine - WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound.
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Variable called in a function scope.
+$content_attributes = array(
 	'class'    => 'tm-content',
 	'role'     => 'main',
 	'itemprop' => 'mainEntityOfPage',
@@ -16,18 +17,19 @@ $content_attributes = array( // @codingStandardsIgnoreLine - WordPress.NamingCon
 // Blog specific attributes.
 if ( is_home() || is_page_template( 'page_blog.php' ) || is_singular( 'post' ) || is_archive() ) {
 
-	$content_attributes['itemscope'] = 'itemscope'; // Automatically escaped. @codingStandardsIgnoreLine - WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound.
-	$content_attributes['itemtype']  = 'http://schema.org/Blog'; // Automatically escaped. @codingStandardsIgnoreLine - WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound.
+	$content_attributes['itemscope'] = 'itemscope'; // Automatically escaped.
+	$content_attributes['itemtype']  = 'http://schema.org/Blog'; // Automatically escaped.
 
 }
 
 // Blog specific attributes.
 if ( is_search() ) {
 
-	$content_attributes['itemscope'] = 'itemscope'; // Automatically escaped. @codingStandardsIgnoreLine - WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound.
-	$content_attributes['itemtype']  = 'http://schema.org/SearchResultsPage'; // Automatically escaped. @codingStandardsIgnoreLine - WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound.
+	$content_attributes['itemscope'] = 'itemscope'; // Automatically escaped.
+	$content_attributes['itemtype']  = 'http://schema.org/SearchResultsPage'; // Automatically escaped.
 
 }
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 
 beans_open_markup_e( 'beans_content', 'div', $content_attributes );
 

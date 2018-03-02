@@ -4,7 +4,7 @@
  *
  * @package Beans\Framework\Templates\Structure
  *
- * @since 1.0.0
+ * @since   1.0.0
  */
 
 beans_open_markup_e(
@@ -48,4 +48,4 @@ beans_open_markup_e(
 
 	beans_close_markup_e( 'beans_comment_body', 'div' );
 
-	beans_close_markup_e( 'beans_comment', 'article' );
+beans_close_markup_e( 'beans_comment', 'article' ); // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect -- Code structure mirrors HTML markup.
