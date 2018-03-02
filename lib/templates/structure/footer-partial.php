@@ -2,21 +2,15 @@
 /**
  * Since WordPress force us to use the footer.php name to close the document, we add a footer-partial.php template for the actual footer.
  *
- * @package Beans\Framework\Templates\Structure
- *
- * @since   1.0.0
+ * @package Structure\Footer
  */
 
-beans_open_markup_e(
-	'beans_footer',
-	'footer',
-	array(
-		'class'     => 'tm-footer uk-block',
-		'role'      => 'contentinfo',
-		'itemscope' => 'itemscope',
-		'itemtype'  => 'http://schema.org/WPFooter',
-	)
-);
+beans_open_markup_e( 'beans_footer', 'footer', array(
+	'class'     => 'tm-footer uk-block',
+	'role'      => 'contentinfo',
+	'itemscope' => 'itemscope',
+	'itemtype'  => 'http://schema.org/WPFooter',
+) );
 
 	beans_open_markup_e( 'beans_fixed_wrap[_footer]', 'div', 'class=uk-container uk-container-center' );
 

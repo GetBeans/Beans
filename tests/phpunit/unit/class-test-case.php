@@ -39,7 +39,8 @@ abstract class Test_Case extends TestCase {
 		} );
 
 		Functions\when( 'wp_json_encode' )->alias( function ( $array ) {
-			return json_encode( $array ); // phpcs:ignore WordPress.WP.AlternativeFunctions.json_encode_json_encode -- Required as part of our mock.
+			// @codingStandardsIgnoreLine - WordPress.WP.AlternativeFunctions.json_encode_json_encode - we are mocking the function here.
+			return json_encode( $array );
 		} );
 	}
 

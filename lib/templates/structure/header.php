@@ -4,9 +4,7 @@
  *
  * This template must be called using get_header().
  *
- * @package Beans\Framework\Templates\Structure
- *
- * @since   1.0.0
+ * @package Structure\Header
  */
 
 beans_output_e( 'beans_doctype', '<!DOCTYPE html>' );
@@ -28,16 +26,12 @@ beans_open_markup_e( 'beans_html', 'html', str_replace( ' ', '&', str_replace( '
 
 	beans_close_markup_e( 'beans_head', 'head' );
 
-	beans_open_markup_e(
-		'beans_body',
-		'body',
-		array(
-			'class'     => implode( ' ', get_body_class( 'uk-form no-js' ) ),
-			'itemscope' => 'itemscope',
-			'itemtype'  => 'http://schema.org/WebPage',
+	beans_open_markup_e( 'beans_body', 'body', array(
+		'class'     => implode( ' ', get_body_class( 'uk-form no-js' ) ),
+		'itemscope' => 'itemscope',
+		'itemtype'  => 'http://schema.org/WebPage',
 
-		)
-	);
+	) );
 
 		beans_open_markup_e( 'beans_site', 'div', array( 'class' => 'tm-site' ) );
 
@@ -45,13 +39,8 @@ beans_open_markup_e( 'beans_html', 'html', str_replace( ' ', '&', str_replace( '
 
 				beans_open_markup_e( 'beans_fixed_wrap[_main]', 'div', 'class=uk-container uk-container-center' );
 
-					beans_open_markup_e(
-						'beans_main_grid',
-						'div',
-						array(
-							'class'               => 'uk-grid',
-							'data-uk-grid-margin' => '',
-						)
-					);
+					beans_open_markup_e( 'beans_main_grid', 'div', array( 'class' => 'uk-grid', 'data-uk-grid-margin' => '' ) );
 
-						beans_open_markup_e( 'beans_primary', 'div', array( 'class' => 'tm-primary ' . beans_get_layout_class( 'content' ) ) );
+						beans_open_markup_e( 'beans_primary', 'div', array(
+							'class' => 'tm-primary ' . beans_get_layout_class( 'content' ),
+						) );

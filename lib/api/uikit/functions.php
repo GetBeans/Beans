@@ -2,16 +2,14 @@
 /**
  * The Beans UIkit component integrates the awesome {@link https://getuikit.com/v2/ UIkit 2 framework}.
  *
- * Only the selected components are compiled into a single cached file and can be different on a per page basis.
- * UIkit default or custom themes can be enqueued to the UIkit compiler. All UIkit LESS variables are accessible
+ * Only the desired components are compiled into a single cached file and may be different on a per page basis. UIkit
+ * default or custom themes can be enqueued to the UIkit compiler. All UIkit LESS variables are accessible
  * and overwritable via custom themes.
  *
- * When development mode is enabled, file changes will automatically be detected. This makes it very easy
+ * When development mode is enabled, files changes will automatically be detected. This makes it very easy
  * to style UIkit themes using LESS.
  *
- * @package Beans\Framework\API\UIkit
- *
- * @since 1.0.0
+ * @package API\UIkit
  */
 
 /**
@@ -20,7 +18,7 @@
  * Enqueued components will be compiled into a single file. Refer to
  * {@link https://getuikit.com/v2/ UIkit 2} to learn more about the available components.
  *
- * When development mode is enabled, file changes will automatically be detected. This makes it very easy
+ * When development mode is enabled, files changes will automatically be detected. This makes it very easy
  * to style UIkit themes using LESS.
  *
  * This function must be called in the 'beans_uikit_enqueue_scripts' action hook.
@@ -32,18 +30,20 @@
  *                                 load all components.
  * @param string       $type       Optional. Type of UIkit components ('core' or 'add-ons').
  * @param bool         $autoload   Optional. Automatically include components dependencies.
- *
- * @return void
  */
 function beans_uikit_enqueue_components( $components, $type = 'core', $autoload = true ) {
+
 	global $_beans_uikit_enqueued_items;
 
 	// Get all uikit components.
 	if ( true === $components ) {
-		$uikit      = new _Beans_Uikit();
+
+		$uikit = new _Beans_Uikit;
 		$components = $uikit->get_all_components( $type );
+
 	} elseif ( $autoload ) {
-		$uikit     = new _Beans_Uikit();
+
+		$uikit = new _Beans_Uikit;
 		$autoloads = $uikit->get_autoload_components( (array) $components );
 
 		foreach ( $autoloads as $autotype => $autoload ) {
@@ -53,6 +53,7 @@ function beans_uikit_enqueue_components( $components, $type = 'core', $autoload 
 
 	// Add components.
 	$_beans_uikit_enqueued_items['components'][ $type ] = array_merge( (array) $_beans_uikit_enqueued_items['components'][ $type ], (array) $components );
+
 }
 
 /**
@@ -61,7 +62,7 @@ function beans_uikit_enqueue_components( $components, $type = 'core', $autoload 
  * Dequeued components are removed from the UIkit compiler. Refer to
  * {@link https://getuikit.com/v2/ UIkit 2} to learn more about the available components.
  *
- * When development mode is enabled, file changes will automatically be detected. This makes it very easy
+ * When development mode is enabled, files changes will automatically be detected. This makes it very easy
  * to style UIkit themes using LESS.
  *
  * This function must be called in the 'beans_uikit_enqueue_scripts' action hook.
@@ -72,19 +73,21 @@ function beans_uikit_enqueue_components( $components, $type = 'core', $autoload 
  *                                 the UIkit component filename without the extention (e.g. 'grid'). Set to true
  *                                 exclude all components.
  * @param string       $type       Optional. Type of UIkit components ('core' or 'add-ons').
- *
- * @return void
  */
 function beans_uikit_dequeue_components( $components, $type = 'core' ) {
+
 	global $_beans_uikit_enqueued_items;
 
 	if ( true === $components ) {
-		$uikit      = new _Beans_Uikit();
+
+		$uikit = new _Beans_Uikit;
 		$components = $uikit->get_all_components( $type );
+
 	}
 
 	// Remove components.
 	$_beans_uikit_enqueued_items['components'][ $type ] = array_diff( (array) $_beans_uikit_enqueued_items['components'][ $type ], (array) $components );
+
 }
 
 /**
@@ -103,6 +106,7 @@ function beans_uikit_dequeue_components( $components, $type = 'core' ) {
  * @return bool False on error or if already exists, true on success.
  */
 function beans_uikit_register_theme( $id, $path ) {
+
 	global $_beans_uikit_registered_items;
 
 	// Stop here if already registered.
@@ -121,6 +125,7 @@ function beans_uikit_register_theme( $id, $path ) {
 	$_beans_uikit_registered_items['themes'][ $id ] = trailingslashit( $path );
 
 	return true;
+
 }
 
 /**
@@ -150,6 +155,7 @@ function beans_uikit_enqueue_theme( $id, $path = false ) {
 	$_beans_uikit_enqueued_items['themes'][ $id ] = _beans_uikit_get_registered_theme( $id );
 
 	return true;
+
 }
 
 /**
@@ -161,18 +167,20 @@ function beans_uikit_enqueue_theme( $id, $path = false ) {
  *
  * @param string $id The id of the theme to dequeue.
  *
- * @return void
+ * @return bool Will always return true.
  */
 function beans_uikit_dequeue_theme( $id ) {
+
 	global $_beans_uikit_enqueued_items;
+
 	unset( $_beans_uikit_enqueued_items['themes'][ $id ] );
+
 }
 
 /**
  * Initialize registered UIkit items global.
  *
  * @ignore
- * @access private
  */
 global $_beans_uikit_registered_items;
 
@@ -191,7 +199,6 @@ if ( ! isset( $_beans_uikit_registered_items ) ) {
  * Initialize enqueued UIkit items global.
  *
  * @ignore
- * @access private
  */
 global $_beans_uikit_enqueued_items;
 
@@ -208,36 +215,26 @@ if ( ! isset( $_beans_uikit_enqueued_items ) ) {
 /**
  * Get registered theme.
  *
- * @since 1.0.0
  * @ignore
- * @access private
- *
- * @param string $id UIkit theme ID.
- *
- * @return mixed
  */
 function _beans_uikit_get_registered_theme( $id ) {
+
 	global $_beans_uikit_registered_items;
 
-	// Stop here if the theme is already registered.
-	$theme = beans_get( $id, $_beans_uikit_registered_items['themes'] );
-
-	if ( $theme ) {
+	// Stop here if is already registered.
+	if ( $theme = beans_get( $id, $_beans_uikit_registered_items['themes'] ) ) {
 		return $theme;
 	}
 
 	return false;
+
 }
 
 add_action( 'wp_enqueue_scripts', '_beans_uikit_enqueue_assets', 7 );
 /**
  * Enqueue UIkit assets.
  *
- * @since 1.0.0
  * @ignore
- * @access private
- *
- * @return void
  */
 function _beans_uikit_enqueue_assets() {
 
@@ -253,19 +250,17 @@ function _beans_uikit_enqueue_assets() {
 	do_action( 'beans_uikit_enqueue_scripts' );
 
 	// Compile everything.
-	$uikit = new _Beans_Uikit();
+	$uikit = new _Beans_Uikit;
+
 	$uikit->compile();
+
 }
 
 add_action( 'admin_enqueue_scripts', '_beans_uikit_enqueue_admin_assets', 7 );
 /**
  * Enqueue UIkit admin assets.
  *
- * @since 1.0.0
  * @ignore
- * @access private
- *
- * @return void
  */
 function _beans_uikit_enqueue_admin_assets() {
 
@@ -281,6 +276,8 @@ function _beans_uikit_enqueue_admin_assets() {
 	do_action( 'beans_uikit_admin_enqueue_scripts' );
 
 	// Compile everything.
-	$uikit = new _Beans_Uikit();
+	$uikit = new _Beans_Uikit;
+
 	$uikit->compile();
+
 }

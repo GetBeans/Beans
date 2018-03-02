@@ -4,9 +4,7 @@
  *
  * This template must be called using get_footer().
  *
- * @package Beans\Framework\Templates\Structure
- *
- * @since   1.0.0
+ * @package Structure\Footer
  */
 
 						beans_close_markup_e( 'beans_primary', 'div' );
