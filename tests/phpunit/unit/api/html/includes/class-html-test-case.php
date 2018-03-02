@@ -46,4 +46,15 @@ abstract class HTML_Test_Case extends Test_Case {
 		require_once BEANS_TESTS_LIB_DIR . 'api/html/class-beans-attribute.php';
 		require_once BEANS_TESTS_LIB_DIR . 'api/html/functions.php';
 	}
+
+	/**
+	 * Prepares the test environment before each test.
+	 */
+	protected function setUp() {
+		parent::setUp();
+
+		$this->load_original_functions( array(
+			'api/filters/functions.php',
+		) );
+	}
 }

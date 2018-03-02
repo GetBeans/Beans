@@ -48,6 +48,10 @@ abstract class Template_Test_Case extends Test_Case {
 	protected function setUp() {
 		parent::setUp();
 
+		$this->load_original_functions( array(
+			'api/utilities/functions.php',
+		) );
+
 		$this->set_up_virtual_filesystem();
 
 		if ( ! defined( 'BEANS_STRUCTURE_PATH' ) ) {

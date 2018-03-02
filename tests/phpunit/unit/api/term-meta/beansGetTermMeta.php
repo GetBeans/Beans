@@ -27,6 +27,10 @@ class Tests_BeansGetTermMeta extends Test_Case {
 		parent::setUp();
 
 		require_once BEANS_TESTS_LIB_DIR . 'api/term-meta/functions.php';
+
+		$this->load_original_functions( array(
+			'api/utilities/functions.php',
+		) );
 	}
 
 	/**
@@ -42,7 +46,8 @@ class Tests_BeansGetTermMeta extends Test_Case {
 	}
 
 	/**
-	 * Test beans_get_term_meta() should return default when given and queried object has a term_id but term meta does not exist.
+	 * Test beans_get_term_meta() should return default when given and queried object has a term_id but term meta does
+	 * not exist.
 	 */
 	public function test_should_return_default_when_default_given_and_queried_obj_has_term_id_but_term_meta_not_set() {
 		Monkey\Functions\expect( 'get_queried_object' )
@@ -58,7 +63,8 @@ class Tests_BeansGetTermMeta extends Test_Case {
 	}
 
 	/**
-	 * Test beans_get_term_meta() should return meta term's value when queried object has a term_id and meta for that id exists.
+	 * Test beans_get_term_meta() should return meta term's value when queried object has a term_id and meta for that
+	 * id exists.
 	 */
 	public function test_should_return_term_meta_when_queried_object_has_term_id_and_meta_is_set() {
 		Monkey\Functions\expect( 'get_queried_object' )
@@ -90,7 +96,8 @@ class Tests_BeansGetTermMeta extends Test_Case {
 	}
 
 	/**
-	 * Test beans_get_term_meta() should return meta term's value when term_id is tag_ID and term meta for that id exists.
+	 * Test beans_get_term_meta() should return meta term's value when term_id is tag_ID and term meta for that id
+	 * exists.
 	 */
 	public function test_should_return_term_meta_when_default_given_and_term_id_is_tag_id_and_term_meta_exists() {
 		$_GET['tag_ID'] = 1;

@@ -35,8 +35,17 @@ abstract class Filters_Test_Case extends Test_Case {
 		require_once dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'stubs/functions.php';
 
 		static::$test_filters = require dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'fixtures/test-filters.php';
+	}
 
-		require_once BEANS_TESTS_LIB_DIR . 'api/filters/functions.php';
+	/**
+	 * Prepares the test environment before each test.
+	 */
+	protected function setUp() {
+		parent::setUp();
+
+		$this->load_original_functions( array(
+			'api/utilities/functions.php',
+		) );
 	}
 
 	/**

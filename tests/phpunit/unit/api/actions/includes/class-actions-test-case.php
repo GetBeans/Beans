@@ -43,7 +43,6 @@ abstract class Actions_Test_Case extends Test_Case {
 		static::$test_ids     = array_keys( static::$test_actions );
 
 		require_once BEANS_TESTS_LIB_DIR . 'api/actions/functions.php';
-		require_once BEANS_TESTS_LIB_DIR . 'api/utilities/functions.php';
 	}
 
 	/**
@@ -67,6 +66,17 @@ abstract class Actions_Test_Case extends Test_Case {
 
 		static::$test_actions = null;
 		static::$test_ids     = null;
+	}
+
+	/**
+	 * Prepares the test environment before each test.
+	 */
+	protected function setUp() {
+		parent::setUp();
+
+		$this->load_original_functions( array(
+			'api/utilities/functions.php',
+		) );
 	}
 
 	/**
