@@ -34,9 +34,8 @@ class Tests_BeansGetPostMeta extends Test_Case {
 		) );
 	}
 
-
 	/**
-	 * Test beans_get_post_meta() should return the default when the post meta cannot be resolved.
+	 * Test beans_get_post_meta() should return the default when the post_id cannot be resolved.
 	 */
 	public function test_should_return_default_when_post_id_cannot_be_resolved() {
 		Monkey\Functions\expect( 'get_the_id' )->twice()->andReturn( false );
