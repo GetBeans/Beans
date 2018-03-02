@@ -16,8 +16,8 @@ use Brain\Monkey;
  * Class Tests_BeansGetPostMeta
  *
  * @package Beans\Framework\Tests\Unit\API\Post_Meta
- * @group   unit-tests
  * @group   api
+ * @group   api-post-meta
  */
 class Tests_BeansGetPostMeta extends Test_Case {
 
