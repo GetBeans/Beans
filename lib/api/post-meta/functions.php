@@ -27,6 +27,10 @@ function beans_get_post_meta( $meta_key, $default = false, $post_id = false ) {
 		$post_id = ! $id ? beans_get( 'post' ) : $id;
 	}
 
+	if ( ! $post_id ) {
+		return $default;
+	}
+
 	$post_meta = get_post_meta( $post_id );
 
 	if ( isset( $post_meta[ $meta_key ] ) ) {
