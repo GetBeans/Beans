@@ -4,7 +4,7 @@
  *
  * @package Beans\Framework\Render
  *
- * @since 1.0.0
+ * @since   1.0.0
  */
 
 beans_add_smart_action( 'widgets_init', 'beans_do_register_widget_areas', 5 );

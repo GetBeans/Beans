@@ -75,7 +75,7 @@ function beans_modify_menu_args( $args ) {
 	$widget_area_type = beans_get_widget_area( 'beans_type' );
 
 	if ( $widget_area_type ) {
-		$type = ( 'stack' === $widget_area_type ) ? 'sidenav' : $widget_area_type;
+		$type = 'stack' === $widget_area_type ? 'sidenav' : $widget_area_type;
 	}
 
 	// Stop if it isn't a Beans menu.

@@ -6,7 +6,7 @@
  *
  * @package Beans\Framework\Render
  *
- * @since 1.0.0
+ * @since   1.0.0
  */
 
 beans_add_smart_action( 'beans_load_document', 'beans_header_template', 5 );
@@ -86,7 +86,7 @@ function beans_loop_template( $id = false ) {
 		 * @since 1.0.0
 		 */
 		$args     = beans_apply_filters( "beans_loop_query_args[_{$id}]", false );
-		$wp_query = new WP_Query( $args ); // @codingStandardsIgnoreLine - WordPress.Variables.GlobalVariables.OverrideProhibited.
+		$wp_query = new WP_Query( $args ); // phpcs:ignore WordPress.Variables.GlobalVariables.OverrideProhibited -- Valid use case.
 	}
 
 	// Allow overwrite. Require the default loop.php if no overwrite is found.
@@ -96,7 +96,7 @@ function beans_loop_template( $id = false ) {
 
 	// Only reset the query if a filter is set.
 	if ( $_has_filter ) {
-		wp_reset_query(); // @codingStandardsIgnoreLine - WordPress.WP.DiscouragedFunctions.wp_reset_query_wp_reset_query.
+		wp_reset_query(); // // phpcs:ignore WordPress.WP.DiscouragedFunctions.wp_reset_query_wp_reset_query -- Ensure the main query has been reset to the original main query.
 	}
 }
 
@@ -240,5 +240,5 @@ function beans_footer_template() {
  * @access private
  */
 if ( ! isset( $content_width ) ) {
-	$content_width = 800; // @codingStandardsIgnoreLine - WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound.
+	$content_width = 800; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Valid use case.
 }

@@ -4,7 +4,7 @@
  *
  * @package Beans\Framework\Render
  *
- * @since 1.0.0
+ * @since   1.0.0
  */
 
 // Filter.
