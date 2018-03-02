@@ -68,15 +68,6 @@ final class _Beans_Attribute {
 	 * Initialize by registering the attribute filter.
 	 *
 	 * @since 1.0.0
-<<<<<<< HEAD
-	 *
-	 * @param array $method Method to register as the callback for this filter.
-	 *
-	 * @return void
-	 */
-	public function init( $method ) {
-		beans_add_filter( $this->id . '_attributes', array( $this, $method ) );
-=======
 	 * @since 1.5.0 Return self, for chaining and testing.
 	 *
 	 * @param array $method Method to register as the callback for this filter.
@@ -87,7 +78,6 @@ final class _Beans_Attribute {
 		beans_add_filter( $this->id . '_attributes', array( $this, $method ) );
 
 		return $this;
->>>>>>> 995000e04feaaab3f81493ef960a623a909dabc7
 	}
 
 	/**
