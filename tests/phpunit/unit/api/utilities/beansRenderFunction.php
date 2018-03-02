@@ -56,12 +56,12 @@ class Tests_BeansRenderFunction extends Test_Case {
 		$this->assertSame( 'foo', beans_render_function( 'callback_for_render_function', 'foo' ) );
 
 		$callback = function ( $foo, $bar, $baz ) {
-			echo "{$foo} {$bar} {$baz}"; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped -- Not testing escaping functionality.
+			echo "{$foo} {$bar} {$baz}"; // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped - reason: we are not testing escaping functionality.
 		};
 		$this->assertSame( 'foo bar baz', beans_render_function( $callback, 'foo', 'bar', 'baz' ) );
 
 		$callback = function ( $array, $baz ) {
-			echo join( ' ', $array ) . ' ' . $baz; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped -- Not testing escaping functionality.
+			echo join( ' ', $array ) . ' ' . $baz; // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped - reason: we are not testing escaping functionality.
 		};
 		$this->assertSame(
 			'foo bar baz',
@@ -70,7 +70,7 @@ class Tests_BeansRenderFunction extends Test_Case {
 
 		$callback = function ( $object ) {
 			$this->assertObjectHasAttribute( 'foo', $object );
-			echo $object->foo; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped -- Not testing escaping functionality.
+			echo $object->foo; // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped - reason: we are not testing escaping functionality.
 		};
 		$this->assertSame(
 			'beans',

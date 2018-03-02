@@ -1,10 +1,8 @@
 <?php
 /**
- * The Beans Options component extends the Beans Fields API and makes it easy to add fields to a WordPress options page.
+ * The Beans Options component extends the Beans Fields and make it easy to add fields to a WordPress options page.
  *
- * @package Beans\Framework\API\Options
- *
- * @since 1.0.0
+ * @package API\Options
  */
 
 /**
@@ -17,30 +15,30 @@
  * @param array  $fields {
  *      Array of fields to register.
  *
- *      @type string $id          A unique id used for the field. This id will also be used to save the value in
- *                                the database.
- *      @type string $type        The type of field to use. Please refer to the Beans core field types for more
- *                                information. Custom field types are accepted here.
- *      @type string $label       The field label. Default false.
+ * 		@type string $id          A unique id used for the field. This id will also be used to save the value in
+ * 		      					  the database.
+ * 		@type string $type 		  The type of field to use. Please refer to the Beans core field types for more
+ * 		      					  information. Custom field types are accepted here.
+ *      @type string $label 	  The field label. Default false.
  *      @type string $description The field description. The description can be truncated using <!--more-->
- *                                as a delimiter. Default false.
+ *            					  as a delimiter. Default false.
  *      @type array  $attributes  An array of attributes to add to the field. The array key defines the
- *                                attribute name and the array value defines the attribute value. Default array.
+ *            					  attribute name and the array value defines the attribute value. Default array.
  *      @type mixed  $default     The default field value. Default false.
  *      @type array  $fields      Must only be used for 'group' field type. The array arguments are similar to the
- *                                {@see beans_register_fields()} $fields arguments.
+ *            					  {@see beans_register_fields()} $fields arguments.
  *      @type bool   $db_group    Must only be used for 'group' field types. Defines whether the group of fields
- *                                registered should be saved as a group in the database or as individual
- *                                entries. Default false.
+ *            					  registered should be saved as a group in the database or as individual
+ *            					  entries. Default false.
  * }
  * @param string $menu_slug The menu slug used by fields.
  * @param string $section   A section id to define the group of fields.
  * @param array  $args {
  *      Optional. Array of arguments used to register the fields.
  *
- *      @type string $title   The metabox Title. Default 'Undefined'.
- *      @type string $context Where on the page where the metabox should be shown
- *                            ('normal', 'column'). Default 'normal'.
+ * 		@type string $title   The metabox Title. Default 'Undefined'.
+ * 		@type string $context Where on the page where the metabox should be shown
+ * 		      				  ('normal', 'column'). Default 'normal'.
  * }
  *
  * @return bool True on success, false on failure.
@@ -80,12 +78,13 @@ function beans_register_options( array $fields, $menu_slug, $section, $args = ar
 	}
 
 	// Load the class only if this function is called to prevent unnecessary memory usage.
-	require_once BEANS_API_PATH . 'options/class.php';
+	require_once( BEANS_API_PATH . 'options/class.php' );
 
 	$class = new _Beans_Options();
 	$class->register( $section, $args );
 
 	return true;
+
 }
 
 /**
@@ -96,8 +95,6 @@ function beans_register_options( array $fields, $menu_slug, $section, $args = ar
  * @since 1.0.0
  *
  * @param array $menu_slug The menu slug used to register the options.
- *
- * @return bool
  */
 function beans_options( $menu_slug ) {
 
@@ -107,17 +104,14 @@ function beans_options( $menu_slug ) {
 
 	$class = new _Beans_Options();
 	$class->page( $menu_slug );
+
 }
 
 add_action( 'wp_loaded', '_beans_options_page_actions' );
 /**
  * Fires the options form actions.
  *
- * @since 1.0.0
  * @ignore
- * @access private
- *
- * @return void
  */
 function _beans_options_page_actions() {
 
@@ -126,8 +120,9 @@ function _beans_options_page_actions() {
 	}
 
 	// Load the class only if this function is called to prevent unnecessary memory usage.
-	require_once BEANS_API_PATH . 'options/class.php';
+	require_once( BEANS_API_PATH . 'options/class.php' );
 
 	$class = new _Beans_Options();
 	$class->actions();
+
 }

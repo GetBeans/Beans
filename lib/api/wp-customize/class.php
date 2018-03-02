@@ -1,44 +1,25 @@
 <?php
 /**
- * This class handles the Beans WP Customize workflow.
- *
- * @package Beans\Framework\API\WP_Customize
- *
- * @since   1.0.0
- */
-
-/**
  * Handle the Beans WP Customize workflow.
  *
- * @since   1.0.0
  * @ignore
- * @access  private
  *
- * @package Beans\Framework\API\WP_Customize
+ * @package API\WP_Customize
  */
 final class _Beans_WP_Customize {
 
 	/**
-	 * Metabox arguments
+	 * Fields section.
 	 *
-	 * @var array
-	 */
-	private $args = array();
-
-	/**
-	 * Field section.
-	 *
-	 * @var string
+	 * @type string
 	 */
 	private $section;
 
 	/**
 	 * Constructor.
-	 *
-	 * @param string $section Field section.
-	 * @param array  $args Meta box arguments.
 	 */
 	public function __construct( $section, $args ) {
+
 		$defaults = array(
 			'title'       => __( 'Undefined', 'tm-beans' ),
 			'priority'    => 30,
@@ -46,25 +27,24 @@ final class _Beans_WP_Customize {
 		);
 
 		$this->section = $section;
-		$this->args    = array_merge( $defaults, $args );
+		$this->args = array_merge( $defaults, $args );
 
 		// Add section, settings and controls.
 		$this->add();
 
 		beans_add_attribute( 'beans_field_label', 'class', 'customize-control-title' );
+
 	}
 
 	/**
 	 * Add section, settings and controls.
-	 *
-	 * @since 1.0.0
-	 * @ignore
-	 *
-	 * @return void
 	 */
 	private function add() {
+
 		global $wp_customize;
+
 		$this->add_section( $wp_customize );
+
 		$fields = beans_get_fields( 'wp_customize', $this->section );
 
 		foreach ( $fields as $field ) {
@@ -77,18 +57,13 @@ final class _Beans_WP_Customize {
 
 			$this->add_setting( $wp_customize, $field );
 			$this->add_control( $wp_customize, $field );
+
 		}
+
 	}
 
 	/**
 	 * Add Section.
-	 *
-	 * @since 1.0.0
-	 * @ignore
-	 *
-	 * @param WP_Customize_Manager $wp_customize WP Customizer Manager object.
-	 *
-	 * @return void
 	 */
 	private function add_section( $wp_customize ) {
 
@@ -104,20 +79,14 @@ final class _Beans_WP_Customize {
 				'description' => $this->args['description'],
 			)
 		);
+
 	}
 
 	/**
 	 * Add setting.
-	 *
-	 * @since 1.0.0
-	 * @ignore
-	 *
-	 * @param WP_Customize_Manager $wp_customize WP Customizer Manager object.
-	 * @param array                $field Meta box settings.
-	 *
-	 * @return void
 	 */
 	private function add_setting( $wp_customize, $field ) {
+
 		$defaults = array(
 			'db_type'    => 'theme_mod',
 			'capability' => 'edit_theme_options',
@@ -136,20 +105,14 @@ final class _Beans_WP_Customize {
 				'sanitize_callback' => array( $this, 'sanitize' ),
 			)
 		);
+
 	}
 
 	/**
 	 * Add Control.
-	 *
-	 * @since 1.0.0
-	 * @ignore
-	 *
-	 * @param WP_Customize_Manager $wp_customize WP Customizer Manager object.
-	 * @param array                $field Meta box settings.
-	 *
-	 * @return void
 	 */
 	private function add_control( $wp_customize, $field ) {
+
 		$class = '_Beans_WP_Customize_Control';
 
 		if ( $field['type'] !== $class && class_exists( $field['type'] ) ) {
@@ -167,39 +130,32 @@ final class _Beans_WP_Customize {
 				$field
 			)
 		);
+
 	}
 
 	/**
-	 * Sanitize the value.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param mixed $value Value.
-	 *
-	 * @return mixed
+	 * Sanatize value.
 	 */
 	public function sanitize( $value ) {
+
 		return $value;
+
 	}
 }
 
 if ( class_exists( 'WP_Customize_Control' ) ) :
+
 	/**
 	 * Render Beans fields content for WP Customize.
 	 *
-	 * @since   1.0.0
-	 *
 	 * @ignore
-	 * @access  private
-	 *
-	 * @package Beans\Framework\API\WP_Customize
 	 */
-	class _Beans_WP_Customize_Control extends WP_Customize_Control { // phpcs:ignore Generic.Files.OneClassPerFile.MultipleFound, Generic.Classes.OpeningBraceSameLine.ContentAfterBrace -- Will be fixed.
+	class _Beans_WP_Customize_Control extends WP_Customize_Control {
 
 		/**
 		 * Field data.
 		 *
-		 * @var string
+		 * @type string
 		 */
 		private $beans_field;
 
@@ -207,20 +163,22 @@ if ( class_exists( 'WP_Customize_Control' ) ) :
 		 * Constructor.
 		 */
 		public function __construct() {
+
 			$args = func_get_args();
+
 			call_user_func_array( array( 'parent', '__construct' ), $args );
+
 			$this->beans_field = end( $args );
+
 		}
 
 		/**
 		 * Field content.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @return void
 		 */
 		public function render_content() {
+
 			beans_field( $this->beans_field );
+
 		}
 	}
 

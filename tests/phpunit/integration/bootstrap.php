@@ -11,15 +11,15 @@
  */
 
 if ( ! file_exists( '../../../wp-content' ) ) {
-	trigger_error( 'Unable to run the integration tests, because the wp-content folder does not exist.', E_USER_ERROR ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_trigger_error -- Valid use case for our testing suite.
+	trigger_error( 'Unable to run the integration tests, because the wp-content folder does not exist.', E_USER_ERROR );  // @codingStandardsIgnoreLine.
 }
 
 define( 'BEANS_TESTS_DIR', __DIR__ );
 define( 'BEANS_THEME_DIR', dirname( dirname( dirname( __DIR__ ) ) ) );
-define( 'WP_CONTENT_DIR', dirname( dirname( dirname( getcwd() ) ) ) . '/wp-content/' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound -- Our tests need to define this constant.
+define( 'WP_CONTENT_DIR', dirname( dirname( dirname( getcwd() ) ) ) . '/wp-content/' ); // @codingStandardsIgnoreLine.
 
 if ( ! defined( 'WP_PLUGIN_DIR' ) ) {
-	define( 'WP_PLUGIN_DIR', WP_CONTENT_DIR . 'plugins/' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound -- When this constant is not already defined, we define it here. It's a valid use case for our testing suite.
+	define( 'WP_PLUGIN_DIR', WP_CONTENT_DIR . 'plugins/' ); // @codingStandardsIgnoreLine.
 }
 
 /**
@@ -44,7 +44,7 @@ function beans_get_wp_tests_dir() {
 
 	// Check it again. If it doesn't exist, stop here and post a message as to why we stopped.
 	if ( ! file_exists( $tests_dir . '/includes/' ) ) {
-		trigger_error( 'Unable to run the integration tests, because the WordPress test suite could not be located.', E_USER_ERROR ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_trigger_error -- Valid use case for our testing suite.
+		trigger_error( 'Unable to run the integration tests, because the WordPress test suite could not be located.', E_USER_ERROR );  // @codingStandardsIgnoreLine.
 	}
 
 	// Strip off the trailing directory separator, if it exists.

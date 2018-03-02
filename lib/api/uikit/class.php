@@ -1,31 +1,18 @@
 <?php
 /**
- * This class handles the UIkit components.
+ * Compile Uikit components.
  *
- * @package Beans\Framework\API\UIkit
- *
- * @since 1.0.0
- */
-
-/**
- * Compile UIkit components.
- *
- * @since   1.0.0
  * @ignore
- * @access  private
  *
- * @package Beans\Framework\API\UIkit
+ * @package API\Uikit
  */
 final class _Beans_Uikit {
 
 	/**
 	 * Compile enqueued items.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return void
 	 */
-	public function compile() {
+	function compile() {
+
 		global $_beans_uikit_enqueued_items;
 
 		/**
@@ -62,12 +49,9 @@ final class _Beans_Uikit {
 		 *
 		 * @param array $components An array of UIkit script compiler arguments.
 		 */
-		$scripts_args = apply_filters(
-			'beans_uikit_euqueued_scripts_args',
-			array(
-				'depedencies' => array( 'jquery' ),
-			)
-		);
+		$scripts_args = apply_filters( 'beans_uikit_euqueued_scripts_args', array(
+			'depedencies' => array( 'jquery' ),
+		) );
 
 		// Compile less.
 		if ( $styles ) {
@@ -78,16 +62,14 @@ final class _Beans_Uikit {
 		if ( $scripts ) {
 			beans_compile_js_fragments( 'uikit', array_unique( $scripts ), $scripts_args );
 		}
+
 	}
 
 	/**
 	 * Register less components.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return array
 	 */
-	public function register_less_components() {
+	function register_less_components() {
+
 		global $_beans_uikit_enqueued_items;
 
 		$components = array();
@@ -95,12 +77,13 @@ final class _Beans_Uikit {
 		foreach ( $_beans_uikit_enqueued_items['components'] as $type => $items ) {
 
 			// Add core before the components.
-			if ( 'core' === $type ) {
+			if ( 'core' == $type ) {
 				$items = array_merge( array( 'variables' ), $items );
 			}
 
 			// Fetch components from directories.
 			$components = array_merge( $components, $this->get_components_from_directory( $items, $this->get_less_directories( $type ), 'styles' ) );
+
 		}
 
 		// Add fixes.
@@ -109,16 +92,14 @@ final class _Beans_Uikit {
 		}
 
 		return $components;
+
 	}
 
 	/**
-	 * Register JavaScript components.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return array
+	 * Register js components.
 	 */
-	public function register_js_components() {
+	function register_js_components() {
+
 		global $_beans_uikit_enqueued_items;
 
 		$components = array();
@@ -126,7 +107,7 @@ final class _Beans_Uikit {
 		foreach ( $_beans_uikit_enqueued_items['components'] as $type => $items ) {
 
 			// Add core before the components.
-			if ( 'core' === $type ) {
+			if ( 'core' == $type ) {
 				$items = array_merge(
 					array(
 						'core',
@@ -140,29 +121,25 @@ final class _Beans_Uikit {
 
 			// Fetch components from directories.
 			$components = array_merge( $components, $this->get_components_from_directory( $items, $this->get_js_directories( $type ), 'scripts' ) );
+
 		}
 
 		return $components;
+
 	}
 
 	/**
 	 * Get LESS directories.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $type Type of the UIkit components.
-	 *
-	 * @return array
 	 */
-	public function get_less_directories( $type ) {
+	function get_less_directories( $type ) {
 
-		if ( 'add-ons' === $type ) {
+		if ( 'add-ons' == $type ) {
 			$type = 'components';
 		}
 
 		global $_beans_uikit_enqueued_items;
 
-		// Define the UIkit src directory.
+		// Define uikit src directory.
 		$directories = array( BEANS_API_PATH . 'uikit/src/less/' . $type );
 
 		// Add the registered theme directories.
@@ -171,41 +148,29 @@ final class _Beans_Uikit {
 		}
 
 		return $directories;
+
 	}
 
 	/**
-	 * Get JavaScript directories.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $type Type.
-	 *
-	 * @return array
+	 * Get JS directories.
 	 */
-	public function get_js_directories( $type ) {
+	function get_js_directories( $type ) {
 
-		if ( 'add-ons' === $type ) {
+		if ( 'add-ons' == $type ) {
 			$type = 'components';
 		}
 
-		// Define the UIkit src directory.
+		// Define uikit src directory.
 		return array( BEANS_API_PATH . 'uikit/src/js/' . $type );
+
 	}
 
 	/**
 	 * Get components from directories.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param array  $components Array of UIkit Components.
-	 * @param array  $directories Array of directories containing the UIkit Components.
-	 * @param string $format File format.
-	 *
-	 * @return array
 	 */
-	public function get_components_from_directory( $components, $directories, $format ) {
+	function get_components_from_directory( $components, $directories, $format ) {
 
-		$extension = 'styles' === $format ? 'less' : 'min.js';
+		$extension = ( 'styles' == $format ) ? 'less' : 'min.js';
 
 		$return = array();
 
@@ -213,6 +178,7 @@ final class _Beans_Uikit {
 
 			// Fectch components from all directories set.
 			foreach ( $directories as $directory ) {
+
 				$file = trailingslashit( $directory ) . $component . '.' . $extension;
 
 				// Make sure the file exists.
@@ -223,18 +189,14 @@ final class _Beans_Uikit {
 		}
 
 		return $return;
+
 	}
 
 	/**
 	 * Get all components.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $type Type of UIkit components ('core' or 'add-ons').
-	 *
-	 * @return array
 	 */
-	public function get_all_components( $type ) {
+	function get_all_components( $type ) {
+
 		// Fetch all directories.
 		$directories = array_merge( $this->get_less_directories( $type ), $this->get_js_directories( $type ) );
 
@@ -253,48 +215,45 @@ final class _Beans_Uikit {
 
 			// Only return the filname and remove empty elements.
 			$components = array_merge( $components, array_filter( array_map( array( $this, 'to_filename' ), $scandir ) ) );
+
 		}
 
 		return $components;
+
 	}
 
 	/**
-	 * Auto detect the required components.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param array $components Array of components to autoload.
-	 *
-	 * @return array
+	 * Auto detect components required.
 	 */
-	public function get_autoload_components( $components ) {
+	function get_autoload_components( $components ) {
+
 		$autoload = array(
 			'core'    => array(),
 			'add-ons' => array(),
 		);
 
-		$dependencies = array(
-			'panel'     => array(
+		$depedencies = array(
+			'panel' => array(
 				'core' => array(
 					'badge',
 				),
 			),
-			'cover'     => array(
+			'cover' => array(
 				'core' => array(
 					'flex',
 				),
 			),
-			'overlay'   => array(
+			'overlay' => array(
 				'core' => array(
 					'flex',
 				),
 			),
-			'tab'       => array(
+			'tab' => array(
 				'core' => array(
 					'switcher',
 				),
 			),
-			'modal'     => array(
+			'modal' => array(
 				'core' => array(
 					'close',
 				),
@@ -304,8 +263,8 @@ final class _Beans_Uikit {
 					'animation',
 				),
 			),
-			'lightbox'  => array(
-				'core'    => array(
+			'lightbox' => array(
+				'core' => array(
 					'animation',
 					'flex',
 					'close',
@@ -316,13 +275,13 @@ final class _Beans_Uikit {
 					'slidenav',
 				),
 			),
-			'slider'    => array(
+			'slider' => array(
 				'add-ons' => array(
 					'slidenav',
 				),
 			),
-			'slideset'  => array(
-				'core'    => array(
+			'slideset' => array(
+				'core' => array(
 					'animation',
 					'flex',
 				),
@@ -332,7 +291,7 @@ final class _Beans_Uikit {
 				),
 			),
 			'slideshow' => array(
-				'core'    => array(
+				'core' => array(
 					'animation',
 					'flex',
 				),
@@ -341,12 +300,12 @@ final class _Beans_Uikit {
 					'slidenav',
 				),
 			),
-			'parallax'  => array(
+			'parallax' => array(
 				'core' => array(
 					'flex',
 				),
 			),
-			'notify'    => array(
+			'notify' => array(
 				'core' => array(
 					'close',
 				),
@@ -355,31 +314,27 @@ final class _Beans_Uikit {
 
 		foreach ( (array) $components as $component ) {
 
-			$this_dependencies = beans_get( $component, $dependencies, array() );
+			$this_depedencies = beans_get( $component, $depedencies, array() );
 
-			foreach ( $this_dependencies as $dependency ) {
-				$autoload['core']    = array_merge( $autoload['core'], array_flip( beans_get( 'core', $this_dependencies, array() ) ) );
-				$autoload['add-ons'] = array_merge( $autoload['add-ons'], array_flip( beans_get( 'add-ons', $this_dependencies, array() ) ) );
+			foreach ( $this_depedencies as $depedency ) {
+				$autoload['core'] = array_merge( $autoload['core'], array_flip( beans_get( 'core', $this_depedencies, array() ) ) );
+				$autoload['add-ons'] = array_merge( $autoload['add-ons'], array_flip( beans_get( 'add-ons', $this_depedencies, array() ) ) );
 			}
 		}
 
 		// Format autoload back to associative key value array.
-		$autoload['core']    = array_flip( $autoload['core'] );
+		$autoload['core'] = array_flip( $autoload['core'] );
 		$autoload['add-ons'] = array_flip( $autoload['add-ons'] );
 
 		return $autoload;
+
 	}
 
 	/**
 	 * Convert component to a filename.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $file File name.
-	 *
-	 * @return null|string
 	 */
-	public function to_filename( $file ) {
+	function to_filename( $file ) {
+
 		$pathinfo = pathinfo( $file );
 
 		$ignore = array(
@@ -388,11 +343,12 @@ final class _Beans_Uikit {
 		);
 
 		// Stop here if it isn't a valid file or if it should be ignored.
-		if ( ! isset( $pathinfo['filename'] ) || in_array( $pathinfo['filename'], $ignore, true ) ) {
+		if ( ! isset( $pathinfo['filename'] ) || in_array( $pathinfo['filename'], $ignore ) ) {
 			return null;
 		}
 
 		// Return the filename without the .min to avoid duplicates.
 		return str_replace( '.min', '', $pathinfo['filename'] );
+
 	}
 }

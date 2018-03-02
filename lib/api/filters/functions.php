@@ -1,8 +1,8 @@
 <?php
 /**
- * Beans Filters extend WordPress Filters by registering sub filters if they are told to do so.
+ * Beans Filters extends WordPress Filters by registering sub filters if it is told to do so.
  *
- * @package Beans\Framework\API\Filters
+ * @package API\Filters
  */
 
 /**
@@ -56,7 +56,7 @@ function beans_add_filter( $hook, $callback_or_value, $priority = 10, $args = 1 
  *                      always run the parent filter first, so a filter set to the parent will apply
  *                      to all sub-hooks. Maximum 3 sub-hooks allowed.
  * @param mixed  $value The value on which the filters hooked to <tt>$id</tt> are applied to it.
- * @param mixed  $var   Additional variables passed to the functions hooked to <tt>$id</tt>. @codingStandardsIgnoreLine - Squiz.Commenting.FunctionComment.ExtraParamComment.
+ * @param mixed  $var   Additional variables passed to the functions hooked to <tt>$id</tt>.
  *
  * @return mixed The filtered value after all hooked functions are applied to it.
  */

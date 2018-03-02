@@ -1,10 +1,6 @@
 <?php
 /**
- * Functions for Beans Term Meta.
- *
- * @package Beans\Framework\API\Term_Meta
- *
- * @since 1.0.0
+ * @package API\Term_Meta
  */
 
 /**
@@ -21,10 +17,9 @@
 function beans_get_term_meta( $field_id, $default = false, $term_id = false ) {
 
 	if ( ! $term_id ) {
-		$_term_id = beans_get( 'term_id', get_queried_object() );
-
-		$term_id = $_term_id ? $_term_id : beans_get( 'tag_ID' );
+		$term_id = ( $_term_id = beans_get( 'term_id', get_queried_object() ) ) ? $_term_id : beans_get( 'tag_ID' );
 	}
 
-	return $term_id ? get_option( "beans_term_{$term_id}_{$field_id}", $default ) : $default;
+	return get_option( "beans_term_{$term_id}_{$field_id}", $default );
+
 }

@@ -42,7 +42,7 @@ if ( ! function_exists( 'array_replace_recursive' ) ) {
 			$from_base = beans_get( $key, $array1 );
 
 			if ( is_array( $value ) && is_array( $from_base ) ) {
-				$array1[ $key ] = array_replace_recursive( $from_base, $value ); // phpcs:ignore PHPCompatibility.PHP.NewFunctions.array_replace_recursiveFound -- This polyfill provides the construct for PHP 5.2.
+				$array1[ $key ] = array_replace_recursive( $from_base, $value ); // @codingStandardsIgnoreLine - PHPCompatibility.PHP.NewFunctions.array_replace_recursiveFound) - Sniffer is not picking up the polyfill.
 			} else {
 				$array1[ $key ] = $value;
 			}
