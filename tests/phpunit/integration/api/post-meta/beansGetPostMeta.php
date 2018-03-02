@@ -21,6 +21,14 @@ use WP_UnitTestCase;
 class Tests_BeansGetPostMeta extends WP_UnitTestCase {
 
 	/**
+	 * Test beans_get_post_meta() should return the default when the post_id cannot be resolved.
+	 */
+	public function test_should_return_default_when_post_id_cannot_be_resolved() {
+		$this->assertFalse( beans_get_post_meta( 'beans_layout' ) );
+		$this->assertSame( 'default_fallback', beans_get_post_meta( 'beans_layout', 'default_fallback' ) );
+	}
+
+	/**
 	 * Test beans_get_post_meta() should return the default when the post meta does not exist.
 	 */
 	public function test_should_return_default_when_post_meta_does_not_exist() {
