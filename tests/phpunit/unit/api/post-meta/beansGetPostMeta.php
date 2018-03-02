@@ -16,8 +16,8 @@ use Brain\Monkey;
  * Class Tests_BeansGetPostMeta
  *
  * @package Beans\Framework\Tests\Unit\API\Post_Meta
- * @group   unit-tests
  * @group   api
+ * @group   api-post-meta
  */
 class Tests_BeansGetPostMeta extends Test_Case {
 
@@ -28,6 +28,19 @@ class Tests_BeansGetPostMeta extends Test_Case {
 		parent::setUp();
 
 		require_once BEANS_TESTS_LIB_DIR . 'api/post-meta/functions.php';
+	}
+
+
+	/**
+	 * Test beans_get_post_meta() should return the default when the post meta cannot be resolved.
+	 */
+	public function test_should_return_default_when_post_id_cannot_be_resolved() {
+		Monkey\Functions\expect( 'get_the_id' )->twice()->andReturn( false );
+		Monkey\Functions\expect( 'beans_get' )->twice()->andReturn( null );
+		Monkey\Functions\expect( 'get_post_meta' )->never();
+
+		$this->assertFalse( beans_get_post_meta( 'beans_layout' ) );
+		$this->assertSame( 'default_fallback', beans_get_post_meta( 'beans_layout', 'default_fallback' ) );
 	}
 
 	/**
@@ -49,12 +62,10 @@ class Tests_BeansGetPostMeta extends Test_Case {
 		Monkey\Functions\expect( 'get_post_meta' )->with( 47 )->once()->andReturn( array() );
 		$this->assertSame( 'c', beans_get_post_meta( 'beans_layout', 'c' ) );
 
-		$_GET['post'] = '18';
-		require_once BEANS_TESTS_LIB_DIR . 'api/utilities/functions.php';
 		Monkey\Functions\expect( 'get_the_id' )->once()->andReturn( 0 );
+		Monkey\Functions\expect( 'beans_get' )->once()->with( 'post' )->andReturn( 18 );
 		Monkey\Functions\expect( 'get_post_meta' )->with( '18' )->once()->andReturn( array() );
 		$this->assertSame( 'c', beans_get_post_meta( 'beans_layout', 'c' ) );
-		unset( $_GET['post'] );
 	}
 
 	/**
@@ -86,9 +97,8 @@ class Tests_BeansGetPostMeta extends Test_Case {
 			->andReturn( 'sp_c' );
 		$this->assertSame( 'sp_c', beans_get_post_meta( 'beans_layout' ) );
 
-		$_GET['post'] = '18';
-		require_once BEANS_TESTS_LIB_DIR . 'api/utilities/functions.php';
 		Monkey\Functions\expect( 'get_the_id' )->once()->andReturn( 0 );
+		Monkey\Functions\expect( 'beans_get' )->once()->with( 'post' )->andReturn( 18 );
 		Monkey\Functions\expect( 'get_post_meta' )
 			->with( '18' )
 			->once()
@@ -100,6 +110,5 @@ class Tests_BeansGetPostMeta extends Test_Case {
 			->ordered()
 			->andReturn( 'default_fallback' );
 		$this->assertSame( 'default_fallback', beans_get_post_meta( 'beans_layout', 'c' ) );
-		unset( $_GET['post'] );
 	}
 }
