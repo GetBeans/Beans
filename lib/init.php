@@ -13,7 +13,6 @@ add_action( 'beans_init', 'beans_define_constants', -1 );
  *
  * @since 1.0.0
  * @ignore
- * @access private
  *
  * @return void
  */
@@ -62,7 +61,6 @@ add_action( 'beans_init', 'beans_load_dependencies', -1 );
  *
  * @since 1.0.0
  * @ignore
- * @access private
  *
  * @return void
  */
@@ -102,7 +100,6 @@ add_action( 'beans_init', 'beans_add_theme_support' );
  *
  * @since 1.0.0
  * @ignore
- * @access private
  *
  * @return void
  */
@@ -132,7 +129,6 @@ add_action( 'beans_init', 'beans_includes' );
  *
  * @since 1.0.0
  * @ignore
- * @access private
  *
  * @return void
  */
@@ -140,7 +136,6 @@ function beans_includes() {
 
 	// Include admin.
 	if ( is_admin() ) {
-
 		require_once BEANS_ADMIN_PATH . 'options.php';
 		require_once BEANS_ADMIN_PATH . 'updater.php';
 	}
@@ -167,7 +162,6 @@ add_action( 'beans_init', 'beans_load_textdomain' );
  *
  * @since 1.0.0
  * @ignore
- * @access private
  *
  * @return void
  */
