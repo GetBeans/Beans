@@ -17,7 +17,7 @@ beans_add_smart_action( 'beans_head', 'beans_head_meta', 0 );
  */
 function beans_head_meta() {
 	?>
-	<meta charset="<?php esc_attr( get_bloginfo( 'charset' ) ); ?>" />
+	<meta charset="<?php echo esc_attr( get_bloginfo( 'charset' ) ); ?>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<?php
 }
