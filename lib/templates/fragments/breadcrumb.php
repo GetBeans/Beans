@@ -21,7 +21,7 @@ function beans_breadcrumb() {
 		return;
 	}
 
-	wp_reset_query(); // @codingStandardsIgnoreLine - WordPress.WP.DiscouragedFunctions.wp_reset_query_wp_reset_query.
+	wp_reset_query(); // phpcs:ignore WordPress.WP.DiscouragedFunctions.wp_reset_query_wp_reset_query -- Ensure the main query has been reset to the original main query.
 
 	global $post;
 

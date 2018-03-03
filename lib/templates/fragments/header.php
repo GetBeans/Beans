@@ -73,7 +73,6 @@ beans_add_smart_action( 'wp_head', 'beans_header_image' );
  * @return void
  */
 function beans_header_image() {
-
 	$header_image = get_header_image();
 
 	if ( ! current_theme_supports( 'custom-header' ) || ! $header_image || empty( $header_image ) ) {
@@ -121,7 +120,8 @@ function beans_site_branding() {
 
 			$logo = get_theme_mod( 'beans_logo_image', false );
 
-			if ( $logo ) { // @codingStandardsIgnoreLine - Generic.WhiteSpace.ScopeIndent.IncorrectExact.
+			// phpcs:disable Generic.WhiteSpace.ScopeIndent.IncorrectExact -- Code structure mimics HTML markup.
+			if ( $logo ) {
 				beans_selfclose_markup_e(
 					'beans_logo_image',
 					'img',
@@ -131,10 +131,11 @@ function beans_site_branding() {
 						'alt'   => get_bloginfo( 'name' ), // Automatically escaped.
 					)
 				);
-			} else { // @codingStandardsIgnoreLine - Generic.WhiteSpace.ScopeIndent.IncorrectExact.
+			} else {
 				beans_output_e( 'beans_site_title_text', get_bloginfo( 'name' ) );
-			} // @codingStandardsIgnoreLine - Generic.WhiteSpace.ScopeIndent.IncorrectExact.
+			}
 
+		// phpcs:enable Generic.WhiteSpace.ScopeIndent.IncorrectExact -- Code structure mimics HTML markup.
 		beans_close_markup_e( 'beans_site_title_link', 'a' );
 
 	beans_close_markup_e( 'beans_site_branding', 'div' );
@@ -149,7 +150,6 @@ beans_add_smart_action( 'beans_site_branding_append_markup', 'beans_site_title_t
  * @return void
  */
 function beans_site_title_tag() {
-
 	// Stop here if there isn't a description.
 	$description = get_bloginfo( 'description' );
 

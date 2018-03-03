@@ -4,7 +4,7 @@
  *
  * @package Beans\Framework\Templates\Fragments
  *
- * @since 1.0.0
+ * @since   1.0.0
  */
 
 beans_add_smart_action( 'beans_widget', 'beans_widget_badge', 5 );
@@ -23,7 +23,7 @@ function beans_widget_badge() {
 
 	beans_open_markup_e( 'beans_widget_badge' . _beans_widget_subfilters(), 'div', 'class=uk-panel-badge uk-badge' );
 
-		echo beans_widget_shortcodes( beans_get_widget( 'badge_content' ) ); // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped.
+		echo beans_widget_shortcodes( beans_get_widget( 'badge_content' ) ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped -- Echoes HTML output.
 
 	beans_close_markup_e( 'beans_widget_badge' . _beans_widget_subfilters(), 'div' );
 }

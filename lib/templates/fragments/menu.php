@@ -3,6 +3,8 @@
  * Echo menu fragments.
  *
  * @package Beans\Framework\Templates\Fragments
+ *
+ * @since   1.0.0
  */
 
 beans_add_smart_action( 'beans_header', 'beans_primary_menu', 15 );
@@ -76,13 +78,7 @@ function beans_primary_menu_offcanvas_button() {
 		)
 	);
 
-		beans_open_markup_e(
-			'beans_primary_menu_offcanvas_button_icon',
-			'i',
-			array(
-				'class' => 'uk-icon-navicon uk-margin-small-right',
-			)
-		);
+		beans_open_markup_e( 'beans_primary_menu_offcanvas_button_icon', 'i', array( 'class' => 'uk-icon-navicon uk-margin-small-right' ) );
 
 		beans_close_markup_e( 'beans_primary_menu_offcanvas_button_icon', 'i' );
 

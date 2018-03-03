@@ -4,7 +4,7 @@
  *
  * @package Beans\Framework\Templates\Fragments
  *
- * @since 1.0.0
+ * @since   1.0.0
  */
 
 beans_add_smart_action( 'beans_post_meta_date', 'beans_post_meta_date_shortcode' );
@@ -100,7 +100,7 @@ function beans_post_meta_comments_shortcode() {
 
 	beans_open_markup_e( 'beans_post_meta_comments', 'a', array( 'href' => get_comments_link() ) ); // Automatically escaped.
 
-		printf( $comment_text, (int) get_comments_number( $post->ID ) ); // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped.
+		printf( $comment_text, (int) get_comments_number( $post->ID ) ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped -- Pending security audit.
 
 	beans_close_markup_e( 'beans_post_meta_comments', 'a' );
 }
@@ -121,7 +121,7 @@ function beans_post_meta_tags_shortcode() {
 		return;
 	}
 
-	printf( '%1$s%2$s', beans_output( 'beans_post_meta_tags_prefix', __( 'Tagged with: ', 'tm-beans' ) ), $tags ); // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped.
+	printf( '%1$s%2$s', beans_output( 'beans_post_meta_tags_prefix', __( 'Tagged with: ', 'tm-beans' ) ), $tags ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped -- Pending security audit.
 }
 
 beans_add_smart_action( 'beans_post_meta_categories', 'beans_post_meta_categories_shortcode' );
@@ -139,5 +139,5 @@ function beans_post_meta_categories_shortcode() {
 		return;
 	}
 
-	printf( '%1$s%2$s', beans_output( 'beans_post_meta_categories_prefix', __( 'Filed under: ', 'tm-beans' ) ), $categories ); // @codingStandardsIgnoreLine - WordPress.XSS.EscapeOutput.OutputNotEscaped.
+	printf( '%1$s%2$s', beans_output( 'beans_post_meta_categories_prefix', __( 'Filed under: ', 'tm-beans' ) ), $categories ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped -- Pending security audit.
 }
