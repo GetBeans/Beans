@@ -117,7 +117,6 @@ abstract class Image_Test_Case extends Test_Case {
 			$this->images_dir . '/image1.jpg' => static::$fixtures_dir . '/image1.jpg',
 			$this->images_dir . '/image2.jpg' => static::$fixtures_dir . '/image2.jpg',
 		);
-
 	}
 
 	/**
