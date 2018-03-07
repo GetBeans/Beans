@@ -42,15 +42,6 @@ class Tests_Beans_Edit_Image_CreateEditedImage extends Image_Test_Case {
 	}
 
 	/**
-	 * Prepares the test environment before each test.
-	 */
-	public function setUp() {
-		parent::setUp();
-
-		require_once BEANS_TESTS_LIB_DIR . 'api/image/class-beans-image-editor.php';
-	}
-
-	/**
 	 * Test create_edited_image() should edit the given image and then create a new "edited image", which is stored in
 	 * the
 	 * "rebuilt path".

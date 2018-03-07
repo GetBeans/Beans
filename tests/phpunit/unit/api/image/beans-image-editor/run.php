@@ -35,18 +35,6 @@ class Tests_Beans_Edit_Image_Run extends Image_Test_Case {
 	}
 
 	/**
-	 * Set up the test fixture.
-	 */
-	protected function setUp() {
-		parent::setUp();
-
-		require_once BEANS_TESTS_LIB_DIR . 'api/image/class-beans-image-editor.php';
-
-		Monkey\Functions\when( 'beans_url_to_path' )->returnArg();
-		Monkey\Functions\when( 'beans_path_to_url' )->returnArg();
-	}
-
-	/**
 	 * Test run() should edit the existing image, store it in the "rebuilt path", and then return its URL.
 	 */
 	public function test_should_edit_store_and_return_its_url() {
