@@ -8,8 +8,6 @@
  * @since   1.5.0
  */
 
-// phpcs:disable Squiz.Commenting.FunctionComment.ExtraParamComment -- The extra parameter is intentional for documentation.
-
 /**
  * Register output by ID.
  *
@@ -20,11 +18,12 @@
  *
  * Since this function uses {@see beans_apply_filters()}, the $id argument may contain sub-hook(s).
  *
+ * Note: You can pass additional arguments to the functions that are hooked to <tt>$id</tt>.
+ *
  * @since 1.0.0
  *
  * @param string $id     A unique string used as a reference. The $id argument may contain sub-hook(s).
  * @param string $output Content to output.
- * @param mixed  $var    Additional variables passed to the functions hooked to <tt>$id</tt>.
  *
  * @return string The output.
  */
@@ -55,12 +54,13 @@ function beans_output( $id, $output ) {
  *
  * Since this function uses {@see beans_apply_filters()}, the $id argument may contain sub-hook(s).
  *
+ * Note: You can pass additional arguments to the functions that are hooked to <tt>$id</tt>.
+ *
  * @since 1.4.0
  * @uses beans_output()  To register output by ID.
  *
  * @param string $id     A unique string used as a reference. The $id argument may contain sub-hook(s).
  * @param string $output Content to output.
- * @param mixed  $var    Additional variables passed to the functions hooked to <tt>$id</tt>.
  */
 function beans_output_e( $id, $output ) {
 	$args = func_get_args();
@@ -94,6 +94,8 @@ function beans_remove_output( $id ) {
  *
  * Since this function uses {@see beans_apply_filters()}, the $id argument may contain sub-hook(s).
  *
+ * Note: You can pass additional arguments to the functions that are hooked to <tt>$id</tt>.
+ *
  * @since 1.0.0
  *
  * @param string       $id         A unique string used as a reference. The $id argument may contain sub-hooks(s).
@@ -106,7 +108,6 @@ function beans_remove_output( $id ) {
  *                                 (e.g. class=""). Setting it to 'false' will only display
  *                                 the attribute name (e.g. data-example). Setting it to 'null' will not
  *                                 display anything.
- * @param mixed        $var        Optional. Additional variables passed to the functions hooked to <tt>$id</tt>.
  *
  * @return string The output.
  */
@@ -141,7 +142,7 @@ function beans_open_markup( $id, $tag, $attributes = array() ) {
 
 	$output = call_user_func_array( '_beans_render_action', $args );
 
-		// Don't output the tag if empty, the before and after actions still run.
+	// Don't output the tag if empty, the before and after actions still run.
 	if ( $tag ) {
 		$output .= '<' . $tag . ' ' . call_user_func_array( 'beans_add_attributes', $attributes_args ) . ( _beans_is_html_dev_mode() ? ' data-markup-id="' . $id . '"' : null ) . ( $_temp_beans_selfclose_markup ? '/' : '' ) . '>';
 	}
@@ -168,6 +169,8 @@ function beans_open_markup( $id, $tag, $attributes = array() ) {
  *
  * Since this function uses {@see beans_apply_filters()}, the $id argument may contain sub-hook(s).
  *
+ * Note: You can pass additional arguments to the functions that are hooked to <tt>$id</tt>.
+ *
  * @since 1.4.0
  *
  * @param string       $id         A unique string used as a reference. The $id argument may contain sub-hooks(s).
@@ -180,7 +183,6 @@ function beans_open_markup( $id, $tag, $attributes = array() ) {
  *                                 (e.g. class=""). Setting it to 'false' will only display
  *                                 the attribute name (e.g. data-example). Setting it to 'null' will not
  *                                 display anything.
- * @param mixed        $var        Optional. Additional variables passed to the functions hooked to <tt>$id</tt>.
  *
  * @return void
  */
@@ -192,8 +194,10 @@ function beans_open_markup_e( $id, $tag, $attributes = array() ) {
 /**
  * Register self-close markup and attributes by ID.
  *
- * This function is shortuct of {@see beans_open_markup()}. It should be used for self-closing HTML markup such as
+ * This function is shortcut of {@see beans_open_markup()}. It should be used for self-closing HTML markup such as
  * images or inputs.
+ *
+ * Note: You can pass additional arguments to the functions that are hooked to <tt>$id</tt>.
  *
  * @since 1.0.0
  *
@@ -207,7 +211,6 @@ function beans_open_markup_e( $id, $tag, $attributes = array() ) {
  *                                 (e.g. class=""). Setting it to 'false' will only display
  *                                 the attribute name (e.g. data-example). Setting it to 'null' will not
  *                                 display anything.
- * @param mixed        $var        Optional. Additional variables passed to the functions hooked to <tt>$id</tt>.
  *
  * @return string The output.
  */
@@ -223,8 +226,10 @@ function beans_selfclose_markup( $id, $tag, $attributes = array() ) {
 /**
  * Echo self-close markup and attributes registered by ID.
  *
- * This function is shortuct of {@see beans_open_markup()}. It should be used for self-closing HTML markup such as
+ * This function is shortcut of {@see beans_open_markup()}. It should be used for self-closing HTML markup such as
  * images or inputs.
+ *
+ * Note: You can pass additional arguments to the functions that are hooked to <tt>$id</tt>.
  *
  * @since 1.4.0
  *
@@ -238,7 +243,6 @@ function beans_selfclose_markup( $id, $tag, $attributes = array() ) {
  *                                 (e.g. class=""). Setting it to 'false' will only display
  *                                 the attribute name (e.g. data-example). Setting it to 'null' will not
  *                                 display anything.
- * @param mixed        $var        Optional. Additional variables passed to the functions hooked to <tt>$id</tt>.
  *
  * @return void
  */
@@ -253,11 +257,12 @@ function beans_selfclose_markup_e( $id, $tag, $attributes = array() ) {
  * This function is similar to {@see beans_open_markup()}, but does not accept HTML attributes. The $id
  * argument must be the identical to the opening markup.
  *
+ * Note: You can pass additional arguments to the functions that are hooked to <tt>$id</tt>.
+ *
  * @since 1.0.0
  *
  * @param string $id  Identical to the opening markup ID.
  * @param string $tag The HTML tag.
- * @param mixed  $var Additional variables passed to the functions hooked to <tt>$id</tt>.
  *
  * @return string The output.
  */
@@ -298,11 +303,12 @@ function beans_close_markup( $id, $tag ) {
  * This function is similar to {@see beans_open_markup()}, but does not accept HTML attributes. The $id
  * argument must be the identical to the opening markup.
  *
+ * Note: You can pass additional arguments to the functions that are hooked to <tt>$id</tt>.
+ *
  * @since 1.4.0
  *
  * @param string $id  Identical to the opening markup ID.
  * @param string $tag The HTML tag.
- * @param mixed  $var Additional variables passed to the functions hooked to <tt>$id</tt>.
  */
 function beans_close_markup_e( $id, $tag ) {
 	$args = func_get_args();
@@ -321,7 +327,7 @@ function beans_close_markup_e( $id, $tag ) {
  * @since 1.0.0
  *
  * @param string          $id       The markup ID.
- * @param string|callback $markup   The replacment HTML tag. A callback is accepted if conditions needs
+ * @param string|callback $markup   The replacement HTML tag. A callback is accepted if conditions needs
  *                                  to be applied. If arguments are available, they are passed to the callback.
  * @param int             $priority Optional. Used to specify the order in which the functions
  *                                  associated with a particular action are executed. Default 10.
@@ -385,8 +391,10 @@ function beans_reset_markup( $id ) {
 /**
  * Wrap markup.
  *
- * This function calls {@see beans_open_markup()} before the opening markup and
- * {@see beans_close_markup()} after the closing markup.
+ * This function calls {@see beans_open_markup()} before the opening markup and {@see beans_close_markup()}
+ * after the closing markup.
+ *
+ * Note: You can pass additional arguments to the functions that are hooked to <tt>$id</tt>.
  *
  * @since 1.0.0
  *
@@ -399,7 +407,6 @@ function beans_reset_markup( $id ) {
  *                                 (e.g. class=""). Setting it to 'false' will only display
  *                                 the attribute name (e.g. data-example). Setting it to 'null' will not
  *                                 display anything.
- * @param mixed        $var        Additional variables passed to the functions hooked to <tt>$id</tt>.
  *
  * @return bool Will always return true.
  */
@@ -419,8 +426,10 @@ function beans_wrap_markup( $id, $new_id, $tag, $attributes = array() ) {
 /**
  * Wrap markup inner content.
  *
- * This function calls {@see beans_open_markup()} after the opening markup and
- * {@see beans_close_markup()} before the closing markup.
+ * This function calls {@see beans_open_markup()} after the opening markup and {@see beans_close_markup()}
+ * before the closing markup.
+ *
+ * Note: You can pass additional arguments to the functions that are hooked to <tt>$id</tt>.
  *
  * @since 1.0.0
  *
@@ -433,7 +442,6 @@ function beans_wrap_markup( $id, $new_id, $tag, $attributes = array() ) {
  *                                 (e.g. class=""). Setting it to 'false' will only display
  *                                 the attribute name (e.g. data-example). Setting it to 'null' will not
  *                                 display anything.
- * @param mixed        $var        Additional variables passed to the functions hooked to <tt>$id</tt>.
  *
  * @return bool Will always return true.
  */
@@ -453,10 +461,12 @@ function beans_wrap_inner_markup( $id, $new_id, $tag, $attributes = array() ) {
 /**
  * Register attributes by ID.
  *
- * The Beans HTML "attributes" functions make it really easy to modify, replace, extend,
- * remove or hook into registered attributes.
+ * The Beans HTML "attributes" functions make it really easy to modify, replace, extend, remove or hook
+ * into registered attributes.
  *
  * Since this function uses {@see beans_apply_filters()}, the $id argument may contain sub-hook(s).
+ *
+ * Note: You can pass additional arguments to the functions that are hooked to <tt>$id</tt>.
  *
  * @since 1.0.0
  *
@@ -467,7 +477,6 @@ function beans_wrap_inner_markup( $id, $new_id, $tag, $attributes = array() ) {
  *                                 (e.g. class=""). Setting it to 'false' will only display
  *                                 the attribute name (e.g. data-example). Setting it to 'null' will not
  *                                 display anything.
- * @param mixed        $var        Additional variables passed to the functions hooked to <tt>$id</tt>.
  *
  * @return string The HTML attributes.
  */
@@ -485,8 +494,6 @@ function beans_add_attributes( $id, $attributes = array() ) {
 
 	return beans_esc_attributes( $attributes );
 }
-
-// phpcs:enable Squiz.Commenting.FunctionComment.ExtraParamComment -- The extra parameter is intentional for documentation.
 
 /**
  * Reset markup attributes.
