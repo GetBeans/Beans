@@ -327,8 +327,8 @@ function beans_close_markup_e( $id, $tag ) {
  * @since 1.0.0
  *
  * @param string          $id       The markup ID.
- * @param string|callback $markup   The replacement HTML tag. A callback is accepted if conditions needs
- *                                  to be applied. If arguments are available, they are passed to the callback.
+ * @param string|callback $markup   The replacement HTML tag. A callback is accepted if conditions need to be
+ *                                  applied. If arguments are available, then they are passed to the callback.
  * @param int             $priority Optional. Used to specify the order in which the functions
  *                                  associated with a particular action are executed. Default 10.
  *                                  Lower numbers correspond with earlier execution,
