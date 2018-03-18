@@ -27,7 +27,7 @@ function beans_get_post_meta( $meta_key, $default = false, $post_id = false ) {
 	}
 
 	if ( ! $post_id ) {
-		$post_id = beans_get( 'post' );
+		$post_id = (int) beans_get( 'post' );
 	}
 
 	if ( ! $post_id ) {
