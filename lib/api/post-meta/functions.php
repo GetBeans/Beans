@@ -18,7 +18,7 @@
  * @param mixed            $default  Optional. The default value to return of the post meta value doesn't exist.
  * @param int|string|false $post_id  Optional. Overwrite the current post id.
  *
- * @return mixed Saved data if exist, otherwise default value set.
+ * @return mixed Returns the meta value, if it exists; else, the default value is returned.
  */
 function beans_get_post_meta( $meta_key, $default = false, $post_id = false ) {
 
