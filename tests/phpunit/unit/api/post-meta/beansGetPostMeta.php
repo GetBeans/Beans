@@ -49,7 +49,10 @@ class Tests_BeansGetPostMeta extends Test_Case {
 	 * Test beans_get_post_meta() should return the default when the post meta does not exist.
 	 */
 	public function test_should_return_default_when_post_meta_does_not_exist() {
-		Monkey\Functions\expect( 'get_post_meta' )->with( 1 )->times( 3 )->andReturn( array() );
+		Monkey\Functions\expect( 'get_post_meta' )
+			->with( 1 )
+			->times( 3 )
+			->andReturn( array() );
 
 		$this->assertFalse( beans_get_post_meta( 'beans_layout', false, 1 ) );
 		$this->assertSame( '', beans_get_post_meta( 'beans_layout', '', 1 ) );
@@ -61,12 +64,21 @@ class Tests_BeansGetPostMeta extends Test_Case {
 	 */
 	public function test_should_get_post_id_when_none_is_provided() {
 		Monkey\Functions\expect( 'get_the_ID' )->once()->andReturn( 47 );
-		Monkey\Functions\expect( 'get_post_meta' )->with( 47 )->once()->andReturn( array() );
+		Monkey\Functions\expect( 'get_post_meta' )
+			->with( 47 )
+			->once()
+			->andReturn( array() );
 		$this->assertSame( 'c', beans_get_post_meta( 'beans_layout', 'c' ) );
 
 		Monkey\Functions\expect( 'get_the_ID' )->once()->andReturn( 0 );
-		Monkey\Functions\expect( 'beans_get' )->once()->with( 'post' )->andReturn( 18 );
-		Monkey\Functions\expect( 'get_post_meta' )->with( '18' )->once()->andReturn( array() );
+		Monkey\Functions\expect( 'beans_get' )
+			->once()
+			->with( 'post' )
+			->andReturn( 18 );
+		Monkey\Functions\expect( 'get_post_meta' )
+			->with( '18' )
+			->once()
+			->andReturn( array() );
 		$this->assertSame( 'c', beans_get_post_meta( 'beans_layout', 'c' ) );
 	}
 
@@ -100,7 +112,10 @@ class Tests_BeansGetPostMeta extends Test_Case {
 		$this->assertSame( 'sp_c', beans_get_post_meta( 'beans_layout' ) );
 
 		Monkey\Functions\expect( 'get_the_ID' )->once()->andReturn( 0 );
-		Monkey\Functions\expect( 'beans_get' )->once()->with( 'post' )->andReturn( 18 );
+		Monkey\Functions\expect( 'beans_get' )
+			->once()
+			->with( 'post' )
+			->andReturn( 18 );
 		Monkey\Functions\expect( 'get_post_meta' )
 			->with( '18' )
 			->once()
