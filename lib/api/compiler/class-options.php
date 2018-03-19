@@ -72,7 +72,7 @@ final class _Beans_Compiler_Options {
 						array(
 							'id'      => 'beans_compile_all_scripts',
 							'type'    => 'activation',
-							'label'   => __( 'Select to activate compilation.', 'tm-beans' ),
+							'label'   => __( 'Select to compile scripts.', 'tm-beans' ),
 							'default' => false,
 						),
 						array(
