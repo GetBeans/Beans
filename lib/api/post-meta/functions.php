@@ -24,10 +24,10 @@ function beans_get_post_meta( $meta_key, $default = false, $post_id = '' ) {
 
 	if ( ! $post_id ) {
 		$post_id = get_the_ID();
-	}
 
-	if ( ! $post_id ) {
-		$post_id = (int) beans_get( 'post' );
+		if ( ! $post_id ) {
+			$post_id = (int) beans_get( 'post' );
+		}
 	}
 
 	if ( ! $post_id ) {
