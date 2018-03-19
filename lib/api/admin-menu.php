@@ -47,7 +47,7 @@ final class _Beans_Admin {
 	public function display_screen() {
 		?>
 		<div class="wrap">
-			<h2><?php esc_html_e( 'Beans Settings', 'tm-beans' ); ?><span style="float: right; font-size: 10px; color: #888;"><?php esc_html_e( 'Version ', 'tm-beans' ); ?><?php echo esc_attr( BEANS_VERSION ); ?></span></h2>
+			<h1><?php esc_html_e( 'Beans Settings', 'tm-beans' ); ?><span style="float: right; font-size: 12px; color: #555;"><?php esc_html_e( 'Version ', 'tm-beans' ); ?><?php echo esc_attr( BEANS_VERSION ); ?></span></h1>
 			<?php beans_options( 'beans_settings' ); ?>
 		</div>
 		<?php
@@ -66,7 +66,8 @@ final class _Beans_Admin {
 		$fields = array(
 			array(
 				'id'             => 'beans_dev_mode',
-				'checkbox_label' => __( 'Enable development mode', 'tm-beans' ),
+				'label'          => __( 'Enable development mode', 'tm-beans' ),
+				'checkbox_label' => __( 'Select to activate development mode.', 'tm-beans' ),
 				'type'           => 'checkbox',
 				'description'    => __( 'This option should be enabled while your website is in development.', 'tm-beans' ),
 			),

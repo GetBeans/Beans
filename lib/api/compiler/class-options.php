@@ -51,8 +51,8 @@ final class _Beans_Compiler_Options {
 			$fields = array_merge( $fields, array(
 				array(
 					'id'             => 'beans_compile_all_styles',
-					'label'          => false,
-					'checkbox_label' => __( 'Compile all WordPress styles', 'tm-beans' ),
+					'label'          => __( 'Compile all WordPress styles', 'tm-beans' ),
+					'checkbox_label' => __( 'Select to compile styles.', 'tm-beans' ),
 					'type'           => 'checkbox',
 					'default'        => false,
 					'description'    => __( 'Compile and cache all the CSS files that have been enqueued to the WordPress head.', 'tm-beans' ),
@@ -67,24 +67,27 @@ final class _Beans_Compiler_Options {
 					'id'          => 'beans_compile_all_scripts_group',
 					'label'       => __( 'Compile all WordPress scripts', 'tm-beans' ),
 					'type'        => 'group',
+					'tag'         => 'p',
 					'fields'      => array(
 						array(
 							'id'      => 'beans_compile_all_scripts',
 							'type'    => 'activation',
+							'label'   => __( 'Select to activate compilation.', 'tm-beans' ),
 							'default' => false,
 						),
 						array(
 							'id'         => 'beans_compile_all_scripts_mode',
 							'type'       => 'select',
+							'label'      => 'Choose the level of compilation.',
 							'default'    => 'aggressive',
-							'attributes' => array( 'style' => 'margin: -3px 0 0 -8px;' ),
+							'attributes' => array( 'style' => 'margin-top: -6px;' ),
 							'options'    => array(
 								'aggressive' => __( 'Aggressive', 'tm-beans' ),
 								'standard'   => __( 'Standard', 'tm-beans' ),
 							),
 						),
 					),
-					'description' => __( 'Compile and cache all the Javascript files that have been enqueued to the WordPress head.<!--more-->JavaSript is outputted in the footer if the level is set to <strong>Aggressive</strong> and might conflict with some third party plugins which are not following WordPress standards.', 'tm-beans' ),
+					'description' => __( 'Compile and cache all the JavaScript files that have been enqueued to the WordPress head. <br/> JavaScript is outputted in the footer if the level is set to <strong>Aggressive</strong> and might conflict with some third-party plugins which are not following WordPress standards.', 'tm-beans' ),
 				),
 			) );
 		}

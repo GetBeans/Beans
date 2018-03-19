@@ -29,8 +29,13 @@ function beans_field_label( array $field ) {
 
 	// These field types do not use a label, as they are providing a header for the group of fields.
 	if ( in_array( $field['type'], array( 'radio', 'group' ), true ) ) {
-		$tag  = 'h3';
-		$args = array( 'class' => 'bs-fields-header hndle' );
+		if ( isset( $field['tag'] ) && 'p' === $field['tag'] ) {
+			$tag  = 'p';
+			$args = array( 'class' => 'bs-fields-header' );
+		} else {
+			$tag  = 'h3';
+			$args = array( 'class' => 'bs-fields-header hndle' );
+		}
 	} else {
 		$tag  = 'label';
 		$args = array( 'for' => $field['id'] );
