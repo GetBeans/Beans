@@ -124,9 +124,10 @@ final class _Beans_Post_Meta {
 	 */
 	public function save( $post_id ) {
 
-		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-			return false;
-		}
+	    if ( beans_doing_autosave() ) {
+	        return false;
+        }
+
 
 		if ( ! wp_verify_nonce( beans_post( 'beans_post_meta_nonce' ), 'beans_post_meta_nonce' ) ) {
 			return $post_id;
