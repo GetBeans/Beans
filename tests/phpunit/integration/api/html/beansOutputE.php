@@ -93,7 +93,7 @@ EOB;
 			->with( 'Beans rocks!', 47, 'Hello' )
 			->andReturnUsing( function( $output, $arg1, $arg2 ) {
 				return $arg2;
-			});
+			} );
 
 		// Check with HTML dev mode disabled.
 		add_option( 'beans_dev_mode', 0 );
@@ -105,7 +105,7 @@ EOB;
 		update_option( 'beans_dev_mode', 1 );
 		ob_start();
 		beans_output_e( 'beans_breadcrumb_item_text', 'Beans rocks!', 47, 'Hello' );
-		$actual = ob_get_clean();
+		$actual   = ob_get_clean();
 		$expected = <<<EOB
 <!-- open output: beans_breadcrumb_item_text -->Hello<!-- close output: beans_breadcrumb_item_text -->
 EOB;

@@ -52,7 +52,7 @@ class Tests_BeansOutput extends HTML_Test_Case {
 			->once()
 			->with( 'beans_archive_title_text_output', 'Beans rocks!' )
 			->andReturnUsing( function( $hook, $output ) {
-				return apply_filters( $hook, $output );
+				return apply_filters( $hook, $output ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Prefix is in the value represented by the variable.
 			} );
 
 		// Check with HTML dev mode disabled.
@@ -96,7 +96,7 @@ EOB;
 			->with( 'beans_breadcrumb_item_text_output', 'Beans rocks!', 47, 'Hello' )
 			->andReturnUsing( function( $hook, $output ) {
 				return $output;
-			});
+			} );
 
 		// Check with HTML dev mode disabled.
 		Monkey\Functions\expect( '_beans_is_html_dev_mode' )->once()->andReturn( false );
