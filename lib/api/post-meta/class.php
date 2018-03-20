@@ -128,16 +128,11 @@ final class _Beans_Post_Meta {
 	        return false;
         }
 
+        $fields = beans_post( 'beans_fields' );
 
-		if ( ! wp_verify_nonce( beans_post( 'beans_post_meta_nonce' ), 'beans_post_meta_nonce' ) ) {
-			return $post_id;
-		}
-
-		$fields = beans_post( 'beans_fields' );
-
-		if ( ! $fields ) {
-			return $post_id;
-		}
+	    if ( ! $this->ok_to_save( $post_id, $fields ) ) {
+	        return $post_id;
+        }
 
 		foreach ( $fields as $field => $value ) {
 			update_post_meta( $post_id, $field, $value );
@@ -175,4 +170,21 @@ final class _Beans_Post_Meta {
 
 		return $attachment;
 	}
+
+	public function ok_to_save( $id, $fields ) {
+		if ( ! wp_verify_nonce( beans_post( 'beans_post_meta_nonce' ), 'beans_post_meta_nonce' ) ) {
+			return false;
+		}
+
+		if ( ! current_user_can( 'edit_post', $id ) ) {
+			return false;
+		}
+
+		if ( ! $fields ) {
+			return false;
+		}
+
+		return true;
+	}
+
 }
