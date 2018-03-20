@@ -70,7 +70,7 @@ function beans_output_e( $id, $output ) {
  * @return bool
  */
 function beans_remove_output( $id ) {
-	return beans_add_filter( $id . '_output', false );
+	return beans_add_filter( $id . '_output', false, 99999999 );
 }
 
 /**
