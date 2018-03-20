@@ -87,10 +87,10 @@ EOB;
 	}
 
 	/**
-	 * Test beans_output() should the pass additional arguments when firing the filter hook.
+	 * Test beans_output() should pass the additional arguments when firing the filter hook.
 	 */
 	public function test_should_pass_additional_args_when_firing_filter_hook() {
-		// Setup beans_apply_filters() mock to fire apply_filters().
+		// Check that beans_apply_filters() is called as expected.
 		Monkey\Functions\expect( 'beans_apply_filters' )
 			->twice()
 			->with( 'beans_breadcrumb_item_text_output', 'Beans rocks!', 47, 'Hello' )

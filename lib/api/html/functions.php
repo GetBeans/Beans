@@ -9,23 +9,24 @@
  */
 
 /**
- * Register output by ID.
+ * Register the output for the given ID.  This function enables the output be:
  *
- * The output can be modified using the available Beans HTML "output" functions.
+ *      1. modified by registering a callback to "{$id}_output"
+ *      2. removed by using {@see beans_remove_output()}.
  *
- * HTML comments containing the ID are added before and after the output if the development mode is enabled.
- * This makes it very easy to find a content ID when inspecting an element in your web browser.
+ * When in development mode, HTML comments containing the ID are added before and after the output, i.e. making it
+ * easier to identify the content ID when inspecting an element in your web browser.
  *
- * Since this function uses {@see beans_apply_filters()}, the $id argument may contain sub-hook(s).
- *
- * Note: You can pass additional arguments to the functions that are hooked to <tt>$id</tt>.
+ * Notes:
+ *      1. Since this function uses {@see beans_apply_filters()}, the $id argument may contain sub-hook(s).
+ *      2. You can pass additional arguments to the functions that are hooked to <tt>$id</tt>.
  *
  * @since 1.0.0
  *
  * @param string $id     A unique string used as a reference. The $id argument may contain sub-hook(s).
- * @param string $output Content to output.
+ * @param string $output The given content to output.
  *
- * @return string The output.
+ * @return string|void
  */
 function beans_output( $id, $output ) {
 	$args    = func_get_args();
@@ -45,22 +46,14 @@ function beans_output( $id, $output ) {
 }
 
 /**
- * Echo output registered by ID.
- *
- * The output can be modified using the available Beans HTML "output" functions.
- *
- * HTML comments containing the ID are added before and after the output if the development mode is enabled.
- * This makes it very easy to find a content ID when inspecting an element in your web browser.
- *
- * Since this function uses {@see beans_apply_filters()}, the $id argument may contain sub-hook(s).
- *
- * Note: You can pass additional arguments to the functions that are hooked to <tt>$id</tt>.
+ * Register and then echo the output for the given ID.  This function is a wrapper for {@see beans_output()}.  See
+ * {@see beans_output()} for more details.
  *
  * @since 1.4.0
- * @uses beans_output()  To register output by ID.
+ * @uses  beans_output()  To register output by ID.
  *
  * @param string $id     A unique string used as a reference. The $id argument may contain sub-hook(s).
- * @param string $output Content to output.
+ * @param string $output The given content to output.
  */
 function beans_output_e( $id, $output ) {
 	$args = func_get_args();
@@ -354,8 +347,8 @@ function beans_modify_markup( $id, $markup, $priority = 10, $args = 1 ) {
  * @since 1.0.0
  *
  * @param string $id             The markup ID.
- * @param bool   $remove_actions Optional. Whether elements attached to a markup should be removed or not. This must be used
- *                               with absolute caution.
+ * @param bool   $remove_actions Optional. Whether elements attached to a markup should be removed or not. This must be
+ *                               used with absolute caution.
  *
  * @return bool Will always return true.
  */
@@ -371,8 +364,8 @@ function beans_remove_markup( $id, $remove_actions = false ) {
 /**
  * Reset markup.
  *
- * This function will automatically reset the opening and the closing HTML tag to its original value. If the markup is self-closed,
- * the HTML tag will be reset accordingly.
+ * This function will automatically reset the opening and the closing HTML tag to its original value. If the markup is
+ * self-closed, the HTML tag will be reset accordingly.
  *
  * The "data-markup-id" is added as a HTML attribute if the development mode is enabled. This makes it very
  * easy to find the content ID when inspecting an element in a web browser.
