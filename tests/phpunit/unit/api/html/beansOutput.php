@@ -38,9 +38,9 @@ class Tests_BeansOutput extends HTML_Test_Case {
 	}
 
 	/**
-	 * Test beans_output() should fire the "{$id}_output" filter hook.
+	 * Test beans_output() should return the filtered output after firing the "{$id}_output" filter hook.
 	 */
-	public function test_should_fire_output_filter_hook() {
+	public function test_should_return_filtered_output_after_firing_output_filter_hook() {
 		// Check the applied filter.
 		Monkey\Filters\expectApplied( 'beans_archive_title_text_output' )
 			->once()
@@ -64,7 +64,7 @@ class Tests_BeansOutput extends HTML_Test_Case {
 	}
 
 	/**
-	 * Test beans_output() should return output when not in HTML dev mode.
+	 * Test beans_output() should return the output when not in HTML dev mode.
 	 */
 	public function test_should_return_output_when_not_in_html_dev_mode() {
 		Monkey\Functions\when( 'beans_apply_filters' )->returnArg( 2 );
@@ -74,7 +74,7 @@ class Tests_BeansOutput extends HTML_Test_Case {
 	}
 
 	/**
-	 * Test beans_output() should return "comment wrapped" HTML when in HTML dev mode.
+	 * Test beans_output() should return the "comment wrapped" HTML when in HTML dev mode.
 	 */
 	public function test_should_return_comment_wrapped_html_when_in_html_dev_mode() {
 		Monkey\Functions\when( 'beans_apply_filters' )->returnArg( 2 );
@@ -87,7 +87,7 @@ EOB;
 	}
 
 	/**
-	 * Test beans_output() should pass additional arguments when firing the filter hook.
+	 * Test beans_output() should the pass additional arguments when firing the filter hook.
 	 */
 	public function test_should_pass_additional_args_when_firing_filter_hook() {
 		// Setup beans_apply_filters() mock to fire apply_filters().
