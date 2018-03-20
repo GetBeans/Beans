@@ -599,7 +599,7 @@ function beans_posts_pagination() {
 		)
 	);
 
-		// Previous.
+	// Previous.
 	if ( get_previous_posts_link() ) {
 		beans_open_markup_e( 'beans_posts_pagination_item[_previous]', 'li' );
 
@@ -629,8 +629,8 @@ function beans_posts_pagination() {
 		beans_close_markup_e( 'beans_posts_pagination_item[_previous]', 'li' );
 	}
 
-		// Links.
-	foreach ( range( 1, $wp_query->max_num_pages ) as $link ) {
+	// Links.
+	foreach ( range( 1, (int) $wp_query->max_num_pages ) as $link ) {
 
 		// Skip if next is set.
 		if ( isset( $next ) && $link !== $next ) {
@@ -698,7 +698,7 @@ function beans_posts_pagination() {
 		}
 	}
 
-		// Next.
+	// Next.
 	if ( get_next_posts_link() ) {
 		beans_open_markup_e( 'beans_posts_pagination_item[_next]', 'li' );
 
