@@ -82,7 +82,7 @@ EOB;
 	}
 
 	/**
-	 * Test beans_field_label() should render the radio field's group header.
+	 * Test beans_field_label() should not render the radio field's group label.
 	 */
 	public function test_should_render_radio_group_header() {
 		$field = $this->merge_field_with_default( array(
@@ -114,15 +114,12 @@ EOB;
 		beans_field_label( $field );
 		$html = ob_get_clean();
 
-		$expected = <<<EOB
-<h3 class="bs-fields-header hndle">Layout</h3>
-EOB;
 		// Run the test.
-		$this->assertSame( $this->format_the_html( $expected ), $this->format_the_html( $html ) );
+		$this->assertEmpty( $this->format_the_html( $html ) );
 	}
 
 	/**
-	 * Test beans_field_label() should render the group field's header.
+	 * Test beans_field_label() should not render the group field's label.
 	 */
 	public function test_should_render_group_header() {
 		$field = array(
@@ -163,10 +160,6 @@ EOB;
 		beans_field_label( $field );
 		$html = ob_get_clean();
 
-		$expected = <<<EOB
-<h3 class="bs-fields-header hndle">Group of fields</h3>
-EOB;
-		// Run the test.
-		$this->assertSame( $this->format_the_html( $expected ), $this->format_the_html( $html ) );
+		$this->assertEmpty( $this->format_the_html( $html ) );
 	}
 }

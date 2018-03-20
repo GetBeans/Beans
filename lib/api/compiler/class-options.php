@@ -75,12 +75,11 @@ final class _Beans_Compiler_Options {
 							'default' => false,
 						),
 						array(
-							'id'         => 'beans_compile_all_scripts_mode',
-							'type'       => 'select',
-							'label'      => 'Choose the level of compilation.',
-							'default'    => 'aggressive',
-							//'attributes' => array( 'style' => 'margin-top: -6px;' ),
-							'options'    => array(
+							'id'      => 'beans_compile_all_scripts_mode',
+							'type'    => 'select',
+							'label'   => 'Choose the level of compilation.',
+							'default' => 'aggressive',
+							'options' => array(
 								'aggressive' => __( 'Aggressive', 'tm-beans' ),
 								'standard'   => __( 'Standard', 'tm-beans' ),
 							),

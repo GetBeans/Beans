@@ -118,17 +118,16 @@ EOB;
 
 		$expected = <<<EOB
 <div class="bs-field-wrap bs-radio beans_tests">
-	<h3 class="bs-fields-header hndle">Having fun?</h3>
 	<div class="bs-field-inside">
 		<div class="bs-field bs-radio">
-			<fieldset>
-				<legend class="screen-reader-text">Radio buttons</legend>
+			<fieldset class="bs-field-fieldset">
+				<legend class="bs-field-legend">Having fun?</legend>
 					<label class="" for="beans_radio_test_no">
 					  <input id="beans_radio_test_no" type="radio" name="beans_fields[beans_radio_test]" value="no" checked='checked' /> No
-			    </label>
+			    	</label>
 					<label class="" for="beans_radio_test_yes">
 					  <input id="beans_radio_test_yes" type="radio" name="beans_fields[beans_radio_test]" value="yes" /> Yes
-			    </label>
+			    	</label>
 			</fieldset>
 		</div>
 	</div>
@@ -189,20 +188,22 @@ EOB;
 
 		$expected = <<<EOB
 <div class="bs-field-wrap bs-group beans_group_tests">
-	<h3 class="bs-fields-header hndle">Group of fields</h3>
 	<div class="bs-field-inside">
-		<div class="bs-field bs-activation">
-			<label for="beans_group_activation_test">Activate Foo</label>
-			<input type="hidden" value="0" name="beans_fields[beans_group_activation_test]" />
-			<input id="beans_group_activation_test" type="checkbox" name="beans_fields[beans_group_activation_test]" value="1" />
-		</div>
-		<div class="bs-field bs-select">
-			<label for="beans_group_select_test">Select Foo</label>
-			<select id="beans_group_select_test" name="beans_fields[beans_group_select_test]" style="margin: -3px 0 0 -8px;">
-				<option value="aggressive" selected='selected'>Aggressive</option>
-				<option value="standard">Standard</option>
-			</select>
-		</div>
+		<fieldset class="bs-field-fieldset">
+			<legend class="bs-field-legend">Group of fields</legend>
+			<div class="bs-field bs-activation">
+				<label for="beans_group_activation_test">Activate Foo</label>
+				<input type="hidden" value="0" name="beans_fields[beans_group_activation_test]" />
+				<input id="beans_group_activation_test" type="checkbox" name="beans_fields[beans_group_activation_test]" value="1" />
+			</div>
+			<div class="bs-field bs-select">
+				<label for="beans_group_select_test">Select Foo</label>
+				<select id="beans_group_select_test" name="beans_fields[beans_group_select_test]" style="margin: -3px 0 0 -8px;">
+					<option value="aggressive" selected='selected'>Aggressive</option>
+					<option value="standard">Standard</option>
+				</select>
+			</div>
+		</fieldset>
 	</div>
 	<div class="bs-field-description">This is a group of fields.</div>
 </div>
@@ -282,23 +283,25 @@ EOB;
 
 		$expected = <<<EOB
 <div class="bs-field-wrap bs-group beans_tests">
-	<h3 class="bs-fields-header hndle">Group of fields</h3>
 	<div class="bs-field-inside">
-		<div class="bs-field bs-activation">
-			<input type="hidden" value="0" name="beans_fields[beans_compile_all_scripts]" />
-			<input id="beans_compile_all_scripts" type="checkbox" name="beans_fields[beans_compile_all_scripts]" value="1" />
-		</div>
-		<div class="bs-field bs-select">
-			<select id="beans_compile_all_scripts_mode" name="beans_fields[beans_compile_all_scripts_mode]" style="margin: -3px 0 0 -8px;">
-				<option value="aggressive" selected='selected'>Aggressive</option>
-				<option value="standard">Standard</option>
-			</select>
-		</div>
-		<div class="bs-field bs-checkbox">
-			<input type="hidden" value="0" name="beans_fields[beans_checkbox_test]" />
-			<input id="beans_checkbox_test" type="checkbox" name="beans_fields[beans_checkbox_test]" value="1" />
-			<span class="bs-checkbox-label">Enable the checkbox test</span>
-		</div>
+		<fieldset class="bs-field-fieldset">
+			<legend class="bs-field-legend">Group of fields</legend>
+			<div class="bs-field bs-activation">
+				<input type="hidden" value="0" name="beans_fields[beans_compile_all_scripts]" />
+				<input id="beans_compile_all_scripts" type="checkbox" name="beans_fields[beans_compile_all_scripts]" value="1" />
+			</div>
+			<div class="bs-field bs-select">
+				<select id="beans_compile_all_scripts_mode" name="beans_fields[beans_compile_all_scripts_mode]" style="margin: -3px 0 0 -8px;">
+					<option value="aggressive" selected='selected'>Aggressive</option>
+					<option value="standard">Standard</option>
+				</select>
+			</div>
+			<div class="bs-field bs-checkbox">
+				<input type="hidden" value="0" name="beans_fields[beans_checkbox_test]" />
+				<input id="beans_checkbox_test" type="checkbox" name="beans_fields[beans_checkbox_test]" value="1" />
+				<span class="bs-checkbox-label">Enable the checkbox test</span>
+			</div>
+		</fieldset>
 	</div>
 	<div class="bs-field-description">This is a group of fields.</div>
 </div>
