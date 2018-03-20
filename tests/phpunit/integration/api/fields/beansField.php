@@ -192,9 +192,9 @@ EOB;
 		<fieldset class="bs-field-fieldset">
 			<legend class="bs-field-legend">Group of fields</legend>
 			<div class="bs-field bs-activation">
-				<label for="beans_group_activation_test">Activate Foo</label>
 				<input type="hidden" value="0" name="beans_fields[beans_group_activation_test]" />
 				<input id="beans_group_activation_test" type="checkbox" name="beans_fields[beans_group_activation_test]" value="1" />
+				<label for="beans_group_activation_test">Activate Foo</label>
 			</div>
 			<div class="bs-field bs-select">
 				<label for="beans_group_select_test">Select Foo</label>
@@ -289,6 +289,7 @@ EOB;
 			<div class="bs-field bs-activation">
 				<input type="hidden" value="0" name="beans_fields[beans_compile_all_scripts]" />
 				<input id="beans_compile_all_scripts" type="checkbox" name="beans_fields[beans_compile_all_scripts]" value="1" />
+				<label for="beans_compile_all_scripts"></label>
 			</div>
 			<div class="bs-field bs-select">
 				<select id="beans_compile_all_scripts_mode" name="beans_fields[beans_compile_all_scripts_mode]" style="margin: -3px 0 0 -8px;">
