@@ -79,7 +79,7 @@ final class _Beans_Compiler_Options {
 							'type'       => 'select',
 							'label'      => 'Choose the level of compilation.',
 							'default'    => 'aggressive',
-							'attributes' => array( 'style' => 'margin-top: -6px;' ),
+							//'attributes' => array( 'style' => 'margin-top: -6px;' ),
 							'options'    => array(
 								'aggressive' => __( 'Aggressive', 'tm-beans' ),
 								'standard'   => __( 'Standard', 'tm-beans' ),

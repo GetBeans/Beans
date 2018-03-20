@@ -83,20 +83,6 @@ p.bs-fields-header {
 	opacity: 0.5;
 }
 
-/* Group fields */
-.bs-group .bs-field-inside {
-	display: inline-block;
-	margin: -10px 0 0 -10px;
-}
-
-.bs-group .bs-field-inside .bs-field {
-	display: inline-block;
-	width: auto;
-	min-width: 0;
-	max-width: 300px;
-	margin: 10px 0 0 10px;
-}
-
 /* Dashicons */
 .bs-field .button {
 	display: inline-block;
@@ -236,13 +222,35 @@ p.bs-fields-header {
 .bs-field .bs-image-wrap:focus .bs-toolbar {
 }
 
-/* Radio/Imageradio */
-.bs-radio fieldset {
-	margin-left: -15px;
+/* Group fields */
+.bs-group .bs-field-inside {
+	display: inline-block;
+	margin: -10px 0 0 -10px;
 }
 
-.bs-radio fieldset label {
-	padding-left: 15px;
+.bs-group .bs-field-inside .bs-field {
+	display: inline-block;
+	width: auto;
+	min-width: 0;
+	max-width: 300px;
+	margin: 10px 0 0 10px;
+}
+
+.bs-group .bs-field-inside .bs-field:first-of-type {
+	margin-left: 3px;
+}
+
+.bs-group .bs-field-fieldset {
+	margin: 10px;
+}
+
+.bs-group .bs-select select {
+	margin-top: -8px;
+}
+
+/* Radio/Image radio */
+.bs-radio .bs-field-legend {
+	margin-bottom: 15px;
 }
 
 .bs-radio .bs-has-image {

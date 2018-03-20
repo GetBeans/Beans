@@ -96,12 +96,14 @@ function beans_field( array $field ) {
 		return;
 	}
 
+	$group_field_type = 'group' === $field['type'];
+
 	beans_open_markup_e( 'beans_field_wrap', 'div', array(
 		'class' => 'bs-field-wrap bs-' . $field['type'] . ' ' . $field['context'],
 	), $field );
 
 	// Set fields loop to cater for groups.
-	if ( 'group' === $field['type'] ) {
+	if ( $group_field_type ) {
 		$fields = $field['fields'];
 	} else {
 		$fields = array( $field );
@@ -111,7 +113,7 @@ function beans_field( array $field ) {
 		'class' => 'bs-field-inside',
 	), $fields );
 
-	if ( 'group' === $field['type'] ) {
+	if ( $group_field_type ) {
 		beans_open_markup_e( 'beans_field_group_fieldset', 'fieldset', array(
 			'class' => 'bs-field-fieldset',
 		), $field );
@@ -151,7 +153,7 @@ function beans_field( array $field ) {
 		beans_close_markup_e( 'beans_field[_' . $single_field['id'] . ']', 'div', $single_field );
 	}
 
-	if ( 'group' === $field['type'] ) {
+	if ( $group_field_type ) {
 		beans_close_markup_e( 'beans_field_group_fieldset', 'fieldset', $field );
 	}
 	beans_close_markup_e( 'beans_field_inside', 'div', $fields );
