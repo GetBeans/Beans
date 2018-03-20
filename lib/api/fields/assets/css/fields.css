@@ -157,6 +157,11 @@ p.bs-fields-header {
 	cursor: pointer;
 }
 
+.bs-activation label {
+	display: inline-block;
+	margin-bottom: 5px;
+}
+
 /* Image */
 .bs-field .bs-images-wrap {
 	margin-left: -10px;
@@ -256,6 +261,7 @@ p.bs-fields-header {
 .bs-radio .bs-has-image {
 	display: inline-block;
 	width: auto;
+	padding-right: 15px;
 	line-height: 0;
 }
 

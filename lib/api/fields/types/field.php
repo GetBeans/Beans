@@ -21,7 +21,7 @@ beans_add_smart_action( 'beans_field_wrap_prepend_markup', 'beans_field_label' )
 function beans_field_label( array $field ) {
 
 	// These field types do not use a label, as they are using fieldsets with legends.
-	if ( in_array( $field['type'], array( 'radio', 'group' ), true ) ) {
+	if ( in_array( $field['type'], array( 'radio', 'group', 'activation' ), true ) ) {
 		return;
 	}
 
