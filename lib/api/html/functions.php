@@ -9,7 +9,7 @@
  */
 
 /**
- * Register the output for the given ID.  This function enables the output be:
+ * Register the output for the given ID.  This function enables the output to be:
  *
  *      1. modified by registering a callback to "{$id}_output"
  *      2. removed by using {@see beans_remove_output()}.
