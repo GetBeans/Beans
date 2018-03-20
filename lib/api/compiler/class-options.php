@@ -67,7 +67,6 @@ final class _Beans_Compiler_Options {
 					'id'          => 'beans_compile_all_scripts_group',
 					'label'       => __( 'Compile all WordPress scripts', 'tm-beans' ),
 					'type'        => 'group',
-					'tag'         => 'p',
 					'fields'      => array(
 						array(
 							'id'      => 'beans_compile_all_scripts',

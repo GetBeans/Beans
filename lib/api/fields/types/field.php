@@ -19,30 +19,24 @@ beans_add_smart_action( 'beans_field_wrap_prepend_markup', 'beans_field_label' )
  * }
  */
 function beans_field_label( array $field ) {
+
+	// These field types do not use a label, as they are using fieldsets with legends.
+	if ( in_array( $field['type'], array( 'radio', 'group' ), true ) ) {
+		return;
+	}
+
 	$label = beans_get( 'label', $field );
 
 	if ( ! $label ) {
 		return;
 	}
 
-	$id = 'beans_field_label[_' . $field['id'] . ']';
-
-	// These field types do not use a label, as they are providing a header for the group of fields.
-	if ( in_array( $field['type'], array( 'radio', 'group' ), true ) ) {
-		if ( isset( $field['tag'] ) && 'p' === $field['tag'] ) {
-			$tag  = 'p';
-			$args = array( 'class' => 'bs-fields-header' );
-		} else {
-			$tag  = 'h3';
-			$args = array( 'class' => 'bs-fields-header hndle' );
-		}
-	} else {
-		$tag  = 'label';
-		$args = array( 'for' => $field['id'] );
-	}
+	$id   = 'beans_field_label[_' . $field['id'] . ']';
+	$tag  = 'label';
+	$args = array( 'for' => $field['id'] );
 
 	beans_open_markup_e( $id, $tag, $args );
-	echo esc_html( $field['label'] );
+		echo esc_html( $field['label'] );
 	beans_close_markup_e( $id, $tag );
 }
 

@@ -111,6 +111,17 @@ function beans_field( array $field ) {
 		'class' => 'bs-field-inside',
 	), $fields );
 
+	if ( 'group' === $field['type'] ) {
+		beans_open_markup_e( 'beans_field_group_fieldset', 'fieldset', array(
+			'class' => 'bs-field-fieldset',
+		), $field );
+			beans_open_markup_e( 'beans_field_group_legend', 'legend', array(
+				'class' => 'bs-field-legend',
+			), $field );
+				echo esc_html( $field['label'] );
+			beans_close_markup_e( 'beans_field_group_legend', 'legend', $field );
+	}
+
 	// Loop through fields.
 	foreach ( $fields as $single_field ) {
 		beans_open_markup_e( 'beans_field[_' . $single_field['id'] . ']', 'div', array(
@@ -140,6 +151,9 @@ function beans_field( array $field ) {
 		beans_close_markup_e( 'beans_field[_' . $single_field['id'] . ']', 'div', $single_field );
 	}
 
+	if ( 'group' === $field['type'] ) {
+		beans_close_markup_e( 'beans_field_group_fieldset', 'fieldset', $field );
+	}
 	beans_close_markup_e( 'beans_field_inside', 'div', $fields );
 	beans_close_markup_e( 'beans_field_wrap', 'div', $field );
 }
