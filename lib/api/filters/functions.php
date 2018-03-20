@@ -25,7 +25,7 @@
  *                                          the order in which they were added to the filter.
  * @param int            $args              Optional. The number of arguments the callback accepts. Default is 1.
  *
- * @return bool
+ * @return bool|_Beans_Anonymous_Filters
  */
 function beans_add_filter( $hook, $callback_or_value, $priority = 10, $args = 1 ) {
 

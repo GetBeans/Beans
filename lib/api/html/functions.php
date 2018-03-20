@@ -67,7 +67,7 @@ function beans_output_e( $id, $output ) {
  *
  * @param string $id The output's ID.
  *
- * @return bool
+ * @return bool|_Beans_Anonymous_Filters
  */
 function beans_remove_output( $id ) {
 	return beans_add_filter( $id . '_output', false, 99999999 );
