@@ -117,9 +117,10 @@ function beans_open_markup( $id, $tag, $attributes = array() ) {
 	// Remove function $tag argument.
 	unset( $attributes_args[1] );
 
-	// Stop here if the tag is set to false, the before and after actions won't run in this case.
+	// Filter the tag.
 	$tag = call_user_func_array( 'beans_apply_filters', $args );
 
+	// Stop here if the tag is set to null, the before and after actions won't run in this case.
 	if ( null === $tag ) {
 		return;
 	}
