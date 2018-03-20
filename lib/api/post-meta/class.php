@@ -144,25 +144,21 @@ final class _Beans_Post_Meta {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int $attachment Attachment ID.
+	 * @param array $attachment Attachment data.
 	 *
 	 * @return mixed
 	 */
 	public function save_attachment( $attachment ) {
 
-		if ( ! wp_verify_nonce( beans_post( 'beans_post_meta_nonce' ), 'beans_post_meta_nonce' ) ) {
-			return $post_id;
-		}
-
-		if ( ! current_user_can( 'edit_post', $attachment['ID'] ) ) {
+		if ( beans_doing_autosave() ) {
 			return $attachment;
 		}
 
 		$fields = beans_post( 'beans_fields' );
 
-		if ( ! $fields ) {
-			return $attachment;
-		}
+		if ( ! $this->ok_to_save( $attachment['ID'], $fields ) ) {
+		    return $attachment;
+        }
 
 		foreach ( $fields as $field => $value ) {
 			update_post_meta( $attachment['ID'], $field, $value );
@@ -171,6 +167,14 @@ final class _Beans_Post_Meta {
 		return $attachment;
 	}
 
+	/**
+	 * Check if all criteria are met to safely save post meta.
+     *
+     * @param int   $id The Post Id.
+     * @param array $fields The array of fields to save.
+     *
+     * @return bool
+	 */
 	public function ok_to_save( $id, $fields ) {
 		if ( ! wp_verify_nonce( beans_post( 'beans_post_meta_nonce' ), 'beans_post_meta_nonce' ) ) {
 			return false;
@@ -186,5 +190,4 @@ final class _Beans_Post_Meta {
 
 		return true;
 	}
-
 }
