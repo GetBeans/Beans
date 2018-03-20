@@ -61,16 +61,13 @@ function beans_output_e( $id, $output ) {
 }
 
 /**
- * Remove output.
- *
- * HTML comments containing the ID are added before and after the output if the development mode is enabled.
- * This makes it very easy to find a content ID when inspecting an element in your web browser.
+ * Removes the HTML output for the given $id, meaning the output will not render.
  *
  * @since 1.0.0
  *
- * @param string $id The output ID.
+ * @param string $id The output's ID.
  *
- * @return bool Will always return true.
+ * @return bool
  */
 function beans_remove_output( $id ) {
 	return beans_add_filter( $id . '_output', false );
