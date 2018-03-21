@@ -120,14 +120,14 @@ function beans_open_markup( $id, $tag, $attributes = array() ) {
 	// Filter the tag.
 	$tag = call_user_func_array( 'beans_apply_filters', $args );
 
-	// Stop here if the tag is set to null, the before and after actions won't run in this case.
+	// If the tag is set to null, bail out.
 	if ( null === $tag ) {
 		return;
 	}
 
 	global $_temp_beans_selfclose_markup;
 
-	// Remove function $tag arguments.
+	// Remove the $tag argument.
 	unset( $args[1] );
 	unset( $attributes_args[1] );
 
@@ -135,7 +135,7 @@ function beans_open_markup( $id, $tag, $attributes = array() ) {
 	$args[0] = $id . '_before_markup';
 	$output  = call_user_func_array( '_beans_render_action', $args );
 
-	// Don't output the tag if empty, the before and after actions still run.
+	// Skip the opening tag when it's empty.
 	if ( $tag ) {
 		$output .= '<' . $tag . ' ' . call_user_func_array( 'beans_add_attributes', $attributes_args ) . ( _beans_is_html_dev_mode() ? ' data-markup-id="' . $id . '"' : null ) . ( $_temp_beans_selfclose_markup ? '/' : '' ) . '>';
 	}
@@ -235,46 +235,47 @@ function beans_selfclose_markup_e( $id, $tag, $attributes = array() ) {
 }
 
 /**
- * Register close markup by ID.
+ * Build the closing HTML element's markup.  This function fires 2 separate hooks:
  *
- * This function is similar to {@see beans_open_markup()}, but does not accept HTML attributes. The $id
- * argument must be the identical to the opening markup.
+ *      1. "{id}_append_markup" - which fires first before the closing tag.
+ *      2. "{$id}_after_markup" - which fires after the closing tag.
  *
  * Note: You can pass additional arguments to the functions that are hooked to <tt>$id</tt>.
  *
  * @since 1.0.0
  *
  * @param string $id  Identical to the opening markup ID.
- * @param string $tag The HTML tag.
+ * @param string $tag The HTML tag. If set to False or empty, the markup HTML tag will be removed but
+ *                    the actions hook will be called. If set the Null, both markup HTML tag and actions
+ *                    hooks will be removed.
  *
- * @return string The output.
+ * @return string|void
  */
 function beans_close_markup( $id, $tag ) {
-	// Stop here if the tag is set to false, the before and after actions won't run in this case.
+	// Filter the tag.
 	$tag = beans_apply_filters( $id . '_markup', $tag );
 
+	// If the tag is set to null, bail out.
 	if ( null === $tag ) {
 		return;
 	}
 
 	$args = func_get_args();
 
-	// Remove function $tag argument.
+	// Remove the $tag argument.
 	unset( $args[1] );
 
-	// Set before action id.
+	// Set and then fire the append action hook.
 	$args[0] = $id . '_append_markup';
+	$output  = call_user_func_array( '_beans_render_action', $args );
 
-	$output = call_user_func_array( '_beans_render_action', $args );
-
-	// Don't output the tag if empty, the before and after actions still run.
+	// Skip the closing tag when it's empty.
 	if ( $tag ) {
 		$output .= '</' . $tag . '>';
 	}
 
-	// Set after action id.
+	// Set and then fire the after action hook.
 	$args[0] = $id . '_after_markup';
-
 	$output .= call_user_func_array( '_beans_render_action', $args );
 
 	return $output;
