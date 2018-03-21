@@ -92,9 +92,9 @@ class Tests_BeansOpenMarkup extends HTML_Test_Case {
 	}
 
 	/**
-	 * Test beans_open_markup() should return built HTML when no before or prepend hooks are registered.
+	 * Test beans_open_markup() should return the built HTML element when before or prepend hooks are not registered.
 	 */
-	public function test_should_return_built_html_when_before_or_prepend_hooks_registered() {
+	public function test_should_return_built_html_when_before_or_prepend_hooks_not_registered() {
 		$actual = beans_open_markup( 'beans_archive_title', 'h1', array( 'class' => 'uk-article-title' ) );
 		$this->assertSame( '<h1 class="uk-article-title">', $actual );
 		$this->assertEquals( 0, did_action( 'beans_archive_title_before_markup' ) );
@@ -103,7 +103,7 @@ class Tests_BeansOpenMarkup extends HTML_Test_Case {
 	}
 
 	/**
-	 * Test beans_open_markup() should return built HTML with the "data-markup-id" when in development mode.
+	 * Test beans_open_markup() should return the built HTML element with the "data-markup-id" when in development mode.
 	 */
 	public function test_should_return_built_html_with_data_markup_id_when_in_dev_mode() {
 		add_option( 'beans_dev_mode', 1 );
@@ -113,8 +113,7 @@ class Tests_BeansOpenMarkup extends HTML_Test_Case {
 	}
 
 	/**
-	 * Test beans_open_markup() should return a built HTML element when there are before and prepend hooks are
-	 * registered.
+	 * Test beans_open_markup() should return the built HTML when before and prepend hooks are registered.
 	 */
 	public function test_should_return_built_html_when_before_or_prepend_hooks() {
 		add_action( 'beans_archive_title_before_markup', function() {

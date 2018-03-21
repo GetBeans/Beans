@@ -74,7 +74,7 @@ function beans_remove_output( $id ) {
 }
 
 /**
- * Build the opening HTML's element markup.  This function fires 3 separate hooks:
+ * Build the opening HTML element's markup.  This function fires 3 separate hooks:
  *
  *      1. "{id}_before_markup" - which fires first before the element.
  *      2. "{$id}_prepend_markup" - which fires after the element when the element is not self-closing.
@@ -131,7 +131,7 @@ function beans_open_markup( $id, $tag, $attributes = array() ) {
 	unset( $args[1] );
 	unset( $attributes_args[1] );
 
-	// Set and then do the before action hook.
+	// Set and then fire the before action hook.
 	$args[0] = $id . '_before_markup';
 	$output  = call_user_func_array( '_beans_render_action', $args );
 
@@ -151,7 +151,7 @@ function beans_open_markup( $id, $tag, $attributes = array() ) {
 }
 
 /**
- * Echo the opening HTML's element markup.  This function is a wrapper for {@see beans_open_markup()}.  See
+ * Echo the opening HTML element's markup.  This function is a wrapper for {@see beans_open_markup()}.  See
  * {@see beans_open_markup()} for more details.
  *
  * @since 1.4.0

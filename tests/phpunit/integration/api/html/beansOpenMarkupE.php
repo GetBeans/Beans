@@ -25,16 +25,16 @@ class Tests_BeansOpenMarkupE extends HTML_Test_Case {
 	/**
 	 * Test beans_open_markup_e() should echo empty when the tag is set to null.
 	 */
-	public function test_should_echo_empty_when_tag_set_to_false() {
+	public function test_should_echo_empty_when_tag_set_to_null() {
 		ob_start();
 		beans_open_markup_e( 'beans_archive_title', null, array( 'class' => 'uk-article-title' ) );
 		$this->assertEquals( '', ob_get_clean() );
 	}
 
 	/**
-	 * Test beans_open_markup_e() should echo the HTML element only when no before or prepend hooks are registered.
+	 * Test beans_open_markup_e() should echo the HTML element only when before or prepend hooks are not registered.
 	 */
-	public function test_should_echo_html_element_when_no_hooks_are_registered() {
+	public function test_should_echo_html_element_when_hooks_not_registered() {
 		ob_start();
 		beans_open_markup_e( 'beans_archive_title', 'h1', array( 'class' => 'uk-article-title' ) );
 		$actual = ob_get_clean();
