@@ -26,12 +26,28 @@ class Tests_Beans_Post_Meta extends Test_Case {
 	 * Test new _Beans_Post_Meta should register required actions and filters.
 	 */
 	public function test_construct_should_register_required_actions_and_filters() {
+
+		// First instantiation registers everything.
 		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );
 
-		$this->assertEquals( 10, has_action( 'add_meta_boxes', array( $post_meta, 'register_metabox' ) ) );
-		$this->assertEquals( 10, has_action( 'edit_form_top', array( $post_meta, 'nonce' ) ) );
-		$this->assertEquals( 10, has_action( 'save_post', array( $post_meta, 'save' ) ) );
-		$this->assertEquals( 10, has_filter( 'attachment_fields_to_save', array( $post_meta, 'save_attachment' ) ) );
+		$this->assertTrue( has_action( 'add_meta_boxes', array( $post_meta, 'register_metabox' ) ) );
+		$this->assertTrue( has_action( 'edit_form_top', array( $post_meta, 'nonce' ) ) );
+		$this->assertTrue( has_action( 'save_post', array( $post_meta, 'save' ) ) );
+		$this->assertTrue( has_filter( 'attachment_fields_to_save', array( $post_meta, 'save_attachment' ) ) );
+
+		// Remove all the added hooks so we can start again with a clean $wp_filters array
+		remove_action( 'add_meta_boxes', array( $post_meta, 'register_metabox' ) );
+		remove_action( 'edit_form_top', array( $post_meta, 'nonce' ) );
+		remove_action( 'save_post', array( $post_meta, 'save' ) );
+		remove_filter( 'attachment_fields_to_save', array( $post_meta, 'save_attachment' ) );
+
+		// Subsequent instantiations register only an 'add_meta_boxes' hook.
+		$post_meta_again = new _Beans_Post_Meta( 'tm-beans-2', array( 'title' => 'Custom Post Options' ) );
+
+		$this->assertTrue( has_action( 'add_meta_boxes', array( $post_meta_again, 'register_metabox' ) ) );
+		$this->assertFalse( has_action( 'edit_form_top', array( $post_meta_again, 'nonce' ) ) );
+		$this->assertFalse( has_action( 'save_post', array( $post_meta_again, 'save' ) ) );
+		$this->assertFalse( has_filter( 'attachment_fields_to_save', array( $post_meta_again, 'save_attachment' ) ) );
 	}
 
 	/**
@@ -165,7 +181,7 @@ class Tests_Beans_Post_Meta extends Test_Case {
 	public function test_save_attachment_should_run_update_post_meta_and_return_attachment_when_ok_to_save() {
 		$post_meta  = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );
 		$attachment = array( 'ID' => 543 );
-		$fields = array( 'beans_post_test_field' => 'beans_test_post_field_value' );
+		$fields     = array( 'beans_post_test_field' => 'beans_test_post_field_value' );
 
 		Monkey\Functions\expect( 'beans_doing_autosave' )->once()->andReturn( false );
 		Monkey\Functions\expect( 'wp_verify_nonce' )->once()->andReturn( true );
