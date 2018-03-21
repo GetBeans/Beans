@@ -721,16 +721,18 @@ function _beans_render_action( $hook ) {
  * @param array  $args   Array of arguments.
  * @param string $output The output to be updated.
  *
- * @return string|bool
+ * @return string
  */
 function _beans_when_has_action_do_render( array $args, &$output = '' ) {
 
-	if ( has_action( $args[0] ) ) {
-		$output .= call_user_func_array( 'beans_render_function', array_merge( array( 'do_action' ), $args ) );
-		return $output;
+	if ( ! has_action( $args[0] ) ) {
+		return false;
 	}
 
-	return false;
+	ob_start();
+	call_user_func_array( 'do_action', $args );
+	$output .= ob_get_clean();
+	return $output;
 }
 
 /**
