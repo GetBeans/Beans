@@ -106,20 +106,16 @@ function beans_remove_output( $id ) {
  * @return string|void
  */
 function beans_open_markup( $id, $tag, $attributes = array() ) {
-	global $_temp_beans_selfclose_markup;
-
 	$args            = func_get_args();
 	$attributes_args = $args;
 
 	// Set markup tag filter id.
 	$args[0] = $id . '_markup';
 
-	if ( isset( $args[2] ) ) {
+	// If there are attributes, remove them from $args.
+	if ( $attributes ) {
 		unset( $args[2] );
 	}
-
-	// Remove function $tag argument.
-	unset( $attributes_args[1] );
 
 	// Filter the tag.
 	$tag = call_user_func_array( 'beans_apply_filters', $args );
@@ -129,23 +125,24 @@ function beans_open_markup( $id, $tag, $attributes = array() ) {
 		return;
 	}
 
-	// Remove function $tag argument.
+	global $_temp_beans_selfclose_markup;
+
+	// Remove function $tag arguments.
 	unset( $args[1] );
+	unset( $attributes_args[1] );
 
-	// Set before action hook.
+	// Set and then do the before action hook.
 	$args[0] = $id . '_before_markup';
-
-	$output = call_user_func_array( '_beans_render_action', $args );
+	$output  = call_user_func_array( '_beans_render_action', $args );
 
 	// Don't output the tag if empty, the before and after actions still run.
 	if ( $tag ) {
 		$output .= '<' . $tag . ' ' . call_user_func_array( 'beans_add_attributes', $attributes_args ) . ( _beans_is_html_dev_mode() ? ' data-markup-id="' . $id . '"' : null ) . ( $_temp_beans_selfclose_markup ? '/' : '' ) . '>';
 	}
 
-	// Set after action hook.
+	// Set and then fire the after action hook.
 	$args[0] = $id . ( $_temp_beans_selfclose_markup ? '_after_markup' : '_prepend_markup' );
-
-	$output .= call_user_func_array( '_beans_render_action', $args );
+	$output  .= call_user_func_array( '_beans_render_action', $args );
 
 	// Reset the global variable to reduce memory usage.
 	unset( $GLOBALS['_temp_beans_selfclose_markup'] );
