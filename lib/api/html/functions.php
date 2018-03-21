@@ -142,7 +142,7 @@ function beans_open_markup( $id, $tag, $attributes = array() ) {
 
 	// Set and then fire the after action hook.
 	$args[0] = $id . ( $_temp_beans_selfclose_markup ? '_after_markup' : '_prepend_markup' );
-	$output  .= call_user_func_array( '_beans_render_action', $args );
+	$output .= call_user_func_array( '_beans_render_action', $args );
 
 	// Reset the global variable to reduce memory usage.
 	unset( $GLOBALS['_temp_beans_selfclose_markup'] );
