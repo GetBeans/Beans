@@ -173,4 +173,30 @@ EOB;
 		$this->assertEquals( 0, did_action( 'beans_post_image_item_prepend_markup' ) );
 		$this->assertEquals( 0, did_action( 'beans_post_image_item_after_markup' ) );
 	}
+
+	/**
+	 * Test beans_open_markup() should return only the output from the hooked callbacks and not the HTML element when
+	 * the tag is empty.
+	 */
+	public function test_should_return_only_hooked_callbacks_output_and_no_html_element_when_tag_is_empty() {
+		add_action( 'beans_archive_title_before_markup', function() {
+			echo '<!-- _before_markup fired -->';
+		} );
+		add_action( 'beans_archive_title_prepend_markup', function() {
+			echo '<!-- _prepend_markup fired -->';
+		} );
+
+		// Check with an empty string.
+		$actual = beans_open_markup( 'beans_archive_title', '', array( 'class' => 'uk-article-title' ) );
+		$this->assertSame( '<!-- _before_markup fired --><!-- _prepend_markup fired -->', $actual );
+
+		// Check with false.
+		$actual = beans_open_markup( 'beans_archive_title', false, array( 'class' => 'uk-article-title' ) );
+		$this->assertSame( '<!-- _before_markup fired --><!-- _prepend_markup fired -->', $actual );
+
+		// Check the hooks.
+		$this->assertEquals( 2, did_action( 'beans_archive_title_before_markup' ) );
+		$this->assertEquals( 2, did_action( 'beans_archive_title_prepend_markup' ) );
+		$this->assertEquals( 0, did_action( 'beans_archive_title_after_markup' ) );
+	}
 }

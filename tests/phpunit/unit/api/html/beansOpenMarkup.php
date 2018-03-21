@@ -184,4 +184,29 @@ EOB;
 EOB;
 		$this->assertSame( $expected, $actual );
 	}
+
+	/**
+	 * Test beans_open_markup() should return only the output from the hooked callbacks and not the HTML element when
+	 * the tag is empty.
+	 */
+	public function test_should_return_only_hooked_callbacks_output_and_no_html_element_when_tag_is_empty() {
+		Monkey\Functions\expect( 'beans_add_attributes' )->never();
+		Monkey\Functions\expect( '_beans_is_html_dev_mode' )->never();
+		Monkey\Functions\expect( '_beans_render_action' )
+			->twice()
+			->with( 'beans_archive_title_before_markup' )
+			->andReturn( '<!-- _before_markup fired -->' )
+			->andAlsoExpectIt()
+			->twice()
+			->with( 'beans_archive_title_prepend_markup' )
+			->andReturn( '<!-- _prepend_markup fired -->' );
+
+		// Check with an empty string.
+		$actual = beans_open_markup( 'beans_archive_title', '', array( 'class' => 'uk-article-title' ) );
+		$this->assertSame( '<!-- _before_markup fired --><!-- _prepend_markup fired -->', $actual );
+
+		// Check with false.
+		$actual = beans_open_markup( 'beans_archive_title', false, array( 'class' => 'uk-article-title' ) );
+		$this->assertSame( '<!-- _before_markup fired --><!-- _prepend_markup fired -->', $actual );
+	}
 }
