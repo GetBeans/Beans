@@ -84,7 +84,7 @@ EOB;
 	/**
 	 * Test beans_field_label() should not render the radio field's group label.
 	 */
-	public function test_should_render_radio_group_header() {
+	public function test_should_not_render_radio_group_label() {
 		$field = $this->merge_field_with_default( array(
 			'id'          => 'beans_layout',
 			'label'       => 'Layout',
@@ -121,7 +121,7 @@ EOB;
 	/**
 	 * Test beans_field_label() should not render the group field's label.
 	 */
-	public function test_should_render_group_header() {
+	public function test_should_not_render_group_label() {
 		$field = array(
 			'id'          => 'beans_group_test',
 			'label'       => 'Group of fields',
@@ -153,6 +153,25 @@ EOB;
 					'default'        => false,
 				),
 			),
+		);
+
+		// Run the function and grab the HTML out of the buffer.
+		ob_start();
+		beans_field_label( $field );
+		$html = ob_get_clean();
+
+		$this->assertEmpty( $this->format_the_html( $html ) );
+	}
+
+	/**
+	 * Test beans_field_label() should not render the activation field's label.
+	 */
+	public function test_should_not_render_activation_field_label() {
+		$field = array(
+			'id'      => 'beans_group_activation_test',
+			'label'   => 'Activate',
+			'type'    => 'activation',
+			'default' => false,
 		);
 
 		// Run the function and grab the HTML out of the buffer.
