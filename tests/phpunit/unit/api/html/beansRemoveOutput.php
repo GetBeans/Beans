@@ -63,7 +63,7 @@ class Tests_BeansRemoveOutput extends HTML_Test_Case {
 			beans_remove_output( $id );
 		}
 
-		// Tests are focused above on ensuring beans_apply_filters() is called with the right arguments.
+		// Tests are focused above on ensuring beans_add_filter() is called with the right arguments.
 		$this->assertTrue( true );
 	}
 }

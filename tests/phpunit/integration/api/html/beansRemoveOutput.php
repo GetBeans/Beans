@@ -24,7 +24,7 @@ require_once __DIR__ . '/includes/class-html-test-case.php';
 class Tests_BeansRemoveOutput extends HTML_Test_Case {
 
 	/**
-	 * Test beans_remove_output() should return an _Beans_Anonymous_Filters instance.
+	 * Test beans_remove_output() should return a _Beans_Anonymous_Filters instance.
 	 */
 	public function test_should_return_anonymous_filter_instance() {
 		$this->assertInstanceOf( _Beans_Anonymous_Filters::class, beans_remove_output( 'beans_post_meta_item_date' ) );
@@ -33,7 +33,7 @@ class Tests_BeansRemoveOutput extends HTML_Test_Case {
 	/**
 	 * Test beans_remove_output() should register callback to the "{$id}_output" filter hook.
 	 */
-	public function test_should_return_register_callback_to_id_output() {
+	public function test_should_return_register_callback_to_id_output_filter() {
 		$anonymous_filter = beans_remove_output( 'beans_post_meta_item_date' );
 
 		$this->assertSame( 99999999, has_filter( 'beans_post_meta_item_date_output', array(
