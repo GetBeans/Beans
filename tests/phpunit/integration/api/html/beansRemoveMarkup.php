@@ -31,9 +31,9 @@ class Tests_BeansRemoveMarkup extends HTML_Test_Case {
 	}
 
 	/**
-	 * Test beans_remove_markup() should register callback to the "{$id}_markup" filter hook.
+	 * Test beans_remove_markup() should register a callback to the "{$id}_markup" filter hook.
 	 */
-	public function test_should_return_register_callback_to_id_output_filter() {
+	public function test_should_return_register_callback_to_id_markup_filter() {
 		$anonymous_filter = beans_remove_markup( 'beans_archive_title' );
 
 		$this->assertSame( 10, has_filter( 'beans_archive_title_markup', array(
@@ -61,7 +61,7 @@ class Tests_BeansRemoveMarkup extends HTML_Test_Case {
 	}
 
 	/**
-	 * Test beans_remove_markup() should remove the markup's element when $remove_actions is true.
+	 * Test beans_remove_markup() should remove the HTML markup when $remove_actions is true.
 	 */
 	public function test_should_remove_html_markup_when_remove_actions_is_true() {
 		beans_remove_markup( 'beans_archive_title' );

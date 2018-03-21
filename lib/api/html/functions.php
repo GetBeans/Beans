@@ -335,7 +335,7 @@ function beans_modify_markup( $id, $markup, $priority = 10, $args = 1 ) {
  *
  * @param string $id             The target markup's ID.
  * @param bool   $remove_actions Optional. When true, the markup including the before and prepend/after hooks will be
- *                               removed; else, only the HTML element is removed.
+ *                               removed. When false, only the HTML element will be removed.
  *
  * @return bool|_Beans_Anonymous_Filters
  */
