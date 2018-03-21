@@ -335,17 +335,12 @@ function beans_modify_markup( $id, $markup, $priority = 10, $args = 1 ) {
  *
  * @param string $id             The target markup's ID.
  * @param bool   $remove_actions Optional. When true, the markup including the before and prepend/after hooks will be
- *                               removed.
+ *                               removed; else, only the HTML element is removed.
  *
  * @return bool|_Beans_Anonymous_Filters
  */
 function beans_remove_markup( $id, $remove_actions = false ) {
-
-	if ( $remove_actions ) {
-		return beans_add_filter( $id . '_markup', null );
-	}
-
-	return beans_add_filter( $id . '_markup', false );
+	return beans_add_filter( $id . '_markup', $remove_actions ? null : false );
 }
 
 /**
