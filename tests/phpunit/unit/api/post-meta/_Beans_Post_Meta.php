@@ -63,7 +63,7 @@ class Tests_Beans_Post_Meta extends Test_Case {
 		$post_meta->nonce();
 		$actual_output = ob_get_clean();
 
-		$this->assertEquals( $expected_html_output, trim( $actual_output ) );
+		$this->assertEquals( $expected_html_output, $actual_output );
 	}
 
 	/**

@@ -79,9 +79,7 @@ final class _Beans_Post_Meta {
 	 * @return void
 	 */
 	public function nonce() {
-		?>
-		<input type="hidden" name="beans_post_meta_nonce" value="<?php echo esc_attr( wp_create_nonce( 'beans_post_meta_nonce' ) ); ?>" />
-		<?php
+		include dirname(__FILE__) . '/views/nonce.php';
 	}
 
 	/**
