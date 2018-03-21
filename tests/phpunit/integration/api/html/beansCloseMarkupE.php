@@ -58,14 +58,12 @@ class Tests_BeansCloseMarkupE extends HTML_Test_Case {
 			echo '<!-- _after_markup fired -->';
 		} );
 
-
 		ob_start();
 		beans_close_markup_e( 'beans_archive_title', 'h1' );
-		$actual = ob_get_clean();
+		$actual   = ob_get_clean();
 		$expected = <<<EOB
 <!-- _append_markup fired --></h1><!-- _after_markup fired -->
 EOB;
-
 		// Run the tests.
 		$this->assertSame( $expected, $actual );
 		$this->assertEquals( 1, did_action( 'beans_archive_title_append_markup' ) );
