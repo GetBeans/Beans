@@ -23,7 +23,7 @@ require_once __DIR__ . '/includes/class-html-test-case.php';
 class Tests_BeansOpenMarkupE extends HTML_Test_Case {
 
 	/**
-	 * Test beans_open_markup_e() should echo empty when the tag is set to null.
+	 * Test beans_open_markup_e() should echo an empty string when the tag is set to null.
 	 */
 	public function test_should_echo_empty_when_tag_set_to_null() {
 		ob_start();
@@ -32,7 +32,8 @@ class Tests_BeansOpenMarkupE extends HTML_Test_Case {
 	}
 
 	/**
-	 * Test beans_open_markup_e() should echo the HTML element only when before or prepend hooks are not registered.
+	 * Test beans_open_markup_e() should echo the HTML element only when neither the before nor prepend hooks are not
+	 * registered.
 	 */
 	public function test_should_echo_html_element_when_hooks_not_registered() {
 		ob_start();

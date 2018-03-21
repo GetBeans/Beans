@@ -88,7 +88,7 @@ class Tests_BeansCloseMarkup extends HTML_Test_Case {
 		} );
 
 		// Run the tests.
-		$actual   = beans_close_markup( 'beans_archive_title', 'h1', array( 'class' => 'uk-article-title' ) );
+		$actual   = beans_close_markup( 'beans_archive_title', 'h1' );
 		$expected = <<<EOB
 <!-- _append_markup fired --></h1><!-- _after_markup fired -->
 EOB;
@@ -111,11 +111,11 @@ EOB;
 		} );
 
 		// Check with an empty string.
-		$actual = beans_close_markup( 'beans_archive_title', '', array( 'class' => 'uk-article-title' ) );
+		$actual = beans_close_markup( 'beans_archive_title', '' );
 		$this->assertSame( '<!-- _append_markup fired --><!-- _after_markup fired -->', $actual );
 
 		// Check with false.
-		$actual = beans_close_markup( 'beans_archive_title', false, array( 'class' => 'uk-article-title' ) );
+		$actual = beans_close_markup( 'beans_archive_title', false );
 		$this->assertSame( '<!-- _append_markup fired --><!-- _after_markup fired -->', $actual );
 
 		// Check the hooks.
