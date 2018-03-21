@@ -23,34 +23,6 @@ class Tests_Beans_Post_Meta extends Test_Case {
 	}
 
 	/**
-	 * Test new _Beans_Post_Meta should register required actions and filters.
-	 */
-	public function test_construct_should_register_required_actions_and_filters() {
-
-		// First instantiation registers everything.
-		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );
-
-		$this->assertTrue( has_action( 'add_meta_boxes', array( $post_meta, 'register_metabox' ) ) );
-		$this->assertTrue( has_action( 'edit_form_top', array( $post_meta, 'nonce' ) ) );
-		$this->assertTrue( has_action( 'save_post', array( $post_meta, 'save' ) ) );
-		$this->assertTrue( has_filter( 'attachment_fields_to_save', array( $post_meta, 'save_attachment' ) ) );
-
-		// Remove all the added hooks so we can start again with a clean $wp_filters array
-		remove_action( 'add_meta_boxes', array( $post_meta, 'register_metabox' ) );
-		remove_action( 'edit_form_top', array( $post_meta, 'nonce' ) );
-		remove_action( 'save_post', array( $post_meta, 'save' ) );
-		remove_filter( 'attachment_fields_to_save', array( $post_meta, 'save_attachment' ) );
-
-		// Subsequent instantiations register only an 'add_meta_boxes' hook.
-		$post_meta_again = new _Beans_Post_Meta( 'tm-beans-2', array( 'title' => 'Custom Post Options' ) );
-
-		$this->assertTrue( has_action( 'add_meta_boxes', array( $post_meta_again, 'register_metabox' ) ) );
-		$this->assertFalse( has_action( 'edit_form_top', array( $post_meta_again, 'nonce' ) ) );
-		$this->assertFalse( has_action( 'save_post', array( $post_meta_again, 'save' ) ) );
-		$this->assertFalse( has_filter( 'attachment_fields_to_save', array( $post_meta_again, 'save_attachment' ) ) );
-	}
-
-	/**
 	 * Test _Beans_Post_Meta::nonce() should output correct nonce html.
 	 */
 	public function test_nonce_should_echo_nonce_input_html() {
