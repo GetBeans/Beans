@@ -26,7 +26,7 @@ class Tests_BeansOpenMarkup extends HTML_Test_Case {
 	/**
 	 * Test beans_open_markup() should return null when the tag is set to null.
 	 */
-	public function test_should_return_null_when_tag_set_to_false() {
+	public function test_should_return_null_when_tag_set_to_null() {
 		$this->assertNull( beans_open_markup( 'beans_archive_title', null, array( 'class' => 'uk-article-title' ) ) );
 	}
 
