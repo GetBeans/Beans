@@ -151,7 +151,7 @@ function beans_open_markup( $id, $tag, $attributes = array() ) {
 }
 
 /**
- * Echo the opening HTML element's markup.  This function is a wrapper for {@see beans_open_markup()}.  See
+ * Echo the opening HTML tag's markup.  This function is a wrapper for {@see beans_open_markup()}.  See
  * {@see beans_open_markup()} for more details.
  *
  * @since 1.4.0
@@ -282,17 +282,17 @@ function beans_close_markup( $id, $tag ) {
 }
 
 /**
- * Echo close markup registered by ID.
- *
- * This function is similar to {@see beans_open_markup()}, but does not accept HTML attributes. The $id
- * argument must be the identical to the opening markup.
- *
- * Note: You can pass additional arguments to the functions that are hooked to <tt>$id</tt>.
+ * Echo the closing HTML tag's markup.  This function is a wrapper for {@see beans_close_markup()}.  See
+ * {@see beans_close_markup()} for more details.
  *
  * @since 1.4.0
  *
  * @param string $id  Identical to the opening markup ID.
- * @param string $tag The HTML tag.
+ * @param string $tag The HTML tag. If set to False or empty, the markup HTML tag will be removed but
+ *                    the actions hook will be called. If set the Null, both markup HTML tag and actions
+ *                    hooks will be removed.
+ *
+ * @return void
  */
 function beans_close_markup_e( $id, $tag ) {
 	$args = func_get_args();
