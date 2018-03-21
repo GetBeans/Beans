@@ -326,21 +326,18 @@ function beans_modify_markup( $id, $markup, $priority = 10, $args = 1 ) {
 }
 
 /**
- * Remove markup.
+ * Remove the markup.
  *
  * This function will automatically remove the opening and the closing HTML tag. If the markup is self-closing,
  * the HTML tag will be removed accordingly.
  *
- * The "data-markup-id" is added as a HTML attribute if the development mode is enabled. This makes it very
- * easy to find the content ID when inspecting an element in a web browser.
- *
  * @since 1.0.0
  *
- * @param string $id             The markup ID.
- * @param bool   $remove_actions Optional. Whether elements attached to a markup should be removed or not. This must be
- *                               used with absolute caution.
+ * @param string $id             The target markup's ID.
+ * @param bool   $remove_actions Optional. When true, the markup including the before and prepend/after hooks will be
+ *                               removed.
  *
- * @return bool Will always return true.
+ * @return bool|_Beans_Anonymous_Filters
  */
 function beans_remove_markup( $id, $remove_actions = false ) {
 
