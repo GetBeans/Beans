@@ -109,7 +109,6 @@ EOB;
 	}
 
 	/**
-	/**
 	 * Test beans_close_markup() should return the hooked callbacks' output and not the closing tag when
 	 * the tag is empty.
 	 */
