@@ -41,9 +41,9 @@ class Tests_Beans_Compiler_Get_Remote_Content extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test get_remote_content() should return an empty string when the remote site or file does not exist.
+	 * Test get_remote_content() should return an empty string when the remote site or file does not exist on http.
 	 */
-	public function test_should_return_empty_string_when_remote_does_not_exist() {
+	public function test_should_return_empty_string_when_remote_does_not_exist_on_http() {
 		// Set up the compiler.
 		$fragment = 'http://beans.local/invalid-file.js';
 		$compiler = new _Beans_Compiler( array() );
@@ -52,6 +52,23 @@ class Tests_Beans_Compiler_Get_Remote_Content extends Compiler_Test_Case {
 		// Set up the mocks.
 		Functions\expect( 'wp_remote_get' )->once();
 		Functions\expect( 'is_wp_error' )->once()->andReturn( true );
+
+		// Run the test.
+		$this->assertSame( '', $compiler->get_remote_content() );
+	}
+
+	/**
+	 * Test get_remote_content() should return an empty string when the remote site or file does not exist on https.
+	 */
+	public function test_should_return_empty_string_when_remote_does_not_exist_on_https() {
+		// Set up the compiler.
+		$fragment = 'http://beans.local/invalid-file.js';
+		$compiler = new _Beans_Compiler( array() );
+		$this->set_current_fragment( $compiler, $fragment );
+
+		// Set up the mocks.
+		Functions\expect( 'wp_remote_get' )->twice();
+		Functions\expect( 'is_wp_error' )->twice()->andReturnValues( array( false, true ) );
 
 		// Run the test.
 		$this->assertSame( '', $compiler->get_remote_content() );
@@ -67,7 +84,7 @@ class Tests_Beans_Compiler_Get_Remote_Content extends Compiler_Test_Case {
 		$this->set_current_fragment( $compiler, $fragment );
 
 		// Set up the mocks.
-		Functions\expect( 'is_wp_error' )->once()->andReturn( false );
+		Functions\expect( 'is_wp_error' )->twice()->andReturn( false );
 		Functions\expect( 'wp_remote_get' )
 			->with( $fragment )
 			->once()
@@ -106,7 +123,7 @@ class Tests_Beans_Compiler_Get_Remote_Content extends Compiler_Test_Case {
 		);
 
 		// Set up the mocks.
-		Functions\expect( 'is_wp_error' )->once()->andReturn( false );
+		Functions\expect( 'is_wp_error' )->twice()->andReturn( false );
 		Functions\expect( 'wp_remote_get' )
 			// Check that it did add http: to the relative URL.
 			->with( 'http:' . $fragment )
@@ -142,7 +159,7 @@ class Tests_Beans_Compiler_Get_Remote_Content extends Compiler_Test_Case {
 		);
 
 		// Set up the mocks.
-		Functions\expect( 'is_wp_error' )->once()->andReturn( false );
+		Functions\expect( 'is_wp_error' )->twice()->andReturn( false );
 		Functions\expect( 'wp_remote_get' )
 			// Check that it did add http: to the relative URL.
 			->with( $fragment )
@@ -178,7 +195,7 @@ class Tests_Beans_Compiler_Get_Remote_Content extends Compiler_Test_Case {
 		);
 
 		// Set up the mocks.
-		Functions\expect( 'is_wp_error' )->once()->andReturn( false );
+		Functions\expect( 'is_wp_error' )->twice()->andReturn( false );
 		Functions\expect( 'wp_remote_get' )
 			// Check that it did add http: to the relative URL.
 			->with( $fragment )
