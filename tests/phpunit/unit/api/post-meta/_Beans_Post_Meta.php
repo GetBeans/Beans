@@ -17,16 +17,19 @@ class Tests_Beans_Post_Meta extends Test_Case {
 	protected function setUp() {
 		parent::setUp();
 
-		Monkey\Functions\when( '__' )->returnArg( 1 );
+		$this->load_original_functions( array(
+			'api/post-meta/class.php',
+			'api/fields/functions.php',
+			'api/utilities/functions.php',
+		) );
 
-		require_once BEANS_TESTS_LIB_DIR . 'api/post-meta/class.php';
+		$this->setup_common_wp_stubs();
 	}
 
 	/**
 	 * Test _Beans_Post_Meta::nonce() should output correct nonce html.
 	 */
 	public function test_nonce_should_echo_nonce_input_html() {
-		Monkey\Functions\expect( 'esc_attr' )->once()->with( '123456' )->andReturn( '123456' );
 		Monkey\Functions\expect( 'wp_create_nonce' )->once()->with( 'beans_post_meta_nonce' )->andReturn( '123456' );
 		$expected_html_output = '<input type="hidden" name="beans_post_meta_nonce" value="123456" />';
 
