@@ -33,15 +33,35 @@ abstract class HTML_Test_Case extends WP_UnitTestCase {
 	protected static $test_attributes;
 
 	/**
+	 * Array of attachments to test.
+	 *
+	 * @var array
+	 */
+	protected static $test_attachments;
+
+	/**
 	 * Setup the test before we run the test setups.
 	 */
 	public static function setUpBeforeClass() {
 		parent::setUpBeforeClass();
 
-		static::$test_markup     = require dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'fixtures/test-markup.php';
-		static::$test_attributes = array_filter( static::$test_markup, function( $markup ) {
+		static::$test_markup      = require dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'fixtures/test-markup.php';
+		static::$test_attributes  = array_filter( static::$test_markup, function( $markup ) {
 			return isset( $markup['attributes'] );
 		} );
+		static::$test_attachments = require dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'fixtures/test-attachment.php';
+	}
+
+	/**
+	 * Prepares the test environment before each test.
+	 */
+	public function setUp() {
+		parent::setUp();
+
+		// Reset the test fixtures.
+		reset( static::$test_markup );
+		reset( static::$test_attributes );
+		reset( static::$test_attachments );
 	}
 
 	/**
