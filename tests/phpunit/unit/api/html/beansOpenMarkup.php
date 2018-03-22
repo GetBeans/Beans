@@ -67,7 +67,7 @@ class Tests_BeansOpenMarkup extends HTML_Test_Case {
 
 	/**
 	 * Test beans_open_markup() should fire _beans_render_action() for the "_after_markup" hooks when the global
-	 * $_temp_beans_selfclose_markup is set to true.
+	 * $_beans_is_selfclose_markup is set to true.
 	 */
 	public function test_should_fire_after_markup_hooks_when_selfclose_is_true() {
 		Monkey\Functions\when( 'beans_add_attributes' )->justReturn( 'class="uk-article-title"' );
@@ -77,13 +77,13 @@ class Tests_BeansOpenMarkup extends HTML_Test_Case {
 			->with( 'beans_archive_title_after_markup' )
 			->andReturn( 'Worked!' );
 
-		global $_temp_beans_selfclose_markup;
-		$_temp_beans_selfclose_markup = true; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Used in function scope.
+		global $_beans_is_selfclose_markup;
+		$_beans_is_selfclose_markup = true; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Used in function scope.
 
 		$this->assertContains( 'Worked!', beans_open_markup( 'beans_archive_title', 'h1', array( 'class' => 'uk-article-title' ) ) );
 
 		// Check that the global was unset.
-		$this->assertArrayNotHasKey( '_temp_beans_selfclose_markup', $GLOBALS );
+		$this->assertArrayNotHasKey( '_beans_is_selfclose_markup', $GLOBALS );
 	}
 
 	/**
@@ -143,7 +143,7 @@ EOB;
 
 	/**
 	 * Test beans_open_markup() should return a built self-closing HTML element when the global
-	 * $_temp_beans_selfclose_markup is set to true.
+	 * $_beans_is_selfclose_markup is set to true.
 	 */
 	public function test_should_return_built_self_closing_html_when_selfclose_markup_is_true() {
 		$args = array(
@@ -164,8 +164,8 @@ EOB;
 
 		// Run it with development mode off.
 		Monkey\Functions\expect( '_beans_is_html_dev_mode' )->once()->andReturn( false );
-		global $_temp_beans_selfclose_markup;
-		$_temp_beans_selfclose_markup = true; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Used in function scope.
+		global $_beans_is_selfclose_markup;
+		$_beans_is_selfclose_markup = true; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Used in function scope.
 
 		$actual   = beans_open_markup( 'beans_post_image_item', 'img', $args, 'http://example.com/image.png' );
 		$expected = <<<EOB
@@ -175,8 +175,8 @@ EOB;
 
 		// Run it with development mode on.
 		Monkey\Functions\expect( '_beans_is_html_dev_mode' )->once()->andReturn( true );
-		global $_temp_beans_selfclose_markup;
-		$_temp_beans_selfclose_markup = true; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Used in function scope.
+		global $_beans_is_selfclose_markup;
+		$_beans_is_selfclose_markup = true; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Used in function scope.
 
 		$actual   = beans_open_markup( 'beans_post_image_item', 'img', $args, 'http://example.com/image.png' );
 		$expected = <<<EOB

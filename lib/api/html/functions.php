@@ -125,7 +125,7 @@ function beans_open_markup( $id, $tag, $attributes = array() ) {
 		return;
 	}
 
-	global $_temp_beans_selfclose_markup;
+	global $_beans_is_selfclose_markup;
 
 	// Remove the $tag argument.
 	unset( $args[1] );
@@ -137,15 +137,15 @@ function beans_open_markup( $id, $tag, $attributes = array() ) {
 
 	// Skip the opening tag when it's empty.
 	if ( $tag ) {
-		$output .= '<' . $tag . ' ' . call_user_func_array( 'beans_add_attributes', $attributes_args ) . ( _beans_is_html_dev_mode() ? ' data-markup-id="' . $id . '"' : null ) . ( $_temp_beans_selfclose_markup ? '/' : '' ) . '>';
+		$output .= '<' . $tag . ' ' . call_user_func_array( 'beans_add_attributes', $attributes_args ) . ( _beans_is_html_dev_mode() ? ' data-markup-id="' . $id . '"' : null ) . ( $_beans_is_selfclose_markup ? '/' : '' ) . '>';
 	}
 
 	// Set and then fire the after action hook.
-	$args[0] = $id . ( $_temp_beans_selfclose_markup ? '_after_markup' : '_prepend_markup' );
+	$args[0] = $id . ( $_beans_is_selfclose_markup ? '_after_markup' : '_prepend_markup' );
 	$output  .= call_user_func_array( '_beans_render_action', $args );
 
 	// Reset the global variable to reduce memory usage.
-	unset( $GLOBALS['_temp_beans_selfclose_markup'] );
+	unset( $GLOBALS['_beans_is_selfclose_markup'] );
 
 	return $output;
 }
@@ -184,7 +184,7 @@ function beans_open_markup_e( $id, $tag, $attributes = array() ) {
  *
  * @since 1.0.0
  *
- * @global bool $_temp_beans_selfclose_markup When true, indicates a self-closing element should be built.
+ * @global bool $_beans_is_selfclose_markup When true, indicates a self-closing element should be built.
  *
  * @param string       $id         A unique string used as a reference. The $id argument may contain sub-hook(s).
  * @param string       $tag        The self-closing HTML tag. When set to false or an empty string, the markup HTML tag
@@ -200,14 +200,14 @@ function beans_open_markup_e( $id, $tag, $attributes = array() ) {
  * @return string|void
  */
 function beans_selfclose_markup( $id, $tag, $attributes = array() ) {
-	global $_temp_beans_selfclose_markup;
+	global $_beans_is_selfclose_markup;
 
-	$_temp_beans_selfclose_markup = true; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Used in function scope.
+	$_beans_is_selfclose_markup = true; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Used in function scope.
 
 	$html = call_user_func_array( 'beans_open_markup', func_get_args() );
 
 	// Reset the global variable to reduce memory usage.
-	unset( $GLOBALS['_temp_beans_selfclose_markup'] );
+	unset( $GLOBALS['_beans_is_selfclose_markup'] );
 
 	return $html;
 }

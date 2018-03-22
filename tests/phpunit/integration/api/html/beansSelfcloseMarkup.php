@@ -30,12 +30,12 @@ class Tests_BeansSelfcloseMarkup extends HTML_Test_Case {
 
 		foreach ( static::$test_attachments as $attachment ) {
 			// Check before we start.
-			$this->assertArrayNotHasKey( '_temp_beans_selfclose_markup', $GLOBALS );
+			$this->assertArrayNotHasKey( '_beans_is_selfclose_markup', $GLOBALS );
 
 			beans_selfclose_markup( $attachment['id'], null, $attachment['attributes'], $attachment['attachment'] );
 
 			// Check after we run the function.
-			$this->assertArrayNotHasKey( '_temp_beans_selfclose_markup', $GLOBALS );
+			$this->assertArrayNotHasKey( '_beans_is_selfclose_markup', $GLOBALS );
 		}
 	}
 
