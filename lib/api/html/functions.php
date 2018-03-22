@@ -236,8 +236,7 @@ function beans_selfclose_markup( $id, $tag, $attributes = array() ) {
  * @return void
  */
 function beans_selfclose_markup_e( $id, $tag, $attributes = array() ) {
-	$args = func_get_args();
-	echo call_user_func_array( 'beans_selfclose_markup', $args ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped -- Pending security audit.
+	echo call_user_func_array( 'beans_selfclose_markup', func_get_args() ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped -- Pending security audit.
 }
 
 /**
