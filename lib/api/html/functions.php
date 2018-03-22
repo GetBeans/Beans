@@ -142,7 +142,7 @@ function beans_open_markup( $id, $tag, $attributes = array() ) {
 
 	// Set and then fire the after action hook.
 	$args[0] = $id . ( $_temp_beans_selfclose_markup ? '_after_markup' : '_prepend_markup' );
-	$output .= call_user_func_array( '_beans_render_action', $args );
+	$output  .= call_user_func_array( '_beans_render_action', $args );
 
 	// Reset the global variable to reduce memory usage.
 	unset( $GLOBALS['_temp_beans_selfclose_markup'] );
@@ -175,7 +175,7 @@ function beans_open_markup_e( $id, $tag, $attributes = array() ) {
 }
 
 /**
- * Register self-close markup and attributes by ID.
+ * Build the self-closing HTML element's markup.
  *
  * This function is shortcut of {@see beans_open_markup()}. It should be used for self-closing HTML markup such as
  * images or inputs.
@@ -184,10 +184,12 @@ function beans_open_markup_e( $id, $tag, $attributes = array() ) {
  *
  * @since 1.0.0
  *
+ * @global bool $_temp_beans_selfclose_markup When true, indicates a self-closing element should be built.
+ *
  * @param string       $id         A unique string used as a reference. The $id argument may contain sub-hook(s).
- * @param string|bool  $tag        The HTML self-close tag.If set to False or empty, the markup HTML tag will
- *                                 be removed but the actions hook will be called. If set the Null, both
- *                                 markup HTML tag and actions hooks will be removed.
+ * @param string       $tag        The self-closing HTML tag. When set to false or an empty string, the markup HTML tag
+ *                                 will not be built, but both action hooks will fire. If set to null, the function
+ *                                 bails out, i.e. the markup HTML tag will not be built and neither action hook fires.
  * @param string|array $attributes Optional. Query string or array of attributes. The array key defines the
  *                                 attribute name and the array value defines the attribute value. Setting
  *                                 the array value to '' will display the attribute value as empty
@@ -195,7 +197,7 @@ function beans_open_markup_e( $id, $tag, $attributes = array() ) {
  *                                 the attribute name (e.g. data-example). Setting it to 'null' will not
  *                                 display anything.
  *
- * @return string The output.
+ * @return string|void
  */
 function beans_selfclose_markup( $id, $tag, $attributes = array() ) {
 	global $_temp_beans_selfclose_markup;
@@ -280,7 +282,7 @@ function beans_close_markup( $id, $tag ) {
 
 	// Set and then fire the after action hook.
 	$args[0] = $id . '_after_markup';
-	$output .= call_user_func_array( '_beans_render_action', $args );
+	$output  .= call_user_func_array( '_beans_render_action', $args );
 
 	return $output;
 }
