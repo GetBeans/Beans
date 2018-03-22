@@ -474,10 +474,10 @@ final class _Beans_Compiler {
 		) {
 			$fragment = str_replace( 'http://', 'https://', $fragment );
 			$request  = wp_remote_get( $fragment );
-		}
 
-		if ( is_wp_error( $request ) ) {
-			return '';
+			if ( is_wp_error( $request ) ) {
+				return '';
+			}
 		}
 
 		if ( ( ! isset( $request['body'] ) || 200 !== $request['response']['code'] ) ) {
