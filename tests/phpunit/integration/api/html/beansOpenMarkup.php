@@ -80,7 +80,7 @@ class Tests_BeansOpenMarkup extends HTML_Test_Case {
 		add_action( 'beans_archive_title_after_markup', '__beans_render_title_after_markup' );
 
 		global $_beans_is_selfclose_markup;
-		$_beans_is_selfclose_markup = true; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Used in function scope.
+		$_beans_is_selfclose_markup = true;
 
 		// Run the tests.
 		$actual = beans_open_markup( 'beans_archive_title', 'h1', array( 'class' => 'uk-article-title' ) );
@@ -150,7 +150,7 @@ EOB;
 
 		// Run it with development mode off.
 		global $_beans_is_selfclose_markup;
-		$_beans_is_selfclose_markup = true; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Used in function scope.
+		$_beans_is_selfclose_markup = true;
 
 		$actual   = beans_open_markup( 'beans_post_image_item', 'img', $args, 'http://example.com/image.png' );
 		$expected = <<<EOB
@@ -161,7 +161,7 @@ EOB;
 		// Run it with development mode on.
 		add_option( 'beans_dev_mode', 1 );
 		global $_beans_is_selfclose_markup;
-		$_beans_is_selfclose_markup = true; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Used in function scope.
+		$_beans_is_selfclose_markup = true;
 
 		$actual   = beans_open_markup( 'beans_post_image_item', 'img', $args, 'http://example.com/image.png' );
 		$expected = <<<EOB
