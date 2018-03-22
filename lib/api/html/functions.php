@@ -203,7 +203,12 @@ function beans_selfclose_markup( $id, $tag, $attributes = array() ) {
 	$_temp_beans_selfclose_markup = true; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Used in function scope.
 	$args                         = func_get_args();
 
-	return call_user_func_array( 'beans_open_markup', $args );
+	$html = call_user_func_array( 'beans_open_markup', $args );
+
+	// Reset the global variable to reduce memory usage.
+	unset( $GLOBALS['_temp_beans_selfclose_markup'] );
+
+	return $html;
 }
 
 /**
