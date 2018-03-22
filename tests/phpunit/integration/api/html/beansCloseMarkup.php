@@ -67,9 +67,10 @@ class Tests_BeansCloseMarkup extends HTML_Test_Case {
 	}
 
 	/**
-	 * Test beans_close_markup() should return the built HTML element when append or after hooks are not registered.
+	 * Test beans_close_markup() should return the closing tag only when a callback is not registered to either the
+	 * "_append_markup" or "_after_markup" hook.
 	 */
-	public function test_should_return_built_html_when_append_or_after_hooks_not_registered() {
+	public function test_should_return_closing_tag_when_callback_not_registered_to_either_hook() {
 		$actual = beans_close_markup( 'beans_archive_title', 'h1' );
 		$this->assertSame( '</h1>', $actual );
 		$this->assertEquals( 0, did_action( 'beans_archive_title_append_markup' ) );
@@ -77,9 +78,10 @@ class Tests_BeansCloseMarkup extends HTML_Test_Case {
 	}
 
 	/**
-	 * Test beans_close_markup() should return a built HTML when append or after hooks are registered.
+	 * Test beans_close_markup() should return the append, tag, and after HTML when callbacks are registered
+	 * to the "_append_markup" and "_after_markup" hooks.
 	 */
-	public function test_should_return_built_html_when_append_or_after_hooks() {
+	public function test_should_return_built_html_when_callback_registered_to_hooks() {
 		add_action( 'beans_archive_title_append_markup', function() {
 			echo '<!-- _append_markup fired -->';
 		} );
@@ -99,10 +101,11 @@ EOB;
 	}
 
 	/**
-	 * Test beans_close_markup() should return only the output from the hooked callbacks and not the HTML element when
+	/**
+	 * Test beans_close_markup() should return the hooked callbacks' output and not the closing tag when
 	 * the tag is empty.
 	 */
-	public function test_should_return_only_hooked_callbacks_output_and_no_html_element_when_tag_is_empty() {
+	public function test_should_return_hooked_callbacks_output_and_not_closing_tag_when_tag_is_empty() {
 		add_action( 'beans_archive_title_append_markup', function() {
 			echo '<!-- _append_markup fired -->';
 		} );

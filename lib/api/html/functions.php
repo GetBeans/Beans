@@ -245,9 +245,9 @@ function beans_selfclose_markup_e( $id, $tag, $attributes = array() ) {
  * @since 1.0.0
  *
  * @param string $id  Identical to the opening markup ID.
- * @param string $tag The HTML tag. If set to False or empty, the markup HTML tag will be removed but
- *                    the actions hook will be called. If set the Null, both markup HTML tag and actions
- *                    hooks will be removed.
+ * @param string $tag The HTML tag. When set to false or an empty string, the markup HTML tag will not be built, but
+ *                    both action hooks will fire. If set to null, the function bails out, i.e. the markup HTML
+ *                    tag will not be built and neither action hook fires.
  *
  * @return string|void
  */
@@ -288,9 +288,9 @@ function beans_close_markup( $id, $tag ) {
  * @since 1.4.0
  *
  * @param string $id  Identical to the opening markup ID.
- * @param string $tag The HTML tag. If set to False or empty, the markup HTML tag will be removed but
- *                    the actions hook will be called. If set the Null, both markup HTML tag and actions
- *                    hooks will be removed.
+ * @param string $tag The HTML tag. When set to false or an empty string, the markup HTML tag will not be built, but
+ *                    both action hooks will fire. If set to null, the function bails out, i.e. the markup HTML
+ *                    tag will not be built and neither action hook fires.
  *
  * @return void
  */

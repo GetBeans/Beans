@@ -38,10 +38,10 @@ class Tests_BeansCloseMarkupE extends HTML_Test_Case {
 	}
 
 	/**
-	 * Test beans_close_markup_e() should echo the HTML element only when neither the append nor after hooks are not
-	 * registered.
+	 * Test beans_close_markup_e() should echo the closing tag only when a callback is not registered to either the
+	 * "_append_markup" or "_after_markup" hook.
 	 */
-	public function test_should_echo_html_element_when_hooks_not_registered() {
+	public function test_should_echo_closing_tag_when_callback_not_registered_to_either_hook() {
 		Monkey\Functions\when( 'beans_apply_filters' )->returnArg( 2 );
 		Monkey\Functions\when( '_beans_render_action' )->justReturn( '' );
 
@@ -51,10 +51,10 @@ class Tests_BeansCloseMarkupE extends HTML_Test_Case {
 	}
 
 	/**
-	 * Test beans_close_markup_e() should echo the before, element, and prepend HTML when callbacks are registered
-	 * the "_append_markup" and "_after_markup" hooks.
+	 * Test beans_close_markup_e() should echo the append, tag, and after HTML when callbacks are registered
+	 * to the "_append_markup" and "_after_markup" hooks.
 	 */
-	public function test_should_echo_built_html_when_append_or_after_hooks() {
+	public function test_should_echo_built_html_when_append_and_after_hooks() {
 		Monkey\Functions\when( 'beans_apply_filters' )->returnArg( 2 );
 		Monkey\Functions\expect( '_beans_render_action' )
 			->once()
