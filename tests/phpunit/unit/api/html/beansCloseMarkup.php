@@ -99,6 +99,17 @@ EOB;
 	}
 
 	/**
+	 * Test beans_close_markup() should return an empty string when (1) the tag is an empty string and (2) a callback
+	 * is not registered to either the "_append_markup" or "_after_markup" hook.
+	 */
+	public function test_should_return_empty_string_when_empty_tag_and_callback_not_registered_to_hooks() {
+		Monkey\Functions\when( 'beans_apply_filters' )->returnArg( 2 );
+		Monkey\Functions\when( '_beans_render_action' )->justReturn( '' );
+
+		$this->assertSame( '', beans_close_markup( 'beans_archive_title', '' ) );
+	}
+
+	/**
 	 * Test beans_close_markup() should return the hooked callbacks' output and not the closing tag when
 	 * the tag is empty.
 	 */
