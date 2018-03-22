@@ -30,10 +30,10 @@ return array(
 		'id'         => 'beans_post_image_item',
 		'tag'        => 'img',
 		'attributes' => array(
-			'width'  => 1200,
-			'height' => 600,
-			'src'         => 'https://example.com/image.png',
-			'alt'         => 'A background image.',
+			'width'    => 1200,
+			'height'   => 600,
+			'src'      => 'https://example.com/image.png',
+			'alt'      => 'A background image.',
 			'itemprop' => 'image',
 		),
 		'attachment' => (object) array(
