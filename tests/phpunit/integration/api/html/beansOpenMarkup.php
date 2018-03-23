@@ -198,4 +198,39 @@ EOB;
 		$this->assertEquals( 2, did_action( 'beans_archive_title_prepend_markup' ) );
 		$this->assertEquals( 0, did_action( 'beans_archive_title_after_markup' ) );
 	}
+
+	/**
+	 * Test beans_open_markup() should escape the built HTML tag.
+	 */
+	public function test_should_escape_built_html_tag() {
+		$expected = <<<EOB
+<&lt;script&gt;alert(&quot;Should escape me.&quot;)&lt;/script&gt; class="uk-article-title" itemprop="headline">
+EOB;
+		// Check when given as the tag.
+		$actual = beans_open_markup( 'beans_post_title', '<script>alert("Should escape me.")</script>', array(
+			'class'    => 'uk-article-title',
+			'itemprop' => 'headline',
+		) );
+		$this->assertSame( $expected, $actual );
+
+		// Check when tag is filtered.
+		add_filter( 'beans_post_title_markup', function() {
+			return '<script>alert("Should escape me.")</script>';
+		} );
+		$actual = beans_open_markup( 'beans_post_title', 'h1', array(
+			'class'    => 'uk-article-title',
+			'itemprop' => 'headline',
+		) );
+		$this->assertSame( $expected, $actual );
+
+		// Check the attributes too.
+		$expected = <<<EOB
+<a href="http://example.com/testing-ensure-safe?val=scriptalert(Should%20escape%20me.);/script" title="Testing to ensure safe." rel="bookmark">
+EOB;
+		$this->assertSame( $expected, beans_open_markup( 'beans_post_title_link', 'a', array(
+			'href'  => 'http://example.com/testing-ensure-safe?val=<script>alert("Should escape me.");</script>',
+			'title' => 'Testing to ensure safe.',
+			'rel'   => 'bookmark',
+		) ) );
+	}
 }

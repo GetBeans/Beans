@@ -132,4 +132,21 @@ EOB;
 		$this->assertEquals( 2, did_action( 'beans_archive_title_append_markup' ) );
 		$this->assertEquals( 2, did_action( 'beans_archive_title_after_markup' ) );
 	}
+
+	/**
+	 * Test beans_close_markup() should escape the closing tag.
+	 */
+	public function test_should_escape_closing_tag() {
+		$expected = <<<EOB
+</&lt;script&gt;alert(&quot;Should escape me.&quot;)&lt;/script&gt;>
+EOB;
+		// Check when given as the tag.
+		$this->assertSame( $expected, beans_close_markup( 'beans_post_title', '<script>alert("Should escape me.")</script>' ) );
+
+		// Check when tag is filtered.
+		add_filter( 'beans_post_title_markup', function() {
+			return '<script>alert("Should escape me.")</script>';
+		});
+		$this->assertSame( $expected, beans_close_markup( 'beans_post_title', 'h1' ) );
+	}
 }

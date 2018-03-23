@@ -39,7 +39,7 @@ function beans_output( $id, $output ) {
 	}
 
 	if ( _beans_is_html_dev_mode() ) {
-		$id = esc_attr( $id );
+		$id     = esc_attr( $id );
 		$output = "<!-- open output: $id -->" . $output . "<!-- close output: $id -->";
 	}
 
