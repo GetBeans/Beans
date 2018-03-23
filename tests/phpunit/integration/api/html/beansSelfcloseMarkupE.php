@@ -26,7 +26,7 @@ class Tests_BeansSelfcloseMarkupE extends HTML_Test_Case {
 	/**
 	 * Test beans_selfclose_markup_e() should echo an empty string when the tag is set to null.
 	 */
-	public function test_should_return_null_when_tag_set_to_null() {
+	public function test_should_echo_empty_string_when_tag_set_to_null() {
 
 		foreach ( static::$test_attachments as $attachment ) {
 			ob_start();
@@ -38,7 +38,7 @@ class Tests_BeansSelfcloseMarkupE extends HTML_Test_Case {
 	/**
 	 * Test beans_selfclose_markup_e() should echo the built HTML self-closing element.
 	 */
-	public function test_should_return_built_html_self_closing_element() {
+	public function test_should_echo_built_html_self_closing_element() {
 		// Check the first attachment.
 		$attachment = current( static::$test_attachments );
 		$expected   = <<<EOB

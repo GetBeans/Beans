@@ -93,9 +93,9 @@ function beans_remove_output( $id ) {
  * @since 1.0.0
  *
  * @param string       $id         A unique string used as a reference. The $id argument may contain sub-hooks(s).
- * @param string|bool  $tag        The HTML tag. When set to false or an empty string, the markup HTML tag will not be
+ * @param string|bool  $tag        The HTML tag. When set to false or an empty string, the HTML markup tag will not be
  *                                 built, but both action hooks will fire. If set to null, the function bails out, i.e.
- *                                 the markup HTML tag will not be built and neither action hook fires.
+ *                                 the HTML markup tag will not be built and neither action hook fires.
  * @param string|array $attributes Optional. Query string or array of attributes. The array key defines the
  *                                 attribute name and the array value defines the attribute value.
  *
@@ -131,7 +131,7 @@ function beans_open_markup( $id, $tag, $attributes = array() ) {
 	$args[0] = $id . '_before_markup';
 	$output  = call_user_func_array( '_beans_render_action', $args );
 
-	// Skip the opening tag when it's empty.
+	// Build the opening tag when tag is available.
 	if ( $tag ) {
 		$output .= '<' . $tag . ' ' . call_user_func_array( 'beans_add_attributes', $attributes_args ) . ( _beans_is_html_dev_mode() ? ' data-markup-id="' . $id . '"' : null ) . ( $_beans_is_selfclose_markup ? '/' : '' ) . '>';
 	}
@@ -153,9 +153,9 @@ function beans_open_markup( $id, $tag, $attributes = array() ) {
  * @since 1.4.0
  *
  * @param string       $id         A unique string used as a reference. The $id argument may contain sub-hooks(s).
- * @param string|bool  $tag        The HTML tag. When set to false or an empty string, the markup HTML tag will not be
+ * @param string|bool  $tag        The HTML tag. When set to false or an empty string, the HTML markup tag will not be
  *                                 built, but both action hooks will fire. If set to null, the function bails out, i.e.
- *                                 the markup HTML tag will not be built and neither action hook fires.
+ *                                 the HTML markup tag will not be built and neither action hook fires.
  * @param string|array $attributes Optional. Query string or array of attributes. The array key defines the
  *                                 attribute name and the array value defines the attribute value.
  *
@@ -180,9 +180,9 @@ function beans_open_markup_e( $id, $tag, $attributes = array() ) {
  * @global bool        $_beans_is_selfclose_markup When true, indicates a self-closing element should be built.
  *
  * @param string       $id         A unique string used as a reference. The $id argument may contain sub-hooks(s).
- * @param string|bool  $tag        The self-closing HTML tag. When set to false or an empty string, the markup HTML tag
+ * @param string|bool  $tag        The self-closing HTML tag. When set to false or an empty string, the HTML markup tag
  *                                 will not be built, but both action hooks will fire. If set to null, the function
- *                                 bails out, i.e. the markup HTML tag will not be built and neither action hook fires.
+ *                                 bails out, i.e. the HTML markup tag will not be built and neither action hook fires.
  * @param string|array $attributes Optional. Query string or array of attributes. The array key defines the attribute
  *                                 name and the array value defines the attribute value.
  *
@@ -208,9 +208,9 @@ function beans_selfclose_markup( $id, $tag, $attributes = array() ) {
  * @since 1.4.0
  *
  * @param string       $id         A unique string used as a reference. The $id argument may contain sub-hooks(s).
- * @param string|bool  $tag        The self-closing HTML tag. When set to false or an empty string, the markup HTML tag
+ * @param string|bool  $tag        The self-closing HTML tag. When set to false or an empty string, the HTML markup tag
  *                                 will not be built, but both action hooks will fire. If set to null, the function
- *                                 bails out, i.e. the markup HTML tag will not be built and neither action hook fires.
+ *                                 bails out, i.e. the HTML markup tag will not be built and neither action hook fires.
  * @param string|array $attributes Optional. Query string or array of attributes. The array key defines the attribute
  *                                 name and the array value defines the attribute value.
  *
@@ -231,8 +231,8 @@ function beans_selfclose_markup_e( $id, $tag, $attributes = array() ) {
  * @since 1.0.0
  *
  * @param string $id  Identical to the opening markup ID.
- * @param string $tag The HTML tag. When set to false or an empty string, the markup HTML tag will not be built, but
- *                    both action hooks will fire. If set to null, the function bails out, i.e. the markup HTML
+ * @param string $tag The HTML tag. When set to false or an empty string, the HTML markup tag will not be built, but
+ *                    both action hooks will fire. If set to null, the function bails out, i.e. the HTML markup
  *                    tag will not be built and neither action hook fires.
  *
  * @return string|void
@@ -255,7 +255,7 @@ function beans_close_markup( $id, $tag ) {
 	$args[0] = $id . '_append_markup';
 	$output  = call_user_func_array( '_beans_render_action', $args );
 
-	// Skip the closing tag when it's empty.
+	// Build the closing tag when tag is available.
 	if ( $tag ) {
 		$output .= '</' . $tag . '>';
 	}
@@ -274,8 +274,8 @@ function beans_close_markup( $id, $tag ) {
  * @since 1.4.0
  *
  * @param string $id  Identical to the opening markup ID.
- * @param string $tag The HTML tag. When set to false or an empty string, the markup HTML tag will not be built, but
- *                    both action hooks will fire. If set to null, the function bails out, i.e. the markup HTML
+ * @param string $tag The HTML tag. When set to false or an empty string, the HTML markup tag will not be built, but
+ *                    both action hooks will fire. If set to null, the function bails out, i.e. the HTML markup
  *                    tag will not be built and neither action hook fires.
  *
  * @return void
