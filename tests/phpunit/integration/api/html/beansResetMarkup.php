@@ -24,9 +24,9 @@ require_once __DIR__ . '/includes/class-html-test-case.php';
 class Tests_BeansResetMarkup extends HTML_Test_Case {
 
 	/**
-	 * Test beans_reset_markup() should reset the markup HTML opening and closing tag.
+	 * Test beans_reset_markup() should reset the HTML markup opening and closing tag.
 	 */
-	public function test_should_reset_markup_html_opening_and_closing_tag() {
+	public function test_should_reset_html_markup_opening_and_closing_tag() {
 		// First, register to modify the tag.
 		$anonymous_filter = beans_modify_markup( 'beans_archive_title', 'h2', 20 );
 		$this->assertEquals( 20, has_filter( 'beans_archive_title_markup', array( $anonymous_filter, 'callback' ) ) );
@@ -44,9 +44,9 @@ class Tests_BeansResetMarkup extends HTML_Test_Case {
 	}
 
 	/**
-	 * Test beans_reset_markup() should reset the markup HTML self-closing tag.
+	 * Test beans_reset_markup() should reset the HTML markup self-closing tag.
 	 */
-	public function test_should_reset_markup_html_self_closing_tag() {
+	public function test_should_reset_html_markup_self_closing_tag() {
 		// First, register to modify the tag.
 		$anonymous_filter = beans_modify_markup( 'beans_post_image_item', 'foo', 20 );
 		$this->assertEquals( 20, has_filter( 'beans_post_image_item_markup', array( $anonymous_filter, 'callback' ) ) );
