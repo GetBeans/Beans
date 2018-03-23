@@ -58,7 +58,7 @@ function beans_output( $id, $output ) {
  */
 function beans_output_e( $id, $output ) {
 	$args = func_get_args();
-	echo call_user_func_array( 'beans_output', $args ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped -- Pending security audit.
+	echo call_user_func_array( 'beans_output', $args ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped -- Escaped in beans_output.
 }
 
 /**
