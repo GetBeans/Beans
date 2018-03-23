@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for beans_modify_action()
+ * Tests for beans_modify_action().
  *
  * @package Beans\Framework\Tests\Unit\API\Actions
  *
@@ -30,16 +30,11 @@ class Tests_BeansModifyAction extends Actions_Test_Case {
 	public function test_should_return_false_when_nothing_to_modify() {
 		global $_beans_registered_actions;
 
-		$this->go_to_post( true );
-
 		foreach ( static::$test_actions as $beans_id => $original_action ) {
 			$this->assertFalse( beans_modify_action( $beans_id ) );
 
 			// Verify that the action was not stored as "modified".
 			$this->assertArrayNotHasKey( $beans_id, $_beans_registered_actions['modified'] );
-
-			// Check that the original action was not replaced.
-			$this->assertSame( $original_action, _beans_get_action( $beans_id, 'added' ) );
 		}
 	}
 
@@ -47,17 +42,35 @@ class Tests_BeansModifyAction extends Actions_Test_Case {
 	 * Test beans_modify_action() should register with Beans as "modified", but not add the action.
 	 */
 	public function test_should_register_as_modified_but_not_add_action() {
+		global $_beans_registered_actions;
 
 		foreach ( static::$test_actions as $beans_id => $action ) {
 			// Check the starting state.
+			$this->assertArrayNotHasKey( $beans_id, $_beans_registered_actions['modified'] );
 			$this->assertFalse( has_action( $action['hook'], $action['callback'] ) );
-			$this->assertFalse( _beans_get_action( $beans_id, 'modified' ) );
+
+			// Set up the mocks.
+			Monkey\Functions\expect( '_beans_get_current_action' )
+				->once()
+				->with( $beans_id )
+				->andReturn( false );
+			Monkey\Functions\expect( '_beans_merge_action' )
+				->once()
+				->with( $beans_id, $action, 'modified' )
+				->andReturnUsing( function( $id, $action ) {
+					global $_beans_registered_actions;
+					$_beans_registered_actions['modified'][ $id ] = $action;
+
+					return $action;
+				} );
+			Monkey\Actions\expectAdded( $action['hook'] )->never();
 
 			// Check that it returns false.
 			$this->assertFalse( beans_modify_action( $beans_id, $action['hook'], $action['callback'], $action['priority'], $action['args'] ) );
 
 			// Check that it did register as "modified" in Beans.
-			$this->assertEquals( $action, _beans_get_action( $beans_id, 'modified' ) );
+			$this->assertArrayHasKey( $beans_id, $_beans_registered_actions['modified'] );
+			$this->assertSame( $action, $_beans_registered_actions['modified'][ $beans_id ] );
 
 			// Check that the action was not added in WordPress.
 			$this->assertFalse( has_action( $action['hook'], $action['callback'] ) );
@@ -68,34 +81,33 @@ class Tests_BeansModifyAction extends Actions_Test_Case {
 	 * Test beans_modify_action() should modify the registered action's hook.
 	 */
 	public function test_should_modify_the_action_hook() {
-		$modified_action = array(
-			'hook' => 'foo',
-		);
-
-		$this->go_to_post( true );
+		$modified_hook = 'foo';
 
 		foreach ( static::$test_actions as $beans_id => $original_action ) {
-			// Set up the WordPress simulator before we modify the action.
-			Monkey\Actions\expectAdded( $modified_action['hook'] )
+			Monkey\Functions\expect( '_beans_get_current_action' )
 				->once()
-				->whenHappen( function( $callback, $priority, $args ) use ( $original_action ) {
-					// Check that the parameters remain unchanged in WordPress.
-					$this->assertSame( $original_action['callback'], $callback );
-					$this->assertSame( $original_action['priority'], $priority );
-					$this->assertSame( $original_action['args'], $args );
-				} );
+				->with( $beans_id )
+				->andReturn( $original_action );
+
+			// Expect that the original action gets removed.
+			Monkey\Functions\expect( 'remove_action' )
+				->once()
+				->with( $original_action['hook'], $original_action['callback'], $original_action['priority'] );
+
+			// When called, return the modified action.
+			Monkey\Functions\expect( '_beans_merge_action' )
+				->once()
+				->with( $beans_id, array( 'hook' => $modified_hook ), 'modified' )
+				->andReturn( array( 'hook' => $modified_hook ) );
+
+			// Expect the modified hook is added, but not the original hook.
+			Monkey\Actions\expectAdded( $original_action['hook'] )->never();
+			Monkey\Actions\expectAdded( $modified_hook )
+				->once()
+				->with( $original_action['callback'], $original_action['priority'], $original_action['args'] );
 
 			// Modify the hook.
-			$this->assertTrue( beans_modify_action( $beans_id, $modified_action['hook'] ) );
-
-			// Check that the modified action is registered as "modified" in Beans.
-			$this->assertEquals( $modified_action, _beans_get_action( $beans_id, 'modified' ) );
-
-			// Check that the original action was removed from WordPress.
-			$this->assertFalse( has_action( $original_action['hook'], $original_action['callback'] ) );
-
-			// Check that the modified action was added in WordPress.
-			$this->assertTrue( has_action( $modified_action['hook'], $original_action['callback'] ) !== false );
+			$this->assertTrue( beans_modify_action( $beans_id, $modified_hook ) );
 		}
 	}
 
@@ -103,35 +115,32 @@ class Tests_BeansModifyAction extends Actions_Test_Case {
 	 * Test beans_modify_action() should modify the registered action's callback.
 	 */
 	public function test_should_modify_the_action_callback() {
-		$modified_action = array(
-			'callback' => 'my_callback',
-		);
-
-		$this->go_to_post( true );
+		$modified_callback = 'my_callback';
 
 		foreach ( static::$test_actions as $beans_id => $original_action ) {
-			// Set up the WordPress simulator before we modify the action.
+			Monkey\Functions\expect( '_beans_get_current_action' )
+				->once()
+				->with( $beans_id )
+				->andReturn( $original_action );
+
+			// Expect that the original action gets removed.
+			Monkey\Functions\expect( 'remove_action' )
+				->once()
+				->with( $original_action['hook'], $original_action['callback'], $original_action['priority'] );
+
+			// When called, return the modified action.
+			Monkey\Functions\expect( '_beans_merge_action' )
+				->once()
+				->with( $beans_id, array( 'callback' => $modified_callback ), 'modified' )
+				->andReturn( array( 'callback' => $modified_callback ) );
+
+			// Expect the original hook with the modified callback.
 			Monkey\Actions\expectAdded( $original_action['hook'] )
 				->once()
-				->whenHappen( function( $callback, $priority, $args ) use ( $original_action, $modified_action ) {
-					// Check that the callback was modified in WordPress.
-					$this->assertSame( $modified_action['callback'], $callback );
-					// Check that the other parameters remain unchanged.
-					$this->assertSame( $original_action['priority'], $priority );
-					$this->assertSame( $original_action['args'], $args );
-				} );
+				->with( $modified_callback, $original_action['priority'], $original_action['args'] );
 
-			// Modify the action's callback.
-			$this->assertTrue( beans_modify_action( $beans_id, null, $modified_action['callback'] ) );
-
-			// Check that the modified action is registered as "modified" in Beans.
-			$this->assertEquals( $modified_action, _beans_get_action( $beans_id, 'modified' ) );
-
-			// Check that the original action was removed from WordPress.
-			$this->assertFalse( has_action( $original_action['hook'], $original_action['callback'] ) );
-
-			// Check that the modified action was added in WordPress.
-			$this->assertTrue( has_action( $original_action['hook'], $modified_action['callback'] ) !== false );
+			// Modify the action.
+			$this->assertTrue( beans_modify_action( $beans_id, null, $modified_callback ) );
 		}
 	}
 
@@ -139,29 +148,32 @@ class Tests_BeansModifyAction extends Actions_Test_Case {
 	 * Test beans_modify_action() should modify the registered action's priority level.
 	 */
 	public function test_should_modify_the_action_priority() {
-		$modified_action = array(
-			'priority' => 20,
-		);
-
-		$this->go_to_post( true );
+		$modified_priority = 20;
 
 		foreach ( static::$test_actions as $beans_id => $original_action ) {
-			// Set up the WordPress simulator before we modify the action.
+			Monkey\Functions\expect( '_beans_get_current_action' )
+				->once()
+				->with( $beans_id )
+				->andReturn( $original_action );
+
+			// Expect that the original action gets removed.
+			Monkey\Functions\expect( 'remove_action' )
+				->once()
+				->with( $original_action['hook'], $original_action['callback'], $original_action['priority'] );
+
+			// When called, return the modified action.
+			Monkey\Functions\expect( '_beans_merge_action' )
+				->once()
+				->with( $beans_id, array( 'priority' => $modified_priority ), 'modified' )
+				->andReturn( array( 'priority' => $modified_priority ) );
+
+			// Expect the original hook with the modified callback.
 			Monkey\Actions\expectAdded( $original_action['hook'] )
 				->once()
-				->whenHappen( function( $callback, $priority, $args ) use ( $original_action, $modified_action ) {
-					// Check that the priority was modified in WordPress.
-					$this->assertSame( $modified_action['priority'], $priority );
-					// Check that the other parameters remain unchanged.
-					$this->assertSame( $original_action['callback'], $callback );
-					$this->assertSame( $original_action['args'], $args );
-				} );
+				->with( $original_action['callback'], $modified_priority, $original_action['args'] );
 
-			// Modify the action's priority.
-			$this->assertTrue( beans_modify_action( $beans_id, null, null, $modified_action['priority'] ) );
-
-			// Check that the modified action is registered as "modified" in Beans.
-			$this->assertEquals( $modified_action, _beans_get_action( $beans_id, 'modified' ) );
+			// Modify the hook.
+			$this->assertTrue( beans_modify_action( $beans_id, null, null, $modified_priority ) );
 		}
 	}
 
@@ -169,29 +181,34 @@ class Tests_BeansModifyAction extends Actions_Test_Case {
 	 * Test beans_modify_action() should modify the registered action's number of arguments.
 	 */
 	public function test_should_modify_the_action_args() {
-		$modified_action = array(
-			'args' => 7,
-		);
-
-		$this->go_to_post( true );
+		$modified_args = 7;
 
 		foreach ( static::$test_actions as $beans_id => $original_action ) {
-			// Set up the WordPress simulator before we modify the action.
-			Monkey\Actions\expectAdded( $original_action['hook'] )
-				->once()
-				->whenHappen( function( $callback, $priority, $args ) use ( $original_action, $modified_action ) {
-					// Check that the number of arguments was modified in WordPress.
-					$this->assertSame( $modified_action['args'], $args );
-					// Check that the other parameters remain unchanged.
-					$this->assertSame( $original_action['callback'], $callback );
-					$this->assertSame( $original_action['priority'], $priority );
-				} );
+			foreach ( static::$test_actions as $beans_id => $original_action ) {
+				Monkey\Functions\expect( '_beans_get_current_action' )
+					->once()
+					->with( $beans_id )
+					->andReturn( $original_action );
 
-			// Modify the action's number of arguments.
-			$this->assertTrue( beans_modify_action( $beans_id, null, null, null, $modified_action['args'] ) );
+				// Expect that the original action gets removed.
+				Monkey\Functions\expect( 'remove_action' )
+					->once()
+					->with( $original_action['hook'], $original_action['callback'], $original_action['priority'] );
 
-			// Check that the modified action is registered as "modified" in Beans.
-			$this->assertEquals( $modified_action, _beans_get_action( $beans_id, 'modified' ) );
+				// When called, return the modified action.
+				Monkey\Functions\expect( '_beans_merge_action' )
+					->once()
+					->with( $beans_id, array( 'args' => $modified_args ), 'modified' )
+					->andReturn( array( 'args' => $modified_args ) );
+
+				// Expect the original hook with the modified callback.
+				Monkey\Actions\expectAdded( $original_action['hook'] )
+					->once()
+					->with( $original_action['callback'], $original_action['priority'], $modified_args );
+
+				// Modify the action.
+				$this->assertTrue( beans_modify_action( $beans_id, null, null, null, $modified_args ) );
+			}
 		}
 	}
 }
