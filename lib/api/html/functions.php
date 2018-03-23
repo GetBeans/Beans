@@ -257,7 +257,7 @@ function beans_close_markup( $id, $tag ) {
 
 	// Build the closing tag when tag is available.
 	if ( $tag ) {
-		$output .= '</' . $tag . '>';
+		$output .= '</' . esc_attr( $tag ) . '>';
 	}
 
 	// Set and then fire the after action hook.
@@ -282,7 +282,7 @@ function beans_close_markup( $id, $tag ) {
  */
 function beans_close_markup_e( $id, $tag ) {
 	$args = func_get_args();
-	echo call_user_func_array( 'beans_close_markup', $args ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped -- Pending security audit.
+	echo call_user_func_array( 'beans_close_markup', $args ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped -- Escaped in beans_close_markup().
 }
 
 /**
