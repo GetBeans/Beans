@@ -133,7 +133,7 @@ function beans_open_markup( $id, $tag, $attributes = array() ) {
 
 	// Build the opening tag when tag is available.
 	if ( $tag ) {
-		$output .= '<' . $tag . ' ' . call_user_func_array( 'beans_add_attributes', $attributes_args ) . ( _beans_is_html_dev_mode() ? ' data-markup-id="' . $id . '"' : null ) . ( $_beans_is_selfclose_markup ? '/' : '' ) . '>';
+		$output .= '<' . esc_attr( $tag ) . ' ' . call_user_func_array( 'beans_add_attributes', $attributes_args ) . ( _beans_is_html_dev_mode() ? ' data-markup-id="' . esc_attr( $id ) . '"' : null ) . ( $_beans_is_selfclose_markup ? '/' : '' ) . '>';
 	}
 
 	// Set and then fire the after action hook.
@@ -163,7 +163,7 @@ function beans_open_markup( $id, $tag, $attributes = array() ) {
  */
 function beans_open_markup_e( $id, $tag, $attributes = array() ) {
 	$args = func_get_args();
-	echo call_user_func_array( 'beans_open_markup', $args ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped -- Pending security audit.
+	echo call_user_func_array( 'beans_open_markup', $args ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped -- Escaped in beans_open_markup().
 }
 
 /**
@@ -217,7 +217,7 @@ function beans_selfclose_markup( $id, $tag, $attributes = array() ) {
  * @return void
  */
 function beans_selfclose_markup_e( $id, $tag, $attributes = array() ) {
-	echo call_user_func_array( 'beans_selfclose_markup', func_get_args() ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped -- Pending security audit.
+	echo call_user_func_array( 'beans_selfclose_markup', func_get_args() ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped -- Escaped in beans_open_markup().
 }
 
 /**
