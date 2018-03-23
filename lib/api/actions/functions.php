@@ -253,8 +253,10 @@ function beans_replace_action( $id, $hook = null, $callback = null, $priority = 
 	// Modify the action.
 	$is_modified = beans_modify_action( $id, $hook, $callback, $priority, $args );
 
-	// Now merge the current action with the replaced one.
-	_beans_merge_action( $id, $action, 'added' );
+	// If there's a current action, merge it with the replaced one; else, it will be replaced when the original is added.
+	if ( $is_modified ) {
+		_beans_merge_action( $id, $action, 'added' );
+	}
 
 	return $is_modified;
 }

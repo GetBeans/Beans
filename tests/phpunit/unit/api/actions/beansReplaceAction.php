@@ -103,8 +103,8 @@ class Tests_BeansReplaceAction extends Replace_Action_Test_Case {
 	 * Test beans_replace_action() should replace the registered action's callback.
 	 */
 	public function test_should_replace_the_action_callback() {
-		$replaced_callback   = 'my_replaced_callback';
-		$replaced_action = array( 'callback' => $replaced_callback );
+		$replaced_callback = 'my_replaced_callback';
+		$replaced_action   = array( 'callback' => $replaced_callback );
 
 		foreach ( static::$test_ids as $beans_id ) {
 			Monkey\Functions\expect( '_beans_merge_action' )
@@ -132,8 +132,8 @@ class Tests_BeansReplaceAction extends Replace_Action_Test_Case {
 	 * Test beans_replace_action() should replace the registered action's priority level.
 	 */
 	public function test_should_replace_the_action_priority() {
-		$replaced_priority   = -2;
-		$replaced_action = array( 'priority' => $replaced_priority );
+		$replaced_priority = - 2;
+		$replaced_action   = array( 'priority' => $replaced_priority );
 
 		foreach ( static::$test_ids as $beans_id ) {
 			Monkey\Functions\expect( '_beans_merge_action' )

@@ -29,20 +29,21 @@ class Tests_BeansReplaceAction extends Replace_Action_Test_Case {
 	 * Intent: We are testing to ensure Beans is "load order" agnostic.
 	 */
 	public function test_should_store_when_action_is_not_registered() {
-		$replaced_action = array(
-			'callback' => 'my_new_callback',
-		);
+		$replaced_callback = 'my_replaced_callback';
+		$replaced_action   = array( 'callback' => $replaced_callback );
 
 		foreach ( static::$test_ids as $beans_id ) {
 			// Test that the original action has not yet been added.
 			$this->assertFalse( _beans_get_action( $beans_id, 'added' ) );
 
 			// Now store away the "replace" hook.
-			$this->assertFalse( beans_replace_action( $beans_id, null, $replaced_action['callback'] ) );
+			$this->assertFalse( beans_replace_action( $beans_id, null, $replaced_callback ) );
 
-			// Check that it was stored as "modified" and "added".
-			$this->assertEquals( $replaced_action, _beans_get_action( $beans_id, 'modified' ) );
-			$this->assertEquals( $replaced_action, _beans_get_action( $beans_id, 'added' ) );
+			// Check that it was stored as "replaced".
+			$this->assertEquals( $replaced_action, _beans_get_action( $beans_id, 'replaced' ) );
+
+			// Check that it did not store as "added".
+			$this->assertFalse( _beans_get_action( $beans_id, 'added' ) );
 		}
 	}
 
@@ -53,13 +54,12 @@ class Tests_BeansReplaceAction extends Replace_Action_Test_Case {
 	 * Intent: We are testing to ensure Beans is "load order" agnostic.
 	 */
 	public function test_should_store_and_then_replace_action() {
-		$replaced_action = array(
-			'callback' => 'my_new_callback',
-		);
+		$replaced_callback = 'my_replaced_callback';
+		$replaced_action   = array( 'callback' => $replaced_callback );
 
-		// Now replace the actions.
+		// Store the "replaced" action.
 		foreach ( static::$test_ids as $beans_id ) {
-			beans_replace_action( $beans_id, null, $replaced_action['callback'] );
+			beans_replace_action( $beans_id, null, $replaced_callback );
 		}
 
 		$this->go_to_post();
@@ -68,7 +68,7 @@ class Tests_BeansReplaceAction extends Replace_Action_Test_Case {
 			// Check that the original action's callback was replaced in Beans.
 			$new_action = _beans_get_action( $beans_id, 'added' );
 			$this->assertEquals( $original_action['hook'], $new_action['hook'] );
-			$this->assertEquals( $replaced_action['callback'], $new_action['callback'] );
+			$this->assertEquals( $replaced_callback, $new_action['callback'] );
 			$this->assertEquals( $original_action['priority'], $new_action['priority'] );
 			$this->assertEquals( $original_action['args'], $new_action['args'] );
 
