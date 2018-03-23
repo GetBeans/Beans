@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for beans_replace_action_hook()
+ * Tests for beans_replace_action_hook().
  *
  * @package Beans\Framework\Tests\Unit\API\Actions
  *
@@ -24,131 +24,30 @@ require_once __DIR__ . '/includes/class-replace-action-test-case.php';
 class Tests_BeansReplaceActionHook extends Replace_Action_Test_Case {
 
 	/**
-	 * Test beans_replace_action_hook() should store the "replaced" action when the original action
-	 * has not yet been registered.
-	 *
-	 * Intent: We are testing to ensure Beans is "load order" agnostic.
+	 * Test beans_replace_action_hook() should return false when the hook is empty or not a string.
 	 */
-	public function test_should_store_when_action_is_not_registered() {
-		$replaced_action = array(
-			'hook' => 'my_new_hook',
-		);
+	public function test_should_return_false_when_hook_is_empty_or_not_string() {
 
-		foreach ( array_keys( static::$test_actions ) as $beans_id ) {
-			// Test that the original action has not yet been added.
-			$this->assertFalse( _beans_get_action( $beans_id, 'added' ) );
-
-			// Now store away the "replace" hook.
-			$this->assertFalse( beans_replace_action_hook( $beans_id, $replaced_action['hook'] ) );
-
-			// Check that it was stored as "modified".
-			$this->assertEquals( $replaced_action, _beans_get_action( $beans_id, 'modified' ) );
-		}
-	}
-
-	/**
-	 * Test beans_replace_action_hook() should store the "replaced" hook when the original action
-	 * has not yet been registered.  Once the original action is registered, then the hook should be replaced.
-	 *
-	 * Intent: We are testing to ensure Beans is "load order" agnostic.
-	 */
-	public function test_should_store_and_then_replace_the_hook() {
-		$replaced_action = array(
-			'hook' => 'foo',
-		);
-
-		// Now replace the actions.
 		foreach ( static::$test_ids as $beans_id ) {
-			beans_replace_action_hook( $beans_id, $replaced_action['hook'] );
-		}
+			Monkey\Functions\expect( 'beans_replace_action' )->never();
 
-		foreach ( static::$test_actions as $beans_id => $original_action ) {
-			// Set up the WordPress simulator before we add the action.
-			Monkey\Actions\expectAdded( $replaced_action['hook'] )
-				->once()
-				->whenHappen( function( $callback, $priority, $args ) use ( $original_action ) {
-					// Check that all of the parameters remain unchanged.
-					$this->assertSame( $original_action['callback'], $callback );
-					$this->assertSame( $original_action['priority'], $priority );
-					$this->assertSame( $original_action['args'], $args );
-				} );
-
-			// Now add the original action.
-			beans_add_action( $beans_id, $original_action['hook'], $original_action['callback'], $original_action['priority'], $original_action['args'] );
-
-			// Check that only the hook was replaced.
-			$new_action = _beans_get_action( $beans_id, 'added' );
-			$this->assertEquals( $replaced_action['hook'], $new_action['hook'] );
-			$this->assertEquals( $original_action['callback'], $new_action['callback'] );
-			$this->assertEquals( $original_action['priority'], $new_action['priority'] );
-			$this->assertEquals( $original_action['args'], $new_action['args'] );
-
-			// Check that the "replaced" action has been stored in Beans and WordPress.
-			$this->check_stored_in_beans( $beans_id, $replaced_action );
-			$this->assertFalse( has_action( $original_action['hook'], $original_action['callback'] ) );
-			$this->assertTrue( has_action( $replaced_action['hook'], $original_action['callback'] ) !== false );
-		}
-	}
-
-	/**
-	 * Test beans_replace_action_hook() should return false when no hook was passed.
-	 */
-	public function test_should_return_false_when_no_hook() {
-		$this->go_to_post();
-
-		foreach ( static::$test_actions as $beans_id => $action_config ) {
-			// Check it returns false.
 			$this->assertFalse( beans_replace_action_hook( $beans_id, '' ) );
-
-			// Verify that it did not get stored in "replaced" or "modified".
-			global $_beans_registered_actions;
-			$this->assertArrayNotHasKey( $beans_id, $_beans_registered_actions['replaced'] );
-			$this->assertArrayNotHasKey( $beans_id, $_beans_registered_actions['modified'] );
-
-			// Check that the original action has not been replaced.
-			$this->assertSame( $action_config, _beans_get_action( $beans_id, 'added' ) );
+			$this->assertFalse( beans_replace_action_hook( $beans_id, array( 'not-a-string' ) ) );
 		}
 	}
 
 	/**
-	 * Test beans_replace_action_hook() should replace the registered action's hook.
+	 * Test beans_replace_action_hook() should invoke beans_replace_action().
 	 */
-	public function test_should_replace_the_action_hook() {
-		$replaced_action = array(
-			'hook' => 'foo',
-		);
+	public function test_should_invoke_beans_replace_action() {
 
-		$this->go_to_post( true );
-
-		foreach ( static::$test_actions as $beans_id => $original_action ) {
-			// Set up the WordPress simulator before we replace the action.
-			Monkey\Actions\expectAdded( $replaced_action['hook'] )
+		foreach ( static::$test_actions as $beans_id => $action ) {
+			Monkey\Functions\expect( 'beans_replace_action' )
 				->once()
-				->whenHappen( function( $callback, $priority, $args ) use ( $original_action ) {
-					// Check that the parameters remain unchanged in WordPress.
-					$this->assertSame( $original_action['callback'], $callback );
-					$this->assertSame( $original_action['priority'], $priority );
-					$this->assertSame( $original_action['args'], $args );
-				} );
+				->with( $beans_id, $action['hook'] )
+				->andReturn( true );
 
-			// Run the replace.
-			$this->assertTrue( beans_replace_action_hook( $beans_id, $replaced_action['hook'] ) );
-
-			// Check that only the hook was replaced.
-			$new_action = _beans_get_action( $beans_id, 'added' );
-			$this->assertEquals( $replaced_action['hook'], $new_action['hook'] );
-			$this->assertEquals( $original_action['callback'], $new_action['callback'] );
-			$this->assertEquals( $original_action['priority'], $new_action['priority'] );
-			$this->assertEquals( $original_action['args'], $new_action['args'] );
-
-			// Check that the "replaced" action has been stored in Beans.
-			$this->check_stored_in_beans( $beans_id, $replaced_action );
-
-			// Check that the original action was removed from WordPress.
-			$this->assertFalse( has_action( $original_action['hook'], $original_action['callback'] ) );
-
-			// Check that the replace action was added in WordPress.
-			$this->assertTrue( has_action( $replaced_action['hook'], $original_action['callback'] ) !== false );
+			$this->assertTrue( beans_replace_action_hook( $beans_id, $action['hook'] ) );
 		}
 	}
 }
