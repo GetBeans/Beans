@@ -322,13 +322,8 @@ function beans_remove_markup( $id, $remove_actions = false ) {
 }
 
 /**
- * Reset markup.
- *
- * This function will automatically reset the opening and the closing HTML tag to its original value. If the markup is
- * self-closed, the HTML tag will be reset accordingly.
- *
- * The "data-markup-id" is added as a HTML attribute if the development mode is enabled. This makes it very
- * easy to find the content ID when inspecting an element in a web browser.
+ * Reset the given markup's tag.  This function will automatically reset the opening and closing HTML tag or
+ * self-closing tag to its original value.
  *
  * @since 1.3.1
  *
