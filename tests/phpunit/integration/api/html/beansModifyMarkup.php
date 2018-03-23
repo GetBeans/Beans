@@ -75,7 +75,6 @@ EOB;
 		$expected = <<<EOB
 <foo width="800" height="500" src="http://example.com/image.png" alt="Some image" itemprop="image"/>
 EOB;
-
 		$actual   = beans_selfclose_markup( 'beans_post_image_item', 'img', array(
 			'width'    => 800,
 			'height'   => 500,
