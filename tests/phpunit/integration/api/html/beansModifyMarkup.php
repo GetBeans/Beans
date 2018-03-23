@@ -43,9 +43,9 @@ class Tests_BeansModifyMarkup extends HTML_Test_Case {
 	}
 
 	/**
-	 * Test beans_modify_markup() should modify the markup HTML tag.
+	 * Test beans_modify_markup() should modify the HTML markup tag.
 	 */
-	public function test_should_modify_markup_html_tag() {
+	public function test_should_modify_html_markup_tag() {
 		beans_modify_markup( 'beans_archive_title', 'h2' );
 		$expected = <<<EOB
 <!-- _before_markup fired --><h2 class="uk-article-title"><!-- _prepend_markup fired -->
@@ -68,9 +68,9 @@ EOB;
 	}
 
 	/**
-	 * Test beans_modify_markup() should modify the markup HTML self-closing tag.
+	 * Test beans_modify_markup() should modify the HTML markup self-closing tag.
 	 */
-	public function test_should_modify_markup_html_self_closing_tag() {
+	public function test_should_modify_html_markup_self_closing_tag() {
 		beans_modify_markup( 'beans_post_image_item', 'foo' );
 		$expected = <<<EOB
 <foo width="800" height="500" src="http://example.com/image.png" alt="Some image" itemprop="image"/>
