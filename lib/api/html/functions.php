@@ -286,27 +286,18 @@ function beans_close_markup_e( $id, $tag ) {
 }
 
 /**
- * Modify opening and closing HTML tag. Also works for self-closing markup.
- *
- * This function will automatically modify the opening and the closing HTML tag. If the markup is self-closing,
- * the HTML tag will be modified accordingly.
- *
- * The "data-markup-id" is added as a HTML attribute if the development mode is enabled. This makes it very
- * easy to find the content ID when inspecting an element in a web browser.
+ * Modify the opening and closing or self-closing HTML tag.
  *
  * @since 1.0.0
  *
- * @param string          $id       The markup ID.
+ * @param string          $id       The target markup's ID.
  * @param string|callback $markup   The replacement HTML tag. A callback is accepted if conditions need to be
  *                                  applied. If arguments are available, then they are passed to the callback.
  * @param int             $priority Optional. Used to specify the order in which the functions
- *                                  associated with a particular action are executed. Default 10.
- *                                  Lower numbers correspond with earlier execution,
- *                                  and functions with the same priority are executed
- *                                  in the order in which they were added to the action.
- * @param int             $args     Optional. The number of arguments the function accepts. Default 1.
+ *                                  associated with a particular action are executed. Default is 10.
+ * @param int             $args     Optional. The number of arguments the callback accepts. Default is 1.
  *
- * @return bool Will always return true.
+ * @return bool|_Beans_Anonymous_Filters
  */
 function beans_modify_markup( $id, $markup, $priority = 10, $args = 1 ) {
 	return beans_add_filter( $id . '_markup', $markup, $priority, $args );
