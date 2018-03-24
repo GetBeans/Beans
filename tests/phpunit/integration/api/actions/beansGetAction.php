@@ -1,34 +1,24 @@
 <?php
 /**
- * Tests for _beans_get_action()
+ * Tests for _beans_get_action().
  *
- * @package Beans\Framework\Tests\Unit\API\Actions
+ * @package Beans\Framework\Tests\Integration\API\Actions
  *
  * @since   1.5.0
  */
 
-namespace Beans\Framework\Tests\Unit\API\Actions;
+namespace Beans\Framework\Tests\Integration\API\Actions;
 
-use Beans\Framework\Tests\Unit\API\Actions\Includes\Actions_Test_Case;
-use Brain\Monkey;
+use Beans\Framework\Tests\Integration\API\Actions\Includes\Actions_Test_Case;
 
 /**
  * Class Tests_BeansGetAction
  *
- * @package Beans\Framework\Tests\Unit\API\Actions
+ * @package Beans\Framework\Tests\Integration\API\Actions
  * @group   api
  * @group   api-actions
  */
 class Tests_BeansGetAction extends Actions_Test_Case {
-
-	/**
-	 * Prepares the test environment before each test.
-	 */
-	protected function setUp() {
-		parent::setUp();
-
-		Monkey\Functions\when( '_beans_unique_action_id' )->returnArg();
-	}
 
 	/**
 	 * Test _beans_get_action() should return false when registry is empty.
