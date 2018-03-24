@@ -10,6 +10,7 @@
 namespace Beans\Framework\Tests\Unit\API\Actions;
 
 use Beans\Framework\Tests\Unit\API\Actions\Includes\Actions_Test_Case;
+use Brain\Monkey;
 
 require_once __DIR__ . '/includes/class-actions-test-case.php';
 
@@ -39,6 +40,11 @@ class Tests_BeansUnsetAction extends Actions_Test_Case {
 
 			// Test each status.
 			foreach ( $this->statuses as $status ) {
+				Monkey\Functions\expect( '_beans_get_action' )
+					->once()
+					->with( $beans_id, $status )
+					->andReturn( false );
+
 				$this->assertFalse( _beans_unset_action( $beans_id, $status ) );
 				$this->assertArrayNotHasKey( $beans_id, $_beans_registered_actions[ $status ] );
 			}
@@ -59,6 +65,12 @@ class Tests_BeansUnsetAction extends Actions_Test_Case {
 				_beans_set_action( $beans_id, $action, $status );
 				$this->assertArrayHasKey( $beans_id, $_beans_registered_actions[ $status ] );
 
+				// Simulate getting the registered action.
+				Monkey\Functions\expect( '_beans_get_action' )
+					->once()
+					->with( $beans_id, $status )
+					->andReturn( $action );
+
 				// Test that it unsets the action.
 				$this->assertTrue( _beans_unset_action( $beans_id, $status ) );
 				$this->assertArrayNotHasKey( $beans_id, $_beans_registered_actions[ $status ] );
@@ -70,9 +82,9 @@ class Tests_BeansUnsetAction extends Actions_Test_Case {
 	 * Test _beans_unset_action() should return false when the status is invalid.
 	 */
 	public function test_should_return_false_when_status_is_invalid() {
+		Monkey\Functions\when( '_beans_get_action' )->justReturn( false );
 
 		foreach ( static::$test_actions as $beans_id => $action ) {
-
 			$this->assertFalse( _beans_unset_action( $beans_id, 'invalid_status' ) );
 			$this->assertFalse( _beans_unset_action( $beans_id, 'foo' ) );
 			$this->assertFalse( _beans_unset_action( $beans_id, 'not_valid_either' ) );
