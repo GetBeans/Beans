@@ -17,6 +17,7 @@ if ( version_compare( phpversion(), '5.6.0', '<' ) ) {
 define( 'BEANS_TESTS_DIR', __DIR__ );
 define( 'BEANS_THEME_DIR', dirname( dirname( dirname( __DIR__ ) ) ) . DIRECTORY_SEPARATOR );
 define( 'BEANS_TESTS_LIB_DIR', BEANS_THEME_DIR . 'lib' . DIRECTORY_SEPARATOR );
+define( 'BEANS_API_PATH', BEANS_TESTS_LIB_DIR . DIRECTORY_SEPARATOR . 'api' . DIRECTORY_SEPARATOR );
 
 // Let's define ABSPATH as it is in WordPress, i.e. relative to the filesystem's WordPress root path.
 if ( ! defined( 'ABSPATH' ) ) {
