@@ -27,17 +27,9 @@ class Tests_BeansResetAction extends Actions_Test_Case {
 	 * Test beans_reset_action() should return false when the action is not registered.
 	 */
 	public function test_should_return_false_when_no_action_is_registered() {
+		Monkey\Functions\when( '_beans_unset_action' );
 
 		foreach ( static::$test_actions as $beans_id => $action ) {
-			Monkey\Functions\expect( '_beans_unset_action' )
-				->once()
-				->with( $beans_id, 'modified' )
-				->andReturn()
-				->andAlsoExpectIt()
-				->once()
-				->with( $beans_id, 'removed' )
-				->andReturn();
-
 			// Simulate that there is no action registered.
 			Monkey\Functions\expect( '_beans_get_action' )
 				->once()
@@ -57,27 +49,9 @@ class Tests_BeansResetAction extends Actions_Test_Case {
 	 * Test beans_reset_action() should reset the original action after it was "removed".
 	 */
 	public function test_should_reset_after_remove() {
-		$this->assertEmpty( '' );
-
-		return;
-		global $_beans_registered_actions;
+		Monkey\Functions\when( '_beans_unset_action' );
 
 		foreach ( static::$test_actions as $beans_id => $action ) {
-			$_beans_registered_actions['added'][ $beans_id ]   = $action;
-			$_beans_registered_actions['removed'][ $beans_id ] = $action;
-
-			Monkey\Functions\expect( '_beans_unset_action' )
-				->once()
-				->with( $beans_id, 'modified' )
-				->andReturn()
-				->andAlsoExpectIt()
-				->once()
-				->with( $beans_id, 'removed' )
-				->andReturnUsing( function( $id ) {
-					global $_beans_registered_actions;
-					unset( $_beans_registered_actions['removed'][ $id ] );
-				} );
-
 			// Simulate that the original action is registered.
 			Monkey\Functions\expect( '_beans_get_action' )
 				->once()
@@ -91,13 +65,10 @@ class Tests_BeansResetAction extends Actions_Test_Case {
 			// Expect the add_action.
 			Monkey\Actions\expectAdded( $action['hook'] )
 				->once()
-				->with( $action['hook'], $action['callback'], $action['priority'], $action['args'] );
+				->with( $action['callback'], $action['priority'], $action['args'] );
 
 			// Reset the action.
 			$this->assertSame( $action, beans_reset_action( $beans_id ) );
-
-			// Check that the "removed" action container is reset.
-			$this->assertArrayNotHasKey( $beans_id, $_beans_registered_actions['removed'] );
 
 			// Check that the original action is registered in WordPress.
 			$this->assertTrue( has_action( $action['hook'], $action['callback'] ) );
