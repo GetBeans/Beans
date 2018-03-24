@@ -10,6 +10,7 @@
 namespace Beans\Framework\Tests\Unit\API\Actions;
 
 use Beans\Framework\Tests\Unit\API\Actions\Includes\Actions_Test_Case;
+use Brain\Monkey;
 
 require_once __DIR__ . '/includes/class-actions-test-case.php';
 
@@ -33,8 +34,6 @@ class Tests_BeansMergeAction extends Actions_Test_Case {
 	 * Test _beans_set_action() should merge the new action's configuration with the registered one and then return it.
 	 */
 	public function test_should_merge_and_return() {
-		global $_beans_registered_actions;
-
 		$modified_action = array(
 			'priority' => 29,
 		);
@@ -44,7 +43,18 @@ class Tests_BeansMergeAction extends Actions_Test_Case {
 
 			// Test each status.
 			foreach ( $this->statuses as $status ) {
-				$_beans_registered_actions[ $status ][ $beans_id ] = $action;
+				// Simulate getting the original action.
+				Monkey\Functions\expect( '_beans_get_action' )
+					->once()
+					->with( $beans_id, $status )
+					->andReturn( $action );
+
+				// Simulate storing the merged action.
+				Monkey\Functions\expect( '_beans_set_action' )
+					->once()
+					->with( $beans_id, $merged_action, $status, true )
+					->andReturn( $merged_action );
+
 				$this->assertSame( $merged_action, _beans_merge_action( $beans_id, $modified_action, $status ) );
 			}
 		}
@@ -54,14 +64,23 @@ class Tests_BeansMergeAction extends Actions_Test_Case {
 	 * Test _beans_merge_action() should store a unregistered action.
 	 */
 	public function test_should_store_new_action() {
-		global $_beans_registered_actions;
 
 		foreach ( static::$test_actions as $beans_id => $action ) {
 
 			// Test each status.
 			foreach ( $this->statuses as $status ) {
+				Monkey\Functions\expect( '_beans_get_action' )
+					->once()
+					->with( $beans_id, $status )
+					->andReturn( false ); // Simulate that no action is currently stored.
+
+				// Simulate storing the merged action.
+				Monkey\Functions\expect( '_beans_set_action' )
+					->once()
+					->with( $beans_id, $action, $status, true )
+					->andReturn( $action );
+
 				$this->assertSame( $action, _beans_merge_action( $beans_id, $action, $status ) );
-				$this->assertSame( $action, $_beans_registered_actions[ $status ][ $beans_id ] );
 			}
 		}
 	}
