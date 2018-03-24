@@ -77,7 +77,7 @@ final class _Beans_Compiler_Options {
 						array(
 							'id'      => 'beans_compile_all_scripts_mode',
 							'type'    => 'select',
-							'label'   => 'Choose the level of compilation.',
+							'label'   => __( 'Choose the level of compilation.', 'tm-beans' ),
 							'default' => 'aggressive',
 							'options' => array(
 								'aggressive' => __( 'Aggressive', 'tm-beans' ),

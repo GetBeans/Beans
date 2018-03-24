@@ -130,7 +130,7 @@ function beans_field( array $field ) {
 			'class' => 'bs-field bs-' . $single_field['type'],
 		), $single_field );
 
-		if ( 'group' === $field['type'] ) {
+		if ( $group_field_type ) {
 			/**
 			 * Fires the "beans_field_group_label" event to render this field's label.
 			 *
