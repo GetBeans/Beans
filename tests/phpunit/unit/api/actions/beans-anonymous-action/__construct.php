@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for __construct() method for _Beans_Anonymous_Action.
+ * Tests for __construct() method of _Beans_Anonymous_Action.
  *
  * @package Beans\Framework\Tests\Unit\API\Actions
  *

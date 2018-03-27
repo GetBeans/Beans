@@ -10,7 +10,6 @@
 namespace Beans\Framework\Tests\Integration\API\HTML;
 
 use Beans\Framework\Tests\Integration\API\HTML\Includes\HTML_Test_Case;
-use Brain\Monkey;
 
 require_once __DIR__ . '/includes/class-html-test-case.php';
 
@@ -31,7 +30,7 @@ class Tests_BeansWrapInnerMarkup extends HTML_Test_Case {
 	 * @param string $hook     To given hook's event name.
 	 * @param int    $priority The priority number for the callback.
 	 *
-	 * @return \_Beans_Anonymous_Actions
+	 * @return \_Beans_Anonymous_Action
 	 */
 	protected function get_instance_from_wp( $hook, $priority ) {
 		global $wp_filter;

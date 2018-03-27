@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for callback() method for _Beans_Anonymous_Action.
+ * Tests for callback() method of _Beans_Anonymous_Action.
  *
  * @package Beans\Framework\Tests\Unit\API\Actions
  *
