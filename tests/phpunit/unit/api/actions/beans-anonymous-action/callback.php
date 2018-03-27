@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for callback() method for _Beans_Anonymous_Actions.
+ * Tests for callback() method for _Beans_Anonymous_Action.
  *
  * @package Beans\Framework\Tests\Unit\API\Actions
  *
@@ -9,20 +9,20 @@
 
 namespace Beans\Framework\Tests\Unit\API\Actions;
 
-use _Beans_Anonymous_Actions;
+use _Beans_Anonymous_Action;
 use Beans\Framework\Tests\Unit\API\Actions\Includes\Actions_Test_Case;
 use Brain\Monkey;
 
 require_once dirname( __DIR__ ) . '/includes/class-actions-test-case.php';
 
 /**
- * Class Tests_BeansAddAction
+ * Class Tests_BeansAnonymousAction_Callback
  *
  * @package Beans\Framework\Tests\Unit\API\Actions
  * @group   api
  * @group   api-actions
  */
-class Tests_BeansAnonymousActions_Callback extends Actions_Test_Case {
+class Tests_BeansAnonymousAction_Callback extends Actions_Test_Case {
 
 	/**
 	 * Prepares the test environment before each test.
@@ -37,7 +37,7 @@ class Tests_BeansAnonymousActions_Callback extends Actions_Test_Case {
 	 * Test callback() should invoke the given callback, passing the arguments to it.
 	 */
 	public function test_should_invoke_callback() {
-		$anonymous_action = new _Beans_Anonymous_Actions( 'beans_test_do_foo', array(
+		$anonymous_action = new _Beans_Anonymous_Action( 'beans_test_do_foo', array(
 			'foo_test_callback',
 			array( 'foo', 'bar' ),
 		), 20, 2 );
@@ -60,7 +60,7 @@ class Tests_BeansAnonymousActions_Callback extends Actions_Test_Case {
 	 * Test callback() should echo the returned content.
 	 */
 	public function test_should_echo_returned_content() {
-		$anonymous_action = new _Beans_Anonymous_Actions( 'beans_test_do_foo', array(
+		$anonymous_action = new _Beans_Anonymous_Action( 'beans_test_do_foo', array(
 			'foo_test_callback',
 			array( 'Cool Beans!', 'It worked!' ),
 		) );

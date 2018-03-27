@@ -648,12 +648,12 @@ function _beans_build_action_array( $hook = null, $callback = null, $priority = 
  *                            in the order in which they were added to the action.
  * @param int    $number_args Optional. The number of arguments the function accepts. Default 1.
  *
- * @return _Beans_Anonymous_Actions
+ * @return _Beans_Anonymous_Action
  */
 function _beans_add_anonymous_action( $hook, array $callback, $priority = 10, $number_args = 1 ) {
 	require_once BEANS_API_PATH . 'actions/class-beans-anonymous-action.php';
 
-	return new _Beans_Anonymous_Actions( $hook, $callback, $priority, $number_args );
+	return new _Beans_Anonymous_Action( $hook, $callback, $priority, $number_args );
 }
 
 /**

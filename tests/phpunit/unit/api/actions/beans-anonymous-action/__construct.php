@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for __construct() method for _Beans_Anonymous_Actions.
+ * Tests for __construct() method for _Beans_Anonymous_Action.
  *
  * @package Beans\Framework\Tests\Unit\API\Actions
  *
@@ -9,19 +9,19 @@
 
 namespace Beans\Framework\Tests\Unit\API\Actions;
 
-use _Beans_Anonymous_Actions;
+use _Beans_Anonymous_Action;
 use Beans\Framework\Tests\Unit\API\Actions\Includes\Actions_Test_Case;
 
 require_once dirname( __DIR__ ) . '/includes/class-actions-test-case.php';
 
 /**
- * Class Tests_BeansAnonymousActions_Construct
+ * Class Tests_BeansAnonymousAction_Construct
  *
  * @package Beans\Framework\Tests\Unit\API\Actions
  * @group   api
  * @group   api-actions
  */
-class Tests_BeansAnonymousActions_Construct extends Actions_Test_Case {
+class Tests_BeansAnonymousAction_Construct extends Actions_Test_Case {
 
 	/**
 	 * Prepares the test environment before each test.
@@ -36,7 +36,7 @@ class Tests_BeansAnonymousActions_Construct extends Actions_Test_Case {
 	 * Test __construct() should set the callback and arguments.
 	 */
 	public function test_should_set_callback_and_arguments() {
-		$anonymous_action = new _Beans_Anonymous_Actions( 'beans_test_do_foo', array(
+		$anonymous_action = new _Beans_Anonymous_Action( 'beans_test_do_foo', array(
 			'foo_test_callback',
 			array( 'foo', 'bar', 'baz' ),
 		) );
@@ -49,7 +49,7 @@ class Tests_BeansAnonymousActions_Construct extends Actions_Test_Case {
 	 * Test __construct() should add the action's hook.
 	 */
 	public function test_should_add_action_hook() {
-		$anonymous_action = new _Beans_Anonymous_Actions( 'beans_test_do_foo', array(
+		$anonymous_action = new _Beans_Anonymous_Action( 'beans_test_do_foo', array(
 			'foo_test_callback',
 			array( 'foo' ),
 		), 50, 3 );

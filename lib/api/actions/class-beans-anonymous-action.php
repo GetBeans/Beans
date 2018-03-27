@@ -16,7 +16,7 @@
  *
  * @package Beans\Framework\API\Actions
  */
-final class _Beans_Anonymous_Actions {
+final class _Beans_Anonymous_Action {
 
 	/**
 	 * The callback to register to the given $hook.
