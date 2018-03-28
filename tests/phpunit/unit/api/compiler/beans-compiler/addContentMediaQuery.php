@@ -11,7 +11,7 @@ namespace Beans\Framework\Tests\Unit\API\Compiler;
 
 use _Beans_Compiler;
 use Beans\Framework\Tests\Unit\API\Compiler\Includes\Compiler_Test_Case;
-use Brain\Monkey\Functions;
+use Brain\Monkey;
 
 require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
 
@@ -23,6 +23,16 @@ require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
  * @group   api-compiler
  */
 class Tests_Beans_Compiler_Add_Content_Media_Query extends Compiler_Test_Case {
+
+	/**
+	 * Prepares the test environment before each test.
+	 */
+	protected function setUp() {
+		parent::setUp();
+
+		Monkey\Functions\when( 'beans_get_compiler_dir' )->justReturn( $this->compiled_dir );
+		Monkey\Functions\when( 'beans_get_compiler_url' )->justReturn( $this->compiled_url );
+	}
 
 	/**
 	 * Test add_content_media_query() should return original content when current fragment is callable.
@@ -98,7 +108,7 @@ EOB;
 			'(min-width: 768px)',
 		);
 
-		Functions\stubs( [
+		Monkey\Functions\stubs( [
 			'wp_parse_args' => function( $query_args ) {
 				parse_str( $query_args, $args );
 				return $args;

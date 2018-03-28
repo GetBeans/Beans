@@ -72,7 +72,7 @@ abstract class Compiler_Test_Case extends Test_Case {
 	}
 
 	/**
-	 * Set up the test fixture.
+	 * Prepares the test environment before each test.
 	 */
 	protected function setUp() {
 		parent::setUp();
@@ -81,7 +81,7 @@ abstract class Compiler_Test_Case extends Test_Case {
 		$this->compiled_dir = vfsStream::url( 'compiled' );
 		$this->compiled_url = 'http:://beans.local/compiled/';
 
-		Functions\expect( 'wp_upload_dir' )->andReturn( array(
+		Functions\when( 'wp_upload_dir' )->justReturn( array(
 			'path'    => '',
 			'url'     => '',
 			'subdir'  => '',
@@ -89,9 +89,8 @@ abstract class Compiler_Test_Case extends Test_Case {
 			'baseurl' => $this->compiled_url,
 			'error'   => false,
 		) );
-
-		Functions\expect( 'is_admin' )->andReturn( $this->is_admin );
-		Functions\expect( 'site_url' )->andReturn( 'http:://beans.local' );
+		Functions\when( 'is_admin' )->justReturn( $this->is_admin );
+		Functions\when( 'site_url' )->justReturn( 'http:://beans.local' );
 
 		$this->load_original_functions( array(
 			'api/utilities/functions.php',
