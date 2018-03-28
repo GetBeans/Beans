@@ -174,13 +174,11 @@ abstract class Compiler_Test_Case extends Test_Case {
 	 * @param \_Beans_Compiler $compiler The Compiler instance.
 	 * @param mixed            $fragment The given value to set.
 	 *
-	 * @return void
+	 * @return \ReflectionProperty|string
+	 * @throws \ReflectionException Throws an exception if property does not exist.
 	 */
 	protected function set_current_fragment( $compiler, $fragment ) {
-		$current_fragment = ( new \ReflectionClass( $compiler ) )->getProperty( 'current_fragment' );
-		$current_fragment->setAccessible( true );
-		$current_fragment->setValue( $compiler, $fragment );
-		$current_fragment->setAccessible( false );
+		return $this->set_reflective_property( $fragment, 'current_fragment', $compiler );
 	}
 
 	/**
@@ -227,9 +225,9 @@ abstract class Compiler_Test_Case extends Test_Case {
 
 		foreach ( $compiler->config['fragments'] as $fragment ) {
 			$mock->shouldReceive( 'get_contents' )
-				->times( $times_called )
-				->with( $fragment )
-				->andReturn( file_get_contents( $fragment ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_file_get_contents, WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- Valid in this edge case.
+			     ->times( $times_called )
+			     ->with( $fragment )
+			     ->andReturn( file_get_contents( $fragment ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_file_get_contents, WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- Valid in this edge case.
 		}
 
 		$GLOBALS['wp_filesystem'] = $mock; // phpcs:ignore WordPress.Variables.GlobalVariables.OverrideProhibited -- Valid use case as we are mocking the filesystem.
@@ -263,6 +261,7 @@ abstract class Compiler_Test_Case extends Test_Case {
 var clickHandler=function(event){event.preventDefault();}
 $(document).ready(function(){init();});})(jQuery);
 EOB;
+
 		return str_replace( '/$', '$', $compiled_content );
 	}
 

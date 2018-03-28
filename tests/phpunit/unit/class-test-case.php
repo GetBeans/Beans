@@ -160,16 +160,36 @@ abstract class Test_Case extends TestCase {
 	 *
 	 * @since 1.5.0
 	 *
-	 * @param string $property   Property name for which to gain access.
-	 * @param string $class_name Name of the target class.
+	 * @param string       $property Property name for which to gain access.
+	 * @param string|mixed $class    Class name or instance.
 	 *
 	 * @return \ReflectionProperty|string
 	 * @throws \ReflectionException Throws an exception if property does not exist.
 	 */
-	protected function get_reflective_property( $property, $class_name ) {
-		$class    = new \ReflectionClass( $class_name );
+	protected function get_reflective_property( $property, $class ) {
+		$class    = new \ReflectionClass( $class );
 		$property = $class->getProperty( $property );
 		$property->setAccessible( true );
+
+		return $property;
+	}
+
+	/**
+	 * Set the value of a property or private property.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @param mixed  $value    The value to set for the property.
+	 * @param string $property Property name for which to gain access.
+	 * @param mixed  $instance Instance of the target object.
+	 *
+	 * @return \ReflectionProperty|string
+	 * @throws \ReflectionException Throws an exception if property does not exist.
+	 */
+	protected function set_reflective_property( $value, $property, $instance ) {
+		$property = $this->get_reflective_property( $property, $instance );
+		$property->setValue( $instance, $value );
+		$property->setAccessible( false );
 
 		return $property;
 	}
