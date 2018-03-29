@@ -11,7 +11,8 @@ namespace Beans\Framework\Tests\Unit\API\Compiler;
 
 use _Beans_Compiler;
 use Beans\Framework\Tests\Unit\API\Compiler\Includes\Compiler_Test_Case;
-use Brain\Monkey\Functions;
+use Brain\Monkey;
+use org\bovigo\vfs\vfsStream;
 
 require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
 
@@ -23,6 +24,16 @@ require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
  * @group   api-compiler
  */
 class Tests_Beans_Compiler_Get_Remote_Content extends Compiler_Test_Case {
+
+	/**
+	 * Prepares the test environment before each test.
+	 */
+	protected function setUp() {
+		parent::setUp();
+
+		Monkey\Functions\when( 'beans_get_compiler_dir' )->justReturn( vfsStream::url( 'compiled/beans/compiler/' ) );
+		Monkey\Functions\when( 'beans_get_compiler_url' )->justReturn( $this->compiled_url . 'beans/compiler/' );
+	}
 
 	/**
 	 * Test get_remote_content() should return false when the fragment is empty.
@@ -50,8 +61,8 @@ class Tests_Beans_Compiler_Get_Remote_Content extends Compiler_Test_Case {
 		$this->set_current_fragment( $compiler, $fragment );
 
 		// Set up the mocks.
-		Functions\expect( 'wp_remote_get' )->once();
-		Functions\expect( 'is_wp_error' )->once()->andReturn( true );
+		Monkey\Functions\expect( 'wp_remote_get' )->once();
+		Monkey\Functions\expect( 'is_wp_error' )->once()->andReturn( true );
 
 		// Run the test.
 		$this->assertSame( '', $compiler->get_remote_content() );
@@ -67,8 +78,8 @@ class Tests_Beans_Compiler_Get_Remote_Content extends Compiler_Test_Case {
 		$this->set_current_fragment( $compiler, $fragment );
 
 		// Set up the mocks.
-		Functions\expect( 'wp_remote_get' )->twice();
-		Functions\expect( 'is_wp_error' )->twice()->andReturnValues( array( false, true ) );
+		Monkey\Functions\expect( 'wp_remote_get' )->twice();
+		Monkey\Functions\expect( 'is_wp_error' )->twice()->andReturnValues( array( false, true ) );
 
 		// Run the test.
 		$this->assertSame( '', $compiler->get_remote_content() );
@@ -84,8 +95,8 @@ class Tests_Beans_Compiler_Get_Remote_Content extends Compiler_Test_Case {
 		$this->set_current_fragment( $compiler, $fragment );
 
 		// Set up the mocks.
-		Functions\expect( 'is_wp_error' )->twice()->andReturn( false );
-		Functions\expect( 'wp_remote_get' )
+		Monkey\Functions\expect( 'is_wp_error' )->twice()->andReturn( false );
+		Monkey\Functions\expect( 'wp_remote_get' )
 			->with( $fragment )
 			->once()
 			->ordered()
@@ -123,13 +134,13 @@ class Tests_Beans_Compiler_Get_Remote_Content extends Compiler_Test_Case {
 		);
 
 		// Set up the mocks.
-		Functions\expect( 'is_wp_error' )->once()->andReturn( false );
-		Functions\expect( 'wp_remote_get' )
+		Monkey\Functions\expect( 'is_wp_error' )->once()->andReturn( false );
+		Monkey\Functions\expect( 'wp_remote_get' )
 			// Check that it did add http: to the relative URL.
 			->with( 'http:' . $fragment )
 			->once()
 			->andReturn( $request );
-		Functions\expect( 'wp_remote_retrieve_body' )
+		Monkey\Functions\expect( 'wp_remote_retrieve_body' )
 			->with( $request )
 			->once()
 			->andReturn( $this->get_expected_content() );
@@ -159,13 +170,13 @@ class Tests_Beans_Compiler_Get_Remote_Content extends Compiler_Test_Case {
 		);
 
 		// Set up the mocks.
-		Functions\expect( 'is_wp_error' )->once()->andReturn( false );
-		Functions\expect( 'wp_remote_get' )
+		Monkey\Functions\expect( 'is_wp_error' )->once()->andReturn( false );
+		Monkey\Functions\expect( 'wp_remote_get' )
 			// Check that it did add http: to the relative URL.
 			->with( $fragment )
 			->once()
 			->andReturn( $request );
-		Functions\expect( 'wp_remote_retrieve_body' )
+		Monkey\Functions\expect( 'wp_remote_retrieve_body' )
 			->with( $request )
 			->once()
 			->andReturn( $this->get_expected_content() );
@@ -195,13 +206,13 @@ class Tests_Beans_Compiler_Get_Remote_Content extends Compiler_Test_Case {
 		);
 
 		// Set up the mocks.
-		Functions\expect( 'is_wp_error' )->once()->andReturn( false );
-		Functions\expect( 'wp_remote_get' )
+		Monkey\Functions\expect( 'is_wp_error' )->once()->andReturn( false );
+		Monkey\Functions\expect( 'wp_remote_get' )
 			// Check that it did add http: to the relative URL.
 			->with( $fragment )
 			->once()
 			->andReturn( $request );
-		Functions\expect( 'wp_remote_retrieve_body' )
+		Monkey\Functions\expect( 'wp_remote_retrieve_body' )
 			->with( $request )
 			->once()
 			->andReturn( $this->get_expected_content() );
