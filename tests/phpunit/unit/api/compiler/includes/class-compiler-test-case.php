@@ -183,7 +183,12 @@ abstract class Compiler_Test_Case extends Test_Case {
 			->at( $this->mock_filesystem->getChild( 'compiled/beans/compiler/' . $folder_name ) )
 			->setContent( $content );
 
-		return vfsStream::url( 'compiled/beans/compiler/' . $folder_name . '/' . $filename );
+		$cached_file = vfsStream::url( 'compiled/beans/compiler/' . $folder_name . '/' . $filename );
+
+		// vfs has a little quirk: We need to check the file to finish storing it in the system.  This helps us to modify it later.
+		file_exists( $cached_file );
+
+		return $cached_file;
 	}
 
 	/**
