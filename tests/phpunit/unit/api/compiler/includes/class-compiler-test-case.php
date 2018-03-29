@@ -167,6 +167,26 @@ abstract class Compiler_Test_Case extends Test_Case {
 	}
 
 	/**
+	 * Create a file in the virtual directory system.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $folder_name Name of the folder to create, which is the configuration's ID.
+	 * @param string $filename    File's name.
+	 * @param string $content     The content to store in the file.
+	 *
+	 * @return string
+	 */
+	protected function create_virtual_file( $folder_name, $filename, $content ) {
+		$this->add_virtual_directory( $folder_name );
+		vfsStream::newFile( $filename )
+			->at( $this->mock_filesystem->getChild( 'compiled/beans/compiler/' . $folder_name ) )
+			->setContent( $content );
+
+		return vfsStream::url( 'compiled/beans/compiler/' . $folder_name . '/' . $filename );
+	}
+
+	/**
 	 * Set the protected property "current_fragment".
 	 *
 	 * @since 1.5.0

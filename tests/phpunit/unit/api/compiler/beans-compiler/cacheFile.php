@@ -76,9 +76,6 @@ class Tests_Beans_Compiler_Cache_File extends Compiler_Test_Case {
 		$this->set_reflective_property( $compiled_content, 'compiled_content', $compiler );
 		$this->set_reflective_property( $filename, 'filename', $compiler );
 
-		// Just checking that the filename is what we expect.
-		$this->assertSame( $cached_file, $compiler->get_filename() );
-
 		// Mock the filesystem.
 		$this->mock_creating_file( 'test-jquery', $filename, $cached_file, $compiled_content );
 
@@ -194,11 +191,7 @@ class Tests_Beans_Compiler_Cache_File extends Compiler_Test_Case {
 			->once()
 			->with( $cached_file, $compiled_content, FS_CHMOD_FILE )
 			->andReturnUsing( function( $cached_filename, $content ) use ( $folder_name, $filename ) {
-				// Simulate creating the cached file.
-				$this->add_virtual_directory( $folder_name );
-				vfsStream::newFile( $filename )
-					->at( $this->mock_filesystem->getChild( 'compiled/beans/compiler/' . $folder_name ) )
-					->setContent( $content );
+				$this->create_virtual_file( $folder_name, $filename, $content );
 
 				return true;
 			} );
