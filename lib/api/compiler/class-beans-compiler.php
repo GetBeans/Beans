@@ -384,7 +384,7 @@ final class _Beans_Compiler {
 			$content .= $fragment_content;
 		}
 
-		$this->compiled_content = $this->format_content( $content );
+		$this->compiled_content = ! empty( $content ) ? $this->format_content( $content ) : '';
 	}
 
 	/**

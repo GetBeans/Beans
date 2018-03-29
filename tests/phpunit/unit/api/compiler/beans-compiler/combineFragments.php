@@ -11,6 +11,7 @@ namespace Beans\Framework\Tests\Unit\API\Compiler;
 
 use _Beans_Compiler;
 use Beans\Framework\Tests\Unit\API\Compiler\Includes\Compiler_Test_Case;
+use Brain\Monkey;
 use org\bovigo\vfs\vfsStream;
 
 require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
@@ -58,6 +59,9 @@ class Tests_Beans_Compiler_Combine_Fragments extends Compiler_Test_Case {
 	protected function setUp() {
 		parent::setUp();
 
+		Monkey\Functions\when( 'beans_get_compiler_dir' )->justReturn( vfsStream::url( 'compiled/beans/compiler/' ) );
+		Monkey\Functions\when( 'beans_get_compiler_url' )->justReturn( $this->compiled_url . 'beans/compiler/' );
+
 		$fixtures     = $this->mock_filesystem->getChild( 'fixtures' );
 		$this->css    = $fixtures->getChild( 'style.css' )->getContent();
 		$this->less   = $fixtures->getChild( 'variables.less' )->getContent() . $fixtures->getChild( 'test.less' )
@@ -82,8 +86,19 @@ class Tests_Beans_Compiler_Combine_Fragments extends Compiler_Test_Case {
 	 */
 	public function test_should_return_empty_string_when_fragment_does_not_exist() {
 		$fragment = vfsStream::url( 'compiled/fixtures/' ) . 'invalid-file.js';
-		$compiler = new _Beans_Compiler( array() );
-		$this->set_current_fragment( $compiler, $fragment );
+		$compiler = new _Beans_Compiler( array(
+			'id'           => 'test-script',
+			'type'         => 'script',
+			'fragments'    => array( $fragment ),
+			'dependencies' => array( 'javascript' ),
+			'in_footer'    => true,
+			'minify_js'    => true,
+		) );
+
+		// Setup the mocks.
+		Monkey\Functions\when( 'beans_url_to_path' )->returnArg();
+		Monkey\Functions\when( 'wp_remote_get' )->justReturn();
+		Monkey\Functions\when( 'is_wp_error' )->justReturn( true );
 
 		// Run the test.
 		$compiler->combine_fragments();
@@ -105,6 +120,8 @@ class Tests_Beans_Compiler_Combine_Fragments extends Compiler_Test_Case {
 		) );
 
 		// Set up the mocks.
+		Monkey\Functions\expect( 'beans_url_to_path' )->never();
+		Monkey\Functions\expect( 'wp_remote_get' )->never();
 		$this->mock_filesystem_for_fragments( $compiler );
 		$this->mock_dev_mode( true );
 
@@ -136,6 +153,8 @@ EOB;
 		) );
 
 		// Set up the mocks.
+		Monkey\Functions\expect( 'beans_url_to_path' )->never();
+		Monkey\Functions\expect( 'wp_remote_get' )->never();
 		$this->mock_filesystem_for_fragments( $compiler );
 		$this->mock_dev_mode( false );
 
@@ -160,6 +179,8 @@ EOB;
 		) );
 
 		// Set up the mocks.
+		Monkey\Functions\expect( 'beans_url_to_path' )->never();
+		Monkey\Functions\expect( 'wp_remote_get' )->never();
 		$this->mock_filesystem_for_fragments( $compiler );
 		$this->mock_dev_mode( false );
 
@@ -184,6 +205,8 @@ EOB;
 		) );
 
 		// Set up the mocks.
+		Monkey\Functions\expect( 'beans_url_to_path' )->never();
+		Monkey\Functions\expect( 'wp_remote_get' )->never();
 		$this->mock_filesystem_for_fragments( $compiler );
 		$this->mock_dev_mode( true );
 
@@ -211,6 +234,8 @@ EOB;
 		$this->mock_dev_mode( false );
 
 		// Run the test.
+		Monkey\Functions\expect( 'beans_url_to_path' )->never();
+		Monkey\Functions\expect( 'wp_remote_get' )->never();
 		$compiler->combine_fragments();
 		$this->assertSame( $this->get_compiled_jquery(), $compiler->compiled_content );
 	}
@@ -230,6 +255,8 @@ EOB;
 		) );
 
 		// Set up the mocks.
+		Monkey\Functions\expect( 'beans_url_to_path' )->never();
+		Monkey\Functions\expect( 'wp_remote_get' )->never();
 		$this->mock_filesystem_for_fragments( $compiler );
 		$this->mock_dev_mode( false );
 
@@ -253,6 +280,8 @@ EOB;
 		) );
 
 		// Set up the mocks.
+		Monkey\Functions\expect( 'beans_url_to_path' )->never();
+		Monkey\Functions\expect( 'wp_remote_get' )->never();
 		$this->mock_filesystem_for_fragments( $compiler );
 		$this->mock_dev_mode( true );
 
@@ -275,6 +304,8 @@ EOB;
 		) );
 
 		// Set up the mocks.
+		Monkey\Functions\expect( 'beans_url_to_path' )->never();
+		Monkey\Functions\expect( 'wp_remote_get' )->never();
 		$this->mock_filesystem_for_fragments( $compiler );
 		$this->mock_dev_mode( false );
 
