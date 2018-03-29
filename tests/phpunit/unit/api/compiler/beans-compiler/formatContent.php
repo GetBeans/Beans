@@ -11,7 +11,7 @@ namespace Beans\Framework\Tests\Unit\API\Compiler;
 
 use _Beans_Compiler;
 use Beans\Framework\Tests\Unit\API\Compiler\Includes\Compiler_Test_Case;
-use Brain\Monkey\Functions;
+use Brain\Monkey;
 
 require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
 
@@ -67,6 +67,8 @@ class Tests_Beans_Compiler_Format_Content extends Compiler_Test_Case {
 			'type' => 'foo',
 		) );
 
+		Monkey\Functions\expect( '_beans_is_compiler_dev_mode' )->never();
+
 		// Run the tests.
 		$this->assertSame( $this->less, $compiler->format_content( $this->less ) );
 		$this->assertSame( $this->jquery, $compiler->format_content( $this->jquery ) );
@@ -83,10 +85,7 @@ class Tests_Beans_Compiler_Format_Content extends Compiler_Test_Case {
 			'format' => 'less',
 		) );
 
-		// Turn on development mode.
-		$this->mock_dev_mode( true );
-
-		$expected_css = <<<EOB
+		$compiled_css = <<<EOB
 body {
   background-color: #fff;
   color: #000;
@@ -94,8 +93,13 @@ body {
 }
 
 EOB;
+		// Setup the mocks.
+		Monkey\Functions\expect( '_beans_is_compiler_dev_mode' )->once()->andReturn( true );
+		$mock = \Mockery::mock( 'Beans_Lessc' );
+		$mock->shouldReceive( 'compile' )->andReturn( $compiled_css );
+
 		// Run the tests.
-		$this->assertSame( $expected_css, $compiler->format_content( $this->less ) );
+		$this->assertSame( $compiled_css, $compiler->format_content( $this->less ) );
 	}
 
 	/**
@@ -108,14 +112,25 @@ EOB;
 			'format' => 'less',
 		) );
 
-		// Turn off development mode.
-		$this->mock_dev_mode( false );
+		$compiled_css = <<<EOB
+body {
+  background-color: #fff;
+  color: #000;
+  font-size: 18px;
+}
+
+EOB;
+		// Setup the mocks.
+		Monkey\Functions\expect( '_beans_is_compiler_dev_mode' )->once()->andReturn( false );
+		$mock = \Mockery::mock( 'Beans_Lessc' );
+		$mock->shouldReceive( 'compile' )->andReturn( $compiled_css );
 
 		// Run the test.
-		$this->assertContains(
-			'body{background-color:#fff;color:#000;font-size:18px;',
-			$compiler->format_content( $this->less )
-		);
+		$expected_css = <<<EOB
+body{background-color:#fff;color:#000;font-size:18px;
+}
+EOB;
+		$this->assertSame( $expected_css, $compiler->format_content( $this->less ) );
 	}
 
 	/**
@@ -129,8 +144,9 @@ EOB;
 			'minify_js' => false,
 		) );
 
-		// Turn off development mode.
-		$this->mock_dev_mode( false );
+		// Setup the mocks.
+		Monkey\Functions\expect( '_beans_is_compiler_dev_mode' )->once()->andReturn( false );
+		\Mockery::mock( 'JSMin' )->shouldNotReceive( 'min' );
 
 		// Run the test.
 		$this->assertSame( $this->jquery, $compiler->format_content( $this->jquery ) );
@@ -147,8 +163,9 @@ EOB;
 			'minify_js' => true,
 		) );
 
-		// Turn on development mode.
-		$this->mock_dev_mode( true );
+		// Setup the mocks.
+		Monkey\Functions\expect( '_beans_is_compiler_dev_mode' )->once()->andReturn( true );
+		\Mockery::mock( 'JSMin' )->shouldNotReceive( 'min' );
 
 		// Run the test.
 		$this->assertSame( $this->jquery, $compiler->format_content( $this->jquery ) );
@@ -165,16 +182,20 @@ EOB;
 			'minify_js' => true,
 		) );
 
-		// Turn off development mode.
-		$this->mock_dev_mode( false );
-
-		$expected = <<<EOB
+		$compiled_jquery = <<<EOB
 (function($){'use strict';var init=function(){/$('some-button').on('click',clickHandler);}
 var clickHandler=function(event){event.preventDefault();}
 $(document).ready(function(){init();});})(jQuery);
 EOB;
+		$compiled_jquery = str_replace( '/$', '$', $compiled_jquery );
+
+		// Setup the mocks.
+		Monkey\Functions\expect( '_beans_is_compiler_dev_mode' )->once()->andReturn( false );
+		$mock = \Mockery::mock( 'JSMin' );
+		$mock->shouldReceive( 'min' )->andReturn( $compiled_jquery );
+
 		// Run the test.
-		$this->assertSame( str_replace( '/$', '$', $expected ), $compiler->format_content( $this->jquery ) );
+		$this->assertSame( $compiled_jquery, $compiler->format_content( $this->jquery ) );
 	}
 
 	/**
@@ -188,8 +209,9 @@ EOB;
 			'minify_js' => false,
 		) );
 
-		// Turn off development mode.
-		$this->mock_dev_mode( false );
+		// Setup the mocks.
+		Monkey\Functions\expect( '_beans_is_compiler_dev_mode' )->once()->andReturn( false );
+		\Mockery::mock( 'JSMin' )->shouldNotReceive( 'min' );
 
 		// Run the test.
 		$this->assertSame( $this->js, $compiler->format_content( $this->js ) );
@@ -206,8 +228,9 @@ EOB;
 			'minify_js' => true,
 		) );
 
-		// Turn on development mode.
-		$this->mock_dev_mode( true );
+		// Setup the mocks.
+		Monkey\Functions\expect( '_beans_is_compiler_dev_mode' )->once()->andReturn( true );
+		\Mockery::mock( 'JSMin' )->shouldNotReceive( 'min' );
 
 		// Run the test.
 		$this->assertSame( $this->js, $compiler->format_content( $this->js ) );
@@ -224,14 +247,16 @@ EOB;
 			'minify_js' => true,
 		) );
 
-		// Turn off development mode.
-		$this->mock_dev_mode( false );
-
-		$expected = <<<EOB
+		$compiled_js = <<<EOB
 class MyGameClock{constructor(maxTime){this.maxTime=maxTime;this.currentClock=0;}
 getRemainingTime(){return this.maxTime-this.currentClock;}}
 EOB;
+		// Setup the mocks.
+		Monkey\Functions\expect( '_beans_is_compiler_dev_mode' )->once()->andReturn( false );
+		$mock = \Mockery::mock( 'JSMin' );
+		$mock->shouldReceive( 'min' )->andReturn( $compiled_js );
+
 		// Run the test.
-		$this->assertSame( $expected, $compiler->format_content( $this->js ) );
+		$this->assertSame( $compiled_js, $compiler->format_content( $this->js ) );
 	}
 }
