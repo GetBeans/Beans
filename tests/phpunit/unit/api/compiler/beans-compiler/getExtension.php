@@ -26,7 +26,7 @@ class Tests_Beans_Compiler_Get_Extension extends Compiler_Test_Case {
 	 * Test get_extension() should return "css" when the type is "style".
 	 */
 	public function test_should_return_css_when_style() {
-		$compiler = new \_Beans_Compiler( array( 'type' => 'style' ) );
+		$compiler = $this->create_compiler( array( 'type' => 'style' ) );
 
 		$this->assertSame( 'css', $compiler->get_extension() );
 	}
@@ -35,7 +35,7 @@ class Tests_Beans_Compiler_Get_Extension extends Compiler_Test_Case {
 	 * Test get_extension() should return "js" when the type is "script".
 	 */
 	public function test_should_return_js_when_script() {
-		$compiler = new \_Beans_Compiler( array( 'type' => 'script' ) );
+		$compiler = $this->create_compiler( array( 'type' => 'script' ) );
 
 		$this->assertSame( 'js', $compiler->get_extension() );
 	}
@@ -44,16 +44,16 @@ class Tests_Beans_Compiler_Get_Extension extends Compiler_Test_Case {
 	 * Test get_extension() should return null when the type is invalid.
 	 */
 	public function test_should_return_null_when_invalid_type() {
-		$compiler = new \_Beans_Compiler( array( 'type' => 'invalid' ) );
+		$compiler = $this->create_compiler( array( 'type' => 'invalid' ) );
 		$this->assertNull( $compiler->get_extension() );
 
-		$compiler = new \_Beans_Compiler( array( 'type' => null ) );
+		$compiler = $this->create_compiler( array( 'type' => null ) );
 		$this->assertNull( $compiler->get_extension() );
 
-		$compiler = new \_Beans_Compiler( array( 'type' => false ) );
+		$compiler = $this->create_compiler( array( 'type' => false ) );
 		$this->assertNull( $compiler->get_extension() );
 
-		$compiler = new \_Beans_Compiler( array() );
+		$compiler = $this->create_compiler( array() );
 		$this->assertNull( $compiler->get_extension() );
 	}
 }

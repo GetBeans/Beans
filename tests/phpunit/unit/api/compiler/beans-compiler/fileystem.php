@@ -10,7 +10,7 @@
 namespace Beans\Framework\Tests\Unit\API\Compiler;
 
 use Beans\Framework\Tests\Unit\API\Compiler\Includes\Compiler_Test_Case;
-use Brain\Monkey\Functions;
+use Brain\Monkey;
 use Mockery;
 
 require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
@@ -32,10 +32,10 @@ class Tests_Beans_Compiler_Filesystem extends Compiler_Test_Case {
 		Mockery::mock( 'WP_Filesystem_Direct' );
 		$GLOBALS['wp_filesystem'] = new \WP_Filesystem_Direct(); // phpcs:ignore WordPress.Variables.GlobalVariables.OverrideProhibited -- Valid use case as we are mocking the filesystem.
 
-		Functions\when( 'WP_Filesystem' )->justReturn( true );
+		Monkey\Functions\when( 'WP_Filesystem' )->justReturn( true );
 
 		// Test that the WP Filesystem is not loaded yet.
-		$compiler = new \_Beans_Compiler( array() );
+		$compiler = $this->create_compiler();
 		$this->assertTrue( $compiler->filesystem() );
 
 		unset( $GLOBALS['wp_filesystem'] );

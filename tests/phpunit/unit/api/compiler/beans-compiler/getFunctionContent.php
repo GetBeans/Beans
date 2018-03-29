@@ -10,7 +10,7 @@
 namespace Beans\Framework\Tests\Unit\API\Compiler;
 
 use Beans\Framework\Tests\Unit\API\Compiler\Includes\Compiler_Test_Case;
-use Brain\Monkey\Functions;
+use Brain\Monkey;
 use Mockery;
 
 require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
@@ -28,7 +28,7 @@ class Tests_Beans_Compiler_Get_Function_Content extends Compiler_Test_Case {
 	 * Test get_function_content() should return false when the given fragment is not callable.
 	 */
 	public function test_should_return_false_when_fragment_not_callable() {
-		$compiler = new \_Beans_Compiler( array() );
+		$compiler = $this->create_compiler();
 
 		// Run the tests.
 		$this->assertfalse( $compiler->get_function_content() );
@@ -45,10 +45,10 @@ class Tests_Beans_Compiler_Get_Function_Content extends Compiler_Test_Case {
 	 */
 	public function test_should_return_content_from_function() {
 		$fragment = 'beans_test_get_function_content_callback';
-		$compiler = new \_Beans_Compiler( array() );
+		$compiler = $this->create_compiler();
 
 		// Set up the function mocks.
-		Functions\expect( $fragment )->once()->andReturn( 'Beans rocks' );
+		Monkey\Functions\expect( $fragment )->once()->andReturn( 'Beans rocks' );
 		$this->set_current_fragment( $compiler, $fragment );
 
 		// Run the test.
@@ -59,7 +59,7 @@ class Tests_Beans_Compiler_Get_Function_Content extends Compiler_Test_Case {
 	 * Test get_function_content() should return content from an object's method.
 	 */
 	public function test_should_return_content_from_method() {
-		$compiler = new \_Beans_Compiler( array() );
+		$compiler = $this->create_compiler();
 
 		// Set up the mock.
 		$mock = Mockery::mock( 'Get_Function_Content_Mock' );

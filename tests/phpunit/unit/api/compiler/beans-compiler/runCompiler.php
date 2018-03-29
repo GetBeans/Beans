@@ -9,7 +9,6 @@
 
 namespace Beans\Framework\Tests\Unit\API\Compiler;
 
-use _Beans_Compiler;
 use Beans\Framework\Tests\Unit\API\Compiler\Includes\Compiler_Test_Case;
 use Brain\Monkey\Functions;
 use org\bovigo\vfs\vfsStream;
@@ -91,7 +90,7 @@ class Tests_Beans_Compiler_Run_Compiler extends Compiler_Test_Case {
 			'minify_js'    => true,
 			'version'      => '1.5.0',
 		);
-		$compiler = new _Beans_Compiler( $config );
+		$compiler = $this->create_compiler( $config );
 
 		// Store the cached file into the virtual filesystem.
 		$this->add_virtual_directory( $config['id'] );
@@ -131,7 +130,7 @@ class Tests_Beans_Compiler_Run_Compiler extends Compiler_Test_Case {
 			'minify_js'    => true,
 			'version'      => null,
 		);
-		$compiler = new _Beans_Compiler( $config );
+		$compiler = $this->create_compiler( $config );
 
 		/**
 		 * Set up the original "compiled" file. This is the file that should get removed during this
@@ -203,7 +202,7 @@ class Tests_Beans_Compiler_Run_Compiler extends Compiler_Test_Case {
 			'minify_js'    => true,
 			'version'      => null,
 		);
-		$compiler = new _Beans_Compiler( $config );
+		$compiler = $this->create_compiler( $config );
 
 		// Set up the mocks.
 		$this->add_virtual_directory( $config['id'] );
@@ -235,7 +234,7 @@ class Tests_Beans_Compiler_Run_Compiler extends Compiler_Test_Case {
 			'minify_js'    => true,
 			'version'      => null,
 		);
-		$compiler = new _Beans_Compiler( $config );
+		$compiler = $this->create_compiler( $config );
 
 		// Set up the mocks.
 		$this->add_virtual_directory( $config['id'] );
@@ -266,7 +265,7 @@ class Tests_Beans_Compiler_Run_Compiler extends Compiler_Test_Case {
 			'minify_js'    => false,
 			'version'      => '1.5.0',
 		);
-		$compiler = new _Beans_Compiler( $config );
+		$compiler = $this->create_compiler( $config );
 
 		// Set up the mocks.
 		$this->add_virtual_directory( $config['id'] );
@@ -299,7 +298,7 @@ class Tests_Beans_Compiler_Run_Compiler extends Compiler_Test_Case {
 			'minify_js'    => false,
 			'version'      => '1.5.0',
 		);
-		$compiler = new _Beans_Compiler( $config );
+		$compiler = $this->create_compiler( $config );
 
 		// Set up the mocks.
 		$this->add_virtual_directory( $config['id'] );

@@ -33,7 +33,7 @@ class Tests_Beans_Compiler_Get extends Compiler_Test_Case {
 			'depedencies' => array( 'jquery' ),
 		);
 
-		$compiler = new \_Beans_Compiler( $config );
+		$compiler = $this->create_compiler( $config );
 
 		// Run the tests.
 		$this->assertArrayNotHasKey( 'depedencies', $compiler->config );
@@ -45,7 +45,7 @@ class Tests_Beans_Compiler_Get extends Compiler_Test_Case {
 	 * Test should return the configuration.
 	 */
 	public function test_should_return_configuration() {
-		$compiler = new \_Beans_Compiler( array(
+		$compiler = $this->create_compiler( array(
 			'id'     => 'test',
 			'type'   => 'style',
 			'format' => 'less',
@@ -64,7 +64,7 @@ class Tests_Beans_Compiler_Get extends Compiler_Test_Case {
 			$compiler->config
 		);
 
-		$compiler = new \_Beans_Compiler( array(
+		$compiler = $this->create_compiler( array(
 			'id'           => 'test_scripts',
 			'type'         => 'script',
 			'dependencies' => array( 'jquery' ),
@@ -96,7 +96,7 @@ class Tests_Beans_Compiler_Get extends Compiler_Test_Case {
 			'format' => 'less',
 		);
 
-		$compiler = new \_Beans_Compiler( $config );
+		$compiler = $this->create_compiler( $config );
 
 		// Run the test.
 		$this->assertSame( vfsStream::url( 'compiled/beans/compiler/test' ), $compiler->dir );
@@ -111,7 +111,7 @@ class Tests_Beans_Compiler_Get extends Compiler_Test_Case {
 			'type' => 'script',
 		);
 
-		$compiler = new \_Beans_Compiler( $config );
+		$compiler = $this->create_compiler( $config );
 
 		// Run the test.
 		$this->assertSame( $this->compiled_url . 'beans/compiler/test_scripts', $compiler->url );

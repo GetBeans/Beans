@@ -10,7 +10,6 @@
 namespace Beans\Framework\Tests\Unit\API\Compiler;
 
 use Beans\Framework\Tests\Unit\API\Compiler\Includes\Compiler_Test_Case;
-use Brain\Monkey;
 use org\bovigo\vfs\vfsStream;
 
 require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
@@ -25,21 +24,11 @@ require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
 class Tests_Beans_Compiler_CacheFileExist extends Compiler_Test_Case {
 
 	/**
-	 * Prepares the test environment before each test.
-	 */
-	protected function setUp() {
-		parent::setUp();
-
-		Monkey\Functions\when( 'beans_get_compiler_dir' )->justReturn( vfsStream::url( 'compiled/beans/compiler/' ) );
-		Monkey\Functions\when( 'beans_get_compiler_url' )->justReturn( $this->compiled_url . 'beans/compiler/' );
-	}
-
-	/**
 	 * Test cache_file_exist() should return false when the filename has not been generated.
 	 */
 	public function test_should_return_false_when_filename_not_generated() {
 		$fragment = vfsStream::url( 'compiled/fixtures/my-game-clock.js' );
-		$compiler = new \_Beans_Compiler( array(
+		$compiler = $this->create_compiler( array(
 			'id'        => 'test',
 			'type'      => 'script',
 			'fragments' => array( $fragment ),
@@ -54,7 +43,7 @@ class Tests_Beans_Compiler_CacheFileExist extends Compiler_Test_Case {
 	 */
 	public function test_should_return_false_when_file_does_not_exist() {
 		$fragment = vfsStream::url( 'compiled/fixtures/my-game-clock.js' );
-		$compiler = new \_Beans_Compiler( array(
+		$compiler = $this->create_compiler( array(
 			'id'        => 'test-script',
 			'type'      => 'script',
 			'fragments' => array( $fragment ),
@@ -74,7 +63,7 @@ class Tests_Beans_Compiler_CacheFileExist extends Compiler_Test_Case {
 	 */
 	public function test_should_return_true_when_file_exists() {
 		$fragment = vfsStream::url( 'compiled/fixtures/my-game-clock.js' );
-		$compiler = new \_Beans_Compiler( array(
+		$compiler = $this->create_compiler( array(
 			'id'        => 'test-script',
 			'type'      => 'script',
 			'fragments' => array( $fragment ),

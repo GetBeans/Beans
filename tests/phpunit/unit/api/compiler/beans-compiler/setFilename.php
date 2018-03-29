@@ -10,7 +10,6 @@
 namespace Beans\Framework\Tests\Unit\API\Compiler;
 
 use Beans\Framework\Tests\Unit\API\Compiler\Includes\Compiler_Test_Case;
-use Brain\Monkey;
 use org\bovigo\vfs\vfsStream;
 
 require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
@@ -23,16 +22,6 @@ require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
  * @group   api-compiler
  */
 class Tests_Beans_Compiler_Set_Filename extends Compiler_Test_Case {
-
-	/**
-	 * Prepares the test environment before each test.
-	 */
-	protected function setUp() {
-		parent::setUp();
-
-		Monkey\Functions\when( 'beans_get_compiler_dir' )->justReturn( vfsStream::url( 'compiled/beans/compiler/' ) );
-		Monkey\Functions\when( 'beans_get_compiler_url' )->justReturn( $this->compiled_url . 'beans/compiler/' );
-	}
 
 	/**
 	 * Test set_filename() should return the hash created with the modification time from each of the fragments.
@@ -49,7 +38,7 @@ class Tests_Beans_Compiler_Set_Filename extends Compiler_Test_Case {
 			'minify_js'    => true,
 			'version'      => null,
 		);
-		$compiler = new \_Beans_Compiler( $config );
+		$compiler = $this->create_compiler( $config );
 
 		$this->add_virtual_directory( 'test-script' );
 
@@ -77,7 +66,7 @@ class Tests_Beans_Compiler_Set_Filename extends Compiler_Test_Case {
 			'minify_js'    => true,
 			'version'      => null,
 		);
-		$compiler = new \_Beans_Compiler( $config );
+		$compiler = $this->create_compiler( $config );
 
 		$this->add_virtual_directory( 'test-script' );
 
@@ -102,7 +91,7 @@ class Tests_Beans_Compiler_Set_Filename extends Compiler_Test_Case {
 			'minify_js'    => true,
 			'version'      => null,
 		);
-		$compiler = new \_Beans_Compiler( $config );
+		$compiler = $this->create_compiler( $config );
 
 		$this->add_virtual_directory( $config['id'] );
 

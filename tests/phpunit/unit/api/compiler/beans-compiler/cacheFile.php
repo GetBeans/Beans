@@ -9,9 +9,7 @@
 
 namespace Beans\Framework\Tests\Unit\API\Compiler;
 
-use _Beans_Compiler;
 use Beans\Framework\Tests\Unit\API\Compiler\Includes\Compiler_Test_Case;
-use Brain\Monkey;
 use Mockery;
 use org\bovigo\vfs\vfsStream;
 
@@ -27,20 +25,10 @@ require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
 class Tests_Beans_Compiler_Cache_File extends Compiler_Test_Case {
 
 	/**
-	 * Prepares the test environment before each test.
-	 */
-	protected function setUp() {
-		parent::setUp();
-
-		Monkey\Functions\when( 'beans_get_compiler_dir' )->justReturn( vfsStream::url( 'compiled/beans/compiler/' ) );
-		Monkey\Functions\when( 'beans_get_compiler_url' )->justReturn( $this->compiled_url . 'beans/compiler/' );
-	}
-
-	/**
 	 * Test cache_file() should not create the file when the filename is empty.
 	 */
 	public function test_should_not_create_the_file_when_filename_empty() {
-		$compiler = new _Beans_Compiler( array(
+		$compiler = $this->create_compiler( array(
 			'id'           => 'test-script',
 			'type'         => 'script',
 			'fragments'    => array( vfsStream::url( 'compiled/fixtures/jquery.test.js' ) ),
@@ -60,7 +48,7 @@ class Tests_Beans_Compiler_Cache_File extends Compiler_Test_Case {
 	 * Test cache_file() should create the compiled jQuery file.
 	 */
 	public function test_should_create_compiled_jquery_file() {
-		$compiler = new _Beans_Compiler( array(
+		$compiler = $this->create_compiler( array(
 			'id'           => 'test-jquery',
 			'type'         => 'script',
 			'fragments'    => array( vfsStream::url( 'compiled/fixtures/jquery.test.js' ) ),
@@ -89,7 +77,7 @@ class Tests_Beans_Compiler_Cache_File extends Compiler_Test_Case {
 	 * Test cache_file() should create the compiled JavaScript file.
 	 */
 	public function test_should_create_compiled_javascript_file() {
-		$compiler = new _Beans_Compiler( array(
+		$compiler = $this->create_compiler( array(
 			'id'        => 'test-js',
 			'type'      => 'script',
 			'fragments' => array( vfsStream::url( 'compiled/fixtures/my-game-clock.js' ) ),
@@ -117,7 +105,7 @@ class Tests_Beans_Compiler_Cache_File extends Compiler_Test_Case {
 	 * Test cache_file() should create the compiled CSS file.
 	 */
 	public function test_should_create_compiled_css_file() {
-		$compiler = new _Beans_Compiler( array(
+		$compiler = $this->create_compiler( array(
 			'id'        => 'test-css',
 			'type'      => 'style',
 			'format'    => 'css',
@@ -144,7 +132,7 @@ class Tests_Beans_Compiler_Cache_File extends Compiler_Test_Case {
 	 * Test cache_file() should create the compiled LESS file.
 	 */
 	public function test_should_create_compiled_less_file() {
-		$compiler = new _Beans_Compiler( array(
+		$compiler = $this->create_compiler( array(
 			'id'        => 'test-less',
 			'type'      => 'style',
 			'format'    => 'less',

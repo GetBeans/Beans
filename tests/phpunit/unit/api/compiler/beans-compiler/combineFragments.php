@@ -9,7 +9,6 @@
 
 namespace Beans\Framework\Tests\Unit\API\Compiler;
 
-use _Beans_Compiler;
 use Beans\Framework\Tests\Unit\API\Compiler\Includes\Compiler_Test_Case;
 use Brain\Monkey;
 use org\bovigo\vfs\vfsStream;
@@ -59,9 +58,6 @@ class Tests_Beans_Compiler_Combine_Fragments extends Compiler_Test_Case {
 	protected function setUp() {
 		parent::setUp();
 
-		Monkey\Functions\when( 'beans_get_compiler_dir' )->justReturn( vfsStream::url( 'compiled/beans/compiler/' ) );
-		Monkey\Functions\when( 'beans_get_compiler_url' )->justReturn( $this->compiled_url . 'beans/compiler/' );
-
 		$fixtures     = $this->mock_filesystem->getChild( 'fixtures' );
 		$this->css    = $fixtures->getChild( 'style.css' )->getContent();
 		$this->less   = $fixtures->getChild( 'variables.less' )->getContent() . $fixtures->getChild( 'test.less' )
@@ -74,7 +70,7 @@ class Tests_Beans_Compiler_Combine_Fragments extends Compiler_Test_Case {
 	 * Test combine_fragments() should return an empty string when there are no fragments to combine.
 	 */
 	public function test_should_return_empty_string_when_no_fragments() {
-		$compiler = new _Beans_Compiler( array() );
+		$compiler = $this->create_compiler( array() );
 
 		// Run the test.
 		$compiler->combine_fragments();
@@ -86,7 +82,7 @@ class Tests_Beans_Compiler_Combine_Fragments extends Compiler_Test_Case {
 	 */
 	public function test_should_return_empty_string_when_fragment_does_not_exist() {
 		$fragment = vfsStream::url( 'compiled/fixtures/' ) . 'invalid-file.js';
-		$compiler = new _Beans_Compiler( array(
+		$compiler = $this->create_compiler( array(
 			'id'           => 'test-script',
 			'type'         => 'script',
 			'fragments'    => array( $fragment ),
@@ -109,7 +105,7 @@ class Tests_Beans_Compiler_Combine_Fragments extends Compiler_Test_Case {
 	 * Test combine_fragments() should compile the LESS fragments and return the compiled CSS.
 	 */
 	public function test_should_compile_less_and_return_css() {
-		$compiler = new _Beans_Compiler( array(
+		$compiler = $this->create_compiler( array(
 			'id'        => 'test',
 			'type'      => 'style',
 			'format'    => 'less',
@@ -142,7 +138,7 @@ EOB;
 	 * Test combine_fragments() should return minified, compiled CSS from the Less combined fragments.
 	 */
 	public function test_should_return_minified_compiled_css() {
-		$compiler = new _Beans_Compiler( array(
+		$compiler = $this->create_compiler( array(
 			'id'        => 'test',
 			'type'      => 'style',
 			'format'    => 'less',
@@ -168,7 +164,7 @@ EOB;
 	 * but "minify_js" is disabled.
 	 */
 	public function test_should_return_original_jquery_when_minify_js_disabled() {
-		$compiler = new _Beans_Compiler( array(
+		$compiler = $this->create_compiler( array(
 			'id'           => 'test',
 			'type'         => 'script',
 			'minify_js'    => false,
@@ -194,7 +190,7 @@ EOB;
 	 * but the site is in development mode.
 	 */
 	public function test_should_always_return_original_jquery_when_in_dev_mode() {
-		$compiler = new _Beans_Compiler( array(
+		$compiler = $this->create_compiler( array(
 			'id'           => 'test',
 			'type'         => 'script',
 			'minify_js'    => true,
@@ -219,7 +215,7 @@ EOB;
 	 * Test combine_fragments() should return minified jQuery.
 	 */
 	public function test_should_return_minified_jquery() {
-		$compiler = new _Beans_Compiler( array(
+		$compiler = $this->create_compiler( array(
 			'id'           => 'test',
 			'type'         => 'script',
 			'minify_js'    => true,
@@ -245,7 +241,7 @@ EOB;
 	 * but "minify_js" is disabled.
 	 */
 	public function test_should_return_original_js_when_minify_js_disabled() {
-		$compiler = new _Beans_Compiler( array(
+		$compiler = $this->create_compiler( array(
 			'id'        => 'test',
 			'type'      => 'script',
 			'minify_js' => false,
@@ -270,7 +266,7 @@ EOB;
 	 * but the site is in development mode.
 	 */
 	public function test_should_always_return_original_js_when_in_dev_mode() {
-		$compiler = new _Beans_Compiler( array(
+		$compiler = $this->create_compiler( array(
 			'id'        => 'test',
 			'type'      => 'script',
 			'minify_js' => true,
@@ -294,7 +290,7 @@ EOB;
 	 * Test combine_fragments() should return minified JavaScript.
 	 */
 	public function test_should_return_minified_javascript() {
-		$compiler = new _Beans_Compiler( array(
+		$compiler = $this->create_compiler( array(
 			'id'        => 'test',
 			'type'      => 'script',
 			'minify_js' => true,

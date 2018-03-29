@@ -187,6 +187,22 @@ abstract class Compiler_Test_Case extends Test_Case {
 	}
 
 	/**
+	 * Create the compiler.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $config Compiler's configuration parameters.
+	 *
+	 * @return \_Beans_Compiler
+	 */
+	protected function create_compiler( array $config = array() ) {
+		Monkey\Functions\when( 'beans_get_compiler_dir' )->justReturn( vfsStream::url( 'compiled/beans/compiler/' ) );
+		Monkey\Functions\when( 'beans_get_compiler_url' )->justReturn( $this->compiled_url . 'beans/compiler/' );
+
+		return new \_Beans_Compiler( $config );
+	}
+
+	/**
 	 * Set the protected property "current_fragment".
 	 *
 	 * @since 1.5.0

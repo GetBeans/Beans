@@ -25,16 +25,6 @@ require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
 class Tests_Beans_Compiler_Set_Fragments extends Compiler_Test_Case {
 
 	/**
-	 * Prepares the test environment before each test.
-	 */
-	protected function setUp() {
-		parent::setUp();
-
-		Monkey\Functions\when( 'beans_get_compiler_dir' )->justReturn( vfsStream::url( 'compiled/beans/compiler/' ) );
-		Monkey\Functions\when( 'beans_get_compiler_url' )->justReturn( $this->compiled_url . 'beans/compiler/' );
-	}
-
-	/**
 	 * Test set_fragments() should return unchanged fragments, meaning no fragments were added or removed.
 	 */
 	public function test_should_return_unchanged_fragments() {
@@ -48,7 +38,7 @@ class Tests_Beans_Compiler_Set_Fragments extends Compiler_Test_Case {
 			),
 		);
 
-		$compiler = new \_Beans_Compiler( $config );
+		$compiler = $this->create_compiler( $config );
 
 		// Setup the mock.
 		Monkey\Functions\expect( 'beans_get' )
@@ -78,7 +68,7 @@ class Tests_Beans_Compiler_Set_Fragments extends Compiler_Test_Case {
 			),
 		);
 
-		$compiler = new \_Beans_Compiler( $config );
+		$compiler = $this->create_compiler( $config );
 		global $_beans_compiler_added_fragments;
 		$_beans_compiler_added_fragments['less'] = array(
 			'test' => array(
@@ -116,7 +106,7 @@ class Tests_Beans_Compiler_Set_Fragments extends Compiler_Test_Case {
 			),
 		);
 
-		$compiler = new \_Beans_Compiler( $config );
+		$compiler = $this->create_compiler( $config );
 
 		// Setup the mock.
 		Monkey\Functions\expect( 'beans_get' )

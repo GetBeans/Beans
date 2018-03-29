@@ -9,7 +9,6 @@
 
 namespace Beans\Framework\Tests\Unit\API\Compiler;
 
-use _Beans_Compiler;
 use Beans\Framework\Tests\Unit\API\Compiler\Includes\Compiler_Test_Case;
 use Brain\Monkey;
 
@@ -25,23 +24,13 @@ require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
 class Tests_Beans_Compiler_Add_Content_Media_Query extends Compiler_Test_Case {
 
 	/**
-	 * Prepares the test environment before each test.
-	 */
-	protected function setUp() {
-		parent::setUp();
-
-		Monkey\Functions\when( 'beans_get_compiler_dir' )->justReturn( $this->compiled_dir );
-		Monkey\Functions\when( 'beans_get_compiler_url' )->justReturn( $this->compiled_url );
-	}
-
-	/**
 	 * Test add_content_media_query() should return original content when current fragment is callable.
 	 */
 	public function test_should_return_content_when_fragment_is_callable() {
 		Monkey\Functions\expect( 'wp_parse_args' )->never();
 		Monkey\Functions\expect( 'beans_get' )->never();
 
-		$compiler = new _Beans_Compiler( array() );
+		$compiler = $this->create_compiler();
 		$css      = <<<EOB
 .foo {
     margin: 0;
@@ -60,7 +49,7 @@ EOB;
 		Monkey\Functions\expect( 'wp_parse_args' )->never();
 		Monkey\Functions\expect( 'beans_get' )->never();
 
-		$compiler = new _Beans_Compiler( array() );
+		$compiler = $this->create_compiler();
 		$css      = <<<EOB
 .foo {
     margin: 0;
@@ -83,7 +72,7 @@ EOB;
 		Monkey\Functions\expect( 'wp_parse_args' )->never();
 		Monkey\Functions\expect( 'beans_get' )->never();
 
-		$compiler = new _Beans_Compiler( array() );
+		$compiler = $this->create_compiler( array() );
 		$css      = <<<EOB
 .foo {
     margin: 0;
@@ -102,7 +91,7 @@ EOB;
 	 * Test add_content_media_query() should wrap the content in the specified media query.
 	 */
 	public function test_should_wrap_content_in_media_query() {
-		$compiler      = new _Beans_Compiler( array() );
+		$compiler      = $this->create_compiler( array() );
 		$css           = <<<EOB
 .foo {
     margin: 0;

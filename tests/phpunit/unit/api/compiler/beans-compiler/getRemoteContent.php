@@ -9,10 +9,8 @@
 
 namespace Beans\Framework\Tests\Unit\API\Compiler;
 
-use _Beans_Compiler;
 use Beans\Framework\Tests\Unit\API\Compiler\Includes\Compiler_Test_Case;
 use Brain\Monkey;
-use org\bovigo\vfs\vfsStream;
 
 require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
 
@@ -26,20 +24,10 @@ require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
 class Tests_Beans_Compiler_Get_Remote_Content extends Compiler_Test_Case {
 
 	/**
-	 * Prepares the test environment before each test.
-	 */
-	protected function setUp() {
-		parent::setUp();
-
-		Monkey\Functions\when( 'beans_get_compiler_dir' )->justReturn( vfsStream::url( 'compiled/beans/compiler/' ) );
-		Monkey\Functions\when( 'beans_get_compiler_url' )->justReturn( $this->compiled_url . 'beans/compiler/' );
-	}
-
-	/**
 	 * Test get_remote_content() should return false when the fragment is empty.
 	 */
 	public function test_should_return_false_when_fragment_is_empty() {
-		$compiler = new _Beans_Compiler( array() );
+		$compiler = $this->create_compiler( array() );
 
 		// Run the tests.
 		$this->assertfalse( $compiler->get_remote_content() );
@@ -57,7 +45,7 @@ class Tests_Beans_Compiler_Get_Remote_Content extends Compiler_Test_Case {
 	public function test_should_return_empty_string_when_remote_does_not_exist_on_http() {
 		// Set up the compiler.
 		$fragment = 'http://beans.local/invalid-file.js';
-		$compiler = new _Beans_Compiler( array() );
+		$compiler = $this->create_compiler( array() );
 		$this->set_current_fragment( $compiler, $fragment );
 
 		// Set up the mocks.
@@ -74,7 +62,7 @@ class Tests_Beans_Compiler_Get_Remote_Content extends Compiler_Test_Case {
 	public function test_should_return_empty_string_when_remote_does_not_exist_on_https() {
 		// Set up the compiler.
 		$fragment = 'http://beans.local/invalid-file.js';
-		$compiler = new _Beans_Compiler( array() );
+		$compiler = $this->create_compiler( array() );
 		$this->set_current_fragment( $compiler, $fragment );
 
 		// Set up the mocks.
@@ -91,7 +79,7 @@ class Tests_Beans_Compiler_Get_Remote_Content extends Compiler_Test_Case {
 	public function test_should_retry_and_return_false_when_remote_file_does_not_exist() {
 		// Set up the compiler.
 		$fragment = 'http://beans.local/invalid-file.js';
-		$compiler = new _Beans_Compiler( array() );
+		$compiler = $this->create_compiler( array() );
 		$this->set_current_fragment( $compiler, $fragment );
 
 		// Set up the mocks.
@@ -124,7 +112,7 @@ class Tests_Beans_Compiler_Get_Remote_Content extends Compiler_Test_Case {
 	public function test_should_return_content_when_relative_url() {
 		// Set up the compiler.
 		$fragment = '//fonts.googleapis.com/css?family=Lato';
-		$compiler = new _Beans_Compiler( array() );
+		$compiler = $this->create_compiler( array() );
 		$this->set_current_fragment( $compiler, $fragment );
 		$request = array(
 			'body'     => $this->get_expected_content(),
@@ -160,7 +148,7 @@ class Tests_Beans_Compiler_Get_Remote_Content extends Compiler_Test_Case {
 	public function test_should_return_content_when_http() {
 		// Set up the compiler.
 		$fragment = 'http://fonts.googleapis.com/css?family=Lato';
-		$compiler = new _Beans_Compiler( array() );
+		$compiler = $this->create_compiler( array() );
 		$this->set_current_fragment( $compiler, $fragment );
 		$request = array(
 			'body'     => $this->get_expected_content(),
@@ -196,7 +184,7 @@ class Tests_Beans_Compiler_Get_Remote_Content extends Compiler_Test_Case {
 	public function test_should_return_content_when_https() {
 		// Set up the compiler.
 		$fragment = 'https://fonts.googleapis.com/css?family=Lato';
-		$compiler = new _Beans_Compiler( array() );
+		$compiler = $this->create_compiler( array() );
 		$this->set_current_fragment( $compiler, $fragment );
 		$request = array(
 			'body'     => $this->get_expected_content(),

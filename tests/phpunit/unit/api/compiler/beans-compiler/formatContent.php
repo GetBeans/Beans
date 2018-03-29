@@ -9,7 +9,6 @@
 
 namespace Beans\Framework\Tests\Unit\API\Compiler;
 
-use _Beans_Compiler;
 use Beans\Framework\Tests\Unit\API\Compiler\Includes\Compiler_Test_Case;
 use Brain\Monkey;
 
@@ -63,7 +62,7 @@ class Tests_Beans_Compiler_Format_Content extends Compiler_Test_Case {
 	 * a style or script (per the configuration).
 	 */
 	public function test_should_return_original_content_when_type_not_style_or_script() {
-		$compiler = new _Beans_Compiler( array(
+		$compiler = $this->create_compiler( array(
 			'type' => 'foo',
 		) );
 
@@ -79,7 +78,7 @@ class Tests_Beans_Compiler_Format_Content extends Compiler_Test_Case {
 	 * Test format_content() should return compiled CSS (not minified) from the Less combined fragments.
 	 */
 	public function test_should_return_compiled_css() {
-		$compiler = new _Beans_Compiler( array(
+		$compiler = $this->create_compiler( array(
 			'id'     => 'test',
 			'type'   => 'style',
 			'format' => 'less',
@@ -106,7 +105,7 @@ EOB;
 	 * Test format_content() should return minified, compiled CSS from the Less combined fragments.
 	 */
 	public function test_should_return_minified_compiled_css() {
-		$compiler = new _Beans_Compiler( array(
+		$compiler = $this->create_compiler( array(
 			'id'     => 'test',
 			'type'   => 'style',
 			'format' => 'less',
@@ -138,7 +137,7 @@ EOB;
 	 * but "minify_js" is disabled.
 	 */
 	public function test_should_return_original_jquery_when_minify_js_disabled() {
-		$compiler = new _Beans_Compiler( array(
+		$compiler = $this->create_compiler( array(
 			'id'        => 'test',
 			'type'      => 'script',
 			'minify_js' => false,
@@ -157,7 +156,7 @@ EOB;
 	 * but the site is in development mode.
 	 */
 	public function test_should_always_return_original_jquery_when_in_dev_mode() {
-		$compiler = new _Beans_Compiler( array(
+		$compiler = $this->create_compiler( array(
 			'id'        => 'test',
 			'type'      => 'script',
 			'minify_js' => true,
@@ -176,7 +175,7 @@ EOB;
 	 * and the site is not in development mode.
 	 */
 	public function test_should_return_minified_jquery_when_not_in_dev_mode_and_minify_js_enabled() {
-		$compiler = new _Beans_Compiler( array(
+		$compiler = $this->create_compiler( array(
 			'id'        => 'test',
 			'type'      => 'script',
 			'minify_js' => true,
@@ -203,7 +202,7 @@ EOB;
 	 * but "minify_js" is disabled.
 	 */
 	public function test_should_return_original_js_when_minify_js_disabled() {
-		$compiler = new _Beans_Compiler( array(
+		$compiler = $this->create_compiler( array(
 			'id'        => 'test',
 			'type'      => 'script',
 			'minify_js' => false,
@@ -222,7 +221,7 @@ EOB;
 	 * but the site is in development mode.
 	 */
 	public function test_should_always_return_original_js_when_in_dev_mode() {
-		$compiler = new _Beans_Compiler( array(
+		$compiler = $this->create_compiler( array(
 			'id'        => 'test',
 			'type'      => 'script',
 			'minify_js' => true,
@@ -241,7 +240,7 @@ EOB;
 	 * and the site is not in development mode.
 	 */
 	public function test_should_return_minified_js_when_not_in_dev_mode_and_minify_js_enabled() {
-		$compiler = new _Beans_Compiler( array(
+		$compiler = $this->create_compiler( array(
 			'id'        => 'test',
 			'type'      => 'script',
 			'minify_js' => true,

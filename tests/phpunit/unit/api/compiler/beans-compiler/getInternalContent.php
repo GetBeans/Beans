@@ -9,7 +9,6 @@
 
 namespace Beans\Framework\Tests\Unit\API\Compiler;
 
-use _Beans_Compiler;
 use Beans\Framework\Tests\Unit\API\Compiler\Includes\Compiler_Test_Case;
 use Brain\Monkey;
 use org\bovigo\vfs\vfsStream;
@@ -32,15 +31,13 @@ class Tests_Beans_Compiler_Get_Internal_Content extends Compiler_Test_Case {
 		parent::setUp();
 
 		Monkey\Functions\when( 'beans_url_to_path' )->returnArg();
-		Monkey\Functions\when( 'beans_get_compiler_dir' )->justReturn( vfsStream::url( 'compiled/beans/compiler/' ) );
-		Monkey\Functions\when( 'beans_get_compiler_url' )->justReturn( $this->compiled_url . 'beans/compiler/' );
 	}
 
 	/**
 	 * Test get_internal_content() should return false when fragment is empty.
 	 */
 	public function test_should_return_false_when_fragment_is_empty() {
-		$compiler = new _Beans_Compiler( array() );
+		$compiler = $this->create_compiler();
 
 		// Run the test.
 		$this->assertfalse( $compiler->get_internal_content() );
@@ -50,7 +47,7 @@ class Tests_Beans_Compiler_Get_Internal_Content extends Compiler_Test_Case {
 	 * Test get_internal_content() should return false when the file does not exist.
 	 */
 	public function test_should_return_false_when_file_does_not_exist() {
-		$compiler = new _Beans_Compiler( array() );
+		$compiler = $this->create_compiler();
 		$this->set_reflective_property( vfsStream::url( 'compiled/fixtures/' ) . 'invalid-file.js', 'filename', $compiler );
 
 		// Run the test.
@@ -62,7 +59,7 @@ class Tests_Beans_Compiler_Get_Internal_Content extends Compiler_Test_Case {
 	 */
 	public function test_should_return_fragment_contents() {
 		$fragment = vfsStream::url( 'compiled/fixtures/test.less' );
-		$compiler = new _Beans_Compiler( array(
+		$compiler = $this->create_compiler( array(
 			'fragments' => array( $fragment ),
 		) );
 
