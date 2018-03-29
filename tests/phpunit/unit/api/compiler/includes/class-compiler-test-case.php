@@ -244,8 +244,7 @@ abstract class Compiler_Test_Case extends Test_Case {
 		$mock = Mockery::mock( 'WP_Filesystem_Direct' );
 
 		foreach ( $compiler->config['fragments'] as $fragment ) {
-			$mock
-				->shouldReceive( 'get_contents' )
+			$mock->shouldReceive( 'get_contents' )
 				->times( $times_called )
 				->with( $fragment )
 				->andReturn( file_get_contents( $fragment ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_file_get_contents, WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- Valid in this edge case.
