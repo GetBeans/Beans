@@ -10,6 +10,7 @@
 namespace Beans\Framework\Tests\Unit\API\Compiler;
 
 use Beans\Framework\Tests\Unit\API\Compiler\Includes\Compiler_Test_Case;
+use Brain\Monkey;
 use org\bovigo\vfs\vfsStream;
 
 require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
@@ -22,6 +23,16 @@ require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
  * @group   api-compiler
  */
 class Tests_Beans_Compiler_Set_Filename extends Compiler_Test_Case {
+
+	/**
+	 * Prepares the test environment before each test.
+	 */
+	protected function setUp() {
+		parent::setUp();
+
+		Monkey\Functions\when( 'beans_get_compiler_dir' )->justReturn( vfsStream::url( 'compiled/beans/compiler/' ) );
+		Monkey\Functions\when( 'beans_get_compiler_url' )->justReturn( $this->compiled_url . 'beans/compiler/' );
+	}
 
 	/**
 	 * Test set_filename() should return the hash created with the modification time from each of the fragments.
@@ -40,11 +51,9 @@ class Tests_Beans_Compiler_Set_Filename extends Compiler_Test_Case {
 		);
 		$compiler = new \_Beans_Compiler( $config );
 
-		// Set up the mocks.
-		$this->mock_dev_mode( true );
 		$this->add_virtual_directory( 'test-script' );
 
-		// Set the filename. Test.
+		// Run the tests.
 		$compiler->set_filename();
 		$expected = $this->get_filename( $compiler, $config, filemtime( $fragment ) );
 		$this->assertSame( $expected, $compiler->filename );
@@ -70,16 +79,9 @@ class Tests_Beans_Compiler_Set_Filename extends Compiler_Test_Case {
 		);
 		$compiler = new \_Beans_Compiler( $config );
 
-		// Set up the mocks.
-		$this->mock_dev_mode( true );
 		$this->add_virtual_directory( 'test-script' );
 
-		// Test that we are in dev mode & the directory does exist.
-		$this->assertTrue( _beans_is_compiler_dev_mode() );
-		$this->directoryExists( vfsStream::url( 'compiled/beans/compiler/test-script' ) );
-		$this->assertTrue( is_dir( $compiler->dir ) );
-
-		// Set the filename. Test.
+		// Run the tests.
 		$compiler->set_filename();
 		$expected = $this->get_filename( $compiler, $config, filemtime( $fragment ) );
 		$this->assertSame( $expected, $compiler->filename );
@@ -102,8 +104,6 @@ class Tests_Beans_Compiler_Set_Filename extends Compiler_Test_Case {
 		);
 		$compiler = new \_Beans_Compiler( $config );
 
-		// Set up the mocks.
-		$this->mock_dev_mode( true );
 		$this->add_virtual_directory( $config['id'] );
 
 		/**
