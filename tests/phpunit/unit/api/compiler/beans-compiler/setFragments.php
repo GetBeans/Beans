@@ -25,6 +25,16 @@ require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
 class Tests_Beans_Compiler_Set_Fragments extends Compiler_Test_Case {
 
 	/**
+	 * Prepares the test environment before each test.
+	 */
+	protected function setUp() {
+		parent::setUp();
+
+		Monkey\Functions\when( 'beans_get_compiler_dir' )->justReturn( vfsStream::url( 'compiled/beans/compiler/' ) );
+		Monkey\Functions\when( 'beans_get_compiler_url' )->justReturn( $this->compiled_url . 'beans/compiler/' );
+	}
+
+	/**
 	 * Test set_fragments() should return unchanged fragments, meaning no fragments were added or removed.
 	 */
 	public function test_should_return_unchanged_fragments() {
@@ -40,10 +50,16 @@ class Tests_Beans_Compiler_Set_Fragments extends Compiler_Test_Case {
 
 		$compiler = new \_Beans_Compiler( $config );
 
+		// Setup the mock.
+		Monkey\Functions\expect( 'beans_get' )
+			->once()
+			->with( 'test', array() )
+			->andReturn();
+
 		// Check before we start.
 		$this->assertSame( $config['fragments'], $compiler->config['fragments'] );
 
-		// Set the fragments. Test.
+		// Run the test.
 		$compiler->set_fragments();
 		$this->assertSame( $config['fragments'], $compiler->config['fragments'] );
 	}
@@ -71,10 +87,16 @@ class Tests_Beans_Compiler_Set_Fragments extends Compiler_Test_Case {
 			),
 		);
 
+		// Setup the mock.
+		Monkey\Functions\expect( 'beans_get' )
+			->once()
+			->with( 'test', $_beans_compiler_added_fragments['less'] )
+			->andReturn( $_beans_compiler_added_fragments['less']['test'] );
+
 		// Check before we start.
 		$this->assertSame( $config['fragments'], $compiler->config['fragments'] );
 
-		// Set the fragments. Test.
+		// Run the test.
 		$expected = array_merge( $config['fragments'], $_beans_compiler_added_fragments['less']['test'] );
 		$compiler->set_fragments();
 		$this->assertSame( $expected, $compiler->config['fragments'] );
@@ -96,13 +118,17 @@ class Tests_Beans_Compiler_Set_Fragments extends Compiler_Test_Case {
 
 		$compiler = new \_Beans_Compiler( $config );
 
-		// Set up the expectation before firing the event.
+		// Setup the mock.
+		Monkey\Functions\expect( 'beans_get' )
+			->once()
+			->with( 'test', array() )
+			->andReturn();
 		Monkey\Filters\expectApplied( 'beans_compiler_fragments_test' )
 			->once()
 			->with( $config['fragments'] )
 			->andReturn( $compiler->config['fragments'] );
 
-		// Set the fragments. Test.
+		// Run the test.
 		$compiler->set_fragments();
 		$this->assertSame( $config['fragments'], $compiler->config['fragments'] );
 	}
