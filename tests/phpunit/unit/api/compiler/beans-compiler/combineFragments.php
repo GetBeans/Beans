@@ -118,8 +118,8 @@ class Tests_Beans_Compiler_Combine_Fragments extends Compiler_Test_Case {
 		// Set up the mocks.
 		Monkey\Functions\expect( 'beans_url_to_path' )->never();
 		Monkey\Functions\expect( 'wp_remote_get' )->never();
+		Monkey\Functions\expect( '_beans_is_compiler_dev_mode' )->once()->andReturn( true );
 		$this->mock_filesystem_for_fragments( $compiler );
-		$this->mock_dev_mode( true );
 
 		// Run the test.
 		$compiler->combine_fragments();
@@ -151,8 +151,8 @@ EOB;
 		// Set up the mocks.
 		Monkey\Functions\expect( 'beans_url_to_path' )->never();
 		Monkey\Functions\expect( 'wp_remote_get' )->never();
+		Monkey\Functions\expect( '_beans_is_compiler_dev_mode' )->once()->andReturn( false );
 		$this->mock_filesystem_for_fragments( $compiler );
-		$this->mock_dev_mode( false );
 
 		// Run the test.
 		$compiler->combine_fragments();
@@ -177,8 +177,8 @@ EOB;
 		// Set up the mocks.
 		Monkey\Functions\expect( 'beans_url_to_path' )->never();
 		Monkey\Functions\expect( 'wp_remote_get' )->never();
+		Monkey\Functions\expect( '_beans_is_compiler_dev_mode' )->once()->andReturn( false );
 		$this->mock_filesystem_for_fragments( $compiler );
-		$this->mock_dev_mode( false );
 
 		// Run the test.
 		$compiler->combine_fragments();
@@ -203,8 +203,8 @@ EOB;
 		// Set up the mocks.
 		Monkey\Functions\expect( 'beans_url_to_path' )->never();
 		Monkey\Functions\expect( 'wp_remote_get' )->never();
+		Monkey\Functions\expect( '_beans_is_compiler_dev_mode' )->once()->andReturn( true );
 		$this->mock_filesystem_for_fragments( $compiler );
-		$this->mock_dev_mode( true );
 
 		// Run the test.
 		$compiler->combine_fragments();
@@ -226,12 +226,12 @@ EOB;
 		) );
 
 		// Set up the mocks.
-		$this->mock_filesystem_for_fragments( $compiler );
-		$this->mock_dev_mode( false );
-
-		// Run the test.
 		Monkey\Functions\expect( 'beans_url_to_path' )->never();
 		Monkey\Functions\expect( 'wp_remote_get' )->never();
+		Monkey\Functions\expect( '_beans_is_compiler_dev_mode' )->once()->andReturn( false );
+		$this->mock_filesystem_for_fragments( $compiler );
+
+		// Run the test.
 		$compiler->combine_fragments();
 		$this->assertSame( $this->get_compiled_jquery(), $compiler->compiled_content );
 	}
@@ -253,8 +253,8 @@ EOB;
 		// Set up the mocks.
 		Monkey\Functions\expect( 'beans_url_to_path' )->never();
 		Monkey\Functions\expect( 'wp_remote_get' )->never();
+		Monkey\Functions\expect( '_beans_is_compiler_dev_mode' )->once()->andReturn( false );
 		$this->mock_filesystem_for_fragments( $compiler );
-		$this->mock_dev_mode( false );
 
 		// Run the test.
 		$compiler->combine_fragments();
@@ -278,8 +278,8 @@ EOB;
 		// Set up the mocks.
 		Monkey\Functions\expect( 'beans_url_to_path' )->never();
 		Monkey\Functions\expect( 'wp_remote_get' )->never();
+		Monkey\Functions\expect( '_beans_is_compiler_dev_mode' )->once()->andReturn( true );
 		$this->mock_filesystem_for_fragments( $compiler );
-		$this->mock_dev_mode( true );
 
 		// Run the test.
 		$compiler->combine_fragments();
@@ -302,8 +302,8 @@ EOB;
 		// Set up the mocks.
 		Monkey\Functions\expect( 'beans_url_to_path' )->never();
 		Monkey\Functions\expect( 'wp_remote_get' )->never();
+		Monkey\Functions\expect( '_beans_is_compiler_dev_mode' )->once()->andReturn( false );
 		$this->mock_filesystem_for_fragments( $compiler );
-		$this->mock_dev_mode( false );
 
 		// Run the test.
 		$compiler->combine_fragments();

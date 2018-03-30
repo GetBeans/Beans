@@ -275,21 +275,6 @@ abstract class Compiler_Test_Case extends Test_Case {
 	}
 
 	/**
-	 * Mock the site's development mode.
-	 *
-	 * @since 1.5.0
-	 *
-	 * @param bool $is_enabled Optional. When true, development mode is enabled. Default is false.
-	 *
-	 * @return void
-	 */
-	protected function mock_dev_mode( $is_enabled = false ) {
-		Monkey\Functions\expect( 'get_option' )
-			->with( 'beans_dev_mode', false )
-			->andReturn( $is_enabled );
-	}
-
-	/**
 	 * Get the compiled jQuery.
 	 *
 	 * @since 1.5.0
