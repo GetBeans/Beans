@@ -165,7 +165,7 @@ class Tests_Beans_Compiler_Run_Compiler extends Compiler_Test_Case {
 		$modified_hashes    = explode( '-', pathinfo( $modified_filename, PATHINFO_FILENAME ) );
 
 		/**
-		 * Step 4: Test the starting conditions.
+		 * Step 3: Test the starting conditions.
 		 *
 		 * 1. Check that the original file is cached.
 		 * 2. Check that the new "modified" file is not yet cached (as that happens when we run the compiler).
