@@ -36,10 +36,10 @@ class Tests_BeansFieldSlider extends Fields_Test_Case {
 	 * Cleans up the test environment after each test.
 	 */
 	public function tearDown() {
-		parent::setUp();
-
 		beans_remove_action( 'beans_field_slider', 'beans_field_slider' );
 		beans_remove_action( 'beans_field_enqueue_scripts_slider', 'beans_field_enqueue_scripts_slider' );
+
+		parent::tearDown();
 	}
 
 	/**

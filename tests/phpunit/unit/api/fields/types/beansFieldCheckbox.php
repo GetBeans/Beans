@@ -36,9 +36,9 @@ class Tests_BeansFieldCheckbox extends Fields_Test_Case {
 	 * Cleans up the test environment after each test.
 	 */
 	public function tearDown() {
-		parent::setUp();
-
 		beans_remove_action( 'beans_field_checkbox', 'beans_field_checkbox' );
+
+		parent::tearDown();
 	}
 
 	/**

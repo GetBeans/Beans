@@ -36,10 +36,10 @@ class Tests_BeansFieldImage extends Fields_Test_Case {
 	 * Cleans up the test environment after each test.
 	 */
 	public function tearDown() {
-		parent::setUp();
-
 		beans_remove_action( 'beans_field_enqueue_scripts_image', 'beans_field_enqueue_scripts_image' );
 		beans_remove_action( 'beans_field_image_assets', 'beans_field_image_assets' );
+
+		parent::tearDown();
 	}
 
 	/**

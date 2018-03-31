@@ -36,10 +36,10 @@ class Tests_BeansFieldLabel extends Fields_Test_Case {
 	 * Cleans up the test environment after each test.
 	 */
 	public function tearDown() {
-		parent::setUp();
-
 		beans_remove_action( 'beans_field_label', 'beans_field_label' );
 		beans_remove_action( 'beans_field_description', 'beans_field_description' );
+
+		parent::tearDown();
 	}
 
 	/**
