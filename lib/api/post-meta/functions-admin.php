@@ -103,6 +103,7 @@ function beans_register_post_meta( array $fields, $conditions, $section, $args =
  * @return bool
  */
 function _beans_is_post_meta_conditions( $conditions ) {
+
 	// If user has designated boolean true, it's always true. Nothing more to do here.
 	if ( true === $conditions ) {
 		return true;
