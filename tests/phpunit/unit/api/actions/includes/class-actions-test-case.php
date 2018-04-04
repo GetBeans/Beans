@@ -86,23 +86,6 @@ abstract class Actions_Test_Case extends Test_Case {
 	}
 
 	/**
-	 * Cleans up the test environment after each test.
-	 */
-	protected function tearDown() {
-		global $_beans_registered_actions;
-		$_beans_registered_actions = array(
-			'added'    => array(),
-			'modified' => array(),
-			'removed'  => array(),
-			'replaced' => array(),
-		);
-
-		$this->remove_test_actions();
-
-		parent::tearDown();
-	}
-
-	/**
 	 * Simulate going to the post and loading in the template and fragments.
 	 *
 	 * @since 1.5.0
@@ -131,17 +114,6 @@ abstract class Actions_Test_Case extends Test_Case {
 			if ( $expect_added ) {
 				$this->assertTrue( has_action( $action['hook'], $action['callback'] ) !== false );
 			}
-		}
-	}
-
-	/**
-	 * Remove the test actions.
-	 */
-	protected function remove_test_actions() {
-
-		foreach ( static::$test_actions as $beans_id => $action ) {
-			_beans_unset_action( $beans_id, 'added' );
-			remove_action( $action['hook'], $action['callback'], $action['priority'] );
 		}
 	}
 }
