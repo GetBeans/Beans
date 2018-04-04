@@ -26,7 +26,7 @@ class Tests_BeansGetImageUrl extends Fields_Test_Case {
 	/**
 	 * Prepares the test environment before each test.
 	 */
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 
 		// Load the field type.

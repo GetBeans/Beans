@@ -38,7 +38,7 @@ abstract class Options_Test_Case extends Test_Case {
 	/**
 	 * Prepares the test environment before each test.
 	 */
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 
 		$this->load_original_functions( array(
