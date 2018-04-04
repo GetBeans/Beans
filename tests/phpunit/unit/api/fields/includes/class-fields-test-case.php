@@ -54,29 +54,6 @@ abstract class Fields_Test_Case extends Test_Case {
 	}
 
 	/**
-	 * Cleans up the test environment after each test.
-	 */
-	protected function tearDown() {
-
-		// Reset the "registered" container.
-		$registered = $this->get_reflective_property( 'registered' );
-		$registered->setValue( new \_Beans_Fields(), array(
-			'option'       => array(),
-			'post_meta'    => array(),
-			'term_meta'    => array(),
-			'wp_customize' => array(),
-		) );
-
-		// Reset the other static properties.
-		foreach ( array( 'field_types_loaded', 'field_assets_hook_loaded' ) as $property_name ) {
-			$property = $this->get_reflective_property( $property_name );
-			$property->setValue( new \_Beans_Fields(), array() );
-		}
-
-		parent::tearDown();
-	}
-
-	/**
 	 * Get reflective access to the private method.
 	 *
 	 * @since 1.5.0
