@@ -72,10 +72,10 @@ abstract class Compiler_Test_Case extends WP_UnitTestCase {
 	 * Tear down the test fixture.
 	 */
 	public function tearDown() {
+		unset( $GLOBALS['wp_filesystem'] );
+
 		Mockery::close();
 		parent::tearDown();
-
-		unset( $GLOBALS['wp_filesystem'] );
 	}
 
 	/**

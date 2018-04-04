@@ -40,10 +40,11 @@ class Tests_BeansGetLayoutClass extends WP_UnitTestCase {
 	 * Cleans up the test environment after each test.
 	 */
 	public function tearDown() {
-		parent::tearDown();
 
 		// Reset the Beans' sidebars.
 		beans_do_register_widget_areas();
+
+		parent::tearDown();
 	}
 
 	/**

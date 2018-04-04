@@ -52,7 +52,6 @@ abstract class Filters_Test_Case extends Test_Case {
 	 * Reset the test fixture.
 	 */
 	protected function tearDown() {
-		parent::tearDown();
 
 		foreach ( static::$test_filters as $beans_id => $filter ) {
 
@@ -62,6 +61,8 @@ abstract class Filters_Test_Case extends Test_Case {
 
 			remove_filter( $filter['hook'], $filter['callback'], $filter['priority'] );
 		}
+
+		parent::tearDown();
 	}
 
 	/**

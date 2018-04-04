@@ -101,8 +101,6 @@ abstract class Compiler_Test_Case extends Test_Case {
 	 * Tear down the test fixture.
 	 */
 	protected function tearDown() {
-		Mockery::close();
-		parent::tearDown();
 
 		// Reset the global fragments container.
 		global $_beans_compiler_added_fragments;
@@ -113,6 +111,9 @@ abstract class Compiler_Test_Case extends Test_Case {
 		);
 
 		unset( $GLOBALS['wp_filesystem'] );
+
+		Mockery::close();
+		parent::tearDown();
 	}
 
 	/**

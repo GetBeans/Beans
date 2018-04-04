@@ -89,8 +89,6 @@ abstract class Actions_Test_Case extends Test_Case {
 	 * Cleans up the test environment after each test.
 	 */
 	protected function tearDown() {
-		parent::tearDown();
-
 		global $_beans_registered_actions;
 		$_beans_registered_actions = array(
 			'added'    => array(),
@@ -100,6 +98,8 @@ abstract class Actions_Test_Case extends Test_Case {
 		);
 
 		$this->remove_test_actions();
+
+		parent::tearDown();
 	}
 
 	/**

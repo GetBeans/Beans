@@ -48,7 +48,6 @@ abstract class Filters_Test_Case extends Test_Case {
 	 * Cleans up the test environment after each test.
 	 */
 	public function tearDown() {
-		parent::tearDown();
 
 		foreach ( static::$test_filters as $beans_id => $filter ) {
 
@@ -58,6 +57,8 @@ abstract class Filters_Test_Case extends Test_Case {
 
 			remove_filter( $filter['hook'], $filter['callback'], $filter['priority'] );
 		}
+
+		parent::tearDown();
 	}
 
 	/**

@@ -34,7 +34,6 @@ abstract class Replace_Action_Test_Case extends Actions_Test_Case {
 	 * Cleans up the test environment after each test.
 	 */
 	public function tearDown() {
-		parent::tearDown();
 
 		// Reset and restore.
 		foreach ( static::$test_actions as $beans_id => $action ) {
@@ -46,6 +45,8 @@ abstract class Replace_Action_Test_Case extends Actions_Test_Case {
 			// Restore the original action.
 			beans_add_smart_action( $action['hook'], $action['callback'], $action['priority'], $action['args'] );
 		}
+
+		parent::tearDown();
 	}
 
 	/**

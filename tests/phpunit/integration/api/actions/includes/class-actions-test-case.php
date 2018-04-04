@@ -76,7 +76,6 @@ abstract class Actions_Test_Case extends WP_UnitTestCase {
 	 * Cleans up the test environment after each test.
 	 */
 	public function tearDown() {
-		parent::tearDown();
 
 		if ( false === $this->reset_beans_registry ) {
 			return;
@@ -89,6 +88,8 @@ abstract class Actions_Test_Case extends WP_UnitTestCase {
 			'removed'  => array(),
 			'replaced' => array(),
 		);
+
+		parent::tearDown();
 	}
 
 	/**
