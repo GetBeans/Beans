@@ -44,11 +44,11 @@ abstract class Test_Case extends WP_UnitTestCase {
 	 * Cleans up the test environment after each test.
 	 */
 	public function tearDown() {
-		Monkey\tearDown();
-		parent::tearDown();
-
 		$this->reset_fields_container();
 		$this->reset_actions_container();
+
+		Monkey\tearDown();
+		parent::tearDown();
 	}
 
 	/**

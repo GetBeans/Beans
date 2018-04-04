@@ -28,6 +28,13 @@ abstract class Test_Case extends TestCase {
 	protected $just_return_path = false;
 
 	/**
+	 * Reset flag.
+	 *
+	 * @var bool
+	 */
+	protected $was_reset = false;
+
+	/**
 	 * Prepares the test environment before each test.
 	 */
 	protected function setUp() {
@@ -79,12 +86,21 @@ abstract class Test_Case extends TestCase {
 		foreach ( array( 'esc_attr_e', 'esc_html_e', '_e' ) as $wp_function ) {
 			Monkey\Functions\when( $wp_function )->echoArg();
 		}
+
+		if ( ! $this->was_reset ) {
+			$this->reset_actions_container();
+			$this->reset_fields_container();
+			$this->was_reset = true;
+		}
 	}
 
 	/**
 	 * Cleans up the test environment after each test.
 	 */
 	protected function tearDown() {
+		$this->reset_actions_container();
+		$this->reset_fields_container();
+
 		Monkey\tearDown();
 		parent::tearDown();
 	}
@@ -134,6 +150,41 @@ abstract class Test_Case extends TestCase {
 		$html = preg_replace( '/\s*(\<)/m', '$1$2', $html );
 
 		return str_replace( '>', ">\n", $html );
+	}
+
+	/**
+	 * Reset the Actions API container.
+	 */
+	protected function reset_actions_container() {
+		global $_beans_registered_actions;
+		$_beans_registered_actions = array(
+			'added'    => array(),
+			'modified' => array(),
+			'removed'  => array(),
+			'replaced' => array(),
+		);
+	}
+
+	/**
+	 * Reset the Fields API container, i.e. static memories.
+	 */
+	protected function reset_fields_container() {
+		if ( ! class_exists( '_Beans_Fields' ) ) {
+			return;
+		}
+		// Reset the "registered" container.
+		$registered = $this->get_reflective_property( 'registered', '_Beans_Fields' );
+		$registered->setValue( new \_Beans_Fields(), array(
+			'option'       => array(),
+			'post_meta'    => array(),
+			'term_meta'    => array(),
+			'wp_customize' => array(),
+		) );
+		// Reset the other static properties.
+		foreach ( array( 'field_types_loaded', 'field_assets_hook_loaded' ) as $property_name ) {
+			$property = $this->get_reflective_property( $property_name, '_Beans_Fields' );
+			$property->setValue( new \_Beans_Fields(), array() );
+		}
 	}
 
 	/**

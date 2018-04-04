@@ -33,16 +33,6 @@ class Tests_BeansFieldLabel extends Fields_Test_Case {
 	}
 
 	/**
-	 * Cleans up the test environment after each test.
-	 */
-	public function tearDown() {
-		beans_remove_action( 'beans_field_label', 'beans_field_label' );
-		beans_remove_action( 'beans_field_description', 'beans_field_description' );
-
-		parent::tearDown();
-	}
-
-	/**
 	 * Test beans_field_label() should not render the field's label when none is given.
 	 */
 	public function test_should_not_render_field_label_when_none_given() {

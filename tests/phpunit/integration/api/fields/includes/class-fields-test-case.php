@@ -51,11 +51,11 @@ abstract class Fields_Test_Case extends Test_Case {
 	 * Cleans up the test environment after each test.
 	 */
 	public function tearDown() {
-		parent::tearDown();
-
 		remove_action( 'beans_field_group_label', 'beans_field_label' );
 		remove_action( 'beans_field_wrap_prepend_markup', 'beans_field_label' );
 		remove_action( 'beans_field_wrap_append_markup', 'beans_field_description' );
+
+		parent::tearDown();
 	}
 
 	/**

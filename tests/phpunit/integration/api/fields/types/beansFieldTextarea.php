@@ -33,15 +33,6 @@ class Tests_BeansFieldTextarea extends Fields_Test_Case {
 	}
 
 	/**
-	 * Cleans up the test environment after each test.
-	 */
-	public function tearDown() {
-		beans_remove_action( 'beans_field_textarea', 'beans_field_textarea' );
-
-		parent::tearDown();
-	}
-
-	/**
 	 * Test beans_field_textarea() should render the textarea field.
 	 */
 	public function test_should_render_textarea_field() {

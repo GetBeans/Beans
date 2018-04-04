@@ -33,16 +33,6 @@ class Tests_BeansFieldSlider extends Fields_Test_Case {
 	}
 
 	/**
-	 * Cleans up the test environment after each test.
-	 */
-	public function tearDown() {
-		beans_remove_action( 'beans_field_slider', 'beans_field_slider' );
-		beans_remove_action( 'beans_field_enqueue_scripts_slider', 'beans_field_enqueue_scripts_slider' );
-
-		parent::tearDown();
-	}
-
-	/**
 	 * Test beans_field_slider() should render the slider field.
 	 */
 	public function test_should_render_slider_field() {

@@ -33,15 +33,6 @@ class Tests_BeansFieldRadio extends Fields_Test_Case {
 	}
 
 	/**
-	 * Cleans up the test environment after each test.
-	 */
-	public function tearDown() {
-		beans_remove_action( 'beans_field_radio', 'beans_field_radio' );
-
-		parent::tearDown();
-	}
-
-	/**
 	 * Test beans_field_radio() should render the radio field with image options.
 	 */
 	public function test_should_render_radio_field_with_image_options() {

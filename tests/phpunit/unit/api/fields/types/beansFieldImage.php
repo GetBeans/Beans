@@ -34,16 +34,6 @@ class Tests_BeansFieldImage extends Fields_Test_Case {
 	}
 
 	/**
-	 * Cleans up the test environment after each test.
-	 */
-	public function tearDown() {
-		beans_remove_action( 'beans_field_enqueue_scripts_image', 'beans_field_enqueue_scripts_image' );
-		beans_remove_action( 'beans_field_image_assets', 'beans_field_image_assets' );
-
-		parent::tearDown();
-	}
-
-	/**
 	 * Test beans_field_image() should render a single image field.
 	 */
 	public function test_should_render_single_image_field() {

@@ -33,15 +33,6 @@ class Tests_BeansFieldActivation extends Fields_Test_Case {
 	}
 
 	/**
-	 * Cleans up the test environment after each test.
-	 */
-	public function tearDown() {
-		beans_remove_action( 'beans_field_activation', 'beans_field_activation' );
-
-		parent::tearDown();
-	}
-
-	/**
 	 * Test beans_field_activation() should render the activation field.
 	 */
 	public function test_should_render_activation_field() {

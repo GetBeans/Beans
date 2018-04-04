@@ -33,15 +33,6 @@ class Tests_BeansFieldCheckbox extends Fields_Test_Case {
 	}
 
 	/**
-	 * Cleans up the test environment after each test.
-	 */
-	public function tearDown() {
-		beans_remove_action( 'beans_field_checkbox', 'beans_field_checkbox' );
-
-		parent::tearDown();
-	}
-
-	/**
 	 * Test beans_field_checkbox() should render the checkbox with the label when given.
 	 */
 	public function test_should_render_checkbox_with_label_when_given() {

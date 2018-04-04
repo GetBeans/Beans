@@ -57,7 +57,6 @@ abstract class Fields_Test_Case extends Test_Case {
 	 * Cleans up the test environment after each test.
 	 */
 	protected function tearDown() {
-		parent::tearDown();
 
 		// Reset the "registered" container.
 		$registered = $this->get_reflective_property( 'registered' );
@@ -73,6 +72,8 @@ abstract class Fields_Test_Case extends Test_Case {
 			$property = $this->get_reflective_property( $property_name );
 			$property->setValue( new \_Beans_Fields(), array() );
 		}
+
+		parent::tearDown();
 	}
 
 	/**

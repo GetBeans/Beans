@@ -33,15 +33,6 @@ class Tests_BeansFieldSelect extends Fields_Test_Case {
 	}
 
 	/**
-	 * Cleans up the test environment after each test.
-	 */
-	public function tearDown() {
-		beans_remove_action( 'beans_field_select', 'beans_field_select' );
-
-		parent::tearDown();
-	}
-
-	/**
 	 * Test beans_field_checkbox() should render the select field.
 	 */
 	public function test_should_render_select_field() {

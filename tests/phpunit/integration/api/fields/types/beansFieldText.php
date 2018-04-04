@@ -33,15 +33,6 @@ class Tests_BeansFieldText extends Fields_Test_Case {
 	}
 
 	/**
-	 * Cleans up the test environment after each test.
-	 */
-	public function tearDown() {
-		beans_remove_action( 'beans_field_text', 'beans_field_text' );
-
-		parent::tearDown();
-	}
-
-	/**
 	 * Test beans_field_text() should render the text field.
 	 */
 	public function test_should_render_text_field() {
