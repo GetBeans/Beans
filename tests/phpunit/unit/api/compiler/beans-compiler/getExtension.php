@@ -14,13 +14,13 @@ use Beans\Framework\Tests\Unit\API\Compiler\Includes\Compiler_Test_Case;
 require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
 
 /**
- * Class Tests_Beans_Compiler_Get_Extension
+ * Class Tests_BeansCompiler_GetExtension
  *
  * @package Beans\Framework\Tests\Unit\API\Compiler
  * @group   api
  * @group   api-compiler
  */
-class Tests_Beans_Compiler_Get_Extension extends Compiler_Test_Case {
+class Tests_BeansCompiler_GetExtension extends Compiler_Test_Case {
 
 	/**
 	 * Test get_extension() should return "css" when the type is "style".

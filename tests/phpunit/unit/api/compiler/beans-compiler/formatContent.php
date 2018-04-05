@@ -15,13 +15,13 @@ use Brain\Monkey;
 require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
 
 /**
- * Class Tests_Beans_Compiler_Format_Content
+ * Class Tests_BeansCompiler_FormatContent
  *
  * @package Beans\Framework\Tests\Unit\API\Compiler
  * @group   api
  * @group   api-compiler
  */
-class Tests_Beans_Compiler_Format_Content extends Compiler_Test_Case {
+class Tests_BeansCompiler_FormatContent extends Compiler_Test_Case {
 
 	/**
 	 * The Less content.

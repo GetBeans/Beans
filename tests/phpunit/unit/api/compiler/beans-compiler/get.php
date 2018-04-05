@@ -15,13 +15,13 @@ use org\bovigo\vfs\vfsStream;
 require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
 
 /**
- * Class Tests_Beans_Compiler_Get
+ * Class Tests_BeansCompiler_Get
  *
  * @package Beans\Framework\Tests\Unit\API\Compiler
  * @group   api
  * @group   api-compiler
  */
-class Tests_Beans_Compiler_Get extends Compiler_Test_Case {
+class Tests_BeansCompiler_Get extends Compiler_Test_Case {
 
 	/**
 	 * Test should fix the configuration's dependency key.

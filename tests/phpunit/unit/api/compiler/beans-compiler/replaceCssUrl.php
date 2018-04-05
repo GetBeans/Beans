@@ -15,13 +15,13 @@ use Brain\Monkey;
 require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
 
 /**
- * Class Tests_Beans_Compiler_Replace_Css_Url
+ * Class Tests_BeansCompiler_ReplaceCssUrl
  *
  * @package Beans\Framework\Tests\Unit\API\Compiler
  * @group   api
  * @group   api-compiler
  */
-class Tests_Beans_Compiler_Replace_Css_Url extends Compiler_Test_Case {
+class Tests_BeansCompiler_ReplaceCssUrl extends Compiler_Test_Case {
 
 	/**
 	 * Test replace_css_url() should return original content when there is no url source in the CSS.

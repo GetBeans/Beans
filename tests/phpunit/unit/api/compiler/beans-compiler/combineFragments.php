@@ -16,13 +16,13 @@ use org\bovigo\vfs\vfsStream;
 require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
 
 /**
- * Class Tests_Beans_Compiler_Combine_Fragments
+ * Class Tests_BeansCompiler_CombineFragments
  *
  * @package Beans\Framework\Tests\Unit\API\Compiler
  * @group   api
  * @group   api-compiler
  */
-class Tests_Beans_Compiler_Combine_Fragments extends Compiler_Test_Case {
+class Tests_BeansCompiler_CombineFragments extends Compiler_Test_Case {
 
 	/**
 	 * The CSS content.
