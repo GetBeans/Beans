@@ -15,13 +15,13 @@ use Beans\Framework\Tests\Integration\API\Compiler\Includes\Compiler_Test_Case;
 require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
 
 /**
- * Class Tests_Beans_Compiler_Get_Remote_Content
+ * Class Tests_BeansCompiler_GetRemoteContent
  *
  * @package Beans\Framework\Tests\Integration\API\Compiler
  * @group   api
  * @group   api-compiler
  */
-class Tests_Beans_Compiler_Get_Remote_Content extends Compiler_Test_Case {
+class Tests_BeansCompiler_GetRemoteContent extends Compiler_Test_Case {
 
 	/**
 	 * Test get_remote_content() should return false when fragment is empty.

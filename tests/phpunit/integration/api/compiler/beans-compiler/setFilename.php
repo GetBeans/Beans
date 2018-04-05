@@ -15,13 +15,13 @@ use org\bovigo\vfs\vfsStream;
 require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
 
 /**
- * Class Tests_Beans_Compiler_Set_Filename
+ * Class Tests_BeansCompiler_SetFilename
  *
  * @package Beans\Framework\Tests\Integration\API\Compiler
  * @group   api
  * @group   api-compiler
  */
-class Tests_Beans_Compiler_Set_Filename extends Compiler_Test_Case {
+class Tests_BeansCompiler_SetFilename extends Compiler_Test_Case {
 
 	/**
 	 * Test set_filename() should return the hash created with the modification time from each of the fragments.

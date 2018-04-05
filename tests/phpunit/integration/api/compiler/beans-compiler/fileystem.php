@@ -16,13 +16,13 @@ use Brain\Monkey\Functions;
 require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
 
 /**
- * Class Tests_Beans_Compiler_Filesystem
+ * Class Tests_BeansCompiler_Filesystem
  *
  * @package Beans\Framework\Tests\Integration\API\Compiler
  * @group   api
  * @group   api-compiler
  */
-class Tests_Beans_Compiler_Filesystem extends Compiler_Test_Case {
+class Tests_BeansCompiler_Filesystem extends Compiler_Test_Case {
 
 	/**
 	 * Test filesystem() should render a report and die when no filesystem is selected.
