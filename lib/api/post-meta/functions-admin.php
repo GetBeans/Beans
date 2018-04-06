@@ -77,7 +77,7 @@ function beans_register_post_meta( array $fields, $conditions, $section, $args =
 
 	// Stop here if the current page isn't concerned.
 	if ( ! _beans_is_post_meta_conditions( $conditions ) || ! is_admin() ) {
-		return;
+		return false;
 	}
 
 	// Stop here if the field can't be registered.
@@ -89,6 +89,8 @@ function beans_register_post_meta( array $fields, $conditions, $section, $args =
 	require_once BEANS_API_PATH . 'post-meta/class-beans-post-meta.php';
 
 	new _Beans_Post_Meta( $section, $args );
+
+	return true;
 }
 
 /**
