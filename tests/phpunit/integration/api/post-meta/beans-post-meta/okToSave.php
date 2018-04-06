@@ -1,0 +1,86 @@
+<?php
+/**
+ * Tests for the ok_to_save method of _Beans_Post_Meta.
+ *
+ * @package Beans\Framework\Tests\Integration\API\Post_Meta
+ *
+ * @since   1.5.0
+ */
+
+namespace Beans\Framework\Tests\Integration\API\Post_Meta;
+
+use WP_UnitTestCase;
+use _Beans_Post_Meta;
+
+require_once BEANS_THEME_DIR . '/lib/api/post-meta/class-beans-post-meta.php';
+
+/**
+ * Class Tests_Beans_Post_Meta_Ok_To_Save.
+ *
+ * @package Beans\Framework\Tests\Integration\API\Post_Meta
+ * @group   api
+ * @group   api-post-meta
+ */
+class Tests_Beans_Post_Meta_Ok_To_Save extends WP_UnitTestCase {
+
+	/**
+	 * Test _Beans_Post_Meta::ok_to_save() is false with unverified nonce.
+	 */
+	public function test_ok_to_save_should_return_false_when_unverified_nonce() {
+		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );
+		$post_id   = $this->factory()->post->create();
+
+		$this->assertFalse( $post_meta->ok_to_save( $post_id, array( array( 'id' => 'beans_test_slider' ) ) ) );
+	}
+
+	/**
+	 * Test _Beans_Post_Meta::ok_to_save() is false with invalid user permissions.
+	 */
+	public function test_ok_to_save_should_return_false_when_user_cannot_edit() {
+		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );
+		$post_id   = $this->factory()->post->create();
+
+		// Run without permission to save.
+		$user_id = $this->factory()->user->create( array( 'role' => 'subscriber' ) );
+		wp_set_current_user( $user_id );
+
+		// Set a nonce to return.
+		$_POST['beans_post_meta_nonce'] = wp_create_nonce( 'beans_post_meta_nonce' );
+
+		$this->assertFalse( $post_meta->ok_to_save( $post_id, array( array( 'id' => 'beans_test_slider' ) ) ) );
+	}
+
+	/**
+	 * Test _Beans_Post_Meta::ok_to_save() is false when post meta has no fields.
+	 */
+	public function test_ok_to_save_should_return_false_when_fields_empty() {
+		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );
+		$post_id   = $this->factory()->post->create();
+
+		// Run with permission to save.
+		$user_id = $this->factory()->user->create( array( 'role' => 'administrator' ) );
+		wp_set_current_user( $user_id );
+
+		// Set a nonce to return.
+		$_POST['beans_post_meta_nonce'] = wp_create_nonce( 'beans_post_meta_nonce' );
+
+		$this->assertFalse( $post_meta->ok_to_save( $post_id, array() ) );
+	}
+
+	/**
+	 * Test _Beans_Post_Meta::ok_to_save() is true when all conditions for saving are met.
+	 */
+	public function test_ok_to_save_should_return_true_when_all_conditions_met() {
+		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );
+		$post_id   = $this->factory()->post->create();
+
+		// Run with permission to save.
+		$user_id = $this->factory()->user->create( array( 'role' => 'administrator' ) );
+		wp_set_current_user( $user_id );
+
+		// Set a nonce to return.
+		$_POST['beans_post_meta_nonce'] = wp_create_nonce( 'beans_post_meta_nonce' );
+
+		$this->assertTrue( $post_meta->ok_to_save( $post_id, array( array( 'id' => 'beans_test_slider' ) ) ) );
+	}
+}

@@ -15,8 +15,8 @@ use WP_UnitTestCase;
  * Class Tests_BeansGetPostMeta
  *
  * @package Beans\Framework\Tests\Integration\API\Post_Meta
- * @group   integration-tests
  * @group   api
+ * @group   api-post-meta
  */
 class Tests_BeansGetPostMeta extends WP_UnitTestCase {
 
