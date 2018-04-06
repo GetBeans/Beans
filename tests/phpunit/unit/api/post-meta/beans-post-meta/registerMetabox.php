@@ -1,6 +1,6 @@
 <?php
 /**
- * registerMetabox.php
+ * Tests the register_metabox method of _Beans_Post_Meta.
  */
 
 namespace Beans\Framework\Tests\Unit\API\Post_Meta;
@@ -11,7 +11,14 @@ use Brain\Monkey;
 
 require_once dirname( __DIR__ ) . '/includes/class-beans-post-meta-test-case.php';
 
-class Tests_BeansPostMeta_RegisterMetabox extends Beans_Post_Meta_Test_Case {
+/**
+ * Class Tests_Beans_Post_Meta_Metabox_Content
+ *
+ * @package Beans\Framework\Tests\Unit\API\Post_Meta
+ * @group   api
+ * @group   api-post-meta
+ */
+class Tests_Beans_Post_Meta_Register_Metabox extends Beans_Post_Meta_Test_Case {
 
 	/**
 	 * Test _Beans_Post_Meta::register_metabox() should register an appropriate metabox.

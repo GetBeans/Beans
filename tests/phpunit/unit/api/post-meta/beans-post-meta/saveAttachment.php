@@ -1,6 +1,6 @@
 <?php
 /**
- * saveAttachment.php
+ * Tests the save_attachment method of _Beans_Post_Meta.
  */
 
 namespace Beans\Framework\Tests\Unit\API\Post_Meta;
@@ -11,23 +11,15 @@ use Brain\Monkey;
 
 require_once dirname( __DIR__ ) . '/includes/class-beans-post-meta-test-case.php';
 
-class Tests_BeansPostMeta_SaveAttachment extends Beans_Post_Meta_Test_Case {
+/**
+ * Class Tests_Beans_Post_Meta_Save_Attachment
+ *
+ * @package Beans\Framework\Tests\Unit\API\Post_Meta
+ * @group   api
+ * @group   api-post-meta
+ */
+class Tests_BeansPostMeta_Save_Attachment extends Beans_Post_Meta_Test_Case {
 
-	/**
-	 * Setup test fixture.
-	 */
-//	protected function setUp() {
-//		parent::setUp();
-//
-//		$this->load_original_functions( array(
-//			'api/post-meta/class-beans-post-meta.php',
-//			'api/fields/functions.php',
-//			'api/utilities/functions.php',
-//		) );
-//
-//		$this->setup_common_wp_stubs();
-//	}
-//
 	/**
 	 * Test _Beans_Post_Meta::save_attachment() doesn't update post meta when doing autosave.
 	 */

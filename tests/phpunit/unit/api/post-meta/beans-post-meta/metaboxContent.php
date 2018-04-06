@@ -1,6 +1,6 @@
 <?php
 /**
- * metaboxContent.php
+ * Tests the metabox_content method of _Beans_Post_Meta.
  */
 
 namespace Beans\Framework\Tests\Unit\API\Post_Meta;
@@ -11,7 +11,14 @@ use Brain\Monkey;
 
 require_once dirname( __DIR__ ) . '/includes/class-beans-post-meta-test-case.php';
 
-class Tests_BeansPostMeta_MetaboxContent extends Beans_Post_Meta_Test_Case {
+/**
+ * Class Tests_Beans_Post_Meta_Metabox_Content
+ *
+ * @package Beans\Framework\Tests\Unit\API\Post_Meta
+ * @group   api
+ * @group   api-post-meta
+ */
+class Tests_Beans_Post_Meta_Metabox_Content extends Beans_Post_Meta_Test_Case {
 
 	/**
 	 * Test _Beans_Post_Meta::metabox_content() should output post meta fields markup.
