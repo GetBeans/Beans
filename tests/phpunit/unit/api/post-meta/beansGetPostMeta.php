@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Unit\API\Post_Meta;
 
-use Beans\Framework\Tests\Unit\Test_Case;
+use Beans\Framework\Tests\Unit\API\Post_Meta\Includes\Beans_Post_Meta_Test_Case;
 use Brain\Monkey;
 
 /**
@@ -19,19 +19,19 @@ use Brain\Monkey;
  * @group   api
  * @group   api-post-meta
  */
-class Tests_BeansGetPostMeta extends Test_Case {
+class Tests_Beans_Get_Post_Meta extends Beans_Post_Meta_Test_Case {
 
 	/**
 	 * Setup test fixture.
 	 */
-	protected function setUp() {
-		parent::setUp();
-
-		$this->load_original_functions( array(
-			'api/post-meta/functions.php',
-			'api/utilities/functions.php',
-		) );
-	}
+//	protected function setUp() {
+//		parent::setUp();
+//
+//		$this->load_original_functions( array(
+//			'api/post-meta/functions.php',
+//			'api/utilities/functions.php',
+//		) );
+//	}
 
 	/**
 	 * Test beans_get_post_meta() should return the default when the post_id cannot be resolved.
