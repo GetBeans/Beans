@@ -26,6 +26,8 @@ abstract class Beans_Post_Meta_Test_Case extends Test_Case {
 
 		$this->load_original_functions( array(
 			'api/post-meta/class-beans-post-meta.php',
+			'api/post-meta/functions.php',
+			'api/post-meta/functions-admin.php',
 			'api/fields/functions.php',
 			'api/utilities/functions.php',
 		) );
