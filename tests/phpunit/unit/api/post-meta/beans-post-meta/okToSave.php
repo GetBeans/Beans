@@ -1,6 +1,10 @@
 <?php
 /**
  * Tests the ok_to_save method of _Beans_Post_Meta.
+ *
+ * @package Beans\Framework\Tests\Unit\API\Post_Meta
+ *
+ * @since 1.5.0
  */
 
 namespace Beans\Framework\Tests\Unit\API\Post_Meta;

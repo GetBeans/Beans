@@ -1,6 +1,10 @@
 <?php
 /**
  * Tests the save method of _Beans_Post_Meta.
+ *
+ * @package Beans\Framework\Tests\Unit\API\Post_Meta.
+ *
+ * @since 1.5.0
  */
 
 namespace Beans\Framework\Tests\Unit\API\Post_Meta;
@@ -55,7 +59,7 @@ class Tests_Beans_Post_Meta_Save extends Beans_Post_Meta_Test_Case {
 		Monkey\Functions\expect( 'update_post_meta' )
 			->once()
 			->with( 256, 'beans_post_test_field', 'beans_test_post_field_value' )
-			->andReturn( true );;
+			->andReturn( true );
 		$this->assertnull( $post_meta->save( 256 ) );
 	}
 }

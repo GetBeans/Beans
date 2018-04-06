@@ -79,7 +79,7 @@ final class _Beans_Post_Meta {
 	 * @return void
 	 */
 	public function nonce() {
-		include dirname(__FILE__) . '/views/nonce.php';
+		include dirname( __FILE__ ) . '/views/nonce.php';
 	}
 
 	/**
@@ -92,7 +92,10 @@ final class _Beans_Post_Meta {
 	 * @return void
 	 */
 	public function register_metabox( $post_type ) {
-		add_meta_box( $this->section, $this->args['title'], array( $this, 'metabox_content' ), $post_type, $this->args['context'], $this->args['priority'] );
+		add_meta_box( $this->section, $this->args['title'], array(
+			$this,
+			'metabox_content',
+		), $post_type, $this->args['context'], $this->args['priority'] );
 	}
 
 	/**
@@ -122,15 +125,15 @@ final class _Beans_Post_Meta {
 	 */
 	public function save( $post_id ) {
 
-	    if ( beans_doing_autosave() ) {
-	        return false;
-        }
+		if ( beans_doing_autosave() ) {
+			return false;
+		}
 
-        $fields = beans_post( 'beans_fields' );
+		$fields = beans_post( 'beans_fields' );
 
-	    if ( ! $this->ok_to_save( $post_id, $fields ) ) {
-	        return $post_id;
-        }
+		if ( ! $this->ok_to_save( $post_id, $fields ) ) {
+			return $post_id;
+		}
 
 		foreach ( $fields as $field => $value ) {
 			update_post_meta( $post_id, $field, $value );
@@ -155,8 +158,8 @@ final class _Beans_Post_Meta {
 		$fields = beans_post( 'beans_fields' );
 
 		if ( ! $this->ok_to_save( $attachment['ID'], $fields ) ) {
-		    return $attachment;
-        }
+			return $attachment;
+		}
 
 		foreach ( $fields as $field => $value ) {
 			update_post_meta( $attachment['ID'], $field, $value );
@@ -167,11 +170,11 @@ final class _Beans_Post_Meta {
 
 	/**
 	 * Check if all criteria are met to safely save post meta.
-     *
-     * @param int   $id The Post Id.
-     * @param array $fields The array of fields to save.
-     *
-     * @return bool
+	 *
+	 * @param int   $id The Post Id.
+	 * @param array $fields The array of fields to save.
+	 *
+	 * @return bool
 	 */
 	public function ok_to_save( $id, $fields ) {
 		if ( ! wp_verify_nonce( beans_post( 'beans_post_meta_nonce' ), 'beans_post_meta_nonce' ) ) {

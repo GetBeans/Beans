@@ -1,6 +1,10 @@
 <?php
 /**
- * test-fields.php
+ *  Test field data for use with metabox_content method tests.
+ *
+ * @package Beans\Framework\Tests\Integration\API\Post_Meta\Fixtures
+ *
+ * @since 1.5.0
  */
 
 return array(

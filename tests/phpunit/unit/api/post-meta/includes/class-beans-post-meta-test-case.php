@@ -1,6 +1,10 @@
 <?php
 /**
- * class-beans-post-meta-test-case.php
+ * Test Case for Beans' Post_Meta API unit tests.
+ *
+ * @package Beans\Framework\Tests\Unit\API\Post_Meta\Includes
+ *
+ * @since 1.5.0
  */
 
 namespace Beans\Framework\Tests\Unit\API\Post_Meta\Includes;
@@ -30,4 +34,3 @@ abstract class Beans_Post_Meta_Test_Case extends Test_Case {
 	}
 
 }
-

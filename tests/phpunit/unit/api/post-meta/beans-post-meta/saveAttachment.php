@@ -1,6 +1,10 @@
 <?php
 /**
  * Tests the save_attachment method of _Beans_Post_Meta.
+ *
+ * @package Beans\Framework\Tests\Unit\API\Post_Meta
+ *
+ * @since 1.5.0
  */
 
 namespace Beans\Framework\Tests\Unit\API\Post_Meta;
@@ -47,7 +51,7 @@ class Tests_BeansPostMeta_Save_Attachment extends Beans_Post_Meta_Test_Case {
 		Monkey\Functions\expect( 'update_post_meta' )
 			->once()
 			->with( 543, 'beans_post_test_field', 'beans_test_post_field_value' )
-			->andReturn( true );;
+			->andReturn( true );
 		$this->assertEquals( $attachment, $post_meta->save_attachment( $attachment ) );
 	}
 }

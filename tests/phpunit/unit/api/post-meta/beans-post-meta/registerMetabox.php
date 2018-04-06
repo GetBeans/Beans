@@ -1,6 +1,10 @@
 <?php
 /**
  * Tests the register_metabox method of _Beans_Post_Meta.
+ *
+ * @package Beans\Framework\Tests\Unit\API\Post_Meta
+ *
+ * @since 1.5.0
  */
 
 namespace Beans\Framework\Tests\Unit\API\Post_Meta;
@@ -26,15 +30,17 @@ class Tests_Beans_Post_Meta_Register_Metabox extends Beans_Post_Meta_Test_Case {
 	public function test_register_metabox_should_register_metabox() {
 		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );
 
+		$wp_meta_boxes['post']['normal']['high']['1'] = array(
+			'id'            => 1,
+			'title'         => 'Post Options',
+			'callback'      => array( $this, 'metabox_content' ),
+			'callback_args' => null,
+		);
+
 		Monkey\Functions\expect( 'add_meta_box' )
 			->once()
 			->with( 'tm-beans', 'Post Options', array( $post_meta, 'metabox_content' ), 'post', 'normal', 'high' )
-			->andReturn( $wp_meta_boxes['post']['normal']['high']['1'] = array(
-				'id'            => 1,
-				'title'         => 'Post Options',
-				'callback'      => array( $this, 'metabox_content' ),
-				'callback_args' => null
-			) );
+			->andReturn( $wp_meta_boxes['post']['normal']['high']['1'] );
 
 		$post_meta->register_metabox( 'post' );
 
@@ -44,7 +50,8 @@ class Tests_Beans_Post_Meta_Register_Metabox extends Beans_Post_Meta_Test_Case {
 				'id'            => 1,
 				'title'         => 'Post Options',
 				'callback'      => array( $this, 'metabox_content' ),
-				'callback_args' => null
-			) );
+				'callback_args' => null,
+			)
+		);
 	}
 }

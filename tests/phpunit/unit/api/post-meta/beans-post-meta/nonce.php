@@ -1,6 +1,10 @@
 <?php
 /**
  * Tests the nonce method of _Beans_Post_Meta.
+ *
+ * @package Beans\Framework\Tests\Unit\API\Post_Meta
+ *
+ * @since 1.5.0
  */
 
 namespace Beans\Framework\Tests\Unit\API\Post_Meta;
@@ -32,6 +36,6 @@ class Tests_Beans_Post_Meta_Nonce extends Beans_Post_Meta_Test_Case {
 		$post_meta->nonce();
 		$actual_output = ob_get_clean();
 
-		$this->assertEquals( $expected_html_output, $actual_output );
+		$this->assertContains( $expected_html_output, $actual_output );
 	}
 }
