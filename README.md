@@ -21,6 +21,6 @@ Beans community is growing rapidly and a lot of people are asking how they can c
 * Build extensions
 * Contribute to Beans core
 
-If you are a Beans superstar and you want to contribute to Beans core, please see the [Beans Contributor's Wiki](wiki).
+If you are a Beans superstar and you want to contribute to Beans core, please see the [Beans Contributor's Wiki](https://github.com/Getbeans/Beans/wiki).
 
 Thanks for making Beans such a great theme which is loved and used by truly passionate people.
