@@ -25,7 +25,7 @@ class Tests_Beans_Post_Meta_Page_Template_Reload extends Test_Case {
 	 */
 	public function test_does_nothing_when_not_editing_post_object() {
 		global $pagenow;
-		$pagenow = 'wp-login.php';
+		$pagenow = 'wp-login.php'; // phpcs:ignore WordPress.Variables.GlobalVariables.OverrideProhibited -- Resetting global here for tests.
 
 		ob_start();
 		_beans_post_meta_page_template_reload();
@@ -41,7 +41,7 @@ class Tests_Beans_Post_Meta_Page_Template_Reload extends Test_Case {
 		global $_beans_post_meta_conditions, $pagenow;
 
 		$_beans_post_meta_conditions = array();
-		$pagenow                     = 'post.php';
+		$pagenow                     = 'post.php'; // phpcs:ignore WordPress.Variables.GlobalVariables.OverrideProhibited -- Resetting global here for tests.
 
 		ob_start();
 		_beans_post_meta_page_template_reload();
@@ -57,7 +57,7 @@ class Tests_Beans_Post_Meta_Page_Template_Reload extends Test_Case {
 		global $_beans_post_meta_conditions, $pagenow;
 
 		$_beans_post_meta_conditions = array( 'page-template-name.php' );
-		$pagenow                     = 'post.php';
+		$pagenow                     = 'post.php'; // phpcs:ignore WordPress.Variables.GlobalVariables.OverrideProhibited -- Resetting global here for tests.
 
 		ob_start();
 		_beans_post_meta_page_template_reload();

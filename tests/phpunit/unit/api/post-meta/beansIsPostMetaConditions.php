@@ -8,10 +8,8 @@
 
 namespace Beans\Framework\Tests\Unit\API\Post_Meta;
 
-use Beans\Framework\Tests\Unit\API\Post_Meta\Includes\Beans_Post_Meta_Test_Case;
+use Beans\Framework\Tests\Unit\Test_Case;
 use Brain\Monkey;
-
-require_once dirname( __FILE__ ) . '/includes/class-beans-post-meta-test-case.php';
 
 /**
  * Class Tests_Beans_Is_Post_Meta_Conditions
@@ -20,11 +18,7 @@ require_once dirname( __FILE__ ) . '/includes/class-beans-post-meta-test-case.ph
  * @group   api
  * @group   api-post-meta
  */
-class Tests_Beans_Is_Post_Meta_Conditions extends Beans_Post_Meta_Test_Case {
-
-	protected function setUp() {
-		parent::setUp();
-	}
+class Tests_Beans_Is_Post_Meta_Conditions extends Test_Case {
 
 	/**
 	 * Tests is_post_meta_conditions returns true when $conditions are a boolean true.
@@ -72,7 +66,7 @@ class Tests_Beans_Is_Post_Meta_Conditions extends Beans_Post_Meta_Test_Case {
 	 */
 	public function test_returns_true_when_conditions_match_post_type() {
 
-		// Setup for when post_id is in GET
+		// Setup for when post_id is in GET.
 		Monkey\Functions\expect( 'beans_get' )->once()->with( 'post' )->andReturn( 25 );
 		Monkey\Functions\expect( 'beans_post' )->once()->with( 'post_ID' )->andReturn( false );
 		Monkey\Functions\expect( 'get_post_type' )->once()->with( 25 )->andReturn( 'cpt' );
@@ -80,7 +74,7 @@ class Tests_Beans_Is_Post_Meta_Conditions extends Beans_Post_Meta_Test_Case {
 
 		$this->assertTrue( _beans_is_post_meta_conditions( array( 'cpt' ) ) );
 
-		// Setup for when post_id is in POST
+		// Setup for when post_id is in POST.
 		Monkey\Functions\expect( 'beans_get' )->once()->with( 'post' )->andReturn( false );
 		Monkey\Functions\expect( 'beans_post' )->once()->with( 'post_ID' )->andReturn( 25 );
 		Monkey\Functions\expect( 'get_post_type' )->once()->with( 25 )->andReturn( 'cpt' );
@@ -94,7 +88,7 @@ class Tests_Beans_Is_Post_Meta_Conditions extends Beans_Post_Meta_Test_Case {
 	 */
 	public function test_returns_true_when_conditions_match_post_id() {
 
-		// Setup for when post_id is in GET
+		// Setup for when post_id is in GET.
 		Monkey\Functions\expect( 'beans_get' )->once()->with( 'post' )->andReturn( 1 );
 		Monkey\Functions\expect( 'beans_post' )->once()->with( 'post_ID' )->andReturn( false );
 		Monkey\Functions\expect( 'get_post_type' )->once()->with( 1 )->andReturn( 'cpt' );
@@ -102,7 +96,7 @@ class Tests_Beans_Is_Post_Meta_Conditions extends Beans_Post_Meta_Test_Case {
 
 		$this->assertTrue( _beans_is_post_meta_conditions( array( 1 ) ) );
 
-		// Setup for when post_id is in POST
+		// Setup for when post_id is in POST.
 		Monkey\Functions\expect( 'beans_get' )->once()->with( 'post' )->andReturn( false );
 		Monkey\Functions\expect( 'beans_post' )->once()->with( 'post_ID' )->andReturn( 2 );
 		Monkey\Functions\expect( 'get_post_type' )->once()->with( 2 )->andReturn( 'cpt' );
@@ -116,7 +110,7 @@ class Tests_Beans_Is_Post_Meta_Conditions extends Beans_Post_Meta_Test_Case {
 	 */
 	public function test_returns_true_when_conditions_match_page_template_name() {
 
-		// Setup for when post_id is in GET
+		// Setup for when post_id is in GET.
 		Monkey\Functions\expect( 'beans_get' )->once()->with( 'post' )->andReturn( 345 );
 		Monkey\Functions\expect( 'beans_post' )->once()->with( 'post_ID' )->andReturn( false );
 		Monkey\Functions\expect( 'get_post_type' )->once()->with( 345 )->andReturn( 'page' );
@@ -127,7 +121,7 @@ class Tests_Beans_Is_Post_Meta_Conditions extends Beans_Post_Meta_Test_Case {
 
 		$this->assertTrue( _beans_is_post_meta_conditions( array( 'page-template-name' ) ) );
 
-		// Setup for when post_id is in POST
+		// Setup for when post_id is in POST.
 		Monkey\Functions\expect( 'beans_get' )->once()->with( 'post' )->andReturn( false );
 		Monkey\Functions\expect( 'beans_post' )->once()->with( 'post_ID' )->andReturn( 543 );
 		Monkey\Functions\expect( 'get_post_type' )->once()->with( 543 )->andReturn( 'page' );
@@ -144,7 +138,7 @@ class Tests_Beans_Is_Post_Meta_Conditions extends Beans_Post_Meta_Test_Case {
 	 */
 	public function test_returns_false_when_no_conditions_match() {
 
-		// Setup for when post_id is in GET
+		// Setup for when post_id is in GET.
 		Monkey\Functions\expect( 'beans_get' )->once()->with( 'post' )->andReturn( 345 );
 		Monkey\Functions\expect( 'beans_post' )->once()->with( 'post_ID' )->andReturn( false );
 		Monkey\Functions\expect( 'get_post_type' )->once()->with( 345 )->andReturn( 'page' );
@@ -155,7 +149,7 @@ class Tests_Beans_Is_Post_Meta_Conditions extends Beans_Post_Meta_Test_Case {
 
 		$this->assertFalse( _beans_is_post_meta_conditions( array( 'some-other-conditions' ) ) );
 
-		// Setup for when post_id is in POST
+		// Setup for when post_id is in POST.
 		Monkey\Functions\expect( 'beans_get' )->once()->with( 'post' )->andReturn( false );
 		Monkey\Functions\expect( 'beans_post' )->once()->with( 'post_ID' )->andReturn( 543 );
 		Monkey\Functions\expect( 'get_post_type' )->once()->with( 543 )->andReturn( 'page' );
