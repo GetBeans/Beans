@@ -17,32 +17,33 @@
  * @param array        $fields {
  *            Array of fields to register.
  *
- *      @type string $id          A unique id used for the field. This id will also be used to save the value in
+ * @type string $id A unique id used for the field. This id will also be used to save the value in
  *                                the database.
- *      @type string $type        The type of field to use. Please refer to the Beans core field types for more
+ * @type string $type The type of field to use. Please refer to the Beans core field types for more
  *                                information. Custom field types are accepted here.
- *      @type string $label       The field label. Default false.
- *      @type string $description The field description. The description can be truncated using <!--more-->
+ * @type string $label The field label. Default false.
+ * @type string $description The field description. The description can be truncated using <!--more-->
  *                                as a delimiter. Default false.
- *      @type array  $attributes  An array of attributes to add to the field. The array key defines the
+ * @type array $attributes An array of attributes to add to the field. The array key defines the
  *                                attribute name and the array value defines the attribute value. Default array.
- *      @type mixed  $default     The default field value. Default false.
- *      @type array  $fields      Must only be used for 'group' field type. The array arguments are similar to the
+ * @type mixed $default The default field value. Default false.
+ * @type array $fields Must only be used for 'group' field type. The array arguments are similar to the
  *                                {@see beans_register_fields()} $fields arguments.
- *      @type bool   $db_group    Must only be used for 'group' field type. Defines whether the group of fields
+ * @type bool $db_group Must only be used for 'group' field type. Defines whether the group of fields
  *                                registered should be saved as a group in the database or as individual
  *                                entries. Default false.
  * }
+ *
  * @param string|array $conditions Array of 'post types id(s)', 'post id(s)' or 'page template slug(s)' for which the post meta should be registered.
  *                                 'page template slug(s)' must include '.php' file extention. Set to true to display everywhere.
- * @param string       $section          A section id to define the group of fields.
+ * @param string       $section A section id to define the group of fields.
  * @param array        $args {
  *            Optional. Array of arguments used to register the fields.
  *
- *      @type string $title    The metabox Title. Default 'Undefined'.
- *      @type string $context  Where on the page the metabox should be shown
+ * @type string $title The metabox Title. Default 'Undefined'.
+ * @type string $context Where on the page the metabox should be shown
  *                             ('normal', 'advanced', or 'side'). Default 'normal'.
- *      @type int    $priority The priority within the context where the boxes should show
+ * @type int $priority The priority within the context where the boxes should show
  *                             ('high', 'core', 'default' or 'low'). Default 'high'.
  * }
  *
@@ -143,9 +144,12 @@ function _beans_is_post_meta_conditions( $conditions ) {
 	}
 
 	$statements = array(
-		in_array( $current_post_type, (array) $conditions, true ), // Check post type.
-		isset( $post_id ) && in_array( $post_id, (array) $conditions, true ), // Check post id.
-		isset( $post_id ) && in_array( get_post_meta( $post_id, '_wp_page_template', true ), (array) $conditions, true ), // Check page template.
+		in_array( $current_post_type, (array) $conditions, true ),
+		// Check post type.
+		isset( $post_id ) && in_array( $post_id, (array) $conditions, true ),
+		// Check post id.
+		isset( $post_id ) && in_array( get_post_meta( $post_id, '_wp_page_template', true ), (array) $conditions, true ),
+		// Check page template.
 	);
 
 	// Return true if any condition is met, otherwise false.
@@ -175,31 +179,7 @@ function _beans_post_meta_page_template_reload() {
 		return;
 	}
 
-	?>
-	<script type="text/javascript">
-		( function( $ ) {
-			$( document ).ready( function() {
-				$( '#page_template' ).data( 'beans-pre', $( '#page_template' ).val() );
-				$( '#page_template' ).change( function() {
-					var save = $( '#save-action #save-post' ),
-						meta = JSON.parse( '<?php echo wp_json_encode( $_beans_post_meta_conditions ); ?>' );
-
-					if ( -1 === $.inArray( $( this ).val(), meta ) && -1 === $.inArray( $( this ).data( 'beans-pre' ), meta ) ) {
-						return;
-					}
-
-					if ( save.length === 0 ) {
-						save = $( '#publishing-action #publish' );
-					}
-
-					$( this ).data( 'beans-pre', $( this ).val() );
-					save.trigger( 'click' );
-					$( '#wpbody-content' ).fadeOut();
-				} );
-			} );
-		} )( jQuery );
-	</script>
-	<?php
+	include dirname( __FILE__ ) . '/views/script.php';
 }
 
 /**
