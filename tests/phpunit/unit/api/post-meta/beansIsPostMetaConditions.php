@@ -35,6 +35,9 @@ class Tests_Beans_Is_Post_Meta_Conditions extends Test_Case {
 		Monkey\Functions\expect( 'beans_get' )->once()->with( 'post_type' )->andReturn( 'post' );
 
 		$this->assertTrue( _beans_is_post_meta_conditions( array( 'post' ) ) );
+
+		// Clean up server globals.
+		$_SERVER['REQUEST_URI'] = '';
 	}
 
 	/**
