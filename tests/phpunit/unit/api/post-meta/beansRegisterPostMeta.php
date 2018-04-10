@@ -29,7 +29,13 @@ class Tests_Beans_Register_Post_Meta extends Beans_Post_Meta_Test_Case {
 		Monkey\Functions\when( '_beans_pre_standardize_fields' )->returnArg();
 		Monkey\Functions\expect( '_beans_is_post_meta_conditions' )->once()->andReturn( false );
 
-		$this->assertFalse( beans_register_post_meta( array(), false, 'tm-beans' ) );
+		$this->assertFalse( beans_register_post_meta( array(
+			array(
+				'id'    => 'field_id',
+				'type'  => 'radio',
+				'label' => 'Field Label'
+			)
+		), false, 'tm-beans' ) );
 	}
 
 	/**
@@ -40,7 +46,13 @@ class Tests_Beans_Register_Post_Meta extends Beans_Post_Meta_Test_Case {
 		Monkey\Functions\expect( '_beans_is_post_meta_conditions' )->once()->andReturn( true );
 		Monkey\Functions\expect( 'is_admin' )->once()->andReturn( false );
 
-		$this->assertFalse( beans_register_post_meta( array(), true, 'tm-beans' ) );
+		$this->assertFalse( beans_register_post_meta( array(
+			array(
+				'id'    => 'field_id',
+				'type'  => 'radio',
+				'label' => 'Field Label'
+			)
+		), true, 'tm-beans' ) );
 	}
 
 	/**

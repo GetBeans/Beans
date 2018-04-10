@@ -14,7 +14,7 @@
  *
  * @since 1.0.0
  *
- * @param array        $fields {
+ * @param array $fields {
  *            Array of fields to register.
  *
  * @type string $id A unique id used for the field. This id will also be used to save the value in
@@ -36,8 +36,8 @@
  *
  * @param string|array $conditions Array of 'post types id(s)', 'post id(s)' or 'page template slug(s)' for which the post meta should be registered.
  *                                 'page template slug(s)' must include '.php' file extention. Set to true to display everywhere.
- * @param string       $section A section id to define the group of fields.
- * @param array        $args {
+ * @param string $section A section id to define the group of fields.
+ * @param array $args {
  *            Optional. Array of arguments used to register the fields.
  *
  * @type string $title The metabox Title. Default 'Undefined'.
@@ -52,6 +52,9 @@
 function beans_register_post_meta( array $fields, $conditions, $section, $args = array() ) {
 	global $_beans_post_meta_conditions;
 
+	if ( empty ( $fields ) ) {
+		return false;
+	}
 	/**
 	 * Filter the post meta fields.
 	 *
