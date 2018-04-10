@@ -25,13 +25,6 @@ require_once dirname( __DIR__ ) . '/includes/class-beans-post-meta-test-case.php
 class Tests_Beans_Post_Meta_Metabox_Content extends Beans_Post_Meta_Test_Case {
 
 	/**
-	 * Fixture to clean up after tests.
-	 */
-	public function tearDown() {
-		parent::tearDown();
-	}
-
-	/**
 	 * Test _Beans_Post_Meta::metabox_content() should output post meta fields markup.
 	 */
 	public function test_metabox_content_should_return_fields_markup() {

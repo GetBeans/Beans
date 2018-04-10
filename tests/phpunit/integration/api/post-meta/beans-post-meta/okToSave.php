@@ -25,13 +25,6 @@ require_once dirname( __DIR__ ) . '/includes/class-beans-post-meta-test-case.php
 class Tests_Beans_Post_Meta_Ok_To_Save extends Beans_Post_Meta_Test_Case {
 
 	/**
-	 * Fixture to clean up after tests.
-	 */
-	public function tearDown() {
-		parent::tearDown();
-	}
-
-	/**
 	 * Test _Beans_Post_Meta::ok_to_save() is false with unverified nonce.
 	 */
 	public function test_ok_to_save_should_return_false_when_unverified_nonce() {

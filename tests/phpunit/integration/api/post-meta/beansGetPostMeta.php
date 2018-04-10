@@ -23,13 +23,6 @@ require_once dirname( __FILE__ ) . '/includes/class-beans-post-meta-test-case.ph
 class Tests_BeansGetPostMeta extends Beans_Post_Meta_Test_Case {
 
 	/**
-	 * Fixture to clean up after tests.
-	 */
-	public function tearDown() {
-		parent::tearDown();
-	}
-
-	/**
 	 * Test beans_get_post_meta() should return the default when the post_id cannot be resolved.
 	 */
 	public function test_should_return_default_when_post_id_cannot_be_resolved() {

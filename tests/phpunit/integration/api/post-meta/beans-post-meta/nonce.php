@@ -25,13 +25,6 @@ require_once dirname( __DIR__ ) . '/includes/class-beans-post-meta-test-case.php
 class Tests_Beans_Post_Meta_Nonce extends Beans_Post_Meta_Test_Case {
 
 	/**
-	 * Fixture to clean up after tests.
-	 */
-	public function tearDown() {
-		parent::tearDown();
-	}
-
-	/**
 	 * Test _Beans_Post_Meta::nonce() should output correct nonce html.
 	 */
 	public function test_nonce_should_echo_nonce_input_html() {

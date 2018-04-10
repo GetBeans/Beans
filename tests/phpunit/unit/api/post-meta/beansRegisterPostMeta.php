@@ -40,8 +40,8 @@ class Tests_Beans_Register_Post_Meta extends Beans_Post_Meta_Test_Case {
 			array(
 				'id'    => 'field_id',
 				'type'  => 'radio',
-				'label' => 'Field Label'
-			)
+				'label' => 'Field Label',
+			),
 		), false, 'tm-beans' ) );
 	}
 
@@ -57,8 +57,8 @@ class Tests_Beans_Register_Post_Meta extends Beans_Post_Meta_Test_Case {
 			array(
 				'id'    => 'field_id',
 				'type'  => 'radio',
-				'label' => 'Field Label'
-			)
+				'label' => 'Field Label',
+			),
 		), true, 'tm-beans' ) );
 	}
 

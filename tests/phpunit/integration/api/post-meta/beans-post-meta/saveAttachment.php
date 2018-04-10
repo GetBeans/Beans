@@ -24,10 +24,6 @@ require_once dirname( __DIR__ ) . '/includes/class-beans-post-meta-test-case.php
  */
 class Tests_Beans_Post_Meta_Save_Attachment extends Beans_Post_Meta_Test_Case {
 
-	public function tearDown() {
-		parent::tearDown();
-	}
-
 	/**
 	 * Test _Beans_Post_Meta::save_attachment() runs update_post_meta() and returns attachment when ok_to_save() is true.
 	 */

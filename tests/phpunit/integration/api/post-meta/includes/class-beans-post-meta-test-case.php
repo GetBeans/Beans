@@ -18,6 +18,9 @@ use Beans\Framework\Tests\Integration\Test_Case;
  */
 abstract class Beans_Post_Meta_Test_Case extends Test_Case {
 
+	/**
+	 * Fixture to clean up after tests.
+	 */
 	public function tearDown() {
 
 		unset( $GLOBALS['current_screen'] );

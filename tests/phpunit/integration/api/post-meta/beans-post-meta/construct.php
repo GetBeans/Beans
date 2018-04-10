@@ -25,13 +25,6 @@ require_once dirname( __DIR__ ) . '/includes/class-beans-post-meta-test-case.php
 class Tests_Beans_Post_Meta_Construct extends Beans_Post_Meta_Test_Case {
 
 	/**
-	 * Fixture to clean up after tests.
-	 */
-	public function tearDown() {
-		parent::tearDown();
-	}
-
-	/**
 	 * Test correct hooks are set on class instantiation.
 	 */
 	public function test_construct_sets_correct_hooks_when_instantiated() {
