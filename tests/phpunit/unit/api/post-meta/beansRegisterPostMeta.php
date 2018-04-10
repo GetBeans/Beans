@@ -23,6 +23,13 @@ require_once dirname( __FILE__ ) . '/includes/class-beans-post-meta-test-case.ph
 class Tests_Beans_Register_Post_Meta extends Beans_Post_Meta_Test_Case {
 
 	/**
+	 * Test beans_register_post_meta returns false when given empty fields.
+	 */
+	public function test_returns_false_when_fields_are_empty() {
+		$this->assertFalse( beans_register_post_meta( array(), true, 'tm-beans' ) );
+	}
+
+	/**
 	 * Test beans_register_post_meta returns false when conditions are false.
 	 */
 	public function test_returns_false_when_conditions_are_false() {
