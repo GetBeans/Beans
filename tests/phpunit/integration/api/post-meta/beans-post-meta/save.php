@@ -9,10 +9,11 @@
 
 namespace Beans\Framework\Tests\Integration\API\Post_Meta;
 
-use WP_UnitTestCase;
+use Beans\Framework\Tests\Integration\API\Post_Meta\Includes\Beans_Post_Meta_Test_Case;
 use _Beans_Post_Meta;
 
 require_once BEANS_THEME_DIR . '/lib/api/post-meta/class-beans-post-meta.php';
+require_once dirname( __DIR__ ) . '/includes/class-beans-post-meta-test-case.php';
 
 /**
  * Class Tests_Beans_Post_Meta_Save.
@@ -21,7 +22,14 @@ require_once BEANS_THEME_DIR . '/lib/api/post-meta/class-beans-post-meta.php';
  * @group   api
  * @group   api-post-meta
  */
-class Tests_Beans_Post_Meta_Save extends WP_UnitTestCase {
+class Tests_Beans_Post_Meta_Save extends Beans_Post_Meta_Test_Case {
+
+	/**
+	 * Fixture to clean up after tests.
+	 */
+	public function tearDown() {
+		parent::tearDown();
+	}
 
 	/**
 	 * Test _Beans_Post_Meta::save() returns post_id when ok_to_save() is false.

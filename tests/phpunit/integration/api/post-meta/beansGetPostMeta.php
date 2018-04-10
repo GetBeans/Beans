@@ -9,7 +9,9 @@
 
 namespace Beans\Framework\Tests\Integration\API\Post_Meta;
 
-use WP_UnitTestCase;
+use Beans\Framework\Tests\Integration\API\Post_Meta\Includes\Beans_Post_Meta_Test_Case;
+
+require_once dirname( __FILE__ ) . '/includes/class-beans-post-meta-test-case.php';
 
 /**
  * Class Tests_BeansGetPostMeta
@@ -18,7 +20,14 @@ use WP_UnitTestCase;
  * @group   api
  * @group   api-post-meta
  */
-class Tests_BeansGetPostMeta extends WP_UnitTestCase {
+class Tests_BeansGetPostMeta extends Beans_Post_Meta_Test_Case {
+
+	/**
+	 * Fixture to clean up after tests.
+	 */
+	public function tearDown() {
+		parent::tearDown();
+	}
 
 	/**
 	 * Test beans_get_post_meta() should return the default when the post_id cannot be resolved.
