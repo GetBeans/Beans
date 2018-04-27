@@ -31,7 +31,7 @@ class Tests_BeansPostMeta_Save_Attachment extends Beans_Post_Meta_Test_Case {
 		$post_meta  = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );
 		$attachment = array( 'ID' => 543 );
 
-		Monkey\Functions\expect( 'beans_doing_autosave' )->once()->andReturn( true );
+		Monkey\Functions\expect( '_beans_doing_autosave' )->once()->andReturn( true );
 		Monkey\Functions\expect( 'update_post_meta' )->never();
 		$this->assertEquals( $attachment, $post_meta->save_attachment( $attachment ) );
 	}
@@ -44,7 +44,7 @@ class Tests_BeansPostMeta_Save_Attachment extends Beans_Post_Meta_Test_Case {
 		$attachment = array( 'ID' => 543 );
 		$fields     = array( 'beans_post_test_field' => 'beans_test_post_field_value' );
 
-		Monkey\Functions\expect( 'beans_doing_autosave' )->once()->andReturn( false );
+		Monkey\Functions\expect( '_beans_doing_autosave' )->once()->andReturn( false );
 		Monkey\Functions\expect( 'wp_verify_nonce' )->once()->andReturn( true );
 		Monkey\Functions\expect( 'current_user_can' )->once()->andReturn( true );
 		Monkey\Functions\expect( 'beans_post' )->andReturn( $fields );

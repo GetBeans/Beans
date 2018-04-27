@@ -60,25 +60,27 @@ final class _Beans_Post_Meta {
 	 * @return void
 	 */
 	private function do_once() {
-		static $once = false;
+		static $did_once = false;
 
-		if ( ! $once ) {
-			add_action( 'edit_form_top', array( $this, 'nonce' ) );
-			add_action( 'save_post', array( $this, 'save' ) );
-			add_filter( 'attachment_fields_to_save', array( $this, 'save_attachment' ) );
-
-			$once = true;
+		if ( $did_once ) {
+			return;
 		}
+
+		add_action( 'edit_form_top', array( $this, 'render_nonce' ) );
+		add_action( 'save_post', array( $this, 'save' ) );
+		add_filter( 'attachment_fields_to_save', array( $this, 'save_attachment' ) );
+
+		$did_once = true;
 	}
 
 	/**
-	 * Post meta nonce.
+	 * Render post meta nonce.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
-	public function nonce() {
+	public function render_nonce() {
 		include dirname( __FILE__ ) . '/views/nonce.php';
 	}
 
@@ -92,22 +94,24 @@ final class _Beans_Post_Meta {
 	 * @return void
 	 */
 	public function register_metabox( $post_type ) {
-		add_meta_box( $this->section, $this->args['title'], array(
-			$this,
-			'metabox_content',
-		), $post_type, $this->args['context'], $this->args['priority'] );
+		add_meta_box(
+			$this->section,
+			$this->args['title'],
+			array( $this, 'render_metabox_content' ),
+			$post_type,
+			$this->args['context'],
+			$this->args['priority']
+		);
 	}
 
 	/**
-	 * Metabox content.
+	 * Render metabox content.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int $post Post ID.
-	 *
 	 * @return void
 	 */
-	public function metabox_content( $post ) {
+	public function render_metabox_content() {
 
 		foreach ( beans_get_fields( 'post_meta', $this->section ) as $field ) {
 			beans_field( $field );
@@ -185,10 +189,6 @@ final class _Beans_Post_Meta {
 			return false;
 		}
 
-		if ( ! $fields ) {
-			return false;
-		}
-
-		return true;
+		return ! empty( $fields );
 	}
 }

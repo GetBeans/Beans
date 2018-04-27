@@ -33,7 +33,7 @@ class Tests_Beans_Post_Meta_Nonce extends Beans_Post_Meta_Test_Case {
 		$expected_html_output = '<input type="hidden" name="beans_post_meta_nonce" value="%x" />';
 
 		ob_start();
-		$post_meta->nonce();
+		$post_meta->render_nonce();
 		$actual_output = ob_get_clean();
 
 		$this->assertStringMatchesFormat( $expected_html_output, $actual_output );

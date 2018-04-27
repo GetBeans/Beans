@@ -48,7 +48,7 @@ class Tests_Beans_Post_Meta_Metabox_Content extends Beans_Post_Meta_Test_Case {
 		} );
 
 		ob_start();
-		$post_meta->metabox_content( 74 );
+		$post_meta->render_metabox_content( 74 );
 		$output = ob_get_clean();
 
 		$this->assertEquals( 'beans_field_html', $output );

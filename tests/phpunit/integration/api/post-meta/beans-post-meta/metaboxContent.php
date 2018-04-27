@@ -36,7 +36,7 @@ class Tests_Beans_Post_Meta_Metabox_Content extends Beans_Post_Meta_Test_Case {
 		$post_id = $this->factory()->post->create();
 
 		ob_start();
-		$post_meta->metabox_content( $post_id );
+		$post_meta->render_metabox_content( $post_id );
 		$output = ob_get_clean();
 
 		$this->assertContains( 'bs-radio', $output );

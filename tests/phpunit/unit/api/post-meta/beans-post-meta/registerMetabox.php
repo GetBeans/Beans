@@ -33,13 +33,13 @@ class Tests_Beans_Post_Meta_Register_Metabox extends Beans_Post_Meta_Test_Case {
 		$wp_meta_boxes['post']['normal']['high']['1'] = array(
 			'id'            => 1,
 			'title'         => 'Post Options',
-			'callback'      => array( $this, 'metabox_content' ),
+			'callback'      => array( $this, 'render_metabox_content' ),
 			'callback_args' => null,
 		);
 
 		Monkey\Functions\expect( 'add_meta_box' )
 			->once()
-			->with( 'tm-beans', 'Post Options', array( $post_meta, 'metabox_content' ), 'post', 'normal', 'high' )
+			->with( 'tm-beans', 'Post Options', array( $post_meta, 'render_metabox_content' ), 'post', 'normal', 'high' )
 			->andReturn( $wp_meta_boxes['post']['normal']['high']['1'] );
 
 		$post_meta->register_metabox( 'post' );
@@ -49,7 +49,7 @@ class Tests_Beans_Post_Meta_Register_Metabox extends Beans_Post_Meta_Test_Case {
 			array(
 				'id'            => 1,
 				'title'         => 'Post Options',
-				'callback'      => array( $this, 'metabox_content' ),
+				'callback'      => array( $this, 'render_metabox_content' ),
 				'callback_args' => null,
 			)
 		);

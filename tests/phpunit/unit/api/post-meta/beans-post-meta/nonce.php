@@ -33,7 +33,7 @@ class Tests_Beans_Post_Meta_Nonce extends Beans_Post_Meta_Test_Case {
 
 		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );
 		ob_start();
-		$post_meta->nonce();
+		$post_meta->render_nonce();
 		$actual_output = ob_get_clean();
 
 		$this->assertContains( $expected_html_output, $actual_output );
