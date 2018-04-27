@@ -16,16 +16,16 @@ use Brain\Monkey;
 require_once dirname( __DIR__ ) . '/includes/class-beans-post-meta-test-case.php';
 
 /**
- * Class Tests_Beans_Post_Meta_Save
+ * Class Tests_BeansPostMeta_Save
  *
  * @package Beans\Framework\Tests\Unit\API\Post_Meta
  * @group   api
  * @group   api-post-meta
  */
-class Tests_Beans_Post_Meta_Save extends Beans_Post_Meta_Test_Case {
+class Tests_BeansPostMeta_Save extends Beans_Post_Meta_Test_Case {
 
 	/**
-	 * Test _Beans_Post_Meta::save() is false when doing autosave.
+	 * Test _Beans_Post_Meta::save() returns false when doing autosave.
 	 */
 	public function test_save_should_return_false_when_doing_autosave() {
 		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );
@@ -46,7 +46,7 @@ class Tests_Beans_Post_Meta_Save extends Beans_Post_Meta_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Post_Meta::save() runs update_post_meta() and return null when ok_to_save() is true.
+	 * Test _Beans_Post_Meta::save() runs update_post_meta() and returns null when ok_to_save() is true.
 	 */
 	public function test_save_should_run_update_post_meta_and_return_null_when_ok_to_save() {
 		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );

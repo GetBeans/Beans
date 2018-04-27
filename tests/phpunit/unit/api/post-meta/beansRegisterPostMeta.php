@@ -14,13 +14,13 @@ use Brain\Monkey;
 require_once dirname( __FILE__ ) . '/includes/class-beans-post-meta-test-case.php';
 
 /**
- * Class Tests_Beans_Register_Post_Meta
+ * Class Tests_BeansRegisterPostMeta
  *
  * @package Beans\Framework\Tests\Unit\API\Post_Meta
  * @group   api
  * @group   api-post-meta
  */
-class Tests_Beans_Register_Post_Meta extends Beans_Post_Meta_Test_Case {
+class Tests_BeansRegisterPostMeta extends Beans_Post_Meta_Test_Case {
 
 	/**
 	 * Test beans_register_post_meta returns false when given empty fields.

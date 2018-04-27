@@ -22,7 +22,7 @@ require_once dirname( __DIR__ ) . '/includes/class-beans-post-meta-test-case.php
  * @group   api
  * @group   api-post-meta
  */
-class Tests_BeansPostMeta_MetaboxContent extends Beans_Post_Meta_Test_Case {
+class Tests_BeansPostMeta_RenderMetaboxContent extends Beans_Post_Meta_Test_Case {
 
 	/**
 	 * Test _Beans_Post_Meta::metabox_content() should output post meta fields markup.

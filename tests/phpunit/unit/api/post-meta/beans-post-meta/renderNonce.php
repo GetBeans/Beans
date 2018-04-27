@@ -16,13 +16,13 @@ use Brain\Monkey;
 require_once dirname( __DIR__ ) . '/includes/class-beans-post-meta-test-case.php';
 
 /**
- * Class Tests_Beans_Post_Meta_Nonce
+ * Class Tests_BeansPostMeta_RenderNonce
  *
  * @package Beans\Framework\Tests\Unit\API\Post_Meta
  * @group   api
  * @group   api-post-meta
  */
-class Tests_Beans_Post_Meta_Nonce extends Beans_Post_Meta_Test_Case {
+class Tests_BeansPostMeta_RenderNonce extends Beans_Post_Meta_Test_Case {
 
 	/**
 	 * Test _Beans_Post_Meta::nonce() should output correct nonce html.
