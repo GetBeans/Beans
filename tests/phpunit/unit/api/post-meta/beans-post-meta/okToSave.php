@@ -25,7 +25,7 @@ require_once dirname( __DIR__ ) . '/includes/class-beans-post-meta-test-case.php
 class Tests_BeansPostMeta_OkToSave extends Beans_Post_Meta_Test_Case {
 
 	/**
-	 * Test _Beans_Post_Meta::ok_to_save() returns false when nonce check fails.
+	 * Test _Beans_Post_Meta::ok_to_save() should return false when nonce check fails.
 	 */
 	public function test_ok_to_save_should_return_false_when_unverified_nonce() {
 		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );
@@ -35,7 +35,7 @@ class Tests_BeansPostMeta_OkToSave extends Beans_Post_Meta_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Post_Meta::ok_to_save() returns false when user permissions are invalid.
+	 * Test _Beans_Post_Meta::ok_to_save() should return false when user permissions are invalid.
 	 */
 	public function test_ok_to_save_should_return_false_when_user_cannot_edit() {
 		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );
@@ -49,7 +49,7 @@ class Tests_BeansPostMeta_OkToSave extends Beans_Post_Meta_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Post_Meta::ok_to_save() returns false when post meta has no fields.
+	 * Test _Beans_Post_Meta::ok_to_save() should return false when post meta has no fields.
 	 */
 	public function test_ok_to_save_should_return_false_when_fields_empty() {
 		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );
@@ -60,7 +60,7 @@ class Tests_BeansPostMeta_OkToSave extends Beans_Post_Meta_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Post_Meta::ok_to_save() returns true when all conditions for saving are met.
+	 * Test _Beans_Post_Meta::ok_to_save() should return true when all conditions for saving are met.
 	 */
 	public function test_ok_to_save_should_return_true_when_all_conditions_met() {
 		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );

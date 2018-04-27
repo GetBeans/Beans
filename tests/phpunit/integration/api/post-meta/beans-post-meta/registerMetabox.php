@@ -25,7 +25,7 @@ require_once dirname( __DIR__ ) . '/includes/class-beans-post-meta-test-case.php
 class Tests_BeansPostMeta_RegisterMetabox extends Beans_Post_Meta_Test_Case {
 
 	/**
-	 * Test _Beans_Post_Meta::register_metabox() should register an appropriate metabox.
+	 * Test _Beans_Post_Meta::register_metabox() should register an appropriate metabox when called.
 	 */
 	public function test_register_metabox_should_register_metabox() {
 		global $wp_meta_boxes;

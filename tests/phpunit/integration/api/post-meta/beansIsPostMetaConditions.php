@@ -24,14 +24,14 @@ require_once dirname( __FILE__ ) . '/includes/class-beans-post-meta-test-case.ph
 class Tests_BeansIsPostMetaConditions extends Beans_Post_Meta_Test_Case {
 
 	/**
-	 * Tests is_post_meta_conditions returns true when $conditions are a boolean true.
+	 * Tests is_post_meta_conditions should return true when $conditions are a boolean true.
 	 */
 	public function test_returns_true_for_boolean_true_condition() {
 		$this->assertTrue( _beans_is_post_meta_conditions( true ) );
 	}
 
 	/**
-	 * Tests is_post_meta_conditions returns true when is a new post and $conditions include 'post'.
+	 * Tests is_post_meta_conditions should return true when is a new post and $conditions include 'post'.
 	 */
 	public function test_returns_true_when_new_post_and_conditions_include_post() {
 		set_current_screen( 'post' );
@@ -44,7 +44,7 @@ class Tests_BeansIsPostMetaConditions extends Beans_Post_Meta_Test_Case {
 	}
 
 	/**
-	 * Tests is_post_meta_conditions returns false when is a new post and $conditions don't include 'post'.
+	 * Tests is_post_meta_conditions should return false when is a new post and $conditions don't include 'post'.
 	 */
 	public function test_returns_false_when_new_post_and_conditions_dont_include_post() {
 		set_current_screen( 'post' );
@@ -57,7 +57,7 @@ class Tests_BeansIsPostMetaConditions extends Beans_Post_Meta_Test_Case {
 	}
 
 	/**
-	 * Tests is_post_meta_conditions returns false when post_id can't be found.
+	 * Tests is_post_meta_conditions should return false when post_id can't be found.
 	 */
 	public function test_returns_false_when_post_id_not_found() {
 		set_current_screen( 'edit' );
@@ -66,7 +66,7 @@ class Tests_BeansIsPostMetaConditions extends Beans_Post_Meta_Test_Case {
 	}
 
 	/**
-	 * Tests is_post_meta_conditions returns true when $conditions match post type.
+	 * Tests is_post_meta_conditions should return true when $conditions match post type.
 	 */
 	public function test_returns_true_when_conditions_match_post_type() {
 		$post_id = $this->factory()->post->create( array( 'post_type' => 'cpt' ) );
@@ -90,7 +90,7 @@ class Tests_BeansIsPostMetaConditions extends Beans_Post_Meta_Test_Case {
 	}
 
 	/**
-	 * Tests is_post_meta_conditions returns true conditions match post ID.
+	 * Tests is_post_meta_conditions should return true when conditions match post ID.
 	 */
 	public function test_returns_true_when_conditions_match_post_id() {
 		$post_id = $this->factory()->post->create();
@@ -114,7 +114,7 @@ class Tests_BeansIsPostMetaConditions extends Beans_Post_Meta_Test_Case {
 	}
 
 	/**
-	 * Tests is_post_meta_conditions returns true conditions match a page template name.
+	 * Tests is_post_meta_conditions should return true when conditions match a page template name.
 	 */
 	public function test_returns_true_when_conditions_match_page_template_name() {
 		$page_id = $this->factory()->post->create( array( 'post_type' => 'page' ) );
@@ -139,7 +139,7 @@ class Tests_BeansIsPostMetaConditions extends Beans_Post_Meta_Test_Case {
 	}
 
 	/**
-	 * Tests is_post_meta_conditions returns false when no conditions match.
+	 * Tests is_post_meta_conditions should return false when no conditions match.
 	 */
 	public function test_returns_false_when_no_conditions_match() {
 

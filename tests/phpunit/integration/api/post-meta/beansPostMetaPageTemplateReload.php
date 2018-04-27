@@ -24,7 +24,7 @@ require_once dirname( __FILE__ ) . '/includes/class-beans-post-meta-test-case.ph
 class Tests_BeansPostMetaPageTemplateReload extends Beans_Post_Meta_Test_Case {
 
 	/**
-	 * Test beans_post_meta_page_template_reload does nothing when not editing a post object.
+	 * Test beans_post_meta_page_template_reload should do nothing when not editing a post object.
 	 */
 	public function test_does_nothing_when_not_editing_post_object() {
 		global $pagenow;
@@ -38,7 +38,7 @@ class Tests_BeansPostMetaPageTemplateReload extends Beans_Post_Meta_Test_Case {
 	}
 
 	/**
-	 * Test beans_post_meta_page_template_reload does nothing when post meta not assigned to page templates.
+	 * Test beans_post_meta_page_template_reload should do nothing when post meta not assigned to page templates.
 	 */
 	public function test_does_nothing_when_post_meta_not_assigned_to_page_templates() {
 		global $_beans_post_meta_conditions, $pagenow;
@@ -54,7 +54,7 @@ class Tests_BeansPostMetaPageTemplateReload extends Beans_Post_Meta_Test_Case {
 	}
 
 	/**
-	 * Test beans_post_meta_page_template_reload outputs script html when post meta is assigned to page templates.
+	 * Test beans_post_meta_page_template_reload should output script html when post meta is assigned to page templates.
 	 */
 	public function test_does_nothing_when_post_meta_assigned_to_page_templates() {
 		global $_beans_post_meta_conditions, $pagenow;

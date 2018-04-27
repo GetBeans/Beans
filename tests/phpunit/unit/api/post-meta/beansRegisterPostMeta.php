@@ -23,7 +23,7 @@ require_once dirname( __FILE__ ) . '/includes/class-beans-post-meta-test-case.ph
 class Tests_BeansRegisterPostMeta extends Beans_Post_Meta_Test_Case {
 
 	/**
-	 * Test beans_register_post_meta returns false when given empty fields.
+	 * Test beans_register_post_meta should return false when given empty fields.
 	 */
 	public function test_returns_false_when_fields_are_empty() {
 		$this->assertFalse( beans_register_post_meta( array(), true, 'tm-beans' ) );
@@ -46,7 +46,7 @@ class Tests_BeansRegisterPostMeta extends Beans_Post_Meta_Test_Case {
 	}
 
 	/**
-	 * Test beans_register_post_meta returns false when not on the admin side.
+	 * Test beans_register_post_meta should return false when not on the admin side.
 	 */
 	public function test_returns_false_when_not_is_admin() {
 		Monkey\Functions\when( '_beans_pre_standardize_fields' )->returnArg();
@@ -63,7 +63,7 @@ class Tests_BeansRegisterPostMeta extends Beans_Post_Meta_Test_Case {
 	}
 
 	/**
-	 * Test beans_register_post_meta returns false when given fields are unregisterable.
+	 * Test beans_register_post_meta should return false when given fields are unregisterable.
 	 */
 	public function test_returns_false_when_fields_cannot_be_registered() {
 		Monkey\Functions\when( '_beans_pre_standardize_fields' )->returnArg();
@@ -78,7 +78,7 @@ class Tests_BeansRegisterPostMeta extends Beans_Post_Meta_Test_Case {
 	}
 
 	/**
-	 * Test beans_register_post_meta returns true when fields are successfully registered.
+	 * Test beans_register_post_meta should return true when fields are successfully registered.
 	 */
 	public function test_returns_true_on_successfully_registered() {
 		Monkey\Functions\when( '_beans_pre_standardize_fields' )->returnArg();

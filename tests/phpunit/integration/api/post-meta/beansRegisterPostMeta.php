@@ -24,7 +24,7 @@ require_once dirname( __FILE__ ) . '/includes/class-beans-post-meta-test-case.ph
 class Tests_BeansRegisterPostMeta extends Beans_Post_Meta_Test_Case {
 
 	/**
-	 * Test beans_register_post_meta returns false when on front end.
+	 * Test beans_register_post_meta should return false when on front end.
 	 */
 	public function test_returns_false_when_not_is_admin() {
 
@@ -38,7 +38,7 @@ class Tests_BeansRegisterPostMeta extends Beans_Post_Meta_Test_Case {
 	}
 
 	/**
-	 * Test beans_register_post_meta returns false when conditions are false.
+	 * Test beans_register_post_meta should return false when conditions are false.
 	 */
 	public function test_returns_false_when_conditions_are_false() {
 		set_current_screen( 'edit' );
@@ -53,7 +53,7 @@ class Tests_BeansRegisterPostMeta extends Beans_Post_Meta_Test_Case {
 	}
 
 	/**
-	 * Test beans_register_post_meta returns false when fields cannot be registered.
+	 * Test beans_register_post_meta should return false when fields cannot be registered.
 	 */
 	public function test_returns_false_when_fields_are_unregisterable() {
 		set_current_screen( 'edit' );
@@ -62,7 +62,7 @@ class Tests_BeansRegisterPostMeta extends Beans_Post_Meta_Test_Case {
 	}
 
 	/**
-	 * Test beans_register_post_meta returns true when post meta is registered.
+	 * Test beans_register_post_meta should return true when post meta is registered.
 	 */
 	public function test_returns_false_when_post_meta_is_registered() {
 		set_current_screen( 'edit' );

@@ -25,7 +25,7 @@ require_once dirname( __DIR__ ) . '/includes/class-beans-post-meta-test-case.php
 class Tests_BeansPostMeta_Render_Nonce extends Beans_Post_Meta_Test_Case {
 
 	/**
-	 * Test _Beans_Post_Meta::nonce() should output correct nonce html.
+	 * Test _Beans_Post_Meta::nonce() should output correct nonce html when called.
 	 */
 	public function test_nonce_should_echo_nonce_input_html() {
 		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );

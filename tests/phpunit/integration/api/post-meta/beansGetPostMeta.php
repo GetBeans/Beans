@@ -56,7 +56,7 @@ class Tests_BeansGetPostMeta extends Beans_Post_Meta_Test_Case {
 	}
 
 	/**
-	 * Test beans_get_post_meta() should return the post's meta value.
+	 * Test beans_get_post_meta() should return the post's meta value when all conditions are met.
 	 */
 	public function test_should_return_post_meta_value() {
 		$post_id = self::factory()->post->create( array( 'post_title' => 'Hello Beans' ) );

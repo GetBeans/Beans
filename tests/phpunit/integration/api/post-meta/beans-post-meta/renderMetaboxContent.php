@@ -25,7 +25,7 @@ require_once dirname( __DIR__ ) . '/includes/class-beans-post-meta-test-case.php
 class Tests_BeansPostMeta_RenderMetaboxContent extends Beans_Post_Meta_Test_Case {
 
 	/**
-	 * Test _Beans_Post_Meta::metabox_content() should output post meta fields markup.
+	 * Test _Beans_Post_Meta::metabox_content() should output post meta fields markup when called.
 	 */
 	public function test_metabox_content_should_return_fields_markup() {
 		$test_data = require dirname( ( __DIR__ ) ) . DIRECTORY_SEPARATOR . 'fixtures/test-fields.php';
