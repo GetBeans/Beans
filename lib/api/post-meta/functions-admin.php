@@ -105,7 +105,7 @@ function beans_register_post_meta( array $fields, $conditions, $section, $args =
  * @ignore
  * @access private
  *
- * @param array $conditions Conditions to show a Post Meta box.
+ * @param array|bool $conditions Conditions to show a Post Meta box.
  *
  * @return bool
  */
