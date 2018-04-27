@@ -16,16 +16,16 @@ require_once BEANS_THEME_DIR . '/lib/api/post-meta/class-beans-post-meta.php';
 require_once dirname( __DIR__ ) . '/includes/class-beans-post-meta-test-case.php';
 
 /**
- * Class Tests_Beans_Post_Meta_Ok_To_Save.
+ * Class Tests_BeansPostMeta_OkToSave.
  *
  * @package Beans\Framework\Tests\Integration\API\Post_Meta
  * @group   api
  * @group   api-post-meta
  */
-class Tests_Beans_Post_Meta_Ok_To_Save extends Beans_Post_Meta_Test_Case {
+class Tests_BeansPostMeta_OkToSave extends Beans_Post_Meta_Test_Case {
 
 	/**
-	 * Test _Beans_Post_Meta::ok_to_save() is false with unverified nonce.
+	 * Test _Beans_Post_Meta::ok_to_save() should return false when nonce check fails.
 	 */
 	public function test_ok_to_save_should_return_false_when_unverified_nonce() {
 		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );
@@ -35,7 +35,7 @@ class Tests_Beans_Post_Meta_Ok_To_Save extends Beans_Post_Meta_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Post_Meta::ok_to_save() is false with invalid user permissions.
+	 * Test _Beans_Post_Meta::ok_to_save() should return false when user permissions are invalid.
 	 */
 	public function test_ok_to_save_should_return_false_when_user_cannot_edit() {
 		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );
@@ -52,7 +52,7 @@ class Tests_Beans_Post_Meta_Ok_To_Save extends Beans_Post_Meta_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Post_Meta::ok_to_save() is false when post meta has no fields.
+	 * Test _Beans_Post_Meta::ok_to_save() should return false when post meta has no fields.
 	 */
 	public function test_ok_to_save_should_return_false_when_fields_empty() {
 		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );
@@ -69,7 +69,7 @@ class Tests_Beans_Post_Meta_Ok_To_Save extends Beans_Post_Meta_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Post_Meta::ok_to_save() is true when all conditions for saving are met.
+	 * Test _Beans_Post_Meta::ok_to_save() should return true when all conditions for saving are met.
 	 */
 	public function test_ok_to_save_should_return_true_when_all_conditions_met() {
 		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );

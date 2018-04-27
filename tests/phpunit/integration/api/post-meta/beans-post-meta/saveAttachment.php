@@ -16,16 +16,16 @@ require_once BEANS_THEME_DIR . '/lib/api/post-meta/class-beans-post-meta.php';
 require_once dirname( __DIR__ ) . '/includes/class-beans-post-meta-test-case.php';
 
 /**
- * Class Tests_Beans_Post_Meta_Save_Attachment.
+ * Class Tests_BeansPostMeta_SaveAttachment.
  *
  * @package Beans\Framework\Tests\Integration\API\Post_Meta
  * @group   api
  * @group   api-post-meta
  */
-class Tests_Beans_Post_Meta_Save_Attachment extends Beans_Post_Meta_Test_Case {
+class Tests_BeansPostMeta_SaveAttachment extends Beans_Post_Meta_Test_Case {
 
 	/**
-	 * Test _Beans_Post_Meta::save_attachment() runs update_post_meta() and returns attachment when ok_to_save() is true.
+	 * Test _Beans_Post_Meta::save_attachment() should run update_post_meta() and return attachment when ok_to_save() is true.
 	 */
 	public function test_save_attachment_should_run_update_post_meta_and_return_attachment_when_ok_to_save() {
 		$post_meta       = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );

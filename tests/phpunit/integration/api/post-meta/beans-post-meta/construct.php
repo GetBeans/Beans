@@ -16,13 +16,13 @@ require_once BEANS_THEME_DIR . '/lib/api/post-meta/class-beans-post-meta.php';
 require_once dirname( __DIR__ ) . '/includes/class-beans-post-meta-test-case.php';
 
 /**
- * Class Tests_Beans_Post_Meta_Construct.
+ * Class Tests_BeansPostMeta_Construct.
  *
  * @package Beans\Framework\Tests\Integration\API\Post_Meta
  * @group   api
  * @group   api-post-meta
  */
-class Tests_Beans_Post_Meta_Construct extends Beans_Post_Meta_Test_Case {
+class Tests_BeansPostMeta_Construct extends Beans_Post_Meta_Test_Case {
 
 	/**
 	 * Test correct hooks are set on class instantiation.

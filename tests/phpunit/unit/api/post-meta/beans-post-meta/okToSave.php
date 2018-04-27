@@ -16,13 +16,13 @@ use Brain\Monkey;
 require_once dirname( __DIR__ ) . '/includes/class-beans-post-meta-test-case.php';
 
 /**
- * Class Tests_Beans_Post_Meta_Ok_To_Save
+ * Class Tests_BeansPostMeta_OkToSave
  *
  * @package Beans\Framework\Tests\Unit\API\Post_Meta
  * @group   api
  * @group   api-post-meta
  */
-class Tests_Beans_Post_Meta_Ok_To_Save extends Beans_Post_Meta_Test_Case {
+class Tests_BeansPostMeta_OkToSave extends Beans_Post_Meta_Test_Case {
 
 	/**
 	 * Test _Beans_Post_Meta::ok_to_save() is false with unverified nonce.
