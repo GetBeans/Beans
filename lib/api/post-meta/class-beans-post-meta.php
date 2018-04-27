@@ -125,7 +125,7 @@ final class _Beans_Post_Meta {
 	 */
 	public function save( $post_id ) {
 
-		if ( beans_doing_autosave() ) {
+		if ( _beans_doing_autosave() ) {
 			return false;
 		}
 
@@ -151,7 +151,7 @@ final class _Beans_Post_Meta {
 	 */
 	public function save_attachment( $attachment ) {
 
-		if ( beans_doing_autosave() ) {
+		if ( _beans_doing_autosave() ) {
 			return $attachment;
 		}
 
