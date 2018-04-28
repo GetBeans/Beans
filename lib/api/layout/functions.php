@@ -224,22 +224,39 @@ function _beans_get_layout_classes( array $args ) {
 function beans_get_layouts_for_options( $add_default = false ) {
 	$base    = BEANS_ADMIN_ASSETS_URL . 'images/layouts/';
 	$layouts = array(
-		'c' => $base . 'c.png',
+		'c' => array(
+			'src'                => $base . 'c.png',
+			'alt'                => 'Full-Width Content Layout',
+			'screen_reader_text' => 'Option for the Full-Width Content Layout.',
+		),
 	);
 
 	// Add sidebar primary layouts if the primary widget area is registered.
 	$has_primary = beans_has_widget_area( 'sidebar_primary' );
 
 	if ( $has_primary ) {
-		$layouts['c_sp'] = $base . 'cs.png';
-		$layouts['sp_c'] = $base . 'sc.png';
+		$layouts['c_sp']['src']                = $base . 'cs.png';
+		$layouts['c_sp']['alt']                = 'Content and Primary Sidebar Layout';
+		$layouts['c_sp']['screen_reader_text'] = 'Option for the Content and Primary Sidebar Layout.';
+
+		$layouts['sp_c']['src']                = $base . 'sc.png';
+		$layouts['sp_c']['alt']                = 'Primary Sidebar and Content Layout';
+		$layouts['sp_c']['screen_reader_text'] = 'Option for the Primary Sidebar and Content Layout.';
 	}
 
 	// Add sidebar secondary layouts if the primary and secondary widget area are registered.
 	if ( $has_primary && beans_has_widget_area( 'sidebar_secondary' ) ) {
-		$layouts['c_sp_ss'] = $base . 'css.png';
-		$layouts['sp_ss_c'] = $base . 'ssc.png';
-		$layouts['sp_c_ss'] = $base . 'scs.png';
+		$layouts['c_sp_ss']['src']                = $base . 'css.png';
+		$layouts['c_sp_ss']['alt']                = 'Content, Primary Sidebar and Secondary Sidebar Layout';
+		$layouts['c_sp_ss']['screen_reader_text'] = 'Option for the Content, Primary Sidebar and Secondary Sidebar Layout.';
+
+		$layouts['sp_ss_c']['src']                = $base . 'ssc.png';
+		$layouts['sp_ss_c']['alt']                = 'Primary Sidebar, Secondary Sidebar and Content Layout';
+		$layouts['sp_ss_c']['screen_reader_text'] = 'Option for the Primary Sidebar, Secondary Sidebar and Content Layout.';
+
+		$layouts['sp_c_ss']['src']                = $base . 'scs.png';
+		$layouts['sp_c_ss']['alt']                = 'Primary Sidebar, Content and Secondary Sidebar Layout';
+		$layouts['sp_c_ss']['screen_reader_text'] = 'Option for the Primary Sidebar, Content and Secondary Sidebar Layout.';
 	}
 
 	/**
