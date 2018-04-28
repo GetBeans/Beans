@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Integration\API\Image\Includes;
 
-use WP_UnitTestCase;
+use Beans\Framework\Tests\Integration\Test_Case;
 use org\bovigo\vfs\vfsStream;
 
 /**
@@ -17,7 +17,7 @@ use org\bovigo\vfs\vfsStream;
  *
  * @package Beans\Framework\Tests\Integration\API\Image\Includes
  */
-abstract class Image_Test_Case extends WP_UnitTestCase {
+abstract class Image_Test_Case extends Test_Case {
 
 	/**
 	 * When true, return the given path when doing wp_normalize_path().
@@ -72,40 +72,6 @@ abstract class Image_Test_Case extends WP_UnitTestCase {
 
 		// Set up the "beans" directory's virtual filesystem.
 		$this->mock_filesystem = vfsStream::setup( 'uploads', 0755, $structure );
-	}
-
-	/**
-	 * Get reflective access to the private method.
-	 *
-	 * @since 1.5.0
-	 *
-	 * @param string $method_name Method name for which to gain access.
-	 *
-	 * @return \ReflectionMethod
-	 */
-	protected function get_reflective_method( $method_name ) {
-		$class  = new \ReflectionClass( '_Beans_Image_Editor' );
-		$method = $class->getMethod( $method_name );
-		$method->setAccessible( true );
-
-		return $method;
-	}
-
-	/**
-	 * Get reflective access to the private property.
-	 *
-	 * @since 1.5.0
-	 *
-	 * @param string $property Optional. Property name for which to gain access.
-	 *
-	 * @return \ReflectionProperty|string
-	 */
-	protected function get_reflective_property( $property = 'rebuilt_path' ) {
-		$class    = new \ReflectionClass( '_Beans_Image_Editor' );
-		$property = $class->getProperty( $property );
-		$property->setAccessible( true );
-
-		return $property;
 	}
 
 	/**

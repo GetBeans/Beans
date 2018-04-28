@@ -44,7 +44,7 @@ class Tests_Beans_Edit_Image_Run extends Image_Test_Case {
 	 * Test run() should edit the existing image, store it in the "rebuilt path", and then return its URL.
 	 */
 	public function test_should_edit_store_and_return_its_url() {
-		$rebuilt_path  = $this->get_reflective_property();
+		$rebuilt_path  = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
 		$image_sources = array(
 			static::$fixtures_dir . '/image1.jpg',
 			static::$fixtures_dir . '/image2.jpg',
@@ -85,7 +85,7 @@ class Tests_Beans_Edit_Image_Run extends Image_Test_Case {
 	 * stored.
 	 */
 	public function test_should_return_url_when_edited_image_exists() {
-		$rebuilt_path  = $this->get_reflective_property();
+		$rebuilt_path  = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
 		$image_sources = array(
 			static::$fixtures_dir . '/image1.jpg',
 			static::$fixtures_dir . '/image2.jpg',
@@ -110,7 +110,7 @@ class Tests_Beans_Edit_Image_Run extends Image_Test_Case {
 	 * image info.
 	 */
 	public function test_should_edit_store_and_return_indexed_array() {
-		$rebuilt_path  = $this->get_reflective_property();
+		$rebuilt_path  = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
 		$image_sources = array(
 			static::$fixtures_dir . '/image1.jpg',
 			static::$fixtures_dir . '/image2.jpg',
@@ -151,7 +151,7 @@ class Tests_Beans_Edit_Image_Run extends Image_Test_Case {
 	 * edited and stored.
 	 */
 	public function test_should_return_index_array_when_edited_image_exists() {
-		$rebuilt_path  = $this->get_reflective_property();
+		$rebuilt_path  = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
 		$image_sources = array(
 			static::$fixtures_dir . '/image1.jpg',
 			static::$fixtures_dir . '/image2.jpg',
@@ -176,7 +176,7 @@ class Tests_Beans_Edit_Image_Run extends Image_Test_Case {
 	 * object.
 	 */
 	public function test_should_edit_store_and_return_object() {
-		$rebuilt_path  = $this->get_reflective_property();
+		$rebuilt_path  = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
 		$image_sources = array(
 			static::$fixtures_dir . '/image1.jpg',
 			static::$fixtures_dir . '/image2.jpg',
@@ -224,7 +224,7 @@ class Tests_Beans_Edit_Image_Run extends Image_Test_Case {
 	 * edited and stored.
 	 */
 	public function test_should_return_object_when_edited_image_exists() {
-		$rebuilt_path  = $this->get_reflective_property();
+		$rebuilt_path  = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
 		$image_sources = array(
 			static::$fixtures_dir . '/image1.jpg',
 			static::$fixtures_dir . '/image2.jpg',
@@ -254,7 +254,7 @@ class Tests_Beans_Edit_Image_Run extends Image_Test_Case {
 	 * associative array.
 	 */
 	public function test_should_edit_image_and_return_associative_array() {
-		$rebuilt_path  = $this->get_reflective_property();
+		$rebuilt_path  = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
 		$image_sources = array(
 			static::$fixtures_dir . '/image1.jpg',
 			static::$fixtures_dir . '/image2.jpg',
@@ -309,7 +309,7 @@ class Tests_Beans_Edit_Image_Run extends Image_Test_Case {
 	 * been edited and stored.
 	 */
 	public function test_should_return_associatve_array_when_edited_image_exists() {
-		$rebuilt_path  = $this->get_reflective_property();
+		$rebuilt_path  = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
 		$image_sources = array(
 			static::$fixtures_dir . '/image1.jpg',
 			static::$fixtures_dir . '/image2.jpg',

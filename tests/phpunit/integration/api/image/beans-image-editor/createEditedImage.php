@@ -46,8 +46,8 @@ class Tests_Beans_Edit_Image_CreateEditedImage extends Image_Test_Case {
 	 * "rebuilt path".
 	 */
 	public function test_should_edit_create_and_store_image() {
-		$created_edited_image = $this->get_reflective_method( 'create_edited_image' );
-		$rebuilt_path         = $this->get_reflective_property();
+		$created_edited_image = $this->get_reflective_method( 'create_edited_image', '_Beans_Image_Editor' );
+		$rebuilt_path         = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
 		$image_sources        = array(
 			static::$fixtures_dir . '/image1.jpg',
 			static::$fixtures_dir . '/image2.jpg',
@@ -73,8 +73,8 @@ class Tests_Beans_Edit_Image_CreateEditedImage extends Image_Test_Case {
 	 * Test create_edited_image() should return false when the image does not exist.
 	 */
 	public function test_should_return_false_when_no_image() {
-		$created_edited_image = $this->get_reflective_method( 'create_edited_image' );
-		$rebuilt_path         = $this->get_reflective_property();
+		$created_edited_image = $this->get_reflective_method( 'create_edited_image', '_Beans_Image_Editor' );
+		$rebuilt_path         = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
 		$src                  = 'path/does/not/exist/image.jpg';
 
 		$editor           = new _Beans_Image_Editor( $src, array( 'resize' => array( 800, false ) ) );

@@ -137,36 +137,6 @@ abstract class Image_Test_Case extends Test_Case {
 	}
 
 	/**
-	 * Get reflective access to the private method.
-	 *
-	 * @since 1.5.0
-	 *
-	 * @param string $method_name Method name for which to gain access.
-	 * @param string $class_name  Optional. Name of the target class.
-	 *
-	 * @return \ReflectionMethod
-	 * @throws \ReflectionException Throws an exception if method does not exist.
-	 */
-	protected function get_reflective_method( $method_name, $class_name = '_Beans_Image_Editor' ) {
-		return parent::get_reflective_method( $method_name, $class_name );
-	}
-
-	/**
-	 * Get reflective access to the private property.
-	 *
-	 * @since 1.5.0
-	 *
-	 * @param string $property   Optional. Property name for which to gain access.
-	 * @param string $class_name Optional. Name of the target class.
-	 *
-	 * @return \ReflectionProperty|string
-	 * @throws \ReflectionException Throws an exception if property does not exist.
-	 */
-	protected function get_reflective_property( $property = 'rebuilt_path', $class_name = '_Beans_Image_Editor' ) {
-		return parent::get_reflective_property( $property, $class_name );
-	}
-
-	/**
 	 * Initialize the virtual "edited" image.
 	 *
 	 * @since 1.5.0

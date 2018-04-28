@@ -39,7 +39,7 @@ class Tests_BeansRegisterFields extends Fields_Test_Case {
 		$this->assertTrue( beans_register_fields( $test_data['fields'], 'beans_tests', $test_data['section'] ) );
 
 		// Check what was registered.
-		$registered = $this->get_reflective_property_value( 'registered' );
+		$registered = $this->get_reflective_property_value( 'registered', '_Beans_Fields' );
 		$this->assertArrayHasKey( 'beans_tests', $registered );
 		$this->assertArrayHasKey( $test_data['section'], $registered['beans_tests'] );
 

@@ -38,7 +38,7 @@ class Tests_Beans_Edit_Image_Run extends Image_Test_Case {
 	 * Test run() should edit the existing image, store it in the "rebuilt path", and then return its URL.
 	 */
 	public function test_should_edit_store_and_return_its_url() {
-		$rebuilt_path = $this->get_reflective_property();
+		$rebuilt_path = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
 		$args         = array( 'resize' => array( 800, false ) );
 
 		foreach ( $this->images as $actual_path ) {
@@ -88,7 +88,7 @@ class Tests_Beans_Edit_Image_Run extends Image_Test_Case {
 	 */
 	public function test_should_return_url_when_edited_image_exists() {
 		$this->load_images_into_vfs();
-		$rebuilt_path = $this->get_reflective_property();
+		$rebuilt_path = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
 		$args         = array( 'resize' => array( 800, false ) );
 
 		foreach ( $this->images as $virtual_path => $actual_path ) {
@@ -110,7 +110,7 @@ class Tests_Beans_Edit_Image_Run extends Image_Test_Case {
 	 * its image info.
 	 */
 	public function test_should_edit_store_and_return_indexed_array() {
-		$rebuilt_path = $this->get_reflective_property();
+		$rebuilt_path = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
 		$args         = array( 'resize' => array( 800, false ) );
 
 		foreach ( $this->images as $virtual_path => $actual_path ) {
@@ -160,7 +160,7 @@ class Tests_Beans_Edit_Image_Run extends Image_Test_Case {
 	 */
 	public function test_should_return_index_array_when_edited_image_exists() {
 		$this->load_images_into_vfs();
-		$rebuilt_path = $this->get_reflective_property();
+		$rebuilt_path = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
 		$args         = array( 'resize' => array( 800, false ) );
 
 		foreach ( $this->images as $virtual_path => $actual_path ) {
@@ -182,7 +182,7 @@ class Tests_Beans_Edit_Image_Run extends Image_Test_Case {
 	 * object.
 	 */
 	public function test_should_edit_store_and_return_object() {
-		$rebuilt_path = $this->get_reflective_property();
+		$rebuilt_path = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
 		$args         = array( 'resize' => array( 400, false ) );
 
 		foreach ( $this->images as $actual_path ) {
@@ -239,7 +239,7 @@ class Tests_Beans_Edit_Image_Run extends Image_Test_Case {
 	 */
 	public function test_should_return_object_when_edited_image_exists() {
 		$this->load_images_into_vfs();
-		$rebuilt_path = $this->get_reflective_property();
+		$rebuilt_path = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
 		$args         = array( 'resize' => array( 400, false ) );
 
 		foreach ( $this->images as $virtual_path => $actual_path ) {
@@ -265,7 +265,7 @@ class Tests_Beans_Edit_Image_Run extends Image_Test_Case {
 	 * associative array.
 	 */
 	public function test_should_edit_image_and_return_associative_array() {
-		$rebuilt_path = $this->get_reflective_property();
+		$rebuilt_path = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
 		$args         = array( 'resize' => array( 600, false ) );
 
 		foreach ( $this->images as $actual_path ) {
@@ -329,7 +329,7 @@ class Tests_Beans_Edit_Image_Run extends Image_Test_Case {
 	 */
 	public function test_should_return_associative_array_when_edited_image_exists() {
 		$this->load_images_into_vfs();
-		$rebuilt_path = $this->get_reflective_property();
+		$rebuilt_path = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
 		$args         = array( 'resize' => array( 600, false ) );
 
 		foreach ( $this->images as $virtual_path => $actual_path ) {

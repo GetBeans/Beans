@@ -35,7 +35,7 @@ class Tests_BeansGetFields extends Fields_Test_Case {
 			);
 
 			// Register the fields first.
-			$registered = $this->get_reflective_property( 'registered' );
+			$registered = $this->get_reflective_property( 'registered', '_Beans_Fields' );
 			$registered->setValue( new \_Beans_Fields(), $data_set );
 
 			$this->assertSame( $data_set['beans_tests'][ $test_data['section'] ], beans_get_fields( 'beans_tests', $test_data['section'] ) );
