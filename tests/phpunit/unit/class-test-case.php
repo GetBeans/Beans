@@ -41,29 +41,25 @@ abstract class Test_Case extends TestCase {
 		parent::setUp();
 		Monkey\setUp();
 
-		Functions\when( 'wp_normalize_path' )->alias(
-			function( $path ) {
+		Functions\when( 'wp_normalize_path' )->alias( function( $path ) {
 
-				if ( true === $this->just_return_path ) {
-					return $path;
-				}
-
-					$path = str_replace( '\\', '/', $path );
-					$path = preg_replace( '|(?<=.)/+|', '/', $path );
-
-				if ( ':' === substr( $path, 1, 1 ) ) {
-					$path = ucfirst( $path );
-				}
-
-					return $path;
+			if ( true === $this->just_return_path ) {
+				return $path;
 			}
-		);
 
-		Functions\when( 'wp_json_encode' )->alias(
-			function( $array ) {
-					return json_encode( $array ); // phpcs:ignore WordPress.WP.AlternativeFunctions.json_encode_json_encode -- Required as part of our mock.
+			$path = str_replace( '\\', '/', $path );
+			$path = preg_replace( '|(?<=.)/+|', '/', $path );
+
+			if ( ':' === substr( $path, 1, 1 ) ) {
+				$path = ucfirst( $path );
 			}
-		);
+
+			return $path;
+		} );
+
+		Functions\when( 'wp_json_encode' )->alias( function( $array ) {
+			return json_encode( $array ); // phpcs:ignore WordPress.WP.AlternativeFunctions.json_encode_json_encode -- Required as part of our mock.
+		} );
 	}
 
 	/**
@@ -71,25 +67,21 @@ abstract class Test_Case extends TestCase {
 	 */
 	protected function setup_common_wp_stubs() {
 		// Common escaping functions.
-		Monkey\Functions\stubs(
-			array(
-				'esc_attr',
-				'esc_html',
-				'esc_textarea',
-				'esc_url',
-				'wp_kses_post',
-			)
-		);
+		Monkey\Functions\stubs( array(
+			'esc_attr',
+			'esc_html',
+			'esc_textarea',
+			'esc_url',
+			'wp_kses_post',
+		) );
 
 		// Common internationalization functions.
-		Monkey\Functions\stubs(
-			array(
-				'__',
-				'esc_html__',
-				'esc_html_x',
-				'esc_attr_x',
-			)
-		);
+		Monkey\Functions\stubs( array(
+			'__',
+			'esc_html__',
+			'esc_html_x',
+			'esc_attr_x',
+		) );
 
 		foreach ( array( 'esc_attr_e', 'esc_html_e', '_e' ) as $wp_function ) {
 			Monkey\Functions\when( $wp_function )->echoArg();
@@ -177,19 +169,20 @@ abstract class Test_Case extends TestCase {
 	 * Reset the Fields API container, i.e. static memories.
 	 */
 	protected function reset_fields_container() {
+
 		if ( ! class_exists( '_Beans_Fields' ) ) {
 			return;
 		}
+
 		// Reset the "registered" container.
 		$registered = $this->get_reflective_property( 'registered', '_Beans_Fields' );
-		$registered->setValue(
-			new \_Beans_Fields(), array(
-				'option'       => array(),
-				'post_meta'    => array(),
-				'term_meta'    => array(),
-				'wp_customize' => array(),
-			)
-		);
+		$registered->setValue( new \_Beans_Fields(), array(
+			'option'       => array(),
+			'post_meta'    => array(),
+			'term_meta'    => array(),
+			'wp_customize' => array(),
+		) );
+
 		// Reset the other static properties.
 		foreach ( array( 'field_types_loaded', 'field_assets_hook_loaded' ) as $property_name ) {
 			$property = $this->get_reflective_property( $property_name, '_Beans_Fields' );

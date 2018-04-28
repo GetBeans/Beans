@@ -122,14 +122,12 @@ abstract class Test_Case extends WP_UnitTestCase {
 
 		// Reset the "registered" container.
 		$registered = $this->get_reflective_property( 'registered', '_Beans_Fields' );
-		$registered->setValue(
-			new \_Beans_Fields(), array(
-				'option'       => array(),
-				'post_meta'    => array(),
-				'term_meta'    => array(),
-				'wp_customize' => array(),
-			)
-		);
+		$registered->setValue( new \_Beans_Fields(), array(
+			'option'       => array(),
+			'post_meta'    => array(),
+			'term_meta'    => array(),
+			'wp_customize' => array(),
+		) );
 
 		// Reset the other static properties.
 		foreach ( array( 'field_types_loaded', 'field_assets_hook_loaded' ) as $property_name ) {
