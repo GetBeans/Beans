@@ -14,9 +14,9 @@
  *
  * @since 1.0.0
  *
- * @param string     $meta_key The post meta id searched.
+ * @param string     $meta_key The post meta ID searched.
  * @param mixed      $default  Optional. The default value to return of the post meta value doesn't exist.
- * @param int|string $post_id  Optional. Overwrite the current post id.
+ * @param int|string $post_id  Optional. Overwrite the current post ID.
  *
  * @return mixed Returns the meta value, if it exists; else, the default value is returned.
  */

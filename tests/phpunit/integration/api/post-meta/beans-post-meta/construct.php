@@ -25,9 +25,9 @@ require_once dirname( __DIR__ ) . '/includes/class-beans-post-meta-test-case.php
 class Tests_BeansPostMeta_Construct extends Beans_Post_Meta_Test_Case {
 
 	/**
-	 * Test construct should set correct hooks when class is instantiated.
+	 * Test __construct() should set correct hooks when class is instantiated.
 	 */
-	public function test_construct_sets_correct_hooks_when_instantiated() {
+	public function test_should_set_correct_hooks_when_instantiated() {
 		// First instantiation sets all hooks.
 		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * The Beans Post Meta component extends the Beans Fields and make it easy add fields to any Post Type.
+ * The Beans Post Meta component extends the Beans Fields and makes it easy to add fields to any Post Type.
  *
  * @package Beans\Framework\API\Post_Meta
  *
@@ -17,7 +17,7 @@
  * @param array        $fields {
  *            Array of fields to register.
  *
- * @type string $id A unique id used for the field. This id will also be used to save the value in
+ * @type string $id A unique ID used for the field. This ID will also be used to save the value in
  *                                the database.
  * @type string $type The type of field to use. Please refer to the Beans core field types for more
  *                                information. Custom field types are accepted here.
@@ -27,16 +27,16 @@
  * @type array $attributes An array of attributes to add to the field. The array key defines the
  *                                attribute name and the array value defines the attribute value. Default array.
  * @type mixed $default The default field value. Default false.
- * @type array $fields Must only be used for 'group' field type. The array arguments are similar to the
+ * @type array $fields Must only be used for the 'group' field type. The array arguments are similar to the
  *                                {@see beans_register_fields()} $fields arguments.
- * @type bool $db_group Must only be used for 'group' field type. Defines whether the group of fields
+ * @type bool $db_group Must only be used for the 'group' field type. Defines whether the group of fields
  *                                registered should be saved as a group in the database or as individual
  *                                entries. Default false.
  * }
  *
- * @param string|array $conditions Array of 'post types id(s)', 'post id(s)' or 'page template slug(s)' for which the post meta should be registered.
- *                                 'page template slug(s)' must include '.php' file extention. Set to true to display everywhere.
- * @param string       $section A section id to define the group of fields.
+ * @param string|array $conditions Array of 'post type ID(s)', 'post ID(s)' or 'page template slug(s)' for which the post meta should be registered.
+ *                                 'page template slug(s)' must include the '.php' file extention. Set to true to display everywhere.
+ * @param string       $section A section ID to define the group of fields.
  * @param array        $args {
  *            Optional. Array of arguments used to register the fields.
  *
@@ -59,7 +59,7 @@ function beans_register_post_meta( array $fields, $conditions, $section, $args =
 	/**
 	 * Filter the post meta fields.
 	 *
-	 * The dynamic portion of the hook name, $section, refers to the section id which defines the group of fields.
+	 * The dynamic portion of the hook name, $section, refers to the section ID which defines the group of fields.
 	 *
 	 * @since 1.0.0
 	 *
@@ -70,7 +70,7 @@ function beans_register_post_meta( array $fields, $conditions, $section, $args =
 	/**
 	 * Filter the conditions used to define whether the fields set should be displayed or not.
 	 *
-	 * The dynamic portion of the hook name, $section, refers to the section id which defines the group of fields.
+	 * The dynamic portion of the hook name, $section, refers to the section ID which defines the group of fields.
 	 *
 	 * @since 1.0.0
 	 *
@@ -129,9 +129,9 @@ function _beans_is_post_meta_conditions( $conditions ) {
 			}
 		}
 	} else {
-		// Try to get id from $_GET.
+		// Try to get ID from $_GET.
 		$id_get = beans_get( 'post' );
-		// Try to get id from $_POST.
+		// Try to get ID from $_POST.
 		$id_post = beans_post( 'post_ID' );
 
 		if ( $id_get ) {
@@ -149,7 +149,7 @@ function _beans_is_post_meta_conditions( $conditions ) {
 
 	$statements = array(
 		in_array( $current_post_type, (array) $conditions, true ), // Check post type.
-		isset( $post_id ) && in_array( $post_id, (array) $conditions, true ), // Check post id.
+		isset( $post_id ) && in_array( $post_id, (array) $conditions, true ), // Check post ID.
 		isset( $post_id ) && in_array( get_post_meta( $post_id, '_wp_page_template', true ), (array) $conditions, true ), // Check page template.
 	);
 
@@ -175,7 +175,7 @@ function _beans_post_meta_page_template_reload() {
 		return;
 	}
 
-	// Stop here of there isn't any post meta assigned to page templates.
+	// Stop here if there is no post meta assigned to page templates.
 	if ( false === stripos( wp_json_encode( $_beans_post_meta_conditions ), '.php' ) ) {
 		return;
 	}

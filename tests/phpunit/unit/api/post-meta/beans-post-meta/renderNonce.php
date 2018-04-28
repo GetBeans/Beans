@@ -25,7 +25,7 @@ require_once dirname( __DIR__ ) . '/includes/class-beans-post-meta-test-case.php
 class Tests_BeansPostMeta_RenderNonce extends Beans_Post_Meta_Test_Case {
 
 	/**
-	 * Test _Beans_Post_Meta::nonce() should output correct nonce html.
+	 * Test _Beans_Post_Meta::nonce() should echo correct nonce input HTML.
 	 */
 	public function test_nonce_should_echo_nonce_input_html() {
 		Monkey\Functions\expect( 'wp_create_nonce' )->once()->with( 'beans_post_meta_nonce' )->andReturn( '123456' );

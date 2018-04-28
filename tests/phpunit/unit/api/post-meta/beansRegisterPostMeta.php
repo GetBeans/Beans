@@ -23,16 +23,16 @@ require_once dirname( __FILE__ ) . '/includes/class-beans-post-meta-test-case.ph
 class Tests_BeansRegisterPostMeta extends Beans_Post_Meta_Test_Case {
 
 	/**
-	 * Test beans_register_post_meta should return false when given empty fields.
+	 * Test beans_register_post_meta() should return false when no fields.
 	 */
-	public function test_returns_false_when_fields_are_empty() {
+	public function test_should_return_false_when_no_fields() {
 		$this->assertFalse( beans_register_post_meta( array(), true, 'tm-beans' ) );
 	}
 
 	/**
-	 * Test beans_register_post_meta returns false when conditions are false.
+	 * Test beans_register_post_meta() should return false when conditions are false.
 	 */
-	public function test_returns_false_when_conditions_are_false() {
+	public function test_should_return_false_when_conditions_are_false() {
 		Monkey\Functions\when( '_beans_pre_standardize_fields' )->returnArg();
 		Monkey\Functions\expect( '_beans_is_post_meta_conditions' )->once()->andReturn( false );
 
@@ -48,7 +48,7 @@ class Tests_BeansRegisterPostMeta extends Beans_Post_Meta_Test_Case {
 	/**
 	 * Test beans_register_post_meta should return false when not on the admin side.
 	 */
-	public function test_returns_false_when_not_is_admin() {
+	public function test_should_return_false_when_not_is_admin() {
 		Monkey\Functions\when( '_beans_pre_standardize_fields' )->returnArg();
 		Monkey\Functions\expect( '_beans_is_post_meta_conditions' )->once()->andReturn( true );
 		Monkey\Functions\expect( 'is_admin' )->once()->andReturn( false );
@@ -63,9 +63,9 @@ class Tests_BeansRegisterPostMeta extends Beans_Post_Meta_Test_Case {
 	}
 
 	/**
-	 * Test beans_register_post_meta should return false when given fields are unregisterable.
+	 * Test beans_register_post_meta() should return false when fields cannot be registered.
 	 */
-	public function test_returns_false_when_fields_cannot_be_registered() {
+	public function test_should_return_false_when_fields_cannot_be_registered() {
 		Monkey\Functions\when( '_beans_pre_standardize_fields' )->returnArg();
 		Monkey\Functions\expect( '_beans_is_post_meta_conditions' )->once()->andReturn( true );
 		Monkey\Functions\expect( 'is_admin' )->once()->andReturn( true );
@@ -78,9 +78,9 @@ class Tests_BeansRegisterPostMeta extends Beans_Post_Meta_Test_Case {
 	}
 
 	/**
-	 * Test beans_register_post_meta should return true when fields are successfully registered.
+	 * Test beans_register_post_meta() should return true when fields are successfully registered.
 	 */
-	public function test_returns_true_on_successfully_registered() {
+	public function test_should_return_true_when_fields_successfully_registered() {
 		Monkey\Functions\when( '_beans_pre_standardize_fields' )->returnArg();
 		Monkey\Functions\expect( '_beans_is_post_meta_conditions' )->once()->andReturn( true );
 		Monkey\Functions\expect( 'is_admin' )->once()->andReturn( true );

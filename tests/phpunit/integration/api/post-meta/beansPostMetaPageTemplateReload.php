@@ -24,9 +24,9 @@ require_once dirname( __FILE__ ) . '/includes/class-beans-post-meta-test-case.ph
 class Tests_BeansPostMetaPageTemplateReload extends Beans_Post_Meta_Test_Case {
 
 	/**
-	 * Test beans_post_meta_page_template_reload should do nothing when not editing a post object.
+	 * Test beans_post_meta_page_template_reload() should do nothing when not editing a post object.
 	 */
-	public function test_does_nothing_when_not_editing_post_object() {
+	public function test_should_do_nothing_when_not_editing_post_object() {
 		global $pagenow;
 		$pagenow = 'wp-login.php'; // phpcs:ignore WordPress.Variables.GlobalVariables.OverrideProhibited -- Resetting global here for tests.
 
@@ -38,9 +38,9 @@ class Tests_BeansPostMetaPageTemplateReload extends Beans_Post_Meta_Test_Case {
 	}
 
 	/**
-	 * Test beans_post_meta_page_template_reload should do nothing when post meta not assigned to page templates.
+	 * Test beans_post_meta_page_template_reload() should do nothing when post meta is not assigned to a page templates.
 	 */
-	public function test_does_nothing_when_post_meta_not_assigned_to_page_templates() {
+	public function test_should_do_nothing_when_post_meta_not_assigned_to_page_templates() {
 		global $_beans_post_meta_conditions, $pagenow;
 
 		$_beans_post_meta_conditions = array();
@@ -54,9 +54,9 @@ class Tests_BeansPostMetaPageTemplateReload extends Beans_Post_Meta_Test_Case {
 	}
 
 	/**
-	 * Test beans_post_meta_page_template_reload should output script html when post meta is assigned to page templates.
+	 * Test beans_post_meta_page_template_reload() should output script HTML when post meta is assigned to page templates.
 	 */
-	public function test_does_nothing_when_post_meta_assigned_to_page_templates() {
+	public function test_should_output_script_html_when_post_meta_assigned_to_page_templates() {
 		global $_beans_post_meta_conditions, $pagenow;
 
 		$_beans_post_meta_conditions = array( 'page-template-name.php' );

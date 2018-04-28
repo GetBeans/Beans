@@ -27,7 +27,7 @@ class Tests_BeansPostMeta_OkToSave extends Beans_Post_Meta_Test_Case {
 	/**
 	 * Test _Beans_Post_Meta::ok_to_save() should return false when nonce check fails.
 	 */
-	public function test_ok_to_save_should_return_false_when_unverified_nonce() {
+	public function test_ok_to_save_should_return_false_when_nonce_check_fails() {
 		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );
 
 		Monkey\Functions\expect( 'wp_verify_nonce' )->once()->andReturn( false );
@@ -35,9 +35,9 @@ class Tests_BeansPostMeta_OkToSave extends Beans_Post_Meta_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Post_Meta::ok_to_save() should return false when user permissions are invalid.
+	 * Test _Beans_Post_Meta::ok_to_save() should return false when `edit post` user permissions are not met.
 	 */
-	public function test_ok_to_save_should_return_false_when_user_cannot_edit() {
+	public function test_ok_to_save_should_return_false_when_user_permissions_not_met() {
 		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );
 
 		Monkey\Functions\expect( 'wp_verify_nonce' )->once()->andReturn( true );
@@ -51,7 +51,7 @@ class Tests_BeansPostMeta_OkToSave extends Beans_Post_Meta_Test_Case {
 	/**
 	 * Test _Beans_Post_Meta::ok_to_save() should return false when post meta has no fields.
 	 */
-	public function test_ok_to_save_should_return_false_when_fields_empty() {
+	public function test_ok_to_save_should_return_false_when_no_fields() {
 		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );
 
 		Monkey\Functions\expect( 'wp_verify_nonce' )->once()->andReturn( true );

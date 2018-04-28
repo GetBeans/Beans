@@ -37,7 +37,7 @@ class Tests_BeansPostMeta_Save extends Beans_Post_Meta_Test_Case {
 	/**
 	 * Test _Beans_Post_Meta::save() should return post_id when ok_to_save() is false.
 	 */
-	public function test_save_should_return_post_id_when_not_ok_to_save() {
+	public function test_save_should_return_post_id_when_ok_to_save_false() {
 		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );
 
 		Monkey\Functions\expect( '_beans_doing_autosave' )->once()->andReturn( false );

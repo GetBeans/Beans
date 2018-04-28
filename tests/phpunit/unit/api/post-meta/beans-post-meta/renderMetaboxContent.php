@@ -27,7 +27,7 @@ class Tests_BeansPostMeta_RenderMetaboxContent extends Beans_Post_Meta_Test_Case
 	/**
 	 * Test _Beans_Post_Meta::metabox_content() should output post meta fields markup.
 	 */
-	public function test_metabox_content_should_return_fields_markup() {
+	public function test_metabox_content_should_output_fields_markup() {
 		$field = array(
 			'id'      => 'beans_layout',
 			'label'   => 'Layout',
