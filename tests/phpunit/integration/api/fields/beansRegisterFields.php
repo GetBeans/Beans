@@ -10,6 +10,7 @@
 namespace Beans\Framework\Tests\Integration\API\Fields;
 
 use Beans\Framework\Tests\Integration\API\Fields\Includes\Fields_Test_Case;
+use _Beans_Fields;
 
 require_once __DIR__ . '/includes/class-fields-test-case.php';
 
@@ -39,7 +40,9 @@ class Tests_BeansRegisterFields extends Fields_Test_Case {
 		$this->assertTrue( beans_register_fields( $test_data['fields'], 'beans_tests', $test_data['section'] ) );
 
 		// Check what was registered.
-		$registered = $this->get_reflective_property_value( 'registered', '_Beans_Fields' );
+		$registered_property = $this->get_reflective_property( 'registered', '_Beans_Fields' );
+		$registered          = $registered_property->getValue( new _Beans_Fields() );
+
 		$this->assertArrayHasKey( 'beans_tests', $registered );
 		$this->assertArrayHasKey( $test_data['section'], $registered['beans_tests'] );
 

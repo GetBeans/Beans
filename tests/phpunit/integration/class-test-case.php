@@ -175,20 +175,4 @@ abstract class Test_Case extends WP_UnitTestCase {
 
 		return $property;
 	}
-
-	/**
-	 * Get the value of the private or protected property.
-	 *
-	 * @since 1.5.0
-	 *
-	 * @param string $property Property name for which to gain access.
-	 * @param string $class_name Name of the target class.
-	 *
-	 * @return mixed
-	 * @throws \ReflectionException Throws an exception if property does not exist.
-	 */
-	protected function get_reflective_property_value( $property, $class_name ) {
-		$reflective = $this->get_reflective_property( $property, $class_name );
-		return $reflective->getValue( new $class_name() );
-	}
 }
