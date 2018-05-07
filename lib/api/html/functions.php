@@ -194,7 +194,8 @@ function beans_selfclose_markup( $id, $tag, $attributes = array() ) {
 
 	$_beans_is_selfclose_markup = true;
 
-	$html = call_user_func_array( 'beans_open_markup', func_get_args() );
+	$args = func_get_args();
+	$html = call_user_func_array( 'beans_open_markup', $args );
 
 	// Reset the global variable to reduce memory usage.
 	unset( $GLOBALS['_beans_is_selfclose_markup'] );
@@ -218,7 +219,8 @@ function beans_selfclose_markup( $id, $tag, $attributes = array() ) {
  * @return void
  */
 function beans_selfclose_markup_e( $id, $tag, $attributes = array() ) {
-	echo call_user_func_array( 'beans_selfclose_markup', func_get_args() ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped -- Escaped in beans_open_markup().
+	$args = func_get_args();
+	echo call_user_func_array( 'beans_selfclose_markup', $args ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped -- Escaped in beans_open_markup().
 }
 
 /**
