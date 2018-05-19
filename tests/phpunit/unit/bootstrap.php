@@ -10,12 +10,11 @@
 
 namespace Beans\Framework\Tests\Unit;
 
-if ( version_compare( phpversion(), '5.6.0', '<' ) ) {
-	trigger_error( 'Beans Unit Tests require PHP 5.6 or higher.', E_USER_ERROR ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_trigger_error -- Valid use case for our testing suite.
-}
+use function Beans\Framework\Tests\init_test_suite;
 
-define( 'BEANS_TESTS_DIR', __DIR__ );
-define( 'BEANS_THEME_DIR', dirname( dirname( dirname( __DIR__ ) ) ) . DIRECTORY_SEPARATOR );
+require_once dirname( dirname( __FILE__ ) ) . '/functions.php';
+init_test_suite( 'unit' );
+
 define( 'BEANS_TESTS_LIB_DIR', BEANS_THEME_DIR . 'lib' . DIRECTORY_SEPARATOR );
 define( 'BEANS_API_PATH', BEANS_TESTS_LIB_DIR . DIRECTORY_SEPARATOR . 'api' . DIRECTORY_SEPARATOR );
 
@@ -24,15 +23,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 	define( 'ABSPATH', dirname( dirname( dirname( BEANS_THEME_DIR ) ) ) . '/' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound -- Valid use case for our testing suite.
 }
 
-// Time to load Composer's autoloader.
-$beans_autoload_path = BEANS_THEME_DIR . 'vendor/';
-
-if ( ! file_exists( $beans_autoload_path . 'autoload.php' ) ) {
-	trigger_error( 'Whoops, we need Composer before we start running tests.  Please type: `composer install`.  When done, try running `phpunit` again.', E_USER_ERROR ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_trigger_error -- Valid use case for our testing suite.
-}
-require_once $beans_autoload_path . 'autoload.php';
-unset( $beans_autoload_path );
-
-require_once dirname( __DIR__ ) . '/functions.php';
-require_once dirname( __DIR__ ) . '/test-case-trait.php';
 require_once BEANS_TESTS_DIR . '/class-test-case.php';

@@ -10,20 +10,20 @@
 
 namespace Beans\Framework\Tests\Integration;
 
+use function Beans\Framework\Tests\init_test_suite;
+
 if ( ! file_exists( '../../../wp-content' ) ) {
 	trigger_error( 'Unable to run the integration tests, because the wp-content folder does not exist.', E_USER_ERROR ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_trigger_error -- Valid use case for our testing suite.
 }
 
-define( 'BEANS_TESTS_DIR', __DIR__ );
-define( 'BEANS_THEME_DIR', dirname( dirname( dirname( __DIR__ ) ) ) );
+require_once dirname( dirname( __FILE__ ) ) . '/functions.php';
+init_test_suite( 'integration' );
+
 define( 'WP_CONTENT_DIR', dirname( dirname( dirname( getcwd() ) ) ) . '/wp-content/' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound -- Our tests need to define this constant.
 
 if ( ! defined( 'WP_PLUGIN_DIR' ) ) {
 	define( 'WP_PLUGIN_DIR', WP_CONTENT_DIR . 'plugins/' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound -- When this constant is not already defined, we define it here. It's a valid use case for our testing suite.
 }
-
-// Load Patchwork before everything else in order to allow us to redefine WordPress and Beans functions.
-require_once BEANS_THEME_DIR . '/vendor/brain/monkey/inc/patchwork-loader.php';
 
 /**
  * Get the WordPress' tests suite directory.
@@ -73,6 +73,4 @@ tests_add_filter( 'setup_theme', function() {
 require_once $beans_tests_dir . '/includes/bootstrap.php';
 
 // Load the Integration Test Case.
-require_once dirname( __DIR__ ) . '/functions.php';
-require_once dirname( __DIR__ ) . '/test-case-trait.php';
 require_once BEANS_TESTS_DIR . '/class-test-case.php';
