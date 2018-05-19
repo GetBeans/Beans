@@ -46,7 +46,7 @@ class Tests_Beans_Options_Render_Page extends Options_Test_Case {
 		ob_start();
 		( new _Beans_Options() )->render_page( 'themesphppagebeans_settings' );
 		$html = ob_get_clean();
-		$html = $this->format_the_html( $html );
+		$html = $this->prepare_html( $html );
 
 		// Run the tests. Exclude checking for the nonce fields.
 		$expected = <<<EOB
@@ -62,7 +62,7 @@ EOB;
 					<span class="screen-reader-text">Toggle panel: Compiler options</span>
 					<span class="toggle-indicator" aria-hidden="true"></span>
 				</button>
-				<h2 class='hndle'><span>Compiler options</span></h2>
+				<h2 class="hndle"><span>Compiler options</span></h2>
 				<div class="inside"></div>
 			</div>
 		</div>
@@ -95,9 +95,9 @@ EOB;
 		ob_start();
 		( new _Beans_Options() )->render_page( 'themesphppagebeans_settings' );
 		$html = ob_get_clean();
-		$html = $this->format_the_html( $html );
+		$html = $this->prepare_html( $html );
 
-		// Run the tests. Exclude checking for the nonce fields.
+		// Run the tests.
 		$expected = <<<EOB
 <form action="" method="post" class="bs-options" data-page="">
 EOB;
@@ -111,7 +111,7 @@ EOB;
 					<span class="screen-reader-text">Toggle panel: Compiler options</span>
 					<span class="toggle-indicator" aria-hidden="true"></span>
 				</button>
-				<h2 class='hndle'><span>Compiler options</span></h2>
+				<h2 class="hndle"><span>Compiler options</span></h2>
 				<div class="inside"></div>
 			</div>
 		</div>
@@ -121,7 +121,7 @@ EOB;
 					<span class="screen-reader-text">Toggle panel: Images options</span>
 					<span class="toggle-indicator" aria-hidden="true"></span>
 				</button>
-				<h2 class='hndle'><span>Images options</span></h2>
+				<h2 class="hndle"><span>Images options</span></h2>
 				<div class="inside"></div>
 			</div>
 			<div id="mode_options" class="postbox " >
@@ -129,7 +129,7 @@ EOB;
 					<span class="screen-reader-text">Toggle panel: Mode options</span>
 					<span class="toggle-indicator" aria-hidden="true"></span>
 				</button>
-				<h2 class='hndle'><span>Mode options</span></h2>
+				<h2 class="hndle"><span>Mode options</span></h2>
 				<div class="inside"></div>
 			</div>				
 		</div>
@@ -141,5 +141,24 @@ EOB;
 </form>
 EOB;
 		$this->assertContains( $this->format_the_html( $expected ), $html );
+	}
+
+	/**
+	 * Prepares the HTML by:
+	 *      1. formatting it
+	 *      2. Converting each instance of class='hndle' to class="hndle"
+	 *
+	 * @param string $html The given HTML to prepare.
+	 *
+	 * @return string
+	 */
+	protected function prepare_html( $html ) {
+		$html = $this->format_the_html( $html );
+
+		if ( strpos( $html, "class='hndle'>" ) === false ) {
+			return $html;
+		}
+
+		return str_replace( "class='hndle'>", 'class="hndle">', $html );
 	}
 }
