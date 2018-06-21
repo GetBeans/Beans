@@ -26,10 +26,10 @@ class Tests_BeansApplyFilters extends Filters_Test_Case {
 	 * Test beans_apply_filters() should return value after calling the hook with no sub-hook.
 	 */
 	public function test_should_return_value_after_calling_hook_no_subhook() {
-		$filters = array(
+		$filters = [
 			'beans_field_description_markup',
 			'beans_widget_content_categories_output',
-		);
+		];
 
 		foreach ( $filters as $filter ) {
 			$this->assertSame( 'foo', beans_apply_filters( $filter, 'foo' ) );
@@ -43,7 +43,7 @@ class Tests_BeansApplyFilters extends Filters_Test_Case {
 		add_filter( 'beans_test_query_args', 'beans_test_query_args_base' );
 		add_filter( 'beans_test_query_args[_main]', 'beans_test_query_args_main' );
 
-		$this->assertSame( array( 'base', '_main' ), beans_apply_filters( 'beans_test_query_args[_main]', 'foo' ) );
+		$this->assertSame( [ 'base', '_main' ], beans_apply_filters( 'beans_test_query_args[_main]', 'foo' ) );
 	}
 
 	/**
@@ -62,7 +62,7 @@ class Tests_BeansApplyFilters extends Filters_Test_Case {
 		} );
 
 		$this->assertSame(
-			array( 'base', '_main', '_second', '[_main][_second]' ),
+			[ 'base', '_main', '_second', '[_main][_second]' ],
 			beans_apply_filters( 'beans_test_query_args[_main][_second]', 'foo' )
 		);
 	}
@@ -91,7 +91,7 @@ class Tests_BeansApplyFilters extends Filters_Test_Case {
 		} );
 
 		$this->assertSame(
-			array( 'base', '_main', '_second', '[_main][_second]', '_third', '[_main][_second][_third]' ),
+			[ 'base', '_main', '_second', '[_main][_second]', '_third', '[_main][_second][_third]' ],
 			beans_apply_filters( 'beans_test_query_args[_main][_second][_third]', 'foo' )
 		);
 	}

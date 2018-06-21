@@ -65,10 +65,10 @@ class Tests_BeansAddFilter extends Filters_Test_Case {
 			$this->assertSame( $filter['value_to_return'], $object->value_to_return );
 
 			// Check that the filter was registered.
-			$this->assertTrue( has_filter( $filter['hook'], array( $object, 'callback' ) ) !== false );
+			$this->assertTrue( has_filter( $filter['hook'], [ $object, 'callback' ] ) !== false );
 
 			// Clean up.
-			remove_filter( $filter['hook'], array( $object, 'callback' ), $filter['priority'] );
+			remove_filter( $filter['hook'], [ $object, 'callback' ], $filter['priority'] );
 		}
 	}
 }

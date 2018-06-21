@@ -39,7 +39,7 @@ class Tests_BeansAnonymousFilters_Construct extends Test_Case {
 		$this->assertSame( 'foo', $object->value_to_return );
 
 		// Clean up.
-		remove_action( 'do_foo', array( $object, 'callback' ), 20 );
+		remove_action( 'do_foo', [ $object, 'callback' ], 20 );
 	}
 
 	/**
@@ -48,9 +48,9 @@ class Tests_BeansAnonymousFilters_Construct extends Test_Case {
 	public function test_should_register_callback_to_hook() {
 		$object = new _Beans_Anonymous_Filters( 'do_foo', false, 20 );
 
-		$this->assertTrue( has_filter( 'do_foo', array( $object, 'callback' ) ) !== false );
+		$this->assertTrue( has_filter( 'do_foo', [ $object, 'callback' ] ) !== false );
 
 		// Clean up.
-		remove_action( 'do_foo', array( $object, 'callback' ), 20 );
+		remove_action( 'do_foo', [ $object, 'callback' ], 20 );
 	}
 }

@@ -29,7 +29,7 @@ class Tests_BeansAddAnonymousFilter extends WP_UnitTestCase {
 		$this->assertSame( 'foo', $object->value_to_return );
 
 		// Clean up.
-		remove_action( 'do_foo', array( $object, 'callback' ), 20 );
+		remove_action( 'do_foo', [ $object, 'callback' ], 20 );
 	}
 
 	/**
@@ -38,10 +38,10 @@ class Tests_BeansAddAnonymousFilter extends WP_UnitTestCase {
 	public function test_should_register_callback_to_hook() {
 		$object = _beans_add_anonymous_filter( 'do_foo', false, 20 );
 
-		$this->assertTrue( has_filter( 'do_foo', array( $object, 'callback' ) ) !== false );
+		$this->assertTrue( has_filter( 'do_foo', [ $object, 'callback' ] ) !== false );
 
 		// Clean up.
-		remove_action( 'do_foo', array( $object, 'callback' ), 20 );
+		remove_action( 'do_foo', [ $object, 'callback' ], 20 );
 	}
 
 	/**
@@ -54,7 +54,7 @@ class Tests_BeansAddAnonymousFilter extends WP_UnitTestCase {
 			$this->assertSame( $value, apply_filters( 'beans_test_do_foo', 'foo' ) );
 
 			// Clean up.
-			remove_action( 'beans_test_do_foo', array( $object, 'callback' ), 20 );
+			remove_action( 'beans_test_do_foo', [ $object, 'callback' ], 20 );
 		}
 	}
 }

@@ -89,7 +89,7 @@ abstract class Filters_Test_Case extends Test_Case {
 	 * Create a post, load it, and force the "template redirect" to fire.
 	 */
 	protected function go_to_post() {
-		$post_id = self::factory()->post->create( array( 'post_title' => 'Hello Beans' ) );
+		$post_id = self::factory()->post->create( [ 'post_title' => 'Hello Beans' ] );
 		$this->go_to( get_permalink( $post_id ) );
 		do_action( 'template_redirect' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Valid use case as we need to fire this action as part of our tests.
 	}
@@ -102,7 +102,7 @@ abstract class Filters_Test_Case extends Test_Case {
 			return $post_title . '_' . $post_id;
 		} );
 		Monkey\Functions\when( 'beans_test_modify_widget_count' )->justReturn( 20 );
-		Monkey\Functions\when( 'beans_test_query_args_base' )->justReturn( array( 'base' ) );
+		Monkey\Functions\when( 'beans_test_query_args_base' )->justReturn( [ 'base' ] );
 		Monkey\Functions\when( 'beans_test_query_args_main' )->alias( function ( $args ) {
 			$args[] = '_main';
 			return $args;

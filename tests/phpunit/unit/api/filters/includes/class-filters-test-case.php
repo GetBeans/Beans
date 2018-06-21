@@ -43,9 +43,9 @@ abstract class Filters_Test_Case extends Test_Case {
 
 		$this->mock_filter_callbacks();
 
-		$this->load_original_functions( array(
+		$this->load_original_functions( [
 			'api/filters/functions.php',
-		) );
+		] );
 	}
 
 	/**
@@ -73,7 +73,7 @@ abstract class Filters_Test_Case extends Test_Case {
 			return $post_title . '_' . $post_id;
 		} );
 		Monkey\Functions\when( 'beans_test_modify_widget_count' )->justReturn( 20 );
-		Monkey\Functions\when( 'beans_test_query_args_base' )->justReturn( array( 'base' ) );
+		Monkey\Functions\when( 'beans_test_query_args_base' )->justReturn( [ 'base' ] );
 		Monkey\Functions\when( 'beans_test_query_args_main' )->alias( function ( $args ) {
 			$args[] = '_main';
 			return $args;
