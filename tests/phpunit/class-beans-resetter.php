@@ -101,7 +101,7 @@ class Beans_Resetter {
 		] );
 
 		// Reset the other static properties.
-		foreach ( array( 'field_types_loaded', 'field_assets_hook_loaded' ) as $property_name ) {
+		foreach ( [ 'field_types_loaded', 'field_assets_hook_loaded' ] as $property_name ) {
 			$property = $this->get_reflective_property( $property_name, '_Beans_Fields' );
 			$property->setValue( new _Beans_Fields(), [] );
 		}

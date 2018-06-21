@@ -64,23 +64,23 @@ abstract class Test_Case extends TestCase {
 	 */
 	protected function setup_common_wp_stubs() {
 		// Common escaping functions.
-		Monkey\Functions\stubs( array(
+		Monkey\Functions\stubs( [
 			'esc_attr',
 			'esc_html',
 			'esc_textarea',
 			'esc_url',
 			'wp_kses_post',
-		) );
+		] );
 
 		// Common internationalization functions.
-		Monkey\Functions\stubs( array(
+		Monkey\Functions\stubs( [
 			'__',
 			'esc_html__',
 			'esc_html_x',
 			'esc_attr_x',
-		) );
+		] );
 
-		foreach ( array( 'esc_attr_e', 'esc_html_e', '_e' ) as $wp_function ) {
+		foreach ( [ 'esc_attr_e', 'esc_html_e', '_e' ] as $wp_function ) {
 			Monkey\Functions\when( $wp_function )->echoArg();
 		}
 	}
