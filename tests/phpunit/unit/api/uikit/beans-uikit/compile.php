@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests the compile() method of _Beans_Uikit.
+ * Tests for the compile() method of _Beans_Uikit.
  *
  * @package Beans\Framework\Tests\Unit\API\UIkit
  *

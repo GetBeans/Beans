@@ -9,11 +9,11 @@
 
 namespace Beans\Framework\Tests\Integration\API\Term_Meta;
 
-use Beans\Framework\Tests\Integration\API\Term_Meta\Includes\Beans_Term_Meta_Test_Case;
+use Beans\Framework\Tests\Integration\API\Term_Meta\Includes\Term_Meta_Test_Case;
 use _Beans_Term_Meta;
 
 require_once BEANS_THEME_DIR . '/lib/api/term-meta/class-beans-term-meta.php';
-require_once dirname( __DIR__ ) . '/includes/class-beans-term-meta-test-case.php';
+require_once dirname( __DIR__ ) . '/includes/class-term-meta-test-case.php';
 
 /**
  * Class Tests_BeanTermMeta_RenderNonce
@@ -22,7 +22,7 @@ require_once dirname( __DIR__ ) . '/includes/class-beans-term-meta-test-case.php
  * @group   api
  * @group   api-term-meta
  */
-class Tests_BeansTermMeta_RenderNonce extends Beans_Term_Meta_Test_Case {
+class Tests_BeansTermMeta_RenderNonce extends Term_Meta_Test_Case {
 
 	/**
 	 * Tests _Beans_Term_Meta::render_nonce() should render nonce HTML.

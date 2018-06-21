@@ -9,8 +9,10 @@
 
 namespace Beans\Framework\Tests\Unit\API\Post_Meta;
 
-use Beans\Framework\Tests\Unit\Test_Case;
+use Beans\Framework\Tests\Unit\API\Post_Meta\Includes\Post_Meta_Test_Case;
 use Brain\Monkey;
+
+require_once dirname( __FILE__ ) . '/includes/class-post-meta-test-case.php';
 
 /**
  * Class Tests_BeansPostMetaPageTemplateReload
@@ -19,7 +21,7 @@ use Brain\Monkey;
  * @group   api
  * @group   api-post-meta
  */
-class Tests_BeansPostMetaPageTemplateReload extends Test_Case {
+class Tests_BeansPostMetaPageTemplateReload extends Post_Meta_Test_Case {
 
 	/**
 	 * Test _beans_post_meta_page_template_reload() should do nothing when not editing a post object.

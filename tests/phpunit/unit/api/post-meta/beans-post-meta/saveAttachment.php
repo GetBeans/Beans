@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests the save_attachment() method of _Beans_Post_Meta.
+ * Tests for the save_attachment() method of _Beans_Post_Meta.
  *
  * @package Beans\Framework\Tests\Unit\API\Post_Meta
  *
@@ -9,11 +9,11 @@
 
 namespace Beans\Framework\Tests\Unit\API\Post_Meta;
 
-use Beans\Framework\Tests\Unit\API\Post_Meta\Includes\Beans_Post_Meta_Test_Case;
+use Beans\Framework\Tests\Unit\API\Post_Meta\Includes\Post_Meta_Test_Case;
 use _Beans_Post_Meta;
 use Brain\Monkey;
 
-require_once dirname( __DIR__ ) . '/includes/class-beans-post-meta-test-case.php';
+require_once dirname( __DIR__ ) . '/includes/class-post-meta-test-case.php';
 
 /**
  * Class Tests_BeansPostMeta_SaveAttachment
@@ -22,7 +22,7 @@ require_once dirname( __DIR__ ) . '/includes/class-beans-post-meta-test-case.php
  * @group   api
  * @group   api-post-meta
  */
-class Tests_BeansPostMeta_SaveAttachment extends Beans_Post_Meta_Test_Case {
+class Tests_BeansPostMeta_SaveAttachment extends Post_Meta_Test_Case {
 
 	/**
 	 * Test _Beans_Post_Meta::save_attachment() should not update post meta when _beans_doing_autosave() is true.

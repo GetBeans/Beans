@@ -9,11 +9,11 @@
 
 namespace Beans\Framework\Tests\Unit\API\Term_Meta;
 
-use Beans\Framework\Tests\Unit\API\Term_Meta\Includes\Beans_Term_Meta_Test_Case;
+use Beans\Framework\Tests\Unit\API\Term_Meta\Includes\Term_Meta_Test_Case;
 use _Beans_Term_Meta;
 use Brain\Monkey;
 
-require_once dirname( __DIR__ ) . '/includes/class-beans-term-meta-test-case.php';
+require_once dirname( __DIR__ ) . '/includes/class-term-meta-test-case.php';
 
 /**
  * Class Tests_BeansTermMeta_RenderFields
@@ -22,7 +22,7 @@ require_once dirname( __DIR__ ) . '/includes/class-beans-term-meta-test-case.php
  * @group   api
  * @group   api-term-meta
  */
-class Tests_BeansTermMeta_RenderFields extends Beans_Term_Meta_Test_Case {
+class Tests_BeansTermMeta_RenderFields extends Term_Meta_Test_Case {
 
 	/**
 	 * Tests _beans_term_meta::render_fields() should render fields HTML.

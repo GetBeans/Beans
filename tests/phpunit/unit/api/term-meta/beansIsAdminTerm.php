@@ -9,10 +9,10 @@
 
 namespace Beans\Framework\Tests\Unit\API\Term_Meta;
 
-use Beans\Framework\Tests\Unit\API\Term_Meta\Includes\Beans_Term_Meta_Test_Case;
+use Beans\Framework\Tests\Unit\API\Term_Meta\Includes\Term_Meta_Test_Case;
 use Brain\Monkey;
 
-require_once dirname( __FILE__ ) . '/includes/class-beans-term-meta-test-case.php';
+require_once dirname( __FILE__ ) . '/includes/class-term-meta-test-case.php';
 
 /**
  * Class Tests_BeansIsAdminTerm
@@ -21,7 +21,7 @@ require_once dirname( __FILE__ ) . '/includes/class-beans-term-meta-test-case.ph
  * @group   api
  * @group   api-term-meta
  */
-class Tests_BeansIsAdminTerm extends Beans_Term_Meta_Test_Case {
+class Tests_BeansIsAdminTerm extends Term_Meta_Test_Case {
 
 	/**
 	 * Test _beans_is_admin_term() should return true when taxonomies are boolean true.

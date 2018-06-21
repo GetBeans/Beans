@@ -9,10 +9,10 @@
 
 namespace Beans\Framework\Tests\Integration\API\Post_Meta;
 
-use Beans\Framework\Tests\Integration\API\Post_Meta\Includes\Beans_Post_Meta_Test_Case;
+use Beans\Framework\Tests\Integration\API\Post_Meta\Includes\Post_Meta_Test_Case;
 
 require_once BEANS_API_PATH . 'post-meta/functions-admin.php';
-require_once dirname( __FILE__ ) . '/includes/class-beans-post-meta-test-case.php';
+require_once dirname( __FILE__ ) . '/includes/class-post-meta-test-case.php';
 
 /**
  * Class Tests_BeansIsGetPostMetaConditions
@@ -21,7 +21,7 @@ require_once dirname( __FILE__ ) . '/includes/class-beans-post-meta-test-case.ph
  * @group   api
  * @group   api-post-meta
  */
-class Tests_BeansIsPostMetaConditions extends Beans_Post_Meta_Test_Case {
+class Tests_BeansIsPostMetaConditions extends Post_Meta_Test_Case {
 
 	/**
 	 * Test _beans_is_post_meta_conditions() should return true when $conditions are a boolean true.

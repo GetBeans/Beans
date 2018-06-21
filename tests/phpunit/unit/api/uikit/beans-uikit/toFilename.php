@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests the to_filename() method of _Beans_Uikit.
+ * Tests for the to_filename() method of _Beans_Uikit.
  *
  * @package Beans\Framework\Tests\Unit\API\UIkit
  *

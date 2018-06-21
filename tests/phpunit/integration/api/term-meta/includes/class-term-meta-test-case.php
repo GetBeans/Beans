@@ -12,11 +12,11 @@ namespace Beans\Framework\Tests\Integration\API\Term_Meta\Includes;
 use Beans\Framework\Tests\Integration\Test_Case;
 
 /**
- * Abstract Class Beans_Term_Meta_Test_Case
+ * Abstract Class Term_Meta_Test_Case
  *
  * @package Beans\Framework\Tests\Integration\API\Term_Meta\Includes
  */
-abstract class Beans_Term_Meta_Test_Case extends Test_Case {
+abstract class Term_Meta_Test_Case extends Test_Case {
 
 	/**
 	 * An array of test data.

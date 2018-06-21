@@ -9,7 +9,9 @@
 
 namespace Beans\Framework\Tests\Integration\API\Filters;
 
-use WP_UnitTestCase;
+use Beans\Framework\Tests\Integration\API\Filters\Includes\Filters_Test_Case;
+
+require_once __DIR__ . '/includes/class-filters-test-case.php';
 
 /**
  * Class Tests_BeansAddAnonymousFilter
@@ -18,7 +20,7 @@ use WP_UnitTestCase;
  * @group   api
  * @group   api-filters
  */
-class Tests_BeansAddAnonymousFilter extends WP_UnitTestCase {
+class Tests_BeansAddAnonymousFilter extends Filters_Test_Case {
 
 	/**
 	 * Test _beans_add_anonymous_filter() should store callback.

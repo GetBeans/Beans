@@ -9,10 +9,10 @@
 
 namespace Beans\Framework\Tests\Unit\API\Term_Meta;
 
-use Beans\Framework\Tests\Unit\API\Term_Meta\Includes\Beans_Term_Meta_Test_Case;
+use Beans\Framework\Tests\Unit\API\Term_Meta\Includes\Term_Meta_Test_Case;
 use Brain\Monkey;
 
-require_once dirname( __FILE__ ) . '/includes/class-beans-term-meta-test-case.php';
+require_once dirname( __FILE__ ) . '/includes/class-term-meta-test-case.php';
 
 /**
  * Class Tests_BeansRegisterTermMeta
@@ -21,7 +21,7 @@ require_once dirname( __FILE__ ) . '/includes/class-beans-term-meta-test-case.ph
  * @group   api
  * @group   api-term-meta
  */
-class Tests_BeansRegisterTermMeta extends Beans_Term_Meta_Test_Case {
+class Tests_BeansRegisterTermMeta extends Term_Meta_Test_Case {
 
 	/**
 	 * Test beans_register_term_meta() should return false when current taxonomy is not concerned.

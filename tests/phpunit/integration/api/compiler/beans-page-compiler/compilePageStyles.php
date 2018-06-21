@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests the compile_page_styles() method of _Beans_Page_Compiler.
+ * Tests for the compile_page_styles() method of _Beans_Page_Compiler.
  *
  * @package Beans\Framework\Tests\Integration\API\Compiler
  *

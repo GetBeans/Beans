@@ -9,8 +9,8 @@
 
 namespace Beans\Framework\Tests\Integration\API\Actions;
 
+use Beans\Framework\Tests\Integration\API\Actions\Includes\Actions_Test_Case;
 use Brain\Monkey\Functions;
-use WP_UnitTestCase;
 
 /**
  * Class Tests_BeansAddAnonymousAction
@@ -19,7 +19,7 @@ use WP_UnitTestCase;
  * @group   api
  * @group   api-actions
  */
-class Tests_BeansAddAnonymousAction extends WP_UnitTestCase {
+class Tests_BeansAddAnonymousAction extends Actions_Test_Case {
 
 	/**
 	 * Test _beans_add_anonymous_action() should register callback to the given hook.

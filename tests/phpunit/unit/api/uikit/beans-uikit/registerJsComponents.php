@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests the register_js_components() method of _Beans_Uikit.
+ * Tests for the register_js_components() method of _Beans_Uikit.
  *
  * @package Beans\Framework\Tests\Unit\API\UIkit
  *

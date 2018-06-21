@@ -9,8 +9,6 @@
 
 namespace Beans\Framework\Tests\Integration\API\Actions\Includes;
 
-use WP_UnitTestCase;
-
 /**
  * Abstract Class Replace_Actions_Test_Case
  *

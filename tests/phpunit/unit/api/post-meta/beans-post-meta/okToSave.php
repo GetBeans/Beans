@@ -9,11 +9,11 @@
 
 namespace Beans\Framework\Tests\Unit\API\Post_Meta;
 
-use Beans\Framework\Tests\Unit\API\Post_Meta\Includes\Beans_Post_Meta_Test_Case;
+use Beans\Framework\Tests\Unit\API\Post_Meta\Includes\Post_Meta_Test_Case;
 use _Beans_Post_Meta;
 use Brain\Monkey;
 
-require_once dirname( __DIR__ ) . '/includes/class-beans-post-meta-test-case.php';
+require_once dirname( __DIR__ ) . '/includes/class-post-meta-test-case.php';
 
 /**
  * Class Tests_BeansPostMeta_OkToSave
@@ -22,7 +22,7 @@ require_once dirname( __DIR__ ) . '/includes/class-beans-post-meta-test-case.php
  * @group   api
  * @group   api-post-meta
  */
-class Tests_BeansPostMeta_OkToSave extends Beans_Post_Meta_Test_Case {
+class Tests_BeansPostMeta_OkToSave extends Post_Meta_Test_Case {
 
 	/**
 	 * Test _Beans_Post_Meta::ok_to_save() should return false when nonce check fails.

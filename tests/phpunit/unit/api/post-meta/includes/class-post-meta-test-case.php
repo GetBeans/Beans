@@ -12,11 +12,11 @@ namespace Beans\Framework\Tests\Unit\API\Post_Meta\Includes;
 use Beans\Framework\Tests\Unit\Test_Case;
 
 /**
- * Abstract Class Beans_Post_Meta_Test_Case
+ * Abstract Class Post_Meta_Test_Case
  *
  * @package Beans\Framework\Tests\Unit\API\Post_Meta\Includes
  */
-abstract class Beans_Post_Meta_Test_Case extends Test_Case {
+abstract class Post_Meta_Test_Case extends Test_Case {
 
 	/**
 	 * Prepares the test environment before each test.

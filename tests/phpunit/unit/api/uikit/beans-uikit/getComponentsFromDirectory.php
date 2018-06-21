@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests the get_components_from_directory() method of _Beans_Uikit.
+ * Tests for the get_components_from_directory() method of _Beans_Uikit.
  *
  * @package Beans\Framework\Tests\Unit\API\UIkit
  *

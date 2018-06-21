@@ -9,7 +9,9 @@
 
 namespace Beans\Framework\Tests\Integration\API\Post_Meta;
 
-use WP_UnitTestCase;
+use Beans\Framework\Tests\Integration\API\Term_Meta\Includes\Term_Meta_Test_Case;
+
+require_once dirname( __FILE__ ) . '/includes/class-term-meta-test-case.php';
 
 /**
  * Class Tests_BeansGetPostMeta
@@ -18,7 +20,7 @@ use WP_UnitTestCase;
  * @group   api
  * @group   api-term-meta
  */
-class Tests_BeansGetTermMeta extends WP_UnitTestCase {
+class Tests_BeansGetTermMeta extends Term_Meta_Test_Case {
 
 	/**
 	 * Test beans_get_term_meta() should return false when no default given and term meta does not exist.

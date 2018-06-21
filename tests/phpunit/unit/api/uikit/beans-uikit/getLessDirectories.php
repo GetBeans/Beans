@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests the get_less_directories() method of _Beans_Uikit.
+ * Tests for the get_less_directories() method of _Beans_Uikit.
  *
  * @package Beans\Framework\Tests\Unit\API\UIkit
  *

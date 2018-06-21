@@ -9,14 +9,14 @@
 
 namespace Beans\Framework\Tests\Integration\API\Actions\Includes;
 
-use WP_UnitTestCase;
+use Beans\Framework\Tests\Integration\Test_Case;
 
 /**
  * Abstract Class Actions_Test_Case
  *
  * @package Beans\Framework\Tests\Unit\API\Actions\Includes
  */
-abstract class Actions_Test_Case extends WP_UnitTestCase {
+abstract class Actions_Test_Case extends Test_Case {
 
 	/**
 	 * When true, reset $_beans_registered_actions at tear down.

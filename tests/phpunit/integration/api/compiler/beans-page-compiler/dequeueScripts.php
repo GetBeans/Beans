@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests the dequeue_scripts() method of _Beans_Page_Compiler.
+ * Tests for the dequeue_scripts() method of _Beans_Page_Compiler.
  *
  * @package Beans\Framework\Tests\Integration\API\Compiler
  *

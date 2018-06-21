@@ -9,11 +9,11 @@
 
 namespace Beans\Framework\Tests\Integration\API\Post_Meta;
 
-use Beans\Framework\Tests\Integration\API\Post_Meta\Includes\Beans_Post_Meta_Test_Case;
+use Beans\Framework\Tests\Integration\API\Post_Meta\Includes\Post_Meta_Test_Case;
 use _Beans_Post_Meta;
 
 require_once BEANS_THEME_DIR . '/lib/api/post-meta/class-beans-post-meta.php';
-require_once dirname( __DIR__ ) . '/includes/class-beans-post-meta-test-case.php';
+require_once dirname( __DIR__ ) . '/includes/class-post-meta-test-case.php';
 
 /**
  * Class Tests_BeansPostMeta_RenderMetaboxContent.
@@ -22,7 +22,7 @@ require_once dirname( __DIR__ ) . '/includes/class-beans-post-meta-test-case.php
  * @group   api
  * @group   api-post-meta
  */
-class Tests_BeansPostMeta_RenderMetaboxContent extends Beans_Post_Meta_Test_Case {
+class Tests_BeansPostMeta_RenderMetaboxContent extends Post_Meta_Test_Case {
 
 	/**
 	 * Test _Beans_Post_Meta::render_metabox_content() should output post meta fields markup when called.
