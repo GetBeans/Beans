@@ -36,11 +36,11 @@ class Tests_BeansFieldLabel extends Fields_Test_Case {
 	 * Test beans_field_label() should not render the field's label when none is given.
 	 */
 	public function test_should_not_render_field_label_when_none_given() {
-		$field = $this->merge_field_with_default( array(
+		$field = $this->merge_field_with_default( [
 			'id'      => 'beans_text_test',
 			'type'    => 'text',
 			'default' => '',
-		) );
+		] );
 
 		$this->assertNull( beans_field_label( $field ) );
 
@@ -52,12 +52,12 @@ class Tests_BeansFieldLabel extends Fields_Test_Case {
 	 * Test beans_field_label() should render the field's label.
 	 */
 	public function test_should_render_field_label() {
-		$field = $this->merge_field_with_default( array(
+		$field = $this->merge_field_with_default( [
 			'id'      => 'beans_text_test',
 			'type'    => 'text',
 			'label'   => 'Testing the text field.',
 			'default' => '',
-		) );
+		] );
 
 		// Run the function and grab the HTML out of the buffer.
 		ob_start();
@@ -75,29 +75,29 @@ EOB;
 	 * Test beans_field_label() should not render the radio field's group label.
 	 */
 	public function test_should_not_render_radio_group_label() {
-		$field = $this->merge_field_with_default( array(
+		$field = $this->merge_field_with_default( [
 			'id'          => 'beans_layout',
 			'label'       => 'Layout',
 			'description' => 'The layout settings.',
 			'type'        => 'radio',
 			'default'     => 'default_fallback',
-			'options'     => array(
+			'options'     => [
 				'default_fallback' => 'Use Default Layout',
-				'c'                => array(
+				'c'                => [
 					'src'                => 'http://example.com/images/layouts/c.png',
 					'alt'                => 'Content Only Layout',
 					'screen_reader_text' => 'Option for the Content Only Layout',
-				),
-				'c_sp'             => array(
+				],
+				'c_sp'             => [
 					'src'                => 'http://example.com/images/layouts/c_sp.png',
 					'screen_reader_text' => 'Option for the Content + Sidebar Primary Layout',
-				),
-				'sp_c'             => array(
+				],
+				'sp_c'             => [
 					'src' => 'http://example.com/images/layouts/sp_c.png',
 					'alt' => 'Sidebar Primary + Content Layout',
-				),
-			),
-		) );
+				],
+			],
+		] );
 
 		// Run the function and grab the HTML out of the buffer.
 		ob_start();
@@ -112,38 +112,38 @@ EOB;
 	 * Test beans_field_label() should not render the group field's label.
 	 */
 	public function test_should_not_render_group_label() {
-		$field = array(
+		$field = [
 			'id'          => 'beans_group_test',
 			'label'       => 'Group of fields',
 			'description' => 'This is a group of fields.',
 			'type'        => 'group',
-			'fields'      => array(
-				array(
+			'fields'      => [
+				[
 					'id'      => 'beans_group_activation_test',
 					'label'   => 'Activate',
 					'type'    => 'activation',
 					'default' => false,
-				),
-				array(
+				],
+				[
 					'id'         => 'beans_group_select_test',
 					'label'      => 'Select',
 					'type'       => 'select',
 					'default'    => 'aggressive',
-					'attributes' => array( 'style' => 'margin: -3px 0 0 -8px;' ),
-					'options'    => array(
+					'attributes' => [ 'style' => 'margin: -3px 0 0 -8px;' ],
+					'options'    => [
 						'aggressive' => 'Aggressive',
 						'standard'   => 'Standard',
-					),
-				),
-				array(
+					],
+				],
+				[
 					'id'             => 'beans_group_checkbox_test',
 					'label'          => false,
 					'checkbox_label' => 'Enable the checkbox test',
 					'type'           => 'checkbox',
 					'default'        => false,
-				),
-			),
-		);
+				],
+			],
+		];
 
 		// Run the function and grab the HTML out of the buffer.
 		ob_start();
@@ -157,12 +157,12 @@ EOB;
 	 * Test beans_field_label() should not render the activation field's label.
 	 */
 	public function test_should_not_render_activation_field_label() {
-		$field = array(
+		$field = [
 			'id'      => 'beans_group_activation_test',
 			'label'   => 'Activate',
 			'type'    => 'activation',
 			'default' => false,
-		);
+		];
 
 		// Run the function and grab the HTML out of the buffer.
 		ob_start();

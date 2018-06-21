@@ -45,12 +45,12 @@ class Tests_BeansFieldImage extends Fields_Test_Case {
 			->once()
 			->andReturn( 'This is the image alt value.' );
 
-		$field = $this->merge_field_with_default( array(
+		$field = $this->merge_field_with_default( [
 			'id'    => 'beans_image_test',
 			'type'  => 'image',
 			'label' => 'Image Test',
 			'value' => 1, // attachment ID.
-		), false );
+		], false );
 
 		// Run the function and grab the HTML out of the buffer.
 		ob_start();
@@ -101,13 +101,13 @@ EOB;
 			->times( 2 )
 			->andReturn( 'This is the image alt value.' );
 
-		$field = $this->merge_field_with_default( array(
+		$field = $this->merge_field_with_default( [
 			'id'       => 'beans_image_test',
 			'type'     => 'image',
 			'label'    => 'Image Test',
-			'value'    => array( 1, 2 ), // attachment IDs.
+			'value'    => [ 1, 2 ], // attachment IDs.
 			'multiple' => true,
-		), false );
+		], false );
 
 		// Run the function and grab the HTML out of the buffer.
 		ob_start();
@@ -163,12 +163,12 @@ EOB;
 			->once()
 			->andReturn( '' );
 
-		$field = $this->merge_field_with_default( array(
+		$field = $this->merge_field_with_default( [
 			'id'    => 'beans_image_test',
 			'type'  => 'image',
 			'label' => 'Image Test',
 			'value' => 1, // attachment ID.
-		), false );
+		], false );
 
 		// Run the function and grab the HTML out of the buffer.
 		ob_start();

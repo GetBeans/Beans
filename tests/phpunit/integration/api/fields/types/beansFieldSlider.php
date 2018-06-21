@@ -36,7 +36,7 @@ class Tests_BeansFieldSlider extends Fields_Test_Case {
 	 * Test beans_field_slider() should render the slider field.
 	 */
 	public function test_should_render_slider_field() {
-		$field = $this->merge_field_with_default( array(
+		$field = $this->merge_field_with_default( [
 			'id'          => 'beans_test_slider',
 			'label'       => 'Test Slider',
 			'description' => 'Testing the slider',
@@ -45,7 +45,7 @@ class Tests_BeansFieldSlider extends Fields_Test_Case {
 			'min'         => 0,
 			'max'         => 100,
 			'interval'    => 1,
-		) );
+		] );
 
 		// Run the function and grab the HTML out of the buffer.
 		ob_start();
@@ -66,7 +66,7 @@ EOB;
 	 * Test beans_field_slider() should render the slider field with unit when given.
 	 */
 	public function test_should_render_slider_field_with_unit_when_given() {
-		$field = $this->merge_field_with_default( array(
+		$field = $this->merge_field_with_default( [
 			'id'          => 'beans_test_slider',
 			'label'       => 'Test Slider',
 			'description' => 'Testing the slider',
@@ -76,7 +76,7 @@ EOB;
 			'max'         => 100,
 			'interval'    => 5,
 			'unit'        => 'Number of beans',
-		) );
+		] );
 
 		// Run the function and grab the HTML out of the buffer.
 		ob_start();
@@ -98,7 +98,7 @@ EOB;
 	 * Test beans_field_slider() should render the slider with the current value.
 	 */
 	public function test_should_render_slider_with_current_value() {
-		$field          = $this->merge_field_with_default( array(
+		$field          = $this->merge_field_with_default( [
 			'id'          => 'beans_test_slider',
 			'label'       => 'Test Slider',
 			'description' => 'Testing the slider',
@@ -107,7 +107,7 @@ EOB;
 			'min'         => 10,
 			'max'         => 100,
 			'interval'    => 5,
-		) );
+		] );
 		$field['value'] = 15;
 
 		// Run the function and grab the HTML out of the buffer.
@@ -129,7 +129,7 @@ EOB;
 	 * Test beans_field_slider() should render the slider field with attributes when given.
 	 */
 	public function test_should_render_slider_field_with_attributes_when_given() {
-		$field = $this->merge_field_with_default( array(
+		$field = $this->merge_field_with_default( [
 			'id'          => 'beans_test_slider',
 			'label'       => 'Test Slider',
 			'description' => 'Testing the slider',
@@ -139,10 +139,10 @@ EOB;
 			'max'         => 20,
 			'interval'    => 1,
 			'unit'        => 'Number of beans',
-			'attributes'  => array(
+			'attributes'  => [
 				'data-test' => 'foo',
-			),
-		) );
+			],
+		] );
 
 		// Run the function and grab the HTML out of the buffer.
 		ob_start();

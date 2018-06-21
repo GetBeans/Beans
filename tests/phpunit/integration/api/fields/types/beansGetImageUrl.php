@@ -54,10 +54,10 @@ class Tests_BeansGetImageUrl extends Fields_Test_Case {
 	 */
 	public function test_should_return_image_url() {
 		$post_id  = self::factory()->post->create();
-		$image_id = self::factory()->attachment->create_object( 'image.jpeg', $post_id, array(
+		$image_id = self::factory()->attachment->create_object( 'image.jpeg', $post_id, [
 			'post_mime_type' => 'image/jpeg',
 			'post_type'      => 'attachment',
-		) );
+		] );
 
 		// Run the test.
 		$this->assertSame( 'http://example.org/wp-content/uploads/image.jpeg', _beans_get_image_url( $image_id ) );

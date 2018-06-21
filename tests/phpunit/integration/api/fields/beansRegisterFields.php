@@ -27,8 +27,8 @@ class Tests_BeansRegisterFields extends Fields_Test_Case {
 	 * Test beans_register_fields() should return false when there are no fields.
 	 */
 	public function test_should_return_false_when_no_fields() {
-		$this->assertFalse( beans_register_fields( array(), '', '' ) );
-		$this->assertFalse( beans_register_fields( array(), 'post_meta', 'tm-beans' ) );
+		$this->assertFalse( beans_register_fields( [], '', '' ) );
+		$this->assertFalse( beans_register_fields( [], 'post_meta', 'tm-beans' ) );
 	}
 
 	/**

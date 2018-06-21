@@ -36,11 +36,11 @@ class Tests_BeansFieldDescription extends Fields_Test_Case {
 	 * Test beans_field_description() should not render the field's description when none is given.
 	 */
 	public function test_should_not_render_field_description_when_none_given() {
-		$field = $this->merge_field_with_default( array(
+		$field = $this->merge_field_with_default( [
 			'id'      => 'beans_text_test',
 			'type'    => 'text',
 			'default' => '',
-		) );
+		] );
 
 		$this->assertNull( beans_field_description( $field ) );
 
@@ -52,12 +52,12 @@ class Tests_BeansFieldDescription extends Fields_Test_Case {
 	 * Test beans_field_description() should render the field's description.
 	 */
 	public function test_should_render_field_description() {
-		$field = $this->merge_field_with_default( array(
+		$field = $this->merge_field_with_default( [
 			'id'          => 'beans_text_test',
 			'type'        => 'text',
 			'description' => 'Testing the text field.',
 			'default'     => '',
-		) );
+		] );
 
 		// Run the function and grab the HTML out of the buffer.
 		ob_start();
@@ -76,12 +76,12 @@ EOB;
 	 * Test beans_field_description() should render the field's extended description.
 	 */
 	public function test_should_render_extended_description() {
-		$field = $this->merge_field_with_default( array(
+		$field = $this->merge_field_with_default( [
 			'id'          => 'beans_text_test',
 			'type'        => 'text',
 			'description' => 'Testing the text field.<!--more-->This is the extended part of the description.',
 			'default'     => '',
-		) );
+		] );
 
 		// Run the function and grab the HTML out of the buffer.
 		ob_start();
