@@ -34,10 +34,10 @@ class Tests_BeansOptions_Register extends Options_Test_Case {
 			$instance->register( $options['section'], $options['args'] );
 
 			// Check that the callback is registered to the hook.
-			$this->assertEquals( 10, has_action( 'admin_enqueue_scripts', array( $instance, 'enqueue_assets' ) ) );
+			$this->assertEquals( 10, has_action( 'admin_enqueue_scripts', [ $instance, 'enqueue_assets' ] ) );
 
 			// Clean up.
-			remove_action( 'admin_enqueue_scripts', array( $instance, 'enqueue_assets' ) );
+			remove_action( 'admin_enqueue_scripts', [ $instance, 'enqueue_assets' ] );
 		}
 	}
 
@@ -58,15 +58,15 @@ class Tests_BeansOptions_Register extends Options_Test_Case {
 			$this->assertArrayHasKey( $option['args']['context'], $wp_meta_boxes['themesphppagebeans_settings'] );
 			$this->assertArrayHasKey( 'default', $wp_meta_boxes['themesphppagebeans_settings'][ $option['args']['context'] ] );
 			$this->assertArrayHasKey( $option['section'], $wp_meta_boxes['themesphppagebeans_settings'][ $option['args']['context'] ]['default'] );
-			$this->assertSame( array(
+			$this->assertSame( [
 				'id'       => $option['section'],
 				'title'    => $option['args']['title'],
-				'callback' => array( $instance, 'render_metabox' ),
+				'callback' => [ $instance, 'render_metabox' ],
 				'args'     => null,
-			), $wp_meta_boxes['themesphppagebeans_settings'][ $option['args']['context'] ]['default'][ $option['section'] ] );
+			], $wp_meta_boxes['themesphppagebeans_settings'][ $option['args']['context'] ]['default'][ $option['section'] ] );
 
 			// Clean up.
-			remove_action( 'admin_enqueue_scripts', array( $instance, 'enqueue_assets' ) );
+			remove_action( 'admin_enqueue_scripts', [ $instance, 'enqueue_assets' ] );
 		}
 	}
 }

@@ -31,18 +31,18 @@ class Tests_BeansOptions_Register extends Options_Test_Case {
 		$property = $this->get_reflective_property( 'args', '_Beans_Options' );
 
 		$instance = new _Beans_Options();
-		$instance->register( 'foo', array() );
-		$this->assertSame( array(
+		$instance->register( 'foo', [] );
+		$this->assertSame( [
 			'title'   => 'Undefined',
 			'context' => 'normal',
-		), $property->getValue( $instance ) );
+		], $property->getValue( $instance ) );
 
 		$instance = new _Beans_Options();
-		$instance->register( 'beans_test', array( 'title' => 'Beans Tests' ) );
-		$this->assertSame( array(
+		$instance->register( 'beans_test', [ 'title' => 'Beans Tests' ] );
+		$this->assertSame( [
 			'title'   => 'Beans Tests',
 			'context' => 'normal',
-		), $property->getValue( $instance ) );
+		], $property->getValue( $instance ) );
 	}
 
 	/**
@@ -50,9 +50,9 @@ class Tests_BeansOptions_Register extends Options_Test_Case {
 	 */
 	public function test_should_register_callback_to_admin_enqueue_scripts_hook() {
 		$instance = new _Beans_Options();
-		$instance->register( 'beans_test', array( 'title' => 'Beans Tests' ) );
+		$instance->register( 'beans_test', [ 'title' => 'Beans Tests' ] );
 
-		$this->assertEquals( 10, has_action( 'admin_enqueue_scripts', array( $instance, 'enqueue_assets' ) ) );
+		$this->assertEquals( 10, has_action( 'admin_enqueue_scripts', [ $instance, 'enqueue_assets' ] ) );
 	}
 
 	/**
@@ -73,15 +73,15 @@ class Tests_BeansOptions_Register extends Options_Test_Case {
 			$this->assertArrayHasKey( $option['args']['context'], $wp_meta_boxes['beans_settings'] );
 			$this->assertArrayHasKey( 'default', $wp_meta_boxes['beans_settings'][ $option['args']['context'] ] );
 			$this->assertArrayHasKey( $option['section'], $wp_meta_boxes['beans_settings'][ $option['args']['context'] ]['default'] );
-			$this->assertSame( array(
+			$this->assertSame( [
 				'id'       => $option['section'],
 				'title'    => $option['args']['title'],
-				'callback' => array( $instance, 'render_metabox' ),
+				'callback' => [ $instance, 'render_metabox' ],
 				'args'     => null,
-			), $wp_meta_boxes['beans_settings'][ $option['args']['context'] ]['default'][ $option['section'] ] );
+			], $wp_meta_boxes['beans_settings'][ $option['args']['context'] ]['default'][ $option['section'] ] );
 
 			// Clean up.
-			remove_action( 'admin_enqueue_scripts', array( $instance, 'enqueue_assets' ) );
+			remove_action( 'admin_enqueue_scripts', [ $instance, 'enqueue_assets' ] );
 		}
 	}
 }

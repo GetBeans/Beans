@@ -28,7 +28,7 @@ class Tests_BeansOptions_RenderPage extends Options_Test_Case {
 	 * Test _Beans_Options::render_page() should return null when the page does not have a metabox.
 	 */
 	public function test_should_return_null_when_page_does_not_have_metabox() {
-		Monkey\Functions\expect( 'beans_get' )->with( 'beans_tests', array() )->once()->andReturn( null );
+		Monkey\Functions\expect( 'beans_get' )->with( 'beans_tests', [] )->once()->andReturn( null );
 
 		$this->assertNull( ( new _Beans_Options() )->render_page( 'beans_tests' ) );
 	}
@@ -38,13 +38,13 @@ class Tests_BeansOptions_RenderPage extends Options_Test_Case {
 	 */
 	public function test_should_render_form_when_context_normal() {
 		Monkey\Functions\expect( 'beans_get' )
-			->with( 'beans_tests', array() )
+			->with( 'beans_tests', [] )
 			->once()
-			->andReturn( array( 'column' => '' ) )
+			->andReturn( [ 'column' => '' ] )
 			->andAlsoExpectIt()
-			->with( 'column', array( 'column' => '' ), array() )
+			->with( 'column', [ 'column' => '' ], [] )
 			->once()
-			->andReturn( array() )
+			->andReturn( [] )
 			->andAlsoExpectIt()
 			->with( 'page' )
 			->once()
@@ -77,11 +77,11 @@ EOB;
 	 */
 	public function test_should_render_form_when_column_context() {
 		Monkey\Functions\expect( 'beans_get' )
-			->with( 'beans_tests', array() )
+			->with( 'beans_tests', [] )
 			->once()
-			->andReturn( array( 'column' => true ) )
+			->andReturn( [ 'column' => true ] )
 			->andAlsoExpectIt()
-			->with( 'column', array( 'column' => true ), array() )
+			->with( 'column', [ 'column' => true ], [] )
 			->once()
 			->andReturn( true )
 			->andAlsoExpectIt()

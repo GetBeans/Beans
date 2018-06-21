@@ -41,12 +41,12 @@ abstract class Options_Test_Case extends Test_Case {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->load_original_functions( array(
+		$this->load_original_functions( [
 			'api/utilities/functions.php',
 			'api/options/class-beans-options.php',
 			'api/options/functions.php',
 			'api/fields/functions.php',
-		) );
+		] );
 
 		$this->setup_function_mocks();
 		$this->setup_common_wp_stubs();
@@ -57,7 +57,7 @@ abstract class Options_Test_Case extends Test_Case {
 	 */
 	protected function tearDown() {
 		global $wp_meta_boxes;
-		$wp_meta_boxes = array(); // phpcs:ignore WordPress.Variables.GlobalVariables.OverrideProhibited -- Resetting global here for tests.
+		$wp_meta_boxes = []; // phpcs:ignore WordPress.Variables.GlobalVariables.OverrideProhibited -- Resetting global here for tests.
 
 		parent::tearDown();
 	}
@@ -74,20 +74,20 @@ abstract class Options_Test_Case extends Test_Case {
 			}
 
 			// phpcs:ignore WordPress.Variables.GlobalVariables.OverrideProhibited -- Mocking global here for tests.
-			$wp_meta_boxes = array(
-				$screen => array(
-					$context => array(
-						$priority => array(
-							$id => array(
+			$wp_meta_boxes = [
+				$screen => [
+					$context => [
+						$priority => [
+							$id => [
 								'id'       => $id,
 								'title'    => $title,
 								'callback' => $callback,
 								'args'     => $callback_args,
-							),
-						),
-					),
-				),
-			);
+							],
+						],
+					],
+				],
+			];
 		} );
 	}
 }

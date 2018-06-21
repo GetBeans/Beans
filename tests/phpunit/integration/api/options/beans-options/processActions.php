@@ -35,8 +35,8 @@ class Tests_BeansOptions_ProcessActions extends Options_Test_Case {
 		$this->assertArrayNotHasKey( 'beans_save_options', $_POST );
 		$this->assertArrayNotHasKey( 'beans_reset_options', $_POST );
 		$this->assertNull( $instance->process_actions() );
-		$this->assertFalse( has_action( 'admin_notices', array( $instance, 'render_save_notice' ) ) );
-		$this->assertFalse( has_action( 'admin_notices', array( $instance, 'render_reset_notice' ) ) );
+		$this->assertFalse( has_action( 'admin_notices', [ $instance, 'render_save_notice' ] ) );
+		$this->assertFalse( has_action( 'admin_notices', [ $instance, 'render_reset_notice' ] ) );
 	}
 
 	/**
@@ -44,11 +44,11 @@ class Tests_BeansOptions_ProcessActions extends Options_Test_Case {
 	 */
 	public function test_should_not_save_options_when_nonce_fails() {
 		$_POST['beans_save_options'] = 1;
-		$test_data                   = array(
+		$test_data                   = [
 			'beans_compile_all_styles'  => 1,
 			'beans_compile_all_scripts' => 1,
 			'beans_dev_mode'            => 1,
-		);
+		];
 		$_POST['beans_fields']       = $test_data;
 		$success_property            = $this->get_reflective_property( 'success', '_Beans_Options' );
 		$instance                    = new _Beans_Options();
@@ -82,11 +82,11 @@ class Tests_BeansOptions_ProcessActions extends Options_Test_Case {
 		$nonce                        = wp_create_nonce( 'beans_options_nonce' );
 		$_POST['beans_options_nonce'] = $nonce;
 		$_POST['beans_save_options']  = 1;
-		$test_data                    = array(
+		$test_data                    = [
 			'beans_compile_all_styles'  => 1,
 			'beans_compile_all_scripts' => 1,
 			'beans_dev_mode'            => 1,
-		);
+		];
 		$_POST['beans_fields']        = $test_data;
 
 		$success_property = $this->get_reflective_property( 'success', '_Beans_Options' );
@@ -98,11 +98,11 @@ class Tests_BeansOptions_ProcessActions extends Options_Test_Case {
 
 		// Check the save.
 		$this->assertArrayHasKey( 'beans_save_options', $_POST );
-		$this->assertEquals( 10, has_action( 'admin_notices', array( $instance, 'render_save_notice' ) ) );
+		$this->assertEquals( 10, has_action( 'admin_notices', [ $instance, 'render_save_notice' ] ) );
 
 		// Check the reset.
 		$this->assertArrayNotHasKey( 'beans_reset_options', $_POST );
-		$this->assertFalse( has_action( 'admin_notices', array( $instance, 'render_reset_notice' ) ) );
+		$this->assertFalse( has_action( 'admin_notices', [ $instance, 'render_reset_notice' ] ) );
 
 		foreach ( $test_data as $option => $value ) {
 			// Check that the value was saved.
@@ -118,11 +118,11 @@ class Tests_BeansOptions_ProcessActions extends Options_Test_Case {
 	 */
 	public function test_should_not_reset_options_when_nonce_fails() {
 		$_POST['beans_reset_options'] = 1;
-		$test_data                    = array(
+		$test_data                    = [
 			'beans_compile_all_styles'  => 1,
 			'beans_compile_all_scripts' => 1,
 			'beans_dev_mode'            => 1,
-		);
+		];
 
 		// Add the options.
 		foreach ( $test_data as $option => $value ) {
@@ -165,11 +165,11 @@ class Tests_BeansOptions_ProcessActions extends Options_Test_Case {
 		$nonce                        = wp_create_nonce( 'beans_options_nonce' );
 		$_POST['beans_options_nonce'] = $nonce;
 		$_POST['beans_reset_options'] = 1;
-		$test_data                    = array(
+		$test_data                    = [
 			'beans_compile_all_styles'  => 1,
 			'beans_compile_all_scripts' => 1,
 			'beans_dev_mode'            => 1,
-		);
+		];
 		$_POST['beans_fields']        = $test_data;
 
 		// Add the options.
@@ -186,11 +186,11 @@ class Tests_BeansOptions_ProcessActions extends Options_Test_Case {
 
 		// Check the reset.
 		$this->assertArrayHasKey( 'beans_options_nonce', $_POST );
-		$this->assertEquals( 10, has_action( 'admin_notices', array( $instance, 'render_reset_notice' ) ) );
+		$this->assertEquals( 10, has_action( 'admin_notices', [ $instance, 'render_reset_notice' ] ) );
 
 		// Check the save.
 		$this->assertArrayNotHasKey( 'beans_save_options', $_POST );
-		$this->assertFalse( has_action( 'admin_notices', array( $instance, 'render_save_notice' ) ) );
+		$this->assertFalse( has_action( 'admin_notices', [ $instance, 'render_save_notice' ] ) );
 
 		// Check that the option was deleted.
 		foreach ( $test_data as $option ) {

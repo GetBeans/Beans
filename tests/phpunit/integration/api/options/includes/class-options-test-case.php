@@ -54,7 +54,7 @@ abstract class Options_Test_Case extends Test_Case {
 		$this->clean_up_global_scope();
 
 		global $wp_meta_boxes;
-		$wp_meta_boxes = array(); // phpcs:ignore WordPress.Variables.GlobalVariables.OverrideProhibited -- Resetting global here for tests.
+		$wp_meta_boxes = []; // phpcs:ignore WordPress.Variables.GlobalVariables.OverrideProhibited -- Resetting global here for tests.
 
 		parent::tearDown();
 	}
