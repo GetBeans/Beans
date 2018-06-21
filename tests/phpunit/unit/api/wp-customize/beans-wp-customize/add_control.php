@@ -35,7 +35,7 @@ class Tests_BeansWPCustomize_AddControl extends WP_Customize_Test_Case {
 			->with( 'wp_customize', $test_data['section'] )
 			->once()
 			->ordered()
-			->andReturn( array() );
+			->andReturn( [] );
 
 		Monkey\Functions\expect( 'beans_add_attribute' )
 			->with( 'beans_field_label', 'class', 'customize-control-title' )

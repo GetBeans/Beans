@@ -50,8 +50,8 @@ class Tests_BeansRegisterWPCustomizeOptions extends WP_Customize_Test_Case {
 
 		Monkey\Functions\expect( 'beans_register_fields' )->never();
 
-		$this->assertFalse( beans_register_wp_customize_options( array(), '', array() ) );
-		$this->assertFalse( beans_register_wp_customize_options( array(), 'post_meta', array( 1, 2, 3 ) ) );
+		$this->assertFalse( beans_register_wp_customize_options( [], '', [] ) );
+		$this->assertFalse( beans_register_wp_customize_options( [], 'post_meta', [ 1, 2, 3 ] ) );
 	}
 
 	/**
@@ -70,18 +70,18 @@ class Tests_BeansRegisterWPCustomizeOptions extends WP_Customize_Test_Case {
 			->andReturn( true );
 
 		Monkey\Functions\expect( 'beans_register_fields' )
-			->with( array(), 'wp_customize', '' )
+			->with( [], 'wp_customize', '' )
 			->once()
 			->ordered()
 			->andReturn( false )
 			->andAlsoExpectIt()
-			->with( array(), 'wp_customize', 'post_meta' )
+			->with( [], 'wp_customize', 'post_meta' )
 			->once()
 			->ordered()
 			->andReturn( false );
 
-		$this->assertFalse( beans_register_wp_customize_options( array(), '', array() ) );
-		$this->assertFalse( beans_register_wp_customize_options( array(), 'post_meta', array( 1, 2, 3 ) ) );
+		$this->assertFalse( beans_register_wp_customize_options( [], '', [] ) );
+		$this->assertFalse( beans_register_wp_customize_options( [], 'post_meta', [ 1, 2, 3 ] ) );
 	}
 
 	/**
@@ -105,13 +105,13 @@ class Tests_BeansRegisterWPCustomizeOptions extends WP_Customize_Test_Case {
 			->with( 'wp_customize', $test_data['section'] )
 			->once()
 			->ordered()
-			->andReturn( array() );
+			->andReturn( [] );
 
 		Monkey\Functions\expect( 'beans_add_attribute' )
 			->with( 'beans_field_label', 'class', 'customize-control-title' )
 			->once()
 			->ordered()
-			->andReturn( array() );
+			->andReturn( [] );
 
 		Monkey\Functions\expect( 'beans_register_fields' )
 			->with( $test_data['fields'], 'wp_customize', $test_data['section'] )

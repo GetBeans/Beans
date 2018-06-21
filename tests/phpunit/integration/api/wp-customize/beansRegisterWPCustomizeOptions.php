@@ -29,8 +29,8 @@ class Tests_BeansRegisterWPCustomizeOptions extends WP_Customize_Test_Case {
 	public function test_should_return_false_when_no_customizer() {
 		$test_data = static::$test_data['single_fields'];
 
-		$this->assertFalse( beans_register_wp_customize_options( array(), '', array() ) );
-		$this->assertFalse( beans_register_wp_customize_options( array(), 'post_meta', array( 1, 2, 3 ) ) );
+		$this->assertFalse( beans_register_wp_customize_options( [], '', [] ) );
+		$this->assertFalse( beans_register_wp_customize_options( [], 'post_meta', [ 1, 2, 3 ] ) );
 		$this->assertFalse( beans_register_wp_customize_options( $test_data['fields'], $test_data['section'], $test_data['args'] ) );
 	}
 
@@ -40,8 +40,8 @@ class Tests_BeansRegisterWPCustomizeOptions extends WP_Customize_Test_Case {
 	public function test_should_return_false_when_no_options() {
 		$this->wp_customize->start_previewing_theme();
 
-		$this->assertFalse( beans_register_wp_customize_options( array(), '', array() ) );
-		$this->assertFalse( beans_register_wp_customize_options( array(), 'post_meta', array( 1, 2, 3 ) ) );
+		$this->assertFalse( beans_register_wp_customize_options( [], '', [] ) );
+		$this->assertFalse( beans_register_wp_customize_options( [], 'post_meta', [ 1, 2, 3 ] ) );
 	}
 
 	/**
