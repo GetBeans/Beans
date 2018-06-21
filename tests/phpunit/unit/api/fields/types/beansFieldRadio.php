@@ -36,19 +36,19 @@ class Tests_BeansFieldRadio extends Fields_Test_Case {
 	 * Test beans_field_radio() should render the radio field with image options.
 	 */
 	public function test_should_render_radio_field_with_image_options() {
-		$field = $this->merge_field_with_default( array(
+		$field = $this->merge_field_with_default( [
 			'id'          => 'beans_layout',
 			'label'       => 'Layout',
 			'description' => 'The layout settings.',
 			'type'        => 'radio',
 			'default'     => 'default_fallback',
-			'options'     => array(
+			'options'     => [
 				'default_fallback' => 'Use Default Layout',
 				'c'                => 'http://example.com/images/layouts/c.png',
 				'c_sp'             => 'http://example.com/images/layouts/c_sp.png',
 				'sp_c'             => 'http://example.com/images/layouts/sp_c.png',
-			),
-		) );
+			],
+		] );
 
 		// Run the function and grab the HTML out of the buffer.
 		ob_start();
@@ -86,29 +86,29 @@ EOB;
 	 * Test beans_field_radio() should render accessible images when accessibility parameters are given.
 	 */
 	public function test_should_render_accessible_images_when_given() {
-		$field = $this->merge_field_with_default( array(
+		$field = $this->merge_field_with_default( [
 			'id'          => 'beans_layout',
 			'label'       => 'Layout',
 			'description' => 'The layout settings.',
 			'type'        => 'radio',
 			'default'     => 'default_fallback',
-			'options'     => array(
+			'options'     => [
 				'default_fallback' => 'Use Default Layout',
-				'c'                => array(
+				'c'                => [
 					'src'                => 'http://example.com/images/layouts/c.png',
 					'alt'                => 'Content Only Layout',
 					'screen_reader_text' => 'Option for the Content Only Layout',
-				),
-				'c_sp'             => array(
+				],
+				'c_sp'             => [
 					'src'                => 'http://example.com/images/layouts/c_sp.png',
 					'screen_reader_text' => 'Option for the Content + Sidebar Primary Layout',
-				),
-				'sp_c'             => array(
+				],
+				'sp_c'             => [
 					'src' => 'http://example.com/images/layouts/sp_c.png',
 					'alt' => 'Sidebar Primary + Content Layout',
-				),
-			),
-		) );
+				],
+			],
+		] );
 
 		// Run the function and grab the HTML out of the buffer.
 		ob_start();

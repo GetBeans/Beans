@@ -37,18 +37,18 @@ class Tests_BeansFieldImage extends Fields_Test_Case {
 	 */
 	public function test_should_render_single_image_field() {
 		$post_id  = self::factory()->post->create();
-		$image_id = self::factory()->attachment->create_object( 'image.png', $post_id, array(
+		$image_id = self::factory()->attachment->create_object( 'image.png', $post_id, [
 			'post_mime_type' => 'image/jpeg',
 			'post_type'      => 'attachment',
-		) );
+		] );
 		update_post_meta( $image_id, '_wp_attachment_image_alt', 'This is the alt value.', true );
 
-		$field = $this->merge_field_with_default( array(
+		$field = $this->merge_field_with_default( [
 			'id'    => 'beans_image_test',
 			'type'  => 'image',
 			'label' => 'Image Test',
 			'value' => $image_id,
-		), false );
+		], false );
 
 		// Run the function and grab the HTML out of the buffer.
 		ob_start();
@@ -87,26 +87,26 @@ EOB;
 	 * Test beans_field_image() should render multiple images field.
 	 */
 	public function test_should_render_multiple_images_field() {
-		$images   = array();
+		$images   = [];
 		$post_id  = self::factory()->post->create();
-		$images[] = self::factory()->attachment->create_object( 'image-1.png', $post_id, array(
+		$images[] = self::factory()->attachment->create_object( 'image-1.png', $post_id, [
 			'post_mime_type' => 'image/jpeg',
 			'post_type'      => 'attachment',
-		) );
+		] );
 		update_post_meta( $images[0], '_wp_attachment_image_alt', 'Image 1 alt.', true );
-		$images[] = self::factory()->attachment->create_object( 'image-2.png', $post_id, array(
+		$images[] = self::factory()->attachment->create_object( 'image-2.png', $post_id, [
 			'post_mime_type' => 'image/jpeg',
 			'post_type'      => 'attachment',
-		) );
+		] );
 		update_post_meta( $images[1], '_wp_attachment_image_alt', 'Image 2 alt.', true );
 
-		$field = $this->merge_field_with_default( array(
+		$field = $this->merge_field_with_default( [
 			'id'       => 'beans_image_test',
 			'type'     => 'image',
 			'label'    => 'Image Test',
 			'value'    => $images,
 			'multiple' => true,
-		), false );
+		], false );
 
 		// Run the function and grab the HTML out of the buffer.
 		ob_start();
@@ -158,17 +158,17 @@ EOB;
 	 */
 	public function test_should_render_single_image_field_with_default_alt_when_none_exists() {
 		$post_id  = self::factory()->post->create();
-		$image_id = self::factory()->attachment->create_object( 'image.png', $post_id, array(
+		$image_id = self::factory()->attachment->create_object( 'image.png', $post_id, [
 			'post_mime_type' => 'image/jpeg',
 			'post_type'      => 'attachment',
-		) );
+		] );
 
-		$field = $this->merge_field_with_default( array(
+		$field = $this->merge_field_with_default( [
 			'id'    => 'beans_image_test',
 			'type'  => 'image',
 			'label' => 'Image Test',
 			'value' => $image_id,
-		), false );
+		], false );
 
 		// Run the function and grab the HTML out of the buffer.
 		ob_start();

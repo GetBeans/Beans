@@ -47,10 +47,10 @@ class Tests_BeansGetImageAlt extends Fields_Test_Case {
 	 */
 	public function test_should_return_default_alt_when_image_alt_not_defined() {
 		$post_id  = self::factory()->post->create();
-		$image_id = self::factory()->attachment->create_object( 'image.png', $post_id, array(
+		$image_id = self::factory()->attachment->create_object( 'image.png', $post_id, [
 			'post_mime_type' => 'image/png',
 			'post_type'      => 'attachment',
-		) );
+		] );
 
 		// Run the test.
 		$this->assertSame( 'Sorry, no description was given for this image.', _beans_get_image_alt( $image_id ) );
@@ -61,10 +61,10 @@ class Tests_BeansGetImageAlt extends Fields_Test_Case {
 	 */
 	public function test_should_return_image_alt() {
 		$post_id  = self::factory()->post->create();
-		$image_id = self::factory()->attachment->create_object( 'image.jpeg', $post_id, array(
+		$image_id = self::factory()->attachment->create_object( 'image.jpeg', $post_id, [
 			'post_mime_type' => 'image/jpeg',
 			'post_type'      => 'attachment',
-		) );
+		] );
 		$alt      = 'This is the alt value.';
 		update_post_meta( $image_id, '_wp_attachment_image_alt', $alt, true );
 

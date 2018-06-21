@@ -63,11 +63,11 @@ class Tests_BeansGetImageUrl extends Fields_Test_Case {
 			->with( 1, 'thumbnail' )
 			->once()
 			->andReturn(
-				array(
+				[
 					'http://example.org/wp-content/uploads/image.jpeg',
 					300,
 					300,
-				)
+				]
 			);
 
 		// Run the test.

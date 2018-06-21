@@ -36,11 +36,11 @@ class Tests_BeansFieldActivation extends Fields_Test_Case {
 	 * Test beans_field_activation() should render the activation field.
 	 */
 	public function test_should_render_activation_field() {
-		$field = $this->merge_field_with_default( array(
+		$field = $this->merge_field_with_default( [
 			'id'      => 'beans_compile_all_scripts',
 			'type'    => 'activation',
 			'default' => false,
-		) );
+		] );
 
 		// Run the function and grab the HTML out of the buffer.
 		ob_start();
@@ -60,14 +60,14 @@ EOB;
 	 * Test beans_field_activation() should render the activation field with attributes when given.
 	 */
 	public function test_should_render_activation_field_with_attributes_when_given() {
-		$field = $this->merge_field_with_default( array(
+		$field = $this->merge_field_with_default( [
 			'id'         => 'beans_compile_all_scripts',
 			'type'       => 'activation',
 			'default'    => false,
-			'attributes' => array(
+			'attributes' => [
 				'data-test' => 'foo',
-			),
-		) );
+			],
+		] );
 
 		// Run the function and grab the HTML out of the buffer.
 		ob_start();

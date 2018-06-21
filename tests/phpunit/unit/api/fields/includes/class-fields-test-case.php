@@ -43,12 +43,12 @@ abstract class Fields_Test_Case extends Test_Case {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->load_original_functions( array(
+		$this->load_original_functions( [
 			'api/actions/functions.php',
 			'api/fields/functions.php',
 			'api/fields/class-beans-fields.php',
 			'api/utilities/functions.php',
-		) );
+		] );
 
 		$this->setup_function_mocks();
 		$this->setup_common_wp_stubs();
@@ -65,14 +65,14 @@ abstract class Fields_Test_Case extends Test_Case {
 	 * @return array
 	 */
 	protected function merge_field_with_default( array $field, $set_value = true ) {
-		$merged_field         = array_merge( array(
+		$merged_field         = array_merge( [
 			'label'       => false,
 			'description' => false,
 			'default'     => false,
 			'context'     => 'beans_tests',
-			'attributes'  => array(),
+			'attributes'  => [],
 			'db_group'    => false,
-		), $field );
+		], $field );
 		$merged_field['name'] = 'beans_fields[' . $field['id'] . ']';
 
 		if ( $set_value ) {

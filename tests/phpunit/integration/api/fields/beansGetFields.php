@@ -28,11 +28,11 @@ class Tests_BeansGetFields extends Fields_Test_Case {
 	public function test_should_return_registered_fields() {
 
 		foreach ( static::$test_data as $test_data ) {
-			$data_set = array(
-				'beans_tests' => array(
+			$data_set = [
+				'beans_tests' => [
 					$test_data['section'] => $test_data['fields'],
-				),
-			);
+				],
+			];
 
 			// Register the fields first.
 			$registered = $this->get_reflective_property( 'registered', '_Beans_Fields' );

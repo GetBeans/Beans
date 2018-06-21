@@ -50,13 +50,13 @@ class Tests_BeansField extends Fields_Test_Case {
 		// Set up the test.
 		require_once BEANS_THEME_DIR . '/lib/api/fields/types/checkbox.php';
 		beans_add_smart_action( 'beans_field_checkbox', 'beans_field_checkbox' );
-		$field = $this->merge_field_with_default( array(
+		$field = $this->merge_field_with_default( [
 			'id'             => 'beans_compile_all_styles',
 			'label'          => false,
 			'checkbox_label' => 'Compile all WordPress styles',
 			'type'           => 'checkbox',
 			'default'        => false,
-		) );
+		] );
 
 		// Run the function and grab the HTML out of the buffer.
 		ob_start();
@@ -90,17 +90,17 @@ EOB;
 		// Set up the test.
 		require_once BEANS_THEME_DIR . '/lib/api/fields/types/radio.php';
 		beans_add_smart_action( 'beans_field_radio', 'beans_field_radio' );
-		$field = $this->merge_field_with_default( array(
+		$field = $this->merge_field_with_default( [
 			'id'          => 'beans_radio_test',
 			'label'       => 'Having fun?',
 			'description' => 'Radio buttons',
 			'type'        => 'radio',
 			'default'     => 'no',
-			'options'     => array(
+			'options'     => [
 				'no'  => 'No',
 				'yes' => 'Yes',
-			),
-		) );
+			],
+		] );
 
 		// Run the function and grab the HTML out of the buffer.
 		ob_start();
@@ -145,32 +145,32 @@ EOB;
 		beans_add_smart_action( 'beans_field_select', 'beans_field_select' );
 
 		// Prepare the group of fields.
-		$group = $this->merge_field_with_default( array(
+		$group = $this->merge_field_with_default( [
 			'id'          => 'beans_group_test',
 			'label'       => 'Group of fields',
 			'description' => 'This is a group of fields.',
 			'type'        => 'group',
 			'context'     => 'beans_group_tests',
-			'fields'      => array(
-				array(
+			'fields'      => [
+				[
 					'id'      => 'beans_group_activation_test',
 					'label'   => 'Activate Foo',
 					'type'    => 'activation',
 					'default' => false,
-				),
-				array(
+				],
+				[
 					'id'         => 'beans_group_select_test',
 					'label'      => 'Select Foo',
 					'type'       => 'select',
 					'default'    => 'aggressive',
-					'attributes' => array( 'style' => 'margin: -3px 0 0 -8px;' ),
-					'options'    => array(
+					'attributes' => [ 'style' => 'margin: -3px 0 0 -8px;' ],
+					'options'    => [
 						'aggressive' => 'Aggressive',
 						'standard'   => 'Standard',
-					),
-				),
-			),
-		) );
+					],
+				],
+			],
+		] );
 
 		// Run the function and grab the HTML out of the buffer.
 		ob_start();
