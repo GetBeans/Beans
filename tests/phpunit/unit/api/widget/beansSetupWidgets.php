@@ -36,7 +36,7 @@ class Tests_BeansSetupWidgets extends Beans_Widget_Test_Case {
 	public function test_should_ignore_widget_when_widget_not_registered() {
 		global $wp_registered_widgets;
 
-		$wp_registered_widgets = array(); // phpcs:ignore WordPress.Variables.GlobalVariables.OverrideProhibited -- Valid use case: ensures no widgets are registered for this test.
+		$wp_registered_widgets = []; // phpcs:ignore WordPress.Variables.GlobalVariables.OverrideProhibited -- Valid use case: ensures no widgets are registered for this test.
 
 		$this->assertEmpty( _beans_setup_widgets( '<!--widget-text-2-->widget output<!--widget-end-->' ) );
 	}
@@ -51,15 +51,15 @@ class Tests_BeansSetupWidgets extends Beans_Widget_Test_Case {
 		$widget->id_base     = 'text';
 		$widget->option_name = 'text';
 
-		$sidebars = array(
-			'text-2' => array(
+		$sidebars = [
+			'text-2' => [
 				'id'        => 'text-2',
 				'name'      => 'Test Widget',
 				'classname' => 'widget_text',
-				'callback'  => array( $widget, 'display_callback' ),
-				'params'    => array( 0 => array( 'number' => 2 ) ),
-			),
-		);
+				'callback'  => [ $widget, 'display_callback' ],
+				'params'    => [ 0 => [ 'number' => 2 ] ],
+			],
+		];
 
 		// Prime the $wp_registered widgets and $_beans_widget_area globals.
 		$wp_registered_widgets                            = $sidebars; // phpcs:ignore WordPress.Variables.GlobalVariables.OverrideProhibited -- Valid use case: setting up sidebars outside of WP.
@@ -76,7 +76,7 @@ class Tests_BeansSetupWidgets extends Beans_Widget_Test_Case {
 		Monkey\Functions\expect( 'get_option' )
 			->once()
 			->with( 'text' )
-			->andReturn( array( 2 => array( 'widget_options' ) ) );
+			->andReturn( [ 2 => [ 'widget_options' ] ] );
 
 		$this->assertSame(
 			$this->get_expected_widget_setup_data(),
@@ -90,9 +90,9 @@ class Tests_BeansSetupWidgets extends Beans_Widget_Test_Case {
 	 * @return array Expected widget setup data
 	 */
 	protected function get_expected_widget_setup_data() {
-		return array(
-			'text-2' => array(
-				'options'       => array( 0 => 'widget_options' ),
+		return [
+			'text-2' => [
+				'options'       => [ 0 => 'widget_options' ],
 				'type'          => 'text',
 				'title'         => '',
 				'count'         => 1,
@@ -104,7 +104,7 @@ class Tests_BeansSetupWidgets extends Beans_Widget_Test_Case {
 				'show_title'    => true,
 				'badge'         => false,
 				'badge_content' => 'Hello',
-			),
-		);
+			],
+		];
 	}
 }

@@ -39,13 +39,13 @@ class Tests_BeansWidgetAreaShortcodes extends Beans_Widget_Test_Case {
 	public function test_should_return_content_with_shortcodes_filtered_out_when_content_given_as_string() {
 		global $_beans_widget_area;
 
-		$_beans_widget_area = array( 'Widget Area Data' );
+		$_beans_widget_area = [ 'Widget Area Data' ];
 
 		Monkey\Functions\expect( 'build_query' )->never();
 
 		Monkey\Functions\expect( 'beans_array_shortcodes' )
 			->once()
-			->with( 'Content with a {key}.', array( 'Widget Area Data' ) )
+			->with( 'Content with a {key}.', [ 'Widget Area Data' ] )
 			->andReturn( 'Content with a shortcode value.' );
 
 		// Run test for content as a string.
@@ -61,22 +61,22 @@ class Tests_BeansWidgetAreaShortcodes extends Beans_Widget_Test_Case {
 	public function test_should_return_content_with_shortcodes_filtered_out_when_content_given_as_array() {
 		global $_beans_widget_area;
 
-		$_beans_widget_area = array( 'Widget Area Data' );
+		$_beans_widget_area = [ 'Widget Area Data' ];
 
 		Monkey\Functions\expect( 'build_query' )
 			->once()
-			->with( array( 'someURLparemetername' => 'URL content with a {key}.' ) )
+			->with( [ 'someURLparemetername' => 'URL content with a {key}.' ] )
 			->andReturn( 'someURLparemetername=URL content with a {key}.' );
 
 		Monkey\Functions\expect( 'beans_array_shortcodes' )
 			->once()
-			->with( 'someURLparemetername=URL content with a {key}.', array( 'Widget Area Data' ) )
+			->with( 'someURLparemetername=URL content with a {key}.', [ 'Widget Area Data' ] )
 			->andReturn( 'someURLparemetername=URL content with a shortcode value.' );
 
 		// Run test for content as a string.
 		$this->assertEquals(
 			'someURLparemetername=URL content with a shortcode value.',
-			beans_widget_area_shortcodes( array( 'someURLparemetername' => 'URL content with a {key}.' ) )
+			beans_widget_area_shortcodes( [ 'someURLparemetername' => 'URL content with a {key}.' ] )
 		);
 	}
 }

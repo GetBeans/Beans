@@ -65,13 +65,13 @@ class Tests_BeansGetWidget extends Beans_Widget_Test_Case {
 	 * Return an array of expected sidebar data.
 	 */
 	protected function get_widget_test_data() {
-		return array(
+		return [
 			'name'        => 'Test Widget',
 			'id'          => 'text-2',
 			'description' => 'Some description',
 			'class'       => 'widgettext',
 			'title'       => 'Test Widget Title',
 			'text'        => 'Arbitrary text content.',
-		);
+		];
 	}
 }

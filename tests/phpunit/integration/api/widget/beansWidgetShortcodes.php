@@ -40,7 +40,7 @@ class Tests_BeansWidgetShortcodes extends Beans_Widget_Test_Case {
 		$this->assertEquals(
 			'someURLparemetername=URL content with a shortcode value.',
 			beans_widget_shortcodes(
-				array( 'someURLparemetername' => 'URL content with a {key}.' )
+				[ 'someURLparemetername' => 'URL content with a {key}.' ]
 			)
 		);
 	}

@@ -41,9 +41,9 @@ class Tests_BeansSetupWidgets extends Beans_Widget_Test_Case {
 	 * @return array Expected widget setup data
 	 */
 	protected function get_expected_widget_setup_data() {
-		return array(
-			'text-2' => array(
-				'options'       => array(),
+		return [
+			'text-2' => [
+				'options'       => [],
 				'type'          => 'text',
 				'title'         => '',
 				'count'         => 1,
@@ -55,7 +55,7 @@ class Tests_BeansSetupWidgets extends Beans_Widget_Test_Case {
 				'show_title'    => true,
 				'badge'         => false,
 				'badge_content' => 'Hello',
-			),
-		);
+			],
+		];
 	}
 }

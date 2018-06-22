@@ -29,7 +29,7 @@ class Tests_BeansWidgetAreaSubfilters extends Beans_Widget_Test_Case {
 	public function test_should_return_widget_area_subfilters_as_string() {
 		global $_beans_widget_area;
 
-		$_beans_widget_area = array( 'id' => 'test_sidebar' );
+		$_beans_widget_area = [ 'id' => 'test_sidebar' ];
 
 		$this->assertEquals( '[_test_sidebar]', _beans_widget_area_subfilters() );
 	}

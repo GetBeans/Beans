@@ -29,11 +29,11 @@ class Tests_BeansHaveWidgets extends Beans_Widget_Test_Case {
 	public function test_should_return_false_when_no_widgets_are_available() {
 		global $_beans_widget_area;
 
-		$_beans_widget_area = array();
+		$_beans_widget_area = [];
 
 		Monkey\Functions\expect( 'beans_get' )
 			->once()
-			->with( 'widgets', array() )
+			->with( 'widgets', [] )
 			->andReturn( false );
 
 		$this->assertFalse( beans_have_widgets() );
@@ -45,13 +45,13 @@ class Tests_BeansHaveWidgets extends Beans_Widget_Test_Case {
 	public function test_should_return_true_when_widgets_available() {
 		global $_beans_widget_area;
 
-		$_beans_widget_area = array(
-			'widgets'        => array(
-				'text-1' => array( 'id' => 'text-1' ),
-				'text-2' => array( 'id' => 'text-2' ),
-			),
+		$_beans_widget_area = [
+			'widgets'        => [
+				'text-1' => [ 'id' => 'text-1' ],
+				'text-2' => [ 'id' => 'text-2' ],
+			],
 			'current_widget' => 1,
-		);
+		];
 
 		Monkey\Functions\expect( 'beans_get' )
 			->once()
@@ -67,13 +67,13 @@ class Tests_BeansHaveWidgets extends Beans_Widget_Test_Case {
 	public function test_should_call_beans_reset_widget_and_return_false_when_end_of_widget_loop() {
 		global $_beans_widget_area;
 
-		$_beans_widget_area = array(
-			'widgets'        => array(
-				'text-1' => array( 'id' => 'text-1' ),
-				'text-2' => array( 'id' => 'text-2' ),
-			),
+		$_beans_widget_area = [
+			'widgets'        => [
+				'text-1' => [ 'id' => 'text-1' ],
+				'text-2' => [ 'id' => 'text-2' ],
+			],
 			'current_widget' => 2,
-		);
+		];
 
 		Monkey\Functions\expect( 'beans_get' )
 			->once()

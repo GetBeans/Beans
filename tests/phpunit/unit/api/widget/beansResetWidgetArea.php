@@ -30,7 +30,7 @@ class Tests_BeansResetWidgetArea extends Beans_Widget_Test_Case {
 		global $_beans_widget_area;
 
 		// We'll set the data via the function's view of the global since that's how it's ordinarily set in the API.
-		$test_widget_area   = array( array( 'text-2' => array( 'id' => 'text-2' ) ) );
+		$test_widget_area   = [ [ 'text-2' => [ 'id' => 'text-2' ] ] ];
 		$_beans_widget_area = $test_widget_area;
 
 		// Confirm that it's stored in the GLOBALS superglobal.

@@ -65,7 +65,7 @@ class Tests_BeansGetWidgetArea extends Beans_Widget_Test_Case {
 	 * Return an array of expected sidebar data.
 	 */
 	protected function get_sidebar_test_data() {
-		return array(
+		return [
 			'name'           => 'Test Sidebar',
 			'id'             => 'test_sidebar',
 			'description'    => '',
@@ -76,6 +76,6 @@ class Tests_BeansGetWidgetArea extends Beans_Widget_Test_Case {
 			'after_title'    => '<!--title-end-->',
 			'widgets_count'  => 0,
 			'current_widget' => 0,
-		);
+		];
 	}
 }

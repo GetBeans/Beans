@@ -32,7 +32,7 @@ class Tests_BeansSetupWidgetArea extends Beans_Widget_Test_Case {
 		$this->add_test_widget_to_test_sidebar();
 
 		// Clear test widget area data global before running test.
-		$_beans_widget_area = array();
+		$_beans_widget_area = [];
 
 		// Run test.
 		$this->assertTrue( _beans_setup_widget_area( 'test_sidebar' ) );

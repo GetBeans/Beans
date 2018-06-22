@@ -28,7 +28,7 @@ class Tests_BeansSetupWidget extends Beans_Widget_Test_Case {
 	public function test_should_return_false_when_widget_id_not_found() {
 		global $_beans_widget_area;
 
-		beans_register_widget_area( array( 'id' => 'test_sidebar' ) );
+		beans_register_widget_area( [ 'id' => 'test_sidebar' ] );
 		$this->add_test_widget_to_test_sidebar();
 
 		_beans_setup_widget_area( 'test_sidebar' );
@@ -44,7 +44,7 @@ class Tests_BeansSetupWidget extends Beans_Widget_Test_Case {
 	public function test_should_advance_widget_pointer_prepare_widget_data_and_return_true_when_widget_id_is_found() {
 		global $_beans_widget_area, $_beans_widget;
 
-		beans_register_widget_area( array( 'id' => 'test_sidebar' ) );
+		beans_register_widget_area( [ 'id' => 'test_sidebar' ] );
 		$this->add_test_widget_to_test_sidebar();
 		_beans_setup_widget_area( 'test_sidebar' );
 

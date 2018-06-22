@@ -33,12 +33,12 @@ class Tests_BeansPrepareWidgetData extends Beans_Widget_Test_Case {
 			->once()
 			->with( 'widgets' )
 			->andReturn(
-				array(
-					'text-2' => array(
+				[
+					'text-2' => [
 						'id'   => 'text-2',
 						'name' => 'Test Widget',
-					),
-				)
+					],
+				]
 			);
 
 		// Call the function.

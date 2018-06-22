@@ -35,10 +35,10 @@ class Tests_BeansGetWidgetAreaOutput extends Beans_Widget_Test_Case {
 	public function test_should_return_widget_output_when_widget_area_is_registered() {
 		global $wp_registered_sidebars;
 
-		beans_register_widget_area( array(
+		beans_register_widget_area( [
 			'id'   => 'test_sidebar',
 			'name' => 'Test Sidebar',
-		) );
+		] );
 		$this->add_test_widget_to_test_sidebar();
 		$this->assertSame(
 			$this->format_the_html( $this->get_expected_output() ),

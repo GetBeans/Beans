@@ -39,7 +39,7 @@ class Tests_BeansIsActiveWidgetArea extends Beans_Widget_Test_Case {
 		$_wp_sidebars_widgets = []; // phpcs:ignore WordPress.Variables.GlobalVariables.OverrideProhibited -- Valid use case: we need test to start with clean sidebars_widgets.
 
 		// Prime the WP database with an active sidebar.
-		update_option( 'sidebars_widgets', array( 'an-active-sidebar' => array( 'text-2' ) ) );
+		update_option( 'sidebars_widgets', [ 'an-active-sidebar' => [ 'text-2' ] ] );
 
 		$this->assertTrue( beans_is_active_widget_area( 'an-active-sidebar' ) );
 	}

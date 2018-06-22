@@ -35,10 +35,10 @@ class Tests_BeansHasWidgetArea extends Beans_Widget_Test_Case {
 	public function test_should_return_true_when_widget_area_registered() {
 		global $wp_registered_sidebars;
 
-		register_sidebar( array(
+		register_sidebar( [
 			'id'   => 'test_sidebar',
 			'name' => 'Test Sidebar',
-		) );
+		] );
 
 		// Confirm we have a test sidebar registered.
 		$this->assertTrue( isset( $wp_registered_sidebars['test_sidebar'] ) );

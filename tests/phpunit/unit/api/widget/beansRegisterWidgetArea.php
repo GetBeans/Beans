@@ -32,7 +32,7 @@ class Tests_BeansRegisterWidgetArea extends Beans_Widget_Test_Case {
 			->with( 'id', [] )
 			->andReturn( false );
 
-		$this->assertSame( '', beans_register_widget_area( array() ) );
+		$this->assertSame( '', beans_register_widget_area( [] ) );
 	}
 
 	/**
@@ -42,10 +42,10 @@ class Tests_BeansRegisterWidgetArea extends Beans_Widget_Test_Case {
 		Monkey\Functions\expect( 'beans_get' )
 			->once()->with(
 				'id',
-				array(
+				[
 					'id'         => 'new-widget-area',
 					'beans_type' => 'grid',
-				)
+				]
 			)
 			->andReturn( 'new-widget-area' );
 
@@ -61,10 +61,10 @@ class Tests_BeansRegisterWidgetArea extends Beans_Widget_Test_Case {
 
 		$this->assertEquals(
 			'new-widget-area',
-			beans_register_widget_area( array(
+			beans_register_widget_area( [
 				'id'         => 'new-widget-area',
 				'beans_type' => 'grid',
-			) )
+			] )
 		);
 	}
 
@@ -72,12 +72,12 @@ class Tests_BeansRegisterWidgetArea extends Beans_Widget_Test_Case {
 	 * Return the expected merged arguments array.
 	 */
 	protected function get_merged_args() {
-		return array(
+		return [
 			'beans_type'                 => 'grid',
 			'beans_show_widget_title'    => true,
 			'beans_show_widget_badge'    => false,
 			'beans_widget_badge_content' => __( 'Hello', 'tm-beans' ),
 			'id'                         => 'new-widget-area',
-		);
+		];
 	}
 }

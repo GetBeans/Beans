@@ -28,7 +28,7 @@ class Tests_BeansDeregisterWidgetArea extends Beans_Widget_Test_Case {
 	public function test_should_unregister_sidebar() {
 		global $wp_registered_sidebars;
 
-		register_sidebar( array( 'id' => 'unwanted-sidebar' ) );
+		register_sidebar( [ 'id' => 'unwanted-sidebar' ] );
 
 		$this->assertTrue( isset( $wp_registered_sidebars['unwanted-sidebar'] ) );
 

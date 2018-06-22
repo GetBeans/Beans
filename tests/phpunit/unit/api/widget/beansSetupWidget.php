@@ -29,17 +29,17 @@ class Tests_BeansSetupWidget extends Beans_Widget_Test_Case {
 	public function test_should_return_false_when_widget_id_not_found() {
 		global $_beans_widget_area;
 
-		$_beans_widget_area = array(
-			'widgets'        => array(
-				'text-1' => array( 'id' => 'text-1' ),
-				'text-2' => array( 'id' => 'text-2' ),
-			),
+		$_beans_widget_area = [
+			'widgets'        => [
+				'text-1' => [ 'id' => 'text-1' ],
+				'text-2' => [ 'id' => 'text-2' ],
+			],
 			'current_widget' => 2,
-		);
+		];
 
 		Monkey\Functions\expect( 'beans_get' )
 			->once()
-			->with( $_beans_widget_area['current_widget'], array( 'text-1', 'text-2' ) )
+			->with( $_beans_widget_area['current_widget'], [ 'text-1', 'text-2' ] )
 			->andReturn( false );
 
 		$this->assertFalse( beans_setup_widget() );
@@ -51,17 +51,17 @@ class Tests_BeansSetupWidget extends Beans_Widget_Test_Case {
 	public function test_should_advance_widget_pointer_prepare_widget_data_and_return_true_when_widget_id_is_found() {
 		global $_beans_widget_area;
 
-		$_beans_widget_area = array(
-			'widgets'        => array(
-				'text-1' => array( 'id' => 'text-1' ),
-				'text-2' => array( 'id' => 'text-2' ),
-			),
+		$_beans_widget_area = [
+			'widgets'        => [
+				'text-1' => [ 'id' => 'text-1' ],
+				'text-2' => [ 'id' => 'text-2' ],
+			],
 			'current_widget' => 1,
-		);
+		];
 
 		Monkey\Functions\expect( 'beans_get' )
 			->once()
-			->with( $_beans_widget_area['current_widget'], array( 'text-1', 'text-2' ) )
+			->with( $_beans_widget_area['current_widget'], [ 'text-1', 'text-2' ] )
 			->andReturn( 'text-2' );
 
 		Monkey\Functions\expect( '_beans_prepare_widget_data' )

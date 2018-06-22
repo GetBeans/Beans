@@ -32,7 +32,7 @@ class Tests_BeansForceTheWidget extends Beans_Widget_Test_Case {
 		$wp_widget_factory->widgets['unorthodox'] = new \stdClass();
 
 		ob_start();
-		_beans_force_the_widget( 'unorthodox', array(), array( 'before_widget' => '<div class="unorthodox"' ) );
+		_beans_force_the_widget( 'unorthodox', [], [ 'before_widget' => '<div class="unorthodox"' ] );
 		$output = ob_get_clean();
 
 		$this->assertEmpty( $output );
@@ -51,7 +51,7 @@ class Tests_BeansForceTheWidget extends Beans_Widget_Test_Case {
 		$wp_widget_factory->widgets['WP_Widget_Text'] = $widget;
 
 		ob_start();
-		_beans_force_the_widget( 'WP_Widget_Text', array(), array( 'before_widget' => '<div class="widget text-2"' ) );
+		_beans_force_the_widget( 'WP_Widget_Text', [], [ 'before_widget' => '<div class="widget text-2"' ] );
 		$output = ob_get_clean();
 
 		$this->assertEquals( '', $output );
@@ -70,7 +70,7 @@ class Tests_BeansForceTheWidget extends Beans_Widget_Test_Case {
 		$wp_widget_factory->widgets['WP_Widget_Text'] = $widget;
 
 		ob_start();
-		_beans_force_the_widget( 'WP_Widget_Text', '', array() );
+		_beans_force_the_widget( 'WP_Widget_Text', '', [] );
 		$output = ob_get_clean();
 
 		$this->assertEquals( '<!--widget-text-2-->', $output );

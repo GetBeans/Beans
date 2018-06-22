@@ -42,17 +42,17 @@ abstract class Beans_Widget_Test_Case extends Test_Case {
 		$widget_object->widget_options['name'] = 'Test Sidebar';
 		$widget_object->widget_options['id']   = 'test_sidebar';
 
-		$widget_registration_args = array(
+		$widget_registration_args = [
 			'name'      => $widget_object->name,
 			'id'        => $widget_object->id,
-			'callback'  => array( $widget_object, 'widget' ),
-			'params'    => array( $widget_object->widget_options ),
+			'callback'  => [ $widget_object, 'widget' ],
+			'params'    => [ $widget_object->widget_options ],
 			'classname' => $widget_object->widget_options['classname'],
-		);
+		];
 
 		$wp_registered_widgets[ $widget_object->id ] = $widget_registration_args; // phpcs:ignore WordPress.Variables.GlobalVariables.OverrideProhibited -- Valid use case: we need to explicitly set the widget registration for widget API tests.
 
-		add_filter( 'sidebars_widgets', array( $this, 'add_a_widget' ) );
+		add_filter( 'sidebars_widgets', [ $this, 'add_a_widget' ] );
 	}
 
 	/**
@@ -63,7 +63,7 @@ abstract class Beans_Widget_Test_Case extends Test_Case {
 	 * @return array Modified sidebars_widgets.
 	 */
 	public function add_a_widget( $sidebars_widgets ) {
-		$sidebars_widgets['test_sidebar'] = array( 0 => 'text-2' );
+		$sidebars_widgets['test_sidebar'] = [ 0 => 'text-2' ];
 
 		return $sidebars_widgets;
 	}

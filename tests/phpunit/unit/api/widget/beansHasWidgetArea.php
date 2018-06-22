@@ -36,10 +36,10 @@ class Tests_BeansHasWidgetArea extends Beans_Widget_Test_Case {
 	public function test_should_return_true_when_widget_area_registered() {
 		global $wp_registered_sidebars;
 
-		$sidebars = array(
+		$sidebars = [
 			'id'   => 'test_sidebar',
 			'name' => 'Test Sidebar',
-		);
+		];
 
 		$wp_registered_sidebars['test_sidebar'] = $sidebars; // phpcs:ignore WordPress.Variables.GlobalVariables.OverrideProhibited -- Valid use case: setting up sidebars outside of WP.
 

@@ -30,12 +30,12 @@ class Tests_BeansResetWidget extends Beans_Widget_Test_Case {
 		global $_beans_widget;
 
 		// We'll set the data via the function's view of the global since that's how it's ordinarily set in the API.
-		$test_widget = array(
-			array(
+		$test_widget = [
+			[
 				'id'   => 'text-2',
 				'name' => 'Test Widget',
-			),
-		);
+			],
+		];
 
 		$_beans_widget = $test_widget;
 

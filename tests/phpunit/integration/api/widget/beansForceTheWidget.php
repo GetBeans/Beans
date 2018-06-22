@@ -32,7 +32,7 @@ class Tests_BeansForceTheWidget extends Beans_Widget_Test_Case {
 		$wp_widget_factory->widgets['unorthodox'] = new \stdClass();
 
 		ob_start();
-		_beans_force_the_widget( 'unorthodox', array(), array( 'before_widget' => '<div class="unorthodox"' ) );
+		_beans_force_the_widget( 'unorthodox', [], [ 'before_widget' => '<div class="unorthodox"' ] );
 		$output = ob_get_clean();
 
 		$this->assertEmpty( $output );
@@ -43,7 +43,7 @@ class Tests_BeansForceTheWidget extends Beans_Widget_Test_Case {
 	 */
 	public function test_should_do_nothing_when_widget_has_id_registered() {
 		ob_start();
-		_beans_force_the_widget( 'WP_Widget_Text', array(), array( 'before_widget' => '<div class="widget text-1"' ) );
+		_beans_force_the_widget( 'WP_Widget_Text', [], [ 'before_widget' => '<div class="widget text-1"' ] );
 		$output = ob_get_clean();
 
 		$this->assertEmpty( $output );
@@ -54,7 +54,7 @@ class Tests_BeansForceTheWidget extends Beans_Widget_Test_Case {
 	 */
 	public function test_should_render_widget_id_html_when_widget_registered_without_id_arg() {
 		ob_start();
-		_beans_force_the_widget( 'WP_Widget_Text', '', array() );
+		_beans_force_the_widget( 'WP_Widget_Text', '', [] );
 		$output = ob_get_clean();
 
 		$this->assertEquals( '<!--widget-text-1-->', $output );

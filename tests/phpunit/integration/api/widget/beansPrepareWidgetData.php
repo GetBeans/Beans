@@ -28,7 +28,7 @@ class Tests_BeansPrepareWidgetData extends Beans_Widget_Test_Case {
 	public function test_should_prepare_widget_data() {
 		global $_beans_widget;
 
-		beans_register_widget_area( array( 'id' => 'test_sidebar' ) );
+		beans_register_widget_area( [ 'id' => 'test_sidebar' ] );
 		$this->add_test_widget_to_test_sidebar();
 		_beans_setup_widget_area( 'test_sidebar' );
 

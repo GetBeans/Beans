@@ -28,10 +28,10 @@ class Tests_BeansHaveWidgets extends Beans_Widget_Test_Case {
 	public function test_should_return_true_when_widgets_available() {
 		// Add a test sidebar with a test widget.
 		beans_register_widget_area(
-			array(
+			[
 				'id'   => 'test_sidebar',
 				'name' => 'Test Sidebar',
-			)
+			]
 		);
 		$this->add_test_widget_to_test_sidebar();
 
@@ -48,10 +48,10 @@ class Tests_BeansHaveWidgets extends Beans_Widget_Test_Case {
 	public function test_should_return_false_when_no_widgets_are_available() {
 		// Add a test sidebar with no widgets.
 		beans_register_widget_area(
-			array(
+			[
 				'id'   => 'test_sidebar',
 				'name' => 'Test Sidebar',
-			)
+			]
 		);
 
 		// Run the Beans widget area setup.
