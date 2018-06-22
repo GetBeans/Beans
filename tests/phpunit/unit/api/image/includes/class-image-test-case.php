@@ -59,7 +59,7 @@ abstract class Image_Test_Case extends Base_Test_Case {
 
 		static::$fixtures_dir = __DIR__ . '/fixtures';
 
-		foreach ( array( 'ARRAY_N', 'ARRAY_A', 'STRING', 'OBJECT' ) as $constant ) {
+		foreach ( [ 'ARRAY_N', 'ARRAY_A', 'STRING', 'OBJECT' ] as $constant ) {
 			if ( ! defined( $constant ) ) {
 				define( $constant, $constant ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound -- WordPress defined constants.
 			}
@@ -127,13 +127,13 @@ abstract class Image_Test_Case extends Base_Test_Case {
 		Monkey\Functions\when( 'beans_url_to_path' )->returnArg();
 		Monkey\Functions\when( 'beans_path_to_url' )->returnArg();
 
-		Monkey\Functions\expect( 'wp_upload_dir' )->andReturn( array(
+		Monkey\Functions\expect( 'wp_upload_dir' )->andReturn( [
 			'path'    => '',
 			'url'     => '',
 			'subdir'  => '',
 			'basedir' => vfsStream::url( 'uploads' ),
 			'baseurl' => $this->images_url,
 			'error'   => false,
-		) );
+		] );
 	}
 }

@@ -47,11 +47,11 @@ class Tests_BeansImageEditor_CreateEditedImage extends Image_Test_Case {
 	public function test_should_edit_create_and_store_image() {
 		$created_edited_image = $this->get_reflective_method( 'create_edited_image', '_Beans_Image_Editor' );
 		$rebuilt_path         = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
-		$image_sources        = array(
+		$image_sources        = [
 			static::$fixtures_dir . '/image1.jpg',
 			static::$fixtures_dir . '/image2.jpg',
-		);
-		$args                 = array( 'resize' => array( 800, false ) );
+		];
+		$args                 = [ 'resize' => [ 800, false ] ];
 
 		foreach ( $image_sources as $src ) {
 			$editor           = new _Beans_Image_Editor( $src, $args );
@@ -76,7 +76,7 @@ class Tests_BeansImageEditor_CreateEditedImage extends Image_Test_Case {
 		$rebuilt_path         = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
 		$src                  = 'path/does/not/exist/image.jpg';
 
-		$editor           = new _Beans_Image_Editor( $src, array( 'resize' => array( 800, false ) ) );
+		$editor           = new _Beans_Image_Editor( $src, [ 'resize' => [ 800, false ] ] );
 		$edited_image_src = $this->init_virtual_image( $rebuilt_path, $editor );
 
 		// Run the tests.

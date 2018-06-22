@@ -39,7 +39,7 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 	 */
 	public function test_should_edit_store_image_and_return_its_url() {
 		$rebuilt_path = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
-		$args         = array( 'resize' => array( 800, false ) );
+		$args         = [ 'resize' => [ 800, false ] ];
 
 		foreach ( $this->images as $actual_path ) {
 			$editor           = new _Beans_Image_Editor( $actual_path, $args );
@@ -70,7 +70,7 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 	 */
 	public function test_should_return_original_src_when_no_image() {
 		$src    = 'path/does/not/exist/image.jpg';
-		$editor = new _Beans_Image_Editor( $src, array( 'resize' => array( 800, false ) ) );
+		$editor = new _Beans_Image_Editor( $src, [ 'resize' => [ 800, false ] ] );
 
 		// Set up the mocks.
 		Monkey\Functions\expect( 'wp_get_image_editor' )->with( $src )->once();
@@ -89,7 +89,7 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 	public function test_should_return_url_when_edited_image_exists() {
 		$this->load_images_into_vfs();
 		$rebuilt_path = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
-		$args         = array( 'resize' => array( 800, false ) );
+		$args         = [ 'resize' => [ 800, false ] ];
 
 		foreach ( $this->images as $virtual_path => $actual_path ) {
 			$editor           = new _Beans_Image_Editor( $actual_path, $args );
@@ -111,7 +111,7 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 	 */
 	public function test_should_edit_store_image_and_return_indexed_array() {
 		$rebuilt_path = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
-		$args         = array( 'resize' => array( 800, false ) );
+		$args         = [ 'resize' => [ 800, false ] ];
 
 		foreach ( $this->images as $virtual_path => $actual_path ) {
 			$editor           = new _Beans_Image_Editor( $actual_path, $args, ARRAY_N );
@@ -133,7 +133,7 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 			$this->assertFileNotExists( $edited_image_src );
 			$image_info = $editor->run();
 			$this->assertFileExists( $edited_image_src );
-			$this->assertSame( array( $edited_image_src, 1200, 630 ), $image_info );
+			$this->assertSame( [ $edited_image_src, 1200, 630 ], $image_info );
 		}
 	}
 
@@ -142,7 +142,7 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 	 */
 	public function test_should_return_indexed_array_with_original_src_when_no_image() {
 		$src    = 'path/does/not/exist/image.jpg';
-		$editor = new _Beans_Image_Editor( $src, array( 'resize' => array( 800, false ) ), ARRAY_N );
+		$editor = new _Beans_Image_Editor( $src, [ 'resize' => [ 800, false ] ], ARRAY_N );
 
 		// Set up the mocks.
 		Monkey\Functions\expect( 'wp_get_image_editor' )->with( $src )->once();
@@ -151,7 +151,7 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 
 		// Run the tests.
 		$this->assertFileNotExists( $src );
-		$this->assertSame( array( $src, null, null ), $editor->run() );
+		$this->assertSame( [ $src, null, null ], $editor->run() );
 	}
 
 	/**
@@ -161,7 +161,7 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 	public function test_should_return_index_array_when_edited_image_exists() {
 		$this->load_images_into_vfs();
 		$rebuilt_path = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
-		$args         = array( 'resize' => array( 800, false ) );
+		$args         = [ 'resize' => [ 800, false ] ];
 
 		foreach ( $this->images as $virtual_path => $actual_path ) {
 			$editor           = new _Beans_Image_Editor( $actual_path, $args, ARRAY_N );
@@ -173,7 +173,7 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 
 			// Run the tests.
 			$this->assertFileExists( $edited_image_src );
-			$this->assertSame( array( $edited_image_src, 1200, 630 ), $editor->run() );
+			$this->assertSame( [ $edited_image_src, 1200, 630 ], $editor->run() );
 		}
 	}
 
@@ -183,7 +183,7 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 	 */
 	public function test_should_edit_store_image_and_return_object() {
 		$rebuilt_path = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
-		$args         = array( 'resize' => array( 400, false ) );
+		$args         = [ 'resize' => [ 400, false ] ];
 
 		foreach ( $this->images as $actual_path ) {
 			$editor           = new _Beans_Image_Editor( $actual_path, $args, OBJECT );
@@ -217,7 +217,7 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 	 */
 	public function test_should_return_object_with_original_src_when_no_image() {
 		$src    = 'path/does/not/exist/image.jpg';
-		$editor = new _Beans_Image_Editor( $src, array( 'resize' => array( 800, false ) ), OBJECT );
+		$editor = new _Beans_Image_Editor( $src, [ 'resize' => [ 800, false ] ], OBJECT );
 
 		// Set up the mocks.
 		Monkey\Functions\expect( 'wp_get_image_editor' )->with( $src )->once();
@@ -240,7 +240,7 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 	public function test_should_return_object_when_edited_image_exists() {
 		$this->load_images_into_vfs();
 		$rebuilt_path = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
-		$args         = array( 'resize' => array( 400, false ) );
+		$args         = [ 'resize' => [ 400, false ] ];
 
 		foreach ( $this->images as $virtual_path => $actual_path ) {
 			$editor           = new _Beans_Image_Editor( $actual_path, $args, OBJECT );
@@ -266,7 +266,7 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 	 */
 	public function test_should_edit_store_image_and_return_associative_array() {
 		$rebuilt_path = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
-		$args         = array( 'resize' => array( 600, false ) );
+		$args         = [ 'resize' => [ 600, false ] ];
 
 		foreach ( $this->images as $actual_path ) {
 			$editor           = new _Beans_Image_Editor( $actual_path, $args, ARRAY_A );
@@ -289,11 +289,11 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 			$image_info = $editor->run();
 			$this->assertFileExists( $edited_image_src );
 			$this->assertSame(
-				array(
+				[
 					'src'    => $edited_image_src,
 					'width'  => 1200,
 					'height' => 630,
-				),
+				],
 				$image_info
 			);
 		}
@@ -304,7 +304,7 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 	 */
 	public function test_should_return_associative_array_with_original_src_when_no_image() {
 		$src    = 'path/does/not/exist/image.jpg';
-		$editor = new _Beans_Image_Editor( $src, array( 'resize' => array( 800, false ) ), ARRAY_A );
+		$editor = new _Beans_Image_Editor( $src, [ 'resize' => [ 800, false ] ], ARRAY_A );
 
 		// Set up the mocks.
 		Monkey\Functions\expect( 'wp_get_image_editor' )->with( $src )->once();
@@ -314,11 +314,11 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 		// Run the tests.
 		$this->assertFileNotExists( $src );
 		$this->assertSame(
-			array(
+			[
 				'src'    => $src,
 				'width'  => null,
 				'height' => null,
-			),
+			],
 			$editor->run()
 		);
 	}
@@ -330,7 +330,7 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 	public function test_should_return_associative_array_when_edited_image_exists() {
 		$this->load_images_into_vfs();
 		$rebuilt_path = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
-		$args         = array( 'resize' => array( 600, false ) );
+		$args         = [ 'resize' => [ 600, false ] ];
 
 		foreach ( $this->images as $virtual_path => $actual_path ) {
 			$editor           = new _Beans_Image_Editor( $actual_path, $args, ARRAY_A );
@@ -343,11 +343,11 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 			// Run the tests.
 			$this->assertFileExists( $edited_image_src );
 			$this->assertSame(
-				array(
+				[
 					'src'    => $edited_image_src,
 					'width'  => 1200,
 					'height' => 630,
-				),
+				],
 				$editor->run()
 			);
 		}

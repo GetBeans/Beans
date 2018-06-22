@@ -46,7 +46,7 @@ class Tests_BeansEditImage extends Image_Test_Case {
 
 		// Run the tests.
 		$this->assertFileNotExists( $src );
-		$this->assertSame( $src, beans_edit_image( $src, array( 'resize' => array( 800, false ) ) ) );
+		$this->assertSame( $src, beans_edit_image( $src, [ 'resize' => [ 800, false ] ] ) );
 	}
 
 	/**
@@ -58,8 +58,8 @@ class Tests_BeansEditImage extends Image_Test_Case {
 		// Run the tests.
 		$this->assertFileNotExists( $src );
 		$this->assertSame(
-			array( $src, null, null ),
-			beans_edit_image( $src, array( 'resize' => array( 800, false ) ), ARRAY_N )
+			[ $src, null, null ],
+			beans_edit_image( $src, [ 'resize' => [ 800, false ] ], ARRAY_N )
 		);
 	}
 
@@ -71,7 +71,7 @@ class Tests_BeansEditImage extends Image_Test_Case {
 
 		// Run the tests.
 		$this->assertFileNotExists( $src );
-		$image_info = beans_edit_image( $src, array( 'resize' => array( 800, false ) ), OBJECT );
+		$image_info = beans_edit_image( $src, [ 'resize' => [ 800, false ] ], OBJECT );
 		$this->assertInstanceOf( 'stdClass', $image_info );
 		$this->assertSame( $src, $image_info->src );
 		$this->assertNull( $image_info->width );
@@ -87,12 +87,12 @@ class Tests_BeansEditImage extends Image_Test_Case {
 		// Run the tests.
 		$this->assertFileNotExists( $src );
 		$this->assertSame(
-			array(
+			[
 				'src'    => $src,
 				'width'  => null,
 				'height' => null,
-			),
-			beans_edit_image( $src, array( 'resize' => array( 800, false ) ), ARRAY_A )
+			],
+			beans_edit_image( $src, [ 'resize' => [ 800, false ] ], ARRAY_A )
 		);
 	}
 }

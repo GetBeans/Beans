@@ -45,11 +45,11 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 	 */
 	public function test_should_edit_store_image_and_return_its_url() {
 		$rebuilt_path  = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
-		$image_sources = array(
+		$image_sources = [
 			static::$fixtures_dir . '/image1.jpg',
 			static::$fixtures_dir . '/image2.jpg',
-		);
-		$args          = array( 'resize' => array( 800, false ) );
+		];
+		$args          = [ 'resize' => [ 800, false ] ];
 
 		foreach ( $image_sources as $src ) {
 			$editor           = new _Beans_Image_Editor( $src, $args );
@@ -73,7 +73,7 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 	 */
 	public function test_should_return_original_src_when_no_image() {
 		$src    = 'path/does/not/exist/image.jpg';
-		$editor = new _Beans_Image_Editor( $src, array( 'resize' => array( 800, false ) ) );
+		$editor = new _Beans_Image_Editor( $src, [ 'resize' => [ 800, false ] ] );
 
 		// Run the tests.
 		$this->assertFileNotExists( $src );
@@ -86,11 +86,11 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 	 */
 	public function test_should_return_url_when_edited_image_exists() {
 		$rebuilt_path  = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
-		$image_sources = array(
+		$image_sources = [
 			static::$fixtures_dir . '/image1.jpg',
 			static::$fixtures_dir . '/image2.jpg',
-		);
-		$args          = array( 'resize' => array( 800, false ) );
+		];
+		$args          = [ 'resize' => [ 800, false ] ];
 
 		foreach ( $image_sources as $src ) {
 			$editor           = new _Beans_Image_Editor( $src, $args );
@@ -111,11 +111,11 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 	 */
 	public function test_should_edit_store_image_and_return_indexed_array() {
 		$rebuilt_path  = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
-		$image_sources = array(
+		$image_sources = [
 			static::$fixtures_dir . '/image1.jpg',
 			static::$fixtures_dir . '/image2.jpg',
-		);
-		$args          = array( 'resize' => array( 800, false ) );
+		];
+		$args          = [ 'resize' => [ 800, false ] ];
 
 		foreach ( $image_sources as $src ) {
 			$editor           = new _Beans_Image_Editor( $src, $args, ARRAY_N );
@@ -125,7 +125,7 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 			$this->assertFileNotExists( $edited_image_src );
 			$image_info = $editor->run();
 			$this->assertFileExists( $edited_image_src );
-			$this->assertSame( array( beans_path_to_url( $edited_image_src ), 800, 420 ), $image_info );
+			$this->assertSame( [ beans_path_to_url( $edited_image_src ), 800, 420 ], $image_info );
 
 			// Check the edited image's dimensions.
 			list( $width, $height ) = @getimagesize( $edited_image_src ); // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged -- Valid use case.
@@ -139,11 +139,11 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 	 */
 	public function test_should_return_indexed_array_with_original_src_when_no_image() {
 		$src    = 'path/does/not/exist/image.jpg';
-		$editor = new _Beans_Image_Editor( $src, array( 'resize' => array( 800, false ) ), ARRAY_N );
+		$editor = new _Beans_Image_Editor( $src, [ 'resize' => [ 800, false ] ], ARRAY_N );
 
 		// Run the tests.
 		$this->assertFileNotExists( $src );
-		$this->assertSame( array( $src, null, null ), $editor->run() );
+		$this->assertSame( [ $src, null, null ], $editor->run() );
 	}
 
 	/**
@@ -152,11 +152,11 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 	 */
 	public function test_should_return_index_array_when_edited_image_exists() {
 		$rebuilt_path  = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
-		$image_sources = array(
+		$image_sources = [
 			static::$fixtures_dir . '/image1.jpg',
 			static::$fixtures_dir . '/image2.jpg',
-		);
-		$args          = array( 'resize' => array( 800, false ) );
+		];
+		$args          = [ 'resize' => [ 800, false ] ];
 
 		foreach ( $image_sources as $src ) {
 			$editor           = new _Beans_Image_Editor( $src, $args, ARRAY_N );
@@ -167,7 +167,7 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 
 			// Run the tests.
 			$this->assertFileExists( $edited_image_src );
-			$this->assertSame( array( beans_path_to_url( $edited_image_src ), 800, 420 ), $editor->run() );
+			$this->assertSame( [ beans_path_to_url( $edited_image_src ), 800, 420 ], $editor->run() );
 		}
 	}
 
@@ -177,11 +177,11 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 	 */
 	public function test_should_edit_store_image_and_return_object() {
 		$rebuilt_path  = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
-		$image_sources = array(
+		$image_sources = [
 			static::$fixtures_dir . '/image1.jpg',
 			static::$fixtures_dir . '/image2.jpg',
-		);
-		$args          = array( 'resize' => array( 400, false ) );
+		];
+		$args          = [ 'resize' => [ 400, false ] ];
 
 		foreach ( $image_sources as $src ) {
 			$editor           = new _Beans_Image_Editor( $src, $args, OBJECT );
@@ -208,7 +208,7 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 	 */
 	public function test_should_return_object_with_original_src_when_no_image() {
 		$src    = 'path/does/not/exist/image.jpg';
-		$editor = new _Beans_Image_Editor( $src, array( 'resize' => array( 800, false ) ), OBJECT );
+		$editor = new _Beans_Image_Editor( $src, [ 'resize' => [ 800, false ] ], OBJECT );
 
 		// Run the tests.
 		$this->assertFileNotExists( $src );
@@ -225,11 +225,11 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 	 */
 	public function test_should_return_object_when_edited_image_exists() {
 		$rebuilt_path  = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
-		$image_sources = array(
+		$image_sources = [
 			static::$fixtures_dir . '/image1.jpg',
 			static::$fixtures_dir . '/image2.jpg',
-		);
-		$args          = array( 'resize' => array( 400, false ) );
+		];
+		$args          = [ 'resize' => [ 400, false ] ];
 
 		// Run the tests.
 		foreach ( $image_sources as $src ) {
@@ -255,11 +255,11 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 	 */
 	public function test_should_edit_store_image_and_return_associative_array() {
 		$rebuilt_path  = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
-		$image_sources = array(
+		$image_sources = [
 			static::$fixtures_dir . '/image1.jpg',
 			static::$fixtures_dir . '/image2.jpg',
-		);
-		$args          = array( 'resize' => array( 600, false ) );
+		];
+		$args          = [ 'resize' => [ 600, false ] ];
 
 		foreach ( $image_sources as $src ) {
 			$editor           = new _Beans_Image_Editor( $src, $args, ARRAY_A );
@@ -270,11 +270,11 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 			$image_info = $editor->run();
 			$this->assertFileExists( $edited_image_src );
 			$this->assertSame(
-				array(
+				[
 					'src'    => beans_path_to_url( $edited_image_src ),
 					'width'  => 600,
 					'height' => 315,
-				),
+				],
 				$image_info
 			);
 
@@ -290,16 +290,16 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 	 */
 	public function test_should_return_associative_array_with_original_src_when_no_image() {
 		$src    = 'path/does/not/exist/image.jpg';
-		$editor = new _Beans_Image_Editor( $src, array( 'resize' => array( 800, false ) ), ARRAY_A );
+		$editor = new _Beans_Image_Editor( $src, [ 'resize' => [ 800, false ] ], ARRAY_A );
 
 		// Run the tests.
 		$this->assertFileNotExists( $src );
 		$this->assertSame(
-			array(
+			[
 				'src'    => $src,
 				'width'  => null,
 				'height' => null,
-			),
+			],
 			$editor->run()
 		);
 	}
@@ -310,11 +310,11 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 	 */
 	public function test_should_return_associatve_array_when_edited_image_exists() {
 		$rebuilt_path  = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
-		$image_sources = array(
+		$image_sources = [
 			static::$fixtures_dir . '/image1.jpg',
 			static::$fixtures_dir . '/image2.jpg',
-		);
-		$args          = array( 'resize' => array( 600, false ) );
+		];
+		$args          = [ 'resize' => [ 600, false ] ];
 
 		// Run the tests.
 		foreach ( $image_sources as $src ) {
@@ -327,11 +327,11 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 			// Run the tests.
 			$this->assertFileExists( $edited_image_src );
 			$this->assertSame(
-				array(
+				[
 					'src'    => beans_path_to_url( $edited_image_src ),
 					'width'  => 600,
 					'height' => 315,
-				),
+				],
 				$editor->run()
 			);
 		}
