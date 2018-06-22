@@ -88,35 +88,35 @@ class Tests_BeansGetLayoutClass extends Test_Case {
 	 * Test beans_get_default_layout() should return classes when the layout is "c".
 	 */
 	public function test_should_return_classes_when_layout_is_c() {
-		$test_parameters = array(
-			array(
-				'expected'          => array(
+		$test_parameters = [
+			[
+				'expected'          => [
 					'content'           => 'uk-width-medium-4-4',
 					'sidebar_primary'   => null,
 					'sidebar_secondary' => null,
-				),
+				],
 				'sidebar_primary'   => false,
 				'sidebar_secondary' => false,
-			),
-			array(
-				'expected'          => array(
+			],
+			[
+				'expected'          => [
 					'content'           => 'uk-width-medium-4-4',
 					'sidebar_primary'   => null,
 					'sidebar_secondary' => null,
-				),
+				],
 				'sidebar_primary'   => true,
 				'sidebar_secondary' => false,
-			),
-			array(
-				'expected'          => array(
+			],
+			[
+				'expected'          => [
 					'content'           => 'uk-width-medium-4-4',
 					'sidebar_primary'   => null,
 					'sidebar_secondary' => null,
-				),
+				],
 				'sidebar_primary'   => true,
 				'sidebar_secondary' => true,
-			),
-		);
+			],
+		];
 
 		$this->run_the_tests( $test_parameters, 'c' );
 	}
@@ -125,35 +125,35 @@ class Tests_BeansGetLayoutClass extends Test_Case {
 	 * Test beans_get_default_layout() should return classes when the layout is "c_sp".
 	 */
 	public function test_should_return_classes_when_layout_is_c_sp() {
-		$test_parameters = array(
-			array(
-				'expected'          => array(
+		$test_parameters = [
+			[
+				'expected'          => [
 					'content'           => 'uk-width-medium-4-4',
 					'sidebar_primary'   => null,
 					'sidebar_secondary' => null,
-				),
+				],
 				'sidebar_primary'   => false,
 				'sidebar_secondary' => false,
-			),
-			array(
-				'expected'          => array(
+			],
+			[
+				'expected'          => [
 					'content'           => 'uk-width-medium-3-4',
 					'sidebar_primary'   => 'uk-width-medium-1-4',
 					'sidebar_secondary' => null,
-				),
+				],
 				'sidebar_primary'   => true,
 				'sidebar_secondary' => false,
-			),
-			array(
-				'expected'          => array(
+			],
+			[
+				'expected'          => [
 					'content'           => 'uk-width-medium-3-4',
 					'sidebar_primary'   => 'uk-width-medium-1-4',
 					'sidebar_secondary' => null,
-				),
+				],
 				'sidebar_primary'   => true,
 				'sidebar_secondary' => true,
-			),
-		);
+			],
+		];
 
 		$this->run_the_tests( $test_parameters, 'c_sp' );
 	}
@@ -162,35 +162,35 @@ class Tests_BeansGetLayoutClass extends Test_Case {
 	 * Test beans_get_default_layout() should return classes when the layout is "sp_c".
 	 */
 	public function test_should_return_classes_when_layout_is_sp_c() {
-		$test_parameters = array(
-			array(
-				'expected'          => array(
+		$test_parameters = [
+			[
+				'expected'          => [
 					'content'           => 'uk-width-medium-4-4',
 					'sidebar_primary'   => null,
 					'sidebar_secondary' => null,
-				),
+				],
 				'sidebar_primary'   => false,
 				'sidebar_secondary' => false,
-			),
-			array(
-				'expected'          => array(
+			],
+			[
+				'expected'          => [
 					'content'           => 'uk-width-medium-3-4 uk-push-1-4',
 					'sidebar_primary'   => 'uk-width-medium-1-4 uk-pull-3-4',
 					'sidebar_secondary' => null,
-				),
+				],
 				'sidebar_primary'   => true,
 				'sidebar_secondary' => false,
-			),
-			array(
-				'expected'          => array(
+			],
+			[
+				'expected'          => [
 					'content'           => 'uk-width-medium-3-4 uk-push-1-4',
 					'sidebar_primary'   => 'uk-width-medium-1-4 uk-pull-3-4',
 					'sidebar_secondary' => null,
-				),
+				],
 				'sidebar_primary'   => true,
 				'sidebar_secondary' => true,
-			),
-		);
+			],
+		];
 
 		$this->run_the_tests( $test_parameters, 'sp_c' );
 	}
@@ -199,35 +199,35 @@ class Tests_BeansGetLayoutClass extends Test_Case {
 	 * Test beans_get_default_layout() should return classes when the layout is "c_ss".
 	 */
 	public function test_should_return_classes_when_layout_is_c_ss() {
-		$test_parameters = array(
-			array(
-				'expected'          => array(
+		$test_parameters = [
+			[
+				'expected'          => [
 					'content'           => 'uk-width-medium-4-4',
 					'sidebar_primary'   => null,
 					'sidebar_secondary' => null,
-				),
+				],
 				'sidebar_primary'   => false,
 				'sidebar_secondary' => false,
-			),
-			array(
-				'expected'          => array(
+			],
+			[
+				'expected'          => [
 					'content'           => 'uk-width-medium-4-4',
 					'sidebar_primary'   => null,
 					'sidebar_secondary' => null,
-				),
+				],
 				'sidebar_primary'   => true,
 				'sidebar_secondary' => false,
-			),
-			array(
-				'expected'          => array(
+			],
+			[
+				'expected'          => [
 					'content'           => 'uk-width-medium-3-4',
 					'sidebar_primary'   => null,
 					'sidebar_secondary' => 'uk-width-medium-1-4',
-				),
+				],
 				'sidebar_primary'   => true,
 				'sidebar_secondary' => true,
-			),
-		);
+			],
+		];
 
 		$this->run_the_tests( $test_parameters, 'c_ss' );
 	}
@@ -236,35 +236,35 @@ class Tests_BeansGetLayoutClass extends Test_Case {
 	 * Test beans_get_default_layout() should return classes when the layout is "c_sp_ss".
 	 */
 	public function test_should_return_classes_when_layout_is_c_sp_ss() {
-		$test_parameters = array(
-			array(
-				'expected'          => array(
+		$test_parameters = [
+			[
+				'expected'          => [
 					'content'           => 'uk-width-medium-4-4',
 					'sidebar_primary'   => null,
 					'sidebar_secondary' => null,
-				),
+				],
 				'sidebar_primary'   => false,
 				'sidebar_secondary' => false,
-			),
-			array(
-				'expected'          => array(
+			],
+			[
+				'expected'          => [
 					'content'           => 'uk-width-medium-3-4',
 					'sidebar_primary'   => 'uk-width-medium-1-4',
 					'sidebar_secondary' => null,
-				),
+				],
 				'sidebar_primary'   => true,
 				'sidebar_secondary' => false,
-			),
-			array(
-				'expected'          => array(
+			],
+			[
+				'expected'          => [
 					'content'           => 'uk-width-medium-2-4',
 					'sidebar_primary'   => 'uk-width-medium-1-4',
 					'sidebar_secondary' => 'uk-width-medium-1-4',
-				),
+				],
 				'sidebar_primary'   => true,
 				'sidebar_secondary' => true,
-			),
-		);
+			],
+		];
 
 		$this->run_the_tests( $test_parameters, 'c_sp_ss' );
 	}
@@ -273,35 +273,35 @@ class Tests_BeansGetLayoutClass extends Test_Case {
 	 * Test beans_get_default_layout() should return classes when the layout is "ss_c".
 	 */
 	public function test_should_return_classes_when_layout_is_ss_c() {
-		$test_parameters = array(
-			array(
-				'expected'          => array(
+		$test_parameters = [
+			[
+				'expected'          => [
 					'content'           => 'uk-width-medium-4-4',
 					'sidebar_primary'   => null,
 					'sidebar_secondary' => null,
-				),
+				],
 				'sidebar_primary'   => false,
 				'sidebar_secondary' => false,
-			),
-			array(
-				'expected'          => array(
+			],
+			[
+				'expected'          => [
 					'content'           => 'uk-width-medium-4-4',
 					'sidebar_primary'   => null,
 					'sidebar_secondary' => null,
-				),
+				],
 				'sidebar_primary'   => true,
 				'sidebar_secondary' => false,
-			),
-			array(
-				'expected'          => array(
+			],
+			[
+				'expected'          => [
 					'content'           => 'uk-width-medium-3-4 uk-push-1-4',
 					'sidebar_primary'   => null,
 					'sidebar_secondary' => 'uk-width-medium-1-4 uk-pull-3-4',
-				),
+				],
 				'sidebar_primary'   => true,
 				'sidebar_secondary' => true,
-			),
-		);
+			],
+		];
 
 		$this->run_the_tests( $test_parameters, 'ss_c' );
 	}
@@ -310,35 +310,35 @@ class Tests_BeansGetLayoutClass extends Test_Case {
 	 * Test beans_get_default_layout() should return classes when the layout is "sp_ss_c".
 	 */
 	public function test_should_return_classes_when_layout_is_sp_ss_c() {
-		$test_parameters = array(
-			array(
-				'expected'          => array(
+		$test_parameters = [
+			[
+				'expected'          => [
 					'content'           => 'uk-width-medium-4-4',
 					'sidebar_primary'   => null,
 					'sidebar_secondary' => null,
-				),
+				],
 				'sidebar_primary'   => false,
 				'sidebar_secondary' => false,
-			),
-			array(
-				'expected'          => array(
+			],
+			[
+				'expected'          => [
 					'content'           => 'uk-width-medium-3-4 uk-push-1-4',
 					'sidebar_primary'   => 'uk-width-medium-1-4 uk-pull-3-4',
 					'sidebar_secondary' => null,
-				),
+				],
 				'sidebar_primary'   => true,
 				'sidebar_secondary' => false,
-			),
-			array(
-				'expected'          => array(
+			],
+			[
+				'expected'          => [
 					'content'           => 'uk-width-medium-2-4 uk-push-2-4',
 					'sidebar_primary'   => 'uk-width-medium-1-4 uk-pull-2-4',
 					'sidebar_secondary' => 'uk-width-medium-1-4 uk-pull-2-4',
-				),
+				],
 				'sidebar_primary'   => true,
 				'sidebar_secondary' => true,
-			),
-		);
+			],
+		];
 
 		$this->run_the_tests( $test_parameters, 'sp_ss_c' );
 	}
@@ -347,35 +347,35 @@ class Tests_BeansGetLayoutClass extends Test_Case {
 	 * Test beans_get_default_layout() should return classes when the layout is "sp_c_ss".
 	 */
 	public function test_should_return_classes_when_layout_is_sp_c_ss() {
-		$test_parameters = array(
-			array(
-				'expected'          => array(
+		$test_parameters = [
+			[
+				'expected'          => [
 					'content'           => 'uk-width-medium-4-4',
 					'sidebar_primary'   => null,
 					'sidebar_secondary' => null,
-				),
+				],
 				'sidebar_primary'   => false,
 				'sidebar_secondary' => false,
-			),
-			array(
-				'expected'          => array(
+			],
+			[
+				'expected'          => [
 					'content'           => 'uk-width-medium-3-4 uk-push-1-4',
 					'sidebar_primary'   => 'uk-width-medium-1-4 uk-pull-3-4',
 					'sidebar_secondary' => null,
-				),
+				],
 				'sidebar_primary'   => true,
 				'sidebar_secondary' => false,
-			),
-			array(
-				'expected'          => array(
+			],
+			[
+				'expected'          => [
 					'content'           => 'uk-width-medium-2-4 uk-push-1-4',
 					'sidebar_primary'   => 'uk-width-medium-1-4 uk-pull-2-4',
 					'sidebar_secondary' => 'uk-width-medium-1-4',
-				),
+				],
 				'sidebar_primary'   => true,
 				'sidebar_secondary' => true,
-			),
-		);
+			],
+		];
 
 		$this->run_the_tests( $test_parameters, 'sp_c_ss' );
 	}

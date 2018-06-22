@@ -95,7 +95,7 @@ class Tests_BeansGetLayout extends Test_Case {
 	 */
 	public function test_should_return_layout_for_category() {
 		$post_id     = self::factory()->post->create();
-		$category_id = self::factory()->category->create( array( 'slug' => 'test-cat' ) );
+		$category_id = self::factory()->category->create( [ 'slug' => 'test-cat' ] );
 		wp_set_object_terms( $post_id, $category_id, 'category' );
 		$meta_key = "beans_term_{$category_id}_beans_layout";
 
@@ -121,7 +121,7 @@ class Tests_BeansGetLayout extends Test_Case {
 	 */
 	public function test_should_return_layout_for_tag() {
 		$post_id = self::factory()->post->create();
-		$tag_id  = self::factory()->tag->create( array( 'slug' => 'test-tag' ) );
+		$tag_id  = self::factory()->tag->create( [ 'slug' => 'test-tag' ] );
 		wp_set_object_terms( $post_id, $tag_id, 'post_tag' );
 		$meta_key = "beans_term_{$tag_id}_beans_layout";
 
@@ -146,12 +146,12 @@ class Tests_BeansGetLayout extends Test_Case {
 	 * Test beans_get_layout() should return layout for a custom taxonomy.
 	 */
 	public function test_should_return_layout_for_custom_tax() {
-		register_taxonomy( 'test_tax', 'post', array( 'public' => true ) );
+		register_taxonomy( 'test_tax', 'post', [ 'public' => true ] );
 		$post_id = self::factory()->post->create();
-		$term_id = self::factory()->term->create( array(
+		$term_id = self::factory()->term->create( [
 			'taxonomy' => 'test_tax',
 			'slug'     => 'custom-term',
-		) );
+		] );
 		wp_set_object_terms( $post_id, $term_id, 'test_tax' );
 		$meta_key = "beans_term_{$term_id}_beans_layout";
 

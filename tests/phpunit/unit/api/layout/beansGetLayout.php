@@ -27,11 +27,11 @@ class Tests_BeansGetLayout extends Test_Case {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->load_original_functions( array(
+		$this->load_original_functions( [
 			'api/layout/functions.php',
 			'api/post-meta/functions.php',
 			'api/term-meta/functions.php',
-		) );
+		] );
 	}
 
 	/**
@@ -42,7 +42,7 @@ class Tests_BeansGetLayout extends Test_Case {
 			->times( 3 )
 			->andReturn( true );
 
-		foreach ( array( 'c', 'c_sp', 'sp_c_ss' ) as $layout ) {
+		foreach ( [ 'c', 'c_sp', 'sp_c_ss' ] as $layout ) {
 
 			Monkey\Functions\expect( 'beans_get_post_meta' )
 				->once()
@@ -75,7 +75,7 @@ class Tests_BeansGetLayout extends Test_Case {
 			->with( 'page_for_posts' )
 			->andReturn( 1 );
 
-		foreach ( array( 'c', 'c_sp', 'sp_c_ss' ) as $layout ) {
+		foreach ( [ 'c', 'c_sp', 'sp_c_ss' ] as $layout ) {
 
 			Monkey\Functions\expect( 'beans_get_post_meta' )
 				->once()
@@ -106,7 +106,7 @@ class Tests_BeansGetLayout extends Test_Case {
 			->times( 3 )
 			->andReturn( true );
 
-		foreach ( array( 'c', 'c_sp', 'sp_c_ss' ) as $layout ) {
+		foreach ( [ 'c', 'c_sp', 'sp_c_ss' ] as $layout ) {
 
 			Monkey\Functions\expect( 'beans_get_term_meta' )
 				->once()

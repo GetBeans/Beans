@@ -27,9 +27,9 @@ class Tests_BeansHasSecondarySidebar extends Test_Case {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->load_original_functions( array(
+		$this->load_original_functions( [
 			'api/layout/functions.php',
-		) );
+		] );
 	}
 
 	/**
