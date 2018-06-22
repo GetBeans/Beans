@@ -28,11 +28,11 @@ class Tests_BeansCompiler_Filesystem extends Compiler_Test_Case {
 	 * Test _Beans_Compiler::filesystem() should render a report and die when no filesystem is selected.
 	 */
 	public function test_should_render_report_and_die_when_no_filesystem_selected() {
-		$compiler = new _Beans_Compiler( array() );
+		$compiler = new _Beans_Compiler( [] );
 
 		// Let's just make sure we start without the WP Filesystem being initialized.
 		unset( $GLOBALS['wp_filesystem'] );
-		remove_filter( 'filesystem_method', array( $compiler, 'modify_filesystem_method' ) );
+		remove_filter( 'filesystem_method', [ $compiler, 'modify_filesystem_method' ] );
 		add_filter( 'filesystem_method', __NAMESPACE__ . '\set_filesystem_method_to_base' );
 
 		// Set up the mocks.
@@ -62,9 +62,9 @@ class Tests_BeansCompiler_Filesystem extends Compiler_Test_Case {
 	 * Test _Beans_Compiler::filesystem() should initialize the WP Filesystem.
 	 */
 	public function test_should_init_wp_filesystem() {
-		$compiler = new _Beans_Compiler( array() );
+		$compiler = new _Beans_Compiler( [] );
 
-		add_filter( 'filesystem_method', array( $compiler, 'modify_filesystem_method' ) );
+		add_filter( 'filesystem_method', [ $compiler, 'modify_filesystem_method' ] );
 
 		// Initialize the WP Filesystem.
 		$this->assertTrue( $compiler->filesystem() );
@@ -75,7 +75,7 @@ class Tests_BeansCompiler_Filesystem extends Compiler_Test_Case {
 		$this->assertArrayHasKey( 'wp_filesystem', $GLOBALS );
 		$this->assertInstanceOf( 'WP_Filesystem_Direct', $GLOBALS['wp_filesystem'] );
 
-		remove_filter( 'filesystem_method', array( $compiler, 'modify_filesystem_method' ) );
+		remove_filter( 'filesystem_method', [ $compiler, 'modify_filesystem_method' ] );
 	}
 
 	/**
@@ -93,11 +93,11 @@ class Tests_BeansCompiler_Filesystem extends Compiler_Test_Case {
 		remove_filter( 'filesystem_method', __NAMESPACE__ . '\set_filesystem_method_to_base' );
 
 		// Next, let's run our Compiler's filesystem and check that it did initialize WP_Filesystem_Direct.
-		$compiler = new _Beans_Compiler( array() );
+		$compiler = new _Beans_Compiler( [] );
 
-		add_filter( 'filesystem_method', array( $compiler, 'modify_filesystem_method' ) );
+		add_filter( 'filesystem_method', [ $compiler, 'modify_filesystem_method' ] );
 		$this->assertTrue( $compiler->filesystem() );
 		$this->assertInstanceOf( 'WP_Filesystem_Direct', $GLOBALS['wp_filesystem'] );
-		remove_filter( 'filesystem_method', array( $compiler, 'modify_filesystem_method' ) );
+		remove_filter( 'filesystem_method', [ $compiler, 'modify_filesystem_method' ] );
 	}
 }

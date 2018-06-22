@@ -29,10 +29,10 @@ class Tests_BeansCompileLessFragments extends Compiler_Test_Case {
 	 */
 	public function test_should_compile_save_and_enqueue_less() {
 		$id        = 'compile-less-fragments';
-		$fragments = array(
+		$fragments = [
 			vfsStream::url( 'compiled/fixtures/test.less' ),
 			vfsStream::url( 'compiled/fixtures/variables.less' ),
-		);
+		];
 		$this->add_virtual_directory( $id );
 		$path = vfsStream::url( "compiled/beans/compiler/{$id}/" );
 

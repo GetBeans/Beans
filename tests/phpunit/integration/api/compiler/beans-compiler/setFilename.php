@@ -41,16 +41,16 @@ class Tests_BeansCompiler_SetFilename extends Compiler_Test_Case {
 	 */
 	public function test_should_return_hash_created_with_fragments_filemtime() {
 		$fragment = vfsStream::url( 'compiled/fixtures/jquery.test.js' );
-		$config   = array(
+		$config   = [
 			'id'           => 'test-script',
 			'type'         => 'script',
 			'format'       => false,
-			'fragments'    => array( $fragment ),
+			'fragments'    => [ $fragment ],
 			'dependencies' => false,
 			'in_footer'    => true,
 			'minify_js'    => true,
 			'version'      => null,
-		);
+		];
 		$compiler = new _Beans_Compiler( $config );
 
 		// Set up the mocks.
@@ -68,19 +68,19 @@ class Tests_BeansCompiler_SetFilename extends Compiler_Test_Case {
 	 */
 	public function test_should_exclude_external_fragments() {
 		$fragment = vfsStream::url( 'compiled/fixtures/my-game-clock.js' );
-		$config   = array(
+		$config   = [
 			'id'           => 'test-script',
 			'type'         => 'script',
 			'format'       => false,
-			'fragments'    => array(
+			'fragments'    => [
 				$fragment,
 				'http://foo.com/my-script.js', // Should skip this one.
-			),
+			],
 			'dependencies' => false,
 			'in_footer'    => true,
 			'minify_js'    => true,
 			'version'      => null,
-		);
+		];
 		$compiler = new _Beans_Compiler( $config );
 
 		// Set up the mocks.
@@ -103,16 +103,16 @@ class Tests_BeansCompiler_SetFilename extends Compiler_Test_Case {
 	 */
 	public function test_should_remove_old_file() {
 		$fragment = vfsStream::url( 'compiled/fixtures/jquery.test.js' );
-		$config   = array(
+		$config   = [
 			'id'           => 'test',
 			'type'         => 'script',
 			'format'       => 'js',
-			'fragments'    => array( $fragment ),
-			'dependencies' => array( 'jquery' ),
+			'fragments'    => [ $fragment ],
+			'dependencies' => [ 'jquery' ],
 			'in_footer'    => true,
 			'minify_js'    => true,
 			'version'      => null,
-		);
+		];
 		$compiler = new _Beans_Compiler( $config );
 
 		// Set up the mocks.

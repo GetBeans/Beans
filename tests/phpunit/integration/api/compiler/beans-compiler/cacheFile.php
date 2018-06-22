@@ -32,8 +32,8 @@ class Tests_BeansCompiler_CacheFile extends Compiler_Test_Case {
 		$config   = [
 			'id'           => 'test-jquery',
 			'type'         => 'script',
-			'fragments'    => array( vfsStream::url( 'compiled/fixtures/jquery.test.js' ) ),
-			'dependencies' => array( 'jquery' ),
+			'fragments'    => [ vfsStream::url( 'compiled/fixtures/jquery.test.js' ) ],
+			'dependencies' => [ 'jquery' ],
 			'in_footer'    => true,
 			'minify_js'    => true,
 		];
@@ -44,7 +44,7 @@ class Tests_BeansCompiler_CacheFile extends Compiler_Test_Case {
 		$this->assertSame( $this->get_compiled_jquery(), $this->get_cached_contents( $compiler->filename, $config['id'] ) );
 
 		// Clean Up.
-		remove_filter( 'filesystem_method', array( $compiler, 'modify_filesystem_method' ) );
+		remove_filter( 'filesystem_method', [ $compiler, 'modify_filesystem_method' ] );
 	}
 
 	/**
@@ -54,7 +54,7 @@ class Tests_BeansCompiler_CacheFile extends Compiler_Test_Case {
 		$config   = [
 			'id'        => 'test-js',
 			'type'      => 'script',
-			'fragments' => array( vfsStream::url( 'compiled/fixtures/my-game-clock.js' ) ),
+			'fragments' => [ vfsStream::url( 'compiled/fixtures/my-game-clock.js' ) ],
 			'in_footer' => true,
 			'minify_js' => true,
 		];
@@ -65,7 +65,7 @@ class Tests_BeansCompiler_CacheFile extends Compiler_Test_Case {
 		$this->assertSame( $this->get_compiled_js(), $this->get_cached_contents( $compiler->filename, $config['id'] ) );
 
 		// Clean Up.
-		remove_filter( 'filesystem_method', array( $compiler, 'modify_filesystem_method' ) );
+		remove_filter( 'filesystem_method', [ $compiler, 'modify_filesystem_method' ] );
 	}
 
 	/**
@@ -75,7 +75,7 @@ class Tests_BeansCompiler_CacheFile extends Compiler_Test_Case {
 		$config   = [
 			'id'        => 'test-css',
 			'type'      => 'style',
-			'fragments' => array( vfsStream::url( 'compiled/fixtures/style.css' ) ),
+			'fragments' => [ vfsStream::url( 'compiled/fixtures/style.css' ) ],
 		];
 		$compiler = $this->initialize_compiler( $config );
 
@@ -84,7 +84,7 @@ class Tests_BeansCompiler_CacheFile extends Compiler_Test_Case {
 		$this->assertSame( $this->get_compiled_css(), $this->get_cached_contents( $compiler->filename, $config['id'] ) );
 
 		// Clean Up.
-		remove_filter( 'filesystem_method', array( $compiler, 'modify_filesystem_method' ) );
+		remove_filter( 'filesystem_method', [ $compiler, 'modify_filesystem_method' ] );
 	}
 
 	/**
@@ -107,7 +107,7 @@ class Tests_BeansCompiler_CacheFile extends Compiler_Test_Case {
 		$this->assertSame( $this->get_compiled_less(), $this->get_cached_contents( $compiler->filename, $config['id'] ) );
 
 		// Clean Up.
-		remove_filter( 'filesystem_method', array( $compiler, 'modify_filesystem_method' ) );
+		remove_filter( 'filesystem_method', [ $compiler, 'modify_filesystem_method' ] );
 	}
 
 	/**
@@ -123,7 +123,7 @@ class Tests_BeansCompiler_CacheFile extends Compiler_Test_Case {
 	protected function initialize_compiler( array $config ) {
 		$compiler = new _Beans_Compiler( $config );
 
-		add_filter( 'filesystem_method', array( $compiler, 'modify_filesystem_method' ) );
+		add_filter( 'filesystem_method', [ $compiler, 'modify_filesystem_method' ] );
 		$compiler->filesystem();
 		$this->add_virtual_directory( $config['id'] );
 		$this->set_current_fragment( $compiler, $config['fragments'][0] );

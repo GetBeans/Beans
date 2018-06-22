@@ -72,11 +72,11 @@ abstract class Compiler_Test_Case extends Base_Test_Case {
 
 		// Set up the global fragments container.
 		global $_beans_compiler_added_fragments;
-		$_beans_compiler_added_fragments = array(
-			'css'  => array(),
-			'less' => array(),
-			'js'   => array(),
-		);
+		$_beans_compiler_added_fragments = [
+			'css'  => [],
+			'less' => [],
+			'js'   => [],
+		];
 
 		// Return the virtual filesystem's path to avoid wp_normalize_path converting its prefix from vfs::// to vfs:/.
 		Monkey\Functions\when( 'wp_normalize_path' )->returnArg();
@@ -185,7 +185,7 @@ abstract class Compiler_Test_Case extends Base_Test_Case {
 				$filemtimes[ $index ] = filemtime( $fragment );
 			}
 		} else {
-			$filemtimes = array( $filemtime );
+			$filemtimes = [ $filemtime ];
 		}
 
 		return sprintf(

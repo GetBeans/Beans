@@ -69,7 +69,7 @@ class Tests_BeansCompiler_CombineFragments extends Compiler_Test_Case {
 	 * Test _Beans_Compiler::combine_fragments() should return an empty string when there are no fragments to combine.
 	 */
 	public function test_should_return_empty_string_when_no_fragments() {
-		$compiler = new _Beans_Compiler( array() );
+		$compiler = new _Beans_Compiler( [] );
 
 		// Run the test.
 		$compiler->combine_fragments();
@@ -81,7 +81,7 @@ class Tests_BeansCompiler_CombineFragments extends Compiler_Test_Case {
 	 */
 	public function test_should_return_empty_string_when_fragment_does_not_exist() {
 		$fragment = vfsStream::url( 'compiled/fixtures/' ) . 'invalid-file.js';
-		$compiler = new _Beans_Compiler( array() );
+		$compiler = new _Beans_Compiler( [] );
 		$this->set_current_fragment( $compiler, $fragment );
 
 		// Run the test.
@@ -93,15 +93,15 @@ class Tests_BeansCompiler_CombineFragments extends Compiler_Test_Case {
 	 * Test _Beans_Compiler::combine_fragments() should compile the Less fragments and return the compiled CSS.
 	 */
 	public function test_should_compile_less_and_return_css() {
-		$compiler = new _Beans_Compiler( array(
+		$compiler = new _Beans_Compiler( [
 			'id'        => 'test',
 			'type'      => 'style',
 			'format'    => 'less',
-			'fragments' => array(
+			'fragments' => [
 				vfsStream::url( 'compiled/fixtures/variables.less' ),
 				vfsStream::url( 'compiled/fixtures/test.less' ),
-			),
-		) );
+			],
+		] );
 
 		// Set up the test.
 		$this->set_up_wp_filesystem( $compiler );
@@ -124,15 +124,15 @@ EOB;
 	 * Test _Beans_Compiler::combine_fragments() should return minified, compiled Less from the Less combined fragments.
 	 */
 	public function test_should_return_minified_compiled_less() {
-		$compiler = new _Beans_Compiler( array(
+		$compiler = new _Beans_Compiler( [
 			'id'        => 'test',
 			'type'      => 'style',
 			'format'    => 'less',
-			'fragments' => array(
+			'fragments' => [
 				vfsStream::url( 'compiled/fixtures/variables.less' ),
 				vfsStream::url( 'compiled/fixtures/test.less' ),
-			),
-		) );
+			],
+		] );
 
 		// Set up the test.
 		$this->set_up_wp_filesystem( $compiler );
@@ -148,15 +148,15 @@ EOB;
 	 * but "minify_js" is disabled.
 	 */
 	public function test_should_return_original_jquery_when_minify_js_disabled() {
-		$compiler = new _Beans_Compiler( array(
+		$compiler = new _Beans_Compiler( [
 			'id'           => 'test',
 			'type'         => 'script',
 			'minify_js'    => false,
-			'fragments'    => array(
+			'fragments'    => [
 				vfsStream::url( 'compiled/fixtures/jquery.test.js' ),
-			),
-			'dependencies' => array( 'jquery' ),
-		) );
+			],
+			'dependencies' => [ 'jquery' ],
+		] );
 
 		// Set up the test.
 		$this->set_up_wp_filesystem( $compiler );
@@ -172,15 +172,15 @@ EOB;
 	 * but the site is in development mode.
 	 */
 	public function test_should_always_return_original_jquery_when_in_dev_mode() {
-		$compiler = new _Beans_Compiler( array(
+		$compiler = new _Beans_Compiler( [
 			'id'           => 'test',
 			'type'         => 'script',
 			'minify_js'    => true,
-			'fragments'    => array(
+			'fragments'    => [
 				vfsStream::url( 'compiled/fixtures/jquery.test.js' ),
-			),
-			'dependencies' => array( 'jquery' ),
-		) );
+			],
+			'dependencies' => [ 'jquery' ],
+		] );
 
 		// Set up the test.
 		$this->set_up_wp_filesystem( $compiler );
@@ -195,15 +195,15 @@ EOB;
 	 * Test _Beans_Compiler::combine_fragments() should return minified jQuery.
 	 */
 	public function test_should_return_minified_jquery() {
-		$compiler = new _Beans_Compiler( array(
+		$compiler = new _Beans_Compiler( [
 			'id'           => 'test',
 			'type'         => 'script',
 			'minify_js'    => true,
-			'fragments'    => array(
+			'fragments'    => [
 				vfsStream::url( 'compiled/fixtures/jquery.test.js' ),
-			),
-			'dependencies' => array( 'jquery' ),
-		) );
+			],
+			'dependencies' => [ 'jquery' ],
+		] );
 
 		// Set up the test.
 		$this->set_up_wp_filesystem( $compiler );
@@ -219,14 +219,14 @@ EOB;
 	 * mode, but "minify_js" is disabled.
 	 */
 	public function test_should_return_original_js_when_minify_js_disabled() {
-		$compiler = new _Beans_Compiler( array(
+		$compiler = new _Beans_Compiler( [
 			'id'        => 'test',
 			'type'      => 'script',
 			'minify_js' => false,
-			'fragments' => array(
+			'fragments' => [
 				vfsStream::url( 'compiled/fixtures/my-game-clock.js' ),
-			),
-		) );
+			],
+		] );
 
 		// Set up the test.
 		$this->set_up_wp_filesystem( $compiler );
@@ -238,7 +238,7 @@ EOB;
 
 		// Clean up.
 		unset( $GLOBALS['wp_filesystem'] );
-		remove_filter( 'filesystem_method', array( $compiler, 'modify_filesystem_method' ) );
+		remove_filter( 'filesystem_method', [ $compiler, 'modify_filesystem_method' ] );
 	}
 
 	/**
@@ -246,14 +246,14 @@ EOB;
 	 * but the site is in development mode.
 	 */
 	public function test_should_always_return_original_js_when_in_dev_mode() {
-		$compiler = new _Beans_Compiler( array(
+		$compiler = new _Beans_Compiler( [
 			'id'        => 'test',
 			'type'      => 'script',
 			'minify_js' => true,
-			'fragments' => array(
+			'fragments' => [
 				vfsStream::url( 'compiled/fixtures/my-game-clock.js' ),
-			),
-		) );
+			],
+		] );
 
 		// Set up the test.
 		$this->set_up_wp_filesystem( $compiler );
@@ -264,21 +264,21 @@ EOB;
 		$this->assertSame( $this->js, $compiler->compiled_content );
 
 		// Clean up.
-		remove_filter( 'filesystem_method', array( $compiler, 'modify_filesystem_method' ) );
+		remove_filter( 'filesystem_method', [ $compiler, 'modify_filesystem_method' ] );
 	}
 
 	/**
 	 * Test _Beans_Compiler::combine_fragments() should return minified JavaScript.
 	 */
 	public function test_should_return_minified_javascript() {
-		$compiler = new _Beans_Compiler( array(
+		$compiler = new _Beans_Compiler( [
 			'id'        => 'test',
 			'type'      => 'script',
 			'minify_js' => true,
-			'fragments' => array(
+			'fragments' => [
 				vfsStream::url( 'compiled/fixtures/my-game-clock.js' ),
-			),
-		) );
+			],
+		] );
 
 		// Set up the test.
 		$this->set_up_wp_filesystem( $compiler );
@@ -289,7 +289,7 @@ EOB;
 		$this->assertSame( $this->get_compiled_js(), $compiler->compiled_content );
 
 		// Clean up.
-		remove_filter( 'filesystem_method', array( $compiler, 'modify_filesystem_method' ) );
+		remove_filter( 'filesystem_method', [ $compiler, 'modify_filesystem_method' ] );
 	}
 
 	/**
@@ -302,7 +302,7 @@ EOB;
 	 * @return void
 	 */
 	private function set_up_wp_filesystem( $compiler ) {
-		add_filter( 'filesystem_method', array( $compiler, 'modify_filesystem_method' ) );
+		add_filter( 'filesystem_method', [ $compiler, 'modify_filesystem_method' ] );
 		$compiler->filesystem();
 		$this->assertInstanceOf( 'WP_Filesystem_Direct', $GLOBALS['wp_filesystem'] );
 	}

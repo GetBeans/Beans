@@ -27,61 +27,61 @@ class Tests_BeansCompiler_Get extends Compiler_Test_Case {
 	 * Test _Beans_Compiler::_get() should fix the configuration's dependency key.
 	 */
 	public function test_should_fix_configuration_dependency_key() {
-		$config = array(
+		$config = [
 			'id'          => 'test',
 			'type'        => 'script',
-			'depedencies' => array( 'jquery' ),
-		);
+			'depedencies' => [ 'jquery' ],
+		];
 
 		$compiler = $this->create_compiler( $config );
 
 		// Run the tests.
 		$this->assertArrayNotHasKey( 'depedencies', $compiler->config );
 		$this->assertArrayHasKey( 'dependencies', $compiler->config );
-		$this->assertSame( array( 'jquery' ), $compiler->config['dependencies'] );
+		$this->assertSame( [ 'jquery' ], $compiler->config['dependencies'] );
 	}
 
 	/**
 	 * Test _Beans_Compiler::_get() should return the configuration.
 	 */
 	public function test_should_return_configuration() {
-		$compiler = $this->create_compiler( array(
+		$compiler = $this->create_compiler( [
 			'id'     => 'test',
 			'type'   => 'style',
 			'format' => 'less',
-		) );
+		] );
 		$this->assertSame(
-			array(
+			[
 				'id'           => 'test',
 				'type'         => 'style',
 				'format'       => 'less',
-				'fragments'    => array(),
+				'fragments'    => [],
 				'dependencies' => false,
 				'in_footer'    => false,
 				'minify_js'    => false,
 				'version'      => false,
-			),
+			],
 			$compiler->config
 		);
 
-		$compiler = $this->create_compiler( array(
+		$compiler = $this->create_compiler( [
 			'id'           => 'test_scripts',
 			'type'         => 'script',
-			'dependencies' => array( 'jquery' ),
+			'dependencies' => [ 'jquery' ],
 			'in_footer'    => true,
 			'version'      => null,
-		) );
+		] );
 		$this->assertSame(
-			array(
+			[
 				'id'           => 'test_scripts',
 				'type'         => 'script',
 				'format'       => false,
-				'fragments'    => array(),
-				'dependencies' => array( 'jquery' ),
+				'fragments'    => [],
+				'dependencies' => [ 'jquery' ],
 				'in_footer'    => true,
 				'minify_js'    => false,
 				'version'      => null,
-			),
+			],
 			$compiler->config
 		);
 	}
@@ -90,11 +90,11 @@ class Tests_BeansCompiler_Get extends Compiler_Test_Case {
 	 * Test _Beans_Compiler::_get() should return the absolute path to the compiled files directory.
 	 */
 	public function test_should_return_absolute_path_to_compiled_files_dir() {
-		$config = array(
+		$config = [
 			'id'     => 'test',
 			'type'   => 'style',
 			'format' => 'less',
-		);
+		];
 
 		$compiler = $this->create_compiler( $config );
 
@@ -106,10 +106,10 @@ class Tests_BeansCompiler_Get extends Compiler_Test_Case {
 	 * Test _Beans_Compiler::_get() should return URL to the compiled files directory.
 	 */
 	public function test_should_return_url_to_compiled_files_dir() {
-		$config = array(
+		$config = [
 			'id'   => 'test_scripts',
 			'type' => 'script',
-		);
+		];
 
 		$compiler = $this->create_compiler( $config );
 

@@ -81,9 +81,9 @@ abstract class Compiler_Test_Case extends Base_Test_Case {
 		parent::setUp();
 		$this->set_up_function_mocks();
 
-		$this->load_original_functions( array(
+		$this->load_original_functions( [
 			'api/compiler/class-beans-compiler.php',
-		) );
+		] );
 	}
 
 	/**
@@ -127,14 +127,14 @@ abstract class Compiler_Test_Case extends Base_Test_Case {
 	 * Set up function mocks.
 	 */
 	protected function set_up_function_mocks() {
-		Functions\when( 'wp_upload_dir' )->justReturn( array(
+		Functions\when( 'wp_upload_dir' )->justReturn( [
 			'path'    => '',
 			'url'     => '',
 			'subdir'  => '',
 			'basedir' => $this->compiled_dir,
 			'baseurl' => $this->compiled_url,
 			'error'   => false,
-		) );
+		] );
 		Functions\when( 'is_admin' )->justReturn( $this->is_admin );
 		Functions\when( 'site_url' )->justReturn( 'http:://beans.local' );
 	}
@@ -187,7 +187,7 @@ abstract class Compiler_Test_Case extends Base_Test_Case {
 	 *
 	 * @return _Beans_Compiler
 	 */
-	protected function create_compiler( array $config = array() ) {
+	protected function create_compiler( array $config = [] ) {
 		Monkey\Functions\when( 'beans_get_compiler_dir' )->justReturn( vfsStream::url( 'compiled/beans/compiler/' ) );
 		Monkey\Functions\when( 'beans_get_compiler_url' )->justReturn( $this->compiled_url . 'beans/compiler/' );
 
@@ -227,7 +227,7 @@ abstract class Compiler_Test_Case extends Base_Test_Case {
 				$filemtimes[ $index ] = filemtime( $fragment );
 			}
 		} else {
-			$filemtimes = array( $filemtime );
+			$filemtimes = [ $filemtime ];
 		}
 
 		return sprintf(

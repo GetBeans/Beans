@@ -27,7 +27,7 @@ class Tests_BeansCompiler_GetRemoteContent extends Compiler_Test_Case {
 	 * Test _Beans_Compiler::get_remote_content() should return false when fragment is empty.
 	 */
 	public function test_should_return_false_when_fragment_is_empty() {
-		$compiler = new _Beans_Compiler( array() );
+		$compiler = new _Beans_Compiler( [] );
 
 		// Run the test.
 		$this->assertfalse( $compiler->get_remote_content( '' ) );
@@ -39,9 +39,9 @@ class Tests_BeansCompiler_GetRemoteContent extends Compiler_Test_Case {
 	 */
 	public function test_should_return_empty_string_when_remote_does_not_exist() {
 		$fragment = 'http://beans.local/invalid-file.js';
-		$compiler = new _Beans_Compiler( array(
-			'fragments' => array( $fragment ),
-		) );
+		$compiler = new _Beans_Compiler( [
+			'fragments' => [ $fragment ],
+		] );
 		$this->set_current_fragment( $compiler, $fragment );
 
 		// Run the test.
@@ -53,9 +53,9 @@ class Tests_BeansCompiler_GetRemoteContent extends Compiler_Test_Case {
 	 */
 	public function test_should_return_content_when_fragment_is_relative_url() {
 		$fragment = '//fonts.googleapis.com/css?family=Lato';
-		$compiler = new _Beans_Compiler( array(
-			'fragments' => array( $fragment ),
-		) );
+		$compiler = new _Beans_Compiler( [
+			'fragments' => [ $fragment ],
+		] );
 		$this->set_current_fragment( $compiler, $fragment );
 
 		$content = $compiler->get_remote_content( $fragment );
@@ -72,9 +72,9 @@ class Tests_BeansCompiler_GetRemoteContent extends Compiler_Test_Case {
 	 */
 	public function test_should_return_content_when_fragment_is_http() {
 		$fragment = 'http://fonts.googleapis.com/css?family=Roboto';
-		$compiler = new _Beans_Compiler( array(
-			'fragments' => array( $fragment ),
-		) );
+		$compiler = new _Beans_Compiler( [
+			'fragments' => [ $fragment ],
+		] );
 		$this->set_current_fragment( $compiler, $fragment );
 
 		$content = $compiler->get_remote_content( $fragment );
@@ -91,9 +91,9 @@ class Tests_BeansCompiler_GetRemoteContent extends Compiler_Test_Case {
 	 */
 	public function test_should_return_content_when_fragment_is_https() {
 		$fragment = 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
-		$compiler = new _Beans_Compiler( array(
-			'fragments' => array( $fragment ),
-		) );
+		$compiler = new _Beans_Compiler( [
+			'fragments' => [ $fragment ],
+		] );
 		$this->set_current_fragment( $compiler, $fragment );
 
 		$content = $compiler->get_remote_content( $fragment );

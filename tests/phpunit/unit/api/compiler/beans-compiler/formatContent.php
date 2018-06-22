@@ -61,9 +61,9 @@ class Tests_BeansCompiler_FormatContent extends Compiler_Test_Case {
 	 * a style or script (per the configuration).
 	 */
 	public function test_should_return_original_content_when_type_not_style_or_script() {
-		$compiler = $this->create_compiler( array(
+		$compiler = $this->create_compiler( [
 			'type' => 'foo',
-		) );
+		] );
 
 		Monkey\Functions\expect( '_beans_is_compiler_dev_mode' )->never();
 
@@ -78,11 +78,11 @@ class Tests_BeansCompiler_FormatContent extends Compiler_Test_Case {
 	 * fragments.
 	 */
 	public function test_should_return_compiled_css() {
-		$compiler = $this->create_compiler( array(
+		$compiler = $this->create_compiler( [
 			'id'     => 'test',
 			'type'   => 'style',
 			'format' => 'less',
-		) );
+		] );
 
 		$compiled_css = <<<EOB
 body {
@@ -105,11 +105,11 @@ EOB;
 	 * Test _Beans_Compiler::format_content() should return minified, compiled CSS from the Less combined fragments.
 	 */
 	public function test_should_return_minified_compiled_css() {
-		$compiler = $this->create_compiler( array(
+		$compiler = $this->create_compiler( [
 			'id'     => 'test',
 			'type'   => 'style',
 			'format' => 'less',
-		) );
+		] );
 
 		$compiled_css = <<<EOB
 body {
@@ -136,11 +136,11 @@ EOB;
 	 * but "minify_js" is disabled.
 	 */
 	public function test_should_return_original_jquery_when_minify_js_disabled() {
-		$compiler = $this->create_compiler( array(
+		$compiler = $this->create_compiler( [
 			'id'        => 'test',
 			'type'      => 'script',
 			'minify_js' => false,
-		) );
+		] );
 
 		// Set up the mocks.
 		Monkey\Functions\expect( '_beans_is_compiler_dev_mode' )->once()->andReturn( false );
@@ -155,11 +155,11 @@ EOB;
 	 * but the site is in development mode.
 	 */
 	public function test_should_always_return_original_jquery_when_in_dev_mode() {
-		$compiler = $this->create_compiler( array(
+		$compiler = $this->create_compiler( [
 			'id'        => 'test',
 			'type'      => 'script',
 			'minify_js' => true,
-		) );
+		] );
 
 		// Set up the mocks.
 		Monkey\Functions\expect( '_beans_is_compiler_dev_mode' )->once()->andReturn( true );
@@ -174,11 +174,11 @@ EOB;
 	 * and the site is not in development mode.
 	 */
 	public function test_should_return_minified_jquery_when_not_in_dev_mode_and_minify_js_enabled() {
-		$compiler = $this->create_compiler( array(
+		$compiler = $this->create_compiler( [
 			'id'        => 'test',
 			'type'      => 'script',
 			'minify_js' => true,
-		) );
+		] );
 
 		$compiled_jquery = <<<EOB
 (function($){'use strict';var init=function(){/$('some-button').on('click',clickHandler);}
@@ -201,11 +201,11 @@ EOB;
 	 * mode, but "minify_js" is disabled.
 	 */
 	public function test_should_return_original_js_when_minify_js_disabled() {
-		$compiler = $this->create_compiler( array(
+		$compiler = $this->create_compiler( [
 			'id'        => 'test',
 			'type'      => 'script',
 			'minify_js' => false,
-		) );
+		] );
 
 		// Set up the mocks.
 		Monkey\Functions\expect( '_beans_is_compiler_dev_mode' )->once()->andReturn( false );
@@ -220,11 +220,11 @@ EOB;
 	 * but the site is in development mode.
 	 */
 	public function test_should_always_return_original_js_when_in_dev_mode() {
-		$compiler = $this->create_compiler( array(
+		$compiler = $this->create_compiler( [
 			'id'        => 'test',
 			'type'      => 'script',
 			'minify_js' => true,
-		) );
+		] );
 
 		// Set up the mocks.
 		Monkey\Functions\expect( '_beans_is_compiler_dev_mode' )->once()->andReturn( true );
@@ -239,11 +239,11 @@ EOB;
 	 * and the site is not in development mode.
 	 */
 	public function test_should_return_minified_js_when_not_in_dev_mode_and_minify_js_enabled() {
-		$compiler = $this->create_compiler( array(
+		$compiler = $this->create_compiler( [
 			'id'        => 'test',
 			'type'      => 'script',
 			'minify_js' => true,
-		) );
+		] );
 
 		$compiled_js = <<<EOB
 class MyGameClock{constructor(maxTime){this.maxTime=maxTime;this.currentClock=0;}

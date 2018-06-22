@@ -36,7 +36,7 @@ class Tests_BeansCompiler_GetFunctionContent extends Compiler_Test_Case {
 		$this->set_current_fragment( $compiler, 'function_does_not_exists' );
 		$this->assertfalse( $compiler->get_function_content() );
 
-		$this->set_current_fragment( $compiler, array( $this, 'method_does_not_exist' ) );
+		$this->set_current_fragment( $compiler, [ $this, 'method_does_not_exist' ] );
 		$this->assertfalse( $compiler->get_function_content() );
 	}
 
@@ -66,7 +66,7 @@ class Tests_BeansCompiler_GetFunctionContent extends Compiler_Test_Case {
 		$mock->shouldReceive( 'get_content' )
 			->once()
 			->andReturn( 'Beans is innovative!' );
-		$this->set_current_fragment( $compiler, array( $mock, 'get_content' ) );
+		$this->set_current_fragment( $compiler, [ $mock, 'get_content' ] );
 
 		// Run the test.
 		$this->assertSame( 'Beans is innovative!', $compiler->get_function_content() );

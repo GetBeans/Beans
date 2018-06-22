@@ -56,10 +56,10 @@ class Tests_BeansCompilerAddFragment extends Compiler_Options_Test_Case {
 		$this->assertArrayHasKey( 'test-css', $_beans_compiler_added_fragments['css'] );
 		$this->assertSame( [ $fragment ], $_beans_compiler_added_fragments['css']['test-css'] );
 
-		$fragments = array(
+		$fragments = [
 			vfsStream::url( 'compiled/fixtures/test.less' ),
 			vfsStream::url( 'compiled/fixtures/variables.less' ),
-		);
+		];
 		$this->assertNull( beans_compiler_add_fragment( 'test-less', $fragments, 'less' ) );
 		$this->assertArrayHasKey( 'test-less', $_beans_compiler_added_fragments['less'] );
 		$this->assertSame( $fragments, $_beans_compiler_added_fragments['less']['test-less'] );
@@ -81,10 +81,10 @@ class Tests_BeansCompilerAddFragment extends Compiler_Options_Test_Case {
 
 		$_beans_compiler_added_fragments['less']['test-css'] = [ 'theme/base.less' ];
 
-		$fragments = array(
+		$fragments = [
 			vfsStream::url( 'compiled/fixtures/test.less' ),
 			vfsStream::url( 'compiled/fixtures/variables.less' ),
-		);
+		];
 		$this->assertNull( beans_compiler_add_fragment( 'test-less', $fragments, 'less' ) );
 		$this->assertContains( $fragments[0], $_beans_compiler_added_fragments['less']['test-less'] );
 		$this->assertContains( $fragments[1], $_beans_compiler_added_fragments['less']['test-less'] );

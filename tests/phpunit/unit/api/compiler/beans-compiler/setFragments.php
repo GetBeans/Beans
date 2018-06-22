@@ -29,22 +29,22 @@ class Tests_BeansCompiler_SetFragments extends Compiler_Test_Case {
 	 * removed.
 	 */
 	public function test_should_return_unchanged_fragments() {
-		$config = array(
+		$config = [
 			'id'        => 'test',
 			'type'      => 'style',
 			'format'    => 'less',
-			'fragments' => array(
+			'fragments' => [
 				vfsStream::url( 'compiled/fixtures/variables.less' ),
 				vfsStream::url( 'compiled/fixtures/test.less' ),
-			),
-		);
+			],
+		];
 
 		$compiler = $this->create_compiler( $config );
 
 		// Set up the mock.
 		Monkey\Functions\expect( 'beans_get' )
 			->once()
-			->with( 'test', array() )
+			->with( 'test', [] )
 			->andReturn();
 
 		// Check before we start.
@@ -60,24 +60,24 @@ class Tests_BeansCompiler_SetFragments extends Compiler_Test_Case {
 	 * variable.
 	 */
 	public function test_should_return_fragments_merged_with_global() {
-		$config = array(
+		$config = [
 			'id'        => 'test',
 			'type'      => 'style',
 			'format'    => 'less',
-			'fragments' => array(
+			'fragments' => [
 				vfsStream::url( 'compiled/fixtures/variables.less' ),
 				vfsStream::url( 'compiled/fixtures/test.less' ),
-			),
-		);
+			],
+		];
 
 		$compiler = $this->create_compiler( $config );
 		global $_beans_compiler_added_fragments;
-		$_beans_compiler_added_fragments['less'] = array(
-			'test' => array(
+		$_beans_compiler_added_fragments['less'] = [
+			'test' => [
 				'some-file.less',
 				'another-file.less',
-			),
-		);
+			],
+		];
 
 		// Set up the mock.
 		Monkey\Functions\expect( 'beans_get' )
@@ -98,22 +98,22 @@ class Tests_BeansCompiler_SetFragments extends Compiler_Test_Case {
 	 * Test _Beans_Compiler::set_fragments() should fire the "beans_compiler_fragments_{id}" event.
 	 */
 	public function test_should_fire_event() {
-		$config = array(
+		$config = [
 			'id'        => 'test',
 			'type'      => 'style',
 			'format'    => 'less',
-			'fragments' => array(
+			'fragments' => [
 				vfsStream::url( 'compiled/fixtures/variables.less' ),
 				vfsStream::url( 'compiled/fixtures/test.less' ),
-			),
-		);
+			],
+		];
 
 		$compiler = $this->create_compiler( $config );
 
 		// Set up the mock.
 		Monkey\Functions\expect( 'beans_get' )
 			->once()
-			->with( 'test', array() )
+			->with( 'test', [] )
 			->andReturn();
 		Monkey\Filters\expectApplied( 'beans_compiler_fragments_test' )
 			->once()

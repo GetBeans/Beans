@@ -27,7 +27,7 @@ class Tests_BeansCompiler_GetRemoteContent extends Compiler_Test_Case {
 	 * Test _Beans_Compiler::get_remote_content() should return false when the fragment is empty.
 	 */
 	public function test_should_return_false_when_fragment_is_empty() {
-		$compiler = $this->create_compiler( array() );
+		$compiler = $this->create_compiler( [] );
 
 		// Run the tests.
 		$this->assertfalse( $compiler->get_remote_content() );
@@ -46,7 +46,7 @@ class Tests_BeansCompiler_GetRemoteContent extends Compiler_Test_Case {
 	public function test_should_return_empty_string_when_remote_does_not_exist_on_http() {
 		// Set up the compiler.
 		$fragment = 'http://beans.local/invalid-file.js';
-		$compiler = $this->create_compiler( array() );
+		$compiler = $this->create_compiler( [] );
 		$this->set_current_fragment( $compiler, $fragment );
 
 		// Set up the mocks.
@@ -64,12 +64,12 @@ class Tests_BeansCompiler_GetRemoteContent extends Compiler_Test_Case {
 	public function test_should_return_empty_string_when_remote_does_not_exist_on_https() {
 		// Set up the compiler.
 		$fragment = 'http://beans.local/invalid-file.js';
-		$compiler = $this->create_compiler( array() );
+		$compiler = $this->create_compiler( [] );
 		$this->set_current_fragment( $compiler, $fragment );
 
 		// Set up the mocks.
 		Monkey\Functions\expect( 'wp_remote_get' )->twice();
-		Monkey\Functions\expect( 'is_wp_error' )->twice()->andReturnValues( array( false, true ) );
+		Monkey\Functions\expect( 'is_wp_error' )->twice()->andReturnValues( [ false, true ] );
 
 		// Run the test.
 		$this->assertSame( '', $compiler->get_remote_content() );
@@ -82,7 +82,7 @@ class Tests_BeansCompiler_GetRemoteContent extends Compiler_Test_Case {
 	public function test_should_retry_and_return_false_when_remote_file_does_not_exist() {
 		// Set up the compiler.
 		$fragment = 'http://beans.local/invalid-file.js';
-		$compiler = $this->create_compiler( array() );
+		$compiler = $this->create_compiler( [] );
 		$this->set_current_fragment( $compiler, $fragment );
 
 		// Set up the mocks.
@@ -92,18 +92,18 @@ class Tests_BeansCompiler_GetRemoteContent extends Compiler_Test_Case {
 			->once()
 			->ordered()
 			// No "body" element is returned.
-			->andReturn( array() )
+			->andReturn( [] )
 			->andAlsoExpectIt()
 			// During the retry, it should change to URL to https.
 			->with( 'https://beans.local/invalid-file.js' )
 			->once()
 			->ordered()
-			->andReturn( array(
+			->andReturn( [
 				'body'     => '',
-				'response' => array(
+				'response' => [
 					'code' => 404, // HTTP code is 404 and not 200.
-				),
-			) );
+				],
+			] );
 
 		// Run the test.
 		$this->assertFalse( $compiler->get_remote_content() );
@@ -115,14 +115,14 @@ class Tests_BeansCompiler_GetRemoteContent extends Compiler_Test_Case {
 	public function test_should_return_content_when_relative_url() {
 		// Set up the compiler.
 		$fragment = '//fonts.googleapis.com/css?family=Lato';
-		$compiler = $this->create_compiler( array() );
+		$compiler = $this->create_compiler( [] );
 		$this->set_current_fragment( $compiler, $fragment );
-		$request = array(
+		$request = [
 			'body'     => $this->get_expected_content(),
-			'response' => array(
+			'response' => [
 				'code' => 200,
-			),
-		);
+			],
+		];
 
 		// Set up the mocks.
 		Monkey\Functions\expect( 'is_wp_error' )->once()->andReturn( false );
@@ -151,14 +151,14 @@ class Tests_BeansCompiler_GetRemoteContent extends Compiler_Test_Case {
 	public function test_should_return_content_when_http() {
 		// Set up the compiler.
 		$fragment = 'http://fonts.googleapis.com/css?family=Lato';
-		$compiler = $this->create_compiler( array() );
+		$compiler = $this->create_compiler( [] );
 		$this->set_current_fragment( $compiler, $fragment );
-		$request = array(
+		$request = [
 			'body'     => $this->get_expected_content(),
-			'response' => array(
+			'response' => [
 				'code' => 200,
-			),
-		);
+			],
+		];
 
 		// Set up the mocks.
 		Monkey\Functions\expect( 'is_wp_error' )->once()->andReturn( false );
@@ -187,14 +187,14 @@ class Tests_BeansCompiler_GetRemoteContent extends Compiler_Test_Case {
 	public function test_should_return_content_when_https() {
 		// Set up the compiler.
 		$fragment = 'https://fonts.googleapis.com/css?family=Lato';
-		$compiler = $this->create_compiler( array() );
+		$compiler = $this->create_compiler( [] );
 		$this->set_current_fragment( $compiler, $fragment );
-		$request = array(
+		$request = [
 			'body'     => $this->get_expected_content(),
-			'response' => array(
+			'response' => [
 				'code' => 200,
-			),
-		);
+			],
+		];
 
 		// Set up the mocks.
 		Monkey\Functions\expect( 'is_wp_error' )->once()->andReturn( false );

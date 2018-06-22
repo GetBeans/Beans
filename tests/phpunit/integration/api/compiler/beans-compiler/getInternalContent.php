@@ -28,7 +28,7 @@ class Tests_BeansCompiler_GetInternalContent extends Compiler_Test_Case {
 	 * Test _Beans_Compiler::get_internal_content() should return false when fragment is empty.
 	 */
 	public function test_should_return_false_when_fragment_is_empty() {
-		$compiler = new _Beans_Compiler( array() );
+		$compiler = new _Beans_Compiler( [] );
 
 		// Run the test.
 		$this->assertfalse( $compiler->get_internal_content( '' ) );
@@ -40,9 +40,9 @@ class Tests_BeansCompiler_GetInternalContent extends Compiler_Test_Case {
 	public function test_should_return_false_when_file_does_not_exist() {
 		// Set up the compiler.
 		$fragment = vfsStream::url( 'compiled/fixtures/' ) . 'invalid-file.js';
-		$compiler = new _Beans_Compiler( array(
-			'fragments' => array( $fragment ),
-		) );
+		$compiler = new _Beans_Compiler( [
+			'fragments' => [ $fragment ],
+		] );
 		$this->set_current_fragment( $compiler, $fragment );
 
 		// Run the test.
@@ -55,13 +55,13 @@ class Tests_BeansCompiler_GetInternalContent extends Compiler_Test_Case {
 	public function test_should_return_fragment_contents() {
 		// Set up the compiler.
 		$fragment = vfsStream::url( 'compiled/fixtures/test.less' );
-		$compiler = new _Beans_Compiler( array(
-			'fragments' => array( $fragment ),
-		) );
+		$compiler = new _Beans_Compiler( [
+			'fragments' => [ $fragment ],
+		] );
 		$this->set_current_fragment( $compiler, $fragment );
 
 		// Set the WP Filesystem.
-		add_filter( 'filesystem_method', array( $compiler, 'modify_filesystem_method' ) );
+		add_filter( 'filesystem_method', [ $compiler, 'modify_filesystem_method' ] );
 		$compiler->filesystem();
 		$this->assertInstanceOf( 'WP_Filesystem_Direct', $GLOBALS['wp_filesystem'] );
 
@@ -71,6 +71,6 @@ class Tests_BeansCompiler_GetInternalContent extends Compiler_Test_Case {
 		$this->assertContains( 'color: @body-color;', $contents );
 
 		// Clean up.
-		remove_filter( 'filesystem_method', array( $compiler, 'modify_filesystem_method' ) );
+		remove_filter( 'filesystem_method', [ $compiler, 'modify_filesystem_method' ] );
 	}
 }

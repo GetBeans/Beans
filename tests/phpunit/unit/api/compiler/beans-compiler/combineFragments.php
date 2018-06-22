@@ -69,7 +69,7 @@ class Tests_BeansCompiler_CombineFragments extends Compiler_Test_Case {
 	 * Test _Beans_Compiler::combine_fragments() should return an empty string when there are no fragments to combine.
 	 */
 	public function test_should_return_empty_string_when_no_fragments() {
-		$compiler = $this->create_compiler( array() );
+		$compiler = $this->create_compiler( [] );
 
 		// Run the test.
 		$compiler->combine_fragments();
@@ -81,14 +81,14 @@ class Tests_BeansCompiler_CombineFragments extends Compiler_Test_Case {
 	 */
 	public function test_should_return_empty_string_when_fragment_does_not_exist() {
 		$fragment = vfsStream::url( 'compiled/fixtures/' ) . 'invalid-file.js';
-		$compiler = $this->create_compiler( array(
+		$compiler = $this->create_compiler( [
 			'id'           => 'test-script',
 			'type'         => 'script',
-			'fragments'    => array( $fragment ),
-			'dependencies' => array( 'javascript' ),
+			'fragments'    => [ $fragment ],
+			'dependencies' => [ 'javascript' ],
 			'in_footer'    => true,
 			'minify_js'    => true,
-		) );
+		] );
 
 		// Set up the mocks.
 		Monkey\Functions\when( 'beans_url_to_path' )->returnArg();
@@ -104,15 +104,15 @@ class Tests_BeansCompiler_CombineFragments extends Compiler_Test_Case {
 	 * Test _Beans_Compiler::combine_fragments() should compile the LESS fragments and return the compiled CSS.
 	 */
 	public function test_should_compile_less_and_return_css() {
-		$compiler = $this->create_compiler( array(
+		$compiler = $this->create_compiler( [
 			'id'        => 'test',
 			'type'      => 'style',
 			'format'    => 'less',
-			'fragments' => array(
+			'fragments' => [
 				vfsStream::url( 'compiled/fixtures/variables.less' ),
 				vfsStream::url( 'compiled/fixtures/test.less' ),
-			),
-		) );
+			],
+		] );
 
 		// Set up the mocks.
 		Monkey\Functions\expect( 'beans_url_to_path' )->never();
@@ -137,15 +137,15 @@ EOB;
 	 * Test _Beans_Compiler::combine_fragments() should return minified, compiled CSS from the Less combined fragments.
 	 */
 	public function test_should_return_minified_compiled_css() {
-		$compiler = $this->create_compiler( array(
+		$compiler = $this->create_compiler( [
 			'id'        => 'test',
 			'type'      => 'style',
 			'format'    => 'less',
-			'fragments' => array(
+			'fragments' => [
 				vfsStream::url( 'compiled/fixtures/variables.less' ),
 				vfsStream::url( 'compiled/fixtures/test.less' ),
-			),
-		) );
+			],
+		] );
 
 		// Set up the mocks.
 		Monkey\Functions\expect( 'beans_url_to_path' )->never();
@@ -167,15 +167,15 @@ EOB;
 	 * but "minify_js" is disabled.
 	 */
 	public function test_should_return_original_jquery_when_minify_js_disabled() {
-		$compiler = $this->create_compiler( array(
+		$compiler = $this->create_compiler( [
 			'id'           => 'test',
 			'type'         => 'script',
 			'minify_js'    => false,
-			'fragments'    => array(
+			'fragments'    => [
 				vfsStream::url( 'compiled/fixtures/jquery.test.js' ),
-			),
-			'dependencies' => array( 'jquery' ),
-		) );
+			],
+			'dependencies' => [ 'jquery' ],
+		] );
 
 		// Set up the mocks.
 		Monkey\Functions\expect( 'beans_url_to_path' )->never();
@@ -193,15 +193,15 @@ EOB;
 	 * but the site is in development mode.
 	 */
 	public function test_should_always_return_original_jquery_when_in_dev_mode() {
-		$compiler = $this->create_compiler( array(
+		$compiler = $this->create_compiler( [
 			'id'           => 'test',
 			'type'         => 'script',
 			'minify_js'    => true,
-			'fragments'    => array(
+			'fragments'    => [
 				vfsStream::url( 'compiled/fixtures/jquery.test.js' ),
-			),
-			'dependencies' => array( 'jquery' ),
-		) );
+			],
+			'dependencies' => [ 'jquery' ],
+		] );
 
 		// Set up the mocks.
 		Monkey\Functions\expect( 'beans_url_to_path' )->never();
@@ -218,15 +218,15 @@ EOB;
 	 * Test _Beans_Compiler::combine_fragments() should return minified jQuery.
 	 */
 	public function test_should_return_minified_jquery() {
-		$compiler = $this->create_compiler( array(
+		$compiler = $this->create_compiler( [
 			'id'           => 'test',
 			'type'         => 'script',
 			'minify_js'    => true,
-			'fragments'    => array(
+			'fragments'    => [
 				vfsStream::url( 'compiled/fixtures/jquery.test.js' ),
-			),
-			'dependencies' => array( 'jquery' ),
-		) );
+			],
+			'dependencies' => [ 'jquery' ],
+		] );
 
 		// Set up the mocks.
 		Monkey\Functions\expect( 'beans_url_to_path' )->never();
@@ -244,14 +244,14 @@ EOB;
 	 * mode, but "minify_js" is disabled.
 	 */
 	public function test_should_return_original_js_when_minify_js_disabled() {
-		$compiler = $this->create_compiler( array(
+		$compiler = $this->create_compiler( [
 			'id'        => 'test',
 			'type'      => 'script',
 			'minify_js' => false,
-			'fragments' => array(
+			'fragments' => [
 				vfsStream::url( 'compiled/fixtures/my-game-clock.js' ),
-			),
-		) );
+			],
+		] );
 
 		// Set up the mocks.
 		Monkey\Functions\expect( 'beans_url_to_path' )->never();
@@ -269,14 +269,14 @@ EOB;
 	 * but the site is in development mode.
 	 */
 	public function test_should_always_return_original_js_when_in_dev_mode() {
-		$compiler = $this->create_compiler( array(
+		$compiler = $this->create_compiler( [
 			'id'        => 'test',
 			'type'      => 'script',
 			'minify_js' => true,
-			'fragments' => array(
+			'fragments' => [
 				vfsStream::url( 'compiled/fixtures/my-game-clock.js' ),
-			),
-		) );
+			],
+		] );
 
 		// Set up the mocks.
 		Monkey\Functions\expect( 'beans_url_to_path' )->never();
@@ -293,14 +293,14 @@ EOB;
 	 * Test _Beans_Compiler::combine_fragments() should return minified JavaScript.
 	 */
 	public function test_should_return_minified_javascript() {
-		$compiler = $this->create_compiler( array(
+		$compiler = $this->create_compiler( [
 			'id'        => 'test',
 			'type'      => 'script',
 			'minify_js' => true,
-			'fragments' => array(
+			'fragments' => [
 				vfsStream::url( 'compiled/fixtures/my-game-clock.js' ),
-			),
-		) );
+			],
+		] );
 
 		// Set up the mocks.
 		Monkey\Functions\expect( 'beans_url_to_path' )->never();

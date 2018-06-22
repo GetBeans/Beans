@@ -24,10 +24,10 @@ abstract class Compiler_Options_Test_Case extends Base_Test_Case {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->load_original_functions( array(
+		$this->load_original_functions( [
 			'api/compiler/class-beans-compiler-options.php',
 			'api/options/functions.php',
-		) );
+		] );
 
 		$this->setup_common_wp_stubs();
 	}

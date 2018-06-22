@@ -50,10 +50,10 @@ abstract class Base_Test_Case extends Test_Case {
 		$this->compiled_dir = vfsStream::url( 'compiled' );
 		$this->compiled_url = 'http:://beans.test/compiled/';
 
-		$this->load_original_functions( array(
+		$this->load_original_functions( [
 			'api/utilities/functions.php',
 			'api/compiler/functions.php',
-		) );
+		] );
 
 		$this->setup_common_wp_stubs();
 	}
@@ -73,16 +73,16 @@ abstract class Base_Test_Case extends Test_Case {
 	 * Get the virtual filesystem's structure.
 	 */
 	protected function get_virtual_structure() {
-		return array(
-			'beans' => array(
-				'compiler'       => array(
+		return [
+			'beans' => [
+				'compiler'       => [
 					'index.php' => '',
-				),
-				'admin-compiler' => array(
+				],
+				'admin-compiler' => [
 					'index.php' => '',
-				),
-			),
-		);
+				],
+			],
+		];
 	}
 
 	/**

@@ -71,16 +71,16 @@ class Tests_BeansCompiler_RunCompiler extends Compiler_Test_Case {
 	 */
 	public function test_should_enqueue_existing_cached_file_when_no_modifications() {
 		$fragment = vfsStream::url( 'compiled/fixtures/jquery.test.js' );
-		$config   = array(
+		$config   = [
 			'id'           => 'test-jquery',
 			'type'         => 'script',
 			'format'       => 'js',
-			'fragments'    => array( vfsStream::url( 'compiled/fixtures/jquery.test.js' ) ),
-			'dependencies' => array( 'jquery' ),
+			'fragments'    => [ vfsStream::url( 'compiled/fixtures/jquery.test.js' ) ],
+			'dependencies' => [ 'jquery' ],
 			'in_footer'    => true,
 			'minify_js'    => true,
 			'version'      => '1.5.0',
-		);
+		];
 		$compiler = new _Beans_Compiler( $config );
 
 		// Store the cached file into the virtual filesystem.
@@ -109,16 +109,16 @@ class Tests_BeansCompiler_RunCompiler extends Compiler_Test_Case {
 	 */
 	public function test_should_recompile_when_fragments_change() {
 		$fragment = vfsStream::url( 'compiled/fixtures/jquery.test.js' );
-		$config   = array(
+		$config   = [
 			'id'           => 'test-script',
 			'type'         => 'script',
 			'format'       => 'js',
-			'fragments'    => array( $fragment ),
-			'dependencies' => array( 'jquery' ),
+			'fragments'    => [ $fragment ],
+			'dependencies' => [ 'jquery' ],
 			'in_footer'    => true,
 			'minify_js'    => true,
 			'version'      => null,
-		);
+		];
 		$compiler = new _Beans_Compiler( $config );
 
 		/**
@@ -179,16 +179,16 @@ class Tests_BeansCompiler_RunCompiler extends Compiler_Test_Case {
 	 */
 	public function test_should_compile_save_and_enqueue_jquery() {
 		$fragment = vfsStream::url( 'compiled/fixtures/jquery.test.js' );
-		$config   = array(
+		$config   = [
 			'id'           => 'test-jquery',
 			'type'         => 'script',
 			'format'       => 'js',
-			'fragments'    => array( $fragment ),
-			'dependencies' => array( 'jquery' ),
+			'fragments'    => [ $fragment ],
+			'dependencies' => [ 'jquery' ],
 			'in_footer'    => true,
 			'minify_js'    => true,
 			'version'      => null,
-		);
+		];
 		$compiler = new _Beans_Compiler( $config );
 
 		// Set up the virtual directory.
@@ -211,16 +211,16 @@ class Tests_BeansCompiler_RunCompiler extends Compiler_Test_Case {
 	 */
 	public function test_should_compile_save_and_enqueue_js() {
 		$fragment = vfsStream::url( 'compiled/fixtures/my-game-clock.js' );
-		$config   = array(
+		$config   = [
 			'id'           => 'test-js',
 			'type'         => 'script',
 			'format'       => 'js',
-			'fragments'    => array( $fragment ),
-			'dependencies' => array( 'jquery' ),
+			'fragments'    => [ $fragment ],
+			'dependencies' => [ 'jquery' ],
 			'in_footer'    => true,
 			'minify_js'    => true,
 			'version'      => null,
-		);
+		];
 		$compiler = new _Beans_Compiler( $config );
 
 		// Set up the virtual directory.
@@ -243,16 +243,16 @@ class Tests_BeansCompiler_RunCompiler extends Compiler_Test_Case {
 	 */
 	public function test_should_compile_save_and_enqueue_css() {
 		$fragment = vfsStream::url( 'compiled/fixtures/style.css' );
-		$config   = array(
+		$config   = [
 			'id'           => 'test-css',
 			'type'         => 'style',
 			'format'       => 'css',
-			'fragments'    => array( $fragment ),
+			'fragments'    => [ $fragment ],
 			'dependencies' => false,
 			'in_footer'    => false,
 			'minify_js'    => false,
 			'version'      => '1.5.0',
-		);
+		];
 		$compiler = new _Beans_Compiler( $config );
 
 		// Set up the virtual directory.
@@ -274,19 +274,19 @@ class Tests_BeansCompiler_RunCompiler extends Compiler_Test_Case {
 	 * WordPress.
 	 */
 	public function test_should_compile_save_and_enqueue_less() {
-		$config   = array(
+		$config   = [
 			'id'           => 'test-css',
 			'type'         => 'style',
 			'format'       => 'less',
-			'fragments'    => array(
+			'fragments'    => [
 				vfsStream::url( 'compiled/fixtures/variables.less' ),
 				vfsStream::url( 'compiled/fixtures/test.less' ),
-			),
+			],
 			'dependencies' => false,
 			'in_footer'    => false,
 			'minify_js'    => false,
 			'version'      => '1.5.0',
-		);
+		];
 		$compiler = new _Beans_Compiler( $config );
 
 		// Set up the virtual directory.
