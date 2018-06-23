@@ -40,7 +40,7 @@ function beans_updater( $value ) {
 
 	// Query the Beans REST API if the transient is expired.
 	if ( empty( $data ) ) {
-		$response = wp_remote_get( 'http://www.getbeans.io/rest-api/', array( 'sslverify' => false ) );
+		$response = wp_remote_get( 'https://www.getbeans.io/rest-api/' );
 
 		// Retrieve data from the body and decode json format.
 		$data = json_decode( wp_remote_retrieve_body( $response ), true );
