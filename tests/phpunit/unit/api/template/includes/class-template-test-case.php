@@ -60,7 +60,7 @@ abstract class Template_Test_Case extends Test_Case {
 	 */
 	private function set_up_virtual_filesystem() {
 		// Create the file structure and load each file's content.
-		$file_structure                             = [
+		$file_structure = [
 			'fragments' => [
 				'branding.php'  => '<div class="tm-site-branding"><a href="http://example.com">Beans Tests</a></div>',
 				'post-body.php' => '<div class="tm-article-content"><p>Nulla in orci condimentum, facilisis ex et, blandit augue.</p></div>',
