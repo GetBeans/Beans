@@ -26,7 +26,7 @@ class Tests_BeansLoadFragmentFile extends Test_Case {
 	 */
 	public function test_should_return_false_when_short_circuiting() {
 
-		foreach ( array( 'branding', 'post-body' ) as $fragment ) {
+		foreach ( [ 'branding', 'post-body' ] as $fragment ) {
 			Monkey\Functions\expect( 'beans_test_fragment_short_circuit' )
 				->with( false )
 				->once()

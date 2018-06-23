@@ -39,10 +39,10 @@ abstract class Template_Test_Case extends Test_Case {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->load_original_functions( array(
+		$this->load_original_functions( [
 			'api/template/functions.php',
 			'api/utilities/functions.php',
-		) );
+		] );
 
 		$this->set_up_virtual_filesystem();
 
@@ -60,16 +60,16 @@ abstract class Template_Test_Case extends Test_Case {
 	 */
 	private function set_up_virtual_filesystem() {
 		// Create the file structure and load each file's content.
-		$file_structure                             = array(
-			'fragments' => array(
+		$file_structure                             = [
+			'fragments' => [
 				'branding.php'  => '<div class="tm-site-branding"><a href="http://example.com">Beans Tests</a></div>',
 				'post-body.php' => '<div class="tm-article-content"><p>Nulla in orci condimentum, facilisis ex et, blandit augue.</p></div>',
-			),
-			'structure' => array(
+			],
+			'structure' => [
 				'content.php' => '',
 				'header.php'  => '',
-			),
-		);
+			],
+		];
 		$file_structure['structure']['content.php'] = '<article>' . $file_structure['fragments']['post-body.php'] . '</article>';
 		$file_structure['structure']['header.php']  = '<header>' . $file_structure['fragments']['branding.php'] . '</header>';
 

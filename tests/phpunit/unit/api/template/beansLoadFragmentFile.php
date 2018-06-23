@@ -28,7 +28,7 @@ class Tests_BeansLoadFragmentFile extends Template_Test_Case {
 	 */
 	public function test_should_return_false_when_short_circuiting() {
 
-		foreach ( array( 'branding', 'post-body' ) as $fragment ) {
+		foreach ( [ 'branding', 'post-body' ] as $fragment ) {
 			Monkey\Filters\expectApplied( "beans_pre_load_fragment_{$fragment}" )
 				->with( false )
 				->once()
@@ -56,7 +56,7 @@ class Tests_BeansLoadFragmentFile extends Template_Test_Case {
 	 */
 	public function test_should_return_true_after_loading_fragment() {
 
-		foreach ( array( 'branding', 'post-body' ) as $fragment ) {
+		foreach ( [ 'branding', 'post-body' ] as $fragment ) {
 			Monkey\Filters\expectApplied( "beans_pre_load_fragment_{$fragment}" )
 				->with( false )
 				->once()
