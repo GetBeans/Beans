@@ -51,7 +51,7 @@ class Tests_BeansIsAdminTerm extends Beans_Term_Meta_Test_Case {
 			->with( 'taxonomy' )
 			->andReturn( 'selected-taxonomy' );
 
-		$this->assertTrue( _beans_is_admin_term( array( 'selected-taxonomy', 'other-taxonomy' ) ) );
+		$this->assertTrue( _beans_is_admin_term( [ 'selected-taxonomy', 'other-taxonomy' ] ) );
 	}
 
 	/**
@@ -63,7 +63,7 @@ class Tests_BeansIsAdminTerm extends Beans_Term_Meta_Test_Case {
 			->with( 'taxonomy' )
 			->andReturn( 'selected-taxonomy' );
 
-		$this->assertFalse( _beans_is_admin_term( array( 'sample-taxonomy', 'other-taxonomy' ) ) );
+		$this->assertFalse( _beans_is_admin_term( [ 'sample-taxonomy', 'other-taxonomy' ] ) );
 	}
 
 }

@@ -29,9 +29,9 @@ class Tests_BeansRegisterTermMeta extends Beans_Term_Meta_Test_Case {
 	public function test_should_return_false_when_current_taxonomy_not_concerned() {
 		Monkey\Functions\expect( '_beans_is_admin_term' )
 			->once()
-			->with( array( 'sample-taxonomy' ) )
+			->with( [ 'sample-taxonomy' ] )
 			->andReturn( false );
-		$this->assertFalse( beans_register_term_meta( static::$test_data, array( 'sample-taxonomy' ), 'tm-beans' ) );
+		$this->assertFalse( beans_register_term_meta( static::$test_data, [ 'sample-taxonomy' ], 'tm-beans' ) );
 	}
 
 	/**
@@ -40,7 +40,7 @@ class Tests_BeansRegisterTermMeta extends Beans_Term_Meta_Test_Case {
 	public function test_should_return_false_when_not_is_admin() {
 		Monkey\Functions\expect( '_beans_is_admin_term' )
 			->once()
-			->with( array( 'sample-taxonomy' ) )
+			->with( [ 'sample-taxonomy' ] )
 			->andReturn( true );
 		Monkey\Functions\expect( 'is_admin' )->once()->andReturn( false );
 
@@ -59,7 +59,7 @@ class Tests_BeansRegisterTermMeta extends Beans_Term_Meta_Test_Case {
 	public function test_should_return_false_when_fields_cannot_be_registered() {
 		Monkey\Functions\expect( '_beans_is_admin_term' )
 			->once()
-			->with( array( 'sample-taxonomy' ) )
+			->with( [ 'sample-taxonomy' ] )
 			->andReturn( true );
 		Monkey\Functions\expect( 'is_admin' )->once()->andReturn( true );
 		Monkey\Functions\expect( 'beans_register_fields' )
@@ -82,7 +82,7 @@ class Tests_BeansRegisterTermMeta extends Beans_Term_Meta_Test_Case {
 	public function test_should_return_true_when_fields_are_successfully_registered() {
 		Monkey\Functions\expect( '_beans_is_admin_term' )
 			->once()
-			->with( array( 'sample-taxonomy' ) )
+			->with( [ 'sample-taxonomy' ] )
 			->andReturn( true );
 		Monkey\Functions\expect( 'is_admin' )->once()->andReturn( true );
 		Monkey\Functions\expect( 'beans_register_fields' )

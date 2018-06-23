@@ -7,11 +7,11 @@
  * @since   1.5.0
  */
 
-return array(
-	'sample-field' => array(
+return [
+	'sample-field' => [
 		'id'      => 'field_id',
 		'context' => 'term_meta',
 		'type'    => 'radio',
 		'label'   => 'Field Label',
-	),
-);
+	],
+];

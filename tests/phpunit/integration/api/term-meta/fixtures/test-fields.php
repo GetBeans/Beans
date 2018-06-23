@@ -7,32 +7,32 @@
  * @since 1.5.0
  */
 
-return array(
-	'fields' => array(
-		array(
+return [
+	'fields' => [
+		[
 			'id'      => 'beans_layout_test',
 			'label'   => 'Layout',
 			'type'    => 'radio',
 			'default' => 'default_fallback',
-			'options' => array(
+			'options' => [
 				'default_fallback' => 'Use Default Layout',
 				'c'                => BEANS_THEME_URL . 'lib/admin/assets/images/layouts/c.png',
 				'c_sp'             => BEANS_THEME_URL . 'lib/admin/assets/images/layouts/c_sp.png',
 				'sp_c'             => BEANS_THEME_URL . 'lib/admin/assets/images/layouts/sp_c.png',
-			),
-		),
-		array(
+			],
+		],
+		[
 			'id'             => 'beans_checkbox_test',
 			'label'          => 'Checkbox Test Field Label',
 			'checkbox_label' => 'Enable the checkbox test',
 			'type'           => 'checkbox',
 			'default'        => false,
-		),
-		array(
+		],
+		[
 			'id'          => 'beans_text_test',
 			'description' => 'Sample Text Field Description',
 			'type'        => 'text',
 			'default'     => 'Testing the text field.',
-		),
-	),
-);
+		],
+	],
+];

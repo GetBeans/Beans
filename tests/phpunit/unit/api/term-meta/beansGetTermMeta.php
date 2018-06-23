@@ -29,7 +29,7 @@ class Tests_BeansGetTermMeta extends Beans_Term_Meta_Test_Case {
 	public function test_should_return_false_when_no_default_given_and_term_meta_not_set() {
 		Monkey\Functions\expect( 'get_queried_object' )
 			->once()
-			->andReturn( (object) array( 'post_id' => 1 ) ); // return an object with no term_id.
+			->andReturn( (object) [ 'post_id' => 1 ] ); // return an object with no term_id.
 		Monkey\Functions\expect( 'get_option' )->never();
 
 		$this->assertFalse( beans_get_term_meta( 'beans_layout' ) );
@@ -42,7 +42,7 @@ class Tests_BeansGetTermMeta extends Beans_Term_Meta_Test_Case {
 	public function test_should_return_default_when_default_given_and_queried_obj_has_term_id_but_term_meta_not_set() {
 		Monkey\Functions\expect( 'get_queried_object' )
 			->once()
-			->andReturn( (object) array( 'term_id' => 1 ) );
+			->andReturn( (object) [ 'term_id' => 1 ] );
 		Monkey\Functions\expect( 'get_option' )
 			->with( 'beans_term_1_beans_layout', 'default_fallback' )
 			->twice()
@@ -59,7 +59,7 @@ class Tests_BeansGetTermMeta extends Beans_Term_Meta_Test_Case {
 	public function test_should_return_term_meta_when_queried_object_has_term_id_and_meta_is_set() {
 		Monkey\Functions\expect( 'get_queried_object' )
 			->once()
-			->andReturn( (object) array( 'term_id' => 1 ) );
+			->andReturn( (object) [ 'term_id' => 1 ] );
 		Monkey\Functions\expect( 'get_option' )
 			->with( 'beans_term_1_beans_layout', 'default_fallback' )
 			->twice()
@@ -75,7 +75,7 @@ class Tests_BeansGetTermMeta extends Beans_Term_Meta_Test_Case {
 	public function test_should_return_default_when_default_given_and_term_id_is_tag_id_but_term_meta_not_set() {
 		Monkey\Functions\expect( 'get_queried_object' )
 			->once()
-			->andReturn( (object) array( 'post_id' => 1 ) );
+			->andReturn( (object) [ 'post_id' => 1 ] );
 		Monkey\Functions\expect( 'beans_get' )->once()->with( 'tag_ID' )->andReturn( 1 );
 		Monkey\Functions\expect( 'get_option' )
 			->with( 'beans_term_1_beans_layout', 'default_fallback' )
@@ -92,7 +92,7 @@ class Tests_BeansGetTermMeta extends Beans_Term_Meta_Test_Case {
 	public function test_should_return_term_meta_when_default_given_and_term_id_is_tag_id_and_term_meta_exists() {
 		Monkey\Functions\expect( 'get_queried_object' )
 			->once()
-			->andReturn( (object) array( 'post_id' => 1 ) );
+			->andReturn( (object) [ 'post_id' => 1 ] );
 		Monkey\Functions\expect( 'beans_get' )->once()->with( 'tag_ID' )->andReturn( 1 );
 		Monkey\Functions\expect( 'get_option' )
 			->with( 'beans_term_1_beans_layout', 'default_fallback' )

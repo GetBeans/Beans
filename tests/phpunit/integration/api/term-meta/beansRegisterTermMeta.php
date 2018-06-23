@@ -28,7 +28,7 @@ class Tests_BeansRegisterTermMeta extends Beans_Term_Meta_Test_Case {
 	 * Test beans_register_term_meta() should return false when current taxonomy is not concerned.
 	 */
 	public function test_should_return_false_when_current_taxonomy_not_concerned() {
-		$this->assertFalse( beans_register_term_meta( static::$test_data['fields'], array( 'sample-taxonomy' ), 'tm-beans' ) );
+		$this->assertFalse( beans_register_term_meta( static::$test_data['fields'], [ 'sample-taxonomy' ], 'tm-beans' ) );
 	}
 
 	/**
@@ -53,7 +53,7 @@ class Tests_BeansRegisterTermMeta extends Beans_Term_Meta_Test_Case {
 		$_POST['taxonomy'] = 'sample-taxonomy';
 		set_current_screen( 'edit' );
 
-		$this->assertFalse( beans_register_term_meta( array(), 'sample-taxonomy', 'tm-beans' ) );
+		$this->assertFalse( beans_register_term_meta( [], 'sample-taxonomy', 'tm-beans' ) );
 	}
 
 	/**
