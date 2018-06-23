@@ -28,7 +28,7 @@ class Tests_BeansPostMeta_Save extends Beans_Post_Meta_Test_Case {
 	 * Test _Beans_Post_Meta::save() should return false when doing autosave.
 	 */
 	public function test_should_return_false_when_doing_autosave() {
-		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );
+		$post_meta = new _Beans_Post_Meta( 'tm-beans', [ 'title' => 'Post Options' ] );
 
 		Monkey\Functions\expect( '_beans_doing_autosave' )->once()->andReturn( true );
 		$this->assertFalse( $post_meta->save( 256 ) );
@@ -38,7 +38,7 @@ class Tests_BeansPostMeta_Save extends Beans_Post_Meta_Test_Case {
 	 * Test _Beans_Post_Meta::save() should return the post_ID when ok_to_save() is false.
 	 */
 	public function test_should_return_post_id_when_ok_to_save_false() {
-		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );
+		$post_meta = new _Beans_Post_Meta( 'tm-beans', [ 'title' => 'Post Options' ] );
 
 		Monkey\Functions\expect( '_beans_doing_autosave' )->once()->andReturn( false );
 		Monkey\Functions\expect( 'wp_verify_nonce' )->once()->andReturn( false );
@@ -49,8 +49,8 @@ class Tests_BeansPostMeta_Save extends Beans_Post_Meta_Test_Case {
 	 * Test _Beans_Post_Meta::save() should run update_post_meta() and return null when ok_to_save() is true.
 	 */
 	public function test_should_run_update_post_meta_and_return_null_when_ok_to_save() {
-		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );
-		$fields    = array( 'beans_post_test_field' => 'beans_test_post_field_value' );
+		$post_meta = new _Beans_Post_Meta( 'tm-beans', [ 'title' => 'Post Options' ] );
+		$fields    = [ 'beans_post_test_field' => 'beans_test_post_field_value' ];
 
 		Monkey\Functions\expect( '_beans_doing_autosave' )->once()->andReturn( false );
 		Monkey\Functions\expect( 'wp_verify_nonce' )->once()->andReturn( true );

@@ -42,7 +42,7 @@ class Tests_Beans_Get_Post_Meta extends Beans_Post_Meta_Test_Case {
 		Monkey\Functions\expect( 'get_post_meta' )
 			->with( 1 )
 			->times( 3 )
-			->andReturn( array() );
+			->andReturn( [] );
 
 		$this->assertFalse( beans_get_post_meta( 'beans_layout', false, 1 ) );
 		$this->assertSame( '', beans_get_post_meta( 'beans_layout', '', 1 ) );
@@ -57,7 +57,7 @@ class Tests_Beans_Get_Post_Meta extends Beans_Post_Meta_Test_Case {
 		Monkey\Functions\expect( 'get_post_meta' )
 			->with( 47 )
 			->once()
-			->andReturn( array() );
+			->andReturn( [] );
 		$this->assertSame( 'c', beans_get_post_meta( 'beans_layout', 'c' ) );
 
 		Monkey\Functions\expect( 'get_the_ID' )->once()->andReturn( 0 );
@@ -68,7 +68,7 @@ class Tests_Beans_Get_Post_Meta extends Beans_Post_Meta_Test_Case {
 		Monkey\Functions\expect( 'get_post_meta' )
 			->with( '18' )
 			->once()
-			->andReturn( array() );
+			->andReturn( [] );
 		$this->assertSame( 'c', beans_get_post_meta( 'beans_layout', 'c' ) );
 	}
 
@@ -80,7 +80,7 @@ class Tests_Beans_Get_Post_Meta extends Beans_Post_Meta_Test_Case {
 			->with( 521 )
 			->once()
 			->ordered()
-			->andReturn( array( 'beans_layout' => 'c_sp' ) )
+			->andReturn( [ 'beans_layout' => 'c_sp' ] )
 			->andAlsoExpectIt()
 			->with( 521, 'beans_layout', true )
 			->once()
@@ -93,7 +93,7 @@ class Tests_Beans_Get_Post_Meta extends Beans_Post_Meta_Test_Case {
 			->with( 47 )
 			->once()
 			->ordered()
-			->andReturn( array( 'beans_layout' => 'sp_c' ) )
+			->andReturn( [ 'beans_layout' => 'sp_c' ] )
 			->andAlsoExpectIt()
 			->with( 47, 'beans_layout', true )
 			->once()
@@ -110,7 +110,7 @@ class Tests_Beans_Get_Post_Meta extends Beans_Post_Meta_Test_Case {
 			->with( '18' )
 			->once()
 			->ordered()
-			->andReturn( array( 'beans_layout' => 'default_fallback' ) )
+			->andReturn( [ 'beans_layout' => 'default_fallback' ] )
 			->andAlsoExpectIt()
 			->with( '18', 'beans_layout', true )
 			->once()

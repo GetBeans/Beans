@@ -28,7 +28,7 @@ class Tests_BeansPostMeta_RenderNonce extends Beans_Post_Meta_Test_Case {
 	 * Test _Beans_Post_Meta::render_nonce() should echo correct nonce input HTML when called.
 	 */
 	public function test_should_echo_nonce_input_html() {
-		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );
+		$post_meta = new _Beans_Post_Meta( 'tm-beans', [ 'title' => 'Post Options' ] );
 
 		$expected_html_output = '<input type="hidden" name="beans_post_meta_nonce" value="%x" />';
 

@@ -29,19 +29,19 @@ class Tests_BeansPostMeta_Construct extends Beans_Post_Meta_Test_Case {
 	 */
 	public function test_should_set_correct_hooks_when_instantiated() {
 		// First instantiation sets all hooks.
-		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );
+		$post_meta = new _Beans_Post_Meta( 'tm-beans', [ 'title' => 'Post Options' ] );
 
-		$this->assertEquals( 10, has_action( 'edit_form_top', array( $post_meta, 'render_nonce' ) ) );
-		$this->assertEquals( 10, has_action( 'save_post', array( $post_meta, 'save' ) ) );
-		$this->assertEquals( 10, has_filter( 'attachment_fields_to_save', array( $post_meta, 'save_attachment' ) ) );
-		$this->assertEquals( 10, has_action( 'add_meta_boxes', array( $post_meta, 'register_metabox' ) ) );
+		$this->assertEquals( 10, has_action( 'edit_form_top', [ $post_meta, 'render_nonce' ] ) );
+		$this->assertEquals( 10, has_action( 'save_post', [ $post_meta, 'save' ] ) );
+		$this->assertEquals( 10, has_filter( 'attachment_fields_to_save', [ $post_meta, 'save_attachment' ] ) );
+		$this->assertEquals( 10, has_action( 'add_meta_boxes', [ $post_meta, 'register_metabox' ] ) );
 
 		// Subsequent instantiation sets 'add_meta_boxes' hook only.
-		$post_meta_2 = new _Beans_Post_Meta( 'tm-beans-custom-post-meta', array( 'title' => 'Custom Options' ) );
+		$post_meta_2 = new _Beans_Post_Meta( 'tm-beans-custom-post-meta', [ 'title' => 'Custom Options' ] );
 
-		$this->assertFalse( has_action( 'edit_form_top', array( $post_meta_2, 'render_nonce' ) ) );
-		$this->assertFalse( has_action( 'save_post', array( $post_meta_2, 'save' ) ) );
-		$this->assertFalse( has_filter( 'attachment_fields_to_save', array( $post_meta_2, 'save_attachment' ) ) );
-		$this->assertEquals( 10, has_action( 'add_meta_boxes', array( $post_meta_2, 'register_metabox' ) ) );
+		$this->assertFalse( has_action( 'edit_form_top', [ $post_meta_2, 'render_nonce' ] ) );
+		$this->assertFalse( has_action( 'save_post', [ $post_meta_2, 'save' ] ) );
+		$this->assertFalse( has_filter( 'attachment_fields_to_save', [ $post_meta_2, 'save_attachment' ] ) );
+		$this->assertEquals( 10, has_action( 'add_meta_boxes', [ $post_meta_2, 'register_metabox' ] ) );
 	}
 }

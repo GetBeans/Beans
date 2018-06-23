@@ -28,13 +28,13 @@ class Tests_BeansRegisterPostMeta extends Beans_Post_Meta_Test_Case {
 	 */
 	public function test_should_return_false_when_not_is_admin() {
 
-		$this->assertFalse( beans_register_post_meta( array(
-			array(
+		$this->assertFalse( beans_register_post_meta( [
+			[
 				'id'    => 'field_id',
 				'type'  => 'radio',
 				'label' => 'Field Label',
-			),
-		), true, 'tm-beans' ) );
+			],
+		], true, 'tm-beans' ) );
 	}
 
 	/**
@@ -43,13 +43,13 @@ class Tests_BeansRegisterPostMeta extends Beans_Post_Meta_Test_Case {
 	public function test_should_return_false_when_conditions_are_false() {
 		set_current_screen( 'edit' );
 
-		$this->assertFalse( beans_register_post_meta( array(
-			array(
+		$this->assertFalse( beans_register_post_meta( [
+			[
 				'id'    => 'field_id',
 				'type'  => 'radio',
 				'label' => 'Field Label',
-			),
-		), false, 'tm-beans' ) );
+			],
+		], false, 'tm-beans' ) );
 	}
 
 	/**
@@ -58,7 +58,7 @@ class Tests_BeansRegisterPostMeta extends Beans_Post_Meta_Test_Case {
 	public function test_should_return_false_when_fields_cannot_be_registered() {
 		set_current_screen( 'edit' );
 
-		$this->assertFalse( beans_register_post_meta( array(), true, 'tm-beans' ) );
+		$this->assertFalse( beans_register_post_meta( [], true, 'tm-beans' ) );
 	}
 
 	/**
@@ -67,12 +67,12 @@ class Tests_BeansRegisterPostMeta extends Beans_Post_Meta_Test_Case {
 	public function test_should_return_true_when_post_meta_is_registered() {
 		set_current_screen( 'edit' );
 
-		$this->assertTrue( beans_register_post_meta( array(
-			array(
+		$this->assertTrue( beans_register_post_meta( [
+			[
 				'id'    => 'field_id',
 				'type'  => 'radio',
 				'label' => 'Field Label',
-			),
-		), true, 'tm-beans' ) );
+			],
+		], true, 'tm-beans' ) );
 	}
 }

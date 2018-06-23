@@ -29,7 +29,7 @@ class Tests_BeansPostMeta_RenderMetaboxContent extends Beans_Post_Meta_Test_Case
 	 */
 	public function test_should_output_fields_markup() {
 		$test_data = require dirname( ( __DIR__ ) ) . DIRECTORY_SEPARATOR . 'fixtures/test-fields.php';
-		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );
+		$post_meta = new _Beans_Post_Meta( 'tm-beans', [ 'title' => 'Post Options' ] );
 
 		beans_register_fields( $test_data['fields'], 'post_meta', $test_data['section'] );
 

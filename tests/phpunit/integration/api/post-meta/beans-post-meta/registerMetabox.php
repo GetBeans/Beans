@@ -30,7 +30,7 @@ class Tests_BeansPostMeta_RegisterMetabox extends Beans_Post_Meta_Test_Case {
 	public function test_register_metabox_should_register_metabox() {
 		global $wp_meta_boxes;
 
-		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );
+		$post_meta = new _Beans_Post_Meta( 'tm-beans', [ 'title' => 'Post Options' ] );
 		$post_meta->register_metabox( 'post' );
 
 		$this->assertArrayHasKey( 'tm-beans', $wp_meta_boxes['post']['normal']['high'] );

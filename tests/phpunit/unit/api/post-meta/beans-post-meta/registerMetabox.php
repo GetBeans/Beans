@@ -28,30 +28,30 @@ class Tests_BeansPostMeta_RegisterMetabox extends Beans_Post_Meta_Test_Case {
 	 * Test _Beans_Post_Meta::register_metabox() should register an appropriate metabox.
 	 */
 	public function test_register_metabox_should_register_metabox() {
-		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );
+		$post_meta = new _Beans_Post_Meta( 'tm-beans', [ 'title' => 'Post Options' ] );
 
-		$wp_meta_boxes['post']['normal']['high']['1'] = array(
+		$wp_meta_boxes['post']['normal']['high']['1'] = [
 			'id'            => 1,
 			'title'         => 'Post Options',
-			'callback'      => array( $this, 'render_metabox_content' ),
+			'callback'      => [ $this, 'render_metabox_content' ],
 			'callback_args' => null,
-		);
+		];
 
 		Monkey\Functions\expect( 'add_meta_box' )
 			->once()
-			->with( 'tm-beans', 'Post Options', array( $post_meta, 'render_metabox_content' ), 'post', 'normal', 'high' )
+			->with( 'tm-beans', 'Post Options', [ $post_meta, 'render_metabox_content' ], 'post', 'normal', 'high' )
 			->andReturn( $wp_meta_boxes['post']['normal']['high']['1'] );
 
 		$post_meta->register_metabox( 'post' );
 
 		$this->assertEquals(
 			$wp_meta_boxes['post']['normal']['high'][1],
-			array(
+			[
 				'id'            => 1,
 				'title'         => 'Post Options',
-				'callback'      => array( $this, 'render_metabox_content' ),
+				'callback'      => [ $this, 'render_metabox_content' ],
 				'callback_args' => null,
-			)
+			]
 		);
 	}
 }

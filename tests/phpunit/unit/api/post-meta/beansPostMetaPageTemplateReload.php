@@ -41,7 +41,7 @@ class Tests_BeansPostMetaPageTemplateReload extends Test_Case {
 	public function test_should_do_nothing_when_post_meta_not_assigned_to_page_templates() {
 		global $_beans_post_meta_conditions, $pagenow;
 
-		$_beans_post_meta_conditions = array();
+		$_beans_post_meta_conditions = [];
 		$pagenow                     = 'post.php'; // phpcs:ignore WordPress.Variables.GlobalVariables.OverrideProhibited -- Resetting global here for tests.
 
 		ob_start();
@@ -57,7 +57,7 @@ class Tests_BeansPostMetaPageTemplateReload extends Test_Case {
 	public function test_should_output_script_html_when_post_meta_assigned_to_page_templates() {
 		global $_beans_post_meta_conditions, $pagenow;
 
-		$_beans_post_meta_conditions = array( 'page-template-name.php' );
+		$_beans_post_meta_conditions = [ 'page-template-name.php' ];
 		$pagenow                     = 'post.php'; // phpcs:ignore WordPress.Variables.GlobalVariables.OverrideProhibited -- Resetting global here for tests.
 
 		ob_start();

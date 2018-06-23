@@ -31,7 +31,7 @@ class Tests_BeansPostMeta_RenderNonce extends Beans_Post_Meta_Test_Case {
 		Monkey\Functions\expect( 'wp_create_nonce' )->once()->with( 'beans_post_meta_nonce' )->andReturn( '123456' );
 		$expected_html_output = '<input type="hidden" name="beans_post_meta_nonce" value="123456" />';
 
-		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );
+		$post_meta = new _Beans_Post_Meta( 'tm-beans', [ 'title' => 'Post Options' ] );
 		ob_start();
 		$post_meta->render_nonce();
 		$actual_output = ob_get_clean();

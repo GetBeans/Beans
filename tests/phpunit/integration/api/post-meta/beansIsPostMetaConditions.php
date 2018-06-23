@@ -37,7 +37,7 @@ class Tests_BeansIsPostMetaConditions extends Beans_Post_Meta_Test_Case {
 		set_current_screen( 'post' );
 		$_SERVER['REQUEST_URI'] = 'post-new.php';
 
-		$this->assertTrue( _beans_is_post_meta_conditions( array( 'post' ) ) );
+		$this->assertTrue( _beans_is_post_meta_conditions( [ 'post' ] ) );
 
 		// Clean up server globals.
 		$_SERVER['REQUEST_URI'] = '';
@@ -50,7 +50,7 @@ class Tests_BeansIsPostMetaConditions extends Beans_Post_Meta_Test_Case {
 		set_current_screen( 'post' );
 		$_SERVER['REQUEST_URI'] = 'post-new.php';
 
-		$this->assertFalse( _beans_is_post_meta_conditions( array( 'page' ) ) );
+		$this->assertFalse( _beans_is_post_meta_conditions( [ 'page' ] ) );
 
 		// Clean up server globals.
 		$_SERVER['REQUEST_URI'] = '';
@@ -62,20 +62,20 @@ class Tests_BeansIsPostMetaConditions extends Beans_Post_Meta_Test_Case {
 	public function test_should_return_false_when_post_id_not_found() {
 		set_current_screen( 'edit' );
 
-		$this->assertFalse( _beans_is_post_meta_conditions( array( 'post' ) ) );
+		$this->assertFalse( _beans_is_post_meta_conditions( [ 'post' ] ) );
 	}
 
 	/**
 	 * Test _beans_is_post_meta_conditions() should return true when $conditions match post type.
 	 */
 	public function test_should_return_true_when_conditions_match_post_type() {
-		$post_id = $this->factory()->post->create( array( 'post_type' => 'cpt' ) );
+		$post_id = $this->factory()->post->create( [ 'post_type' => 'cpt' ] );
 		set_current_screen( 'cpt' );
 
 		// Setup for when post_ID is in GET.
 		$_GET['post'] = $post_id;
 
-		$this->assertTrue( _beans_is_post_meta_conditions( array( 'cpt' ) ) );
+		$this->assertTrue( _beans_is_post_meta_conditions( [ 'cpt' ] ) );
 
 		// Clear Global GET.
 		$_GET['post'] = null;
@@ -83,7 +83,7 @@ class Tests_BeansIsPostMetaConditions extends Beans_Post_Meta_Test_Case {
 		// Setup for when post_ID is in POST.
 		$_POST['post_ID'] = $post_id;
 
-		$this->assertTrue( _beans_is_post_meta_conditions( array( 'cpt' ) ) );
+		$this->assertTrue( _beans_is_post_meta_conditions( [ 'cpt' ] ) );
 
 		// Clear Global POST.
 		$_POST['post_ID'] = null;
@@ -99,7 +99,7 @@ class Tests_BeansIsPostMetaConditions extends Beans_Post_Meta_Test_Case {
 		// Setup for when post_ID is in GET.
 		$_GET['post'] = $post_id;
 
-		$this->assertTrue( _beans_is_post_meta_conditions( array( $post_id ) ) );
+		$this->assertTrue( _beans_is_post_meta_conditions( [ $post_id ] ) );
 
 		// Clear Global GET.
 		$_GET['post'] = null;
@@ -107,7 +107,7 @@ class Tests_BeansIsPostMetaConditions extends Beans_Post_Meta_Test_Case {
 		// Setup for when post_ID is in POST.
 		$_POST['post_ID'] = $post_id;
 
-		$this->assertTrue( _beans_is_post_meta_conditions( array( $post_id ) ) );
+		$this->assertTrue( _beans_is_post_meta_conditions( [ $post_id ] ) );
 
 		// Clear Global POST.
 		$_POST['post_ID'] = null;
@@ -117,14 +117,14 @@ class Tests_BeansIsPostMetaConditions extends Beans_Post_Meta_Test_Case {
 	 * Test _beans_is_post_meta_conditions() should return true when conditions match a page template name.
 	 */
 	public function test_should_return_true_when_conditions_match_page_template_name() {
-		$page_id = $this->factory()->post->create( array( 'post_type' => 'page' ) );
+		$page_id = $this->factory()->post->create( [ 'post_type' => 'page' ] );
 		set_current_screen( 'edit' );
 		add_post_meta( $page_id, '_wp_page_template', 'page-template-name' );
 
 		// Setup for when post_ID is in GET.
 		$_GET['post'] = $page_id;
 
-		$this->assertTrue( _beans_is_post_meta_conditions( array( 'page-template-name' ) ) );
+		$this->assertTrue( _beans_is_post_meta_conditions( [ 'page-template-name' ] ) );
 
 		// Clear Global GET.
 		$_GET['post'] = null;
@@ -132,7 +132,7 @@ class Tests_BeansIsPostMetaConditions extends Beans_Post_Meta_Test_Case {
 		// Setup for when post_ID is in POST.
 		$_POST['post_ID'] = $page_id;
 
-		$this->assertTrue( _beans_is_post_meta_conditions( array( 'page-template-name' ) ) );
+		$this->assertTrue( _beans_is_post_meta_conditions( [ 'page-template-name' ] ) );
 
 		// Clear Global POST.
 		$_POST['post_ID'] = null;
@@ -143,14 +143,14 @@ class Tests_BeansIsPostMetaConditions extends Beans_Post_Meta_Test_Case {
 	 */
 	public function test_should_return_false_when_no_conditions_match() {
 
-		$page_id = $this->factory()->post->create( array( 'post_type' => 'page' ) );
+		$page_id = $this->factory()->post->create( [ 'post_type' => 'page' ] );
 		set_current_screen( 'edit' );
 		add_post_meta( $page_id, '_wp_page_template', 'page-template-name' );
 
 		// Setup for when post_ID is in GET.
 		$_GET['post'] = $page_id;
 
-		$this->assertFalse( _beans_is_post_meta_conditions( array( 'some-other-conditions' ) ) );
+		$this->assertFalse( _beans_is_post_meta_conditions( [ 'some-other-conditions' ] ) );
 
 		// Clear Global GET.
 		$_GET['post'] = null;
@@ -158,7 +158,7 @@ class Tests_BeansIsPostMetaConditions extends Beans_Post_Meta_Test_Case {
 		// Setup for when post_ID is in POST.
 		$_POST['post_ID'] = $page_id;
 
-		$this->assertFalse( _beans_is_post_meta_conditions( array( 'some-other-conditions' ) ) );
+		$this->assertFalse( _beans_is_post_meta_conditions( [ 'some-other-conditions' ] ) );
 
 		// Clear Global POST.
 		$_POST['post_ID'] = null;

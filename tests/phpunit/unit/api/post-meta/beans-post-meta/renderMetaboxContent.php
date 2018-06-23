@@ -28,21 +28,21 @@ class Tests_BeansPostMeta_RenderMetaboxContent extends Beans_Post_Meta_Test_Case
 	 * Test _Beans_Post_Meta::render_metabox_content() should output post meta fields markup.
 	 */
 	public function test_metabox_content_should_output_fields_markup() {
-		$field = array(
+		$field = [
 			'id'      => 'beans_layout',
 			'label'   => 'Layout',
 			'type'    => 'radio',
 			'context' => 'tm-beams',
 			'default' => 'default_fallback',
 			'options' => 'options html from layout options callback',
-		);
+		];
 
-		$post_meta = new _Beans_Post_Meta( 'tm-beans', array( 'title' => 'Post Options' ) );
+		$post_meta = new _Beans_Post_Meta( 'tm-beans', [ 'title' => 'Post Options' ] );
 
 		Monkey\Functions\expect( 'beans_get_fields' )
 			->once()
 			->with( 'post_meta', 'tm-beans' )
-			->andReturn( array( $field ) );
+			->andReturn( [ $field ] );
 		Monkey\Functions\expect( 'beans_field' )->once()->with( $field )->andReturnUsing( function () {
 			echo 'beans_field_html';
 		} );
