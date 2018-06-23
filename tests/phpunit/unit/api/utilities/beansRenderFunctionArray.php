@@ -55,7 +55,7 @@ class Tests_BeansRenderFunctionArray extends Test_Case {
 		};
 		$this->assertSame(
 			'foo bar baz',
-			beans_render_function_array( $callback, array( 'foo', 'bar', 'baz' ) )
+			beans_render_function_array( $callback, [ 'foo', 'bar', 'baz' ] )
 		);
 
 		$callback = function ( $array, $baz ) {
@@ -64,7 +64,7 @@ class Tests_BeansRenderFunctionArray extends Test_Case {
 		};
 		$this->assertSame(
 			'foo bar baz',
-			beans_render_function_array( $callback, array( array( 'foo', 'bar' ), 'baz' ) )
+			beans_render_function_array( $callback, [ [ 'foo', 'bar' ], 'baz' ] )
 		);
 
 		$callback = function ( $array1, $array2 ) {
@@ -78,13 +78,13 @@ class Tests_BeansRenderFunctionArray extends Test_Case {
 			'oof',
 			beans_render_function_array(
 				$callback,
-				array(
-					array(
+				[
+					[
 						'foo' => 'oof',
 						'bar' => 'rab',
-					),
-					array( 'baz' => 'zab' ),
-				)
+					],
+					[ 'baz' => 'zab' ],
+				]
 			)
 		);
 	}

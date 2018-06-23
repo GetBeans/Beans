@@ -65,7 +65,7 @@ class Tests_BeansRenderFunction extends Test_Case {
 		};
 		$this->assertSame(
 			'foo bar baz',
-			beans_render_function( $callback, array( 'foo', 'bar' ), 'baz' )
+			beans_render_function( $callback, [ 'foo', 'bar' ], 'baz' )
 		);
 
 		$callback = function ( $object ) {
@@ -74,7 +74,7 @@ class Tests_BeansRenderFunction extends Test_Case {
 		};
 		$this->assertSame(
 			'beans',
-			beans_render_function( $callback, (object) array( 'foo' => 'beans' ) )
+			beans_render_function( $callback, (object) [ 'foo' => 'beans' ] )
 		);
 	}
 }

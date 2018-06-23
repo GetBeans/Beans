@@ -33,10 +33,10 @@ class Tests_BeansGet extends Test_Case {
 	 * Test beans_get() should find the needle when an array is given.
 	 */
 	public function test_should_find_needle_when_array_given() {
-		$haystack = array(
+		$haystack = [
 			'post_type'       => 'foo',
 			'number_of_posts' => 5,
-		);
+		];
 
 		$this->assertSame( $haystack['number_of_posts'], beans_get( 'number_of_posts', $haystack ) );
 		$this->assertSame( 'foo', beans_get( 'post_type', $haystack ) );
@@ -46,10 +46,10 @@ class Tests_BeansGet extends Test_Case {
 	 * Test beans_get() should return default value when an array is given.
 	 */
 	public function test_should_return_default_when_array_given() {
-		$haystack = array(
+		$haystack = [
 			'post_type'       => 'foo',
 			'number_of_posts' => 5,
-		);
+		];
 
 		$this->assertSame( 'published', beans_get( 'post_status', $haystack, 'published' ) );
 		$this->assertFalse( beans_get( 'post_status', $haystack, false ) );
@@ -60,10 +60,10 @@ class Tests_BeansGet extends Test_Case {
 	 * Test beans_get() should find the needle when an object is given.
 	 */
 	public function test_should_find_needle_when_object_given() {
-		$haystack = (object) array(
+		$haystack = (object) [
 			'post_type'       => 'foo',
 			'number_of_posts' => 5,
-		);
+		];
 
 		$this->assertSame( $haystack->number_of_posts, beans_get( 'number_of_posts', $haystack ) );
 		$this->assertSame( 'foo', beans_get( 'post_type', $haystack ) );
@@ -73,10 +73,10 @@ class Tests_BeansGet extends Test_Case {
 	 * Test beans_get() should return default value when an object is given.
 	 */
 	public function test_should_return_default_when_object_given() {
-		$haystack = (object) array(
+		$haystack = (object) [
 			'post_type'       => 'foo',
 			'number_of_posts' => 5,
-		);
+		];
 
 		$this->assertSame( 'published', beans_get( 'post_status', $haystack, 'published' ) );
 		$this->assertFalse( beans_get( 'post_status', $haystack, false ) );
@@ -98,12 +98,12 @@ class Tests_BeansGet extends Test_Case {
 	public function test_should_find_needle_when_index_given() {
 		$this->assertEquals( 'bar', beans_get( 0, 'bar', 10 ) );
 
-		$data = array(
+		$data = [
 			'red',
 			'white',
 			'foo' => 'baz',
 			'green',
-		);
+		];
 		$this->assertEquals( 'red', beans_get( 0, $data ) );
 		$this->assertEquals( 'white', beans_get( 1, $data ) );
 		$this->assertEquals( 'green', beans_get( 2, $data ) );

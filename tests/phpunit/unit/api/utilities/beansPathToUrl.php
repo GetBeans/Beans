@@ -312,11 +312,11 @@ class Tests_BeansPathToUrl extends Test_Case {
 		Functions\expect( 'get_current_blog_id' )->andReturn( 10 );
 
 		$url = 'http://example.com';
-		Functions\expect( 'get_blog_details' )->once()->andReturn( (object) array( 'path' => '/shop/' ) );
+		Functions\expect( 'get_blog_details' )->once()->andReturn( (object) [ 'path' => '/shop/' ] );
 		Functions\expect( 'site_url' )->once()->andReturn( $url . '/' );
 		$this->assertSame( "{$url}/shop/{$path}", beans_path_to_url( $path, true ) );
 
-		Functions\expect( 'get_blog_details' )->once()->andReturn( (object) array( 'path' => '/shop/' ) );
+		Functions\expect( 'get_blog_details' )->once()->andReturn( (object) [ 'path' => '/shop/' ] );
 		Functions\expect( 'site_url' )->once()->andReturn( $url . '/foo' );
 		$this->assertSame( "{$url}/shop/{$path}", beans_path_to_url( $path, true ) );
 	}
@@ -330,11 +330,11 @@ class Tests_BeansPathToUrl extends Test_Case {
 		Functions\expect( 'get_current_blog_id' )->andReturn( 15 );
 
 		$url = 'http://8.8.8.8';
-		Functions\expect( 'get_blog_details' )->once()->andReturn( (object) array( 'path' => '/support/' ) );
+		Functions\expect( 'get_blog_details' )->once()->andReturn( (object) [ 'path' => '/support/' ] );
 		Functions\expect( 'site_url' )->once()->andReturn( $url . '/' );
 		$this->assertSame( "{$url}/support/{$path}", beans_path_to_url( $path, true ) );
 
-		Functions\expect( 'get_blog_details' )->once()->andReturn( (object) array( 'path' => '/support/' ) );
+		Functions\expect( 'get_blog_details' )->once()->andReturn( (object) [ 'path' => '/support/' ] );
 		Functions\expect( 'site_url' )->once()->andReturn( $url . '/ip-address' );
 		$this->assertSame( "{$url}/support/{$path}", beans_path_to_url( $path, true ) );
 	}
@@ -348,7 +348,7 @@ class Tests_BeansPathToUrl extends Test_Case {
 		Functions\expect( 'get_current_blog_id' )->andReturn( 10 );
 
 		$url = 'http://shop.example.com';
-		Functions\expect( 'get_blog_details' )->andReturn( (object) array( 'path' => '/' ) );
+		Functions\expect( 'get_blog_details' )->andReturn( (object) [ 'path' => '/' ] );
 		Functions\expect( 'site_url' )->once()->andReturn( $url );
 		$this->assertSame( "{$url}/{$path}", beans_path_to_url( $path, true ) );
 
@@ -365,7 +365,7 @@ class Tests_BeansPathToUrl extends Test_Case {
 		Functions\expect( 'get_current_blog_id' )->andReturn( 10 );
 
 		$url = 'http://shop.8.8.8.8';
-		Functions\expect( 'get_blog_details' )->andReturn( (object) array( 'path' => '/' ) );
+		Functions\expect( 'get_blog_details' )->andReturn( (object) [ 'path' => '/' ] );
 		Functions\expect( 'site_url' )->once()->andReturn( $url );
 		$this->assertSame( "{$url}/{$path}", beans_path_to_url( $path, true ) );
 

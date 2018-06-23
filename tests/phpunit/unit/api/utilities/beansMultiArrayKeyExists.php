@@ -33,11 +33,11 @@ class Tests_BeansMultiArrayKeyExists extends Test_Case {
 	 * Test beans_multi_array_key_exists() should throw an error for non-array data type.
 	 */
 	public function test_should_throw_error_for_non_array() {
-		$args = array(
+		$args = [
 			0     => 'bar',
 			'foo' => 10,
 			'bar' => new \stdClass(),
-		);
+		];
 
 		foreach ( $args as $arg1 => $arg2 ) {
 			try {
@@ -57,15 +57,15 @@ class Tests_BeansMultiArrayKeyExists extends Test_Case {
 	 * Test beans_multi_array_key_exists() should return true when key does exist.
 	 */
 	public function test_should_return_true_when_key_exists() {
-		$data = array(
+		$data = [
 			'oof' => 'found me',
-		);
+		];
 		$this->assertTrue( beans_multi_array_key_exists( 'oof', $data ) );
-		$this->assertTrue( beans_multi_array_key_exists( 1, array( 10, 'bar', 'baz' ) ) );
-		$data = array(
+		$this->assertTrue( beans_multi_array_key_exists( 1, [ 10, 'bar', 'baz' ] ) );
+		$data = [
 			'green' => 'grass',
 			'blue'  => 'sky',
-		);
+		];
 		$this->assertTrue( beans_multi_array_key_exists( 'blue', $data ) );
 	}
 
@@ -73,15 +73,15 @@ class Tests_BeansMultiArrayKeyExists extends Test_Case {
 	 * Test beans_multi_array_key_exists() should return false when key does not exist.
 	 */
 	public function test_should_return_false_when_key_does_not_exist() {
-		$data = array(
+		$data = [
 			'oof' => 'found me',
-		);
+		];
 		$this->assertFalse( beans_multi_array_key_exists( 'foo', $data ) );
-		$this->assertFalse( beans_multi_array_key_exists( 'bar', array( 10, 'bar', 'baz' ) ) );
-		$data = array(
+		$this->assertFalse( beans_multi_array_key_exists( 'bar', [ 10, 'bar', 'baz' ] ) );
+		$data = [
 			'green' => 'grass',
 			'blue'  => 'sky',
-		);
+		];
 		$this->assertFalse( beans_multi_array_key_exists( 'red', $data ) );
 	}
 
@@ -89,23 +89,23 @@ class Tests_BeansMultiArrayKeyExists extends Test_Case {
 	 * Test beans_multi_array_key_exists() should return true when key exists within a multi-dimensional array.
 	 */
 	public function test_should_return_true_when_key_exists_multidimensional() {
-		$data = array(
+		$data = [
 			'bar',
-			array(
+			[
 				'zab' => 'foo',
-			),
-		);
+			],
+		];
 		$this->assertTrue( beans_multi_array_key_exists( 'zab', $data ) );
 
-		$data = array(
+		$data = [
 			'bar',
-			'skill' => array(
+			'skill' => [
 				'javascript' => true,
 				'php'        => true,
 				'sql'        => true,
 				'beans'      => 'rocks',
-			),
-		);
+			],
+		];
 		$this->assertTrue( beans_multi_array_key_exists( 'beans', $data ) );
 	}
 
@@ -113,22 +113,22 @@ class Tests_BeansMultiArrayKeyExists extends Test_Case {
 	 * Test beans_multi_array_key_exists() should return false when key does not exist within a multi-dimensional array.
 	 */
 	public function test_should_return_false_when_key_does_not_exist_multidimensional() {
-		$data = array(
+		$data = [
 			'bar',
-			array(
+			[
 				'zab' => 'foo',
-			),
-		);
+			],
+		];
 		$this->assertFalse( beans_multi_array_key_exists( 'foo', $data ) );
-		$data = array(
+		$data = [
 			'bar',
-			'skill' => array(
+			'skill' => [
 				'javascript' => true,
 				'php'        => true,
 				'sql'        => true,
 				'beans'      => 'rocks',
-			),
-		);
+			],
+		];
 		$this->assertFalse( beans_multi_array_key_exists( 'rocks', $data ) );
 	}
 }

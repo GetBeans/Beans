@@ -320,7 +320,7 @@ class Tests_BeansUrlToPath extends Test_Case {
 		Functions\expect( 'is_main_site' )->andReturn( false );
 		Functions\expect( 'get_current_blog_id' )->andReturn( 5 );
 
-		Functions\expect( 'get_blog_details' )->andReturn( (object) array( 'path' => '/shop/' ) );
+		Functions\expect( 'get_blog_details' )->andReturn( (object) [ 'path' => '/shop/' ] );
 
 		Functions\expect( 'site_url' )->once()->andReturn( 'http://example.com/shop/' );
 		$this->assertSame( rtrim( $this->abspath, '/' ), beans_url_to_path( 'http://example.com/shop/', true ) );
@@ -336,7 +336,7 @@ class Tests_BeansUrlToPath extends Test_Case {
 		Functions\expect( 'is_main_site' )->andReturn( false );
 		Functions\expect( 'get_current_blog_id' )->andReturn( 5 );
 
-		Functions\expect( 'get_blog_details' )->andReturn( (object) array( 'path' => '/shop/' ) );
+		Functions\expect( 'get_blog_details' )->andReturn( (object) [ 'path' => '/shop/' ] );
 
 		Functions\expect( 'site_url' )->once()->andReturn( 'http://8.8.8.8/shop/' );
 		$this->assertSame( rtrim( $this->abspath, '/' ), beans_url_to_path( 'http://8.8.8.8/shop/', true ) );
@@ -352,7 +352,7 @@ class Tests_BeansUrlToPath extends Test_Case {
 		Functions\expect( 'is_main_site' )->andReturn( false );
 		Functions\expect( 'get_current_blog_id' )->andReturn( 5 );
 
-		Functions\expect( 'get_blog_details' )->andReturn( (object) array( 'path' => '/' ) );
+		Functions\expect( 'get_blog_details' )->andReturn( (object) [ 'path' => '/' ] );
 		Functions\expect( 'site_url' )->once()->andReturn( 'http://shop.example.com' );
 		$this->assertSame( rtrim( $this->abspath, '/' ), beans_url_to_path( 'http://shop.example.com', true ) );
 
@@ -367,7 +367,7 @@ class Tests_BeansUrlToPath extends Test_Case {
 		Functions\expect( 'is_main_site' )->andReturn( false );
 		Functions\expect( 'get_current_blog_id' )->andReturn( 5 );
 
-		Functions\expect( 'get_blog_details' )->andReturn( (object) array( 'path' => '/' ) );
+		Functions\expect( 'get_blog_details' )->andReturn( (object) [ 'path' => '/' ] );
 		Functions\expect( 'site_url' )->once()->andReturn( 'http://shop.255.147.55.10' );
 		$this->assertSame( rtrim( $this->abspath, '/' ), beans_url_to_path( 'http://shop.255.147.55.10', true ) );
 
