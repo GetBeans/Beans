@@ -29,11 +29,11 @@ class Tests_BeansOpenMarkupE extends HTML_Test_Case {
 	public function test_should_echo_empty_string_when_tag_set_to_null() {
 		Monkey\Functions\expect( 'beans_open_markup' )
 			->once()
-			->with( 'beans_archive_title', null, array( 'class' => 'uk-article-title' ) )
+			->with( 'beans_archive_title', null, [ 'class' => 'uk-article-title' ] )
 			->andReturn( null );
 
 		ob_start();
-		beans_open_markup_e( 'beans_archive_title', null, array( 'class' => 'uk-article-title' ) );
+		beans_open_markup_e( 'beans_archive_title', null, [ 'class' => 'uk-article-title' ] );
 		$this->assertEquals( '', ob_get_clean() );
 	}
 
@@ -43,12 +43,12 @@ class Tests_BeansOpenMarkupE extends HTML_Test_Case {
 	public function test_should_echo_html_element_when_hooks_not_registered() {
 		Monkey\Functions\expect( 'beans_open_markup' )
 			->once()
-			->with( 'beans_archive_title', null, array( 'class' => 'uk-article-title' ) )
+			->with( 'beans_archive_title', null, [ 'class' => 'uk-article-title' ] )
 			->andReturn( '<h1 class="uk-article-title">' );
 
 		// Run the tests.
 		ob_start();
-		beans_open_markup_e( 'beans_archive_title', null, array( 'class' => 'uk-article-title' ) );
+		beans_open_markup_e( 'beans_archive_title', null, [ 'class' => 'uk-article-title' ] );
 		$this->assertEquals( '<h1 class="uk-article-title">', ob_get_clean() );
 	}
 }

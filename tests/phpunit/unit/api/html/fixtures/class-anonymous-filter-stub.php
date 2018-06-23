@@ -33,7 +33,7 @@ class Anonymous_Filter_Stub {
 	public function __construct( $hook, $value_to_return, $priority ) {
 		$this->value_to_return = $value_to_return;
 
-		add_filter( $hook, array( $this, 'callback' ), $priority );
+		add_filter( $hook, [ $this, 'callback' ], $priority );
 	}
 
 	/**

@@ -27,7 +27,7 @@ class Tests_BeansOpenMarkup extends HTML_Test_Case {
 	 * Test beans_open_markup() should return null when the tag is set to null.
 	 */
 	public function test_should_return_null_when_tag_set_to_null() {
-		$this->assertNull( beans_open_markup( 'beans_archive_title', null, array( 'class' => 'uk-article-title' ) ) );
+		$this->assertNull( beans_open_markup( 'beans_archive_title', null, [ 'class' => 'uk-article-title' ] ) );
 	}
 
 	/**
@@ -43,7 +43,7 @@ class Tests_BeansOpenMarkup extends HTML_Test_Case {
 		add_action( 'beans_archive_title_before_markup', '__beans_render_title_before_markup' );
 
 		// Run the tests.
-		$actual = beans_open_markup( 'beans_archive_title', 'h1', array( 'class' => 'uk-article-title' ) );
+		$actual = beans_open_markup( 'beans_archive_title', 'h1', [ 'class' => 'uk-article-title' ] );
 		$this->assertEquals( 1, did_action( 'beans_archive_title_before_markup' ) );
 		$this->assertStringStartsWith( '<!-- _before_markup fired -->', $actual );
 	}
@@ -61,7 +61,7 @@ class Tests_BeansOpenMarkup extends HTML_Test_Case {
 		add_action( 'beans_archive_title_prepend_markup', '__beans_render_title_prepend_markup' );
 
 		// Run the tests.
-		$actual = beans_open_markup( 'beans_archive_title', 'h1', array( 'class' => 'uk-article-title' ) );
+		$actual = beans_open_markup( 'beans_archive_title', 'h1', [ 'class' => 'uk-article-title' ] );
 		$this->assertEquals( 1, did_action( 'beans_archive_title_prepend_markup' ) );
 		$this->assertStringEndsWith( '<!-- _prepend_markup fired -->', $actual );
 	}
@@ -83,7 +83,7 @@ class Tests_BeansOpenMarkup extends HTML_Test_Case {
 		$_beans_is_selfclose_markup = true;
 
 		// Run the tests.
-		$actual = beans_open_markup( 'beans_archive_title', 'h1', array( 'class' => 'uk-article-title' ) );
+		$actual = beans_open_markup( 'beans_archive_title', 'h1', [ 'class' => 'uk-article-title' ] );
 		$this->assertEquals( 1, did_action( 'beans_archive_title_after_markup' ) );
 		$this->assertStringEndsWith( '<!-- _after_markup fired -->', $actual );
 
@@ -95,7 +95,7 @@ class Tests_BeansOpenMarkup extends HTML_Test_Case {
 	 * Test beans_open_markup() should return the built HTML element when before or prepend hooks are not registered.
 	 */
 	public function test_should_return_built_html_when_before_or_prepend_hooks_not_registered() {
-		$actual = beans_open_markup( 'beans_archive_title', 'h1', array( 'class' => 'uk-article-title' ) );
+		$actual = beans_open_markup( 'beans_archive_title', 'h1', [ 'class' => 'uk-article-title' ] );
 		$this->assertSame( '<h1 class="uk-article-title">', $actual );
 		$this->assertEquals( 0, did_action( 'beans_archive_title_before_markup' ) );
 		$this->assertEquals( 0, did_action( 'beans_archive_title_prepend_markup' ) );
@@ -108,7 +108,7 @@ class Tests_BeansOpenMarkup extends HTML_Test_Case {
 	public function test_should_return_built_html_with_data_markup_id_when_in_dev_mode() {
 		add_option( 'beans_dev_mode', 1 );
 
-		$actual = beans_open_markup( 'beans_archive_title', 'h1', array( 'class' => 'uk-article-title' ) );
+		$actual = beans_open_markup( 'beans_archive_title', 'h1', [ 'class' => 'uk-article-title' ] );
 		$this->assertSame( '<h1 class="uk-article-title" data-markup-id="beans_archive_title">', $actual );
 	}
 
@@ -124,7 +124,7 @@ class Tests_BeansOpenMarkup extends HTML_Test_Case {
 		} );
 
 		// Run the tests.
-		$actual   = beans_open_markup( 'beans_archive_title', 'h1', array( 'class' => 'uk-article-title' ) );
+		$actual   = beans_open_markup( 'beans_archive_title', 'h1', [ 'class' => 'uk-article-title' ] );
 		$expected = <<<EOB
 <!-- _before_markup fired --><h1 class="uk-article-title"><!-- _prepend_markup fired -->
 EOB;
@@ -140,13 +140,13 @@ EOB;
 	 * $_beans_is_selfclose_markup is set to true.
 	 */
 	public function test_should_return_built_self_closing_html_when_selfclose_markup_is_true() {
-		$args = array(
+		$args = [
 			'width'    => 800,
 			'height'   => 500,
 			'src'      => 'http://example.com/image.png',
 			'alt'      => 'Some image',
 			'itemprop' => 'image',
-		);
+		];
 
 		// Run it with development mode off.
 		global $_beans_is_selfclose_markup;
@@ -186,11 +186,11 @@ EOB;
 		} );
 
 		// Check with an empty string.
-		$actual = beans_open_markup( 'beans_archive_title', '', array( 'class' => 'uk-article-title' ) );
+		$actual = beans_open_markup( 'beans_archive_title', '', [ 'class' => 'uk-article-title' ] );
 		$this->assertSame( '<!-- _before_markup fired --><!-- _prepend_markup fired -->', $actual );
 
 		// Check with false.
-		$actual = beans_open_markup( 'beans_archive_title', false, array( 'class' => 'uk-article-title' ) );
+		$actual = beans_open_markup( 'beans_archive_title', false, [ 'class' => 'uk-article-title' ] );
 		$this->assertSame( '<!-- _before_markup fired --><!-- _prepend_markup fired -->', $actual );
 
 		// Check the hooks.
@@ -207,30 +207,30 @@ EOB;
 <&lt;script&gt;alert(&quot;Should escape me.&quot;)&lt;/script&gt; class="uk-article-title" itemprop="headline">
 EOB;
 		// Check when given as the tag.
-		$actual = beans_open_markup( 'beans_post_title', '<script>alert("Should escape me.")</script>', array(
+		$actual = beans_open_markup( 'beans_post_title', '<script>alert("Should escape me.")</script>', [
 			'class'    => 'uk-article-title',
 			'itemprop' => 'headline',
-		) );
+		] );
 		$this->assertSame( $expected, $actual );
 
 		// Check when tag is filtered.
 		add_filter( 'beans_post_title_markup', function() {
 			return '<script>alert("Should escape me.")</script>';
 		} );
-		$actual = beans_open_markup( 'beans_post_title', 'h1', array(
+		$actual = beans_open_markup( 'beans_post_title', 'h1', [
 			'class'    => 'uk-article-title',
 			'itemprop' => 'headline',
-		) );
+		] );
 		$this->assertSame( $expected, $actual );
 
 		// Check the attributes too.
 		$expected = <<<EOB
 <a href="http://example.com/testing-ensure-safe?val=scriptalert(Should%20escape%20me.);/script" title="Testing to ensure safe." rel="bookmark">
 EOB;
-		$this->assertSame( $expected, beans_open_markup( 'beans_post_title_link', 'a', array(
+		$this->assertSame( $expected, beans_open_markup( 'beans_post_title_link', 'a', [
 			'href'  => 'http://example.com/testing-ensure-safe?val=<script>alert("Should escape me.");</script>',
 			'title' => 'Testing to ensure safe.',
 			'rel'   => 'bookmark',
-		) ) );
+		] ) );
 	}
 }

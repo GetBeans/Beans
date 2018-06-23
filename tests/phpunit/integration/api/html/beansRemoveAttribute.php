@@ -34,10 +34,10 @@ class Tests_BeansRemoveAttribute extends HTML_Test_Case {
 			$this->assertInstanceOf( \_Beans_Attribute::class, $instance );
 
 			// Check that the object's "remove" method is registered to the filter event for the given ID.
-			$this->assertSame( 10, has_filter( "{$beans_id}_attributes", array( $instance, 'remove' ), 10 ) );
+			$this->assertSame( 10, has_filter( "{$beans_id}_attributes", [ $instance, 'remove' ], 10 ) );
 
 			// Clean up.
-			remove_filter( "{$beans_id}_attributes", array( $instance, 'remove' ) );
+			remove_filter( "{$beans_id}_attributes", [ $instance, 'remove' ] );
 		}
 	}
 
@@ -61,7 +61,7 @@ class Tests_BeansRemoveAttribute extends HTML_Test_Case {
 			$this->assertSame( $markup['attributes'], $actual );
 
 			// Clean up.
-			remove_filter( "{$beans_id}_attributes", array( $instance, 'remove' ) );
+			remove_filter( "{$beans_id}_attributes", [ $instance, 'remove' ] );
 		}
 	}
 
@@ -87,7 +87,7 @@ class Tests_BeansRemoveAttribute extends HTML_Test_Case {
 			$this->assertSame( $expected, $actual );
 
 			// Clean up.
-			remove_filter( "{$beans_id}_attributes", array( $instance, 'remove' ), 10 );
+			remove_filter( "{$beans_id}_attributes", [ $instance, 'remove' ], 10 );
 		}
 	}
 
@@ -96,13 +96,13 @@ class Tests_BeansRemoveAttribute extends HTML_Test_Case {
 	 * should remove the given value from the attribute.
 	 */
 	public function test_should_remove_the_given_value_from_attribute() {
-		$attributes = array(
+		$attributes = [
 			'id'        => 47,
 			'class'     => 'uk-article uk-panel-box category-beans',
 			'itemscope' => 'itemscope',
 			'itemtype'  => 'http://schema.org/blogPost',
 			'itemprop'  => 'beans_post',
-		);
+		];
 
 		$instance = beans_remove_attribute( 'beans_test', 'class', 'uk-panel-box' );
 
@@ -119,7 +119,7 @@ class Tests_BeansRemoveAttribute extends HTML_Test_Case {
 		$this->assertSame( $expected, $actual );
 
 		// Clean up.
-		remove_filter( 'beans_test_attributes', array( $instance, 'remove' ), 10 );
+		remove_filter( 'beans_test_attributes', [ $instance, 'remove' ], 10 );
 	}
 
 	/**
@@ -135,13 +135,13 @@ class Tests_BeansRemoveAttribute extends HTML_Test_Case {
 			$instance = beans_remove_attribute( $beans_id, $name, $value );
 
 			// Fire the event to run the remove.
-			$actual = apply_filters( "{$beans_id}_attributes", array() ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- The hook's name is in the value.
+			$actual = apply_filters( "{$beans_id}_attributes", [] ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- The hook's name is in the value.
 
 			// Check that an empty array is returned.
-			$this->assertSame( array(), $actual );
+			$this->assertSame( [], $actual );
 
 			// Clean up.
-			remove_filter( "{$beans_id}_attributes", array( $instance, 'remove' ), 10 );
+			remove_filter( "{$beans_id}_attributes", [ $instance, 'remove' ], 10 );
 		}
 	}
 }

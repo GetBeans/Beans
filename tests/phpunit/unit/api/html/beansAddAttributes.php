@@ -68,9 +68,9 @@ class Tests_BeansAddAttributes extends HTML_Test_Case {
 	 */
 	public function test_should_return_empty_string_when_no_attributes() {
 		Monkey\Functions\expect( 'beans_apply_filters' )
-			->with( 'foo_attributes', array() )
+			->with( 'foo_attributes', [] )
 			->times( 4 )
-			->andReturn( array() );
+			->andReturn( [] );
 
 		$this->assertSame( '', beans_add_attributes( 'foo' ) );
 		$this->assertSame( '', beans_add_attributes( 'foo', null ) );
@@ -82,7 +82,7 @@ class Tests_BeansAddAttributes extends HTML_Test_Case {
 	 * Test beans_add_attributes() should pass additional arguments when given.
 	 */
 	public function test_should_pass_additional_arguments_when_given() {
-		$attributes = array( 'class' => 'foo' );
+		$attributes = [ 'class' => 'foo' ];
 		Monkey\Functions\expect( 'beans_apply_filters' )
 			->with( 'foo_attributes', $attributes, 14, 'hi' )
 			->once()

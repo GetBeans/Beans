@@ -32,7 +32,7 @@ class Tests_BeansOpenMarkup extends HTML_Test_Case {
 			->with( 'beans_archive_title_markup', null )
 			->andReturnNull();
 
-		$this->assertNull( beans_open_markup( 'beans_archive_title', null, array( 'class' => 'uk-article-title' ) ) );
+		$this->assertNull( beans_open_markup( 'beans_archive_title', null, [ 'class' => 'uk-article-title' ] ) );
 	}
 
 	/**
@@ -46,7 +46,7 @@ class Tests_BeansOpenMarkup extends HTML_Test_Case {
 			->with( 'beans_archive_title_before_markup' )
 			->andReturn( '<!-- _before_markup fired -->' );
 
-		$actual = beans_open_markup( 'beans_archive_title', 'h1', array( 'class' => 'uk-article-title' ) );
+		$actual = beans_open_markup( 'beans_archive_title', 'h1', [ 'class' => 'uk-article-title' ] );
 		$this->assertStringStartsWith( '<!-- _before_markup fired -->', $actual );
 	}
 
@@ -61,7 +61,7 @@ class Tests_BeansOpenMarkup extends HTML_Test_Case {
 			->with( 'beans_archive_title_prepend_markup' )
 			->andReturn( '<!-- _prepend_markup fired -->' );
 
-		$actual = beans_open_markup( 'beans_archive_title', 'h1', array( 'class' => 'uk-article-title' ) );
+		$actual = beans_open_markup( 'beans_archive_title', 'h1', [ 'class' => 'uk-article-title' ] );
 		$this->assertStringEndsWith( '<!-- _prepend_markup fired -->', $actual );
 	}
 
@@ -80,7 +80,7 @@ class Tests_BeansOpenMarkup extends HTML_Test_Case {
 		global $_beans_is_selfclose_markup;
 		$_beans_is_selfclose_markup = true;
 
-		$this->assertContains( 'Worked!', beans_open_markup( 'beans_archive_title', 'h1', array( 'class' => 'uk-article-title' ) ) );
+		$this->assertContains( 'Worked!', beans_open_markup( 'beans_archive_title', 'h1', [ 'class' => 'uk-article-title' ] ) );
 
 		// Check that the global was unset.
 		$this->assertArrayNotHasKey( '_beans_is_selfclose_markup', $GLOBALS );
@@ -93,11 +93,11 @@ class Tests_BeansOpenMarkup extends HTML_Test_Case {
 		Monkey\Functions\when( '_beans_render_action' )->justReturn( '' );
 		Monkey\Functions\expect( 'beans_add_attributes' )
 			->once()
-			->with( 'beans_archive_title', array( 'class' => 'uk-article-title' ) )
+			->with( 'beans_archive_title', [ 'class' => 'uk-article-title' ] )
 			->andReturn( 'class="uk-article-title"' );
 		Monkey\Functions\expect( '_beans_is_html_dev_mode' )->once()->andReturn( false );
 
-		$actual = beans_open_markup( 'beans_archive_title', 'h1', array( 'class' => 'uk-article-title' ) );
+		$actual = beans_open_markup( 'beans_archive_title', 'h1', [ 'class' => 'uk-article-title' ] );
 		$this->assertSame( '<h1 class="uk-article-title">', $actual );
 	}
 
@@ -108,11 +108,11 @@ class Tests_BeansOpenMarkup extends HTML_Test_Case {
 		Monkey\Functions\when( '_beans_render_action' )->justReturn( '' );
 		Monkey\Functions\expect( 'beans_add_attributes' )
 			->once()
-			->with( 'beans_archive_title', array( 'class' => 'uk-article-title' ) )
+			->with( 'beans_archive_title', [ 'class' => 'uk-article-title' ] )
 			->andReturn( 'class="uk-article-title"' );
 		Monkey\Functions\expect( '_beans_is_html_dev_mode' )->once()->andReturn( true );
 
-		$actual = beans_open_markup( 'beans_archive_title', 'h1', array( 'class' => 'uk-article-title' ) );
+		$actual = beans_open_markup( 'beans_archive_title', 'h1', [ 'class' => 'uk-article-title' ] );
 		$this->assertSame( '<h1 class="uk-article-title" data-markup-id="beans_archive_title">', $actual );
 	}
 
@@ -122,7 +122,7 @@ class Tests_BeansOpenMarkup extends HTML_Test_Case {
 	public function test_should_return_built_html_when_before_or_prepend_hooks() {
 		Monkey\Functions\expect( 'beans_add_attributes' )
 			->once()
-			->with( 'beans_archive_title', array( 'class' => 'uk-article-title' ) )
+			->with( 'beans_archive_title', [ 'class' => 'uk-article-title' ] )
 			->andReturn( 'class="uk-article-title"' );
 		Monkey\Functions\expect( '_beans_is_html_dev_mode' )->once()->andReturn( false );
 		Monkey\Functions\expect( '_beans_render_action' )
@@ -134,7 +134,7 @@ class Tests_BeansOpenMarkup extends HTML_Test_Case {
 			->with( 'beans_archive_title_prepend_markup' )
 			->andReturn( '<!-- _prepend_markup fired -->' );
 
-		$actual   = beans_open_markup( 'beans_archive_title', 'h1', array( 'class' => 'uk-article-title' ) );
+		$actual   = beans_open_markup( 'beans_archive_title', 'h1', [ 'class' => 'uk-article-title' ] );
 		$expected = <<<EOB
 <!-- _before_markup fired --><h1 class="uk-article-title"><!-- _prepend_markup fired -->
 EOB;
@@ -146,13 +146,13 @@ EOB;
 	 * $_beans_is_selfclose_markup is set to true.
 	 */
 	public function test_should_return_built_self_closing_html_when_selfclose_markup_is_true() {
-		$args = array(
+		$args = [
 			'width'    => 800,
 			'height'   => 500,
 			'src'      => 'http://example.com/image.png',
 			'alt'      => 'Some image',
 			'itemprop' => 'image',
-		);
+		];
 
 		Monkey\Functions\when( '_beans_render_action' )->justReturn( '' );
 		Monkey\Functions\expect( 'beans_add_attributes' )
@@ -202,11 +202,11 @@ EOB;
 			->andReturn( '<!-- _prepend_markup fired -->' );
 
 		// Check with an empty string.
-		$actual = beans_open_markup( 'beans_archive_title', '', array( 'class' => 'uk-article-title' ) );
+		$actual = beans_open_markup( 'beans_archive_title', '', [ 'class' => 'uk-article-title' ] );
 		$this->assertSame( '<!-- _before_markup fired --><!-- _prepend_markup fired -->', $actual );
 
 		// Check with false.
-		$actual = beans_open_markup( 'beans_archive_title', false, array( 'class' => 'uk-article-title' ) );
+		$actual = beans_open_markup( 'beans_archive_title', false, [ 'class' => 'uk-article-title' ] );
 		$this->assertSame( '<!-- _before_markup fired --><!-- _prepend_markup fired -->', $actual );
 	}
 }

@@ -29,7 +29,7 @@ class Tests_BeansAttribute_Init extends HTML_Test_Case {
 	public function test_should_return_null_when_method_does_not_exist() {
 		$instance = new _Beans_Attribute( 'foo', 'data-test' );
 		$this->assertNull( $instance->init( 'does_not_exist' ) );
-		$this->assertFalse( has_filter( 'foo_attributes', array( $instance, 'does_not_exist' ), 10 ) );
+		$this->assertFalse( has_filter( 'foo_attributes', [ $instance, 'does_not_exist' ], 10 ) );
 	}
 
 	/**
@@ -39,9 +39,9 @@ class Tests_BeansAttribute_Init extends HTML_Test_Case {
 		$instance = new _Beans_Attribute( 'foo', 'data-test' );
 
 		$this->assertSame( $instance, $instance->init( 'add' ) );
-		$this->assertSame( 10, has_filter( 'foo_attributes', array( $instance, 'add' ), 10 ) );
+		$this->assertSame( 10, has_filter( 'foo_attributes', [ $instance, 'add' ], 10 ) );
 
 		// Clean up.
-		remove_filter( 'foo_attributes', array( $instance, 'add' ) );
+		remove_filter( 'foo_attributes', [ $instance, 'add' ] );
 	}
 }

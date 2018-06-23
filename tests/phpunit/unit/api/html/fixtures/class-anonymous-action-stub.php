@@ -33,7 +33,7 @@ class Anonymous_Action_Stub {
 	public function __construct( $hook, array $callback, $priority ) {
 		$this->callback = $callback;
 
-		add_action( $hook, array( $this, 'callback' ), $priority );
+		add_action( $hook, [ $this, 'callback' ], $priority );
 	}
 
 	/**

@@ -67,13 +67,13 @@ class Tests_BeansAttribute_Remove extends HTML_Test_Case {
 	 * Test _Beans_Attribute::remove() should remove the given value from the attribute.
 	 */
 	public function test_should_remove_the_given_value_from_attribute() {
-		$attributes = array(
+		$attributes = [
 			'id'        => 47,
 			'class'     => 'uk-article uk-panel-box category-beans',
 			'itemscope' => 'itemscope',
 			'itemtype'  => 'http://schema.org/blogPost',
 			'itemprop'  => 'beans_post',
-		);
+		];
 
 		// Run the remove.
 		$actual = ( new _Beans_Attribute( 'beans_post', 'class', 'uk-panel-box' ) )->remove( $attributes );
@@ -99,10 +99,10 @@ class Tests_BeansAttribute_Remove extends HTML_Test_Case {
 			$value = current( $markup['attributes'] );
 
 			// Run the remove.
-			$actual = ( new _Beans_Attribute( $beans_id, $name, $value ) )->remove( array() );
+			$actual = ( new _Beans_Attribute( $beans_id, $name, $value ) )->remove( [] );
 
 			// Check that an empty array is returned.
-			$this->assertSame( array(), $actual );
+			$this->assertSame( [], $actual );
 		}
 	}
 }

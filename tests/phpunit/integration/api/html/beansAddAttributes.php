@@ -59,12 +59,12 @@ class Tests_BeansAddAttributes extends HTML_Test_Case {
 	 */
 	public function test_should_return_filtered_attributes_when_registered_callback() {
 		// Set up the test.
-		$attributes = array( 'class' => 'foo' );
+		$attributes = [ 'class' => 'foo' ];
 		Monkey\Functions\expect( 'foo_attributes_callback' )
 			->with( $attributes )
 			->once()
 			->andReturnUsing( function ( $attributes ) {
-				return array( 'class' => 'changed-me' );
+				return [ 'class' => 'changed-me' ];
 			} );
 		add_action( 'foo_attributes', 'foo_attributes_callback' );
 

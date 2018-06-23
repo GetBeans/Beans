@@ -36,10 +36,10 @@ class Tests_BeansModifyMarkup extends HTML_Test_Case {
 	public function test_should_register_callback_to_id_markup_filter() {
 		$anonymous_filter = beans_modify_markup( 'beans_archive_title', 'h2' );
 
-		$this->assertSame( 10, has_filter( 'beans_archive_title_markup', array(
+		$this->assertSame( 10, has_filter( 'beans_archive_title_markup', [
 			$anonymous_filter,
 			'callback',
-		) ) );
+		] ) );
 	}
 
 	/**
@@ -60,7 +60,7 @@ EOB;
 		} );
 
 		// Check the opening markup.
-		$actual = beans_open_markup( 'beans_archive_title', 'h1', array( 'class' => 'uk-article-title' ) );
+		$actual = beans_open_markup( 'beans_archive_title', 'h1', [ 'class' => 'uk-article-title' ] );
 		$this->assertSame( $expected, $actual );
 
 		// Check the closing markup.
@@ -75,13 +75,13 @@ EOB;
 		$expected = <<<EOB
 <foo width="800" height="500" src="http://example.com/image.png" alt="Some image" itemprop="image"/>
 EOB;
-		$actual   = beans_selfclose_markup( 'beans_post_image_item', 'img', array(
+		$actual   = beans_selfclose_markup( 'beans_post_image_item', 'img', [
 			'width'    => 800,
 			'height'   => 500,
 			'src'      => 'http://example.com/image.png',
 			'alt'      => 'Some image',
 			'itemprop' => 'image',
-		) );
+		] );
 		$this->assertSame( $expected, $actual );
 	}
 }

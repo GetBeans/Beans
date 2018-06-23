@@ -36,10 +36,10 @@ class Tests_BeansRemoveOutput extends HTML_Test_Case {
 	public function test_should_return_register_callback_to_id_output_filter() {
 		$anonymous_filter = beans_remove_output( 'beans_post_meta_item_date' );
 
-		$this->assertSame( 99999999, has_filter( 'beans_post_meta_item_date_output', array(
+		$this->assertSame( 99999999, has_filter( 'beans_post_meta_item_date_output', [
 			$anonymous_filter,
 			'callback',
-		) ) );
+		] ) );
 	}
 
 	/**

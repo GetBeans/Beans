@@ -27,7 +27,7 @@ class Tests_BeansOpenMarkupE extends HTML_Test_Case {
 	 */
 	public function test_should_echo_empty_string_when_tag_set_to_null() {
 		ob_start();
-		beans_open_markup_e( 'beans_archive_title', null, array( 'class' => 'uk-article-title' ) );
+		beans_open_markup_e( 'beans_archive_title', null, [ 'class' => 'uk-article-title' ] );
 		$this->assertEquals( '', ob_get_clean() );
 	}
 
@@ -37,7 +37,7 @@ class Tests_BeansOpenMarkupE extends HTML_Test_Case {
 	 */
 	public function test_should_echo_html_element_when_hooks_not_registered() {
 		ob_start();
-		beans_open_markup_e( 'beans_archive_title', 'h1', array( 'class' => 'uk-article-title' ) );
+		beans_open_markup_e( 'beans_archive_title', 'h1', [ 'class' => 'uk-article-title' ] );
 		$actual = ob_get_clean();
 
 		$this->assertSame( '<h1 class="uk-article-title">', $actual );
@@ -53,7 +53,7 @@ class Tests_BeansOpenMarkupE extends HTML_Test_Case {
 		add_option( 'beans_dev_mode', 1 );
 
 		ob_start();
-		beans_open_markup_e( 'beans_archive_title', 'h1', array( 'class' => 'uk-article-title' ) );
+		beans_open_markup_e( 'beans_archive_title', 'h1', [ 'class' => 'uk-article-title' ] );
 		$this->assertSame( '<h1 class="uk-article-title" data-markup-id="beans_archive_title">', ob_get_clean() );
 	}
 
@@ -70,7 +70,7 @@ class Tests_BeansOpenMarkupE extends HTML_Test_Case {
 		} );
 
 		ob_start();
-		beans_open_markup_e( 'beans_archive_title', 'h1', array( 'class' => 'uk-article-title' ) );
+		beans_open_markup_e( 'beans_archive_title', 'h1', [ 'class' => 'uk-article-title' ] );
 		$actual = ob_get_clean();
 
 		$expected = <<<EOB

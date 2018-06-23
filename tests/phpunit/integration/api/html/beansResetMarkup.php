@@ -29,7 +29,7 @@ class Tests_BeansResetMarkup extends HTML_Test_Case {
 	public function test_should_reset_html_markup_opening_and_closing_tag() {
 		// First, register to modify the tag.
 		$anonymous_filter = beans_modify_markup( 'beans_archive_title', 'h2', 20 );
-		$this->assertEquals( 20, has_filter( 'beans_archive_title_markup', array( $anonymous_filter, 'callback' ) ) );
+		$this->assertEquals( 20, has_filter( 'beans_archive_title_markup', [ $anonymous_filter, 'callback' ] ) );
 
 		// Reset it.
 		beans_reset_markup( 'beans_archive_title' );
@@ -49,7 +49,7 @@ class Tests_BeansResetMarkup extends HTML_Test_Case {
 	public function test_should_reset_html_markup_self_closing_tag() {
 		// First, register to modify the tag.
 		$anonymous_filter = beans_modify_markup( 'beans_post_image_item', 'foo', 20 );
-		$this->assertEquals( 20, has_filter( 'beans_post_image_item_markup', array( $anonymous_filter, 'callback' ) ) );
+		$this->assertEquals( 20, has_filter( 'beans_post_image_item_markup', [ $anonymous_filter, 'callback' ] ) );
 
 		// Reset it.
 		beans_reset_markup( 'beans_post_image_item' );
@@ -68,7 +68,7 @@ class Tests_BeansResetMarkup extends HTML_Test_Case {
 	public function test_should_reset_sub_hooks() {
 		// First, register to modify the tag.
 		$anonymous_filter = beans_modify_markup( 'beans_title[_foo]', 'p', 20 );
-		$this->assertEquals( 20, has_filter( 'beans_title[_foo]_markup', array( $anonymous_filter, 'callback' ) ) );
+		$this->assertEquals( 20, has_filter( 'beans_title[_foo]_markup', [ $anonymous_filter, 'callback' ] ) );
 
 		// Reset it.
 		beans_reset_markup( 'beans_title[_foo]' );

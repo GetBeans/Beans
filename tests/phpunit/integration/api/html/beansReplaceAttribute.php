@@ -34,10 +34,10 @@ class Tests_BeansReplaceAttribute extends HTML_Test_Case {
 			$this->assertInstanceOf( \_Beans_Attribute::class, $instance );
 
 			// Check that the object's "replace" method is registered to the filter event for the given ID.
-			$this->assertSame( 10, has_filter( "{$beans_id}_attributes", array( $instance, 'replace' ), 10 ) );
+			$this->assertSame( 10, has_filter( "{$beans_id}_attributes", [ $instance, 'replace' ], 10 ) );
 
 			// Clean up.
-			remove_filter( "{$beans_id}_attributes", array( $instance, 'replace' ) );
+			remove_filter( "{$beans_id}_attributes", [ $instance, 'replace' ] );
 		}
 	}
 
@@ -46,13 +46,13 @@ class Tests_BeansReplaceAttribute extends HTML_Test_Case {
 	 * an existing attribute value.
 	 */
 	public function test_should_replace_existing_attribute_value() {
-		$attributes = array(
+		$attributes = [
 			'id'        => 47,
 			'class'     => 'uk-article uk-panel-box category-beans',
 			'itemscope' => 'itemscope',
 			'itemtype'  => 'http://schema.org/blogPost',
 			'itemprop'  => 'beans_post',
-		);
+		];
 
 		$instance = beans_replace_attribute( 'beans_post', 'class', 'uk-panel-box', 'beans-test' );
 
@@ -67,7 +67,7 @@ class Tests_BeansReplaceAttribute extends HTML_Test_Case {
 		$this->assertNotContains( 'uk-panel-box', $actual['class'] );
 
 		// Clean up.
-		remove_filter( 'beans_post_attributes', array( $instance, 'replace' ), 10 );
+		remove_filter( 'beans_post_attributes', [ $instance, 'replace' ], 10 );
 	}
 
 	/**
@@ -84,25 +84,25 @@ class Tests_BeansReplaceAttribute extends HTML_Test_Case {
 			$instance = beans_replace_attribute( $beans_id, $name, null );
 			$actual   = apply_filters( $hook, $markup['attributes'] ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- The hook's name is in the value.
 			$this->assertNull( $actual[ $name ] );
-			remove_filter( $hook, array( $instance, 'replace' ), 10 );
+			remove_filter( $hook, [ $instance, 'replace' ], 10 );
 
 			// Check when the target value is null.
 			$instance = beans_replace_attribute( $beans_id, $name, null, '' );
 			$actual   = apply_filters( $hook, $markup['attributes'] ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- The hook's name is in the value.
 			$this->assertSame( '', $actual[ $name ] );
-			remove_filter( $hook, array( $instance, 'replace' ), 10 );
+			remove_filter( $hook, [ $instance, 'replace' ], 10 );
 
 			// Check when the target value is an empty string.
 			$instance = beans_replace_attribute( $beans_id, $name, '', 'foo' );
 			$actual   = apply_filters( $hook, $markup['attributes'] ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- The hook's name is in the value.
 			$this->assertSame( 'foo', $actual[ $name ] );
-			remove_filter( $hook, array( $instance, 'replace' ), 10 );
+			remove_filter( $hook, [ $instance, 'replace' ], 10 );
 
 			// Check when the target value is false.
 			$instance = beans_replace_attribute( $beans_id, $name, false, 'foo' );
 			$actual   = apply_filters( $hook, $markup['attributes'] ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- The hook's name is in the value.
 			$this->assertSame( 'foo', $actual[ $name ] );
-			remove_filter( $hook, array( $instance, 'replace' ), 10 );
+			remove_filter( $hook, [ $instance, 'replace' ], 10 );
 		}
 	}
 
@@ -131,7 +131,7 @@ class Tests_BeansReplaceAttribute extends HTML_Test_Case {
 			$this->assertSame( $expected, $actual );
 
 			// Clean up.
-			remove_filter( "{$beans_id}_attributes", array( $instance, 'replace' ), 10 );
+			remove_filter( "{$beans_id}_attributes", [ $instance, 'replace' ], 10 );
 		}
 	}
 
@@ -147,14 +147,14 @@ class Tests_BeansReplaceAttribute extends HTML_Test_Case {
 			$instance = beans_replace_attribute( $beans_id, $name, $value, 'beans-test' );
 
 			// Fire the event to run the replace.
-			$actual = apply_filters( "{$beans_id}_attributes", array() ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- The hook's name is in the value.
+			$actual = apply_filters( "{$beans_id}_attributes", [] ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- The hook's name is in the value.
 
 			// Check that it did add the attribute.
 			$this->assertArrayHasKey( $name, $actual );
-			$this->assertSame( array( $name => 'beans-test' ), $actual );
+			$this->assertSame( [ $name => 'beans-test' ], $actual );
 
 			// Clean up.
-			remove_filter( "{$beans_id}_attributes", array( $instance, 'replace' ), 10 );
+			remove_filter( "{$beans_id}_attributes", [ $instance, 'replace' ], 10 );
 		}
 	}
 }

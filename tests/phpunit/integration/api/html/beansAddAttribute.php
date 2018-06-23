@@ -34,10 +34,10 @@ class Tests_BeansAddAttribute extends HTML_Test_Case {
 			$this->assertInstanceOf( \_Beans_Attribute::class, $instance );
 
 			// Check that the object's "add" method is registered to the filter event for the given ID.
-			$this->assertSame( 10, has_filter( "{$beans_id}_attributes", array( $instance, 'add' ), 10 ) );
+			$this->assertSame( 10, has_filter( "{$beans_id}_attributes", [ $instance, 'add' ], 10 ) );
 
 			// Clean up.
-			remove_filter( "{$beans_id}_attributes", array( $instance, 'add' ) );
+			remove_filter( "{$beans_id}_attributes", [ $instance, 'add' ] );
 		}
 	}
 
@@ -62,7 +62,7 @@ class Tests_BeansAddAttribute extends HTML_Test_Case {
 			$this->assertSame( $expected, $actual );
 
 			// Clean up.
-			remove_filter( "{$beans_id}_attributes", array( $instance, 'add' ), 10 );
+			remove_filter( "{$beans_id}_attributes", [ $instance, 'add' ], 10 );
 		}
 	}
 
@@ -84,7 +84,7 @@ class Tests_BeansAddAttribute extends HTML_Test_Case {
 			$this->assertSame( $expected, $actual );
 
 			// Clean up.
-			remove_filter( "{$beans_id}_attributes", array( $instance, 'add' ), 10 );
+			remove_filter( "{$beans_id}_attributes", [ $instance, 'add' ], 10 );
 		}
 	}
 }

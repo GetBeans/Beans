@@ -31,11 +31,11 @@ class Tests_BeansOutputE extends HTML_Test_Case {
 			return $output;
 		} );
 
-		$ids = array(
+		$ids = [
 			'beans_post_meta_item_date'     => null,
 			'beans_post_meta_item_author'   => '',
 			'beans_post_meta_item_comments' => false,
-		);
+		];
 
 		foreach ( $ids as $id => $output ) {
 			ob_start();

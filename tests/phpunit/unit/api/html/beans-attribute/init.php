@@ -39,7 +39,7 @@ class Tests_BeansAttribute_Init extends HTML_Test_Case {
 		$instance = new _Beans_Attribute( 'foo', 'data-test' );
 
 		Monkey\Functions\expect( 'beans_add_filter' )
-			->with( 'foo_attributes', array( $instance, 'add' ) )
+			->with( 'foo_attributes', [ $instance, 'add' ] )
 			->once();
 
 		$this->assertSame( $instance, $instance->init( 'add' ) );

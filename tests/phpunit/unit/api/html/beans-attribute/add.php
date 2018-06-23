@@ -47,9 +47,9 @@ class Tests_BeansAttribute_Add extends HTML_Test_Case {
 	public function test_should_add_the_attribute_when_empty_array_given() {
 
 		foreach ( array_keys( static::$test_attributes ) as $beans_id ) {
-			$actual = ( new _Beans_Attribute( $beans_id, 'data-test', 'foo' ) )->add( array() );
+			$actual = ( new _Beans_Attribute( $beans_id, 'data-test', 'foo' ) )->add( [] );
 
-			$this->assertSame( array( 'data-test' => 'foo' ), $actual );
+			$this->assertSame( [ 'data-test' => 'foo' ], $actual );
 		}
 	}
 

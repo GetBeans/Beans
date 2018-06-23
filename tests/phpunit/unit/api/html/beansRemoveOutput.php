@@ -48,11 +48,11 @@ class Tests_BeansRemoveOutput extends HTML_Test_Case {
 	 * Test beans_remove_output() should call beans_add_filter() to register the callback for the remove process.
 	 */
 	public function test_should_call_beans_add_filter_to_register_callback() {
-		$ids = array(
+		$ids = [
 			'beans_post_meta_item_date',
 			'beans_post_meta_item_author',
 			'beans_post_meta_item_comments',
-		);
+		];
 
 		foreach ( $ids as $id ) {
 			Monkey\Functions\expect( 'beans_add_filter' )

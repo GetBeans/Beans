@@ -28,13 +28,13 @@ class Tests_BeansAttribute_Replace extends HTML_Test_Case {
 	 * Test _Beans_Attribute::replace() should replace an existing attribute value.
 	 */
 	public function test_should_replace_existing_attribute_value() {
-		$attributes = array(
+		$attributes = [
 			'id'        => 47,
 			'class'     => 'uk-article uk-panel-box category-beans',
 			'itemscope' => 'itemscope',
 			'itemtype'  => 'http://schema.org/blogPost',
 			'itemprop'  => 'beans_post',
-		);
+		];
 
 		$instance = new _Beans_Attribute( 'beans_post', 'class', 'uk-panel-box', 'beans-test' );
 
@@ -110,11 +110,11 @@ class Tests_BeansAttribute_Replace extends HTML_Test_Case {
 		foreach ( static::$test_attributes as $beans_id => $markup ) {
 			$name   = key( $markup['attributes'] );
 			$value  = current( $markup['attributes'] );
-			$actual = ( new _Beans_Attribute( $beans_id, $name, $value, 'beans-test' ) )->replace( array() );
+			$actual = ( new _Beans_Attribute( $beans_id, $name, $value, 'beans-test' ) )->replace( [] );
 
 			// Check that it did add the attribute.
 			$this->assertArrayHasKey( $name, $actual );
-			$this->assertSame( array( $name => 'beans-test' ), $actual );
+			$this->assertSame( [ $name => 'beans-test' ], $actual );
 		}
 	}
 }

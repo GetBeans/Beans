@@ -27,11 +27,11 @@ class Tests_BeansOutputE extends HTML_Test_Case {
 	 * Test beans_output_e() should echo an empty string when the output is empty.
 	 */
 	public function test_should_echo_empty_string_when_output_is_empty() {
-		$ids = array(
+		$ids = [
 			'beans_post_meta_item_date'     => null,
 			'beans_post_meta_item_author'   => '',
 			'beans_post_meta_item_comments' => false,
-		);
+		];
 
 		foreach ( $ids as $id => $output ) {
 			ob_start();
