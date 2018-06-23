@@ -117,13 +117,13 @@ abstract class UIkit_Test_Case extends Test_Case {
 	protected function reset_globals() {
 		global $_beans_uikit_enqueued_items, $_beans_uikit_registered_items;
 
-		$_beans_uikit_enqueued_items = array(
-			'components' => array(
-				'core'    => array(),
-				'add-ons' => array(),
-			),
-			'themes'     => array(),
-		);
+		$_beans_uikit_enqueued_items = [
+			'components' => [
+				'core'    => [],
+				'add-ons' => [],
+			],
+			'themes'     => [],
+		];
 
 		$_beans_uikit_registered_items = [
 			'themes' => [

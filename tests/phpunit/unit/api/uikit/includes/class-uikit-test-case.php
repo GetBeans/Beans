@@ -54,12 +54,12 @@ abstract class UIkit_Test_Case extends Test_Case {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->load_original_functions( array(
+		$this->load_original_functions( [
 			'api/utilities/functions.php',
 			'api/compiler/functions.php',
 			'api/uikit/functions.php',
 			'api/uikit/class-beans-uikit.php',
-		) );
+		] );
 
 		$this->set_up_virtual_filesystem();
 		$this->set_up_mocked_functions();
