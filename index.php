@@ -6,7 +6,7 @@
  * how to customize Beans theme.
  *
  * @author Beans
- * @link   http://www.getbeans.io
+ * @link   https://www.getbeans.io
  * @package Beans\Framework
  */
 

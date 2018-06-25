@@ -7,7 +7,7 @@
  * how to customize the Beans theme.
  *
  * @author Beans
- * @link   http://www.getbeans.io
+ * @link   https://www.getbeans.io
  * @package Beans\Framework
  */
 
@@ -15,7 +15,7 @@
  * Initialize Beans theme framework.
  *
  * @author Beans
- * @link   http://www.getbeans.io
+ * @link   https://www.getbeans.io
  */
 
 require_once dirname( __FILE__ ) . '/lib/init.php';

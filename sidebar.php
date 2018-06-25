@@ -4,7 +4,7 @@
  * not overwrite this file.
  *
  * @author Beans
- * @link   http://www.getbeans.io
+ * @link   https://www.getbeans.io
  * @package Beans\Framework
  */
 

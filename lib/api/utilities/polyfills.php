@@ -25,7 +25,7 @@ if ( ! function_exists( 'array_replace_recursive' ) ) {
 	 * value recursively.
 	 *
 	 * @see   PHP Manual
-	 * @link  http://php.net/manual/en/function.array-replace-recursive.php
+	 * @link  https://php.net/manual/en/function.array-replace-recursive.php
 	 *
 	 * Note: This function became available in PHP 5.3.0.
 	 *

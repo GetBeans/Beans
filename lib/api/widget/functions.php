@@ -13,7 +13,7 @@
  * Register a widget area.
  *
  * Since a Beans widget area is using the WordPress sidebar, this function registers a WordPress sidebar using
- * {@link http://codex.wordpress.org/Function_Reference/register_sidebar register_sidebar()}, with additional
+ * {@link https://codex.wordpress.org/Function_Reference/register_sidebar register_sidebar()}, with additional
  * arguments.
  *
  * Note that the 'class', before_widget', 'after_widget', 'before_title' and 'after_title' arguments are not
@@ -79,7 +79,7 @@ function beans_register_widget_area( $args = array() ) {
  *
  * Since a Beans widget area is using the WordPress sidebar, this function deregisters the defined
  * WordPress sidebar using
- * {@link http://codex.wordpress.org/Function_Reference/unregister_sidebar unregister_sidebar()}.
+ * {@link https://codex.wordpress.org/Function_Reference/unregister_sidebar unregister_sidebar()}.
  *
  * @since 1.0.0
  *
@@ -95,7 +95,7 @@ function beans_deregister_widget_area( $id ) {
  * Check whether a widget area is in use.
  *
  * Since a Beans widget area is using the WordPress sidebar, this function checks if the defined sidebar
- * is in use using {@link http://codex.wordpress.org/Function_Reference/is_active_sidebar is_active_sidebar()}.
+ * is in use using {@link https://codex.wordpress.org/Function_Reference/is_active_sidebar is_active_sidebar()}.
  *
  * @since 1.0.0
  *

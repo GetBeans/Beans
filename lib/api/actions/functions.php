@@ -13,7 +13,7 @@
 /**
  * Hooks a callback (function or method) to a specific action event.
  *
- * This function is similar to {@link http://codex.wordpress.org/Function_Reference/add_action add_action()}
+ * This function is similar to {@link https://codex.wordpress.org/Function_Reference/add_action add_action()}
  * with the exception of being registered by ID within Beans in order to be manipulated by the other Beans
  * Actions functions.
  *

@@ -8,7 +8,7 @@
 /**
  * Hooks a callback (function or method) to a specific filter event.
  *
- * This function is similar to {@link http://codex.wordpress.org/Function_Reference/add_filter add_filter()}
+ * This function is similar to {@link https://codex.wordpress.org/Function_Reference/add_filter add_filter()}
  * with the exception that it accepts a $callback_or_value argument which is used to automatically create an
  * anonymous function.
  *
@@ -39,7 +39,7 @@ function beans_add_filter( $hook, $callback_or_value, $priority = 10, $args = 1 
 /**
  * Call the functions added to a filter hook.
  *
- * This function is similar to {@link http://codex.wordpress.org/Function_Reference/apply_filters apply_filters()}
+ * This function is similar to {@link https://codex.wordpress.org/Function_Reference/apply_filters apply_filters()}
  * with the exception of creating sub-hooks if it is told to do so.
  *
  * Sub-hooks must be set in square brackets as part of the filter id argument. Sub-hooks are cascaded
@@ -111,7 +111,7 @@ function beans_apply_filters( $id, $value ) {
 /**
  * Check if any filter has been registered for a hook.
  *
- * This function is similar to {@link http://codex.wordpress.org/Function_Reference/has_filters has_filters()}
+ * This function is similar to {@link https://codex.wordpress.org/Function_Reference/has_filters has_filters()}
  * with the exception of checking sub-hooks if it is told to do so.
  *
  * @since 1.0.0
