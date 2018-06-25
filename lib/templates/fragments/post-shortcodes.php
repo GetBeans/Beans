@@ -51,7 +51,7 @@ function beans_post_meta_author_shortcode() {
 			'rel'       => 'author',
 			'itemprop'  => 'author',
 			'itemscope' => '',
-			'itemtype'  => 'http://schema.org/Person',
+			'itemtype'  => 'https://schema.org/Person',
 		)
 	);
 

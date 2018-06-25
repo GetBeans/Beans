@@ -71,7 +71,7 @@ function beans_comment_author() {
 			'class'     => 'uk-comment-title',
 			'itemprop'  => 'author',
 			'itemscope' => 'itemscope',
-			'itemtype'  => 'http://schema.org/Person',
+			'itemtype'  => 'https://schema.org/Person',
 		)
 	);
 

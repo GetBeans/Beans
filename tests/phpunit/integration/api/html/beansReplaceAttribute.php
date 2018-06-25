@@ -50,7 +50,7 @@ class Tests_BeansReplaceAttribute extends HTML_Test_Case {
 			'id'        => 47,
 			'class'     => 'uk-article uk-panel-box category-beans',
 			'itemscope' => 'itemscope',
-			'itemtype'  => 'http://schema.org/blogPost',
+			'itemtype'  => 'https://schema.org/blogPost',
 			'itemprop'  => 'beans_post',
 		];
 

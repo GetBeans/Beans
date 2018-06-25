@@ -35,13 +35,13 @@ do_action( 'beans_before_loop' );
 				'id'        => get_the_ID(), // Automatically escaped.
 				'class'     => implode( ' ', get_post_class( array( 'uk-article', ( current_theme_supports( 'beans-default-styling' ) ? 'uk-panel-box' : null ) ) ) ), // Automatically escaped.
 				'itemscope' => 'itemscope',
-				'itemtype'  => 'http://schema.org/CreativeWork',
+				'itemtype'  => 'https://schema.org/CreativeWork',
 			);
 
 			// Blog specifc attributes.
 			if ( 'post' === get_post_type() ) {
 
-				$article_attributes['itemtype'] = 'http://schema.org/BlogPosting';
+				$article_attributes['itemtype'] = 'https://schema.org/BlogPosting';
 
 				// Only add to blogPost attribute to the main query.
 				if ( is_main_query() && ! is_search() ) {

@@ -16,7 +16,7 @@ beans_open_markup_e(
 		'id'        => 'beans-secondary-sidebar',
 		'role'      => 'complementary',
 		'itemscope' => 'itemscope',
-		'itemtype'  => 'http://schema.org/WPSideBar',
+		'itemtype'  => 'https://schema.org/WPSideBar',
 		'tabindex'  => '-1',
 	)
 );

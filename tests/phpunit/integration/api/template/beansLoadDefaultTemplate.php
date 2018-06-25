@@ -54,7 +54,7 @@ class Tests_BeansLoadDefaultTemplate extends Test_Case {
 		$html = ob_get_clean();
 
 		$expected = <<<EOB
-<div class="tm-content" id="beans-content" role="main" itemprop="mainEntityOfPage" tabindex="-1" itemscope="itemscope" itemtype="http://schema.org/Blog">
+<div class="tm-content" id="beans-content" role="main" itemprop="mainEntityOfPage" tabindex="-1" itemscope="itemscope" itemtype="https://schema.org/Blog">
 EOB;
 		$this->assertStringStartsWith( $expected, trim( $html ) );
 

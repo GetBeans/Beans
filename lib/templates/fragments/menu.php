@@ -27,7 +27,7 @@ function beans_primary_menu() {
 			'id'         => 'beans-primary-navigation',
 			'role'       => 'navigation',
 			'itemscope'  => 'itemscope',
-			'itemtype'   => 'http://schema.org/SiteNavigationElement',
+			'itemtype'   => 'https://schema.org/SiteNavigationElement',
 			'aria-label' => esc_attr__( 'Primary Navigation Menu', 'tm-beans' ),
 			'tabindex'   => '-1',
 		)

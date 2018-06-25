@@ -15,7 +15,7 @@ beans_open_markup_e(
 		'class'     => 'uk-comment',
 		'itemprop'  => 'comment',
 		'itemscope' => 'itemscope',
-		'itemtype'  => 'http://schema.org/Comment',
+		'itemtype'  => 'https://schema.org/Comment',
 	)
 );
 

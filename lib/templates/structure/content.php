@@ -21,7 +21,7 @@ $content_attributes = array(
 if ( is_home() || is_page_template( 'page_blog.php' ) || is_singular( 'post' ) || is_archive() ) {
 
 	$content_attributes['itemscope'] = 'itemscope'; // Automatically escaped.
-	$content_attributes['itemtype']  = 'http://schema.org/Blog'; // Automatically escaped.
+	$content_attributes['itemtype']  = 'https://schema.org/Blog'; // Automatically escaped.
 
 }
 
@@ -29,7 +29,7 @@ if ( is_home() || is_page_template( 'page_blog.php' ) || is_singular( 'post' ) |
 if ( is_search() ) {
 
 	$content_attributes['itemscope'] = 'itemscope'; // Automatically escaped.
-	$content_attributes['itemtype']  = 'http://schema.org/SearchResultsPage'; // Automatically escaped.
+	$content_attributes['itemtype']  = 'https://schema.org/SearchResultsPage'; // Automatically escaped.
 
 }
 // phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound

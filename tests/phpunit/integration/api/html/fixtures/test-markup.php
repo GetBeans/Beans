@@ -15,7 +15,7 @@ return [
 			'id'        => 47,
 			'class'     => 'uk-article uk-panel-box post-47 post type-post status-publish format-standard has-post-thumbnail hentry category-beans',
 			'itemscope' => 'itemscope',
-			'itemtype'  => 'http://schema.org/blogPost',
+			'itemtype'  => 'https://schema.org/blogPost',
 			'itemprop'  => 'beans_post',
 		],
 	],

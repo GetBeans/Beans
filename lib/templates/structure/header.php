@@ -34,7 +34,7 @@ beans_open_markup_e( 'beans_html', 'html', str_replace( ' ', '&', str_replace( '
 		array(
 			'class'     => implode( ' ', get_body_class( 'uk-form no-js' ) ),
 			'itemscope' => 'itemscope',
-			'itemtype'  => 'http://schema.org/WebPage',
+			'itemtype'  => 'https://schema.org/WebPage',
 
 		)
 	);
