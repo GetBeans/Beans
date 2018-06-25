@@ -36,7 +36,7 @@ function beans_footer_content() {
 			'beans_footer_credit_framework_link',
 			'a',
 			array(
-				'href' => 'http://www.getbeans.io', // Automatically escaped.
+				'href' => 'https://www.getbeans.io', // Automatically escaped.
 				'rel'  => 'nofollow',
 			)
 		);

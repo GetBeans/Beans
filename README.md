@@ -4,7 +4,7 @@
 
 [Beans](https://www.getbeans.io/) is an incredibly powerful and flexible WordPress theme, yet light weight and unbelievably fast. Whether you are a pro or a beginner, you will enjoy the simplicity of it. The magic is under the hood!
 # Documentation
-Whether you are looking how to get started or how to use Beans API, you will find your answers in the [documentation](https://www.getbeans.io/documentation/). If your don't find what your are looking for, don't hesitate to [contact us](https://getbeans.io/contact/).
+Whether you are looking how to get started or how to use Beans API, you will find your answers in the [documentation](https://www.getbeans.io/documentation/). If your don't find what your are looking for, don't hesitate to [contact us](https://www.getbeans.io/contact/).
 # Code snippets
 [Code snippets](https://www.getbeans.io/code-snippets/) are ready to be pasted straight into your child theme functions.php.
 # Code reference

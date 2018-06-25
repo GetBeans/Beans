@@ -4,7 +4,7 @@
  *
  * @package     Beans\Framework\Tests\Unit
  * @since       1.5.0
- * @link        http://www.getbeans.io
+ * @link        https://www.getbeans.io
  * @license     GNU-2.0+
  */
 

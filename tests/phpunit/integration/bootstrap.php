@@ -4,7 +4,7 @@
  *
  * @package     Beans\Framework\Tests\Integration
  * @since       1.5.0
- * @link        http://www.getbeans.io
+ * @link        https://www.getbeans.io
  * @license     GNU-2.0+
  */
 
