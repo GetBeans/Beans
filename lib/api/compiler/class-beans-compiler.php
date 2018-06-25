@@ -854,7 +854,7 @@ final class _Beans_Compiler {
 		) );
 
 		$html .= beans_output( 'beans_compiler_error_contact_text', sprintf(
-			'<a class="button" href="http://www.getbeans.io/contact/?compiler_report=1" target="_blanc">%s</a>',
+			'<a class="button" href="https://www.getbeans.io/contact/?compiler_report=1" target="_blanc">%s</a>',
 			__( 'Contact Beans Support', 'tm-beans' )
 		) );
 
