@@ -72,6 +72,7 @@ function beans_do_register_wp_customize_options() {
 			'label'       => __( 'Viewport Width - for Previewing Only', 'tm-beans' ),
 			'description' => __( 'Slide left or right to change the viewport width. Publishing will not change the width of your website.', 'tm-beans' ),
 			'type'        => 'group',
+			'transport'   => 'postMessage',
 			'fields'      => array(
 				array(
 					'id'      => 'beans_enable_viewport_width',
@@ -95,6 +96,7 @@ function beans_do_register_wp_customize_options() {
 			'label'       => __( 'Viewport Height - for Previewing Only', 'tm-beans' ),
 			'description' => __( 'Slide left or right to change the viewport height. Publishing will not change the height of your website.', 'tm-beans' ),
 			'type'        => 'group',
+			'transport'   => 'postMessage',
 			'fields'      => array(
 				array(
 					'id'      => 'beans_enable_viewport_height',
