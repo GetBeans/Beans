@@ -1,6 +1,6 @@
 # Beans Changelog
 
-## 2018.07.05 - version 1.5.0-rc
+## 2018.07.10 - version 1.5.0
 
 This release candidate includes security, web accessibility, code quality improvements, performance improvements, and bug fixes.  The entire framework is now WPCS compliant.  The APIs are now fully and thoroughly well-tested. All found issues are resolved.  New functionality is added. 
 
