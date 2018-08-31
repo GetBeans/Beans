@@ -119,7 +119,7 @@ final class _Beans_Attribute {
 
 		if ( $this->new_value ) {
 
-		    if ( isset( $attributes[ $this->attribute ] ) ) {
+		    if ( $this->has_attribute( $attributes ) ) {
 			$attributes[ $this->attribute ] = $this->replace_value( $attributes[ $this->attribute ] );
 		    } else {
 			$attributes[ $this->attribute ] = $this->new_value;
