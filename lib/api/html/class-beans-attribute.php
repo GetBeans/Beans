@@ -117,10 +117,17 @@ final class _Beans_Attribute {
 	 */
 	public function replace( array $attributes ) {
 
-		if ( $this->has_attribute( $attributes ) && ! empty( $this->value ) ) {
+		if ( $this->new_value ) {
+
+		    if ( isset( $attributes[ $this->attribute ] ) ) {
 			$attributes[ $this->attribute ] = $this->replace_value( $attributes[ $this->attribute ] );
-		} else {
+		    } else {
 			$attributes[ $this->attribute ] = $this->new_value;
+		    }   
+		} else {
+
+		    $attributes[ $this->attribute ] = $this->value;
+
 		}
 
 		return $attributes;
