@@ -1,4 +1,4 @@
-<?php
+g<?php
 /**
  * This class provides the means to edit an image.
  *
@@ -61,7 +61,7 @@ final class _Beans_Image_Editor {
 	 *                            Default is STRING.
 	 */
 	public function __construct( $src, array $args, $output = 'STRING' ) {
-		$local_source       = beans_url_to_path( $this->src );
+		$local_source       = beans_url_to_path( $src );
 		$this->src          = file_exists( $local_source ) ? $local_source : $src;
 		$this->args         = $args;
 		$this->output       = $output;
