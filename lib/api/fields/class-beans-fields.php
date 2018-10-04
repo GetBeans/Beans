@@ -16,7 +16,7 @@
  *
  * @package Beans\Framework\API\Fields
  */
-final class _Beans_Fields {
+final class Beans_Fields {
 
 	/**
 	 * Fields.
@@ -129,14 +129,17 @@ final class _Beans_Fields {
 	 * @return array
 	 */
 	private function standardize_field( array $field ) {
-		$field = array_merge( array(
-			'label'       => false,
-			'description' => false,
-			'default'     => false,
-			'context'     => $this->context,
-			'attributes'  => array(),
-			'db_group'    => false,
-		), $field );
+		$field = array_merge(
+			array(
+				'label'       => false,
+				'description' => false,
+				'default'     => false,
+				'context'     => $this->context,
+				'attributes'  => array(),
+				'db_group'    => false,
+			),
+			$field
+		);
 
 		// Set the field's name.
 		$field['name'] = 'wp_customize' === $this->context ? $field['id'] : 'beans_fields[' . $field['id'] . ']';

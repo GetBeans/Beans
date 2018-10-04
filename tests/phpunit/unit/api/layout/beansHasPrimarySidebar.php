@@ -27,9 +27,11 @@ class Tests_BeansHasPrimarySidebar extends Test_Case {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->load_original_functions( array(
-			'api/layout/functions.php',
-		) );
+		$this->load_original_functions(
+			array(
+				'api/layout/functions.php',
+			)
+		);
 	}
 
 	/**

@@ -63,10 +63,12 @@ class Tests_BeansCompilerOptions_Flush extends Compiler_Options_Test_Case {
 		Monkey\Functions\expect( 'beans_remove_dir' )
 			->once()
 			->with( vfsStream::url( 'compiled/beans/compiler/' ) )
-			->andReturnUsing( function() {
-				// Keep it simple. Remove by redefining.
-				vfsStream::setup( 'compiled', 0755, [ 'beans' => [] ] );
-			} );
+			->andReturnUsing(
+				function() {
+						// Keep it simple. Remove by redefining.
+						vfsStream::setup( 'compiled', 0755, [ 'beans' => [] ] );
+				}
+			);
 
 		$this->assertNull( ( new _Beans_Compiler_Options() )->flush() );
 		$this->assertDirectoryNotExists( vfsStream::url( 'compiled/beans/compiler/' ) );

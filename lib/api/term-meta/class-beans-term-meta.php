@@ -16,7 +16,7 @@
  *
  * @package Beans\Framework\API\Term_Meta
  */
-final class _Beans_Term_Meta {
+final class Beans_Term_Meta {
 
 	/**
 	 * Field section.

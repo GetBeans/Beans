@@ -333,7 +333,8 @@ class Tests_BeansCompiler_RunCompiler extends Compiler_Test_Case {
 		$this->add_virtual_directory( $config['id'] );
 
 		return vfsStream::url(
-			sprintf( 'compiled/beans/compiler/%s/%s',
+			sprintf(
+				'compiled/beans/compiler/%s/%s',
 				$config['id'],
 				$this->get_filename( $compiler, $config, $fragment ? filemtime( $fragment ) : null )
 			)
@@ -398,16 +399,18 @@ class Tests_BeansCompiler_RunCompiler extends Compiler_Test_Case {
 		$GLOBALS['wp_filesystem']->shouldReceive( 'put_contents' )
 			->once()
 			->with( $file, $content, FS_CHMOD_FILE )
-			->andReturnUsing( function( $file, $content ) use ( $compiler, $config ) {
-				$pathinfo = pathinfo( $file );
+			->andReturnUsing(
+				function( $file, $content ) use ( $compiler, $config ) {
+						$pathinfo = pathinfo( $file );
 
-				// Add the new file into the virtual filesystem.
-				vfsStream::newFile( $pathinfo['basename'] )
-					->at( $this->mock_filesystem->getChild( 'compiled/beans/compiler/' . $config['id'] ) )
-					->setContent( $content );
+						// Add the new file into the virtual filesystem.
+						vfsStream::newFile( $pathinfo['basename'] )
+						->at( $this->mock_filesystem->getChild( 'compiled/beans/compiler/' . $config['id'] ) )
+						->setContent( $content );
 
-				return true;
-			} );
+						return true;
+				}
+			);
 	}
 
 	/**

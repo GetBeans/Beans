@@ -35,11 +35,16 @@ class Tests_BeansStartsWith extends Test_Case {
 	public function test_should_return_false_when_case_does_not_match() {
 		$this->assertFalse( beans_str_starts_with( 'Foo', 'f' ) );
 		$this->assertFalse( beans_str_starts_with( 'Checking the Case?', 'check' ) );
-		$this->assertFalse( beans_str_starts_with( 'WordPress Community Rocks!', [
-			'wordpress',
-			'wordPress',
-			'WORDPRESS',
-		] ) );
+		$this->assertFalse(
+			beans_str_starts_with(
+				'WordPress Community Rocks!',
+				[
+					'wordpress',
+					'wordPress',
+					'WORDPRESS',
+				]
+			)
+		);
 	}
 
 	/**
@@ -48,11 +53,16 @@ class Tests_BeansStartsWith extends Test_Case {
 	public function test_should_return_true_when_case_matches() {
 		$this->assertTrue( beans_str_starts_with( 'Foo', 'F' ) );
 		$this->assertTrue( beans_str_starts_with( 'Checking the Case?', 'Checking' ) );
-		$this->assertTrue( beans_str_starts_with( 'WordPress Community Rocks!', [
-			'wordpress',
-			'WordPress',
-			'WORDPRESS',
-		] ) );
+		$this->assertTrue(
+			beans_str_starts_with(
+				'WordPress Community Rocks!',
+				[
+					'wordpress',
+					'WordPress',
+					'WORDPRESS',
+				]
+			)
+		);
 	}
 
 	/**
@@ -93,37 +103,55 @@ class Tests_BeansStartsWith extends Test_Case {
 	 * Test beans_str_starts_with() should correctly identify when an array of needles is given.
 	 */
 	public function test_should_correctly_identify_when_array_of_needles_given() {
-		$this->assertTrue( beans_str_starts_with(
-			'This is a string test',
-			[ 'this', ' this', ' This', 'This' ]
-		) );
+		$this->assertTrue(
+			beans_str_starts_with(
+				'This is a string test',
+				[ 'this', ' this', ' This', 'This' ]
+			)
+		);
 		$this->assertFalse( beans_str_starts_with( 'This is a string test', [ 'These', 'are' ] ) );
-		$this->assertTrue( beans_str_starts_with( '.... This is a string test', [
-			'... This',
-			'this',
-			'. This',
-			'.... This',
-		] ) );
-		$this->assertFalse( beans_str_starts_with( '... this is a string test', [
-			'this',
-			' this',
-			'.. this',
-			'...this',
-		] ) );
+		$this->assertTrue(
+			beans_str_starts_with(
+				'.... This is a string test',
+				[
+					'... This',
+					'this',
+					'. This',
+					'.... This',
+				]
+			)
+		);
+		$this->assertFalse(
+			beans_str_starts_with(
+				'... this is a string test',
+				[
+					'this',
+					' this',
+					'.. this',
+					'...this',
+				]
+			)
+		);
 		$this->assertTrue( beans_str_starts_with( 'Hello from Tonya', [ 'Hello', 'Tonya' ] ) );
 		$this->assertFalse( beans_str_starts_with( 'Hello from Tonya', [ 'hello', 'From' ] ) );
-		$this->assertTrue( beans_str_starts_with(
-			'WordPress Community Rocks!',
-			[ 'wordpress', 'wordPress', 'WordPress', 'WORDPRESS' ]
-		) );
-		$this->assertFalse( beans_str_starts_with(
-			'The WordPress Community Rocks!',
-			[ 'the', 'WordPress', 'Community', 'Rocks!' ]
-		) );
-		$this->assertTrue( beans_str_starts_with(
-			'The WordPress Community Rocks!',
-			[ 'The WordPress c', 'The WordPress' ]
-		) );
+		$this->assertTrue(
+			beans_str_starts_with(
+				'WordPress Community Rocks!',
+				[ 'wordpress', 'wordPress', 'WordPress', 'WORDPRESS' ]
+			)
+		);
+		$this->assertFalse(
+			beans_str_starts_with(
+				'The WordPress Community Rocks!',
+				[ 'the', 'WordPress', 'Community', 'Rocks!' ]
+			)
+		);
+		$this->assertTrue(
+			beans_str_starts_with(
+				'The WordPress Community Rocks!',
+				[ 'The WordPress c', 'The WordPress' ]
+			)
+		);
 	}
 
 	/**

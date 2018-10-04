@@ -16,7 +16,7 @@
  *
  * @package Beans\Framework\API\Image
  */
-final class _Beans_Image_Editor {
+final class Beans_Image_Editor {
 
 	/**
 	 * The image source.

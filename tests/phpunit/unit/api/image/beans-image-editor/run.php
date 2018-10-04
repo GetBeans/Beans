@@ -51,9 +51,11 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 			$wp_editor->shouldReceive( 'save' )
 				->once()
 				->with( $edited_image_src )
-				->andReturnUsing( function( $edited_image_src ) use ( $actual_path ) {
-					imagejpeg( imagecreatefromjpeg( $actual_path ), $edited_image_src );
-				} );
+				->andReturnUsing(
+					function( $edited_image_src ) use ( $actual_path ) {
+							imagejpeg( imagecreatefromjpeg( $actual_path ), $edited_image_src );
+					}
+				);
 			Monkey\Functions\expect( 'wp_get_image_editor' )->with( $actual_path )->once()->andReturn( $wp_editor );
 			Monkey\Functions\when( 'is_wp_error' )->justReturn( false );
 
@@ -123,9 +125,11 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 			$wp_editor->shouldReceive( 'save' )
 				->once()
 				->with( $edited_image_src )
-				->andReturnUsing( function( $edited_image_src ) use ( $actual_path ) {
-					imagejpeg( imagecreatefromjpeg( $actual_path ), $edited_image_src );
-				} );
+				->andReturnUsing(
+					function( $edited_image_src ) use ( $actual_path ) {
+							imagejpeg( imagecreatefromjpeg( $actual_path ), $edited_image_src );
+					}
+				);
 			Monkey\Functions\expect( 'wp_get_image_editor' )->with( $actual_path )->once()->andReturn( $wp_editor );
 			Monkey\Functions\when( 'is_wp_error' )->justReturn( false );
 
@@ -195,9 +199,11 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 			$wp_editor->shouldReceive( 'save' )
 				->once()
 				->with( $edited_image_src )
-				->andReturnUsing( function( $edited_image_src ) use ( $actual_path ) {
-					imagejpeg( imagecreatefromjpeg( $actual_path ), $edited_image_src );
-				} );
+				->andReturnUsing(
+					function( $edited_image_src ) use ( $actual_path ) {
+							imagejpeg( imagecreatefromjpeg( $actual_path ), $edited_image_src );
+					}
+				);
 			Monkey\Functions\expect( 'wp_get_image_editor' )->with( $actual_path )->once()->andReturn( $wp_editor );
 			Monkey\Functions\when( 'is_wp_error' )->justReturn( false );
 
@@ -278,9 +284,11 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 			$wp_editor->shouldReceive( 'save' )
 				->once()
 				->with( $edited_image_src )
-				->andReturnUsing( function( $edited_image_src ) use ( $actual_path ) {
-					imagejpeg( imagecreatefromjpeg( $actual_path ), $edited_image_src );
-				} );
+				->andReturnUsing(
+					function( $edited_image_src ) use ( $actual_path ) {
+							imagejpeg( imagecreatefromjpeg( $actual_path ), $edited_image_src );
+					}
+				);
 			Monkey\Functions\expect( 'wp_get_image_editor' )->with( $actual_path )->once()->andReturn( $wp_editor );
 			Monkey\Functions\when( 'is_wp_error' )->justReturn( false );
 

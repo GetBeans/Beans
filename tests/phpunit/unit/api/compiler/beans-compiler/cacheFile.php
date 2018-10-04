@@ -28,14 +28,16 @@ class Tests_BeansCompiler_CacheFile extends Compiler_Test_Case {
 	 * Test _Beans_Compiler::cache_file() should not create the file when the filename is empty.
 	 */
 	public function test_should_not_create_the_file_when_filename_empty() {
-		$compiler = $this->create_compiler( [
-			'id'           => 'test-script',
-			'type'         => 'script',
-			'fragments'    => [ vfsStream::url( 'compiled/fixtures/jquery.test.js' ) ],
-			'dependencies' => [ 'jquery' ],
-			'in_footer'    => true,
-			'minify_js'    => true,
-		] );
+		$compiler = $this->create_compiler(
+			[
+				'id'           => 'test-script',
+				'type'         => 'script',
+				'fragments'    => [ vfsStream::url( 'compiled/fixtures/jquery.test.js' ) ],
+				'dependencies' => [ 'jquery' ],
+				'in_footer'    => true,
+				'minify_js'    => true,
+			]
+		);
 
 		// Run the tests.
 		$this->assertFalse( $compiler->cache_file() );
@@ -48,14 +50,16 @@ class Tests_BeansCompiler_CacheFile extends Compiler_Test_Case {
 	 * Test _Beans_Compiler::cache_file() should create the compiled jQuery file.
 	 */
 	public function test_should_create_compiled_jquery_file() {
-		$compiler = $this->create_compiler( [
-			'id'           => 'test-jquery',
-			'type'         => 'script',
-			'fragments'    => [ vfsStream::url( 'compiled/fixtures/jquery.test.js' ) ],
-			'dependencies' => [ 'jquery' ],
-			'in_footer'    => true,
-			'minify_js'    => true,
-		] );
+		$compiler = $this->create_compiler(
+			[
+				'id'           => 'test-jquery',
+				'type'         => 'script',
+				'fragments'    => [ vfsStream::url( 'compiled/fixtures/jquery.test.js' ) ],
+				'dependencies' => [ 'jquery' ],
+				'in_footer'    => true,
+				'minify_js'    => true,
+			]
+		);
 
 		// Mock the compiler's properties.
 		$compiled_content = $this->get_compiled_jquery();
@@ -77,13 +81,15 @@ class Tests_BeansCompiler_CacheFile extends Compiler_Test_Case {
 	 * Test _Beans_Compiler::cache_file() should create the compiled JavaScript file.
 	 */
 	public function test_should_create_compiled_javascript_file() {
-		$compiler = $this->create_compiler( [
-			'id'        => 'test-js',
-			'type'      => 'script',
-			'fragments' => [ vfsStream::url( 'compiled/fixtures/my-game-clock.js' ) ],
-			'in_footer' => true,
-			'minify_js' => true,
-		] );
+		$compiler = $this->create_compiler(
+			[
+				'id'        => 'test-js',
+				'type'      => 'script',
+				'fragments' => [ vfsStream::url( 'compiled/fixtures/my-game-clock.js' ) ],
+				'in_footer' => true,
+				'minify_js' => true,
+			]
+		);
 
 		// Mock the compiler's properties.
 		$compiled_content = $this->get_compiled_jquery();
@@ -105,12 +111,14 @@ class Tests_BeansCompiler_CacheFile extends Compiler_Test_Case {
 	 * Test _Beans_Compiler::cache_file() should create the compiled CSS file.
 	 */
 	public function test_should_create_compiled_css_file() {
-		$compiler = $this->create_compiler( [
-			'id'        => 'test-css',
-			'type'      => 'style',
-			'format'    => 'css',
-			'fragments' => [ vfsStream::url( 'compiled/fixtures/style.css' ) ],
-		] );
+		$compiler = $this->create_compiler(
+			[
+				'id'        => 'test-css',
+				'type'      => 'style',
+				'format'    => 'css',
+				'fragments' => [ vfsStream::url( 'compiled/fixtures/style.css' ) ],
+			]
+		);
 
 		// Mock the compiler's properties.
 		$compiled_content = $this->get_compiled_css();
@@ -132,15 +140,17 @@ class Tests_BeansCompiler_CacheFile extends Compiler_Test_Case {
 	 * Test _Beans_Compiler::cache_file() should create the compiled LESS file.
 	 */
 	public function test_should_create_compiled_less_file() {
-		$compiler = $this->create_compiler( [
-			'id'        => 'test-less',
-			'type'      => 'style',
-			'format'    => 'less',
-			'fragments' => [
-				vfsStream::url( 'compiled/fixtures/variables.less' ),
-				vfsStream::url( 'compiled/fixtures/test.less' ),
-			],
-		] );
+		$compiler = $this->create_compiler(
+			[
+				'id'        => 'test-less',
+				'type'      => 'style',
+				'format'    => 'less',
+				'fragments' => [
+					vfsStream::url( 'compiled/fixtures/variables.less' ),
+					vfsStream::url( 'compiled/fixtures/test.less' ),
+				],
+			]
+		);
 
 		// Mock the compiler's properties.
 		$compiled_content = $this->get_compiled_less();
@@ -178,11 +188,13 @@ class Tests_BeansCompiler_CacheFile extends Compiler_Test_Case {
 		$mock->shouldReceive( 'put_contents' )
 			->once()
 			->with( $cached_file, $compiled_content, FS_CHMOD_FILE )
-			->andReturnUsing( function( $cached_filename, $content ) use ( $folder_name, $filename ) {
-				$this->create_virtual_file( $folder_name, $filename, $content );
+			->andReturnUsing(
+				function( $cached_filename, $content ) use ( $folder_name, $filename ) {
+						$this->create_virtual_file( $folder_name, $filename, $content );
 
-				return true;
-			} );
+						return true;
+				}
+			);
 		$GLOBALS['wp_filesystem'] = $mock; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.OverrideProhibited -- Valid use case as we are mocking the filesystem.
 	}
 }

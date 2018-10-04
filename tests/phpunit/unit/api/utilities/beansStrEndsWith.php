@@ -91,18 +91,24 @@ class Tests_BeansStrEndsWith extends Test_Case {
 		$this->assertFalse( beans_str_ends_with( 'This is a string test', [ 'tests', 'Tests', 'tests!', 'Tests' ] ) );
 		$this->assertTrue( beans_str_ends_with( 'Hello from Tonya', [ 'From', 'Tonya' ] ) );
 		$this->assertFalse( beans_str_ends_with( 'Hello from Tonya', [ 'hello', 'From' ] ) );
-		$this->assertFalse( beans_str_ends_with(
-			'The WordPress Community Rocks!',
-			[ 'wordpress', 'wordPress', 'WordPress', 'WORDPRESS' ]
-		) );
-		$this->assertFalse( beans_str_ends_with(
-			'The WordPress Community Rocks!',
-			[ 'rocks!', 'community', 'WordPress', 'the' ]
-		) );
-		$this->assertTrue( beans_str_ends_with(
-			'The WordPress Community Rocks!',
-			[ 'community rocks!', 'unity Rocks!' ]
-		) );
+		$this->assertFalse(
+			beans_str_ends_with(
+				'The WordPress Community Rocks!',
+				[ 'wordpress', 'wordPress', 'WordPress', 'WORDPRESS' ]
+			)
+		);
+		$this->assertFalse(
+			beans_str_ends_with(
+				'The WordPress Community Rocks!',
+				[ 'rocks!', 'community', 'WordPress', 'the' ]
+			)
+		);
+		$this->assertTrue(
+			beans_str_ends_with(
+				'The WordPress Community Rocks!',
+				[ 'community rocks!', 'unity Rocks!' ]
+			)
+		);
 	}
 
 	/**

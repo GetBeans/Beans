@@ -36,16 +36,22 @@ class Tests_BeansUikitDequeueComponents extends UIkit_Test_Case {
 
 		beans_uikit_dequeue_components( 'alert' );
 		$this->assertNotContains( 'alert', $_beans_uikit_enqueued_items['components']['core'] );
-		$this->assertSame( [
-			1 => 'button',
-			2 => 'overlay',
-		], $_beans_uikit_enqueued_items['components']['core'] );
+		$this->assertSame(
+			[
+				1 => 'button',
+				2 => 'overlay',
+			],
+			$_beans_uikit_enqueued_items['components']['core']
+		);
 
 		beans_uikit_dequeue_components( 'button' );
 		$this->assertNotContains( 'button', $_beans_uikit_enqueued_items['components']['core'] );
-		$this->assertSame( [
-			2 => 'overlay',
-		], $_beans_uikit_enqueued_items['components']['core'] );
+		$this->assertSame(
+			[
+				2 => 'overlay',
+			],
+			$_beans_uikit_enqueued_items['components']['core']
+		);
 
 		beans_uikit_dequeue_components( 'overlay' );
 		$this->assertNotContains( 'button', $_beans_uikit_enqueued_items['components']['core'] );
@@ -66,16 +72,22 @@ class Tests_BeansUikitDequeueComponents extends UIkit_Test_Case {
 
 		beans_uikit_dequeue_components( 'accordion', 'add-ons' );
 		$this->assertNotContains( 'accordion', $_beans_uikit_enqueued_items['components']['add-ons'] );
-		$this->assertSame( [
-			1 => 'datepicker',
-			2 => 'sticky',
-		], $_beans_uikit_enqueued_items['components']['add-ons'] );
+		$this->assertSame(
+			[
+				1 => 'datepicker',
+				2 => 'sticky',
+			],
+			$_beans_uikit_enqueued_items['components']['add-ons']
+		);
 
 		beans_uikit_dequeue_components( 'datepicker', 'add-ons' );
 		$this->assertNotContains( 'datepicker', $_beans_uikit_enqueued_items['components']['add-ons'] );
-		$this->assertSame( [
-			2 => 'sticky',
-		], $_beans_uikit_enqueued_items['components']['add-ons'] );
+		$this->assertSame(
+			[
+				2 => 'sticky',
+			],
+			$_beans_uikit_enqueued_items['components']['add-ons']
+		);
 
 		beans_uikit_dequeue_components( 'sticky', 'add-ons' );
 		$this->assertNotContains( 'sticky', $_beans_uikit_enqueued_items['components']['add-ons'] );
@@ -97,10 +109,13 @@ class Tests_BeansUikitDequeueComponents extends UIkit_Test_Case {
 
 		beans_uikit_dequeue_components( [ 'alert' ] );
 		$this->assertNotContains( 'alert', $_beans_uikit_enqueued_items['components']['core'] );
-		$this->assertSame( [
-			1 => 'button',
-			2 => 'overlay',
-		], $_beans_uikit_enqueued_items['components']['core'] );
+		$this->assertSame(
+			[
+				1 => 'button',
+				2 => 'overlay',
+			],
+			$_beans_uikit_enqueued_items['components']['core']
+		);
 
 		beans_uikit_dequeue_components( $components );
 		$this->assertEmpty( $_beans_uikit_enqueued_items['components']['core'] );

@@ -45,11 +45,13 @@ class Tests_BeansCompiler_Get extends Compiler_Test_Case {
 	 * Test _Beans_Compiler::_get() should return the configuration.
 	 */
 	public function test_should_return_configuration() {
-		$compiler = $this->create_compiler( [
-			'id'     => 'test',
-			'type'   => 'style',
-			'format' => 'less',
-		] );
+		$compiler = $this->create_compiler(
+			[
+				'id'     => 'test',
+				'type'   => 'style',
+				'format' => 'less',
+			]
+		);
 		$this->assertSame(
 			[
 				'id'           => 'test',
@@ -64,13 +66,15 @@ class Tests_BeansCompiler_Get extends Compiler_Test_Case {
 			$compiler->config
 		);
 
-		$compiler = $this->create_compiler( [
-			'id'           => 'test_scripts',
-			'type'         => 'script',
-			'dependencies' => [ 'jquery' ],
-			'in_footer'    => true,
-			'version'      => null,
-		] );
+		$compiler = $this->create_compiler(
+			[
+				'id'           => 'test_scripts',
+				'type'         => 'script',
+				'dependencies' => [ 'jquery' ],
+				'in_footer'    => true,
+				'version'      => null,
+			]
+		);
 		$this->assertSame(
 			[
 				'id'           => 'test_scripts',

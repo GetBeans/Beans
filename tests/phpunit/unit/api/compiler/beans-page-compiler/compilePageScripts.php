@@ -344,40 +344,50 @@ class Tests_BeansPageCompiler_CompilePageScripts extends Page_Compiler_Test_Case
 		$wp_scripts_mock        = Mockery::mock( 'WP_Scripts' );
 		$wp_scripts_mock->queue = $queue;
 		$registered             = [
-			'jquery'         => $this->get_deps_mock( [
-				'handle' => 'jquery',
-				'src'    => false,
-				'deps'   => [ 'jquery-core', 'jquery-migrate' ],
-				'ver'    => '1.12.4',
-			] ),
-			'jquery-core'    => $this->get_deps_mock( [
-				'handle' => 'jquery-core',
-				'src'    => '/wp-includes/js/jquery/jquery.js',
-				'ver'    => '1.12.4',
-			] ),
-			'jquery-migrate' => $this->get_deps_mock( [
-				'handle' => 'jquery-migrate',
-				'src'    => '/wp-includes/js/jquery/jquery-migrate.js',
-				'ver'    => '1.4.1',
-			] ),
+			'jquery'         => $this->get_deps_mock(
+				[
+					'handle' => 'jquery',
+					'src'    => false,
+					'deps'   => [ 'jquery-core', 'jquery-migrate' ],
+					'ver'    => '1.12.4',
+				]
+			),
+			'jquery-core'    => $this->get_deps_mock(
+				[
+					'handle' => 'jquery-core',
+					'src'    => '/wp-includes/js/jquery/jquery.js',
+					'ver'    => '1.12.4',
+				]
+			),
+			'jquery-migrate' => $this->get_deps_mock(
+				[
+					'handle' => 'jquery-migrate',
+					'src'    => '/wp-includes/js/jquery/jquery-migrate.js',
+					'ver'    => '1.4.1',
+				]
+			),
 		];
 
 		if ( in_array( 'debug-bar', $queue, true ) ) {
-			$registered['debug-bar'] = $this->get_deps_mock( [
-				'handle' => 'debug-bar',
-				'src'    => '/wp-content/plugins/debug-bar/js/debug-bar.dev.js',
-				'deps'   => [ 'jquery' ],
-				'ver'    => '20170515',
-				'extra'  => [ 'group' => 1 ],
-			] );
+			$registered['debug-bar'] = $this->get_deps_mock(
+				[
+					'handle' => 'debug-bar',
+					'src'    => '/wp-content/plugins/debug-bar/js/debug-bar.dev.js',
+					'deps'   => [ 'jquery' ],
+					'ver'    => '20170515',
+					'extra'  => [ 'group' => 1 ],
+				]
+			);
 		}
 
 		if ( in_array( 'uikit', $queue, true ) ) {
-			$registered['uikit'] = $this->get_deps_mock( [
-				'handle' => 'uikit',
-				'src'    => 'wp-content/uploads/beans/compiler/uikit/3b2a958-921f3e0.js',
-				'deps'   => [ 'jquery' ],
-			] );
+			$registered['uikit'] = $this->get_deps_mock(
+				[
+					'handle' => 'uikit',
+					'src'    => 'wp-content/uploads/beans/compiler/uikit/3b2a958-921f3e0.js',
+					'deps'   => [ 'jquery' ],
+				]
+			);
 		}
 
 		$wp_scripts_mock->registered = $registered;

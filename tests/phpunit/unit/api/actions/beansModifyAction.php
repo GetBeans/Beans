@@ -57,12 +57,14 @@ class Tests_BeansModifyAction extends Actions_Test_Case {
 			Monkey\Functions\expect( '_beans_merge_action' )
 				->once()
 				->with( $beans_id, $action, 'modified' )
-				->andReturnUsing( function( $id, $action ) {
-					global $_beans_registered_actions;
-					$_beans_registered_actions['modified'][ $id ] = $action;
+				->andReturnUsing(
+					function( $id, $action ) {
+							global $_beans_registered_actions;
+							$_beans_registered_actions['modified'][ $id ] = $action;
 
-					return $action;
-				} );
+							return $action;
+					}
+				);
 			Monkey\Actions\expectAdded( $action['hook'] )->never();
 
 			// Check that it returns false.

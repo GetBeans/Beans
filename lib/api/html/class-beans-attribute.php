@@ -17,7 +17,7 @@
  *
  * @package Beans\Framework\API\HTML
  */
-final class _Beans_Attribute {
+final class Beans_Attribute {
 
 	/**
 	 * The markup ID.

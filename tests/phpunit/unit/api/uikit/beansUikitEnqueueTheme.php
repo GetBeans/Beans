@@ -49,11 +49,13 @@ class Tests_BeansUikitEnqueueTheme extends UIkit_Test_Case {
 		Monkey\Functions\when( 'beans_uikit_register_theme' )->justReturn( true );
 		Monkey\Functions\expect( '_beans_uikit_get_registered_theme' )
 			->times( 5 )
-			->andReturnUsing( function( $id ) {
-				global $_beans_uikit_registered_items;
+			->andReturnUsing(
+				function( $id ) {
+						global $_beans_uikit_registered_items;
 
-				return $_beans_uikit_registered_items['themes'][ $id ];
-			} );
+						return $_beans_uikit_registered_items['themes'][ $id ];
+				}
+			);
 
 		// Check the built-in themes.
 		foreach ( [ 'default', 'almost-flat', 'gradient', 'wordpress-admin' ] as $theme_id ) {
@@ -80,12 +82,14 @@ class Tests_BeansUikitEnqueueTheme extends UIkit_Test_Case {
 		Monkey\Functions\expect( 'beans_uikit_register_theme' )
 			->once()
 			->with( 'beans-child', $path )
-			->andReturnUsing( function( $id, $path ) {
-				global $_beans_uikit_registered_items;
-				$_beans_uikit_registered_items['themes'][ $id ] = $path;
+			->andReturnUsing(
+				function( $id, $path ) {
+						global $_beans_uikit_registered_items;
+						$_beans_uikit_registered_items['themes'][ $id ] = $path;
 
-				return true;
-			} );
+						return true;
+				}
+			);
 		Monkey\Functions\expect( '_beans_uikit_get_registered_theme' )
 			->once()
 			->with( 'beans-child' )

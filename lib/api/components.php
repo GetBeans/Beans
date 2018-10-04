@@ -63,7 +63,7 @@ function beans_load_api_components( $components ) {
 			'term-meta'   => $root . 'term-meta/functions-admin.php',
 			'compiler'    => $root . 'compiler/class-beans-compiler-options.php',
 			'image'       => $root . 'image/class-beans-image-options.php',
-			'_admin_menu' => $root . 'admin-menu.php', // Internal use.
+			'_admin_menu' => $root . 'class-beans-admin-menu.php', // Internal use.
 		);
 	} else {
 		$admin = array();

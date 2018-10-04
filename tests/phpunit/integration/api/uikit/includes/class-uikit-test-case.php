@@ -99,16 +99,19 @@ abstract class UIkit_Test_Case extends Test_Case {
 	 * Set up the Uploads directory to our virtual filesystem.
 	 */
 	protected function set_up_uploads_directory() {
-		add_filter( 'upload_dir', function( array $uploads_dir ) {
-			$compiled_dir = vfsStream::url( 'virtual-wp-content/uploads' );
+		add_filter(
+			'upload_dir',
+			function( array $uploads_dir ) {
+				$compiled_dir = vfsStream::url( 'virtual-wp-content/uploads' );
 
-			$uploads_dir['path']    = $compiled_dir . $uploads_dir['subdir'];
-			$uploads_dir['url']     = str_replace( 'wp-content/uploads', 'compiled', $uploads_dir['url'] );
-			$uploads_dir['basedir'] = $compiled_dir;
-			$uploads_dir['baseurl'] = str_replace( 'wp-content/uploads', 'compiled', $uploads_dir['baseurl'] );
+				$uploads_dir['path']    = $compiled_dir . $uploads_dir['subdir'];
+				$uploads_dir['url']     = str_replace( 'wp-content/uploads', 'compiled', $uploads_dir['url'] );
+				$uploads_dir['basedir'] = $compiled_dir;
+				$uploads_dir['baseurl'] = str_replace( 'wp-content/uploads', 'compiled', $uploads_dir['baseurl'] );
 
-			return $uploads_dir;
-		} );
+				return $uploads_dir;
+			}
+		);
 	}
 
 	/**

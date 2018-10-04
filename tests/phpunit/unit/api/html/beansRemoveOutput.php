@@ -37,9 +37,11 @@ class Tests_BeansRemoveOutput extends HTML_Test_Case {
 	 * Test beans_remove_output() should return an anonymous filter instance.
 	 */
 	public function test_should_return_anonymous_filter_instance() {
-		Monkey\Functions\when( 'beans_add_filter' )->alias( function( $hook, $value, $priority ) {
-			return new Anonymous_Filter_Stub( $hook, $value, $priority );
-		} );
+		Monkey\Functions\when( 'beans_add_filter' )->alias(
+			function( $hook, $value, $priority ) {
+					return new Anonymous_Filter_Stub( $hook, $value, $priority );
+			}
+		);
 
 		$this->assertInstanceOf( Anonymous_Filter_Stub::class, beans_remove_output( 'beans_post_meta_item_date' ) );
 	}

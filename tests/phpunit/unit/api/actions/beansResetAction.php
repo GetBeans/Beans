@@ -98,9 +98,11 @@ class Tests_BeansResetAction extends Actions_Test_Case {
 			Monkey\Functions\expect( '_beans_get_current_action' )
 				->once()
 				->with( $beans_id )
-				->andReturnUsing( function() use ( $action, $modified_action ) {
-					return array_merge( $action, $modified_action );
-				} );
+				->andReturnUsing(
+					function() use ( $action, $modified_action ) {
+							return array_merge( $action, $modified_action );
+					}
+				);
 
 			// Expect the add_action.
 			Monkey\Actions\expectAdded( $action['hook'] )

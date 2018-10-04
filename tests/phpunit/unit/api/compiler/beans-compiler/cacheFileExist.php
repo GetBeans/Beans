@@ -28,11 +28,13 @@ class Tests_BeansCompiler_CacheFileExist extends Compiler_Test_Case {
 	 */
 	public function test_should_return_false_when_filename_not_generated() {
 		$fragment = vfsStream::url( 'compiled/fixtures/my-game-clock.js' );
-		$compiler = $this->create_compiler( [
-			'id'        => 'test',
-			'type'      => 'script',
-			'fragments' => [ $fragment ],
-		] );
+		$compiler = $this->create_compiler(
+			[
+				'id'        => 'test',
+				'type'      => 'script',
+				'fragments' => [ $fragment ],
+			]
+		);
 
 		// Run cache_file_exist().
 		$this->assertFalse( $compiler->cache_file_exist() );
@@ -43,11 +45,13 @@ class Tests_BeansCompiler_CacheFileExist extends Compiler_Test_Case {
 	 */
 	public function test_should_return_false_when_file_does_not_exist() {
 		$fragment = vfsStream::url( 'compiled/fixtures/my-game-clock.js' );
-		$compiler = $this->create_compiler( [
-			'id'        => 'test-script',
-			'type'      => 'script',
-			'fragments' => [ $fragment ],
-		] );
+		$compiler = $this->create_compiler(
+			[
+				'id'        => 'test-script',
+				'type'      => 'script',
+				'fragments' => [ $fragment ],
+			]
+		);
 
 		// Mock the compiler's property.
 		$filename = '9a71ddb-b8d5d01.js';
@@ -63,11 +67,13 @@ class Tests_BeansCompiler_CacheFileExist extends Compiler_Test_Case {
 	 */
 	public function test_should_return_true_when_file_exists() {
 		$fragment = vfsStream::url( 'compiled/fixtures/my-game-clock.js' );
-		$compiler = $this->create_compiler( [
-			'id'        => 'test-script',
-			'type'      => 'script',
-			'fragments' => [ $fragment ],
-		] );
+		$compiler = $this->create_compiler(
+			[
+				'id'        => 'test-script',
+				'type'      => 'script',
+				'fragments' => [ $fragment ],
+			]
+		);
 
 		// Mock the compiler's property.
 		$filename = '9a71ddb-b8d5d01.js';

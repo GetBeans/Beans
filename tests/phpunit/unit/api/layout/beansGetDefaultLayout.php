@@ -27,10 +27,12 @@ class Tests_BeansGetDefaultLayout extends Test_Case {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->load_original_functions( [
-			'api/layout/functions.php',
-			'api/widget/functions.php',
-		] );
+		$this->load_original_functions(
+			[
+				'api/layout/functions.php',
+				'api/widget/functions.php',
+			]
+		);
 	}
 
 	/**

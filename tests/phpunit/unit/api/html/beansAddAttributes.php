@@ -29,22 +29,24 @@ class Tests_BeansAddAttributes extends HTML_Test_Case {
 	protected function setup() {
 		parent::setUp();
 
-		Monkey\Functions\when( 'wp_parse_args' )->alias( function( $args ) {
+		Monkey\Functions\when( 'wp_parse_args' )->alias(
+			function( $args ) {
 
-			if ( is_array( $args ) ) {
-				return $args;
+				if ( is_array( $args ) ) {
+					  return $args;
+				}
+
+				if ( is_object( $args ) ) {
+					  return get_object_vars( $args );
+				}
+
+				if ( is_string( $args ) ) {
+					  parse_str( $args, $result );
+
+					  return $result;
+				}
 			}
-
-			if ( is_object( $args ) ) {
-				return get_object_vars( $args );
-			}
-
-			if ( is_string( $args ) ) {
-				parse_str( $args, $result );
-
-				return $result;
-			}
-		} );
+		);
 	}
 
 	/**

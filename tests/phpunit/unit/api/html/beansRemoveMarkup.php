@@ -37,9 +37,11 @@ class Tests_BeansRemoveMarkup extends HTML_Test_Case {
 	 * Test beans_remove_markup() should return an anonymous filter instance.
 	 */
 	public function test_should_return_anonymous_filter_instance() {
-		Monkey\Functions\when( 'beans_add_filter' )->alias( function( $hook, $value ) {
-			return new Anonymous_Filter_Stub( $hook, $value, 10 );
-		} );
+		Monkey\Functions\when( 'beans_add_filter' )->alias(
+			function( $hook, $value ) {
+					return new Anonymous_Filter_Stub( $hook, $value, 10 );
+			}
+		);
 
 		$this->assertInstanceOf( Anonymous_Filter_Stub::class, beans_remove_markup( 'beans_archive_title' ) );
 	}

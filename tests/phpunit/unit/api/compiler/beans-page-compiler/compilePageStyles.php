@@ -296,13 +296,15 @@ class Tests_BeansPageCompiler_CompilePageStyles extends Page_Compiler_Test_Case 
 		Monkey\Functions\expect( 'add_query_arg' )->never();
 
 		// Initialize the mocked assets.
-		$assets = $this->get_mock_assets( [
-			'admin-bar',
-			'debug-bar',
-			'uikit',
-			'child-style',
-			'debug-bar-actions-filters',
-		] );
+		$assets = $this->get_mock_assets(
+			[
+				'admin-bar',
+				'debug-bar',
+				'uikit',
+				'child-style',
+				'debug-bar-actions-filters',
+			]
+		);
 
 		// Check the order of how beans_get() will be called.
 		Monkey\Functions\expect( 'beans_get' )
@@ -369,34 +371,42 @@ class Tests_BeansPageCompiler_CompilePageStyles extends Page_Compiler_Test_Case 
 		$registered            = [];
 
 		if ( in_array( 'debug-bar', $queue, true ) ) {
-			$registered['debug-bar'] = $this->get_deps_mock( [
-				'handle' => 'debug-bar',
-				'src'    => 'http://beansdev.test/wp-content/plugins/debug-bar/css/debug-bar.dev.css',
-				'ver'    => '20170515',
-			] );
+			$registered['debug-bar'] = $this->get_deps_mock(
+				[
+					'handle' => 'debug-bar',
+					'src'    => 'http://beansdev.test/wp-content/plugins/debug-bar/css/debug-bar.dev.css',
+					'ver'    => '20170515',
+				]
+			);
 		}
 
 		if ( in_array( 'uikit', $queue, true ) ) {
-			$registered['uikit'] = $this->get_deps_mock( [
-				'handle' => 'uikit',
-				'src'    => 'http://beansdev.test/wp-content/uploads/beans/compiler/uikit/ac2cc0a-f36bb75.css',
-			] );
+			$registered['uikit'] = $this->get_deps_mock(
+				[
+					'handle' => 'uikit',
+					'src'    => 'http://beansdev.test/wp-content/uploads/beans/compiler/uikit/ac2cc0a-f36bb75.css',
+				]
+			);
 		}
 
 		if ( in_array( 'child-style', $queue, true ) ) {
-			$registered['child-style'] = $this->get_deps_mock( [
-				'handle' => 'child-style',
-				'src'    => 'http://beansdev.test/wp-content/themes/tm-beans-child/style.css',
-			] );
+			$registered['child-style'] = $this->get_deps_mock(
+				[
+					'handle' => 'child-style',
+					'src'    => 'http://beansdev.test/wp-content/themes/tm-beans-child/style.css',
+				]
+			);
 		}
 
 		if ( in_array( 'debug-bar-actions-filters', $queue, true ) ) {
-			$registered['debug-bar-actions-filters'] = $this->get_deps_mock( [
-				'handle' => 'debug-bar-actions-filters',
-				'src'    => 'http://beansdev.test/wp-content/plugins/debug-bar-actions-and-filters-addon/css/debug-bar-actions-filters.css',
-				'deps'   => [ 'debug-bar' ],
-				'ver'    => '1.5.1all',
-			] );
+			$registered['debug-bar-actions-filters'] = $this->get_deps_mock(
+				[
+					'handle' => 'debug-bar-actions-filters',
+					'src'    => 'http://beansdev.test/wp-content/plugins/debug-bar-actions-and-filters-addon/css/debug-bar-actions-filters.css',
+					'deps'   => [ 'debug-bar' ],
+					'ver'    => '1.5.1all',
+				]
+			);
 		}
 
 		$wp_styles_mock->registered = $registered;

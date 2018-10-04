@@ -78,16 +78,19 @@ abstract class WP_Customize_Test_Case extends Test_Case {
 	 * @return array
 	 */
 	protected function merge_field_with_default( array $field, $set_value = true ) {
-		$field         = array_merge( [
-			'label'       => false,
-			'description' => false,
-			'default'     => false,
-			'context'     => 'wp_customize',
-			'attributes'  => [
-				'data-customize-setting-link' => $field['id'],
+		$field         = array_merge(
+			[
+				'label'       => false,
+				'description' => false,
+				'default'     => false,
+				'context'     => 'wp_customize',
+				'attributes'  => [
+					'data-customize-setting-link' => $field['id'],
+				],
+				'db_group'    => false,
 			],
-			'db_group'    => false,
-		], $field );
+			$field
+		);
 		$field['name'] = $field['id'];
 
 		if ( 'group' === $field['type'] ) {

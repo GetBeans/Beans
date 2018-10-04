@@ -62,10 +62,14 @@ class Tests_BeansRemoveDir extends Test_Case {
 	 * Test beans_remove_dir() should remove a directory with files.
 	 */
 	public function test_should_remove_dir_with_files() {
-		vfsStream::setup( 'remove-dir', 0644, [
-			'foo.txt' => 'Testing Beans for foo.txt',
-			'bar.txt' => 'Testing Beans for bar.txt',
-		] );
+		vfsStream::setup(
+			'remove-dir',
+			0644,
+			[
+				'foo.txt' => 'Testing Beans for foo.txt',
+				'bar.txt' => 'Testing Beans for bar.txt',
+			]
+		);
 		$dir = vfsStream::url( 'remove-dir' );
 
 		$this->directoryExists( $dir );
@@ -81,16 +85,20 @@ class Tests_BeansRemoveDir extends Test_Case {
 	 * Test beans_remove_dir() should remove a deeply nested directory.
 	 */
 	public function test_should_remove_deeply_nested_dir() {
-		vfsStream::setup( 'remove-dir', 0644, [
-			'foo.txt' => 'Testing Beans for foo.txt',
-			'sub-dir' => [
-				'bar.txt'     => 'Testing Beans for bar.txt',
-				'sub-sub-dir' => [
-					'baz.log'    => 'Baz logger',
-					'foobar.log' => 'Foobar logger',
+		vfsStream::setup(
+			'remove-dir',
+			0644,
+			[
+				'foo.txt' => 'Testing Beans for foo.txt',
+				'sub-dir' => [
+					'bar.txt'     => 'Testing Beans for bar.txt',
+					'sub-sub-dir' => [
+						'baz.log'    => 'Baz logger',
+						'foobar.log' => 'Foobar logger',
+					],
 				],
-			],
-		] );
+			]
+		);
 		$dir = vfsStream::url( 'remove-dir' );
 
 		$this->directoryExists( $dir );

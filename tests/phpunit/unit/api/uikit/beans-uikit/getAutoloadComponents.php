@@ -37,10 +37,13 @@ class Tests_BeansUikit_GetAutoloadComponents extends UIkit_Test_Case {
 			'dropdown',
 		];
 
-		$this->assertSame( [
-			'core'    => [],
-			'add-ons' => [],
-		], $beans_uikit->get_autoload_components( $components ) );
+		$this->assertSame(
+			[
+				'core'    => [],
+				'add-ons' => [],
+			],
+			$beans_uikit->get_autoload_components( $components )
+		);
 	}
 
 	/**
@@ -231,19 +234,29 @@ class Tests_BeansUikit_GetAutoloadComponents extends UIkit_Test_Case {
 			],
 			'add-ons' => [],
 		];
-		$this->assertSame( $expected, $beans_uikit->get_autoload_components( [
-			'panel',
-			'overlay',
-		] ) );
+		$this->assertSame(
+			$expected,
+			$beans_uikit->get_autoload_components(
+				[
+					'panel',
+					'overlay',
+				]
+			)
+		);
 
 		$expected = [
 			'core'    => [ 'switcher' ],
 			'add-ons' => [ 'slidenav' ],
 		];
-		$this->assertSame( $expected, $beans_uikit->get_autoload_components( [
-			'tab',
-			'slider',
-		] ) );
+		$this->assertSame(
+			$expected,
+			$beans_uikit->get_autoload_components(
+				[
+					'tab',
+					'slider',
+				]
+			)
+		);
 
 		$expected = [
 			'core'    => [
@@ -256,11 +269,16 @@ class Tests_BeansUikit_GetAutoloadComponents extends UIkit_Test_Case {
 				'slidenav',
 			],
 		];
-		$this->assertSame( $expected, $beans_uikit->get_autoload_components( [
-			'modal',
-			'slideshow',
-			'notify',
-		] ) );
+		$this->assertSame(
+			$expected,
+			$beans_uikit->get_autoload_components(
+				[
+					'modal',
+					'slideshow',
+					'notify',
+				]
+			)
+		);
 
 		$expected = [
 			'core'    => [
@@ -277,12 +295,17 @@ class Tests_BeansUikit_GetAutoloadComponents extends UIkit_Test_Case {
 				'dotnav',
 			],
 		];
-		$this->assertSame( $expected, $beans_uikit->get_autoload_components( [
-			'lightbox',
-			'notify',
-			'panel',
-			'slideshow',
-			'tab',
-		] ) );
+		$this->assertSame(
+			$expected,
+			$beans_uikit->get_autoload_components(
+				[
+					'lightbox',
+					'notify',
+					'panel',
+					'slideshow',
+					'tab',
+				]
+			)
+		);
 	}
 }

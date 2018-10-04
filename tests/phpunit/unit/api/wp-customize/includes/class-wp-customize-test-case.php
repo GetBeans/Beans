@@ -49,11 +49,13 @@ abstract class WP_Customize_Test_Case extends Test_Case {
 	public function setUp() {
 		parent::setUp();
 
-		$this->load_original_functions( [
-			'api/wp-customize/functions.php',
-			'api/wp-customize/class-beans-wp-customize.php',
-			'api/wp-customize/class-beans-wp-customize-control.php',
-		] );
+		$this->load_original_functions(
+			[
+				'api/wp-customize/functions.php',
+				'api/wp-customize/class-beans-wp-customize.php',
+				'api/wp-customize/class-beans-wp-customize-control.php',
+			]
+		);
 
 		$this->setup_common_wp_stubs();
 
@@ -73,16 +75,19 @@ abstract class WP_Customize_Test_Case extends Test_Case {
 	 * @return array
 	 */
 	protected function merge_field_with_default( array $field, $set_value = true ) {
-		$merged_field         = array_merge( [
-			'label'       => false,
-			'description' => false,
-			'default'     => false,
-			'context'     => 'wp_customize',
-			'attributes'  => [
-				'data-customize-setting-link' => $field['id'],
+		$merged_field         = array_merge(
+			[
+				'label'       => false,
+				'description' => false,
+				'default'     => false,
+				'context'     => 'wp_customize',
+				'attributes'  => [
+					'data-customize-setting-link' => $field['id'],
+				],
+				'db_group'    => false,
 			],
-			'db_group'    => false,
-		], $field );
+			$field
+		);
 		$merged_field['name'] = $field['id'];
 
 		if ( $set_value ) {

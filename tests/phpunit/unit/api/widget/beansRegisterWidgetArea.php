@@ -61,10 +61,12 @@ class Tests_BeansRegisterWidgetArea extends Beans_Widget_Test_Case {
 
 		$this->assertEquals(
 			'new-widget-area',
-			beans_register_widget_area( [
-				'id'         => 'new-widget-area',
-				'beans_type' => 'grid',
-			] )
+			beans_register_widget_area(
+				[
+					'id'         => 'new-widget-area',
+					'beans_type' => 'grid',
+				]
+			)
 		);
 	}
 

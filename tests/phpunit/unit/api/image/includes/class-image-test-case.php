@@ -74,9 +74,11 @@ abstract class Image_Test_Case extends Base_Test_Case {
 
 		$this->setup_function_mocks();
 
-		$this->load_original_functions( [
-			'api/image/class-beans-image-editor.php',
-		] );
+		$this->load_original_functions(
+			[
+				'api/image/class-beans-image-editor.php',
+			]
+		);
 
 		$this->images = [
 			$this->images_dir . '/image1.jpg' => static::$fixtures_dir . '/image1.jpg',
@@ -127,13 +129,15 @@ abstract class Image_Test_Case extends Base_Test_Case {
 		Monkey\Functions\when( 'beans_url_to_path' )->returnArg();
 		Monkey\Functions\when( 'beans_path_to_url' )->returnArg();
 
-		Monkey\Functions\expect( 'wp_upload_dir' )->andReturn( [
-			'path'    => '',
-			'url'     => '',
-			'subdir'  => '',
-			'basedir' => vfsStream::url( 'uploads' ),
-			'baseurl' => $this->images_url,
-			'error'   => false,
-		] );
+		Monkey\Functions\expect( 'wp_upload_dir' )->andReturn(
+			[
+				'path'    => '',
+				'url'     => '',
+				'subdir'  => '',
+				'basedir' => vfsStream::url( 'uploads' ),
+				'baseurl' => $this->images_url,
+				'error'   => false,
+			]
+		);
 	}
 }

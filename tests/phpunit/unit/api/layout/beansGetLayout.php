@@ -27,11 +27,13 @@ class Tests_BeansGetLayout extends Test_Case {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->load_original_functions( [
-			'api/layout/functions.php',
-			'api/post-meta/functions.php',
-			'api/term-meta/functions.php',
-		] );
+		$this->load_original_functions(
+			[
+				'api/layout/functions.php',
+				'api/post-meta/functions.php',
+				'api/term-meta/functions.php',
+			]
+		);
 	}
 
 	/**

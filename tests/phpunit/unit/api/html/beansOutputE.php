@@ -27,9 +27,11 @@ class Tests_BeansOutputE extends HTML_Test_Case {
 	 * Test beans_output_e() should echo an empty string when the output is empty.
 	 */
 	public function test_should_echo_empty_string_when_output_is_empty() {
-		Monkey\Functions\expect( 'beans_output' )->times( 3 )->andReturnUsing( function( $id, $output ) {
-			return $output;
-		} );
+		Monkey\Functions\expect( 'beans_output' )->times( 3 )->andReturnUsing(
+			function( $id, $output ) {
+					return $output;
+			}
+		);
 
 		$ids = [
 			'beans_post_meta_item_date'     => null,
@@ -66,9 +68,11 @@ class Tests_BeansOutputE extends HTML_Test_Case {
 		Monkey\Functions\expect( 'beans_output' )
 			->once()
 			->with( 'beans_archive_title_text', 'Beans rocks!' )
-			->andReturnUsing( function( $id, $output ) {
-				return $output;
-			} );
+			->andReturnUsing(
+				function( $id, $output ) {
+						return $output;
+				}
+			);
 
 		ob_start();
 		beans_output_e( 'beans_archive_title_text', 'Beans rocks!' );
@@ -82,9 +86,11 @@ class Tests_BeansOutputE extends HTML_Test_Case {
 		Monkey\Functions\expect( 'beans_output' )
 			->once()
 			->with( 'beans_archive_title_text', 'Beans rocks!' )
-			->andReturnUsing( function( $id, $output ) {
-				return "<!-- open output: $id -->" . $output . "<!-- close output: $id -->";
-			} );
+			->andReturnUsing(
+				function( $id, $output ) {
+						return "<!-- open output: $id -->" . $output . "<!-- close output: $id -->";
+				}
+			);
 
 		ob_start();
 		beans_output_e( 'beans_archive_title_text', 'Beans rocks!' );
@@ -103,9 +109,11 @@ EOB;
 		Monkey\Functions\expect( 'beans_output' )
 			->once()
 			->with( 'beans_breadcrumb_item_text', 'Beans rocks!', 47, 'Hello' )
-			->andReturnUsing( function( $id, $output, $arg1, $arg2 ) {
-				return $arg2;
-			} );
+			->andReturnUsing(
+				function( $id, $output, $arg1, $arg2 ) {
+						return $arg2;
+				}
+			);
 
 		ob_start();
 		beans_output_e( 'beans_breadcrumb_item_text', 'Beans rocks!', 47, 'Hello' );

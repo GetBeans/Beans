@@ -32,17 +32,23 @@ class Tests_BeansOptions_Register extends Options_Test_Case {
 
 		$instance = new _Beans_Options();
 		$instance->register( 'foo', [] );
-		$this->assertSame( [
-			'title'   => 'Undefined',
-			'context' => 'normal',
-		], $property->getValue( $instance ) );
+		$this->assertSame(
+			[
+				'title'   => 'Undefined',
+				'context' => 'normal',
+			],
+			$property->getValue( $instance )
+		);
 
 		$instance = new _Beans_Options();
 		$instance->register( 'beans_test', [ 'title' => 'Beans Tests' ] );
-		$this->assertSame( [
-			'title'   => 'Beans Tests',
-			'context' => 'normal',
-		], $property->getValue( $instance ) );
+		$this->assertSame(
+			[
+				'title'   => 'Beans Tests',
+				'context' => 'normal',
+			],
+			$property->getValue( $instance )
+		);
 	}
 
 	/**
@@ -73,12 +79,15 @@ class Tests_BeansOptions_Register extends Options_Test_Case {
 			$this->assertArrayHasKey( $option['args']['context'], $wp_meta_boxes['beans_settings'] );
 			$this->assertArrayHasKey( 'default', $wp_meta_boxes['beans_settings'][ $option['args']['context'] ] );
 			$this->assertArrayHasKey( $option['section'], $wp_meta_boxes['beans_settings'][ $option['args']['context'] ]['default'] );
-			$this->assertSame( [
-				'id'       => $option['section'],
-				'title'    => $option['args']['title'],
-				'callback' => [ $instance, 'render_metabox' ],
-				'args'     => null,
-			], $wp_meta_boxes['beans_settings'][ $option['args']['context'] ]['default'][ $option['section'] ] );
+			$this->assertSame(
+				[
+					'id'       => $option['section'],
+					'title'    => $option['args']['title'],
+					'callback' => [ $instance, 'render_metabox' ],
+					'args'     => null,
+				],
+				$wp_meta_boxes['beans_settings'][ $option['args']['context'] ]['default'][ $option['section'] ]
+			);
 
 			// Clean up.
 			remove_action( 'admin_enqueue_scripts', [ $instance, 'enqueue_assets' ] );

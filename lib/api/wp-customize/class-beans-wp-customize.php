@@ -16,7 +16,7 @@
  *
  * @package Beans\Framework\API\WP_Customize
  */
-final class _Beans_WP_Customize {
+final class Beans_WP_Customize {
 
 	/**
 	 * Metabox arguments.

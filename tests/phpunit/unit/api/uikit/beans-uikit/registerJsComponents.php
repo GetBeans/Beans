@@ -44,10 +44,13 @@ class Tests_BeansUikit_RegisterJsComponents extends UIkit_Test_Case {
 	public function test_should_return_base_core_components_when_no_components_registered() {
 		// Check the global.
 		global $_beans_uikit_enqueued_items;
-		$this->assertSame( [
-			'core'    => [],
-			'add-ons' => [],
-		], $_beans_uikit_enqueued_items['components'] );
+		$this->assertSame(
+			[
+				'core'    => [],
+				'add-ons' => [],
+			],
+			$_beans_uikit_enqueued_items['components']
+		);
 
 		// Run the test.
 		$this->assertSame(

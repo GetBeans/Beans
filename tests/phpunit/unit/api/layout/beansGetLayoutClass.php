@@ -27,18 +27,22 @@ class Tests_BeansGetLayoutClass extends Test_Case {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->load_original_functions( array(
-			'api/layout/functions.php',
-			'api/utilities/functions.php',
-			'api/post-meta/functions.php',
-		) );
+		$this->load_original_functions(
+			array(
+				'api/layout/functions.php',
+				'api/utilities/functions.php',
+				'api/post-meta/functions.php',
+			)
+		);
 
-		Monkey\Functions\when( 'beans_get' )->alias( function ( $needle, $haystack ) {
+		Monkey\Functions\when( 'beans_get' )->alias(
+			function ( $needle, $haystack ) {
 
-			if ( isset( $haystack[ $needle ] ) ) {
-				return $haystack[ $needle ];
+				if ( isset( $haystack[ $needle ] ) ) {
+					  return $haystack[ $needle ];
+				}
 			}
-		} );
+		);
 	}
 
 	/**

@@ -51,19 +51,25 @@ class Tests_BeansJoinArraysClean extends Test_Case {
 		];
 		$array2 = [];
 		$this->assertSame( [ 'foo', 5 ], beans_join_arrays_clean( $array1, $array2 ) );
-		$this->assertSame( [
-			'post_type'       => 'foo',
-			'number_of_posts' => 5,
-		], beans_join_arrays_clean( $array1, $array2, false ) );
+		$this->assertSame(
+			[
+				'post_type'       => 'foo',
+				'number_of_posts' => 5,
+			],
+			beans_join_arrays_clean( $array1, $array2, false )
+		);
 
 		$array1 = [ '', 'foo', 'bar', '', 'baz' ];
 		$array2 = [];
 		$this->assertSame( [ 'foo', 'bar', 'baz' ], beans_join_arrays_clean( $array1, $array2 ) );
-		$this->assertSame( [
-			1 => 'foo',
-			2 => 'bar',
-			4 => 'baz',
-		], beans_join_arrays_clean( $array1, $array2, false ) );
+		$this->assertSame(
+			[
+				1 => 'foo',
+				2 => 'bar',
+				4 => 'baz',
+			],
+			beans_join_arrays_clean( $array1, $array2, false )
+		);
 	}
 
 	/**
@@ -79,20 +85,26 @@ class Tests_BeansJoinArraysClean extends Test_Case {
 			'bar'             => null,
 		];
 		$this->assertSame( [ 'foo', 5 ], beans_join_arrays_clean( $array1, $array2 ) );
-		$this->assertSame( [
-			'post_type'       => 'foo',
-			'number_of_posts' => 5,
-		], beans_join_arrays_clean( $array1, $array2, false ) );
+		$this->assertSame(
+			[
+				'post_type'       => 'foo',
+				'number_of_posts' => 5,
+			],
+			beans_join_arrays_clean( $array1, $array2, false )
+		);
 
 		// Check with indexed array.
 		$array1 = [];
 		$array2 = [ '', 'foo', 'bar', '', 'baz' ];
 		$this->assertSame( [ 'foo', 'bar', 'baz' ], beans_join_arrays_clean( $array1, $array2 ) );
-		$this->assertSame( [
-			1 => 'foo',
-			2 => 'bar',
-			4 => 'baz',
-		], beans_join_arrays_clean( $array1, $array2, false ) );
+		$this->assertSame(
+			[
+				1 => 'foo',
+				2 => 'bar',
+				4 => 'baz',
+			],
+			beans_join_arrays_clean( $array1, $array2, false )
+		);
 	}
 
 	/**
@@ -113,11 +125,14 @@ class Tests_BeansJoinArraysClean extends Test_Case {
 			'baz' => 'Hello',
 		];
 		$this->assertSame( [ 'bar', 'Hello', 'foo', 5 ], beans_join_arrays_clean( $array1, $array2 ) );
-		$this->assertSame( [
-			'foo'             => 'bar',
-			'baz'             => 'Hello',
-			'post_type'       => 'foo',
-			'number_of_posts' => 5,
-		], beans_join_arrays_clean( $array1, $array2, false ) );
+		$this->assertSame(
+			[
+				'foo'             => 'bar',
+				'baz'             => 'Hello',
+				'post_type'       => 'foo',
+				'number_of_posts' => 5,
+			],
+			beans_join_arrays_clean( $array1, $array2, false )
+		);
 	}
 }

@@ -16,7 +16,7 @@
  *
  * @package Beans\Framework\API\Compiler
  */
-final class _Beans_Compiler_Options {
+final class Beans_Compiler_Options {
 
 	/**
 	 * Initialize the hooks.

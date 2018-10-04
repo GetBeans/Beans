@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests;
 
-use _Beans_Fields;
+use Beans_Fields;
 
 /**
  * Beans Resetter

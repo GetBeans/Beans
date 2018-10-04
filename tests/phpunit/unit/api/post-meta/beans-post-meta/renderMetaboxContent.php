@@ -43,9 +43,11 @@ class Tests_BeansPostMeta_RenderMetaboxContent extends Post_Meta_Test_Case {
 			->once()
 			->with( 'post_meta', 'tm-beans' )
 			->andReturn( [ $field ] );
-		Monkey\Functions\expect( 'beans_field' )->once()->with( $field )->andReturnUsing( function () {
-			echo 'beans_field_html';
-		} );
+		Monkey\Functions\expect( 'beans_field' )->once()->with( $field )->andReturnUsing(
+			function () {
+					echo 'beans_field_html';
+			}
+		);
 
 		ob_start();
 		$post_meta->render_metabox_content( 74 );

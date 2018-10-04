@@ -65,10 +65,13 @@ class Tests_BeansPageCompiler_DequeueScripts extends Page_Compiler_Test_Case {
 
 		// Set the scripts to be dequeued.
 		$dequeued_scripts = $this->get_reflective_property( 'dequeued_scripts', '_Beans_Page_Compiler' );
-		$dequeued_scripts->setValue( $compiler, [
-			'debug-bar' => $assets->registered['debug-bar']->src,
-			'uikit'     => $assets->registered['uikit']->src,
-		] );
+		$dequeued_scripts->setValue(
+			$compiler,
+			[
+				'debug-bar' => $assets->registered['debug-bar']->src,
+				'uikit'     => $assets->registered['uikit']->src,
+			]
+		);
 
 		// Set up the asset mocks.
 		Monkey\Functions\expect( 'beans_get' )
@@ -97,10 +100,13 @@ class Tests_BeansPageCompiler_DequeueScripts extends Page_Compiler_Test_Case {
 
 		// Set the scripts to be dequeued.
 		$dequeued_scripts = $this->get_reflective_property( 'dequeued_scripts', '_Beans_Page_Compiler' );
-		$dequeued_scripts->setValue( $compiler, [
-			'debug-bar' => $assets->registered['debug-bar']->src,
-			'uikit'     => $assets->registered['uikit']->src,
-		] );
+		$dequeued_scripts->setValue(
+			$compiler,
+			[
+				'debug-bar' => $assets->registered['debug-bar']->src,
+				'uikit'     => $assets->registered['uikit']->src,
+			]
+		);
 
 		// Set up the asset mocks.
 		Monkey\Functions\expect( 'beans_get' )
@@ -127,10 +133,13 @@ class Tests_BeansPageCompiler_DequeueScripts extends Page_Compiler_Test_Case {
 
 		// Set the scripts to be dequeued.
 		$dequeued_scripts = $this->get_reflective_property( 'dequeued_scripts', '_Beans_Page_Compiler' );
-		$dequeued_scripts->setValue( $compiler, [
-			'debug-bar' => $assets->registered['debug-bar']->src,
-			'uikit'     => $assets->registered['uikit']->src,
-		] );
+		$dequeued_scripts->setValue(
+			$compiler,
+			[
+				'debug-bar' => $assets->registered['debug-bar']->src,
+				'uikit'     => $assets->registered['uikit']->src,
+			]
+		);
 
 		// Set up the asset mocks.
 		Monkey\Functions\expect( 'beans_get' )
@@ -170,40 +179,50 @@ EOB;
 		$wp_scripts_mock        = Mockery::mock( 'WP_Scripts' );
 		$wp_scripts_mock->queue = $queue;
 		$registered             = [
-			'jquery'         => $this->get_deps_mock( [
-				'handle' => 'jquery',
-				'src'    => false,
-				'deps'   => [ 'jquery-core', 'jquery-migrate' ],
-				'ver'    => '1.12.4',
-			] ),
-			'jquery-core'    => $this->get_deps_mock( [
-				'handle' => 'jquery-core',
-				'src'    => '/wp-includes/js/jquery/jquery.js',
-				'ver'    => '1.12.4',
-			] ),
-			'jquery-migrate' => $this->get_deps_mock( [
-				'handle' => 'jquery-migrate',
-				'src'    => '/wp-includes/js/jquery/jquery-migrate.js',
-				'ver'    => '1.4.1',
-			] ),
+			'jquery'         => $this->get_deps_mock(
+				[
+					'handle' => 'jquery',
+					'src'    => false,
+					'deps'   => [ 'jquery-core', 'jquery-migrate' ],
+					'ver'    => '1.12.4',
+				]
+			),
+			'jquery-core'    => $this->get_deps_mock(
+				[
+					'handle' => 'jquery-core',
+					'src'    => '/wp-includes/js/jquery/jquery.js',
+					'ver'    => '1.12.4',
+				]
+			),
+			'jquery-migrate' => $this->get_deps_mock(
+				[
+					'handle' => 'jquery-migrate',
+					'src'    => '/wp-includes/js/jquery/jquery-migrate.js',
+					'ver'    => '1.4.1',
+				]
+			),
 		];
 
 		if ( in_array( 'debug-bar', $queue, true ) ) {
-			$registered['debug-bar'] = $this->get_deps_mock( [
-				'handle' => 'debug-bar',
-				'src'    => '/wp-content/plugins/debug-bar/js/debug-bar.dev.js',
-				'deps'   => [ 'jquery' ],
-				'ver'    => '20170515',
-				'extra'  => $with_extras ? [ 'data' => 'var testParams = "hello-beans";' ] : [],
-			] );
+			$registered['debug-bar'] = $this->get_deps_mock(
+				[
+					'handle' => 'debug-bar',
+					'src'    => '/wp-content/plugins/debug-bar/js/debug-bar.dev.js',
+					'deps'   => [ 'jquery' ],
+					'ver'    => '20170515',
+					'extra'  => $with_extras ? [ 'data' => 'var testParams = "hello-beans";' ] : [],
+				]
+			);
 		}
 
 		if ( in_array( 'uikit', $queue, true ) ) {
-			$registered['uikit'] = $this->get_deps_mock( [
-				'handle' => 'uikit',
-				'src'    => 'wp-content/uploads/beans/compiler/uikit/3b2a958-921f3e0.js',
-				'deps'   => [ 'jquery' ],
-			] );
+			$registered['uikit'] = $this->get_deps_mock(
+				[
+					'handle' => 'uikit',
+					'src'    => 'wp-content/uploads/beans/compiler/uikit/3b2a958-921f3e0.js',
+					'deps'   => [ 'jquery' ],
+				]
+			);
 		}
 
 		$wp_scripts_mock->registered = $registered;

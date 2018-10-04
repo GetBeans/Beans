@@ -53,12 +53,14 @@ class Tests_BeansAddAction extends Actions_Test_Case {
 			Monkey\Functions\expect( '_beans_set_action' )
 				->once()
 				->with( $beans_id, $action, 'added', true )
-				->andReturnUsing( function( $id, $action ) {
-					global $_beans_registered_actions;
-					$_beans_registered_actions['added'][ $id ] = $action;
+				->andReturnUsing(
+					function( $id, $action ) {
+							global $_beans_registered_actions;
+							$_beans_registered_actions['added'][ $id ] = $action;
 
-					return $action;
-				} );
+							return $action;
+					}
+				);
 			Monkey\Actions\expectAdded( $action['hook'] )
 				->once()
 				->with( $action['callback'], $action['priority'], $action['args'] );
@@ -83,12 +85,14 @@ class Tests_BeansAddAction extends Actions_Test_Case {
 		global $_beans_registered_actions;
 
 		Monkey\Functions\when( '_beans_get_action' )->justReturn( false );
-		Monkey\Functions\when( '_beans_set_action' )->alias( function( $id, $action ) {
-			global $_beans_registered_actions;
-			$_beans_registered_actions['added'][ $id ] = $action;
+		Monkey\Functions\when( '_beans_set_action' )->alias(
+			function( $id, $action ) {
+					global $_beans_registered_actions;
+					$_beans_registered_actions['added'][ $id ] = $action;
 
-			return $action;
-		} );
+					return $action;
+			}
+		);
 
 		foreach ( static::$test_actions as $beans_id => $action ) {
 			// Let's add it the first time.
@@ -134,12 +138,14 @@ class Tests_BeansAddAction extends Actions_Test_Case {
 			Monkey\Functions\expect( '_beans_set_action' )
 				->once()
 				->with( $beans_id, array_merge( $original_action, $replaced_action ), 'added', true )
-				->andReturnUsing( function( $id, $action ) {
-					global $_beans_registered_actions;
-					$_beans_registered_actions['added'][ $id ] = $action;
+				->andReturnUsing(
+					function( $id, $action ) {
+							global $_beans_registered_actions;
+							$_beans_registered_actions['added'][ $id ] = $action;
 
-					return $action;
-				} );
+							return $action;
+					}
+				);
 			Monkey\Actions\expectAdded( $original_action['hook'] )
 				->once()
 				->with( $replaced_action['callback'], $replaced_action['priority'], $original_action['args'] );
@@ -189,12 +195,14 @@ class Tests_BeansAddAction extends Actions_Test_Case {
 			Monkey\Functions\expect( '_beans_set_action' )
 				->once()
 				->with( $beans_id, $action, 'added', true )
-				->andReturnUsing( function( $id, $action ) {
-					global $_beans_registered_actions;
-					$_beans_registered_actions['added'][ $id ] = $action;
+				->andReturnUsing(
+					function( $id, $action ) {
+							global $_beans_registered_actions;
+							$_beans_registered_actions['added'][ $id ] = $action;
 
-					return $action;
-				} );
+							return $action;
+					}
+				);
 			Monkey\Actions\expectAdded( $action['hook'] )->never();
 
 			// Next, add the action.
@@ -239,12 +247,14 @@ class Tests_BeansAddAction extends Actions_Test_Case {
 			Monkey\Functions\expect( '_beans_set_action' )
 				->once()
 				->with( $beans_id, $original_action, 'added', true )
-				->andReturnUsing( function( $id, $action ) {
-					global $_beans_registered_actions;
-					$_beans_registered_actions['added'][ $id ] = $action;
+				->andReturnUsing(
+					function( $id, $action ) {
+							global $_beans_registered_actions;
+							$_beans_registered_actions['added'][ $id ] = $action;
 
-					return $action;
-				} );
+							return $action;
+					}
+				);
 			Monkey\Actions\expectAdded( $original_action['hook'] )
 				->once()
 				->with( $modified_action['callback'], $modified_action['priority'], $original_action['args'] );

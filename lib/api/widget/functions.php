@@ -55,12 +55,15 @@ function beans_register_widget_area( $args = array() ) {
 	 *
 	 * @since 1.0.0
 	 */
-	$defaults = apply_filters( 'beans_widgets_area_default_args', array(
-		'beans_type'                 => 'stack',
-		'beans_show_widget_title'    => true,
-		'beans_show_widget_badge'    => false,
-		'beans_widget_badge_content' => __( 'Hello', 'tm-beans' ),
-	) );
+	$defaults = apply_filters(
+		'beans_widgets_area_default_args',
+		array(
+			'beans_type'                 => 'stack',
+			'beans_show_widget_title'    => true,
+			'beans_show_widget_badge'    => false,
+			'beans_widget_badge_content' => __( 'Hello', 'tm-beans' ),
+		)
+	);
 
 	/**
 	 * Filter the arguments used by the widget area.
@@ -471,11 +474,14 @@ function _beans_setup_widgets( $widget_area_content ) {
 		$widget['content'] = $content;
 
 		// Add widget control arguments and register widget.
-		$_beans_widgets[ $widget['id'] ] = array_merge( $widget, array(
-			'show_title'    => $_beans_widget_area['beans_show_widget_title'],
-			'badge'         => $_beans_widget_area['beans_show_widget_badge'],
-			'badge_content' => $_beans_widget_area['beans_widget_badge_content'],
-		) );
+		$_beans_widgets[ $widget['id'] ] = array_merge(
+			$widget,
+			array(
+				'show_title'    => $_beans_widget_area['beans_show_widget_title'],
+				'badge'         => $_beans_widget_area['beans_show_widget_badge'],
+				'badge_content' => $_beans_widget_area['beans_widget_badge_content'],
+			)
+		);
 	}
 
 	return $_beans_widgets;

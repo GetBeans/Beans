@@ -92,18 +92,20 @@ class Tests_BeansFlushCompiler extends Compiler_Options_Test_Case {
 		Monkey\Functions\expect( 'beans_remove_dir' )
 			->once()
 			->with( trailingslashit( $compiler_dir ) . 'beans' )
-			->andReturnUsing( function( $dir_path ) {
-				$items = scandir( $dir_path );
-				unset( $items[0], $items[1] );
+			->andReturnUsing(
+				function( $dir_path ) {
+						$items = scandir( $dir_path );
+						unset( $items[0], $items[1] );
 
-				$dir_path = trailingslashit( $dir_path );
+						$dir_path = trailingslashit( $dir_path );
 
-				foreach ( $items as $needle => $item ) {
-					unlink( $dir_path . $item );
+					foreach ( $items as $needle => $item ) {
+						  unlink( $dir_path . $item );
+					}
+
+						return rmdir( $dir_path );
 				}
-
-				return rmdir( $dir_path );
-			} );
+			);
 
 		$this->assertFileExists( vfsStream::url( 'compiled/beans/compiler/beans/1234567-9876543.css' ) );
 		$this->assertFileExists( vfsStream::url( 'compiled/beans/compiler/beans/abcd3fg-hijklmn.js' ) );

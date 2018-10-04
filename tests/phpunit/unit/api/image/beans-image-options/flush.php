@@ -63,10 +63,12 @@ class Tests_BeansImageOptions_Flush extends Options_Test_Case {
 		Monkey\Functions\expect( 'beans_remove_dir' )
 			->once()
 			->with( vfsStream::url( 'uploads/beans/images/' ) )
-			->andReturnUsing( function() {
-				// Keep it simple. Remove by redefining.
-				vfsStream::setup( 'uploads', 0755, [ 'beans' => [] ] );
-			} );
+			->andReturnUsing(
+				function() {
+						// Keep it simple. Remove by redefining.
+						vfsStream::setup( 'uploads', 0755, [ 'beans' => [] ] );
+				}
+			);
 
 		$this->assertNull( ( new _Beans_Image_Options() )->flush() );
 		$this->assertDirectoryNotExists( vfsStream::url( 'uploads/beans/images/' ) );

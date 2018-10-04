@@ -72,17 +72,21 @@ abstract class Actions_Test_Case extends Test_Case {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->load_original_functions( [
-			'api/actions/functions.php',
-			'api/utilities/functions.php',
-		] );
+		$this->load_original_functions(
+			[
+				'api/actions/functions.php',
+				'api/utilities/functions.php',
+			]
+		);
 
-		Monkey\Functions\when( 'beans_get' )->alias( function ( $needle, $haystack ) {
+		Monkey\Functions\when( 'beans_get' )->alias(
+			function ( $needle, $haystack ) {
 
-			if ( isset( $haystack[ $needle ] ) ) {
-				return $haystack[ $needle ];
+				if ( isset( $haystack[ $needle ] ) ) {
+					  return $haystack[ $needle ];
+				}
 			}
-		} );
+		);
 	}
 
 	/**
@@ -102,11 +106,13 @@ abstract class Actions_Test_Case extends Test_Case {
 			if ( $expect_added ) {
 				Monkey\Actions\expectAdded( $action['hook'] )
 					->once()
-					->whenHappen( function ( $callback, $priority, $args ) use ( $action ) {
-						$this->assertSame( $action['callback'], $callback );
-						$this->assertSame( $action['priority'], $priority );
-						$this->assertSame( $action['args'], $args );
-					} );
+					->whenHappen(
+						function ( $callback, $priority, $args ) use ( $action ) {
+								$this->assertSame( $action['callback'], $callback );
+								$this->assertSame( $action['priority'], $priority );
+								$this->assertSame( $action['args'], $args );
+						}
+					);
 			}
 
 			beans_add_action( $beans_id, $action['hook'], $action['callback'], $action['priority'], $action['args'] );

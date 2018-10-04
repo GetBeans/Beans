@@ -59,9 +59,11 @@ class Tests_BeansCompiler_GetInternalContent extends Compiler_Test_Case {
 	 */
 	public function test_should_return_fragment_contents() {
 		$fragment = vfsStream::url( 'compiled/fixtures/test.less' );
-		$compiler = $this->create_compiler( [
-			'fragments' => [ $fragment ],
-		] );
+		$compiler = $this->create_compiler(
+			[
+				'fragments' => [ $fragment ],
+			]
+		);
 
 		// Set up the mocks.
 		$this->set_reflective_property( $fragment, 'current_fragment', $compiler );

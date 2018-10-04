@@ -137,7 +137,8 @@ function beans_comment_callback( $comment, array $args, $depth ) {
 
 	// Render the opening <li> tag.
 	$comment_class = empty( $args['has_children'] ) ? '' : 'parent';
-	printf( '<li id="comment-%d" %s>',
+	printf(
+		'<li id="comment-%d" %s>',
 		(int) get_comment_ID(),
 		comment_class( $comment_class, $comment, null, false )
 	);

@@ -98,12 +98,14 @@ class Tests_BeansCompiler_GetRemoteContent extends Compiler_Test_Case {
 			->with( 'https://beans.local/invalid-file.js' )
 			->once()
 			->ordered()
-			->andReturn( [
-				'body'     => '',
-				'response' => [
-					'code' => 404, // HTTP code is 404 and not 200.
-				],
-			] );
+			->andReturn(
+				[
+					'body'     => '',
+					'response' => [
+						'code' => 404, // HTTP code is 404 and not 200.
+					],
+				]
+			);
 
 		// Run the test.
 		$this->assertFalse( $compiler->get_remote_content() );

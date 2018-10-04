@@ -150,13 +150,17 @@ class Tests_BeansUikitEnqueueComponents extends UIkit_Test_Case {
 		$this->assertSame( $addons, $_beans_uikit_enqueued_items['components']['add-ons'] );
 
 		// Check when duplicates are in different order.
-		beans_uikit_enqueue_components( [
-			'datepicker',
-			'sticky',
-			'tooltip',
-			'autocomplete',
-			'accordion',
-		], 'add-ons', false );
+		beans_uikit_enqueue_components(
+			[
+				'datepicker',
+				'sticky',
+				'tooltip',
+				'autocomplete',
+				'accordion',
+			],
+			'add-ons',
+			false
+		);
 		$this->assertCount( 5, $_beans_uikit_enqueued_items['components']['add-ons'] );
 		$this->assertSame( $addons, $_beans_uikit_enqueued_items['components']['add-ons'] );
 	}
@@ -218,12 +222,14 @@ class Tests_BeansUikitEnqueueComponents extends UIkit_Test_Case {
 		Monkey\Functions\expect( '_beans_uikit_autoload_dependencies' )
 			->once()
 			->with( $components )
-			->andReturnUsing( function() {
-				global $_beans_uikit_enqueued_items;
-				$_beans_uikit_enqueued_items['components']['core'] = [ 'flex', 'switcher' ];
+			->andReturnUsing(
+				function() {
+						global $_beans_uikit_enqueued_items;
+						$_beans_uikit_enqueued_items['components']['core'] = [ 'flex', 'switcher' ];
 
-				return [ 'flex', 'switcher' ];
-			} );
+						return [ 'flex', 'switcher' ];
+				}
+			);
 
 		beans_uikit_enqueue_components( $components, 'core', true );
 		$expected = array_merge( [ 'flex', 'switcher' ], $components );
@@ -240,12 +246,14 @@ class Tests_BeansUikitEnqueueComponents extends UIkit_Test_Case {
 		Monkey\Functions\expect( '_beans_uikit_autoload_dependencies' )
 			->once()
 			->with( $components )
-			->andReturnUsing( function() {
-				global $_beans_uikit_enqueued_items;
-				$_beans_uikit_enqueued_items['components']['add-ons'] = [ 'dotnav' ];
+			->andReturnUsing(
+				function() {
+						global $_beans_uikit_enqueued_items;
+						$_beans_uikit_enqueued_items['components']['add-ons'] = [ 'dotnav' ];
 
-				return [ 'dotnav' ];
-			} );
+						return [ 'dotnav' ];
+				}
+			);
 
 		beans_uikit_enqueue_components( $components, 'add-ons', true );
 		$expected = array_merge( [ 'dotnav' ], $components );

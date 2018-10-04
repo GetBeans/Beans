@@ -158,9 +158,11 @@ EOB;
 		Monkey\Functions\expect( 'beans_add_attributes' )
 			->twice()
 			->with( 'beans_post_image_item', $args, 'http://example.com/image.png' )
-			->andReturnUsing( function( $id, $attributes ) {
-				return $this->convert_attributes_into_html( $attributes );
-			} );
+			->andReturnUsing(
+				function( $id, $attributes ) {
+						return $this->convert_attributes_into_html( $attributes );
+				}
+			);
 
 		// Run it with development mode off.
 		Monkey\Functions\expect( '_beans_is_html_dev_mode' )->once()->andReturn( false );

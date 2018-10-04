@@ -35,10 +35,13 @@ class Tests_BeansUikitGetAllDependencies extends UIkit_Test_Case {
 			'dropdown',
 		];
 
-		$this->assertSame( [
-			'core'    => [],
-			'add-ons' => [],
-		], beans_uikit_get_all_dependencies( $components ) );
+		$this->assertSame(
+			[
+				'core'    => [],
+				'add-ons' => [],
+			],
+			beans_uikit_get_all_dependencies( $components )
+		);
 	}
 
 	/**
@@ -204,19 +207,29 @@ class Tests_BeansUikitGetAllDependencies extends UIkit_Test_Case {
 			],
 			'add-ons' => [],
 		];
-		$this->assertSame( $expected, beans_uikit_get_all_dependencies( [
-			'panel',
-			'overlay',
-		] ) );
+		$this->assertSame(
+			$expected,
+			beans_uikit_get_all_dependencies(
+				[
+					'panel',
+					'overlay',
+				]
+			)
+		);
 
 		$expected = [
 			'core'    => [ 'switcher' ],
 			'add-ons' => [ 'slidenav' ],
 		];
-		$this->assertSame( $expected, beans_uikit_get_all_dependencies( [
-			'tab',
-			'slider',
-		] ) );
+		$this->assertSame(
+			$expected,
+			beans_uikit_get_all_dependencies(
+				[
+					'tab',
+					'slider',
+				]
+			)
+		);
 
 		$expected = [
 			'core'    => [
@@ -229,11 +242,16 @@ class Tests_BeansUikitGetAllDependencies extends UIkit_Test_Case {
 				'slidenav',
 			],
 		];
-		$this->assertSame( $expected, beans_uikit_get_all_dependencies( [
-			'modal',
-			'slideshow',
-			'notify',
-		] ) );
+		$this->assertSame(
+			$expected,
+			beans_uikit_get_all_dependencies(
+				[
+					'modal',
+					'slideshow',
+					'notify',
+				]
+			)
+		);
 
 		$expected = [
 			'core'    => [
@@ -250,12 +268,17 @@ class Tests_BeansUikitGetAllDependencies extends UIkit_Test_Case {
 				'dotnav',
 			],
 		];
-		$this->assertSame( $expected, beans_uikit_get_all_dependencies( [
-			'lightbox',
-			'notify',
-			'panel',
-			'slideshow',
-			'tab',
-		] ) );
+		$this->assertSame(
+			$expected,
+			beans_uikit_get_all_dependencies(
+				[
+					'lightbox',
+					'notify',
+					'panel',
+					'slideshow',
+					'tab',
+				]
+			)
+		);
 	}
 }

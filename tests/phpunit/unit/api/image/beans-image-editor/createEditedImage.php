@@ -64,9 +64,11 @@ class Tests_BeansImageEditor_CreateEditedImage extends Image_Test_Case {
 			$wp_editor->shouldReceive( 'save' )
 				->once()
 				->with( $edited_image_src )
-				->andReturnUsing( function( $edited_image_src ) use ( $src ) {
-					imagejpeg( imagecreatefromjpeg( $src ), $edited_image_src );
-				} );
+				->andReturnUsing(
+					function( $edited_image_src ) use ( $src ) {
+							imagejpeg( imagecreatefromjpeg( $src ), $edited_image_src );
+					}
+				);
 			Monkey\Functions\expect( 'wp_get_image_editor' )->with( $src )->once()->andReturn( $wp_editor );
 			Monkey\Functions\when( 'is_wp_error' )->justReturn( false );
 

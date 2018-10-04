@@ -98,14 +98,18 @@ abstract class Filters_Test_Case extends Test_Case {
 	 * Define the mocks for the filter callbacks.
 	 */
 	protected function mock_filter_callbacks() {
-		Monkey\Functions\when( 'beans_test_the_content' )->alias( function ( $post_title, $post_id ) {
-			return $post_title . '_' . $post_id;
-		} );
+		Monkey\Functions\when( 'beans_test_the_content' )->alias(
+			function ( $post_title, $post_id ) {
+					return $post_title . '_' . $post_id;
+			}
+		);
 		Monkey\Functions\when( 'beans_test_modify_widget_count' )->justReturn( 20 );
 		Monkey\Functions\when( 'beans_test_query_args_base' )->justReturn( [ 'base' ] );
-		Monkey\Functions\when( 'beans_test_query_args_main' )->alias( function ( $args ) {
-			$args[] = '_main';
-			return $args;
-		} );
+		Monkey\Functions\when( 'beans_test_query_args_main' )->alias(
+			function ( $args ) {
+					$args[] = '_main';
+					return $args;
+			}
+		);
 	}
 }

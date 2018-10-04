@@ -16,7 +16,7 @@
  *
  * @package Beans\Framework\API\Filters
  */
-final class _Beans_Anonymous_Filters {
+final class Beans_Anonymous_Filters {
 
 	/**
 	 * The value that will be returned when this anonymous callback runs.

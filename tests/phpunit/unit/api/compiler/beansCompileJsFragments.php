@@ -28,9 +28,15 @@ class Test_BeansCompileJsFragments extends Compiler_Test_Case {
 	public function test_should_return_false_when_no_fragments_given() {
 		$this->assertFalse( beans_compile_js_fragments( 'foo', '' ) );
 		$this->assertFalse( beans_compile_js_fragments( 'foo', [] ) );
-		$this->assertFalse( beans_compile_js_fragments( 'foo', [], [
-			'dependencies' => [],
-			'in_footer'    => true,
-		] ) );
+		$this->assertFalse(
+			beans_compile_js_fragments(
+				'foo',
+				[],
+				[
+					'dependencies' => [],
+					'in_footer'    => true,
+				]
+			)
+		);
 	}
 }

@@ -43,10 +43,13 @@ class Tests_BeansUikit_RegisterLessComponents extends UIkit_Test_Case {
 	public function test_should_return_variables_and_fixes_when_no_theme_or_components_registered() {
 		// Check the global.
 		global $_beans_uikit_enqueued_items;
-		$this->assertSame( [
-			'core'    => [],
-			'add-ons' => [],
-		], $_beans_uikit_enqueued_items['components'] );
+		$this->assertSame(
+			[
+				'core'    => [],
+				'add-ons' => [],
+			],
+			$_beans_uikit_enqueued_items['components']
+		);
 
 		// Run the test.
 		$this->assertSame(
