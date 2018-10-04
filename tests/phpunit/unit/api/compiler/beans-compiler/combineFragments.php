@@ -94,6 +94,9 @@ class Tests_BeansCompiler_CombineFragments extends Compiler_Test_Case {
 		Monkey\Functions\when( 'beans_url_to_path' )->returnArg();
 		Monkey\Functions\when( 'wp_remote_get' )->justReturn();
 		Monkey\Functions\when( 'is_wp_error' )->justReturn( true );
+		Monkey\Functions\when( 'is_main_site' )->justReturn();
+		Monkey\Functions\when( 'get_blog_details' )->justReturn();
+		Monkey\Functions\when( 'get_current_blog_id' )->justReturn();
 
 		// Run the test.
 		$compiler->combine_fragments();
