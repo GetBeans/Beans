@@ -18,7 +18,7 @@ use Beans\Framework\Tests\Unit\Test_Case;
  * @group   api
  * @group   api-utilities
  */
-class Tests_BeansStartsWith extends Test_Case {
+class Tests_BeansStrStartsWith extends Test_Case {
 
 	/**
 	 * Prepares the test environment before each test.

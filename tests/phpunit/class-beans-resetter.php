@@ -93,12 +93,15 @@ class Beans_Resetter {
 
 		// Reset the "registered" container.
 		$registered = $this->get_reflective_property( 'registered', '_Beans_Fields' );
-		$registered->setValue( new _Beans_Fields(), [
-			'option'       => [],
-			'post_meta'    => [],
-			'term_meta'    => [],
-			'wp_customize' => [],
-		] );
+		$registered->setValue(
+			new _Beans_Fields(),
+			[
+				'option'       => [],
+				'post_meta'    => [],
+				'term_meta'    => [],
+				'wp_customize' => [],
+			]
+		);
 
 		// Reset the other static properties.
 		foreach ( [ 'field_types_loaded', 'field_assets_hook_loaded' ] as $property_name ) {

@@ -100,7 +100,7 @@ class Tests_BeansFlushCompiler extends Compiler_Options_Test_Case {
 						$dir_path = trailingslashit( $dir_path );
 
 					foreach ( $items as $needle => $item ) {
-						  unlink( $dir_path . $item );
+						unlink( $dir_path . $item );
 					}
 
 						return rmdir( $dir_path );

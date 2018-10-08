@@ -20,7 +20,7 @@ require_once __DIR__ . '/includes/class-compiler-test-case.php';
  * @group   api
  * @group   api-compiler
  */
-class Test_BeansGetCompilerUrl extends Compiler_Test_Case {
+class Tests_BeansGetCompilerUrl extends Compiler_Test_Case {
 
 	/**
 	 * Test beans_get_compiler_url() should return the URL to the Beans' compiler folder.

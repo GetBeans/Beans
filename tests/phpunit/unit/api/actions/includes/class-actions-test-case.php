@@ -83,7 +83,7 @@ abstract class Actions_Test_Case extends Test_Case {
 			function ( $needle, $haystack ) {
 
 				if ( isset( $haystack[ $needle ] ) ) {
-					  return $haystack[ $needle ];
+					return $haystack[ $needle ];
 				}
 			}
 		);

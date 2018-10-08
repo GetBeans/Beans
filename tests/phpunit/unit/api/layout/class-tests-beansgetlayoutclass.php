@@ -39,7 +39,7 @@ class Tests_BeansGetLayoutClass extends Test_Case {
 			function ( $needle, $haystack ) {
 
 				if ( isset( $haystack[ $needle ] ) ) {
-					  return $haystack[ $needle ];
+					return $haystack[ $needle ];
 				}
 			}
 		);

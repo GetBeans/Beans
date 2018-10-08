@@ -33,17 +33,16 @@ class Tests_BeansAddAttributes extends HTML_Test_Case {
 			function( $args ) {
 
 				if ( is_array( $args ) ) {
-					  return $args;
+					return $args;
 				}
 
 				if ( is_object( $args ) ) {
-					  return get_object_vars( $args );
+					return get_object_vars( $args );
 				}
 
 				if ( is_string( $args ) ) {
-					  parse_str( $args, $result );
-
-					  return $result;
+					parse_str( $args, $result );
+					return $result;
 				}
 			}
 		);

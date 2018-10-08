@@ -20,7 +20,8 @@ function beans_comments_title() {
 	beans_open_markup_e( 'beans_comments_title', 'h2' );
 
 		beans_output_e(
-			'beans_comments_title_text', sprintf(
+			'beans_comments_title_text',
+			sprintf(
 				// translators: Number of comments, one or many.
 				_n( '%s Comment', '%s Comments', get_comments_number(), 'tm-beans' ),
 				number_format_i18n( get_comments_number() )
@@ -149,7 +150,8 @@ function beans_comment_metadata() {
 		);
 
 			beans_output_e(
-				'beans_comment_time_text', sprintf(
+				'beans_comment_time_text',
+				sprintf(
 					// translators: Date of the comment, time of the comment.
 					_x( '%1$s at %2$s', '1: date, 2: time', 'tm-beans' ),
 					get_comment_date(),
@@ -188,9 +190,11 @@ function beans_comment_links() {
 	beans_open_markup_e( 'beans_comment_links', 'ul', array( 'class' => 'tm-comment-links uk-subnav uk-subnav-line' ) );
 
 		// Reply.
-		echo get_comment_reply_link( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Echoes HTML output.
+		echo get_comment_reply_link(
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Echoes HTML output.
 			array_merge(
-				$comment->args, array(
+				$comment->args,
+				array(
 					'add_below' => 'comment-content',
 					'depth'     => $comment->depth,
 					'max_depth' => $comment->args['max_depth'],
@@ -461,7 +465,9 @@ function beans_comment_form_comment() {
 	}
 
 		$output .= beans_open_markup(
-			'beans_comment_form_field[_comment]', 'textarea', array(
+			'beans_comment_form_field[_comment]',
+			'textarea',
+			array(
 				'id'       => 'comment',
 				'class'    => 'uk-width-1-1',
 				'name'     => 'comment',
@@ -489,10 +495,18 @@ beans_add_smart_action( 'comment_form_before_fields', 'beans_comment_before_fiel
  * @return void
  */
 function beans_comment_before_fields() {
-	beans_open_markup_e( 'beans_comment_fields_wrap', 'div', array( 'class' => 'uk-width-medium-1-1' ) );
+	beans_open_markup_e(
+		'beans_comment_fields_wrap',
+		'div',
+		array(
+			'class' => 'uk-width-medium-1-1',
+		)
+	);
 
 		beans_open_markup_e(
-			'beans_comment_fields_inner_wrap', 'div', array(
+			'beans_comment_fields_inner_wrap',
+			'div',
+			array(
 				'class'               => 'uk-grid uk-grid-small',
 				'data-uk-grid-margin' => '',
 			)
@@ -536,7 +550,9 @@ function beans_comment_form_fields( $fields ) {
 		}
 
 			$author .= beans_selfclose_markup(
-				'beans_comment_form_field[_name]', 'input', array(
+				'beans_comment_form_field[_name]',
+				'input',
+				array(
 					'id'       => 'author',
 					'class'    => 'uk-width-1-1',
 					'type'     => 'text',
@@ -561,9 +577,13 @@ function beans_comment_form_fields( $fields ) {
 			 * @since 1.0.0
 			 */
 		if ( beans_apply_filters( 'beans_comment_form_legend[_email]', true ) ) {
-			$email .= beans_open_markup( 'beans_comment_form_legend[_email]', 'legend' );
+			$email .= beans_open_markup(
+				'beans_comment_form_legend[_email]',
+				'legend'
+			);
 
-				$email .= beans_output( 'beans_comment_form_legend_text[_email]',
+				$email .= beans_output(
+					'beans_comment_form_legend_text[_email]',
 					// translators: Whether or not submitting an email address is required.
 					sprintf( __( 'Email %s', 'tm-beans' ), ( get_option( 'require_name_email' ) ? ' *' : '' ) )
 				);
@@ -572,7 +592,9 @@ function beans_comment_form_fields( $fields ) {
 		}
 
 			$email .= beans_selfclose_markup(
-				'beans_comment_form_field[_email]', 'input', array(
+				'beans_comment_form_field[_email]',
+				'input',
+				array(
 					'id'       => 'email',
 					'class'    => 'uk-width-1-1',
 					'type'     => 'text',
@@ -605,7 +627,9 @@ function beans_comment_form_fields( $fields ) {
 		}
 
 			$url .= beans_selfclose_markup(
-				'beans_comment_form_field[_url]', 'input', array(
+				'beans_comment_form_field[_url]',
+				'input',
+				array(
 					'id'    => 'url',
 					'class' => 'uk-width-1-1',
 					'type'  => 'text',

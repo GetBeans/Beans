@@ -20,7 +20,7 @@ require_once __DIR__ . '/includes/class-compiler-test-case.php';
  * @group   api
  * @group   api-compiler
  */
-class Test_BeansCompileJsFragments extends Compiler_Test_Case {
+class Tests_BeansCompileJsFragments extends Compiler_Test_Case {
 
 	/**
 	 * Test beans_compile_js_fragments() should return false when no fragments are given.

@@ -96,7 +96,7 @@ EOB;
 			->andReturnUsing(
 				function ( $image_id ) {
 					if ( 'placeholder' === $image_id ) {
-						  return '';
+						return '';
 					}
 
 						return "image-{$image_id}.png";

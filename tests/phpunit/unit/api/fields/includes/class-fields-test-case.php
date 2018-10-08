@@ -95,7 +95,7 @@ abstract class Fields_Test_Case extends Test_Case {
 			function( $actual, $value ) {
 
 				if ( $actual === $value ) {
-					  echo " checked='checked'";
+					echo " checked='checked'";
 				}
 			}
 		);
@@ -104,7 +104,7 @@ abstract class Fields_Test_Case extends Test_Case {
 			function( $actual, $value ) {
 
 				if ( $actual === $value ) {
-					  echo " selected='selected'";
+					echo " selected='selected'";
 				}
 			}
 		);

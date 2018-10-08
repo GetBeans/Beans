@@ -27,7 +27,7 @@ class Tests_BeansUniqueActionId extends Test_Case {
 		parent::setUp();
 
 		require_once BEANS_TESTS_LIB_DIR . 'api/actions/functions.php';
-		require_once __DIR__ . '/stubs/class-action-stub.php';
+		require_once __DIR__ . '/stubs/class-actions-stub.php';
 	}
 
 	/**

@@ -21,7 +21,7 @@ require_once __DIR__ . '/includes/class-compiler-test-case.php';
  * @group   api
  * @group   api-compiler
  */
-class Test_BeansGetCompilerDir extends Compiler_Test_Case {
+class Tests_BeansGetCompilerDir extends Compiler_Test_Case {
 
 	/**
 	 * Test beans_get_compiler_dir() should return the absolute path to the Beans' uploads compiler folder.

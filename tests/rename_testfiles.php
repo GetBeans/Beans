@@ -23,8 +23,9 @@ function read_all_files($baseDirectory = '.'){
 //					$files['dirs'][]  = $directory_path;
 					continue;
 				} elseif (is_file($file)) {
-					$files[]  = 'class-tests-' . basename(mb_strtolower($file));
-					rename($file, $baseDirectory . 'class-tests-' . basename(mb_strtolower($file)));
+					$files[]  = 'class-tests-beanswpcustomize-' . basename(mb_strtolower($file));
+					rename($file, $baseDirectory . 'class-tests-beanswpcustomize-' . basename(mb_strtolower
+						($file)));
 				}
 			}
 			closedir($handle);
@@ -46,17 +47,32 @@ function read_all_files($baseDirectory = '.'){
 //$results = read_all_files('./tests/phpunit/integration/api/widget/');
 //$results = read_all_files('./tests/phpunit/integration/api/wp-customize/');
 
-//$results = read_all_files('./tests/phpunit/integration/api/actions/');
-//$results = read_all_files('./tests/phpunit/integration/api/compiler/');
-//$results = read_all_files('./tests/phpunit/integration/api/compiler/beans-compiler');
-//$results = read_all_files('./tests/phpunit/integration/api/compiler/beans-compiler-options');
-//$results = read_all_files('./tests/phpunit/integration/api/compiler/beans-page-compiler');
-$results = read_all_files('./tests/phpunit/unit/api/fields');
-$results = read_all_files('./tests/phpunit/unit/api/fields/types');
-//$results = read_all_files('./tests/phpunit/integration/api/filters');
-//$results = read_all_files('./tests/phpunit/integration/api/uikit/');
-//$results = read_all_files('./tests/phpunit/integration/api/widget/');
-//$results = read_all_files('./tests/phpunit/integration/api/wp-customize/');
+//$results = read_all_files('./tests/phpunit/unit/api/actions/');
+//$results = read_all_files('./tests/phpunit/unit/api/compiler/');
+//$results = read_all_files('./tests/phpunit/unit/api/compiler/beans-compiler');
+//$results = read_all_files('./tests/phpunit/unit/api/compiler/beans-compiler-options');
+//$results = read_all_files('./tests/phpunit/unit/api/compiler/beans-page-compiler');
+//$results = read_all_files('./tests/phpunit/unit/api/fields');
+//$results = read_all_files('./tests/phpunit/unit/api/fields/types');
+//$results = read_all_files('./tests/phpunit/unit/api/filters');
+//$results = read_all_files('./tests/phpunit/unit/api/html');
+//$results = read_all_files('./tests/phpunit/unit/api/image');
+//$results = read_all_files('./tests/phpunit/unit/api/image/beans-image-editor');
+//$results = read_all_files('./tests/phpunit/unit/api/image/beans-image-options');
+//$results = read_all_files('./tests/phpunit/unit/api/html/beans-attribute');
+//$results = read_all_files('./tests/phpunit/unit/api/options/beans-options');
+//$results = read_all_files('./tests/phpunit/unit/api/options/');
+//$results = read_all_files('./tests/phpunit/unit/api/post-meta/');
+//$results = read_all_files('./tests/phpunit/unit/api/post-meta/beans-post-meta');
+//$results = read_all_files('./tests/phpunit/unit/api/template/');
+//$results = read_all_files('./tests/phpunit/unit/api/term-meta/');
+//$results = read_all_files('./tests/phpunit/unit/api/term-meta/beans-term-meta');
+//$results = read_all_files('./tests/phpunit/unit/api/uikit/');
+//$results = read_all_files('./tests/phpunit/unit/api/uikit/beans-uikit');
+//$results = read_all_files('./tests/phpunit/unit/api/utilities/');
+//$results = read_all_files('./tests/phpunit/unit/api/widget/');
+//$results = read_all_files('./tests/phpunit/unit/api/wp-customize/');
+$results = read_all_files('./tests/phpunit/unit/api/wp-customize/beans-wp-customize');
 
 foreach ($results as $result) {
 	echo $result . '\n';
