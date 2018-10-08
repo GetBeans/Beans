@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the __construct() method of _Beans_Post_Meta.
+ * Tests for the __construct() method of Beans_Post_Meta.
  *
  * @package Beans\Framework\Tests\Integration\API\Post_Meta
  *
@@ -10,7 +10,7 @@
 namespace Beans\Framework\Tests\Integration\API\Post_Meta;
 
 use Beans\Framework\Tests\Integration\API\Post_Meta\Includes\Post_Meta_Test_Case;
-use _Beans_Post_Meta;
+use Beans_Post_Meta;
 
 require_once BEANS_THEME_DIR . '/lib/api/post-meta/class-beans-post-meta.php';
 require_once dirname( __DIR__ ) . '/includes/class-post-meta-test-case.php';
@@ -29,7 +29,7 @@ class Tests_BeansPostMeta_Construct extends Post_Meta_Test_Case {
 	 */
 	public function test_should_set_correct_hooks_when_instantiated() {
 		// First instantiation sets all hooks.
-		$post_meta = new _Beans_Post_Meta( 'tm-beans', [ 'title' => 'Post Options' ] );
+		$post_meta = new Beans_Post_Meta( 'tm-beans', [ 'title' => 'Post Options' ] );
 
 		$this->assertEquals( 10, has_action( 'edit_form_top', [ $post_meta, 'render_nonce' ] ) );
 		$this->assertEquals( 10, has_action( 'save_post', [ $post_meta, 'save' ] ) );
@@ -37,7 +37,7 @@ class Tests_BeansPostMeta_Construct extends Post_Meta_Test_Case {
 		$this->assertEquals( 10, has_action( 'add_meta_boxes', [ $post_meta, 'register_metabox' ] ) );
 
 		// Subsequent instantiation sets 'add_meta_boxes' hook only.
-		$post_meta_2 = new _Beans_Post_Meta( 'tm-beans-custom-post-meta', [ 'title' => 'Custom Options' ] );
+		$post_meta_2 = new Beans_Post_Meta( 'tm-beans-custom-post-meta', [ 'title' => 'Custom Options' ] );
 
 		$this->assertFalse( has_action( 'edit_form_top', [ $post_meta_2, 'render_nonce' ] ) );
 		$this->assertFalse( has_action( 'save_post', [ $post_meta_2, 'save' ] ) );

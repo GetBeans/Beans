@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the __get() method of _Beans_Compiler.
+ * Tests for the __get() method of Beans_Compiler.
  *
  * @package Beans\Framework\Tests\Unit\API\Compiler
  *
@@ -24,7 +24,7 @@ require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
 class Tests_BeansCompiler_Get extends Compiler_Test_Case {
 
 	/**
-	 * Test _Beans_Compiler::_get() should fix the configuration's dependency key.
+	 * Test Beans_Compiler::_get() should fix the configuration's dependency key.
 	 */
 	public function test_should_fix_configuration_dependency_key() {
 		$config = [
@@ -42,7 +42,7 @@ class Tests_BeansCompiler_Get extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::_get() should return the configuration.
+	 * Test Beans_Compiler::_get() should return the configuration.
 	 */
 	public function test_should_return_configuration() {
 		$compiler = $this->create_compiler(
@@ -91,7 +91,7 @@ class Tests_BeansCompiler_Get extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::_get() should return the absolute path to the compiled files directory.
+	 * Test Beans_Compiler::_get() should return the absolute path to the compiled files directory.
 	 */
 	public function test_should_return_absolute_path_to_compiled_files_dir() {
 		$config = [
@@ -107,7 +107,7 @@ class Tests_BeansCompiler_Get extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::_get() should return URL to the compiled files directory.
+	 * Test Beans_Compiler::_get() should return URL to the compiled files directory.
 	 */
 	public function test_should_return_url_to_compiled_files_dir() {
 		$config = [

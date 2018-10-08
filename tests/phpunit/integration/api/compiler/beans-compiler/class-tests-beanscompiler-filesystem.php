@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the filesystem() method of _Beans_Compiler.
+ * Tests for the filesystem() method of Beans_Compiler.
  *
  * @package Beans\Framework\Tests\Integration\API\Compiler
  *
@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Integration\API\Compiler;
 
-use _Beans_Compiler;
+use Beans_Compiler;
 use Beans\Framework\Tests\Integration\API\Compiler\Includes\Compiler_Test_Case;
 use Brain\Monkey\Functions;
 
@@ -25,10 +25,10 @@ require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
 class Tests_BeansCompiler_Filesystem extends Compiler_Test_Case {
 
 	/**
-	 * Test _Beans_Compiler::filesystem() should render a report and die when no filesystem is selected.
+	 * Test Beans_Compiler::filesystem() should render a report and die when no filesystem is selected.
 	 */
 	public function test_should_render_report_and_die_when_no_filesystem_selected() {
-		$compiler = new _Beans_Compiler( [] );
+		$compiler = new Beans_Compiler( [] );
 
 		// Let's just make sure we start without the WP Filesystem being initialized.
 		unset( $GLOBALS['wp_filesystem'] );
@@ -61,10 +61,10 @@ class Tests_BeansCompiler_Filesystem extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::filesystem() should initialize the WP Filesystem.
+	 * Test Beans_Compiler::filesystem() should initialize the WP Filesystem.
 	 */
 	public function test_should_init_wp_filesystem() {
-		$compiler = new _Beans_Compiler( [] );
+		$compiler = new Beans_Compiler( [] );
 
 		add_filter( 'filesystem_method', [ $compiler, 'modify_filesystem_method' ] );
 
@@ -81,7 +81,7 @@ class Tests_BeansCompiler_Filesystem extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::filesystem() should set WP_Filesystem_Direct when not set as WP_Filesystem method.
+	 * Test Beans_Compiler::filesystem() should set WP_Filesystem_Direct when not set as WP_Filesystem method.
 	 */
 	public function test_should_set_wp_filesystem_direct() {
 		// First, set something else as the WP_Filesystem method.
@@ -95,7 +95,7 @@ class Tests_BeansCompiler_Filesystem extends Compiler_Test_Case {
 		remove_filter( 'filesystem_method', __NAMESPACE__ . '\set_filesystem_method_to_base' );
 
 		// Next, let's run our Compiler's filesystem and check that it did initialize WP_Filesystem_Direct.
-		$compiler = new _Beans_Compiler( [] );
+		$compiler = new Beans_Compiler( [] );
 
 		add_filter( 'filesystem_method', [ $compiler, 'modify_filesystem_method' ] );
 		$this->assertTrue( $compiler->filesystem() );

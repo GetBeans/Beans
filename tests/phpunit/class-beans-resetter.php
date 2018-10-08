@@ -87,14 +87,14 @@ class Beans_Resetter {
 	 */
 	protected function reset_fields_api() {
 
-		if ( ! class_exists( '_Beans_Fields' ) ) {
+		if ( ! class_exists( 'Beans_Fields' ) ) {
 			return;
 		}
 
 		// Reset the "registered" container.
-		$registered = $this->get_reflective_property( 'registered', '_Beans_Fields' );
+		$registered = $this->get_reflective_property( 'registered', 'Beans_Fields' );
 		$registered->setValue(
-			new _Beans_Fields(),
+			new Beans_Fields(),
 			[
 				'option'       => [],
 				'post_meta'    => [],
@@ -105,8 +105,8 @@ class Beans_Resetter {
 
 		// Reset the other static properties.
 		foreach ( [ 'field_types_loaded', 'field_assets_hook_loaded' ] as $property_name ) {
-			$property = $this->get_reflective_property( $property_name, '_Beans_Fields' );
-			$property->setValue( new _Beans_Fields(), [] );
+			$property = $this->get_reflective_property( $property_name, 'Beans_Fields' );
+			$property->setValue( new Beans_Fields(), [] );
 		}
 	}
 }

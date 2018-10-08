@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the render_page() method of _Beans_Options.
+ * Tests for the render_page() method of Beans_Options.
  *
  * @package Beans\Framework\Tests\Integration\API\Options
  *
@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Integration\API\Options;
 
-use _Beans_Options;
+use Beans_Options;
 use Beans\Framework\Tests\Integration\API\Options\Includes\Options_Test_Case;
 use Brain\Monkey;
 
@@ -25,17 +25,17 @@ require_once dirname( __DIR__ ) . '/includes/class-options-test-case.php';
 class Tests_BeansOptions_RenderPage extends Options_Test_Case {
 
 	/**
-	 * Test _Beans_Options::render_page() should return null when the page does not have a metabox.
+	 * Test Beans_Options::render_page() should return null when the page does not have a metabox.
 	 */
 	public function test_should_return_null_when_page_does_not_have_metabox() {
-		$this->assertNull( ( new _Beans_Options() )->render_page( 'beans_settings' ) );
+		$this->assertNull( ( new Beans_Options() )->render_page( 'beans_settings' ) );
 	}
 
 	/**
-	 * Test _Beans_Options::render_page() should render the form when "normal" context is configured.
+	 * Test Beans_Options::render_page() should render the form when "normal" context is configured.
 	 */
 	public function test_should_render_form_when_context_normal() {
-		$instance = new _Beans_Options();
+		$instance = new Beans_Options();
 		$this->go_to_settings_page();
 
 		// Register the first option.
@@ -44,7 +44,7 @@ class Tests_BeansOptions_RenderPage extends Options_Test_Case {
 
 		// Run the method and grab the HTML out of the buffer.
 		ob_start();
-		( new _Beans_Options() )->render_page( 'themesphppagebeans_settings' );
+		( new Beans_Options() )->render_page( 'themesphppagebeans_settings' );
 		$html = ob_get_clean();
 		$html = $this->prepare_html( $html );
 
@@ -77,10 +77,10 @@ EOB;
 	}
 
 	/**
-	 * Test _Beans_Options::render_page() should render the form when "column" context is configured.
+	 * Test Beans_Options::render_page() should render the form when "column" context is configured.
 	 */
 	public function test_should_render_form_when_column_context() {
-		$instance = new _Beans_Options();
+		$instance = new Beans_Options();
 		$this->go_to_settings_page();
 
 		// Register the options.
@@ -93,7 +93,7 @@ EOB;
 
 		// Run the method and grab the HTML out of the buffer.
 		ob_start();
-		( new _Beans_Options() )->render_page( 'themesphppagebeans_settings' );
+		( new Beans_Options() )->render_page( 'themesphppagebeans_settings' );
 		$html = ob_get_clean();
 		$html = $this->prepare_html( $html );
 

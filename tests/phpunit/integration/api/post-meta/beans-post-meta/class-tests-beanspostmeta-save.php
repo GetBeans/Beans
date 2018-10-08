@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the save() method of _Beans_Post_Meta.
+ * Tests for the save() method of Beans_Post_Meta.
  *
  * @package Beans\Framework\Tests\Integration\API\Post_Meta
  *
@@ -10,7 +10,7 @@
 namespace Beans\Framework\Tests\Integration\API\Post_Meta;
 
 use Beans\Framework\Tests\Integration\API\Post_Meta\Includes\Post_Meta_Test_Case;
-use _Beans_Post_Meta;
+use Beans_Post_Meta;
 
 require_once BEANS_THEME_DIR . '/lib/api/post-meta/class-beans-post-meta.php';
 require_once dirname( __DIR__ ) . '/includes/class-post-meta-test-case.php';
@@ -25,20 +25,20 @@ require_once dirname( __DIR__ ) . '/includes/class-post-meta-test-case.php';
 class Tests_BeansPostMeta_Save extends Post_Meta_Test_Case {
 
 	/**
-	 * Test _Beans_Post_Meta::save() should return the post_ID when ok_to_save() is false.
+	 * Test Beans_Post_Meta::save() should return the post_ID when ok_to_save() is false.
 	 */
 	public function test_should_return_post_id_when_ok_to_save_is_false() {
-		$post_meta = new _Beans_Post_Meta( 'tm-beans', [ 'title' => 'Post Options' ] );
+		$post_meta = new Beans_Post_Meta( 'tm-beans', [ 'title' => 'Post Options' ] );
 		$post_id   = $this->factory()->post->create();
 
 		$this->assertEquals( $post_id, $post_meta->save( $post_id ) );
 	}
 
 	/**
-	 * Test _Beans_Post_Meta::save() should run update_post_meta() and return null when ok_to_save() is true.
+	 * Test Beans_Post_Meta::save() should run update_post_meta() and return null when ok_to_save() is true.
 	 */
 	public function test_should_run_update_post_meta_and_return_null_when_ok_to_save() {
-		$post_meta = new _Beans_Post_Meta( 'tm-beans', [ 'title' => 'Post Options' ] );
+		$post_meta = new Beans_Post_Meta( 'tm-beans', [ 'title' => 'Post Options' ] );
 		$post_id   = $this->factory()->post->create();
 
 		// Run with permission to save.

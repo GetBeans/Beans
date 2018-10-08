@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the create_edited_image() method of _Beans_Image_Editor.
+ * Tests for the create_edited_image() method of Beans_Image_Editor.
  *
  * @package Beans\Framework\Tests\Unit\API\Image
  *
@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Unit\API\Image;
 
-use _Beans_Image_Editor;
+use Beans_Image_Editor;
 use Beans\Framework\Tests\Unit\API\Image\Includes\Image_Test_Case;
 use Brain\Monkey;
 use Mockery;
@@ -42,12 +42,12 @@ class Tests_BeansImageEditor_CreateEditedImage extends Image_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Image_Editor::create_edited_image() should edit the given image and then create a new "edited image", which is stored in
+	 * Test Beans_Image_Editor::create_edited_image() should edit the given image and then create a new "edited image", which is stored in
 	 * the "rebuilt path".
 	 */
 	public function test_should_edit_create_and_store_image() {
-		$create_edited_image = $this->get_reflective_method( 'create_edited_image', '_Beans_Image_Editor' );
-		$rebuilt_path        = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
+		$create_edited_image = $this->get_reflective_method( 'create_edited_image', 'Beans_Image_Editor' );
+		$rebuilt_path        = $this->get_reflective_property( 'rebuilt_path', 'Beans_Image_Editor' );
 		$image_sources       = [
 			static::$fixtures_dir . '/image1.jpg',
 			static::$fixtures_dir . '/image2.jpg',
@@ -55,7 +55,7 @@ class Tests_BeansImageEditor_CreateEditedImage extends Image_Test_Case {
 		$args                = [ 'resize' => [ 800, false ] ];
 
 		foreach ( $image_sources as $src ) {
-			$editor           = new _Beans_Image_Editor( $src, $args );
+			$editor           = new Beans_Image_Editor( $src, $args );
 			$edited_image_src = $this->init_virtual_image( $rebuilt_path, $editor );
 
 			// Simulate the WordPress' Editor.
@@ -80,15 +80,15 @@ class Tests_BeansImageEditor_CreateEditedImage extends Image_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Image_Editor::create_edited_image() should return false when the image does not exist.
+	 * Test Beans_Image_Editor::create_edited_image() should return false when the image does not exist.
 	 */
 	public function test_should_return_false_when_no_image() {
-		$create_edited_image = $this->get_reflective_method( 'create_edited_image', '_Beans_Image_Editor' );
-		$rebuilt_path        = $this->get_reflective_property( 'rebuilt_path', '_Beans_Image_Editor' );
+		$create_edited_image = $this->get_reflective_method( 'create_edited_image', 'Beans_Image_Editor' );
+		$rebuilt_path        = $this->get_reflective_property( 'rebuilt_path', 'Beans_Image_Editor' );
 		$src                 = 'path/does/not/exist/image.jpg';
 		$args                = [ 'resize' => [ 800, false ] ];
 
-		$editor           = new _Beans_Image_Editor( $src, $args );
+		$editor           = new Beans_Image_Editor( $src, $args );
 		$edited_image_src = $this->init_virtual_image( $rebuilt_path, $editor );
 
 		// Simulate the WordPress' Editor.

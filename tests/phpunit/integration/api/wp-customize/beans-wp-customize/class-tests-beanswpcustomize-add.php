@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the add() method of _Beans_WP_Customize.
+ * Tests for the add() method of Beans_WP_Customize.
  *
  * @package Beans\Framework\Tests\Integration\API\WP_Customize
  *
@@ -10,7 +10,7 @@
 namespace Beans\Framework\Tests\Integration\API\WP_Customize;
 
 use Beans\Framework\Tests\Integration\API\WP_Customize\Includes\WP_Customize_Test_Case;
-use _Beans_WP_Customize;
+use Beans_WP_Customize;
 
 require_once dirname( __DIR__ ) . '/includes/class-wp-customize-test-case.php';
 
@@ -24,15 +24,15 @@ require_once dirname( __DIR__ ) . '/includes/class-wp-customize-test-case.php';
 class Tests_BeansWPCustomize_Add extends WP_Customize_Test_Case {
 
 	/**
-	 * Test _Beans_WP_Customize::add() should add section, settings and controls to the WP Customizer.
+	 * Test Beans_WP_Customize::add() should add section, settings and controls to the WP Customizer.
 	 */
 	public function test_should_add_section_settings_and_controls_to_wp_customizer() {
 		$test_data = static::$test_data['single_fields'];
 
 		beans_register_fields( $test_data['fields'], 'wp_customize', $test_data['section'] );
 
-		$customizer = new _Beans_WP_Customize( $test_data['section'], $test_data['args'] );
-		$add        = $this->get_reflective_method( 'add', '_Beans_WP_Customize' );
+		$customizer = new Beans_WP_Customize( $test_data['section'], $test_data['args'] );
+		$add        = $this->get_reflective_method( 'add', 'Beans_WP_Customize' );
 
 		$this->assertNull( $add->invoke( $customizer ) );
 
@@ -46,15 +46,15 @@ class Tests_BeansWPCustomize_Add extends WP_Customize_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_WP_Customize::add() should add section and settings of grouped fields to the WP Customizer.
+	 * Test Beans_WP_Customize::add() should add section and settings of grouped fields to the WP Customizer.
 	 */
 	public function test_should_add_section_and_settings_of_grouped_fields_to_wp_customizer() {
 		$test_data = static::$test_data['group'];
 
 		beans_register_fields( $test_data['fields'], 'wp_customize', $test_data['section'] );
 
-		$customizer = new _Beans_WP_Customize( $test_data['section'], $test_data['args'] );
-		$add        = $this->get_reflective_method( 'add', '_Beans_WP_Customize' );
+		$customizer = new Beans_WP_Customize( $test_data['section'], $test_data['args'] );
+		$add        = $this->get_reflective_method( 'add', 'Beans_WP_Customize' );
 
 		$this->assertNull( $add->invoke( $customizer ) );
 

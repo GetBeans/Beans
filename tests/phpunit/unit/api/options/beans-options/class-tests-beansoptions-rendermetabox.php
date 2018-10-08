@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the render_metabox() method of _Beans_Options.
+ * Tests for the render_metabox() method of Beans_Options.
  *
  * @package Beans\Framework\Tests\Unit\API\Options
  *
@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Unit\API\Options;
 
-use _Beans_Options;
+use Beans_Options;
 use Beans\Framework\Tests\Unit\API\Options\Includes\Options_Test_Case;
 use Brain\Monkey;
 
@@ -25,10 +25,10 @@ require_once dirname( __DIR__ ) . '/includes/class-options-test-case.php';
 class Tests_BeansOptions_RenderMetabox extends Options_Test_Case {
 
 	/**
-	 * Test _Beans_Options::render_metabox() should return null when the section does not have fields registered.
+	 * Test Beans_Options::render_metabox() should return null when the section does not have fields registered.
 	 */
 	public function test_should_return_null_when_no_fields_registered() {
-		$instance = new _Beans_Options();
+		$instance = new Beans_Options();
 
 		foreach ( static::$test_data as $option ) {
 			Monkey\Functions\expect( 'beans_get' )->with( 'page' )->once()->andReturn( 'beans_settings' );
@@ -43,11 +43,11 @@ class Tests_BeansOptions_RenderMetabox extends Options_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Options::render_metabox() should render the registered fields.  For this test, we'll not render but rather check that
+	 * Test Beans_Options::render_metabox() should render the registered fields.  For this test, we'll not render but rather check that
 	 * each function is called as expected.
 	 */
 	public function test_should_render_registered_fields() {
-		$instance = new _Beans_Options();
+		$instance = new Beans_Options();
 
 		foreach ( static::$test_data as $option ) {
 			Monkey\Functions\expect( 'beans_get' )->with( 'page' )->once()->andReturn( 'beans_settings' );

@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the flush() method of _Beans_Image_Options.
+ * Tests for the flush() method of Beans_Image_Options.
  *
  * @package Beans\Framework\Tests\Unit\API\Image
  *
@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Unit\API\Image;
 
-use _Beans_Image_Options;
+use Beans_Image_Options;
 use Beans\Framework\Tests\Unit\API\Image\Includes\Options_Test_Case;
 use Brain\Monkey;
 use org\bovigo\vfs\vfsStream;
@@ -26,7 +26,7 @@ require_once dirname( __DIR__ ) . '/includes/class-options-test-case.php';
 class Tests_BeansImageOptions_Flush extends Options_Test_Case {
 
 	/**
-	 * Test _Beans_Image_Options::flush() should not remove the cached directory when this is not a 'edited images
+	 * Test Beans_Image_Options::flush() should not remove the cached directory when this is not a 'edited images
 	 * flush'.
 	 */
 	public function test_should_not_remove_cached_dir_when_not_a_flush() {
@@ -40,14 +40,14 @@ class Tests_BeansImageOptions_Flush extends Options_Test_Case {
 		Monkey\Functions\expect( 'beans_get_images_dir' )->never();
 		Monkey\Functions\expect( 'beans_remove_dir' )->never();
 
-		$this->assertNull( ( new _Beans_Image_Options() )->flush() );
+		$this->assertNull( ( new Beans_Image_Options() )->flush() );
 
 		// Check that it still exists and was not removed.
 		$this->directoryExists( vfsStream::url( 'uploads/beans/images/' ) );
 	}
 
 	/**
-	 * Test _Beans_Image_Options::flush() should remove the cached directory.
+	 * Test Beans_Image_Options::flush() should remove the cached directory.
 	 */
 	public function test_should_remove_cached_dir() {
 		// Check that the cached directory exists before we start.
@@ -70,7 +70,7 @@ class Tests_BeansImageOptions_Flush extends Options_Test_Case {
 				}
 			);
 
-		$this->assertNull( ( new _Beans_Image_Options() )->flush() );
+		$this->assertNull( ( new Beans_Image_Options() )->flush() );
 		$this->assertDirectoryNotExists( vfsStream::url( 'uploads/beans/images/' ) );
 	}
 }

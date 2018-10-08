@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the compile() method of _Beans_Uikit.
+ * Tests for the compile() method of Beans_Uikit.
  *
  * @package Beans\Framework\Tests\Unit\API\UIkit
  *
@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Unit\API\UIkit;
 
-use _Beans_Uikit;
+use Beans_Uikit;
 use Beans\Framework\Tests\Unit\API\UIkit\Includes\UIkit_Test_Case;
 use Brain\Monkey;
 
@@ -25,10 +25,10 @@ require_once dirname( __DIR__ ) . '/includes/class-uikit-test-case.php';
 class Tests_BeansUikit_Compile extends UIkit_Test_Case {
 
 	/**
-	 * Test _Beans_Uikit::compile() should not compile when there are no assets to compile.
+	 * Test Beans_Uikit::compile() should not compile when there are no assets to compile.
 	 */
 	public function test_should_not_compile_when_no_assets_to_compile() {
-		$beans_uikit = new _Beans_Uikit();
+		$beans_uikit = new Beans_Uikit();
 
 		Monkey\Filters\expectApplied( 'beans_uikit_euqueued_styles' )
 			->once()
@@ -43,10 +43,10 @@ class Tests_BeansUikit_Compile extends UIkit_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Uikit::compile() should compile the styles.
+	 * Test Beans_Uikit::compile() should compile the styles.
 	 */
 	public function test_should_compile_styles() {
-		$beans_uikit = new _Beans_Uikit();
+		$beans_uikit = new Beans_Uikit();
 
 		$styles = [
 			BEANS_API_PATH . 'uikit/src/less/core/variables.less',
@@ -67,10 +67,10 @@ class Tests_BeansUikit_Compile extends UIkit_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Uikit::compile() should compile the styles with filtered args.
+	 * Test Beans_Uikit::compile() should compile the styles with filtered args.
 	 */
 	public function test_should_compile_styles_with_filtered_args() {
-		$beans_uikit = new _Beans_Uikit();
+		$beans_uikit = new Beans_Uikit();
 
 		$styles = [
 			BEANS_API_PATH . 'uikit/src/less/core/variables.less',
@@ -93,10 +93,10 @@ class Tests_BeansUikit_Compile extends UIkit_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Uikit::compile() should compile the scripts.
+	 * Test Beans_Uikit::compile() should compile the scripts.
 	 */
 	public function test_should_compile_scripts() {
-		$beans_uikit = new _Beans_Uikit();
+		$beans_uikit = new Beans_Uikit();
 
 		$scripts = [
 			BEANS_API_PATH . 'uikit/src/js/core/core.min.js',
@@ -118,10 +118,10 @@ class Tests_BeansUikit_Compile extends UIkit_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Uikit::compile() should compile the scripts with filtered args.
+	 * Test Beans_Uikit::compile() should compile the scripts with filtered args.
 	 */
 	public function test_should_compile_scripts_with_filtered_args() {
-		$beans_uikit = new _Beans_Uikit();
+		$beans_uikit = new Beans_Uikit();
 
 		$scripts = [
 			BEANS_API_PATH . 'uikit/src/js/core/core.min.js',

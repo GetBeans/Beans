@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the cache_file() method of _Beans_Compiler.
+ * Tests for the cache_file() method of Beans_Compiler.
  *
  * @package Beans\Framework\Tests\Unit\API\Compiler
  *
@@ -25,7 +25,7 @@ require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
 class Tests_BeansCompiler_CacheFile extends Compiler_Test_Case {
 
 	/**
-	 * Test _Beans_Compiler::cache_file() should not create the file when the filename is empty.
+	 * Test Beans_Compiler::cache_file() should not create the file when the filename is empty.
 	 */
 	public function test_should_not_create_the_file_when_filename_empty() {
 		$compiler = $this->create_compiler(
@@ -47,7 +47,7 @@ class Tests_BeansCompiler_CacheFile extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::cache_file() should create the compiled jQuery file.
+	 * Test Beans_Compiler::cache_file() should create the compiled jQuery file.
 	 */
 	public function test_should_create_compiled_jquery_file() {
 		$compiler = $this->create_compiler(
@@ -78,7 +78,7 @@ class Tests_BeansCompiler_CacheFile extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::cache_file() should create the compiled JavaScript file.
+	 * Test Beans_Compiler::cache_file() should create the compiled JavaScript file.
 	 */
 	public function test_should_create_compiled_javascript_file() {
 		$compiler = $this->create_compiler(
@@ -108,7 +108,7 @@ class Tests_BeansCompiler_CacheFile extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::cache_file() should create the compiled CSS file.
+	 * Test Beans_Compiler::cache_file() should create the compiled CSS file.
 	 */
 	public function test_should_create_compiled_css_file() {
 		$compiler = $this->create_compiler(
@@ -137,7 +137,7 @@ class Tests_BeansCompiler_CacheFile extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::cache_file() should create the compiled LESS file.
+	 * Test Beans_Compiler::cache_file() should create the compiled LESS file.
 	 */
 	public function test_should_create_compiled_less_file() {
 		$compiler = $this->create_compiler(

@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the register() method of _Beans_Compiler_Options.
+ * Tests for the register() method of Beans_Compiler_Options.
  *
  * @package Beans\Framework\Tests\Integration\API\Compiler
  *
@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Integration\API\Compiler;
 
-use _Beans_Compiler_Options;
+use Beans_Compiler_Options;
 use Beans\Framework\Tests\Integration\API\Compiler\Includes\Compiler_Options_Test_Case;
 
 require_once dirname( __DIR__ ) . '/includes/class-compiler-options-test-case.php';
@@ -32,25 +32,25 @@ class Tests_BeansCompilerOptions_Register extends Compiler_Options_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler_Options::register() should not register when not on the Beans Settings page.
+	 * Test Beans_Compiler_Options::register() should not register when not on the Beans Settings page.
 	 */
 	public function test_should_not_register_when_not_on_beans_settings_page() {
 		set_current_screen( 'edit' );
-		$this->assertNull( ( new _Beans_Compiler_Options() )->register() );
+		$this->assertNull( ( new Beans_Compiler_Options() )->register() );
 	}
 
 	/**
-	 * Test _Beans_Compiler_Options::register() should not register when not is_admin(), i.e. not in the backend.
+	 * Test Beans_Compiler_Options::register() should not register when not is_admin(), i.e. not in the backend.
 	 */
 	public function test_should_not_register_when_not_is_admin() {
 		set_current_screen( 'front' );
 		$_GET['page'] = 'beans_settings';
 		$this->assertFalse( is_admin() );
-		$this->assertNull( ( new _Beans_Compiler_Options() )->register() );
+		$this->assertNull( ( new Beans_Compiler_Options() )->register() );
 	}
 
 	/**
-	 * Test _Beans_Compiler_Options::register() should register only the flush button when the styles and scripts are
+	 * Test Beans_Compiler_Options::register() should register only the flush button when the styles and scripts are
 	 * not supported.
 	 */
 	public function test_should_only_register_only_flush_button_when_styles_scripts_not_supported() {
@@ -63,7 +63,7 @@ class Tests_BeansCompilerOptions_Register extends Compiler_Options_Test_Case {
 		$this->assertFalse( beans_get_component_support( 'wp_scripts_compiler' ) );
 
 		// Run the registration.
-		$this->assertTrue( ( new _Beans_Compiler_Options() )->register() );
+		$this->assertTrue( ( new Beans_Compiler_Options() )->register() );
 
 		// Check that the fields did get registered.
 		$registered_fields = beans_get_fields( 'option', 'compiler_options' );
@@ -84,7 +84,7 @@ class Tests_BeansCompilerOptions_Register extends Compiler_Options_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler_Options::register() should not register the styles options when not supported.
+	 * Test Beans_Compiler_Options::register() should not register the styles options when not supported.
 	 */
 	public function test_should_not_register_styles_options_when_not_supported() {
 		$this->go_to_settings_page();
@@ -96,7 +96,7 @@ class Tests_BeansCompilerOptions_Register extends Compiler_Options_Test_Case {
 		$this->assertNotEmpty( beans_get_component_support( 'wp_scripts_compiler' ) );
 
 		// Run the registration.
-		$this->assertTrue( ( new _Beans_Compiler_Options() )->register() );
+		$this->assertTrue( ( new Beans_Compiler_Options() )->register() );
 
 		// Check that the right fields did get registered.
 		$registered_fields = beans_get_fields( 'option', 'compiler_options' );
@@ -124,7 +124,7 @@ class Tests_BeansCompilerOptions_Register extends Compiler_Options_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler_Options::register() should not register the scripts options when not supported.
+	 * Test Beans_Compiler_Options::register() should not register the scripts options when not supported.
 	 */
 	public function test_should_not_register_scripts_options_when_not_supported() {
 		$this->go_to_settings_page();
@@ -136,7 +136,7 @@ class Tests_BeansCompilerOptions_Register extends Compiler_Options_Test_Case {
 		$this->assertFalse( beans_get_component_support( 'wp_scripts_compiler' ) );
 
 		// Run the registration.
-		$this->assertTrue( ( new _Beans_Compiler_Options() )->register() );
+		$this->assertTrue( ( new Beans_Compiler_Options() )->register() );
 
 		// Check that the right fields did get registered.
 		$registered_fields = beans_get_fields( 'option', 'compiler_options' );
@@ -166,7 +166,7 @@ class Tests_BeansCompilerOptions_Register extends Compiler_Options_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler_Options::register() should register all options when styles and scripts are supported.
+	 * Test Beans_Compiler_Options::register() should register all options when styles and scripts are supported.
 	 */
 	public function test_should_register_all_options_when_styles_scripts_supported() {
 		$this->go_to_settings_page();
@@ -178,7 +178,7 @@ class Tests_BeansCompilerOptions_Register extends Compiler_Options_Test_Case {
 		$this->assertNotEmpty( beans_get_component_support( 'wp_scripts_compiler' ) );
 
 		// Run the registration.
-		$this->assertTrue( ( new _Beans_Compiler_Options() )->register() );
+		$this->assertTrue( ( new Beans_Compiler_Options() )->register() );
 
 		// Check that the right fields did get registered.
 		$registered_fields = beans_get_fields( 'option', 'compiler_options' );

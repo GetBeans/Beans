@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the combine_fragments() method of _Beans_Compiler.
+ * Tests for the combine_fragments() method of Beans_Compiler.
  *
  * @package Beans\Framework\Tests\Unit\API\Compiler
  *
@@ -66,7 +66,7 @@ class Tests_BeansCompiler_CombineFragments extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::combine_fragments() should return an empty string when there are no fragments to combine.
+	 * Test Beans_Compiler::combine_fragments() should return an empty string when there are no fragments to combine.
 	 */
 	public function test_should_return_empty_string_when_no_fragments() {
 		$compiler = $this->create_compiler( [] );
@@ -77,7 +77,7 @@ class Tests_BeansCompiler_CombineFragments extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::combine_fragments() should return an empty string when the fragment does not exist.
+	 * Test Beans_Compiler::combine_fragments() should return an empty string when the fragment does not exist.
 	 */
 	public function test_should_return_empty_string_when_fragment_does_not_exist() {
 		$fragment = vfsStream::url( 'compiled/fixtures/' ) . 'invalid-file.js';
@@ -103,7 +103,7 @@ class Tests_BeansCompiler_CombineFragments extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::combine_fragments() should compile the LESS fragments and return the compiled CSS.
+	 * Test Beans_Compiler::combine_fragments() should compile the LESS fragments and return the compiled CSS.
 	 */
 	public function test_should_compile_less_and_return_css() {
 		$compiler = $this->create_compiler(
@@ -138,7 +138,7 @@ EOB;
 	}
 
 	/**
-	 * Test _Beans_Compiler::combine_fragments() should return minified, compiled CSS from the Less combined fragments.
+	 * Test Beans_Compiler::combine_fragments() should return minified, compiled CSS from the Less combined fragments.
 	 */
 	public function test_should_return_minified_compiled_css() {
 		$compiler = $this->create_compiler(
@@ -169,7 +169,7 @@ EOB;
 	}
 
 	/**
-	 * Test _Beans_Compiler::combine_fragments() should return the original jQuery when site is not in development mode,
+	 * Test Beans_Compiler::combine_fragments() should return the original jQuery when site is not in development mode,
 	 * but "minify_js" is disabled.
 	 */
 	public function test_should_return_original_jquery_when_minify_js_disabled() {
@@ -197,7 +197,7 @@ EOB;
 	}
 
 	/**
-	 * Test _Beans_Compiler::combine_fragments() should return the original jQuery when "minify_js" is enabled,
+	 * Test Beans_Compiler::combine_fragments() should return the original jQuery when "minify_js" is enabled,
 	 * but the site is in development mode.
 	 */
 	public function test_should_always_return_original_jquery_when_in_dev_mode() {
@@ -225,7 +225,7 @@ EOB;
 	}
 
 	/**
-	 * Test _Beans_Compiler::combine_fragments() should return minified jQuery.
+	 * Test Beans_Compiler::combine_fragments() should return minified jQuery.
 	 */
 	public function test_should_return_minified_jquery() {
 		$compiler = $this->create_compiler(
@@ -252,7 +252,7 @@ EOB;
 	}
 
 	/**
-	 * Test _Beans_Compiler::combine_fragments() should return the original JavaScript when site is not in development
+	 * Test Beans_Compiler::combine_fragments() should return the original JavaScript when site is not in development
 	 * mode, but "minify_js" is disabled.
 	 */
 	public function test_should_return_original_js_when_minify_js_disabled() {
@@ -279,7 +279,7 @@ EOB;
 	}
 
 	/**
-	 * Test _Beans_Compiler::combine_fragments() should return the original JavaScript when "minify_js" is enabled,
+	 * Test Beans_Compiler::combine_fragments() should return the original JavaScript when "minify_js" is enabled,
 	 * but the site is in development mode.
 	 */
 	public function test_should_always_return_original_js_when_in_dev_mode() {
@@ -306,7 +306,7 @@ EOB;
 	}
 
 	/**
-	 * Test _Beans_Compiler::combine_fragments() should return minified JavaScript.
+	 * Test Beans_Compiler::combine_fragments() should return minified JavaScript.
 	 */
 	public function test_should_return_minified_javascript() {
 		$compiler = $this->create_compiler(

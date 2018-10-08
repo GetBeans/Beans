@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the flush() method of _Beans_Compiler_Options.
+ * Tests for the flush() method of Beans_Compiler_Options.
  *
  * @package Beans\Framework\Tests\Unit\API\Compiler
  *
@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Unit\API\Compiler;
 
-use _Beans_Compiler_Options;
+use Beans_Compiler_Options;
 use Beans\Framework\Tests\Unit\API\Compiler\Includes\Compiler_Options_Test_Case;
 use Brain\Monkey;
 use org\bovigo\vfs\vfsStream;
@@ -26,7 +26,7 @@ require_once dirname( __DIR__ ) . '/includes/class-compiler-options-test-case.ph
 class Tests_BeansCompilerOptions_Flush extends Compiler_Options_Test_Case {
 
 	/**
-	 * Test _Beans_Compiler_Options::flush() should not remove the cached directory when this is not a 'compiler
+	 * Test Beans_Compiler_Options::flush() should not remove the cached directory when this is not a 'compiler
 	 * cache flush'.
 	 */
 	public function test_should_not_remove_cached_dir_when_not_a_flush() {
@@ -40,14 +40,14 @@ class Tests_BeansCompilerOptions_Flush extends Compiler_Options_Test_Case {
 		Monkey\Functions\expect( 'beans_get_compiler_dir' )->never();
 		Monkey\Functions\expect( 'beans_remove_dir' )->never();
 
-		$this->assertNull( ( new _Beans_Compiler_Options() )->flush() );
+		$this->assertNull( ( new Beans_Compiler_Options() )->flush() );
 
 		// Check that it still exists and was not removed.
 		$this->directoryExists( vfsStream::url( 'compiled/beans/compiler/' ) );
 	}
 
 	/**
-	 * Test _Beans_Compiler_Options::flush() should remove the cached directory.
+	 * Test Beans_Compiler_Options::flush() should remove the cached directory.
 	 */
 	public function test_should_remove_cached_dir() {
 		// Check that the cached directory exists before we start.
@@ -70,7 +70,7 @@ class Tests_BeansCompilerOptions_Flush extends Compiler_Options_Test_Case {
 				}
 			);
 
-		$this->assertNull( ( new _Beans_Compiler_Options() )->flush() );
+		$this->assertNull( ( new Beans_Compiler_Options() )->flush() );
 		$this->assertDirectoryNotExists( vfsStream::url( 'compiled/beans/compiler/' ) );
 	}
 }

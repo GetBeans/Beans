@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the get_all_components() method of _Beans_Uikit.
+ * Tests for the get_all_components() method of Beans_Uikit.
  *
  * @package Beans\Framework\Tests\Unit\API\UIkit
  *
@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Unit\API\UIkit;
 
-use _Beans_Uikit;
+use Beans_Uikit;
 use Beans\Framework\Tests\Unit\API\UIkit\Includes\UIkit_Test_Case;
 
 require_once dirname( __DIR__ ) . '/includes/class-uikit-test-case.php';
@@ -24,10 +24,10 @@ require_once dirname( __DIR__ ) . '/includes/class-uikit-test-case.php';
 class Tests_BeansUikit_GetAllComponents extends UIkit_Test_Case {
 
 	/**
-	 * Test _Beans_Uikit::get_all_components() should not return duplicate core components.
+	 * Test Beans_Uikit::get_all_components() should not return duplicate core components.
 	 */
 	public function test_should_not_return_duplicate_core_components() {
-		$actual = ( new _Beans_Uikit() )->get_all_components( 'core' );
+		$actual = ( new Beans_Uikit() )->get_all_components( 'core' );
 
 		// Get the number of times each component appears in the array.
 		$num_times_component_in_array = array_count_values( $actual );
@@ -43,10 +43,10 @@ class Tests_BeansUikit_GetAllComponents extends UIkit_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Uikit::get_all_components() should not return duplicate add-ons components.
+	 * Test Beans_Uikit::get_all_components() should not return duplicate add-ons components.
 	 */
 	public function test_should_not_return_duplicate_add_ons_components() {
-		$actual = ( new _Beans_Uikit() )->get_all_components( 'add-ons' );
+		$actual = ( new Beans_Uikit() )->get_all_components( 'add-ons' );
 
 		// Get the number of times each component appears in the array.
 		$num_times_component_in_array = array_count_values( $actual );
@@ -63,10 +63,10 @@ class Tests_BeansUikit_GetAllComponents extends UIkit_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Uikit::get_all_components() should return all core components.
+	 * Test Beans_Uikit::get_all_components() should return all core components.
 	 */
 	public function test_should_return_all_core_components() {
-		$actual = ( new _Beans_Uikit() )->get_all_components( 'core' );
+		$actual = ( new Beans_Uikit() )->get_all_components( 'core' );
 		$this->assertCount( 42, $actual );
 
 		// Check common components.
@@ -102,10 +102,10 @@ class Tests_BeansUikit_GetAllComponents extends UIkit_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Uikit::get_all_components() should return all add-ons components.
+	 * Test Beans_Uikit::get_all_components() should return all add-ons components.
 	 */
 	public function test_should_return_all_add_ons_components() {
-		$actual = ( new _Beans_Uikit() )->get_all_components( 'add-ons' );
+		$actual = ( new Beans_Uikit() )->get_all_components( 'add-ons' );
 		$this->assertCount( 29, $actual );
 
 		// Check common components.

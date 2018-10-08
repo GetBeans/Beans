@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the render_flush_button() method of _Beans_Image_Options.
+ * Tests for the render_flush_button() method of Beans_Image_Options.
  *
  * @package Beans\Framework\Tests\Unit\API\Image
  *
@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Unit\API\Image;
 
-use _Beans_Image_Options;
+use Beans_Image_Options;
 use Beans\Framework\Tests\Unit\API\Image\Includes\Options_Test_Case;
 use Brain\Monkey;
 
@@ -25,22 +25,22 @@ require_once dirname( __DIR__ ) . '/includes/class-options-test-case.php';
 class Tests_BeansImageOptions_RenderFlushButton extends Options_Test_Case {
 
 	/**
-	 * Test _Beans_Image_Options::render_flush_button() should not render when the field is not for image options.
+	 * Test Beans_Image_Options::render_flush_button() should not render when the field is not for image options.
 	 */
 	public function test_should_not_render_when_field_is_not_image_options() {
 		Monkey\Functions\expect( 'esc_html_e' )->never();
 
 		ob_start();
-		( new _Beans_Image_Options() )->render_flush_button( [ 'id' => 'foo' ] );
+		( new Beans_Image_Options() )->render_flush_button( [ 'id' => 'foo' ] );
 		$this->assertEmpty( ob_get_clean() );
 	}
 
 	/**
-	 * Test _Beans_Image_Options::render_flush_button() should render when the field is for image options.
+	 * Test Beans_Image_Options::render_flush_button() should render when the field is for image options.
 	 */
 	public function test_should_render_when_field_is_image_options() {
 		ob_start();
-		( new _Beans_Image_Options() )->render_flush_button( [ 'id' => 'beans_edited_images_directories' ] );
+		( new Beans_Image_Options() )->render_flush_button( [ 'id' => 'beans_edited_images_directories' ] );
 		$actual = ob_get_clean();
 
 		$expected = <<<EOB

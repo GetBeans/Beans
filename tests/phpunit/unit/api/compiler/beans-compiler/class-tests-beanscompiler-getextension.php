@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the get_extension() method of _Beans_Compiler.
+ * Tests for the get_extension() method of Beans_Compiler.
  *
  * @package Beans\Framework\Tests\Unit\API\Compiler
  *
@@ -23,7 +23,7 @@ require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
 class Tests_BeansCompiler_GetExtension extends Compiler_Test_Case {
 
 	/**
-	 * Test _Beans_Compiler::get_extension() should return "css" when the type is "style".
+	 * Test Beans_Compiler::get_extension() should return "css" when the type is "style".
 	 */
 	public function test_should_return_css_when_style() {
 		$compiler = $this->create_compiler( [ 'type' => 'style' ] );
@@ -32,7 +32,7 @@ class Tests_BeansCompiler_GetExtension extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::get_extension() should return "js" when the type is "script".
+	 * Test Beans_Compiler::get_extension() should return "js" when the type is "script".
 	 */
 	public function test_should_return_js_when_script() {
 		$compiler = $this->create_compiler( [ 'type' => 'script' ] );
@@ -41,7 +41,7 @@ class Tests_BeansCompiler_GetExtension extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::get_extension() should return null when the type is invalid.
+	 * Test Beans_Compiler::get_extension() should return null when the type is invalid.
 	 */
 	public function test_should_return_null_when_invalid_type() {
 		$compiler = $this->create_compiler( [ 'type' => 'invalid' ] );

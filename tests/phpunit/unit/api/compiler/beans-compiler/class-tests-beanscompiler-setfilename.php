@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the set_filename() method of _Beans_Compiler.
+ * Tests for the set_filename() method of Beans_Compiler.
  *
  * @package Beans\Framework\Tests\Unit\API\Compiler
  *
@@ -24,7 +24,7 @@ require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
 class Tests_BeansCompiler_SetFilename extends Compiler_Test_Case {
 
 	/**
-	 * Test _Beans_Compiler::set_filename() should return the hash created with the modification time from each of the
+	 * Test Beans_Compiler::set_filename() should return the hash created with the modification time from each of the
 	 * fragments.
 	 */
 	public function test_should_return_hash_created_with_fragments_filemtime() {
@@ -50,7 +50,7 @@ class Tests_BeansCompiler_SetFilename extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::set_filename() should exclude external fragments.
+	 * Test Beans_Compiler::set_filename() should exclude external fragments.
 	 */
 	public function test_should_exclude_external_fragments() {
 		$fragment = vfsStream::url( 'compiled/fixtures/my-game-clock.js' );
@@ -78,7 +78,7 @@ class Tests_BeansCompiler_SetFilename extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::set_filename() should remove the old compiled file.
+	 * Test Beans_Compiler::set_filename() should remove the old compiled file.
 	 */
 	public function test_should_remove_old_file() {
 		$fragment = vfsStream::url( 'compiled/fixtures/jquery.test.js' );

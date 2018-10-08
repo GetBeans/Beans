@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the render_success_notice() method of _Beans_Image_Options.
+ * Tests for the render_success_notice() method of Beans_Image_Options.
  *
  * @package Beans\Framework\Tests\Integration\API\Image
  *
@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Integration\API\Image;
 
-use _Beans_Image_Options;
+use Beans_Image_Options;
 use Beans\Framework\Tests\Integration\API\Image\Includes\Options_Test_Case;
 
 require_once dirname( __DIR__ ) . '/includes/class-options-test-case.php';
@@ -24,26 +24,26 @@ require_once dirname( __DIR__ ) . '/includes/class-options-test-case.php';
 class Tests_BeansImageOptions_RenderSuccessNotice extends Options_Test_Case {
 
 	/**
-	 * Test _Beans_Image_Options::render_success_notice() should not render when not flushing edited images cache.
+	 * Test Beans_Image_Options::render_success_notice() should not render when not flushing edited images cache.
 	 */
 	public function test_should_not_render_when_not_flushing_edited_images_cache() {
 		$this->go_to_settings_page();
 		$this->assertArrayNotHasKey( 'beans_flush_edited_images', $_POST ); // phpcs:ignore WordPress.Security.NonceVerification.NoNonceVerification -- No need for nonce in this test.
 
 		ob_start();
-		( new _Beans_Image_Options() )->render_success_notice();
+		( new Beans_Image_Options() )->render_success_notice();
 		$this->assertEmpty( ob_get_clean() );
 	}
 
 	/**
-	 * Test _Beans_Image_Options::render_success_notice() should render when flushing edited images cache.
+	 * Test Beans_Image_Options::render_success_notice() should render when flushing edited images cache.
 	 */
 	public function test_should_render_when_flushing_edited_images_cache() {
 		$this->go_to_settings_page();
 		$_POST['beans_flush_edited_images'] = 1;
 
 		ob_start();
-		( new _Beans_Image_Options() )->render_success_notice();
+		( new Beans_Image_Options() )->render_success_notice();
 		$actual = ob_get_clean();
 
 		$expected = <<<EOB

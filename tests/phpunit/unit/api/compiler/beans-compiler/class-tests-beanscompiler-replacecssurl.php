@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the replace_css_url() method of _Beans_Compiler.
+ * Tests for the replace_css_url() method of Beans_Compiler.
  *
  * @package Beans\Framework\Tests\Unit\API\Compiler
  *
@@ -24,7 +24,7 @@ require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
 class Tests_BeansCompiler_ReplaceCssUrl extends Compiler_Test_Case {
 
 	/**
-	 * Test _Beans_Compiler::replace_css_url() should return original content when there is no URL source in the CSS.
+	 * Test Beans_Compiler::replace_css_url() should return original content when there is no URL source in the CSS.
 	 */
 	public function test_should_return_original_content_when_no_url() {
 		$compiler = $this->create_compiler();
@@ -46,7 +46,7 @@ EOB;
 	}
 
 	/**
-	 * Test _Beans_Compiler::replace_css_url() should return original content when the CSS source has a valid URI.
+	 * Test Beans_Compiler::replace_css_url() should return original content when the CSS source has a valid URI.
 	 */
 	public function test_should_return_original_content_when_valid_uri() {
 		$compiler = $this->create_compiler();
@@ -64,7 +64,7 @@ EOB;
 	}
 
 	/**
-	 * Test _Beans_Compiler::replace_css_url() should convert the relative URL when it does not have ../.
+	 * Test Beans_Compiler::replace_css_url() should convert the relative URL when it does not have ../.
 	 */
 	public function test_should_convert_relative_url_when_no_up_levels() {
 		$compiler = $this->create_compiler();
@@ -90,7 +90,7 @@ EOB;
 	}
 
 	/**
-	 * Test _Beans_Compiler::replace_css_url() should convert the relative URL.
+	 * Test Beans_Compiler::replace_css_url() should convert the relative URL.
 	 */
 	public function test_should_convert_relative_url() {
 		$compiler = $this->create_compiler();
@@ -144,7 +144,7 @@ EOB;
 	}
 
 	/**
-	 * Test _Beans_Compiler::replace_css_url() should convert a deeper relative URL.
+	 * Test Beans_Compiler::replace_css_url() should convert a deeper relative URL.
 	 */
 	public function test_should_convert_deeper_relative_url() {
 		$compiler = $this->create_compiler();

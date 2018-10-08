@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the get_autoload_components() method of _Beans_Uikit.
+ * Tests for the get_autoload_components() method of Beans_Uikit.
  *
  * @package Beans\Framework\Tests\Unit\API\UIkit
  *
@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Unit\API\UIkit;
 
-use _Beans_Uikit;
+use Beans_Uikit;
 use Beans\Framework\Tests\Unit\API\UIkit\Includes\UIkit_Test_Case;
 
 require_once dirname( __DIR__ ) . '/includes/class-uikit-test-case.php';
@@ -24,11 +24,11 @@ require_once dirname( __DIR__ ) . '/includes/class-uikit-test-case.php';
 class Tests_BeansUikit_GetAutoloadComponents extends UIkit_Test_Case {
 
 	/**
-	 * Test _Beans_Uikit::get_autoload_components() should return empty arrays when the given components have no
+	 * Test Beans_Uikit::get_autoload_components() should return empty arrays when the given components have no
 	 * dependencies.
 	 */
 	public function test_should_return_empty_arrays_when_given_components_have_no_dependencies() {
-		$beans_uikit = new _Beans_Uikit();
+		$beans_uikit = new Beans_Uikit();
 		$components  = [
 			'alert',
 			'badge',
@@ -47,10 +47,10 @@ class Tests_BeansUikit_GetAutoloadComponents extends UIkit_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Uikit::get_autoload_components() should return dependencies for the panel.
+	 * Test Beans_Uikit::get_autoload_components() should return dependencies for the panel.
 	 */
 	public function test_should_return_dependencies_for_panel() {
-		$beans_uikit = new _Beans_Uikit();
+		$beans_uikit = new Beans_Uikit();
 
 		$expected = [
 			'core'    => [ 'badge' ],
@@ -60,10 +60,10 @@ class Tests_BeansUikit_GetAutoloadComponents extends UIkit_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Uikit::get_autoload_components() should return dependencies for the cover.
+	 * Test Beans_Uikit::get_autoload_components() should return dependencies for the cover.
 	 */
 	public function test_should_return_dependencies_for_cover() {
-		$beans_uikit = new _Beans_Uikit();
+		$beans_uikit = new Beans_Uikit();
 
 		$expected = [
 			'core'    => [ 'flex' ],
@@ -73,10 +73,10 @@ class Tests_BeansUikit_GetAutoloadComponents extends UIkit_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Uikit::get_autoload_components() should return dependencies for the overlay.
+	 * Test Beans_Uikit::get_autoload_components() should return dependencies for the overlay.
 	 */
 	public function test_should_return_dependencies_for_overlay() {
-		$beans_uikit = new _Beans_Uikit();
+		$beans_uikit = new Beans_Uikit();
 
 		$expected = [
 			'core'    => [ 'flex' ],
@@ -86,10 +86,10 @@ class Tests_BeansUikit_GetAutoloadComponents extends UIkit_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Uikit::get_autoload_components() should return dependencies for the tab.
+	 * Test Beans_Uikit::get_autoload_components() should return dependencies for the tab.
 	 */
 	public function test_should_return_dependencies_for_tab() {
-		$beans_uikit = new _Beans_Uikit();
+		$beans_uikit = new Beans_Uikit();
 
 		$expected = [
 			'core'    => [ 'switcher' ],
@@ -99,10 +99,10 @@ class Tests_BeansUikit_GetAutoloadComponents extends UIkit_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Uikit::get_autoload_components() should return dependencies for the modal.
+	 * Test Beans_Uikit::get_autoload_components() should return dependencies for the modal.
 	 */
 	public function test_should_return_dependencies_for_modal() {
-		$beans_uikit = new _Beans_Uikit();
+		$beans_uikit = new Beans_Uikit();
 
 		$expected = [
 			'core'    => [ 'close' ],
@@ -112,10 +112,10 @@ class Tests_BeansUikit_GetAutoloadComponents extends UIkit_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Uikit::get_autoload_components() should return dependencies for the scrollspy.
+	 * Test Beans_Uikit::get_autoload_components() should return dependencies for the scrollspy.
 	 */
 	public function test_should_return_dependencies_for_scrollspy() {
-		$beans_uikit = new _Beans_Uikit();
+		$beans_uikit = new Beans_Uikit();
 
 		$expected = [
 			'core'    => [ 'animation' ],
@@ -125,10 +125,10 @@ class Tests_BeansUikit_GetAutoloadComponents extends UIkit_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Uikit::get_autoload_components() should return dependencies for the lightbox.
+	 * Test Beans_Uikit::get_autoload_components() should return dependencies for the lightbox.
 	 */
 	public function test_should_return_dependencies_for_lightbox() {
-		$beans_uikit = new _Beans_Uikit();
+		$beans_uikit = new Beans_Uikit();
 		$expected    = [
 			'core'    => [
 				'animation',
@@ -145,10 +145,10 @@ class Tests_BeansUikit_GetAutoloadComponents extends UIkit_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Uikit::get_autoload_components() should return dependencies for the slider.
+	 * Test Beans_Uikit::get_autoload_components() should return dependencies for the slider.
 	 */
 	public function test_should_return_dependencies_for_slider() {
-		$beans_uikit = new _Beans_Uikit();
+		$beans_uikit = new Beans_Uikit();
 
 		$expected = [
 			'core'    => [],
@@ -158,10 +158,10 @@ class Tests_BeansUikit_GetAutoloadComponents extends UIkit_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Uikit::get_autoload_components() should return dependencies for the slideset.
+	 * Test Beans_Uikit::get_autoload_components() should return dependencies for the slideset.
 	 */
 	public function test_should_return_dependencies_for_slideset() {
-		$beans_uikit = new _Beans_Uikit();
+		$beans_uikit = new Beans_Uikit();
 
 		$expected = [
 			'core'    => [
@@ -177,10 +177,10 @@ class Tests_BeansUikit_GetAutoloadComponents extends UIkit_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Uikit::get_autoload_components() should return dependencies for the slideshow.
+	 * Test Beans_Uikit::get_autoload_components() should return dependencies for the slideshow.
 	 */
 	public function test_should_return_dependencies_for_slideshow() {
-		$beans_uikit = new _Beans_Uikit();
+		$beans_uikit = new Beans_Uikit();
 
 		$expected = [
 			'core'    => [
@@ -196,10 +196,10 @@ class Tests_BeansUikit_GetAutoloadComponents extends UIkit_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Uikit::get_autoload_components() should return dependencies for the parallax.
+	 * Test Beans_Uikit::get_autoload_components() should return dependencies for the parallax.
 	 */
 	public function test_should_return_dependencies_for_parallax() {
-		$beans_uikit = new _Beans_Uikit();
+		$beans_uikit = new Beans_Uikit();
 
 		$expected = [
 			'core'    => [ 'flex' ],
@@ -209,10 +209,10 @@ class Tests_BeansUikit_GetAutoloadComponents extends UIkit_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Uikit::get_autoload_components() should return dependencies for the notify.
+	 * Test Beans_Uikit::get_autoload_components() should return dependencies for the notify.
 	 */
 	public function test_should_return_dependencies_for_notify() {
-		$beans_uikit = new _Beans_Uikit();
+		$beans_uikit = new Beans_Uikit();
 
 		$expected = [
 			'core'    => [ 'close' ],
@@ -222,10 +222,10 @@ class Tests_BeansUikit_GetAutoloadComponents extends UIkit_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Uikit::get_autoload_components() should return all dependencies for the given components.
+	 * Test Beans_Uikit::get_autoload_components() should return all dependencies for the given components.
 	 */
 	public function test_should_return_all_dependencies_for_given_components() {
-		$beans_uikit = new _Beans_Uikit();
+		$beans_uikit = new Beans_Uikit();
 
 		$expected = [
 			'core'    => [

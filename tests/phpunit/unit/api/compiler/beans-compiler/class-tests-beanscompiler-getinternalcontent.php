@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the get_internal_content() method of _Beans_Compiler.
+ * Tests for the get_internal_content() method of Beans_Compiler.
  *
  * @package Beans\Framework\Tests\Unit\API\Compiler
  *
@@ -34,7 +34,7 @@ class Tests_BeansCompiler_GetInternalContent extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::get_internal_content() should return false when fragment is empty.
+	 * Test Beans_Compiler::get_internal_content() should return false when fragment is empty.
 	 */
 	public function test_should_return_false_when_fragment_is_empty() {
 		$compiler = $this->create_compiler();
@@ -44,7 +44,7 @@ class Tests_BeansCompiler_GetInternalContent extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::get_internal_content() should return false when the file does not exist.
+	 * Test Beans_Compiler::get_internal_content() should return false when the file does not exist.
 	 */
 	public function test_should_return_false_when_file_does_not_exist() {
 		$compiler = $this->create_compiler();
@@ -55,7 +55,7 @@ class Tests_BeansCompiler_GetInternalContent extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::get_internal_content() should return a fragment's contents.
+	 * Test Beans_Compiler::get_internal_content() should return a fragment's contents.
 	 */
 	public function test_should_return_fragment_contents() {
 		$fragment = vfsStream::url( 'compiled/fixtures/test.less' );

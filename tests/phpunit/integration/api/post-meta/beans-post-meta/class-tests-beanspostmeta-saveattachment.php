@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the save_attachment() method of _Beans_Post_Meta.
+ * Tests for the save_attachment() method of Beans_Post_Meta.
  *
  * @package Beans\Framework\Tests\Integration\API\Post_Meta
  *
@@ -10,7 +10,7 @@
 namespace Beans\Framework\Tests\Integration\API\Post_Meta;
 
 use Beans\Framework\Tests\Integration\API\Post_Meta\Includes\Post_Meta_Test_Case;
-use _Beans_Post_Meta;
+use Beans_Post_Meta;
 
 require_once BEANS_THEME_DIR . '/lib/api/post-meta/class-beans-post-meta.php';
 require_once dirname( __DIR__ ) . '/includes/class-post-meta-test-case.php';
@@ -25,10 +25,10 @@ require_once dirname( __DIR__ ) . '/includes/class-post-meta-test-case.php';
 class Tests_BeansPostMeta_SaveAttachment extends Post_Meta_Test_Case {
 
 	/**
-	 * Test _Beans_Post_Meta::save_attachment() should run update_post_meta() and return attachment when ok_to_save() is true.
+	 * Test Beans_Post_Meta::save_attachment() should run update_post_meta() and return attachment when ok_to_save() is true.
 	 */
 	public function test_should_run_update_post_meta_and_return_attachment_when_ok_to_save() {
-		$post_meta       = new _Beans_Post_Meta( 'tm-beans', [ 'title' => 'Post Options' ] );
+		$post_meta       = new Beans_Post_Meta( 'tm-beans', [ 'title' => 'Post Options' ] );
 		$attachment_id   = $this->factory()->attachment->create();
 		$attachment_data = get_post( $attachment_id, ARRAY_A );
 

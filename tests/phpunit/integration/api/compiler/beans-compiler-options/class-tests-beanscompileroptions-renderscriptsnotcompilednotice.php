@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the render_scripts_not_compiled_notice() method of _Beans_Compiler_Options.
+ * Tests for the render_scripts_not_compiled_notice() method of Beans_Compiler_Options.
  *
  * @package Beans\Framework\Tests\Integration\API\Compiler
  *
@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Integration\API\Compiler;
 
-use _Beans_Compiler_Options;
+use Beans_Compiler_Options;
 use Beans\Framework\Tests\Integration\API\Compiler\Includes\Compiler_Options_Test_Case;
 
 require_once dirname( __DIR__ ) . '/includes/class-compiler-options-test-case.php';
@@ -24,17 +24,17 @@ require_once dirname( __DIR__ ) . '/includes/class-compiler-options-test-case.ph
 class Tests_BeansCompilerOptions_RenderScriptsNotCompiledNotice extends Compiler_Options_Test_Case {
 
 	/**
-	 * Test _Beans_Compiler_Options::render_scripts_not_compiled_notice() should not render when Compiler is not in dev
+	 * Test Beans_Compiler_Options::render_scripts_not_compiled_notice() should not render when Compiler is not in dev
 	 * mode.
 	 */
 	public function test_should_not_render_when_compiler_not_in_dev_mode() {
 		$this->assertFalse( _beans_is_compiler_dev_mode() );
 
-		$this->assertNull( ( new _Beans_Compiler_Options() )->render_scripts_not_compiled_notice() );
+		$this->assertNull( ( new Beans_Compiler_Options() )->render_scripts_not_compiled_notice() );
 	}
 
 	/**
-	 * Test _Beans_Compiler_Options::render_scripts_not_compiled_notice() should not render when compile scripts is not
+	 * Test Beans_Compiler_Options::render_scripts_not_compiled_notice() should not render when compile scripts is not
 	 * an option.
 	 */
 	public function test_should_not_render_when_compile_scripts_not_an_option() {
@@ -42,11 +42,11 @@ class Tests_BeansCompilerOptions_RenderScriptsNotCompiledNotice extends Compiler
 		$this->assertTrue( _beans_is_compiler_dev_mode() );
 		$this->assertEmpty( get_option( 'beans_compile_all_scripts' ) );
 
-		$this->assertNull( ( new _Beans_Compiler_Options() )->render_scripts_not_compiled_notice() );
+		$this->assertNull( ( new Beans_Compiler_Options() )->render_scripts_not_compiled_notice() );
 	}
 
 	/**
-	 * Test _Beans_Compiler_Options::render_scripts_not_compiled_notice() should render when compile scripts is
+	 * Test Beans_Compiler_Options::render_scripts_not_compiled_notice() should render when compile scripts is
 	 * selected and Compiler is in dev mode.
 	 */
 	public function test_should_render_when_compile_scripts_selected_and_compiler_in_dev_mode() {
@@ -56,7 +56,7 @@ class Tests_BeansCompilerOptions_RenderScriptsNotCompiledNotice extends Compiler
 		$this->assertEquals( 1, get_option( 'beans_compile_all_scripts' ) );
 
 		ob_start();
-		( new _Beans_Compiler_Options() )->render_scripts_not_compiled_notice();
+		( new Beans_Compiler_Options() )->render_scripts_not_compiled_notice();
 		$actual = ob_get_clean();
 
 		$expected = <<<EOB

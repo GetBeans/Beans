@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the replace() method of _Beans_Attribute.
+ * Tests for the replace() method of Beans_Attribute.
  *
  * @package Beans\Framework\Tests\Unit\API\HTML
  *
@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Unit\API\HTML;
 
-use _Beans_Attribute;
+use Beans_Attribute;
 use Beans\Framework\Tests\Unit\API\HTML\Includes\HTML_Test_Case;
 use Brain\Monkey;
 
@@ -25,7 +25,7 @@ require_once dirname( __DIR__ ) . '/includes/class-html-test-case.php';
 class Tests_BeansAttribute_Replace extends HTML_Test_Case {
 
 	/**
-	 * Test _Beans_Attribute::replace() should replace an existing attribute value.
+	 * Test Beans_Attribute::replace() should replace an existing attribute value.
 	 */
 	public function test_should_replace_existing_attribute_value() {
 		$attributes = [
@@ -36,7 +36,7 @@ class Tests_BeansAttribute_Replace extends HTML_Test_Case {
 			'itemprop'  => 'beans_post',
 		];
 
-		$instance = new _Beans_Attribute( 'beans_post', 'class', 'uk-panel-box', 'beans-test' );
+		$instance = new Beans_Attribute( 'beans_post', 'class', 'uk-panel-box', 'beans-test' );
 
 		// Check that the attribute does not contain the new value.
 		$this->assertNotContains( 'beans-test', $attributes['class'] );
@@ -50,7 +50,7 @@ class Tests_BeansAttribute_Replace extends HTML_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Attribute::replace() should replace (overwrite) all attribute's values with the new value when the target value is
+	 * Test Beans_Attribute::replace() should replace (overwrite) all attribute's values with the new value when the target value is
 	 * empty (null, empty string, etc.).
 	 */
 	public function test_should_overwrite_attribute_values_with_new_value() {
@@ -59,31 +59,31 @@ class Tests_BeansAttribute_Replace extends HTML_Test_Case {
 			$name = key( $markup['attributes'] );
 
 			// Check when both value and new value are null.
-			$actual = ( new _Beans_Attribute( 'beans_post', $name ) )->replace( $markup['attributes'] );
+			$actual = ( new Beans_Attribute( 'beans_post', $name ) )->replace( $markup['attributes'] );
 			$this->assertNull( $actual[ $name ] );
 
 			// Check when the value is null.
-			$actual = ( new _Beans_Attribute( 'beans_post', $name, null, '' ) )->replace( $markup['attributes'] );
+			$actual = ( new Beans_Attribute( 'beans_post', $name, null, '' ) )->replace( $markup['attributes'] );
 			$this->assertSame( '', $actual[ $name ] );
 
 			// Check when the value is an empty string.
-			$actual = ( new _Beans_Attribute( 'beans_post', $name, '', 'foo' ) )->replace( $markup['attributes'] );
+			$actual = ( new Beans_Attribute( 'beans_post', $name, '', 'foo' ) )->replace( $markup['attributes'] );
 			$this->assertSame( 'foo', $actual[ $name ] );
 
 			// Check when the target value is false.
-			$actual = ( new _Beans_Attribute( 'beans_post', $name, false, 'foo' ) )->replace( $markup['attributes'] );
+			$actual = ( new Beans_Attribute( 'beans_post', $name, false, 'foo' ) )->replace( $markup['attributes'] );
 			$this->assertSame( 'foo', $actual[ $name ] );
 		}
 	}
 
 	/**
-	 * Test _Beans_Attribute::replace() should add the attribute when it does not exists in the given attributes.
+	 * Test Beans_Attribute::replace() should add the attribute when it does not exists in the given attributes.
 	 */
 	public function test_should_add_attribute_when_it_does_not_exist() {
 
 		foreach ( static::$test_attributes as $beans_id => $markup ) {
 
-			$instance = new _Beans_Attribute( $beans_id, 'data-test', 'foo', 'beans-test' );
+			$instance = new Beans_Attribute( $beans_id, 'data-test', 'foo', 'beans-test' );
 
 			// Check that the attribute does not exist.
 			$this->assertArrayNotHasKey( 'data-test', $markup['attributes'] );
@@ -103,14 +103,14 @@ class Tests_BeansAttribute_Replace extends HTML_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Attribute::replace() should add the attribute when an empty array is given.
+	 * Test Beans_Attribute::replace() should add the attribute when an empty array is given.
 	 */
 	public function test_should_add_attribute_when_an_empty_array_given() {
 
 		foreach ( static::$test_attributes as $beans_id => $markup ) {
 			$name   = key( $markup['attributes'] );
 			$value  = current( $markup['attributes'] );
-			$actual = ( new _Beans_Attribute( $beans_id, $name, $value, 'beans-test' ) )->replace( [] );
+			$actual = ( new Beans_Attribute( $beans_id, $name, $value, 'beans-test' ) )->replace( [] );
 
 			// Check that it did add the attribute.
 			$this->assertArrayHasKey( $name, $actual );

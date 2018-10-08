@@ -102,7 +102,7 @@ abstract class Image_Test_Case extends Base_Test_Case {
 	 * @since 1.5.0
 	 *
 	 * @param \ReflectionProperty $rebuilt_path Instance of the editor's "rebuilt path" property.
-	 * @param _Beans_Image_Editor $editor       Instance of the editor.
+	 * @param Beans_Image_Editor $editor       Instance of the editor.
 	 * @param string|null         $path         Optional. The image's "rebuilt path".
 	 *
 	 * @return string

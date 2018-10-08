@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the get_function_content() method of _Beans_Compiler.
+ * Tests for the get_function_content() method of Beans_Compiler.
  *
  * @package Beans\Framework\Tests\Unit\API\Compiler
  *
@@ -25,7 +25,7 @@ require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
 class Tests_BeansCompiler_GetFunctionContent extends Compiler_Test_Case {
 
 	/**
-	 * Test _Beans_Compiler::get_function_content() should return false when the given fragment is not callable.
+	 * Test Beans_Compiler::get_function_content() should return false when the given fragment is not callable.
 	 */
 	public function test_should_return_false_when_fragment_not_callable() {
 		$compiler = $this->create_compiler();
@@ -41,7 +41,7 @@ class Tests_BeansCompiler_GetFunctionContent extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::get_function_content() should return content from a function.
+	 * Test Beans_Compiler::get_function_content() should return content from a function.
 	 */
 	public function test_should_return_content_from_function() {
 		$fragment = 'beans_test_get_function_content_callback';
@@ -56,7 +56,7 @@ class Tests_BeansCompiler_GetFunctionContent extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::get_function_content() should return content from an object's method.
+	 * Test Beans_Compiler::get_function_content() should return content from an object's method.
 	 */
 	public function test_should_return_content_from_method() {
 		$compiler = $this->create_compiler();

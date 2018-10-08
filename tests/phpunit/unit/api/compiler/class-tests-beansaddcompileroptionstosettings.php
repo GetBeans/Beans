@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Unit\API\Compiler;
 
-use _Beans_Compiler_Options;
+use Beans_Compiler_Options;
 use Beans\Framework\Tests\Unit\API\Compiler\Includes\Compiler_Options_Test_Case;
 
 require_once __DIR__ . '/includes/class-compiler-options-test-case.php';
@@ -24,9 +24,9 @@ require_once __DIR__ . '/includes/class-compiler-options-test-case.php';
 class Tests_BeansAddCompilerOptionsToSettings extends Compiler_Options_Test_Case {
 
 	/**
-	 * Test beans_add_compiler_options_to_settings() should return instance of _Beans_Compiler_Options().
+	 * Test beans_add_compiler_options_to_settings() should return instance of Beans_Compiler_Options().
 	 */
 	public function test_should_return_instance_of_beans_compiler_options() {
-		$this->assertInstanceOf( _Beans_Compiler_Options::class, beans_add_compiler_options_to_settings() );
+		$this->assertInstanceOf( Beans_Compiler_Options::class, beans_add_compiler_options_to_settings() );
 	}
 }

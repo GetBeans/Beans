@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the process_actions() method of _Beans_Options.
+ * Tests for the process_actions() method of Beans_Options.
  *
  * @package Beans\Framework\Tests\Integration\API\Options
  *
@@ -12,7 +12,7 @@
 
 namespace Beans\Framework\Tests\Integration\API\Options;
 
-use _Beans_Options;
+use Beans_Options;
 use Beans\Framework\Tests\Integration\API\Options\Includes\Options_Test_Case;
 
 require_once dirname( __DIR__ ) . '/includes/class-options-test-case.php';
@@ -27,10 +27,10 @@ require_once dirname( __DIR__ ) . '/includes/class-options-test-case.php';
 class Tests_BeansOptions_ProcessActions extends Options_Test_Case {
 
 	/**
-	 * Test _Beans_Options::process_actions() should do nothing when it's not a save or reset action.
+	 * Test Beans_Options::process_actions() should do nothing when it's not a save or reset action.
 	 */
 	public function test_should_do_nothing_when_no_save_or_reset_action() {
-		$instance = new _Beans_Options();
+		$instance = new Beans_Options();
 
 		$this->assertArrayNotHasKey( 'beans_save_options', $_POST );
 		$this->assertArrayNotHasKey( 'beans_reset_options', $_POST );
@@ -40,7 +40,7 @@ class Tests_BeansOptions_ProcessActions extends Options_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Options::process_actions() should not save options when the nonce fails.
+	 * Test Beans_Options::process_actions() should not save options when the nonce fails.
 	 */
 	public function test_should_not_save_options_when_nonce_fails() {
 		$_POST['beans_save_options'] = 1;
@@ -50,8 +50,8 @@ class Tests_BeansOptions_ProcessActions extends Options_Test_Case {
 			'beans_dev_mode'            => 1,
 		];
 		$_POST['beans_fields']       = $test_data;
-		$success_property            = $this->get_reflective_property( 'success', '_Beans_Options' );
-		$instance                    = new _Beans_Options();
+		$success_property            = $this->get_reflective_property( 'success', 'Beans_Options' );
+		$instance                    = new Beans_Options();
 
 		// Check with no nonce.
 		$instance->process_actions();
@@ -75,7 +75,7 @@ class Tests_BeansOptions_ProcessActions extends Options_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Options::process_actions() should save the field values when a save action is passed.
+	 * Test Beans_Options::process_actions() should save the field values when a save action is passed.
 	 */
 	public function test_should_save_field_values_when_save_action() {
 		// Set up the test.
@@ -89,8 +89,8 @@ class Tests_BeansOptions_ProcessActions extends Options_Test_Case {
 		];
 		$_POST['beans_fields']        = $test_data;
 
-		$success_property = $this->get_reflective_property( 'success', '_Beans_Options' );
-		$instance         = new _Beans_Options();
+		$success_property = $this->get_reflective_property( 'success', 'Beans_Options' );
+		$instance         = new Beans_Options();
 		$instance->process_actions();
 
 		// Check that the success property was set.
@@ -114,7 +114,7 @@ class Tests_BeansOptions_ProcessActions extends Options_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Options::process_actions() should not reset options when the nonce fails.
+	 * Test Beans_Options::process_actions() should not reset options when the nonce fails.
 	 */
 	public function test_should_not_reset_options_when_nonce_fails() {
 		$_POST['beans_reset_options'] = 1;
@@ -130,8 +130,8 @@ class Tests_BeansOptions_ProcessActions extends Options_Test_Case {
 		}
 
 		$_POST['beans_fields'] = $test_data;
-		$success_property      = $this->get_reflective_property( 'success', '_Beans_Options' );
-		$instance              = new _Beans_Options();
+		$success_property      = $this->get_reflective_property( 'success', 'Beans_Options' );
+		$instance              = new Beans_Options();
 
 		// Check with no nonce.
 		$instance->process_actions();
@@ -158,7 +158,7 @@ class Tests_BeansOptions_ProcessActions extends Options_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Options::process_actions() should delete the options when it's a reset action.
+	 * Test Beans_Options::process_actions() should delete the options when it's a reset action.
 	 */
 	public function test_should_delete_options_when_reset_action() {
 		// Set up the test.
@@ -177,8 +177,8 @@ class Tests_BeansOptions_ProcessActions extends Options_Test_Case {
 			add_option( $option, $value );
 		}
 
-		$success_property = $this->get_reflective_property( 'success', '_Beans_Options' );
-		$instance         = new _Beans_Options();
+		$success_property = $this->get_reflective_property( 'success', 'Beans_Options' );
+		$instance         = new Beans_Options();
 		$instance->process_actions();
 
 		// Check that the success property was set.

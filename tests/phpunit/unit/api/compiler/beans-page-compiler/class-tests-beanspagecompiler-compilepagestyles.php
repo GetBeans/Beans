@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the compile_page_styles() method of _Beans_Page_Compiler.
+ * Tests for the compile_page_styles() method of Beans_Page_Compiler.
  *
  * @package Beans\Framework\Tests\Unit\API\Compiler
  *
@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Unit\API\Compiler;
 
-use _Beans_Page_Compiler;
+use Beans_Page_Compiler;
 use Beans\Framework\Tests\Unit\API\Compiler\Includes\Page_Compiler_Test_Case;
 use Brain\Monkey;
 use Mockery;
@@ -26,7 +26,7 @@ require_once dirname( __DIR__ ) . '/includes/class-page-compiler-test-case.php';
 class Tests_BeansPageCompiler_CompilePageStyles extends Page_Compiler_Test_Case {
 
 	/**
-	 * Test _Beans_Page_Compiler::compile_page_styles() should not compile when the styles compiler is not supported.
+	 * Test Beans_Page_Compiler::compile_page_styles() should not compile when the styles compiler is not supported.
 	 */
 	public function test_should_not_compile_when_styles_compiler_not_supported() {
 		Monkey\Functions\expect( 'beans_get_component_support' )
@@ -39,11 +39,11 @@ class Tests_BeansPageCompiler_CompilePageStyles extends Page_Compiler_Test_Case 
 		Monkey\Functions\expect( 'beans_compile_css_fragments' )->never();
 
 		// Run the tests.
-		$this->assertNull( ( new _Beans_Page_Compiler() )->compile_page_styles() );
+		$this->assertNull( ( new Beans_Page_Compiler() )->compile_page_styles() );
 	}
 
 	/**
-	 * Test _Beans_Page_Compiler::compile_page_styles() should not compile when the "compile all styles" option is not
+	 * Test Beans_Page_Compiler::compile_page_styles() should not compile when the "compile all styles" option is not
 	 * set.
 	 */
 	public function test_should_not_compile_when_option_is_not_set() {
@@ -57,11 +57,11 @@ class Tests_BeansPageCompiler_CompilePageStyles extends Page_Compiler_Test_Case 
 		Monkey\Functions\expect( 'beans_compile_css_fragments' )->never();
 
 		// Run the tests.
-		$this->assertNull( ( new _Beans_Page_Compiler() )->compile_page_styles() );
+		$this->assertNull( ( new Beans_Page_Compiler() )->compile_page_styles() );
 	}
 
 	/**
-	 * Test _Beans_Page_Compiler::compile_page_styles() should not compile when in dev mode.
+	 * Test Beans_Page_Compiler::compile_page_styles() should not compile when in dev mode.
 	 */
 	public function test_should_not_compile_when_in_dev_mode() {
 		Monkey\Functions\when( 'beans_get_component_support' )->justReturn( true );
@@ -71,11 +71,11 @@ class Tests_BeansPageCompiler_CompilePageStyles extends Page_Compiler_Test_Case 
 		Monkey\Functions\expect( 'beans_compile_css_fragments' )->never();
 
 		// Run the tests.
-		$this->assertNull( ( new _Beans_Page_Compiler() )->compile_page_styles() );
+		$this->assertNull( ( new Beans_Page_Compiler() )->compile_page_styles() );
 	}
 
 	/**
-	 * Test _Beans_Page_Compiler::compile_page_styles() should not compile when there are no styles.
+	 * Test Beans_Page_Compiler::compile_page_styles() should not compile when there are no styles.
 	 */
 	public function test_should_not_compile_when_there_are_no_styles() {
 		Monkey\Functions\when( 'beans_get_component_support' )->justReturn( true );
@@ -90,11 +90,11 @@ class Tests_BeansPageCompiler_CompilePageStyles extends Page_Compiler_Test_Case 
 		Monkey\Functions\expect( 'beans_compile_css_fragments' )->never();
 
 		// Run the tests.
-		$this->assertNull( ( new _Beans_Page_Compiler() )->compile_page_styles() );
+		$this->assertNull( ( new Beans_Page_Compiler() )->compile_page_styles() );
 	}
 
 	/**
-	 * Test _Beans_Page_Compiler::compile_page_styles() should not compile when assets are admin bar only.
+	 * Test Beans_Page_Compiler::compile_page_styles() should not compile when assets are admin bar only.
 	 */
 	public function test_should_not_compile_when_assets_are_admin_bar_only() {
 		Monkey\Functions\when( 'beans_get_component_support' )->justReturn( true );
@@ -112,11 +112,11 @@ class Tests_BeansPageCompiler_CompilePageStyles extends Page_Compiler_Test_Case 
 		Monkey\Functions\expect( 'beans_compile_css_fragments' )->never();
 
 		// Run the tests.
-		$this->assertNull( ( new _Beans_Page_Compiler() )->compile_page_styles() );
+		$this->assertNull( ( new Beans_Page_Compiler() )->compile_page_styles() );
 	}
 
 	/**
-	 * Test _Beans_Page_Compiler::compile_page_styles() should not compile when the style is not registered.
+	 * Test Beans_Page_Compiler::compile_page_styles() should not compile when the style is not registered.
 	 */
 	public function test_should_not_compile_when_style_is_not_registered() {
 		Monkey\Functions\when( 'beans_get_component_support' )->justReturn( true );
@@ -150,11 +150,11 @@ class Tests_BeansPageCompiler_CompilePageStyles extends Page_Compiler_Test_Case 
 		Monkey\Functions\expect( 'beans_compile_css_fragments' )->never();
 
 		// Run the tests.
-		$this->assertNull( ( new _Beans_Page_Compiler() )->compile_page_styles() );
+		$this->assertNull( ( new Beans_Page_Compiler() )->compile_page_styles() );
 	}
 
 	/**
-	 * Test _Beans_Page_Compiler::compile_page_styles() should not compile when the style has no src.
+	 * Test Beans_Page_Compiler::compile_page_styles() should not compile when the style has no src.
 	 */
 	public function test_should_not_compile_when_style_has_no_src() {
 		Monkey\Functions\when( 'beans_get_component_support' )->justReturn( true );
@@ -188,11 +188,11 @@ class Tests_BeansPageCompiler_CompilePageStyles extends Page_Compiler_Test_Case 
 		Monkey\Functions\expect( 'beans_compile_css_fragments' )->never();
 
 		// Run the tests.
-		$this->assertNull( ( new _Beans_Page_Compiler() )->compile_page_styles() );
+		$this->assertNull( ( new Beans_Page_Compiler() )->compile_page_styles() );
 	}
 
 	/**
-	 * Test _Beans_Page_Compiler::compile_page_styles() should compile when the style has src but no dependencies.
+	 * Test Beans_Page_Compiler::compile_page_styles() should compile when the style has src but no dependencies.
 	 */
 	public function test_should_compile_when_style_has_src_but_no_deps() {
 		Monkey\Functions\when( 'beans_get_component_support' )->justReturn( true );
@@ -234,14 +234,14 @@ class Tests_BeansPageCompiler_CompilePageStyles extends Page_Compiler_Test_Case 
 			->andReturnNull();
 
 		// Run the tests.
-		$this->assertNull( ( new _Beans_Page_Compiler() )->compile_page_styles() );
+		$this->assertNull( ( new Beans_Page_Compiler() )->compile_page_styles() );
 
 		// Check the asset's done state.
 		$this->assertSame( [ 'uikit', 'child-style' ], $assets->done );
 	}
 
 	/**
-	 * Test _Beans_Page_Compiler::compile_page_styles() should add the query arg to the compiled style's src.
+	 * Test Beans_Page_Compiler::compile_page_styles() should add the query arg to the compiled style's src.
 	 */
 	public function test_should_add_query_arg_to_compiled_style_src() {
 		Monkey\Functions\when( 'beans_get_component_support' )->justReturn( true );
@@ -279,7 +279,7 @@ class Tests_BeansPageCompiler_CompilePageStyles extends Page_Compiler_Test_Case 
 			->andReturnNull();
 
 		// Run the tests.
-		$this->assertNull( ( new _Beans_Page_Compiler() )->compile_page_styles() );
+		$this->assertNull( ( new Beans_Page_Compiler() )->compile_page_styles() );
 
 		// Check the asset states when done.
 		$this->assertSame( $new_src, $assets->registered['child-style']->src );
@@ -287,7 +287,7 @@ class Tests_BeansPageCompiler_CompilePageStyles extends Page_Compiler_Test_Case 
 	}
 
 	/**
-	 * Test _Beans_Page_Compiler::compile_page_styles() should compile styles and dependencies.
+	 * Test Beans_Page_Compiler::compile_page_styles() should compile styles and dependencies.
 	 */
 	public function test_should_compile_style_and_deps() {
 		Monkey\Functions\when( 'beans_get_component_support' )->justReturn( true );
@@ -350,7 +350,7 @@ class Tests_BeansPageCompiler_CompilePageStyles extends Page_Compiler_Test_Case 
 			->andReturnNull();
 
 		// Run the tests.
-		$this->assertNull( ( new _Beans_Page_Compiler() )->compile_page_styles() );
+		$this->assertNull( ( new Beans_Page_Compiler() )->compile_page_styles() );
 
 		// Check the asset's done state.
 		$this->assertSame( [ 'debug-bar', 'uikit', 'child-style', 'debug-bar-actions-filters' ], $assets->done );

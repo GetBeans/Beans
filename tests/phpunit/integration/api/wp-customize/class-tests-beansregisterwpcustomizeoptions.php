@@ -10,7 +10,7 @@
 namespace Beans\Framework\Tests\Integration\API\WP_Customize;
 
 use Beans\Framework\Tests\Integration\API\WP_Customize\Includes\WP_Customize_Test_Case;
-use _Beans_Fields;
+use Beans_Fields;
 
 require_once __DIR__ . '/includes/class-wp-customize-test-case.php';
 
@@ -55,8 +55,8 @@ class Tests_BeansRegisterWPCustomizeOptions extends WP_Customize_Test_Case {
 		beans_register_wp_customize_options( $test_data['fields'], $test_data['section'], $test_data['args'] );
 
 		// Check what was registered.
-		$registered_property = $this->get_reflective_property( 'registered', '_Beans_Fields' );
-		$registered          = $registered_property->getValue( new _Beans_Fields() );
+		$registered_property = $this->get_reflective_property( 'registered', 'Beans_Fields' );
+		$registered          = $registered_property->getValue( new Beans_Fields() );
 		$this->assertArrayHasKey( $test_data['section'], $registered['wp_customize'] );
 
 		foreach ( $test_data['fields'] as $index => $field ) {

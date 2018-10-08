@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the render_page() method of _Beans_Options.
+ * Tests for the render_page() method of Beans_Options.
  *
  * @package Beans\Framework\Tests\Unit\API\Options
  *
@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Unit\API\Options;
 
-use _Beans_Options;
+use Beans_Options;
 use Beans\Framework\Tests\Unit\API\Options\Includes\Options_Test_Case;
 use Brain\Monkey;
 
@@ -25,16 +25,16 @@ require_once dirname( __DIR__ ) . '/includes/class-options-test-case.php';
 class Tests_BeansOptions_RenderPage extends Options_Test_Case {
 
 	/**
-	 * Test _Beans_Options::render_page() should return null when the page does not have a metabox.
+	 * Test Beans_Options::render_page() should return null when the page does not have a metabox.
 	 */
 	public function test_should_return_null_when_page_does_not_have_metabox() {
 		Monkey\Functions\expect( 'beans_get' )->with( 'beans_tests', [] )->once()->andReturn( null );
 
-		$this->assertNull( ( new _Beans_Options() )->render_page( 'beans_tests' ) );
+		$this->assertNull( ( new Beans_Options() )->render_page( 'beans_tests' ) );
 	}
 
 	/**
-	 * Test _Beans_Options::render_page() should render the form when "normal" context is configured.
+	 * Test Beans_Options::render_page() should render the form when "normal" context is configured.
 	 */
 	public function test_should_render_form_when_context_normal() {
 		Monkey\Functions\expect( 'beans_get' )
@@ -55,7 +55,7 @@ class Tests_BeansOptions_RenderPage extends Options_Test_Case {
 
 		// Run the method and grab the HTML out of the buffer.
 		ob_start();
-		( new _Beans_Options() )->render_page( 'beans_tests' );
+		( new Beans_Options() )->render_page( 'beans_tests' );
 		$html = ob_get_clean();
 
 		$expected = <<<EOB
@@ -73,7 +73,7 @@ EOB;
 	}
 
 	/**
-	 * Test _Beans_Options::render_page() should render the form when "column" context is configured.
+	 * Test Beans_Options::render_page() should render the form when "column" context is configured.
 	 */
 	public function test_should_render_form_when_column_context() {
 		Monkey\Functions\expect( 'beans_get' )
@@ -101,7 +101,7 @@ EOB;
 
 		// Run the method and grab the HTML out of the buffer.
 		ob_start();
-		( new _Beans_Options() )->render_page( 'beans_tests' );
+		( new Beans_Options() )->render_page( 'beans_tests' );
 		$html = ob_get_clean();
 
 		$expected = <<<EOB

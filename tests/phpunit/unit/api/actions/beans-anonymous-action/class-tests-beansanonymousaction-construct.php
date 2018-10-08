@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the __construct() method of _Beans_Anonymous_Action.
+ * Tests for the __construct() method of Beans_Anonymous_Action.
  *
  * @package Beans\Framework\Tests\Unit\API\Actions
  *
@@ -36,7 +36,7 @@ class Tests_BeansAnonymousAction_Construct extends Actions_Test_Case {
 	 * Test __construct() should set the callback and arguments.
 	 */
 	public function test_should_set_callback_and_arguments() {
-		$anonymous_action = new _Beans_Anonymous_Action(
+		$anonymous_action = new Beans_Anonymous_Action(
 			'beans_test_do_foo',
 			[
 				'foo_test_callback',
@@ -52,7 +52,7 @@ class Tests_BeansAnonymousAction_Construct extends Actions_Test_Case {
 	 * Test __construct() should add the action's hook.
 	 */
 	public function test_should_add_action_hook() {
-		$anonymous_action = new _Beans_Anonymous_Action(
+		$anonymous_action = new Beans_Anonymous_Action(
 			'beans_test_do_foo',
 			[
 				'foo_test_callback',

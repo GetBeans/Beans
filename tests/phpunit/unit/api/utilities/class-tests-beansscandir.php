@@ -41,12 +41,12 @@ class Tests_BeansScandir extends Test_Case {
 	 */
 	public function test_should_return_all_files_in_given_directory() {
 		$files = beans_scandir( __DIR__ );
-		$this->assertContains( 'beansArrayUnique.php', $files );
-		$this->assertContains( 'beansGet.php', $files );
-		$this->assertContains( 'beansIsUri.php', $files );
-		$this->assertContains( 'beansIsUrl.php', $files );
-		$this->assertContains( 'beansJoinArrays.php', $files );
-		$this->assertContains( 'beansScandir.php', $files );
+		$this->assertContains( 'class-tests-beansarrayunique.php', $files );
+		$this->assertContains( 'class-tests-beansget.php', $files );
+		$this->assertContains( 'class-tests-beansisuri.php', $files );
+		$this->assertContains( 'class-tests-beansisurl.php', $files );
+		$this->assertContains( 'class-tests-beansjoinarrays.php', $files );
+		$this->assertContains( 'class-tests-beansscandir.php', $files );
 	}
 
 	/**

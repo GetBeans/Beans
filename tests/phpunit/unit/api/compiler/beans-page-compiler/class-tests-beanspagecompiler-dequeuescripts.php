@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the dequeue_scripts() method of _Beans_Page_Compiler.
+ * Tests for the dequeue_scripts() method of Beans_Page_Compiler.
  *
  * @package Beans\Framework\Tests\Unit\API\Compiler
  *
@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Unit\API\Compiler;
 
-use _Beans_Page_Compiler;
+use Beans_Page_Compiler;
 use Beans\Framework\Tests\Unit\API\Compiler\Includes\Page_Compiler_Test_Case;
 use Brain\Monkey;
 use Mockery;
@@ -26,24 +26,24 @@ require_once dirname( __DIR__ ) . '/includes/class-page-compiler-test-case.php';
 class Tests_BeansPageCompiler_DequeueScripts extends Page_Compiler_Test_Case {
 
 	/**
-	 * Test _Beans_Page_Compiler::dequeue_scripts() should not dequeue scripts when there are no scripts.
+	 * Test Beans_Page_Compiler::dequeue_scripts() should not dequeue scripts when there are no scripts.
 	 */
 	public function test_should_not_dequeue_scripts_when_no_scripts() {
 		Monkey\Functions\expect( 'beans_get' )->never();
 
 		// Run the test.
-		$this->assertNull( ( new _Beans_Page_Compiler() )->dequeue_scripts() );
+		$this->assertNull( ( new Beans_Page_Compiler() )->dequeue_scripts() );
 	}
 
 	/**
-	 * Test _Beans_Page_Compiler::dequeue_scripts() should not dequeue when no scripts are registered.
+	 * Test Beans_Page_Compiler::dequeue_scripts() should not dequeue when no scripts are registered.
 	 */
 	public function test_should_not_dequeue_when_no_scripts_registered() {
 		$assets   = $this->get_mock_assets( [ 'uikit' ] );
-		$compiler = new _Beans_Page_Compiler();
+		$compiler = new Beans_Page_Compiler();
 
 		// Set the scripts to be dequeued.
-		$dequeued_scripts = $this->get_reflective_property( 'dequeued_scripts', '_Beans_Page_Compiler' );
+		$dequeued_scripts = $this->get_reflective_property( 'dequeued_scripts', 'Beans_Page_Compiler' );
 		$dequeued_scripts->setValue( $compiler, [ 'uikit' => $assets->registered['uikit']->src ] );
 
 		// Set up the asset mocks.
@@ -57,14 +57,14 @@ class Tests_BeansPageCompiler_DequeueScripts extends Page_Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Page_Compiler::dequeue_scripts() should dequeue scripts.
+	 * Test Beans_Page_Compiler::dequeue_scripts() should dequeue scripts.
 	 */
 	public function test_should_dequeue_scripts() {
 		$assets   = $this->get_mock_assets( [ 'debug-bar', 'uikit' ] );
-		$compiler = new _Beans_Page_Compiler();
+		$compiler = new Beans_Page_Compiler();
 
 		// Set the scripts to be dequeued.
-		$dequeued_scripts = $this->get_reflective_property( 'dequeued_scripts', '_Beans_Page_Compiler' );
+		$dequeued_scripts = $this->get_reflective_property( 'dequeued_scripts', 'Beans_Page_Compiler' );
 		$dequeued_scripts->setValue(
 			$compiler,
 			[
@@ -91,15 +91,15 @@ class Tests_BeansPageCompiler_DequeueScripts extends Page_Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Page_Compiler::dequeue_scripts() should not print the inline localization when no scripts have
+	 * Test Beans_Page_Compiler::dequeue_scripts() should not print the inline localization when no scripts have
 	 * localized data.
 	 */
 	public function test_should_not_print_inline_when_no_scripts_have_localized_data() {
 		$assets   = $this->get_mock_assets( [ 'debug-bar', 'uikit' ] );
-		$compiler = new _Beans_Page_Compiler();
+		$compiler = new Beans_Page_Compiler();
 
 		// Set the scripts to be dequeued.
-		$dequeued_scripts = $this->get_reflective_property( 'dequeued_scripts', '_Beans_Page_Compiler' );
+		$dequeued_scripts = $this->get_reflective_property( 'dequeued_scripts', 'Beans_Page_Compiler' );
 		$dequeued_scripts->setValue(
 			$compiler,
 			[
@@ -125,14 +125,14 @@ class Tests_BeansPageCompiler_DequeueScripts extends Page_Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Page_Compiler::dequeue_scripts() should print the inline localization content.
+	 * Test Beans_Page_Compiler::dequeue_scripts() should print the inline localization content.
 	 */
 	public function test_should_print_inline_localization_content() {
 		$assets   = $this->get_mock_assets( [ 'debug-bar', 'uikit' ], true );
-		$compiler = new _Beans_Page_Compiler();
+		$compiler = new Beans_Page_Compiler();
 
 		// Set the scripts to be dequeued.
-		$dequeued_scripts = $this->get_reflective_property( 'dequeued_scripts', '_Beans_Page_Compiler' );
+		$dequeued_scripts = $this->get_reflective_property( 'dequeued_scripts', 'Beans_Page_Compiler' );
 		$dequeued_scripts->setValue(
 			$compiler,
 			[

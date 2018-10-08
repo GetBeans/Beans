@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Integration\API\HTML;
 
-use _Beans_Anonymous_Filters;
+use Beans_Anonymous_Filters;
 use Beans\Framework\Tests\Integration\API\HTML\Includes\HTML_Test_Case;
 
 require_once __DIR__ . '/includes/class-html-test-case.php';

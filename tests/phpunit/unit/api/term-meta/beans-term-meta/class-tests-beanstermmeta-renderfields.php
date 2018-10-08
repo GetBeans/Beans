@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the render_fields() method of _Beans_Term_Meta.
+ * Tests for the render_fields() method of Beans_Term_Meta.
  *
  * @package Beans\Framework\Tests\Unit\API\Term_Meta
  *
@@ -10,7 +10,7 @@
 namespace Beans\Framework\Tests\Unit\API\Term_Meta;
 
 use Beans\Framework\Tests\Unit\API\Term_Meta\Includes\Term_Meta_Test_Case;
-use _Beans_Term_Meta;
+use Beans_Term_Meta;
 use Brain\Monkey;
 
 require_once dirname( __DIR__ ) . '/includes/class-term-meta-test-case.php';
@@ -65,7 +65,7 @@ class Tests_BeansTermMeta_RenderFields extends Term_Meta_Test_Case {
 				}
 			);
 
-		$terms_meta = new _Beans_Term_Meta( 'tm-beans' );
+		$terms_meta = new Beans_Term_Meta( 'tm-beans' );
 
 		ob_start();
 		$terms_meta->render_fields();

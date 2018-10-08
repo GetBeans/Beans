@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the cache_file() method of _Beans_Compiler.
+ * Tests for the cache_file() method of Beans_Compiler.
  *
  * @package Beans\Framework\Tests\Integration\API\Compiler
  *
@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Integration\API\Compiler;
 
-use _Beans_Compiler;
+use Beans_Compiler;
 use Beans\Framework\Tests\Integration\API\Compiler\Includes\Compiler_Test_Case;
 use Mockery;
 use org\bovigo\vfs\vfsStream;
@@ -26,7 +26,7 @@ require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
 class Tests_BeansCompiler_CacheFile extends Compiler_Test_Case {
 
 	/**
-	 * Test _Beans_Compiler::cache_file() should create the compiled jQuery file.
+	 * Test Beans_Compiler::cache_file() should create the compiled jQuery file.
 	 */
 	public function test_should_create_compiled_jquery_file() {
 		$config   = [
@@ -48,7 +48,7 @@ class Tests_BeansCompiler_CacheFile extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::cache_file() should create the compiled JavaScript file.
+	 * Test Beans_Compiler::cache_file() should create the compiled JavaScript file.
 	 */
 	public function test_should_create_compiled_javascript_file() {
 		$config   = [
@@ -69,7 +69,7 @@ class Tests_BeansCompiler_CacheFile extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::cache_file() should create the compiled CSS file.
+	 * Test Beans_Compiler::cache_file() should create the compiled CSS file.
 	 */
 	public function test_should_create_compiled_css_file() {
 		$config   = [
@@ -88,7 +88,7 @@ class Tests_BeansCompiler_CacheFile extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::cache_file() should create the compiled LESS file.
+	 * Test Beans_Compiler::cache_file() should create the compiled LESS file.
 	 */
 	public function test_should_create_compiled_less_file() {
 		$config   = [
@@ -117,11 +117,11 @@ class Tests_BeansCompiler_CacheFile extends Compiler_Test_Case {
 	 *
 	 * @param array $config Array of runtime configuration parameters.
 	 *
-	 * @return _Beans_Compiler
+	 * @return Beans_Compiler
 	 * @throws \ReflectionException Throws an error.
 	 */
 	protected function initialize_compiler( array $config ) {
-		$compiler = new _Beans_Compiler( $config );
+		$compiler = new Beans_Compiler( $config );
 
 		add_filter( 'filesystem_method', [ $compiler, 'modify_filesystem_method' ] );
 		$compiler->filesystem();

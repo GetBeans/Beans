@@ -128,7 +128,7 @@ function _beans_compile_fragments( $id, $format, $fragments, array $args = array
 		'fragments' => (array) $fragments,
 	);
 
-	$compiler = new _Beans_Compiler( $config + $args );
+	$compiler = new Beans_Compiler( $config + $args );
 	$compiler->run_compiler();
 }
 
@@ -287,15 +287,15 @@ add_action( 'beans_loaded_api_component_compiler', 'beans_add_compiler_options_t
  *
  * @since 1.5.0
  *
- * @return _Beans_Compiler_Options|void
+ * @return Beans_Compiler_Options|void
  */
 function beans_add_compiler_options_to_settings() {
 
-	if ( ! class_exists( '_Beans_Compiler_Options' ) ) {
+	if ( ! class_exists( 'Beans_Compiler_Options' ) ) {
 		return;
 	}
 
-	$instance = new _Beans_Compiler_Options();
+	$instance = new Beans_Compiler_Options();
 	$instance->init();
 
 	return $instance;
@@ -307,15 +307,15 @@ add_action( 'beans_loaded_api_component_compiler', 'beans_add_page_assets_compil
  *
  * @since 1.5.0
  *
- * @return _Beans_Page_Compiler|void
+ * @return Beans_Page_Compiler|void
  */
 function beans_add_page_assets_compiler() {
 
-	if ( ! class_exists( '_Beans_Page_Compiler' ) ) {
+	if ( ! class_exists( 'Beans_Page_Compiler' ) ) {
 		return;
 	}
 
-	$instance = new _Beans_Page_Compiler();
+	$instance = new Beans_Page_Compiler();
 	$instance->init();
 
 	return $instance;

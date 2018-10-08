@@ -101,7 +101,8 @@ class Tests_BeansPathToUrl extends Test_Case {
 		Functions\expect( 'site_url' )->andReturn( $url );
 		$url .= $this->beans_tests_relative_path;
 
-		$this->assertSame( "{$url}/api/utilities/beansPathToUrl.php", beans_path_to_url( __FILE__, true ) );
+		$this->assertSame( "{$url}/api/utilities/class-tests-beanspathtourl.php", beans_path_to_url( __FILE__, true
+		) );
 		$this->assertSame( "{$url}/api/utilities", beans_path_to_url( __DIR__, true ) );
 	}
 
@@ -131,7 +132,7 @@ class Tests_BeansPathToUrl extends Test_Case {
 		Functions\expect( 'site_url' )->andReturn( $url );
 		$url .= $this->beans_tests_relative_path;
 
-		$this->assertSame( "{$url}/api/utilities/beansPathToUrl.php", beans_path_to_url( __FILE__, true ) );
+		$this->assertSame( "{$url}/api/utilities/class-tests-beanspathtourl.php", beans_path_to_url( __FILE__, true ) );
 		$this->assertSame( "{$url}/api/utilities", beans_path_to_url( __DIR__, true ) );
 	}
 
@@ -161,7 +162,8 @@ class Tests_BeansPathToUrl extends Test_Case {
 		Functions\expect( 'site_url' )->andReturn( $url . '/' );
 		$url .= $this->beans_tests_relative_path;
 
-		$this->assertSame( "{$url}/api/utilities/beansPathToUrl.php", beans_path_to_url( __FILE__, true ) );
+		$this->assertSame( "{$url}/api/utilities/class-tests-beanspathtourl.php", beans_path_to_url( __FILE__, true
+		) );
 		$this->assertSame( "{$url}/api/utilities", beans_path_to_url( __DIR__, true ) );
 	}
 
@@ -191,7 +193,7 @@ class Tests_BeansPathToUrl extends Test_Case {
 		Functions\expect( 'site_url' )->andReturn( $url . '/' );
 		$url .= $this->beans_tests_relative_path;
 
-		$this->assertSame( "{$url}/api/utilities/beansPathToUrl.php", beans_path_to_url( __FILE__, true ) );
+		$this->assertSame( "{$url}/api/utilities/class-tests-beanspathtourl.php", beans_path_to_url( __FILE__, true ) );
 		$this->assertSame( "{$url}/api/utilities", beans_path_to_url( __DIR__, true ) );
 	}
 
@@ -261,7 +263,7 @@ class Tests_BeansPathToUrl extends Test_Case {
 
 		Functions\expect( 'site_url' )->once()->andReturn( 'https://getbeans.io' );
 		$this->assertSame(
-			'https://getbeans.io' . $this->beans_tests_relative_path . '/api/utilities/beansPathToUrl.php',
+			'https://getbeans.io' . $this->beans_tests_relative_path . '/api/utilities/class-tests-beanspathtourl.php',
 			beans_path_to_url( __FILE__, true )
 		);
 
@@ -286,7 +288,7 @@ class Tests_BeansPathToUrl extends Test_Case {
 
 		Functions\expect( 'site_url' )->once()->andReturn( 'https://8.8.8.8' );
 		$this->assertSame(
-			'https://8.8.8.8' . $this->beans_tests_relative_path . '/api/utilities/beansPathToUrl.php',
+			'https://8.8.8.8' . $this->beans_tests_relative_path . '/api/utilities/class-tests-beanspathtourl.php',
 			beans_path_to_url( __FILE__, true )
 		);
 

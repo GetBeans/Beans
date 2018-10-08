@@ -30,8 +30,8 @@ class Tests_BeansAddAttribute extends HTML_Test_Case {
 		foreach ( static::$test_attributes as $beans_id => $markup ) {
 			$instance = beans_add_attribute( $beans_id, 'data-test', 'test' );
 
-			// Check that it returns an instance of _Beans_Attribute.
-			$this->assertInstanceOf( \_Beans_Attribute::class, $instance );
+			// Check that it returns an instance of Beans_Attribute.
+			$this->assertInstanceOf( \Beans_Attribute::class, $instance );
 
 			// Check that the object's "add" method is registered to the filter event for the given ID.
 			$this->assertSame( 10, has_filter( "{$beans_id}_attributes", [ $instance, 'add' ], 10 ) );

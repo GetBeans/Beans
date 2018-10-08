@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the register() method of _Beans_Image_Options.
+ * Tests for the register() method of Beans_Image_Options.
  *
  * @package Beans\Framework\Test\Integration\API\Image
  *
@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Integration\API\Image;
 
-use _Beans_Image_Options;
+use Beans_Image_Options;
 use Beans\Framework\Tests\Integration\API\Image\Includes\Options_Test_Case;
 
 require_once dirname( __DIR__ ) . '/includes/class-options-test-case.php';
@@ -48,7 +48,7 @@ class Tests_BeansImageOptions_Register extends Options_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Image_Options::register() should register the options with column context when other metaboxes are
+	 * Test Beans_Image_Options::register() should register the options with column context when other metaboxes are
 	 * registered.
 	 */
 	public function test_should_register_options_with_column_context_when_other_metaboxes_are_registered() {
@@ -57,7 +57,7 @@ class Tests_BeansImageOptions_Register extends Options_Test_Case {
 		global $wp_meta_boxes;
 		$wp_meta_boxes = [ 'beans_settings' => [ 'foo' ] ]; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.OverrideProhibited -- Valid use case to set up the test.
 
-		$this->assertTrue( ( new _Beans_Image_Options() )->register() );
+		$this->assertTrue( ( new Beans_Image_Options() )->register() );
 
 		// Check that the right fields did get registered.
 		$registered_fields = beans_get_fields( 'option', 'images_options' );
@@ -80,13 +80,13 @@ class Tests_BeansImageOptions_Register extends Options_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Image_Options::register() should register the options with normal context when no metaboxes are
+	 * Test Beans_Image_Options::register() should register the options with normal context when no metaboxes are
 	 * registered.
 	 */
 	public function test_should_register_options_with_normal_context_when_no_metaboxes_are_registered() {
 		$this->go_to_settings_page();
 
-		$this->assertTrue( ( new _Beans_Image_Options() )->register() );
+		$this->assertTrue( ( new Beans_Image_Options() )->register() );
 
 		// Check that the right fields did get registered.
 		$registered_fields = beans_get_fields( 'option', 'images_options' );

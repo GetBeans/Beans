@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the set_fragments() method of _Beans_Compiler.
+ * Tests for the set_fragments() method of Beans_Compiler.
  *
  * @package Beans\Framework\Tests\Unit\API\Compiler
  *
@@ -25,7 +25,7 @@ require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
 class Tests_BeansCompiler_SetFragments extends Compiler_Test_Case {
 
 	/**
-	 * Test _Beans_Compiler::set_fragments() should return unchanged fragments, meaning no fragments were added or
+	 * Test Beans_Compiler::set_fragments() should return unchanged fragments, meaning no fragments were added or
 	 * removed.
 	 */
 	public function test_should_return_unchanged_fragments() {
@@ -56,7 +56,7 @@ class Tests_BeansCompiler_SetFragments extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::set_fragments() should return fragments merged with the fragments stored in the global
+	 * Test Beans_Compiler::set_fragments() should return fragments merged with the fragments stored in the global
 	 * variable.
 	 */
 	public function test_should_return_fragments_merged_with_global() {
@@ -95,7 +95,7 @@ class Tests_BeansCompiler_SetFragments extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::set_fragments() should fire the "beans_compiler_fragments_{id}" event.
+	 * Test Beans_Compiler::set_fragments() should fire the "beans_compiler_fragments_{id}" event.
 	 */
 	public function test_should_fire_event() {
 		$config = [

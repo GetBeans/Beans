@@ -29,7 +29,7 @@
  */
 function beans_edit_image( $src, array $args, $output = 'STRING' ) {
 	require_once BEANS_API_PATH . 'image/class-beans-image-editor.php';
-	$editor = new _Beans_Image_Editor( $src, $args, $output );
+	$editor = new Beans_Image_Editor( $src, $args, $output );
 	return $editor->run();
 }
 
@@ -125,15 +125,15 @@ add_action( 'beans_loaded_api_component_image', 'beans_add_image_options_to_sett
  *
  * @since 1.5.0
  *
- * @return _Beans_Image_Options|void
+ * @return Beans_Image_Options|void
  */
 function beans_add_image_options_to_settings() {
 
-	if ( ! class_exists( '_Beans_Image_Options' ) ) {
+	if ( ! class_exists( 'Beans_Image_Options' ) ) {
 		return;
 	}
 
-	$instance = new _Beans_Image_Options();
+	$instance = new Beans_Image_Options();
 	$instance->init();
 
 	return $instance;

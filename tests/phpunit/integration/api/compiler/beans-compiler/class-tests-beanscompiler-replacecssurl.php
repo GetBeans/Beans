@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the replace_css_url() method of _Beans_Compiler.
+ * Tests for the replace_css_url() method of Beans_Compiler.
  *
  * @package Beans\Framework\Tests\Integration\API\Compiler
  *
@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Integration\API\Compiler;
 
-use _Beans_Compiler;
+use Beans_Compiler;
 use Beans\Framework\Tests\Integration\API\Compiler\Includes\Compiler_Test_Case;
 
 require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
@@ -24,10 +24,10 @@ require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
 class Tests_BeansCompiler_ReplaceCssUrl extends Compiler_Test_Case {
 
 	/**
-	 * Test _Beans_Compiler::replace_css_url() should return original content when there is no url source in the CSS.
+	 * Test Beans_Compiler::replace_css_url() should return original content when there is no url source in the CSS.
 	 */
 	public function test_should_return_original_content_when_no_url() {
-		$compiler = new _Beans_Compiler( [] );
+		$compiler = new Beans_Compiler( [] );
 		$css      = <<<EOB
 .home-page .tm-header {
     background-color: #195B7D;
@@ -46,10 +46,10 @@ EOB;
 	}
 
 	/**
-	 * Test _Beans_Compiler::replace_css_url() should return original content when it has a valid URI.
+	 * Test Beans_Compiler::replace_css_url() should return original content when it has a valid URI.
 	 */
 	public function test_should_return_original_content_when_valid_uri() {
-		$compiler = new _Beans_Compiler( [] );
+		$compiler = new Beans_Compiler( [] );
 		$css      = <<<EOB
 .hero-section {
     background: linear-gradient(rgba(255, 255, 255, 0.8) 100%, #fff),
@@ -64,10 +64,10 @@ EOB;
 	}
 
 	/**
-	 * Test _Beans_Compiler::replace_css_url() should convert the relative URL when it does not have ../.
+	 * Test Beans_Compiler::replace_css_url() should convert the relative URL when it does not have ../.
 	 */
 	public function test_should_convert_relative_url_when_no_up_levels() {
-		$compiler = new _Beans_Compiler( [] );
+		$compiler = new Beans_Compiler( [] );
 
 		// Set up the mocks.
 		$this->set_current_fragment( $compiler, 'http://foo.com/assets/less/hero.less' );
@@ -88,10 +88,10 @@ EOB;
 	}
 
 	/**
-	 * Test _Beans_Compiler::replace_css_url() should convert the relative URL.
+	 * Test Beans_Compiler::replace_css_url() should convert the relative URL.
 	 */
 	public function test_should_convert_relative_url() {
-		$compiler = new _Beans_Compiler( [] );
+		$compiler = new Beans_Compiler( [] );
 
 		// Set up the mocks.
 		$this->set_current_fragment( $compiler, 'http://foo.com/assets/less/hero.less' );
@@ -140,10 +140,10 @@ EOB;
 	}
 
 	/**
-	 * Test _Beans_Compiler::replace_css_url() should convert a deeper relative URL.
+	 * Test Beans_Compiler::replace_css_url() should convert a deeper relative URL.
 	 */
 	public function test_should_convert_deeper_relative_url() {
-		$compiler = new _Beans_Compiler( [] );
+		$compiler = new Beans_Compiler( [] );
 
 		// Set up the mocks.
 		$this->set_current_fragment( $compiler, 'http://example.com/assets/less/partials/hero.less' );
@@ -196,7 +196,7 @@ EOB;
 	 *
 	 * @since 1.5.0
 	 *
-	 * @param _Beans_Compiler $compiler The Compiler instance.
+	 * @param Beans_Compiler $compiler The Compiler instance.
 	 * @param mixed           $fragment The given value to set.
 	 *
 	 * @return void

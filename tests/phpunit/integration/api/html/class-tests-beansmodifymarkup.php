@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Integration\API\HTML;
 
-use _Beans_Anonymous_Filters;
+use Beans_Anonymous_Filters;
 use Beans\Framework\Tests\Integration\API\HTML\Includes\HTML_Test_Case;
 
 require_once __DIR__ . '/includes/class-html-test-case.php';
@@ -24,10 +24,10 @@ require_once __DIR__ . '/includes/class-html-test-case.php';
 class Tests_BeansModifyMarkup extends HTML_Test_Case {
 
 	/**
-	 * Test beans_modify_markup() should return a _Beans_Anonymous_Filters instance.
+	 * Test beans_modify_markup() should return a Beans_Anonymous_Filters instance.
 	 */
 	public function test_should_return_anonymous_filter_instance() {
-		$this->assertInstanceOf( _Beans_Anonymous_Filters::class, beans_modify_markup( 'beans_archive_title', 'h2' ) );
+		$this->assertInstanceOf( Beans_Anonymous_Filters::class, beans_modify_markup( 'beans_archive_title', 'h2' ) );
 	}
 
 	/**

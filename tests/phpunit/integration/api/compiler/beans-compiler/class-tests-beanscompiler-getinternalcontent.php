@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the get_internal_content() method of _Beans_Compiler.
+ * Tests for the get_internal_content() method of Beans_Compiler.
  *
  * @package Beans\Framework\Tests\Integration\API\Compiler
  *
@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Integration\API\Compiler;
 
-use _Beans_Compiler;
+use Beans_Compiler;
 use Beans\Framework\Tests\Integration\API\Compiler\Includes\Compiler_Test_Case;
 use org\bovigo\vfs\vfsStream;
 
@@ -25,22 +25,22 @@ require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
 class Tests_BeansCompiler_GetInternalContent extends Compiler_Test_Case {
 
 	/**
-	 * Test _Beans_Compiler::get_internal_content() should return false when fragment is empty.
+	 * Test Beans_Compiler::get_internal_content() should return false when fragment is empty.
 	 */
 	public function test_should_return_false_when_fragment_is_empty() {
-		$compiler = new _Beans_Compiler( [] );
+		$compiler = new Beans_Compiler( [] );
 
 		// Run the test.
 		$this->assertfalse( $compiler->get_internal_content( '' ) );
 	}
 
 	/**
-	 * Test _Beans_Compiler::get_internal_content() should return false when the file does not exist.
+	 * Test Beans_Compiler::get_internal_content() should return false when the file does not exist.
 	 */
 	public function test_should_return_false_when_file_does_not_exist() {
 		// Set up the compiler.
 		$fragment = vfsStream::url( 'compiled/fixtures/' ) . 'invalid-file.js';
-		$compiler = new _Beans_Compiler(
+		$compiler = new Beans_Compiler(
 			[
 				'fragments' => [ $fragment ],
 			]
@@ -52,12 +52,12 @@ class Tests_BeansCompiler_GetInternalContent extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::get_internal_content() should return a fragment's contents.
+	 * Test Beans_Compiler::get_internal_content() should return a fragment's contents.
 	 */
 	public function test_should_return_fragment_contents() {
 		// Set up the compiler.
 		$fragment = vfsStream::url( 'compiled/fixtures/test.less' );
-		$compiler = new _Beans_Compiler(
+		$compiler = new Beans_Compiler(
 			[
 				'fragments' => [ $fragment ],
 			]

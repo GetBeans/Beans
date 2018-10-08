@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the render_fields() methods of _Beans_Term_Meta.
+ * Tests for the render_fields() methods of Beans_Term_Meta.
  *
  * @package Beans\Framework\Tests\Integration\API\Term_Meta
  *
@@ -10,7 +10,7 @@
 namespace Beans\Framework\Tests\Integration\API\Term_Meta;
 
 use Beans\Framework\Tests\Integration\API\Term_Meta\Includes\Term_Meta_Test_Case;
-use _Beans_Term_Meta;
+use Beans_Term_Meta;
 
 require_once BEANS_THEME_DIR . '/lib/api/term-meta/class-beans-term-meta.php';
 require_once BEANS_THEME_DIR . '/lib/api/term-meta/functions-admin.php';
@@ -26,7 +26,7 @@ require_once dirname( __DIR__ ) . '/includes/class-term-meta-test-case.php';
 class Tests_BeansTermMeta_RenderFields extends Term_Meta_Test_Case {
 
 	/**
-	 * Tests _Beans_Term_Meta::render_fields() should render field html.
+	 * Tests Beans_Term_Meta::render_fields() should render field html.
 	 */
 	public function test_should_render_field_html() {
 		// Register Beans actions to render fields.
@@ -44,7 +44,7 @@ class Tests_BeansTermMeta_RenderFields extends Term_Meta_Test_Case {
 		beans_register_term_meta( static::$test_data['fields'], 'category', 'tm-beans' );
 
 		// Call the render_fields() method and capture the output.
-		$term_meta = new _Beans_Term_Meta( 'tm-beans' );
+		$term_meta = new Beans_Term_Meta( 'tm-beans' );
 		ob_start();
 		$term_meta->render_fields();
 		$html = ob_get_clean();

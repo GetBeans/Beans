@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the render_metabox_content() method of _Beans_Post_Meta.
+ * Tests for the render_metabox_content() method of Beans_Post_Meta.
  *
  * @package Beans\Framework\Tests\Unit\API\Post_Meta.
  *
@@ -10,7 +10,7 @@
 namespace Beans\Framework\Tests\Unit\API\Post_Meta;
 
 use Beans\Framework\Tests\Unit\API\Post_Meta\Includes\Post_Meta_Test_Case;
-use _Beans_Post_Meta;
+use Beans_Post_Meta;
 use Brain\Monkey;
 
 require_once dirname( __DIR__ ) . '/includes/class-post-meta-test-case.php';
@@ -25,7 +25,7 @@ require_once dirname( __DIR__ ) . '/includes/class-post-meta-test-case.php';
 class Tests_BeansPostMeta_RenderMetaboxContent extends Post_Meta_Test_Case {
 
 	/**
-	 * Test _Beans_Post_Meta::render_metabox_content() should output post meta fields markup.
+	 * Test Beans_Post_Meta::render_metabox_content() should output post meta fields markup.
 	 */
 	public function test_metabox_content_should_output_fields_markup() {
 		$field = [
@@ -37,7 +37,7 @@ class Tests_BeansPostMeta_RenderMetaboxContent extends Post_Meta_Test_Case {
 			'options' => 'options html from layout options callback',
 		];
 
-		$post_meta = new _Beans_Post_Meta( 'tm-beans', [ 'title' => 'Post Options' ] );
+		$post_meta = new Beans_Post_Meta( 'tm-beans', [ 'title' => 'Post Options' ] );
 
 		Monkey\Functions\expect( 'beans_get_fields' )
 			->once()

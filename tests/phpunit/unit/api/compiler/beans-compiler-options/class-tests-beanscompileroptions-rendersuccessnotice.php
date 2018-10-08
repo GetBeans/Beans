@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the render_success_notice() method of _Beans_Compiler_Options.
+ * Tests for the render_success_notice() method of Beans_Compiler_Options.
  *
  * @package Beans\Framework\Tests\Unit\API\Compiler
  *
@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Unit\API\Compiler;
 
-use _Beans_Compiler_Options;
+use Beans_Compiler_Options;
 use Beans\Framework\Tests\Unit\API\Compiler\Includes\Compiler_Options_Test_Case;
 use Brain\Monkey;
 
@@ -25,7 +25,7 @@ require_once dirname( __DIR__ ) . '/includes/class-compiler-options-test-case.ph
 class Tests_BeansCompilerOptions_RenderSuccessNotice extends Compiler_Options_Test_Case {
 
 	/**
-	 * Test _Beans_Compiler_Options::render_success_notice() should not render when not flushing compiler cache.
+	 * Test Beans_Compiler_Options::render_success_notice() should not render when not flushing compiler cache.
 	 */
 	public function test_should_not_render_when_not_flushing_compiler_cache() {
 		Monkey\Functions\expect( 'beans_post' )
@@ -35,13 +35,13 @@ class Tests_BeansCompilerOptions_RenderSuccessNotice extends Compiler_Options_Te
 		Monkey\Functions\expect( 'esc_html_e' )->never();
 
 		ob_start();
-		( new _Beans_Compiler_Options() )->render_success_notice();
+		( new Beans_Compiler_Options() )->render_success_notice();
 
 		$this->assertEmpty( ob_get_clean() );
 	}
 
 	/**
-	 * Test _Beans_Compiler_Options::render_success_notice() should render when flushing compiler cache.
+	 * Test Beans_Compiler_Options::render_success_notice() should render when flushing compiler cache.
 	 */
 	public function test_should_render_when_flushing_compiler_cache() {
 		Monkey\Functions\expect( 'beans_post' )
@@ -49,7 +49,7 @@ class Tests_BeansCompilerOptions_RenderSuccessNotice extends Compiler_Options_Te
 			->with( 'beans_flush_compiler_cache' )
 			->andReturn( true );
 		ob_start();
-		( new _Beans_Compiler_Options() )->render_success_notice();
+		( new Beans_Compiler_Options() )->render_success_notice();
 		$actual = ob_get_clean();
 
 		$expected = <<<EOB

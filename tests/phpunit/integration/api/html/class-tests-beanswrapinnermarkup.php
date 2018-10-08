@@ -30,7 +30,7 @@ class Tests_BeansWrapInnerMarkup extends HTML_Test_Case {
 	 * @param string $hook     To given hook's event name.
 	 * @param int    $priority The priority number for the callback.
 	 *
-	 * @return \_Beans_Anonymous_Action
+	 * @return \Beans_Anonymous_Action
 	 */
 	protected function get_instance_from_wp( $hook, $priority ) {
 		global $wp_filter;

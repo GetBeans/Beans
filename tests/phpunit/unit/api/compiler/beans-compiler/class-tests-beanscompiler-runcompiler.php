@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the run_compiler() method of _Beans_Compiler.
+ * Tests for the run_compiler() method of Beans_Compiler.
  *
  * @package Beans\Framework\Tests\Unit\API\Compiler
  *
@@ -66,7 +66,7 @@ class Tests_BeansCompiler_RunCompiler extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::run_compiler() should enqueue the existing cached file when no modifications (no fragments
+	 * Test Beans_Compiler::run_compiler() should enqueue the existing cached file when no modifications (no fragments
 	 * have changed to warrant re-compiling the file).
 	 */
 	public function test_should_enqueue_existing_cached_file_when_no_modifications() {
@@ -121,7 +121,7 @@ class Tests_BeansCompiler_RunCompiler extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::run_compiler() should recompile when a fragment(s) changes.  When this happens, the existing
+	 * Test Beans_Compiler::run_compiler() should recompile when a fragment(s) changes.  When this happens, the existing
 	 * cached file is removed and the new file is stored in the filesystem.
 	 */
 	public function test_should_recompile_when_fragments_change() {
@@ -197,7 +197,7 @@ class Tests_BeansCompiler_RunCompiler extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::run_compiler() should compile jQuery, saving it to the virtual filesystem and enqueuing it
+	 * Test Beans_Compiler::run_compiler() should compile jQuery, saving it to the virtual filesystem and enqueuing it
 	 * in WordPress.
 	 */
 	public function test_should_compile_save_and_enqueue_jquery() {
@@ -227,7 +227,7 @@ class Tests_BeansCompiler_RunCompiler extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::run_compiler() should compile JavaScript, saving it to the virtual filesystem and enqueuing
+	 * Test Beans_Compiler::run_compiler() should compile JavaScript, saving it to the virtual filesystem and enqueuing
 	 * it in WordPress.
 	 */
 	public function test_should_compile_save_and_enqueue_js() {
@@ -257,7 +257,7 @@ class Tests_BeansCompiler_RunCompiler extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::run_compiler() should compile CSS, saving it to the virtual filesystem and enqueuing it in
+	 * Test Beans_Compiler::run_compiler() should compile CSS, saving it to the virtual filesystem and enqueuing it in
 	 * WordPress.
 	 */
 	public function test_should_compile_save_and_enqueue_css() {
@@ -287,7 +287,7 @@ class Tests_BeansCompiler_RunCompiler extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::run_compiler() should compile Less, saving it to the virtual filesystem and enqueuing it in
+	 * Test Beans_Compiler::run_compiler() should compile Less, saving it to the virtual filesystem and enqueuing it in
 	 * WordPress.
 	 */
 	public function test_should_compile_save_and_enqueue_less() {
@@ -323,13 +323,13 @@ class Tests_BeansCompiler_RunCompiler extends Compiler_Test_Case {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param \_Beans_Compiler $compiler Instance of the compiler.
+	 * @param \Beans_Compiler $compiler Instance of the compiler.
 	 * @param array            $config   Compiler's configuration parameters.
 	 * @param string           $fragment The fragment.
 	 *
 	 * @return string
 	 */
-	protected function get_cache_filename( \_Beans_Compiler $compiler, array $config, $fragment = '' ) {
+	protected function get_cache_filename( \Beans_Compiler $compiler, array $config, $fragment = '' ) {
 		$this->add_virtual_directory( $config['id'] );
 
 		return vfsStream::url(
@@ -346,7 +346,7 @@ class Tests_BeansCompiler_RunCompiler extends Compiler_Test_Case {
 	 *
 	 * @since 1.5.0
 	 *
-	 * @param _Beans_Compiler $compiler    Instance of the compiler.
+	 * @param Beans_Compiler $compiler    Instance of the compiler.
 	 * @param array           $config      The compiler's configuration.
 	 * @param string          $file        The absolute path to the compiled file.
 	 * @param string          $content     Optional. The expected compiled content.
@@ -418,7 +418,7 @@ class Tests_BeansCompiler_RunCompiler extends Compiler_Test_Case {
 	 *
 	 * @since 1.5.0
 	 *
-	 * @param _Beans_Compiler $compiler Instance of the compiler.
+	 * @param Beans_Compiler $compiler Instance of the compiler.
 	 *
 	 * @return string
 	 */

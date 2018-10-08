@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the compile_page_styles() method of _Beans_Page_Compiler.
+ * Tests for the compile_page_styles() method of Beans_Page_Compiler.
  *
  * @package Beans\Framework\Tests\Integration\API\Compiler
  *
@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Integration\API\Compiler;
 
-use _Beans_Page_Compiler;
+use Beans_Page_Compiler;
 use Beans\Framework\Tests\Integration\API\Compiler\Includes\Page_Compiler_Test_Case;
 use Brain\Monkey;
 
@@ -42,7 +42,7 @@ class Tests_BeansPageCompiler_CompilePageStyles extends Page_Compiler_Test_Case 
 	}
 
 	/**
-	 * Test _Beans_Page_Compiler::compile_page_styles() should not compile when the styles compiler is not supported.
+	 * Test Beans_Page_Compiler::compile_page_styles() should not compile when the styles compiler is not supported.
 	 */
 	public function test_should_not_compile_when_styles_compiler_not_supported() {
 		beans_remove_api_component_support( 'wp_styles_compiler' );
@@ -53,11 +53,11 @@ class Tests_BeansPageCompiler_CompilePageStyles extends Page_Compiler_Test_Case 
 		Monkey\Functions\expect( 'beans_compile_css_fragments' )->never();
 
 		// Run the tests.
-		$this->assertNull( ( new _Beans_Page_Compiler() )->compile_page_styles() );
+		$this->assertNull( ( new Beans_Page_Compiler() )->compile_page_styles() );
 	}
 
 	/**
-	 * Test _Beans_Page_Compiler::compile_page_styles() should not compile when the "compile all styles" option is not
+	 * Test Beans_Page_Compiler::compile_page_styles() should not compile when the "compile all styles" option is not
 	 * set.
 	 */
 	public function test_should_not_compile_when_option_is_not_set() {
@@ -68,11 +68,11 @@ class Tests_BeansPageCompiler_CompilePageStyles extends Page_Compiler_Test_Case 
 		Monkey\Functions\expect( 'beans_compile_css_fragments' )->never();
 
 		// Run the tests.
-		$this->assertNull( ( new _Beans_Page_Compiler() )->compile_page_styles() );
+		$this->assertNull( ( new Beans_Page_Compiler() )->compile_page_styles() );
 	}
 
 	/**
-	 * Test _Beans_Page_Compiler::compile_page_styles() should not compile when in dev mode.
+	 * Test Beans_Page_Compiler::compile_page_styles() should not compile when in dev mode.
 	 */
 	public function test_should_not_compile_when_in_dev_mode() {
 		beans_add_api_component_support( 'wp_styles_compiler' );
@@ -82,11 +82,11 @@ class Tests_BeansPageCompiler_CompilePageStyles extends Page_Compiler_Test_Case 
 		Monkey\Functions\expect( 'beans_compile_css_fragments' )->never();
 
 		// Run the tests.
-		$this->assertNull( ( new _Beans_Page_Compiler() )->compile_page_styles() );
+		$this->assertNull( ( new Beans_Page_Compiler() )->compile_page_styles() );
 	}
 
 	/**
-	 * Test _Beans_Page_Compiler::compile_page_styles() should not compile when there are no styles.
+	 * Test Beans_Page_Compiler::compile_page_styles() should not compile when there are no styles.
 	 */
 	public function test_should_not_compile_when_there_are_no_styles() {
 		beans_add_api_component_support( 'wp_styles_compiler' );
@@ -97,11 +97,11 @@ class Tests_BeansPageCompiler_CompilePageStyles extends Page_Compiler_Test_Case 
 
 		// Run the tests.
 		$this->assertEmpty( $GLOBALS['wp_styles']->queue );
-		$this->assertNull( ( new _Beans_Page_Compiler() )->compile_page_styles() );
+		$this->assertNull( ( new Beans_Page_Compiler() )->compile_page_styles() );
 	}
 
 	/**
-	 * Test _Beans_Page_Compiler::compile_page_styles() should not compile when assets are admin bar only.
+	 * Test Beans_Page_Compiler::compile_page_styles() should not compile when assets are admin bar only.
 	 */
 	public function test_should_not_compile_when_assets_are_admin_bar_only() {
 		beans_add_api_component_support( 'wp_styles_compiler' );
@@ -122,11 +122,11 @@ class Tests_BeansPageCompiler_CompilePageStyles extends Page_Compiler_Test_Case 
 		$this->assertContains( 'dashicons', $GLOBALS['wp_styles']->queue );
 
 		// Run the tests.
-		$this->assertNull( ( new _Beans_Page_Compiler() )->compile_page_styles() );
+		$this->assertNull( ( new Beans_Page_Compiler() )->compile_page_styles() );
 	}
 
 	/**
-	 * Test _Beans_Page_Compiler::compile_page_styles() should not compile when the style is not registered.
+	 * Test Beans_Page_Compiler::compile_page_styles() should not compile when the style is not registered.
 	 */
 	public function test_should_not_compile_when_style_is_not_registered() {
 		beans_add_api_component_support( 'wp_styles_compiler' );
@@ -139,11 +139,11 @@ class Tests_BeansPageCompiler_CompilePageStyles extends Page_Compiler_Test_Case 
 		wp_enqueue_style( 'admin-bar' );
 
 		// Run the tests.
-		$this->assertNull( ( new _Beans_Page_Compiler() )->compile_page_styles() );
+		$this->assertNull( ( new Beans_Page_Compiler() )->compile_page_styles() );
 	}
 
 	/**
-	 * Test _Beans_Page_Compiler::compile_page_styles() should compile when the style has src but no dependencies.
+	 * Test Beans_Page_Compiler::compile_page_styles() should compile when the style has src but no dependencies.
 	 */
 	public function test_should_compile_when_style_has_src_but_no_deps() {
 		beans_add_api_component_support( 'wp_styles_compiler' );
@@ -170,14 +170,14 @@ class Tests_BeansPageCompiler_CompilePageStyles extends Page_Compiler_Test_Case 
 			->andReturnNull();
 
 		// Run the tests.
-		$this->assertNull( ( new _Beans_Page_Compiler() )->compile_page_styles() );
+		$this->assertNull( ( new Beans_Page_Compiler() )->compile_page_styles() );
 
 		// Check the asset's done state.
 		$this->assertSame( [ 'test-compiler-css', 'test-uikit-css' ], $GLOBALS['wp_styles']->done );
 	}
 
 	/**
-	 * Test _Beans_Page_Compiler::compile_page_styles() should add the query arg to the compiled style's src.
+	 * Test Beans_Page_Compiler::compile_page_styles() should add the query arg to the compiled style's src.
 	 */
 	public function test_should_add_query_arg_to_compiled_style_src() {
 		beans_add_api_component_support( 'wp_styles_compiler' );
@@ -202,14 +202,14 @@ class Tests_BeansPageCompiler_CompilePageStyles extends Page_Compiler_Test_Case 
 			->andReturnNull();
 
 		// Run the tests.
-		$this->assertNull( ( new _Beans_Page_Compiler() )->compile_page_styles() );
+		$this->assertNull( ( new Beans_Page_Compiler() )->compile_page_styles() );
 
 		// Check the asset's done state.
 		$this->assertSame( [ 'test-compiler-css', 'test-uikit-css' ], $GLOBALS['wp_styles']->done );
 	}
 
 	/**
-	 * Test _Beans_Page_Compiler::compile_page_styles() should compile styles and dependencies.
+	 * Test Beans_Page_Compiler::compile_page_styles() should compile styles and dependencies.
 	 */
 	public function test_should_compile_styles_and_deps() {
 		beans_add_api_component_support( 'wp_styles_compiler' );
@@ -236,7 +236,7 @@ class Tests_BeansPageCompiler_CompilePageStyles extends Page_Compiler_Test_Case 
 			->andReturnNull();
 
 		// Run the tests.
-		$this->assertNull( ( new _Beans_Page_Compiler() )->compile_page_styles() );
+		$this->assertNull( ( new Beans_Page_Compiler() )->compile_page_styles() );
 
 		// Check the asset's done state.
 		$this->assertSame( [ 'test-compiler-css', 'test-uikit-css' ], $GLOBALS['wp_styles']->done );

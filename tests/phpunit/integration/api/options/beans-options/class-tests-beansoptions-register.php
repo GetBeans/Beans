@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the register() method of _Beans_Options.
+ * Tests for the register() method of Beans_Options.
  *
  * @package Beans\Framework\Tests\Integration\API\Options
  *
@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Integration\API\Options;
 
-use _Beans_Options;
+use Beans_Options;
 use Beans\Framework\Tests\Integration\API\Options\Includes\Options_Test_Case;
 
 require_once dirname( __DIR__ ) . '/includes/class-options-test-case.php';
@@ -24,10 +24,10 @@ require_once dirname( __DIR__ ) . '/includes/class-options-test-case.php';
 class Tests_BeansOptions_Register extends Options_Test_Case {
 
 	/**
-	 * Test _Beans_Options::register() should register the callback to the 'admin_enqueue_scripts' hook.
+	 * Test Beans_Options::register() should register the callback to the 'admin_enqueue_scripts' hook.
 	 */
 	public function test_should_register_callback_to_admin_enqueue_scripts_hook() {
-		$instance = new _Beans_Options();
+		$instance = new Beans_Options();
 
 		foreach ( static::$test_data as $options ) {
 			// Register the option.
@@ -42,10 +42,10 @@ class Tests_BeansOptions_Register extends Options_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Options::register() should register the metabox with WordPress.
+	 * Test Beans_Options::register() should register the metabox with WordPress.
 	 */
 	public function test_should_register_metabox_with_wp() {
-		$instance = new _Beans_Options();
+		$instance = new Beans_Options();
 		$this->go_to_settings_page();
 
 		foreach ( static::$test_data as $option ) {

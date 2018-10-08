@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the __construct() method of _Beans_Term_Meta.
+ * Tests for the __construct() method of Beans_Term_Meta.
  *
  * @package Beans\Framework\Tests\Integration\API\Term_Meta
  *
@@ -10,7 +10,7 @@
 namespace Beans\Framework\Tests\Integration\API\Term_Meta;
 
 use Beans\Framework\Tests\Integration\API\Term_Meta\Includes\Term_Meta_Test_Case;
-use _Beans_Term_Meta;
+use Beans_Term_Meta;
 
 require_once BEANS_THEME_DIR . '/lib/api/term-meta/class-beans-term-meta.php';
 require_once dirname( __DIR__ ) . '/includes/class-term-meta-test-case.php';
@@ -31,7 +31,7 @@ class Tests_BeansTermMeta_Construct extends Term_Meta_Test_Case {
 		$_GET['taxonomy'] = 'sample-taxonomy';
 
 		// First instantiation sets all hooks.
-		$term_meta1 = new _Beans_Term_Meta( 'tm-beans' );
+		$term_meta1 = new Beans_Term_Meta( 'tm-beans' );
 
 		$this->assertEquals( 10, has_action( 'sample-taxonomy_edit_form', [ $term_meta1, 'render_nonce' ] ) );
 		$this->assertEquals( 10, has_action( 'edit_term', [ $term_meta1, 'save' ] ) );
@@ -39,7 +39,7 @@ class Tests_BeansTermMeta_Construct extends Term_Meta_Test_Case {
 		$this->assertEquals( 10, has_action( 'sample-taxonomy_edit_form_fields', [ $term_meta1, 'render_fields' ] ) );
 
 		// Subsequent instantiation sets only {$taxonomy}_edit_form_fields hook.
-		$term_meta2 = new _Beans_Term_Meta( 'tm-beans-child' );
+		$term_meta2 = new Beans_Term_Meta( 'tm-beans-child' );
 		$this->assertFalse( has_action( 'sample-taxonomy_edit_form', [ $term_meta2, 'render_nonce' ] ) );
 		$this->assertFalse( has_action( 'edit_term', [ $term_meta2, 'save' ] ) );
 		$this->assertFalse( has_action( 'delete_term', [ $term_meta2, 'delete' ] ) );

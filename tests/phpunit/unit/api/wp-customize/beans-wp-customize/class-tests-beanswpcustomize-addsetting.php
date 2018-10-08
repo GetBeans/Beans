@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the add_setting() method of _Beans_WP_Customize.
+ * Tests for the add_setting() method of Beans_WP_Customize.
  *
  * @package Beans\Framework\Tests\Unit\API\WP_Customize
  *
@@ -10,7 +10,7 @@
 namespace Beans\Framework\Tests\Unit\API\WP_Customize;
 
 use Beans\Framework\Tests\Unit\API\WP_Customize\Includes\WP_Customize_Test_Case;
-use _Beans_WP_Customize;
+use Beans_WP_Customize;
 use Brain\Monkey;
 use Mockery;
 
@@ -26,7 +26,7 @@ require_once dirname( __DIR__ ) . '/includes/class-wp-customize-test-case.php';
 class Tests_BeansWPCustomize_AddSetting extends WP_Customize_Test_Case {
 
 	/**
-	 * Test _Beans_WP_Customize::add_setting() should call beans_get() and WP_Customize_Manager.
+	 * Test Beans_WP_Customize::add_setting() should call beans_get() and WP_Customize_Manager.
 	 */
 	public function test_should_call_beans_get_and_wp_customize_manager() {
 		$test_data = static::$test_data['single_fields'];
@@ -48,8 +48,8 @@ class Tests_BeansWPCustomize_AddSetting extends WP_Customize_Test_Case {
 
 		$this->wp_customize_mock->shouldReceive( 'get_section', 'add_setting', 'add_section' )->andReturn( true );
 
-		$customizer  = new _Beans_WP_Customize( $test_data['section'], $test_data['args'] );
-		$add_setting = $this->get_reflective_method( 'add_setting', '_Beans_WP_Customize' );
+		$customizer  = new Beans_WP_Customize( $test_data['section'], $test_data['args'] );
+		$add_setting = $this->get_reflective_method( 'add_setting', 'Beans_WP_Customize' );
 
 		$this->assertNull( $add_setting->invoke( $customizer, $this->wp_customize_mock, $test_data['fields'] ) );
 	}

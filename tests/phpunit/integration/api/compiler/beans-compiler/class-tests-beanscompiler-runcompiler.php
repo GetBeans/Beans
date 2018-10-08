@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the run_compiler() method of _Beans_Compiler.
+ * Tests for the run_compiler() method of Beans_Compiler.
  *
  * @package Beans\Framework\Tests\Integration\API\Compiler
  *
@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Integration\API\Compiler;
 
-use _Beans_Compiler;
+use Beans_Compiler;
 use Beans\Framework\Tests\Integration\API\Compiler\Includes\Compiler_Test_Case;
 use org\bovigo\vfs\vfsStream;
 use Brain\Monkey;
@@ -66,7 +66,7 @@ class Tests_BeansCompiler_RunCompiler extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::cache_file() should enqueue the existing cached file when no modifications (no fragments
+	 * Test Beans_Compiler::cache_file() should enqueue the existing cached file when no modifications (no fragments
 	 * have changed to warrant re-compiling the file).
 	 */
 	public function test_should_enqueue_existing_cached_file_when_no_modifications() {
@@ -81,7 +81,7 @@ class Tests_BeansCompiler_RunCompiler extends Compiler_Test_Case {
 			'minify_js'    => true,
 			'version'      => '1.5.0',
 		];
-		$compiler = new _Beans_Compiler( $config );
+		$compiler = new Beans_Compiler( $config );
 
 		// Store the cached file into the virtual filesystem.
 		$this->add_virtual_directory( $config['id'] );
@@ -104,7 +104,7 @@ class Tests_BeansCompiler_RunCompiler extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::cache_file() should recompile when a fragment(s) changes.  When this happens, the existing
+	 * Test Beans_Compiler::cache_file() should recompile when a fragment(s) changes.  When this happens, the existing
 	 * cached file is removed and the new file is stored in the filesystem.
 	 */
 	public function test_should_recompile_when_fragments_change() {
@@ -119,7 +119,7 @@ class Tests_BeansCompiler_RunCompiler extends Compiler_Test_Case {
 			'minify_js'    => true,
 			'version'      => null,
 		];
-		$compiler = new _Beans_Compiler( $config );
+		$compiler = new Beans_Compiler( $config );
 
 		/**
 		 * Set up the original "compiled" file. This is the file that should get removed during this
@@ -174,7 +174,7 @@ class Tests_BeansCompiler_RunCompiler extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::cache_file() should compile jQuery, saving it to the virtual filesystem and enqueuing it
+	 * Test Beans_Compiler::cache_file() should compile jQuery, saving it to the virtual filesystem and enqueuing it
 	 * in WordPress.
 	 */
 	public function test_should_compile_save_and_enqueue_jquery() {
@@ -189,7 +189,7 @@ class Tests_BeansCompiler_RunCompiler extends Compiler_Test_Case {
 			'minify_js'    => true,
 			'version'      => null,
 		];
-		$compiler = new _Beans_Compiler( $config );
+		$compiler = new Beans_Compiler( $config );
 
 		// Set up the virtual directory.
 		$this->add_virtual_directory( $config['id'] );
@@ -206,7 +206,7 @@ class Tests_BeansCompiler_RunCompiler extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::cache_file() should compile JavaScript, saving it to the virtual filesystem and enqueuing
+	 * Test Beans_Compiler::cache_file() should compile JavaScript, saving it to the virtual filesystem and enqueuing
 	 * it in WordPress.
 	 */
 	public function test_should_compile_save_and_enqueue_js() {
@@ -221,7 +221,7 @@ class Tests_BeansCompiler_RunCompiler extends Compiler_Test_Case {
 			'minify_js'    => true,
 			'version'      => null,
 		];
-		$compiler = new _Beans_Compiler( $config );
+		$compiler = new Beans_Compiler( $config );
 
 		// Set up the virtual directory.
 		$this->add_virtual_directory( $config['id'] );
@@ -238,7 +238,7 @@ class Tests_BeansCompiler_RunCompiler extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::cache_file() should compile CSS, saving it to the virtual filesystem and enqueuing it in
+	 * Test Beans_Compiler::cache_file() should compile CSS, saving it to the virtual filesystem and enqueuing it in
 	 * WordPress.
 	 */
 	public function test_should_compile_save_and_enqueue_css() {
@@ -253,7 +253,7 @@ class Tests_BeansCompiler_RunCompiler extends Compiler_Test_Case {
 			'minify_js'    => false,
 			'version'      => '1.5.0',
 		];
-		$compiler = new _Beans_Compiler( $config );
+		$compiler = new Beans_Compiler( $config );
 
 		// Set up the virtual directory.
 		$this->add_virtual_directory( $config['id'] );
@@ -270,7 +270,7 @@ class Tests_BeansCompiler_RunCompiler extends Compiler_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Compiler::cache_file() should compile Less, saving it to the virtual filesystem and enqueuing it in
+	 * Test Beans_Compiler::cache_file() should compile Less, saving it to the virtual filesystem and enqueuing it in
 	 * WordPress.
 	 */
 	public function test_should_compile_save_and_enqueue_less() {
@@ -287,7 +287,7 @@ class Tests_BeansCompiler_RunCompiler extends Compiler_Test_Case {
 			'minify_js'    => false,
 			'version'      => '1.5.0',
 		];
-		$compiler = new _Beans_Compiler( $config );
+		$compiler = new Beans_Compiler( $config );
 
 		// Set up the virtual directory.
 		$this->add_virtual_directory( $config['id'] );
@@ -308,7 +308,7 @@ class Tests_BeansCompiler_RunCompiler extends Compiler_Test_Case {
 	 *
 	 * @since 1.5.0
 	 *
-	 * @param _Beans_Compiler $compiler Instance of the compiler.
+	 * @param Beans_Compiler $compiler Instance of the compiler.
 	 *
 	 * @return string
 	 */

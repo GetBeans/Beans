@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the get_less_directories() method of _Beans_Uikit.
+ * Tests for the get_less_directories() method of Beans_Uikit.
  *
  * @package Beans\Framework\Tests\Unit\API\UIkit
  *
@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Unit\API\UIkit;
 
-use _Beans_Uikit;
+use Beans_Uikit;
 use Beans\Framework\Tests\Unit\API\UIkit\Includes\UIkit_Test_Case;
 use org\bovigo\vfs\vfsStream;
 
@@ -25,11 +25,11 @@ require_once dirname( __DIR__ ) . '/includes/class-uikit-test-case.php';
 class Tests_BeansUikit_GetLessDirectories extends UIkit_Test_Case {
 
 	/**
-	 * Test _Beans_Uikit::get_less_directories() should return only the UIkit type directory when no theme is
+	 * Test Beans_Uikit::get_less_directories() should return only the UIkit type directory when no theme is
 	 * registered.
 	 */
 	public function test_should_return_only_uikit_type_directory_when_no_theme_registered() {
-		$beans_uikit = new _Beans_Uikit();
+		$beans_uikit = new Beans_Uikit();
 
 		global $_beans_uikit_enqueued_items;
 		$this->assertEmpty( $_beans_uikit_enqueued_items['themes'] );
@@ -44,11 +44,11 @@ class Tests_BeansUikit_GetLessDirectories extends UIkit_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Uikit::get_less_directories() should return the path to the 'components' directory when the type is
+	 * Test Beans_Uikit::get_less_directories() should return the path to the 'components' directory when the type is
 	 * 'add-ons'.
 	 */
 	public function test_should_return_path_to_components_directory_when_type_is_add_ons() {
-		$beans_uikit = new _Beans_Uikit();
+		$beans_uikit = new Beans_Uikit();
 
 		$this->assertSame(
 			[ BEANS_API_PATH . 'uikit/src/less/components' ],
@@ -57,10 +57,10 @@ class Tests_BeansUikit_GetLessDirectories extends UIkit_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Uikit::get_less_directories() should return the UIkit type directory and each theme's directory.
+	 * Test Beans_Uikit::get_less_directories() should return the UIkit type directory and each theme's directory.
 	 */
 	public function test_should_return_uikit_type_directory_and_each_theme_directory() {
-		$beans_uikit = new _Beans_Uikit();
+		$beans_uikit = new Beans_Uikit();
 
 		global $_beans_uikit_enqueued_items;
 

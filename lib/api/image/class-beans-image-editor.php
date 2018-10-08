@@ -47,7 +47,7 @@ final class Beans_Image_Editor {
 	private $rebuilt_path;
 
 	/**
-	 * _Beans_Image_Editor constructor.
+	 * Beans_Image_Editor constructor.
 	 *
 	 * @since 1.0.0
 	 *

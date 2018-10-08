@@ -174,7 +174,7 @@ function beans_uikit_dequeue_theme( $id ) {
  * @return array
  */
 function beans_uikit_get_all_components( $type = 'core' ) {
-	$uikit = new _Beans_Uikit();
+	$uikit = new Beans_Uikit();
 
 	return $uikit->get_all_components( $type );
 }
@@ -190,7 +190,7 @@ function beans_uikit_get_all_components( $type = 'core' ) {
  * @return array
  */
 function beans_uikit_get_all_dependencies( $components ) {
-	$uikit = new _Beans_Uikit();
+	$uikit = new Beans_Uikit();
 
 	return $uikit->get_autoload_components( (array) $components );
 }
@@ -292,7 +292,7 @@ function _beans_uikit_enqueue_assets() {
 	do_action( 'beans_uikit_enqueue_scripts' );
 
 	// Compile everything.
-	$uikit = new _Beans_Uikit();
+	$uikit = new Beans_Uikit();
 	$uikit->compile();
 }
 
@@ -320,6 +320,6 @@ function _beans_uikit_enqueue_admin_assets() {
 	do_action( 'beans_uikit_admin_enqueue_scripts' );
 
 	// Compile everything.
-	$uikit = new _Beans_Uikit();
+	$uikit = new Beans_Uikit();
 	$uikit->compile();
 }

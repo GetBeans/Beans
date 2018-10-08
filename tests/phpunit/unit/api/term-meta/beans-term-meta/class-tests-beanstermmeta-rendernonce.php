@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the render_nonce() method of _Beans_Term_Meta.
+ * Tests for the render_nonce() method of Beans_Term_Meta.
  *
  * @package Beans\Framework\Tests\Unit\API\Term_Meta
  *
@@ -10,7 +10,7 @@
 namespace Beans\Framework\Tests\Unit\API\Term_Meta;
 
 use Beans\Framework\Tests\Unit\API\Term_Meta\Includes\Term_Meta_Test_Case;
-use _Beans_Term_Meta;
+use Beans_Term_Meta;
 use Brain\Monkey;
 
 require_once dirname( __DIR__ ) . '/includes/class-term-meta-test-case.php';
@@ -25,7 +25,7 @@ require_once dirname( __DIR__ ) . '/includes/class-term-meta-test-case.php';
 class Tests_BeansTermMeta_RenderNonce extends Term_Meta_Test_Case {
 
 	/**
-	 * Test _Beans_Term_Meta::render_nonce() should render the nonce HTML.
+	 * Test Beans_Term_Meta::render_nonce() should render the nonce HTML.
 	 */
 	public function test_should_render_nonce_html() {
 		Monkey\Functions\expect( 'wp_create_nonce' )
@@ -34,7 +34,7 @@ class Tests_BeansTermMeta_RenderNonce extends Term_Meta_Test_Case {
 			->andReturn( '123456' );
 		$expected_html_output = '<input type="hidden" name="beans_term_meta_nonce" value="123456" />';
 
-		$term_meta = new _Beans_Term_Meta( 'tm-beans' );
+		$term_meta = new Beans_Term_Meta( 'tm-beans' );
 		ob_start();
 		$term_meta->render_nonce();
 		$actual_output = ob_get_clean();

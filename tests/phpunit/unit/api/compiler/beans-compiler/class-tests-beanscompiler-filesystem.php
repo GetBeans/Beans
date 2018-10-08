@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the filesystem() method of _Beans_Compiler.
+ * Tests for the filesystem() method of Beans_Compiler.
  *
  * @package Beans\Framework\Tests\Unit\API\Compiler
  *
@@ -25,7 +25,7 @@ require_once dirname( __DIR__ ) . '/includes/class-compiler-test-case.php';
 class Tests_BeansCompiler_Filesystem extends Compiler_Test_Case {
 
 	/**
-	 * Test _Beans_Compiler::filesystem() should return true when the WP Filesystem is initialized to
+	 * Test Beans_Compiler::filesystem() should return true when the WP Filesystem is initialized to
 	 * WP_Filesystem_Direct.
 	 */
 	public function test_should_return_true_when_wp_filesystem_is_init() {

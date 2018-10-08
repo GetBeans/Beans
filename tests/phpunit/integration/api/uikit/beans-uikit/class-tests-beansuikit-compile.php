@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the compile() method of _Beans_Uikit.
+ * Tests for the compile() method of Beans_Uikit.
  *
  * @package Beans\Framework\Tests\Integration\API\UIkit
  *
@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Integration\API\UIkit;
 
-use _Beans_Uikit;
+use Beans_Uikit;
 use Beans\Framework\Tests\Integration\API\UIkit\Includes\UIkit_Test_Case;
 use Brain\Monkey;
 use org\bovigo\vfs\vfsStream;
@@ -57,7 +57,7 @@ class Tests_BeansUikit_Compile extends UIkit_Test_Case {
 	}
 
 	/**
-	 * Test _Beans_Uikit::compile() should not compile when there are no assets to compile.
+	 * Test Beans_Uikit::compile() should not compile when there are no assets to compile.
 	 */
 	public function test_should_not_compile_when_no_assets_to_compile() {
 		add_filter( 'beans_uikit_euqueued_styles', '__return_empty_array' );
@@ -67,11 +67,11 @@ class Tests_BeansUikit_Compile extends UIkit_Test_Case {
 		Monkey\Functions\expect( 'beans_compile_less_fragments' )->never();
 		Monkey\Functions\expect( 'beans_compile_js_fragments' )->never();
 
-		$this->assertNull( ( new _Beans_Uikit() )->compile() );
+		$this->assertNull( ( new Beans_Uikit() )->compile() );
 	}
 
 	/**
-	 * Test _Beans_Uikit::compile() should compile the styles.
+	 * Test Beans_Uikit::compile() should compile the styles.
 	 */
 	public function test_should_compile_styles() {
 		beans_uikit_enqueue_components(
@@ -106,7 +106,7 @@ class Tests_BeansUikit_Compile extends UIkit_Test_Case {
 		Monkey\Functions\expect( 'beans_compile_js_fragments' )->never();
 
 		$this->assertEmpty( $this->get_compiled_filename( $this->compiled_uikit_path ) );
-		( new _Beans_Uikit() )->compile();
+		( new Beans_Uikit() )->compile();
 		$filename = $this->get_compiled_filename( $this->compiled_uikit_path );
 		$this->assertFileExists( $this->compiled_uikit_path . $filename );
 		$this->assertStringEndsWith( '.css', $filename );
@@ -149,7 +149,7 @@ EOB;
 	}
 
 	/**
-	 * Test _Beans_Uikit::compile() should compile the styles with the default theme.
+	 * Test Beans_Uikit::compile() should compile the styles with the default theme.
 	 */
 	public function test_should_compile_styles_with_default_theme() {
 		$theme_path = BEANS_API_PATH . 'uikit/src/themes/default/';
@@ -178,7 +178,7 @@ EOB;
 		Monkey\Functions\expect( 'beans_compile_js_fragments' )->never();
 
 		$this->assertEmpty( $this->get_compiled_filename( $this->compiled_uikit_path ) );
-		( new _Beans_Uikit() )->compile();
+		( new Beans_Uikit() )->compile();
 		$filename = $this->get_compiled_filename( $this->compiled_uikit_path );
 		$this->assertFileExists( $this->compiled_uikit_path . $filename );
 		$this->assertStringEndsWith( '.css', $filename );
@@ -195,7 +195,7 @@ EOB;
 	}
 
 	/**
-	 * Test _Beans_Uikit::compile() should compile the styles with the child theme.
+	 * Test Beans_Uikit::compile() should compile the styles with the child theme.
 	 */
 	public function test_should_compile_styles_with_child_theme() {
 		$theme_path = dirname( __DIR__ ) . '/fixtures/less/';
@@ -228,7 +228,7 @@ EOB;
 		Monkey\Functions\expect( 'beans_compile_js_fragments' )->never();
 
 		$this->assertEmpty( $this->get_compiled_filename( $this->compiled_uikit_path ) );
-		( new _Beans_Uikit() )->compile();
+		( new Beans_Uikit() )->compile();
 		$filename = $this->get_compiled_filename( $this->compiled_uikit_path );
 		$this->assertFileExists( $this->compiled_uikit_path . $filename );
 		$this->assertStringEndsWith( '.css', $filename );
@@ -268,7 +268,7 @@ EOB;
 	}
 
 	/**
-	 * Test _Beans_Uikit::compile() should compile the scripts.
+	 * Test Beans_Uikit::compile() should compile the scripts.
 	 */
 	public function test_should_compile_scripts() {
 		beans_uikit_enqueue_components(
@@ -302,7 +302,7 @@ EOB;
 		);
 
 		$this->assertEmpty( $this->get_compiled_filename( $this->compiled_uikit_path ) );
-		( new _Beans_Uikit() )->compile();
+		( new Beans_Uikit() )->compile();
 		$filename = $this->get_compiled_filename( $this->compiled_uikit_path );
 		$this->assertFileExists( $this->compiled_uikit_path . $filename );
 		$this->assertStringEndsWith( '.js', $filename );

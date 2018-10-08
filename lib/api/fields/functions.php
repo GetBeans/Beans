@@ -48,7 +48,7 @@ function beans_register_fields( array $fields, $context, $section ) {
 	// Load the class only if this function is called to prevent unnecessary memory usage.
 	require_once BEANS_API_PATH . 'fields/class-beans-fields.php';
 
-	$class = new _Beans_Fields();
+	$class = new Beans_Fields();
 	return $class->register( $fields, $context, $section );
 }
 
@@ -70,11 +70,11 @@ function beans_register_fields( array $fields, $context, $section ) {
  */
 function beans_get_fields( $context, $section = false ) {
 
-	if ( ! class_exists( '_Beans_Fields' ) ) {
+	if ( ! class_exists( 'Beans_Fields' ) ) {
 		return;
 	}
 
-	return _Beans_Fields::get_fields( $context, $section );
+	return Beans_Fields::get_fields( $context, $section );
 }
 
 /**
@@ -84,7 +84,7 @@ function beans_get_fields( $context, $section = false ) {
  * {@see beans_get_fields()}.
  *
  * @since 1.0.0
- * @since 1.5.0 Moved rendering code out of _Beans_Fields.
+ * @since 1.5.0 Moved rendering code out of Beans_Fields.
  *
  * @param array $field The given field to render, obtained using {@see beans_get_fields()}.
  *
@@ -92,7 +92,7 @@ function beans_get_fields( $context, $section = false ) {
  */
 function beans_field( array $field ) {
 
-	if ( ! class_exists( '_Beans_Fields' ) ) {
+	if ( ! class_exists( 'Beans_Fields' ) ) {
 		return;
 	}
 

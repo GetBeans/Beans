@@ -82,7 +82,7 @@ function beans_register_options( array $fields, $menu_slug, $section, $args = ar
 	// Load the class only if this function is called to prevent unnecessary memory usage.
 	require_once BEANS_API_PATH . 'options/class-beans-options.php';
 
-	$class = new _Beans_Options();
+	$class = new Beans_Options();
 	$class->register( $section, $args );
 
 	return true;
@@ -101,11 +101,11 @@ function beans_register_options( array $fields, $menu_slug, $section, $args = ar
  */
 function beans_options( $menu_slug ) {
 
-	if ( ! class_exists( '_Beans_Options' ) ) {
+	if ( ! class_exists( 'Beans_Options' ) ) {
 		return false;
 	}
 
-	$class = new _Beans_Options();
+	$class = new Beans_Options();
 	$class->render_page( $menu_slug );
 }
 
@@ -128,6 +128,6 @@ function _beans_options_page_actions() {
 	// Load the class only if this function is called to prevent unnecessary memory usage.
 	require_once BEANS_API_PATH . 'options/class-beans-options.php';
 
-	$class = new _Beans_Options();
+	$class = new Beans_Options();
 	$class->process_actions();
 }
