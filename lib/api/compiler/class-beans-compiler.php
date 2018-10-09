@@ -844,12 +844,11 @@ final class Beans_Compiler {
 			$this->report();
 		}
 
-		$html = beans_output(
-			'beans_compiler_error_title_text',
+		$html = beans_output( 'beans_compiler_error_title_text',
 			sprintf(
-				'<h2>%s</h2>',
-				__( 'Not cool, Beans cannot work its magic :(', 'tm-beans' )
-			)
+                '<h2>%s</h2>',
+                __( 'Not cool, Beans cannot work its magic :(', 'tm-beans' )
+		    )
 		);
 
 		$html .= beans_output(
