@@ -85,4 +85,4 @@ final class Beans_Admin_Menu {
 	}
 }
 
-new Beans_Admin();
+new Beans_Admin_Menu();
