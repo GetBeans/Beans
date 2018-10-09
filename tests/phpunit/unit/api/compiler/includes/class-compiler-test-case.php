@@ -9,7 +9,7 @@
 
 namespace Beans\Framework\Tests\Unit\API\Compiler\Includes;
 
-use _Beans_Compiler;
+use Beans_Compiler;
 use Brain\Monkey;
 use Brain\Monkey\Functions;
 use Mockery;
@@ -81,9 +81,11 @@ abstract class Compiler_Test_Case extends Base_Test_Case {
 		parent::setUp();
 		$this->set_up_function_mocks();
 
-		$this->load_original_functions( [
-			'api/compiler/class-beans-compiler.php',
-		] );
+		$this->load_original_functions(
+			[
+				'api/compiler/class-beans-compiler.php',
+			]
+		);
 	}
 
 	/**
@@ -127,14 +129,16 @@ abstract class Compiler_Test_Case extends Base_Test_Case {
 	 * Set up function mocks.
 	 */
 	protected function set_up_function_mocks() {
-		Functions\when( 'wp_upload_dir' )->justReturn( [
-			'path'    => '',
-			'url'     => '',
-			'subdir'  => '',
-			'basedir' => $this->compiled_dir,
-			'baseurl' => $this->compiled_url,
-			'error'   => false,
-		] );
+		Functions\when( 'wp_upload_dir' )->justReturn(
+			[
+				'path'    => '',
+				'url'     => '',
+				'subdir'  => '',
+				'basedir' => $this->compiled_dir,
+				'baseurl' => $this->compiled_url,
+				'error'   => false,
+			]
+		);
 		Functions\when( 'is_admin' )->justReturn( $this->is_admin );
 		Functions\when( 'site_url' )->justReturn( 'http:://beans.local' );
 	}
@@ -185,13 +189,13 @@ abstract class Compiler_Test_Case extends Base_Test_Case {
 	 *
 	 * @param array $config Compiler's configuration parameters.
 	 *
-	 * @return _Beans_Compiler
+	 * @return Beans_Compiler
 	 */
 	protected function create_compiler( array $config = [] ) {
 		Monkey\Functions\when( 'beans_get_compiler_dir' )->justReturn( vfsStream::url( 'compiled/beans/compiler/' ) );
 		Monkey\Functions\when( 'beans_get_compiler_url' )->justReturn( $this->compiled_url . 'beans/compiler/' );
 
-		return new _Beans_Compiler( $config );
+		return new Beans_Compiler( $config );
 	}
 
 	/**
@@ -199,7 +203,7 @@ abstract class Compiler_Test_Case extends Base_Test_Case {
 	 *
 	 * @since 1.5.0
 	 *
-	 * @param _Beans_Compiler $compiler The Compiler instance.
+	 * @param Beans_Compiler $compiler The Compiler instance.
 	 * @param mixed           $fragment The given value to set.
 	 *
 	 * @return \ReflectionProperty|string
@@ -214,7 +218,7 @@ abstract class Compiler_Test_Case extends Base_Test_Case {
 	 *
 	 * @since 1.5.0
 	 *
-	 * @param _Beans_Compiler $compiler  Instance of the compiler.
+	 * @param Beans_Compiler $compiler  Instance of the compiler.
 	 * @param array           $config    The compiler's configuration.
 	 * @param int             $filemtime Optional. The fragment's filemtime. Default is null.
 	 *
@@ -243,7 +247,7 @@ abstract class Compiler_Test_Case extends Base_Test_Case {
 	 *
 	 * @since 1.5.0
 	 *
-	 * @param _Beans_Compiler $compiler     Instance of the Compiler.
+	 * @param Beans_Compiler $compiler     Instance of the Compiler.
 	 * @param int             $times_called Optional. Number of times the mock will be called. Default is 1.
 	 *
 	 * @return void

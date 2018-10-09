@@ -63,12 +63,15 @@ function beans_field_image( array $field ) {
  * @return array
  */
 function _beans_get_image_id_attributes( $id, array $field, $is_multiple ) {
-	$attributes = array_merge( array(
-		'class' => 'image-id',
-		'type'  => 'hidden',
-		'name'  => $is_multiple ? $field['name'] . '[]' : $field['name'], // Return single value if not multiple.
-		'value' => $id,
-	), $field['attributes'] );
+	$attributes = array_merge(
+		array(
+			'class' => 'image-id',
+			'type'  => 'hidden',
+			'name'  => $is_multiple ? $field['name'] . '[]' : $field['name'], // Return single value if not multiple.
+			'value' => $id,
+		),
+		$field['attributes']
+	);
 
 	if ( 'placeholder' === $id ) {
 		$attributes = array_merge(

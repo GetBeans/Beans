@@ -50,10 +50,12 @@ abstract class Base_Test_Case extends Test_Case {
 		$this->compiled_dir = vfsStream::url( 'compiled' );
 		$this->compiled_url = 'http:://beans.test/compiled/';
 
-		$this->load_original_functions( [
-			'api/utilities/functions.php',
-			'api/compiler/functions.php',
-		] );
+		$this->load_original_functions(
+			[
+				'api/utilities/functions.php',
+				'api/compiler/functions.php',
+			]
+		);
 
 		$this->setup_common_wp_stubs();
 	}

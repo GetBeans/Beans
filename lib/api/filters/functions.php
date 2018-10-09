@@ -25,7 +25,7 @@
  *                                          the order in which they were added to the filter.
  * @param int            $args              Optional. The number of arguments the callback accepts. Default is 1.
  *
- * @return bool|_Beans_Anonymous_Filters
+ * @return bool|Beans_Anonymous_Filters
  */
 function beans_add_filter( $hook, $callback_or_value, $priority = 10, $args = 1 ) {
 
@@ -195,10 +195,10 @@ function beans_has_filters( $id, $callback = false ) {
  *                            in the order in which they were added to the filter.
  * @param int    $args        Optional. The number of arguments the function accepts. Default 1.
  *
- * @return _Beans_Anonymous_Filters
+ * @return Beans_Anonymous_Filters
  */
 function _beans_add_anonymous_filter( $hook, $value, $priority = 10, $args = 1 ) {
 	require_once BEANS_API_PATH . 'filters/class-beans-anonymous-filters.php';
 
-	return new _Beans_Anonymous_Filters( $hook, $value, $priority, $args );
+	return new Beans_Anonymous_Filters( $hook, $value, $priority, $args );
 }

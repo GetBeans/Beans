@@ -24,9 +24,11 @@ abstract class Options_Test_Case extends Base_Test_Case {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->load_original_functions( [
-			'api/image/class-beans-image-options.php',
-			'api/options/functions.php',
-		] );
+		$this->load_original_functions(
+			[
+				'api/image/class-beans-image-options.php',
+				'api/options/functions.php',
+			]
+		);
 	}
 }

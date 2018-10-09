@@ -76,7 +76,8 @@ function beans_wp_title( $title, $sep ) {
 global $shortcode_tags;
 
 $shortcode_tags = array_merge( // phpcs:ignore WordPress.WP.GlobalVariablesOverride.OverrideProhibited -- Deprecated function.
-	$shortcode_tags, array(
+	$shortcode_tags,
+	array(
 		'beans_post_meta_date'       => 'beans_post_meta_date_shortcode',
 		'beans_post_meta_author'     => 'beans_post_meta_author_shortcode',
 		'beans_post_meta_comments'   => 'beans_post_meta_comments_shortcode',

@@ -24,13 +24,15 @@ abstract class Post_Meta_Test_Case extends Test_Case {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->load_original_functions( [
-			'api/post-meta/class-beans-post-meta.php',
-			'api/post-meta/functions.php',
-			'api/post-meta/functions-admin.php',
-			'api/fields/functions.php',
-			'api/utilities/functions.php',
-		] );
+		$this->load_original_functions(
+			[
+				'api/post-meta/class-beans-post-meta.php',
+				'api/post-meta/functions.php',
+				'api/post-meta/functions-admin.php',
+				'api/fields/functions.php',
+				'api/utilities/functions.php',
+			]
+		);
 
 		$this->setup_common_wp_stubs();
 	}

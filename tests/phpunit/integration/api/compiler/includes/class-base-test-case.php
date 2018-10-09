@@ -44,14 +44,17 @@ abstract class Base_Test_Case extends Test_Case {
 		$this->compiled_dir = vfsStream::url( 'compiled' );
 
 		// Set the Uploads directory to our virtual filesystem.
-		add_filter( 'upload_dir', function( array $uploads_dir ) {
-			$uploads_dir['path']    = $this->compiled_dir . $uploads_dir['subdir'];
-			$uploads_dir['url']     = str_replace( 'wp-content/uploads', 'compiled', $uploads_dir['url'] );
-			$uploads_dir['basedir'] = $this->compiled_dir;
-			$uploads_dir['baseurl'] = str_replace( 'wp-content/uploads', 'compiled', $uploads_dir['baseurl'] );
+		add_filter(
+			'upload_dir',
+			function( array $uploads_dir ) {
+				$uploads_dir['path']    = $this->compiled_dir . $uploads_dir['subdir'];
+				$uploads_dir['url']     = str_replace( 'wp-content/uploads', 'compiled', $uploads_dir['url'] );
+				$uploads_dir['basedir'] = $this->compiled_dir;
+				$uploads_dir['baseurl'] = str_replace( 'wp-content/uploads', 'compiled', $uploads_dir['baseurl'] );
 
-			return $uploads_dir;
-		} );
+				return $uploads_dir;
+			}
+		);
 	}
 
 	/**

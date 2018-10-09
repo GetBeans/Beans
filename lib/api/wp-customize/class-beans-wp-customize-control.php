@@ -21,7 +21,7 @@ if ( ! class_exists( 'WP_Customize_Control' ) ) {
  *
  * @package Beans\Framework\API\WP_Customize
  */
-class _Beans_WP_Customize_Control extends WP_Customize_Control {
+class Beans_WP_Customize_Control extends WP_Customize_Control {
 
 	/**
 	 * Field data.

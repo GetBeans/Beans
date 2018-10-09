@@ -17,7 +17,7 @@
  *
  * @package Beans\Framework\API\HTML
  */
-final class _Beans_Attribute {
+final class Beans_Attribute {
 
 	/**
 	 * The markup ID.
@@ -48,7 +48,7 @@ final class _Beans_Attribute {
 	private $new_value;
 
 	/**
-	 * _Beans_Attributes constructor.
+	 * Beans_Attributes constructor.
 	 *
 	 * @since 1.0.0
 	 *

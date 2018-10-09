@@ -16,7 +16,7 @@
  *
  * @package Beans\Framework\API\WP_Customize
  */
-final class _Beans_WP_Customize {
+final class Beans_WP_Customize {
 
 	/**
 	 * Metabox arguments.
@@ -180,7 +180,7 @@ final class _Beans_WP_Customize {
 	private function add_control( WP_Customize_Manager $wp_customize, array $field ) {
 		require_once 'class-beans-wp-customize-control.php';
 
-		$class = '_Beans_WP_Customize_Control';
+		$class = 'Beans_WP_Customize_Control';
 
 		if ( $field['type'] !== $class && class_exists( $field['type'] ) ) {
 			$class = $field['type'];

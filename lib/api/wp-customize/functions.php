@@ -46,7 +46,7 @@
  *                                text to the section. Default false.
  * }
  *
- * @return _Beans_WP_Customize|bool False on failure.
+ * @return Beans_WP_Customize|bool False on failure.
  */
 function beans_register_wp_customize_options( array $fields, $section, $args = array() ) {
 
@@ -74,5 +74,5 @@ function beans_register_wp_customize_options( array $fields, $section, $args = a
 	// Load the class only if this function is called to prevent unnecessary memory usage.
 	require_once BEANS_API_PATH . 'wp-customize/class-beans-wp-customize.php';
 
-	return new _Beans_WP_Customize( $section, $args );
+	return new Beans_WP_Customize( $section, $args );
 }

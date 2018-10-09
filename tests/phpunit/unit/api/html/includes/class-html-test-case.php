@@ -47,9 +47,12 @@ abstract class HTML_Test_Case extends Test_Case {
 		parent::setUpBeforeClass();
 
 		static::$test_markup      = require dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'fixtures/test-markup.php';
-		static::$test_attributes  = array_filter( static::$test_markup, function( $markup ) {
-			return isset( $markup['attributes'] );
-		} );
+		static::$test_attributes  = array_filter(
+			static::$test_markup,
+			function( $markup ) {
+				return isset( $markup['attributes'] );
+			}
+		);
 		static::$test_attachments = require dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'fixtures/test-attachment.php';
 	}
 
@@ -62,14 +65,16 @@ abstract class HTML_Test_Case extends Test_Case {
 		$this->setup_function_mocks();
 		$this->setup_common_wp_stubs();
 
-		$this->load_original_functions( [
-			'api/html/class-beans-attribute.php',
-			'api/html/functions.php',
-			'api/html/accessibility.php',
-			'api/filters/functions.php',
-			'api/layout/functions.php',
-			'api/widget/functions.php',
-		] );
+		$this->load_original_functions(
+			[
+				'api/html/class-beans-attribute.php',
+				'api/html/functions.php',
+				'api/html/accessibility.php',
+				'api/filters/functions.php',
+				'api/layout/functions.php',
+				'api/widget/functions.php',
+			]
+		);
 
 		// Reset the test fixtures.
 		reset( static::$test_markup );

@@ -16,7 +16,7 @@ g<?php
  *
  * @package Beans\Framework\API\Image
  */
-final class _Beans_Image_Editor {
+final class Beans_Image_Editor {
 
 	/**
 	 * The image source.
@@ -47,7 +47,7 @@ final class _Beans_Image_Editor {
 	private $rebuilt_path;
 
 	/**
-	 * _Beans_Image_Editor constructor.
+	 * Beans_Image_Editor constructor.
 	 *
 	 * @since 1.0.0
 	 *

@@ -64,10 +64,13 @@ require_once $beans_tests_dir . '/includes/functions.php';
  * Register with "setup_theme" in the WP tests suite to set the themes directory
  * and load the Beans framework.
  */
-tests_add_filter( 'setup_theme', function() {
-	register_theme_directory( WP_CONTENT_DIR . 'themes' );
-	switch_theme( basename( BEANS_THEME_DIR ) );
-} );
+tests_add_filter(
+	'setup_theme',
+	function() {
+		register_theme_directory( WP_CONTENT_DIR . 'themes' );
+		switch_theme( basename( BEANS_THEME_DIR ) );
+	}
+);
 
 // Start up the WP testing environment.
 require_once $beans_tests_dir . '/includes/bootstrap.php';

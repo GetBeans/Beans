@@ -25,10 +25,12 @@ abstract class Page_Compiler_Test_Case extends Test_Case {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->load_original_functions( [
-			'api/compiler/class-beans-page-compiler.php',
-			'api/options/functions.php',
-		] );
+		$this->load_original_functions(
+			[
+				'api/compiler/class-beans-page-compiler.php',
+				'api/options/functions.php',
+			]
+		);
 	}
 
 	/**

@@ -43,13 +43,16 @@ abstract class Base_Test_Case extends Test_Case {
 		$this->set_up_virtual_filesystem();
 
 		// Set the Uploads directory to our virtual filesystem.
-		add_filter( 'upload_dir', function( array $uploads_dir ) {
-			$virtual_dir            = vfsStream::url( 'uploads' );
-			$uploads_dir['path']    = $virtual_dir . $uploads_dir['subdir'];
-			$uploads_dir['basedir'] = $virtual_dir;
+		add_filter(
+			'upload_dir',
+			function( array $uploads_dir ) {
+				$virtual_dir            = vfsStream::url( 'uploads' );
+				$uploads_dir['path']    = $virtual_dir . $uploads_dir['subdir'];
+				$uploads_dir['basedir'] = $virtual_dir;
 
-			return $uploads_dir;
-		} );
+				return $uploads_dir;
+			}
+		);
 	}
 
 	/**

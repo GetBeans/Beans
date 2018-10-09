@@ -54,12 +54,14 @@ abstract class UIkit_Test_Case extends Test_Case {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->load_original_functions( [
-			'api/utilities/functions.php',
-			'api/compiler/functions.php',
-			'api/uikit/functions.php',
-			'api/uikit/class-beans-uikit.php',
-		] );
+		$this->load_original_functions(
+			[
+				'api/utilities/functions.php',
+				'api/compiler/functions.php',
+				'api/uikit/functions.php',
+				'api/uikit/class-beans-uikit.php',
+			]
+		);
 
 		$this->set_up_virtual_filesystem();
 		$this->set_up_mocked_functions();
@@ -108,19 +110,25 @@ abstract class UIkit_Test_Case extends Test_Case {
 	 * Set up the mocked functions.
 	 */
 	protected function set_up_mocked_functions() {
-		Monkey\Functions\when( 'trailingslashit' )->alias( function( $file ) {
-			return $file . '/';
-		} );
+		Monkey\Functions\when( 'trailingslashit' )->alias(
+			function( $file ) {
+					return $file . '/';
+			}
+		);
 
-		Monkey\Functions\when( 'beans_join_arrays' )->alias( function( &$array1, $array2 ) {
-			$array1 = array_merge( $array1, $array2 );
-		} );
+		Monkey\Functions\when( 'beans_join_arrays' )->alias(
+			function( &$array1, $array2 ) {
+					$array1 = array_merge( $array1, $array2 );
+			}
+		);
 
-		Monkey\Functions\when( 'beans_get' )->alias( function( $needle, array $haystack, $default = null ) {
-			return isset( $haystack[ $needle ] )
-				? $haystack[ $needle ]
-				: $default;
-		} );
+		Monkey\Functions\when( 'beans_get' )->alias(
+			function( $needle, array $haystack, $default = null ) {
+					return isset( $haystack[ $needle ] )
+					? $haystack[ $needle ]
+					: $default;
+			}
+		);
 	}
 
 	/**

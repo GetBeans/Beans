@@ -84,11 +84,14 @@ function _beans_standardize_radio_image( $value, $radio ) {
 		);
 	}
 
-	$radio = array_merge( array(
-		'src'                => '',
-		'alt'                => '',
-		'screen_reader_text' => '',
-	), $radio );
+	$radio = array_merge(
+		array(
+			'src'                => '',
+			'alt'                => '',
+			'screen_reader_text' => '',
+		),
+		$radio
+	);
 
 	if ( $radio['screen_reader_text'] && $radio['alt'] ) {
 		return $radio;

@@ -93,7 +93,7 @@ function beans_register_post_meta( array $fields, $conditions, $section, $args =
 	// Load the class only if this function is called to prevent unnecessary memory usage.
 	require_once BEANS_API_PATH . 'post-meta/class-beans-post-meta.php';
 
-	new _Beans_Post_Meta( $section, $args );
+	new Beans_Post_Meta( $section, $args );
 
 	return true;
 }

@@ -152,7 +152,7 @@ function beans_includes() {
 	require_once BEANS_RENDER_PATH . 'template-parts.php';
 	require_once BEANS_RENDER_PATH . 'fragments.php';
 	require_once BEANS_RENDER_PATH . 'widget-area.php';
-	require_once BEANS_RENDER_PATH . 'walker.php';
+	require_once BEANS_RENDER_PATH . 'class-beans-walker-nav-menu.php';
 	require_once BEANS_RENDER_PATH . 'menu.php';
 }
 

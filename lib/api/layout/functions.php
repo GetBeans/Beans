@@ -103,12 +103,15 @@ function beans_get_layout_class( $id ) {
 	 * @type string $breakpoint        The UIkit grid breakpoint which may be set to 'small', 'medium' or 'large'. Default 'medium'.
 	 * }
 	 */
-	$args = apply_filters( 'beans_layout_grid_settings', array(
-		'grid'              => 4,
-		'sidebar_primary'   => 1,
-		'sidebar_secondary' => 1,
-		'breakpoint'        => 'medium',
-	) );
+	$args = apply_filters(
+		'beans_layout_grid_settings',
+		array(
+			'grid'              => 4,
+			'sidebar_primary'   => 1,
+			'sidebar_secondary' => 1,
+			'breakpoint'        => 'medium',
+		)
+	);
 
 	/**
 	 * Filter the layout class.
@@ -276,13 +279,16 @@ function beans_get_layouts_for_options( $add_default = false ) {
 		return $layouts;
 	}
 
-	$layouts = array_merge( array(
-		'default_fallback' => sprintf(
-			// translators: The (%s) placeholder is for the "Modify" hyperlink.
-			__( 'Use Default Layout (%s)', 'tm-beans' ),
-			'<a href="' . admin_url( 'customize.php?autofocus[control]=beans_layout' ) . '">' . _x( 'Modify', 'Default layout', 'tm-beans' ) . '</a>'
+	$layouts = array_merge(
+		array(
+			'default_fallback' => sprintf(
+				// translators: The (%s) placeholder is for the "Modify" hyperlink.
+				__( 'Use Default Layout (%s)', 'tm-beans' ),
+				'<a href="' . admin_url( 'customize.php?autofocus[control]=beans_layout' ) . '">' . _x( 'Modify', 'Default layout', 'tm-beans' ) . '</a>'
+			),
 		),
-	), $layouts );
+		$layouts
+	);
 
 	return $layouts;
 }

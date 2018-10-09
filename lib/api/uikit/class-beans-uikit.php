@@ -16,7 +16,7 @@
  *
  * @package Beans\Framework\API\UIkit
  */
-final class _Beans_Uikit {
+final class Beans_Uikit {
 
 	/**
 	 * Components to ignore.

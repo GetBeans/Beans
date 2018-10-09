@@ -48,10 +48,12 @@ abstract class Base_Test_Case extends Test_Case {
 
 		$this->set_up_virtual_filesystem();
 
-		$this->load_original_functions( [
-			'api/utilities/functions.php',
-			'api/image/functions.php',
-		] );
+		$this->load_original_functions(
+			[
+				'api/utilities/functions.php',
+				'api/image/functions.php',
+			]
+		);
 
 		$this->setup_common_wp_stubs();
 	}

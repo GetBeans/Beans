@@ -41,12 +41,14 @@ abstract class Options_Test_Case extends Test_Case {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->load_original_functions( [
-			'api/utilities/functions.php',
-			'api/options/class-beans-options.php',
-			'api/options/functions.php',
-			'api/fields/functions.php',
-		] );
+		$this->load_original_functions(
+			[
+				'api/utilities/functions.php',
+				'api/options/class-beans-options.php',
+				'api/options/functions.php',
+				'api/fields/functions.php',
+			]
+		);
 
 		$this->setup_function_mocks();
 		$this->setup_common_wp_stubs();
@@ -66,28 +68,30 @@ abstract class Options_Test_Case extends Test_Case {
 	 * Setup dependency function mocks.
 	 */
 	protected function setup_function_mocks() {
-		Monkey\Functions\when( 'add_meta_box' )->alias( function( $id, $title, $callback, $screen = null, $context = 'advanced', $priority = 'default', $callback_args = null ) {
-			global $wp_meta_boxes;
+		Monkey\Functions\when( 'add_meta_box' )->alias(
+			function( $id, $title, $callback, $screen = null, $context = 'advanced', $priority = 'default', $callback_args = null ) {
+					global $wp_meta_boxes;
 
-			if ( empty( $screen ) ) {
-				$screen = 'beans';
-			}
+				if ( empty( $screen ) ) {
+					  $screen = 'beans';
+				}
 
-			// phpcs:ignore WordPress.WP.GlobalVariablesOverride.OverrideProhibited -- Mocking global here for tests.
-			$wp_meta_boxes = [
-				$screen => [
-					$context => [
-						$priority => [
-							$id => [
-								'id'       => $id,
-								'title'    => $title,
-								'callback' => $callback,
-								'args'     => $callback_args,
+			   // phpcs:ignore WordPress.WP.GlobalVariablesOverride.OverrideProhibited -- Mocking global here for tests.
+					$wp_meta_boxes = [
+						$screen => [
+							$context => [
+								$priority => [
+									$id => [
+										'id'       => $id,
+										'title'    => $title,
+										'callback' => $callback,
+										'args'     => $callback_args,
+									],
+								],
 							],
 						],
-					],
-				],
-			];
-		} );
+					];
+			}
+		);
 	}
 }

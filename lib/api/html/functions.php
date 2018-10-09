@@ -68,7 +68,7 @@ function beans_output_e( $id, $output ) {
  *
  * @param string $id The output's ID.
  *
- * @return bool|_Beans_Anonymous_Filters
+ * @return bool|Beans_Anonymous_Filters
  */
 function beans_remove_output( $id ) {
 	return beans_add_filter( $id . '_output', false, 99999999 );
@@ -300,7 +300,7 @@ function beans_close_markup_e( $id, $tag ) {
  *                                  associated with a particular action are executed. Default is 10.
  * @param int             $args     Optional. The number of arguments the callback accepts. Default is 1.
  *
- * @return bool|_Beans_Anonymous_Filters
+ * @return bool|Beans_Anonymous_Filters
  */
 function beans_modify_markup( $id, $markup, $priority = 10, $args = 1 ) {
 	return beans_add_filter( $id . '_markup', $markup, $priority, $args );
@@ -318,7 +318,7 @@ function beans_modify_markup( $id, $markup, $priority = 10, $args = 1 ) {
  * @param bool   $remove_actions Optional. When true, the markup including the before and prepend/after hooks will be
  *                               removed. When false, only the HTML element will be removed.
  *
- * @return bool|_Beans_Anonymous_Filters
+ * @return bool|Beans_Anonymous_Filters
  */
 function beans_remove_markup( $id, $remove_actions = false ) {
 	return beans_add_filter( $id . '_markup', $remove_actions ? null : false );
@@ -503,10 +503,10 @@ function beans_reset_attributes( $id ) {
  *                          (e.g. class=""). Setting it to 'false' will only display the attribute name
  *                          (e.g. data-example). Setting it to 'null' will not display anything.
  *
- * @return _Beans_Attribute
+ * @return Beans_Attribute
  */
 function beans_add_attribute( $id, $attribute, $value ) {
-	$attribute = new _Beans_Attribute( $id, $attribute, $value );
+	$attribute = new Beans_Attribute( $id, $attribute, $value );
 
 	return $attribute->init( 'add' );
 }
@@ -531,10 +531,10 @@ function beans_add_attribute( $id, $attribute, $value ) {
  *                               browser will display only the attribute name
  *                               (e.g. data-example).
  *
- * @return _Beans_Attribute
+ * @return Beans_Attribute
  */
 function beans_replace_attribute( $id, $attribute, $value, $new_value = null ) {
-	$attribute = new _Beans_Attribute( $id, $attribute, $value, $new_value );
+	$attribute = new Beans_Attribute( $id, $attribute, $value, $new_value );
 
 	return $attribute->init( 'replace' );
 }
@@ -555,10 +555,10 @@ function beans_replace_attribute( $id, $attribute, $value, $new_value = null ) {
  * @param string|null $value     Optional. The attribute value to remove. Set it to 'false' or null to completely
  *                               remove the attribute.
  *
- * @return _Beans_Attribute
+ * @return Beans_Attribute
  */
 function beans_remove_attribute( $id, $attribute, $value = null ) {
-	$attribute = new _Beans_Attribute( $id, $attribute, $value, '' );
+	$attribute = new Beans_Attribute( $id, $attribute, $value, '' );
 
 	return $attribute->init( 'remove' );
 }

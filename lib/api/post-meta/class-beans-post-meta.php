@@ -16,7 +16,7 @@
  *
  * @package Beans\Framework\API\Post_Meta
  */
-final class _Beans_Post_Meta {
+final class Beans_Post_Meta {
 
 	/**
 	 * Metabox arguments.
