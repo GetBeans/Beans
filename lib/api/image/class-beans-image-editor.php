@@ -1,4 +1,4 @@
-g<?php
+<?php
 /**
  * This class provides the means to edit an image.
  *
