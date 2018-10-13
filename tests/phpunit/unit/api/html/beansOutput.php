@@ -29,7 +29,7 @@ class Tests_BeansOutput extends HTML_Test_Case {
 	public function test_should_return_null_when_output_is_empty() {
 		Monkey\Functions\expect( 'beans_apply_filters' )->times( 3 )->andReturnUsing(
 			function( $hook, $output ) {
-					return $output;
+				return $output;
 			}
 		);
 		Monkey\Functions\expect( '_beans_is_html_dev_mode' )->never();
@@ -55,7 +55,7 @@ class Tests_BeansOutput extends HTML_Test_Case {
 			->with( 'beans_archive_title_text_output', 'Beans rocks!' )
 			->andReturnUsing(
 				function( $hook, $output ) {
-						return apply_filters( $hook, $output ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Prefix is in the value represented by the variable.
+					return apply_filters( $hook, $output ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Prefix is in the value represented by the variable.
 				}
 			);
 
@@ -100,7 +100,7 @@ EOB;
 			->with( 'beans_breadcrumb_item_text_output', 'Beans rocks!', 47, 'Hello' )
 			->andReturnUsing(
 				function( $hook, $output ) {
-						return $output;
+					return $output;
 				}
 			);
 

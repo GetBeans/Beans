@@ -39,7 +39,7 @@ class Tests_BeansOpenMarkup extends HTML_Test_Case {
 			->with( '' )
 			->andReturnUsing(
 				function() {
-						echo '<!-- _before_markup fired -->';
+					echo '<!-- _before_markup fired -->';
 				}
 			);
 		add_action( 'beans_archive_title_before_markup', '__beans_render_title_before_markup' );
@@ -59,7 +59,7 @@ class Tests_BeansOpenMarkup extends HTML_Test_Case {
 			->with( '' )
 			->andReturnUsing(
 				function() {
-						echo '<!-- _prepend_markup fired -->';
+					echo '<!-- _prepend_markup fired -->';
 				}
 			);
 		add_action( 'beans_archive_title_prepend_markup', '__beans_render_title_prepend_markup' );
@@ -80,7 +80,7 @@ class Tests_BeansOpenMarkup extends HTML_Test_Case {
 			->with( '' )
 			->andReturnUsing(
 				function() {
-						echo '<!-- _after_markup fired -->';
+					echo '<!-- _after_markup fired -->';
 				}
 			);
 		add_action( 'beans_archive_title_after_markup', '__beans_render_title_after_markup' );

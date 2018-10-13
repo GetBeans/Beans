@@ -70,27 +70,27 @@ abstract class Options_Test_Case extends Test_Case {
 	protected function setup_function_mocks() {
 		Monkey\Functions\when( 'add_meta_box' )->alias(
 			function( $id, $title, $callback, $screen = null, $context = 'advanced', $priority = 'default', $callback_args = null ) {
-					global $wp_meta_boxes;
+				global $wp_meta_boxes;
 
 				if ( empty( $screen ) ) {
 					$screen = 'beans';
 				}
 
-			   // phpcs:ignore WordPress.WP.GlobalVariablesOverride.OverrideProhibited -- Mocking global here for tests.
-					$wp_meta_boxes = [
-						$screen => [
-							$context => [
-								$priority => [
-									$id => [
-										'id'       => $id,
-										'title'    => $title,
-										'callback' => $callback,
-										'args'     => $callback_args,
-									],
+			   	// phpcs:ignore WordPress.WP.GlobalVariablesOverride.OverrideProhibited -- Mocking global here for tests.
+				$wp_meta_boxes = [
+					$screen => [
+						$context => [
+							$priority => [
+								$id => [
+									'id'       => $id,
+									'title'    => $title,
+									'callback' => $callback,
+									'args'     => $callback_args,
 								],
 							],
 						],
-					];
+					],
+				];
 			}
 		);
 	}

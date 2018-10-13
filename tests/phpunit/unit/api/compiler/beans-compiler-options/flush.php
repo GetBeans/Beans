@@ -65,8 +65,8 @@ class Tests_BeansCompilerOptions_Flush extends Compiler_Options_Test_Case {
 			->with( vfsStream::url( 'compiled/beans/compiler/' ) )
 			->andReturnUsing(
 				function() {
-						// Keep it simple. Remove by redefining.
-						vfsStream::setup( 'compiled', 0755, [ 'beans' => [] ] );
+					// Keep it simple. Remove by redefining.
+					vfsStream::setup( 'compiled', 0755, [ 'beans' => [] ] );
 				}
 			);
 

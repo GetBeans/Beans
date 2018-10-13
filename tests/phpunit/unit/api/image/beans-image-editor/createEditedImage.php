@@ -66,7 +66,7 @@ class Tests_BeansImageEditor_CreateEditedImage extends Image_Test_Case {
 				->with( $edited_image_src )
 				->andReturnUsing(
 					function( $edited_image_src ) use ( $src ) {
-							imagejpeg( imagecreatefromjpeg( $src ), $edited_image_src );
+						imagejpeg( imagecreatefromjpeg( $src ), $edited_image_src );
 					}
 				);
 			Monkey\Functions\expect( 'wp_get_image_editor' )->with( $src )->once()->andReturn( $wp_editor );

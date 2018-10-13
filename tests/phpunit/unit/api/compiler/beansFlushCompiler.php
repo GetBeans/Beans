@@ -94,10 +94,10 @@ class Tests_BeansFlushCompiler extends Compiler_Options_Test_Case {
 			->with( trailingslashit( $compiler_dir ) . 'beans' )
 			->andReturnUsing(
 				function( $dir_path ) {
-						$items = scandir( $dir_path );
-						unset( $items[0], $items[1] );
+					$items = scandir( $dir_path );
+					unset( $items[0], $items[1] );
 
-						$dir_path = trailingslashit( $dir_path );
+					$dir_path = trailingslashit( $dir_path );
 
 					foreach ( $items as $needle => $item ) {
 						unlink( $dir_path . $item );

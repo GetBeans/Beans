@@ -190,9 +190,9 @@ class Tests_BeansCompiler_CacheFile extends Compiler_Test_Case {
 			->with( $cached_file, $compiled_content, FS_CHMOD_FILE )
 			->andReturnUsing(
 				function( $cached_filename, $content ) use ( $folder_name, $filename ) {
-						$this->create_virtual_file( $folder_name, $filename, $content );
+					$this->create_virtual_file( $folder_name, $filename, $content );
 
-						return true;
+					return true;
 				}
 			);
 		$GLOBALS['wp_filesystem'] = $mock; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.OverrideProhibited -- Valid use case as we are mocking the filesystem.

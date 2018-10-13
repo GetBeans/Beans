@@ -45,7 +45,7 @@ class Tests_BeansPostMeta_RenderMetaboxContent extends Post_Meta_Test_Case {
 			->andReturn( [ $field ] );
 		Monkey\Functions\expect( 'beans_field' )->once()->with( $field )->andReturnUsing(
 			function () {
-					echo 'beans_field_html';
+				echo 'beans_field_html';
 			}
 		);
 

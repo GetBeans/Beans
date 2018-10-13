@@ -93,7 +93,7 @@ EOB;
 			->with( 'Beans rocks!', 47, 'Hello' )
 			->andReturnUsing(
 				function( $output, $arg1, $arg2 ) {
-						return $arg2;
+					return $arg2;
 				}
 			);
 

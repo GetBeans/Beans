@@ -160,7 +160,7 @@ EOB;
 			->with( 'beans_post_image_item', $args, 'http://example.com/image.png' )
 			->andReturnUsing(
 				function( $id, $attributes ) {
-						return $this->convert_attributes_into_html( $attributes );
+					return $this->convert_attributes_into_html( $attributes );
 				}
 			);
 

@@ -55,10 +55,10 @@ class Tests_BeansAddAction extends Actions_Test_Case {
 				->with( $beans_id, $action, 'added', true )
 				->andReturnUsing(
 					function( $id, $action ) {
-							global $_beans_registered_actions;
-							$_beans_registered_actions['added'][ $id ] = $action;
+						global $_beans_registered_actions;
+						$_beans_registered_actions['added'][ $id ] = $action;
 
-							return $action;
+						return $action;
 					}
 				);
 			Monkey\Actions\expectAdded( $action['hook'] )
@@ -87,10 +87,10 @@ class Tests_BeansAddAction extends Actions_Test_Case {
 		Monkey\Functions\when( '_beans_get_action' )->justReturn( false );
 		Monkey\Functions\when( '_beans_set_action' )->alias(
 			function( $id, $action ) {
-					global $_beans_registered_actions;
-					$_beans_registered_actions['added'][ $id ] = $action;
+				global $_beans_registered_actions;
+				$_beans_registered_actions['added'][ $id ] = $action;
 
-					return $action;
+				return $action;
 			}
 		);
 
@@ -197,10 +197,10 @@ class Tests_BeansAddAction extends Actions_Test_Case {
 				->with( $beans_id, $action, 'added', true )
 				->andReturnUsing(
 					function( $id, $action ) {
-							global $_beans_registered_actions;
-							$_beans_registered_actions['added'][ $id ] = $action;
+						global $_beans_registered_actions;
+						$_beans_registered_actions['added'][ $id ] = $action;
 
-							return $action;
+						return $action;
 					}
 				);
 			Monkey\Actions\expectAdded( $action['hook'] )->never();
@@ -249,10 +249,10 @@ class Tests_BeansAddAction extends Actions_Test_Case {
 				->with( $beans_id, $original_action, 'added', true )
 				->andReturnUsing(
 					function( $id, $action ) {
-							global $_beans_registered_actions;
-							$_beans_registered_actions['added'][ $id ] = $action;
+						global $_beans_registered_actions;
+						$_beans_registered_actions['added'][ $id ] = $action;
 
-							return $action;
+						return $action;
 					}
 				);
 			Monkey\Actions\expectAdded( $original_action['hook'] )

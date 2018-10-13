@@ -26,8 +26,7 @@ function beans_field_textarea( array $field ) {
 		'<textarea id="%s" name="%s" %s>%s</textarea>',
 		esc_attr( $field['id'] ),
 		esc_attr( $field['name'] ),
-		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaping is handled in the function.
-		beans_esc_attributes( $field['attributes'] ),
+		beans_esc_attributes( $field['attributes'] ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaping is handled in the function.
 		esc_textarea( $field['value'] )
 	);
 }

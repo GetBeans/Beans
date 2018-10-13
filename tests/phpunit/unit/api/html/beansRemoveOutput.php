@@ -39,7 +39,7 @@ class Tests_BeansRemoveOutput extends HTML_Test_Case {
 	public function test_should_return_anonymous_filter_instance() {
 		Monkey\Functions\when( 'beans_add_filter' )->alias(
 			function( $hook, $value, $priority ) {
-					return new Anonymous_Filter_Stub( $hook, $value, $priority );
+				return new Anonymous_Filter_Stub( $hook, $value, $priority );
 			}
 		);
 

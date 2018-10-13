@@ -114,9 +114,9 @@ EOB;
 				->with( 'beans_compiler_media_query=' . $media_query )
 				->andReturnUsing(
 					function( $query_args ) {
-							parse_str( $query_args, $args );
+						parse_str( $query_args, $args );
 
-							return $args;
+						return $args;
 					}
 				);
 			Monkey\Functions\expect( 'beans_get' )

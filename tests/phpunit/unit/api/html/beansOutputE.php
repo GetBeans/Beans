@@ -29,7 +29,7 @@ class Tests_BeansOutputE extends HTML_Test_Case {
 	public function test_should_echo_empty_string_when_output_is_empty() {
 		Monkey\Functions\expect( 'beans_output' )->times( 3 )->andReturnUsing(
 			function( $id, $output ) {
-					return $output;
+				return $output;
 			}
 		);
 
@@ -70,7 +70,7 @@ class Tests_BeansOutputE extends HTML_Test_Case {
 			->with( 'beans_archive_title_text', 'Beans rocks!' )
 			->andReturnUsing(
 				function( $id, $output ) {
-						return $output;
+					return $output;
 				}
 			);
 
@@ -88,7 +88,7 @@ class Tests_BeansOutputE extends HTML_Test_Case {
 			->with( 'beans_archive_title_text', 'Beans rocks!' )
 			->andReturnUsing(
 				function( $id, $output ) {
-						return "<!-- open output: $id -->" . $output . "<!-- close output: $id -->";
+					return "<!-- open output: $id -->" . $output . "<!-- close output: $id -->";
 				}
 			);
 
@@ -111,7 +111,7 @@ EOB;
 			->with( 'beans_breadcrumb_item_text', 'Beans rocks!', 47, 'Hello' )
 			->andReturnUsing(
 				function( $id, $output, $arg1, $arg2 ) {
-						return $arg2;
+					return $arg2;
 				}
 			);
 

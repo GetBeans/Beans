@@ -164,7 +164,7 @@ final class _Beans_Compiler {
 	 */
 	private function maybe_make_dir() {
 
-		if ( ! @is_dir( $this->dir ) ) { // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- This is a valid// use case.
+		if ( ! @is_dir( $this->dir ) ) { // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- This is a valid use case.
 			wp_mkdir_p( $this->dir );
 		}
 

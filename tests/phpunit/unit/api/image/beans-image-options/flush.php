@@ -65,8 +65,8 @@ class Tests_BeansImageOptions_Flush extends Options_Test_Case {
 			->with( vfsStream::url( 'uploads/beans/images/' ) )
 			->andReturnUsing(
 				function() {
-						// Keep it simple. Remove by redefining.
-						vfsStream::setup( 'uploads', 0755, [ 'beans' => [] ] );
+					// Keep it simple. Remove by redefining.
+					vfsStream::setup( 'uploads', 0755, [ 'beans' => [] ] );
 				}
 			);
 

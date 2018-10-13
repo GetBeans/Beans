@@ -108,9 +108,9 @@ abstract class Actions_Test_Case extends Test_Case {
 					->once()
 					->whenHappen(
 						function ( $callback, $priority, $args ) use ( $action ) {
-								$this->assertSame( $action['callback'], $callback );
-								$this->assertSame( $action['priority'], $priority );
-								$this->assertSame( $action['args'], $args );
+							$this->assertSame( $action['callback'], $callback );
+							$this->assertSame( $action['priority'], $priority );
+							$this->assertSame( $action['args'], $args );
 						}
 					);
 			}

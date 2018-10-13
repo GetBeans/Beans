@@ -53,7 +53,7 @@ class Tests_BeansTermMeta_RenderFields extends Term_Meta_Test_Case {
 			->with( static::$test_data['sample-field'] )
 			->andReturnUsing(
 				function () {
-						echo 'field-label';
+					echo 'field-label';
 				}
 			);
 		Monkey\Functions\expect( 'beans_field' )
@@ -61,7 +61,7 @@ class Tests_BeansTermMeta_RenderFields extends Term_Meta_Test_Case {
 			->with( static::$test_data['sample-field'] )
 			->andReturnUsing(
 				function () {
-						echo 'field-markup';
+					echo 'field-markup';
 				}
 			);
 

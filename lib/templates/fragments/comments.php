@@ -190,8 +190,7 @@ function beans_comment_links() {
 	beans_open_markup_e( 'beans_comment_links', 'ul', array( 'class' => 'tm-comment-links uk-subnav uk-subnav-line' ) );
 
 		// Reply.
-		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Echoes HTML output.
-		echo get_comment_reply_link(
+		echo get_comment_reply_link( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Echoes HTML output.
 			array_merge(
 				$comment->args,
 				array(
@@ -459,7 +458,7 @@ function beans_comment_form_comment() {
 
 		$output .= beans_open_markup( 'beans_comment_form_legend[_comment]', 'legend' );
 
-		$output .= beans_output( 'beans_comment_form_legend_text[_comment]', esc_html__( 'Comment *', 'tm-beans' ) );
+				$output .= beans_output( 'beans_comment_form_legend_text[_comment]', esc_html__( 'Comment *', 'tm-beans' ) );
 
 		$output .= beans_close_markup( 'beans_comment_form_legend[_comment]', 'legend' );
 	}
@@ -476,7 +475,7 @@ function beans_comment_form_comment() {
 			)
 		);
 
-	$output .= beans_close_markup( 'beans_comment_form_field[_comment]', 'textarea' );
+			$output .= beans_close_markup( 'beans_comment_form_field[_comment]', 'textarea' );
 
 	$output .= beans_close_markup( 'beans_comment_form[_comment]', 'fieldset' );
 
@@ -538,7 +537,7 @@ function beans_comment_form_fields( $fields ) {
 		if ( beans_apply_filters( 'beans_comment_form_legend[_name]', true ) ) {
 			$author .= beans_open_markup( 'beans_comment_form_legend[_name]', 'legend' );
 
-			$author .= beans_output( 'beans_comment_form_legend_text[_name]', esc_html__( 'Name *', 'tm-beans' ) );
+					$author .= beans_output( 'beans_comment_form_legend_text[_name]', esc_html__( 'Name *', 'tm-beans' ) );
 
 			$author .= beans_close_markup( 'beans_comment_form_legend[_name]', 'legend' );
 		}

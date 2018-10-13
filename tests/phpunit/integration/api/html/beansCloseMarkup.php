@@ -39,7 +39,7 @@ class Tests_BeansCloseMarkup extends HTML_Test_Case {
 			->with( '' )
 			->andReturnUsing(
 				function() {
-						echo '<!-- _append_markup fired -->';
+					echo '<!-- _append_markup fired -->';
 				}
 			);
 		add_action( 'beans_archive_title_append_markup', '__beans_render_title_append_markup' );
@@ -59,7 +59,7 @@ class Tests_BeansCloseMarkup extends HTML_Test_Case {
 			->with( '' )
 			->andReturnUsing(
 				function() {
-						echo '<!-- _after_markup fired -->';
+					echo '<!-- _after_markup fired -->';
 				}
 			);
 		add_action( 'beans_archive_title_after_markup', '__beans_render_title_after_markup' );

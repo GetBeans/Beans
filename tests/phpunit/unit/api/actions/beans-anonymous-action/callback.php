@@ -75,7 +75,7 @@ class Tests_BeansAnonymousAction_Callback extends Actions_Test_Case {
 
 		Monkey\Functions\when( 'foo_test_callback' )->alias(
 			function( $arg1, $arg2 ) {
-					return "{$arg1} {$arg2}";
+				return "{$arg1} {$arg2}";
 			}
 		);
 

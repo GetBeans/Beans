@@ -224,10 +224,10 @@ class Tests_BeansUikitEnqueueComponents extends UIkit_Test_Case {
 			->with( $components )
 			->andReturnUsing(
 				function() {
-						global $_beans_uikit_enqueued_items;
-						$_beans_uikit_enqueued_items['components']['core'] = [ 'flex', 'switcher' ];
+					global $_beans_uikit_enqueued_items;
+					$_beans_uikit_enqueued_items['components']['core'] = [ 'flex', 'switcher' ];
 
-						return [ 'flex', 'switcher' ];
+					return [ 'flex', 'switcher' ];
 				}
 			);
 
@@ -248,10 +248,10 @@ class Tests_BeansUikitEnqueueComponents extends UIkit_Test_Case {
 			->with( $components )
 			->andReturnUsing(
 				function() {
-						global $_beans_uikit_enqueued_items;
-						$_beans_uikit_enqueued_items['components']['add-ons'] = [ 'dotnav' ];
+					global $_beans_uikit_enqueued_items;
+					$_beans_uikit_enqueued_items['components']['add-ons'] = [ 'dotnav' ];
 
-						return [ 'dotnav' ];
+					return [ 'dotnav' ];
 				}
 			);
 

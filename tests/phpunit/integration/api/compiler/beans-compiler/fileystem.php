@@ -45,7 +45,7 @@ class Tests_BeansCompiler_Filesystem extends Compiler_Test_Case {
 		Functions\when( __NAMESPACE__ . '\mock_wp_die_handler' )
 			->alias(
 				function( $message ) {
-						$this->assertContains( 'Beans cannot work its magic', $message );
+					$this->assertContains( 'Beans cannot work its magic', $message );
 				}
 			);
 

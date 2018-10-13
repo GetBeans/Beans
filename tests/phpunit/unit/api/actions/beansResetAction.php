@@ -100,7 +100,7 @@ class Tests_BeansResetAction extends Actions_Test_Case {
 				->with( $beans_id )
 				->andReturnUsing(
 					function() use ( $action, $modified_action ) {
-							return array_merge( $action, $modified_action );
+						return array_merge( $action, $modified_action );
 					}
 				);
 

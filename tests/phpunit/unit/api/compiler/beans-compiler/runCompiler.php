@@ -401,14 +401,14 @@ class Tests_BeansCompiler_RunCompiler extends Compiler_Test_Case {
 			->with( $file, $content, FS_CHMOD_FILE )
 			->andReturnUsing(
 				function( $file, $content ) use ( $compiler, $config ) {
-						$pathinfo = pathinfo( $file );
+					$pathinfo = pathinfo( $file );
 
-						// Add the new file into the virtual filesystem.
-						vfsStream::newFile( $pathinfo['basename'] )
-						->at( $this->mock_filesystem->getChild( 'compiled/beans/compiler/' . $config['id'] ) )
-						->setContent( $content );
+					// Add the new file into the virtual filesystem.
+					vfsStream::newFile( $pathinfo['basename'] )
+					->at( $this->mock_filesystem->getChild( 'compiled/beans/compiler/' . $config['id'] ) )
+					->setContent( $content );
 
-						return true;
+					return true;
 				}
 			);
 	}

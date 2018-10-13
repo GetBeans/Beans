@@ -111,21 +111,21 @@ abstract class Fields_Test_Case extends Test_Case {
 
 		Monkey\Functions\when( '_n' )->alias(
 			function( $single, $plural, $number ) {
-					return $number > 1 ? $plural : $single;
+				return $number > 1 ? $plural : $single;
 			}
 		);
 
 		Monkey\Functions\when( 'beans_get' )->alias(
 			function( $needle, $haystack = false, $default = null ) {
-					$haystack = (array) $haystack;
+				$haystack = (array) $haystack;
 
-					return isset( $haystack[ $needle ] ) ? $haystack[ $needle ] : $default;
+				return isset( $haystack[ $needle ] ) ? $haystack[ $needle ] : $default;
 			}
 		);
 
 		Monkey\Functions\when( 'beans_esc_attributes' )->alias(
 			function( $attributes ) {
-					$string = '';
+				$string = '';
 
 				foreach ( (array) $attributes as $attribute => $value ) {
 

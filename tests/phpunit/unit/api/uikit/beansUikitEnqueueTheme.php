@@ -51,9 +51,9 @@ class Tests_BeansUikitEnqueueTheme extends UIkit_Test_Case {
 			->times( 5 )
 			->andReturnUsing(
 				function( $id ) {
-						global $_beans_uikit_registered_items;
+					global $_beans_uikit_registered_items;
 
-						return $_beans_uikit_registered_items['themes'][ $id ];
+					return $_beans_uikit_registered_items['themes'][ $id ];
 				}
 			);
 
@@ -84,10 +84,10 @@ class Tests_BeansUikitEnqueueTheme extends UIkit_Test_Case {
 			->with( 'beans-child', $path )
 			->andReturnUsing(
 				function( $id, $path ) {
-						global $_beans_uikit_registered_items;
-						$_beans_uikit_registered_items['themes'][ $id ] = $path;
+					global $_beans_uikit_registered_items;
+					$_beans_uikit_registered_items['themes'][ $id ] = $path;
 
-						return true;
+					return true;
 				}
 			);
 		Monkey\Functions\expect( '_beans_uikit_get_registered_theme' )

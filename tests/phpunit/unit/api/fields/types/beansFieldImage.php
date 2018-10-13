@@ -95,6 +95,7 @@ EOB;
 			->times( 2 )
 			->andReturnUsing(
 				function ( $image_id ) {
+
 					if ( 'placeholder' === $image_id ) {
 						return '';
 					}
