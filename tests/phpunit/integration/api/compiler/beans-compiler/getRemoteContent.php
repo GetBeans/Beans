@@ -39,9 +39,11 @@ class Tests_BeansCompiler_GetRemoteContent extends Compiler_Test_Case {
 	 */
 	public function test_should_return_empty_string_when_remote_does_not_exist() {
 		$fragment = 'http://beans.local/invalid-file.js';
-		$compiler = new _Beans_Compiler( [
-			'fragments' => [ $fragment ],
-		] );
+		$compiler = new _Beans_Compiler(
+			[
+				'fragments' => [ $fragment ],
+			]
+		);
 		$this->set_current_fragment( $compiler, $fragment );
 
 		// Run the test.
@@ -53,9 +55,11 @@ class Tests_BeansCompiler_GetRemoteContent extends Compiler_Test_Case {
 	 */
 	public function test_should_return_content_when_fragment_is_relative_url() {
 		$fragment = '//fonts.googleapis.com/css?family=Lato';
-		$compiler = new _Beans_Compiler( [
-			'fragments' => [ $fragment ],
-		] );
+		$compiler = new _Beans_Compiler(
+			[
+				'fragments' => [ $fragment ],
+			]
+		);
 		$this->set_current_fragment( $compiler, $fragment );
 
 		$content = $compiler->get_remote_content( $fragment );
@@ -72,9 +76,11 @@ class Tests_BeansCompiler_GetRemoteContent extends Compiler_Test_Case {
 	 */
 	public function test_should_return_content_when_fragment_is_http() {
 		$fragment = 'http://fonts.googleapis.com/css?family=Roboto';
-		$compiler = new _Beans_Compiler( [
-			'fragments' => [ $fragment ],
-		] );
+		$compiler = new _Beans_Compiler(
+			[
+				'fragments' => [ $fragment ],
+			]
+		);
 		$this->set_current_fragment( $compiler, $fragment );
 
 		$content = $compiler->get_remote_content( $fragment );
@@ -93,9 +99,11 @@ class Tests_BeansCompiler_GetRemoteContent extends Compiler_Test_Case {
 		$this->markTestSkipped( 'wp_remote_get returns cURL error 60. Test must be revisited.' );
 
 		$fragment = 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
-		$compiler = new _Beans_Compiler( [
-			'fragments' => [ $fragment ],
-		] );
+		$compiler = new _Beans_Compiler(
+			[
+				'fragments' => [ $fragment ],
+			]
+		);
 		$this->set_current_fragment( $compiler, $fragment );
 
 		$content = $compiler->get_remote_content( $fragment );
