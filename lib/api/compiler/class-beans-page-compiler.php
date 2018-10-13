@@ -108,10 +108,14 @@ final class _Beans_Page_Compiler {
 		$this->dequeued_scripts = $scripts;
 		add_action( 'wp_print_scripts', array( $this, 'dequeue_scripts' ), 9999 );
 
-		beans_compile_js_fragments( 'beans', $scripts, array(
-			'in_footer' => 'aggressive' === get_option( 'beans_compile_all_scripts_mode', 'aggressive' ),
-			'version'   => null,
-		) );
+		beans_compile_js_fragments(
+			'beans',
+			$scripts,
+			array(
+				'in_footer' => 'aggressive' === get_option( 'beans_compile_all_scripts_mode', 'aggressive' ),
+				'version'   => null,
+			)
+		);
 	}
 
 	/**

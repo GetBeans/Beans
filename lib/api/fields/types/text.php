@@ -22,7 +22,8 @@ beans_add_smart_action( 'beans_field_text', 'beans_field_text' );
  * }
  */
 function beans_field_text( array $field ) {
-	printf( '<input id="%s" type="text" name="%s" value="%s" %s>',
+	printf(
+		'<input id="%s" type="text" name="%s" value="%s" %s>',
 		esc_attr( $field['id'] ),
 		esc_attr( $field['name'] ),
 		esc_attr( $field['value'] ),

@@ -68,19 +68,21 @@ function beans_load_dependencies() {
 	require_once BEANS_API_PATH . 'init.php';
 
 	// Load the necessary Beans components.
-	beans_load_api_components( array(
-		'actions',
-		'html',
-		'term-meta',
-		'post-meta',
-		'image',
-		'wp-customize',
-		'compiler',
-		'uikit',
-		'template',
-		'layout',
-		'widget',
-	) );
+	beans_load_api_components(
+		array(
+			'actions',
+			'html',
+			'term-meta',
+			'post-meta',
+			'image',
+			'wp-customize',
+			'compiler',
+			'uikit',
+			'template',
+			'layout',
+			'widget',
+		)
+	);
 
 	// Add third party styles and scripts compiler support.
 	beans_add_api_component_support( 'wp_styles_compiler' );
@@ -110,13 +112,16 @@ function beans_add_theme_support() {
 	add_theme_support( 'post-thumbnails' );
 	add_theme_support( 'automatic-feed-links' );
 	add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption' ) );
-	add_theme_support( 'custom-header', array(
-		'width'       => 2000,
-		'height'      => 500,
-		'flex-height' => true,
-		'flex-width'  => true,
-		'header-text' => false,
-	) );
+	add_theme_support(
+		'custom-header',
+		array(
+			'width'       => 2000,
+			'height'      => 500,
+			'flex-height' => true,
+			'flex-width'  => true,
+			'header-text' => false,
+		)
+	);
 
 	// Beans specific.
 	add_theme_support( 'offcanvas-menu' );

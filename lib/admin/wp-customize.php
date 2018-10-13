@@ -16,10 +16,16 @@ beans_add_smart_action( 'customize_preview_init', 'beans_do_enqueue_wp_customize
  * @return void
  */
 function beans_do_enqueue_wp_customize_assets() {
-	wp_enqueue_script( 'beans-wp-customize-preview', BEANS_ADMIN_JS_URL . 'wp-customize-preview.js', array(
-		'jquery',
-		'customize-preview',
-	), BEANS_VERSION, true );
+	wp_enqueue_script(
+		'beans-wp-customize-preview',
+		BEANS_ADMIN_JS_URL . 'wp-customize-preview.js',
+		array(
+			'jquery',
+			'customize-preview',
+		),
+		BEANS_VERSION,
+		true
+	);
 }
 
 beans_add_smart_action( 'customize_register', 'beans_do_register_wp_customize_options' );

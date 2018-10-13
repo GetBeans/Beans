@@ -44,7 +44,8 @@ final class _Beans_Image_Options {
 		return beans_register_options(
 			$this->get_fields_to_register(),
 			'beans_settings',
-			'images_options', array(
+			'images_options',
+			array(
 				'title'   => __( 'Images options', 'tm-beans' ),
 				'context' => $this->has_metaboxes() ? 'column' : 'normal',
 			)

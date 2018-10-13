@@ -48,9 +48,11 @@ beans_add_smart_action( 'after_setup_theme', 'beans_do_register_nav_menus' );
  * @return void
  */
 function beans_do_register_nav_menus() {
-	register_nav_menus( array(
-		'primary' => __( 'Primary Menu', 'tm-beans' ),
-	) );
+	register_nav_menus(
+		array(
+			'primary' => __( 'Primary Menu', 'tm-beans' ),
+		)
+	);
 }
 
 // Filter.
