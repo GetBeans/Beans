@@ -83,11 +83,11 @@ function beans_remove_dir( $dir_path ) {
 		if ( is_dir( $path ) ) {
 			beans_remove_dir( $path );
 		} else {
-			@unlink( $path ); // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged -- Valid use case.
+			@unlink( $path ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- Valid use case.
 		}
 	}
 
-	return @rmdir( $dir_path ); // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged -- Valid use case.
+	return @rmdir( $dir_path ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- Valid use case.
 }
 
 /**
@@ -100,7 +100,7 @@ function beans_remove_dir( $dir_path ) {
  * @return array|bool Returns false upon error.
  */
 function beans_scandir( $dir_path ) {
-	$items = @scandir( $dir_path ); // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged -- Valid use case.
+	$items = @scandir( $dir_path ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- Valid use case.
 
 	if ( ! $items ) {
 		return false;
@@ -567,12 +567,15 @@ function beans_esc_attributes( $attributes ) {
 	 *
 	 * @param array $method Associative array of selectors as keys and escaping method as values.
 	 */
-	$methods = apply_filters( 'beans_escape_attributes_methods', array(
-		'href'     => 'esc_url',
-		'src'      => 'esc_url',
-		'itemtype' => 'esc_url',
-		'onclick'  => 'esc_js',
-	) );
+	$methods = apply_filters(
+		'beans_escape_attributes_methods',
+		array(
+			'href'     => 'esc_url',
+			'src'      => 'esc_url',
+			'itemtype' => 'esc_url',
+			'onclick'  => 'esc_js',
+		)
+	);
 
 	$string = '';
 

@@ -164,7 +164,7 @@ final class _Beans_Compiler {
 	 */
 	private function maybe_make_dir() {
 
-		if ( ! @is_dir( $this->dir ) ) {  // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged -- This is a valid use case.
+		if ( ! @is_dir( $this->dir ) ) {  // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- This is a valid use case.
 			wp_mkdir_p( $this->dir );
 		}
 
@@ -224,7 +224,7 @@ final class _Beans_Compiler {
 	 * @return string
 	 */
 	public function hash( array $given_array ) {
-		return substr( md5( @serialize( $given_array ) ), 0, 7 ); // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged, WordPress.PHP.DiscouragedPHPFunctions.serialize_serialize -- Valid use case.
+		return substr( md5( @serialize( $given_array ) ), 0, 7 ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.PHP.DiscouragedPHPFunctions.serialize_serialize -- Valid use case.
 	}
 
 	/**
@@ -432,7 +432,7 @@ final class _Beans_Compiler {
 			$fragment = beans_url_to_path( $fragment );
 
 			// Stop here if it isn't a valid file.
-			if ( ! file_exists( $fragment ) || 0 === @filesize( $fragment ) ) { // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged  -- Valid use case.
+			if ( ! file_exists( $fragment ) || 0 === @filesize( $fragment ) ) { // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged  -- Valid use case.
 				return false;
 			}
 		}
@@ -686,7 +686,7 @@ final class _Beans_Compiler {
 			}
 
 			if ( file_exists( $fragment ) ) {
-				$fragments_filemtime[ $index ] = @filemtime( $fragment ); // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged -- Valid use case.
+				$fragments_filemtime[ $index ] = @filemtime( $fragment ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- Valid use case.
 			}
 		}
 
@@ -742,7 +742,7 @@ final class _Beans_Compiler {
 		foreach ( $items as $item ) {
 
 			// Skip this one if it's a directory.
-			if ( @is_dir( $item ) ) { // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged -- Valid use case.
+			if ( @is_dir( $item ) ) { // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- Valid use case.
 				continue;
 			}
 
@@ -769,7 +769,7 @@ final class _Beans_Compiler {
 			}
 
 			// Clean up other modified files.
-			@unlink( $this->dir . '/' . $item );  // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged -- Valid use case.
+			@unlink( $this->dir . '/' . $item );  // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- Valid use case.
 		}
 	}
 
@@ -844,26 +844,38 @@ final class _Beans_Compiler {
 			$this->report();
 		}
 
-		$html = beans_output( 'beans_compiler_error_title_text', sprintf(
-			'<h2>%s</h2>',
-			__( 'Not cool, Beans cannot work its magic :(', 'tm-beans' )
-		) );
+		$html = beans_output(
+			'beans_compiler_error_title_text',
+			sprintf(
+				'<h2>%s</h2>',
+				__( 'Not cool, Beans cannot work its magic :(', 'tm-beans' )
+			)
+		);
 
-		$html .= beans_output( 'beans_compiler_error_message_text', sprintf(
-			'<p>%s</p>',
-			__( 'Your current install or file permission prevents Beans from working its magic. Please get in touch with Beans support. We will gladly get you started within 24 - 48 hours (working days).', 'tm-beans' )
-		) );
+		$html .= beans_output(
+			'beans_compiler_error_message_text',
+			sprintf(
+				'<p>%s</p>',
+				__( 'Your current install or file permission prevents Beans from working its magic. Please get in touch with Beans support. We will gladly get you started within 24 - 48 hours (working days).', 'tm-beans' )
+			)
+		);
 
-		$html .= beans_output( 'beans_compiler_error_contact_text', sprintf(
-			'<a class="button" href="https://www.getbeans.io/contact/?compiler_report=1" target="_blanc">%s</a>',
-			__( 'Contact Beans Support', 'tm-beans' )
-		) );
+		$html .= beans_output(
+			'beans_compiler_error_contact_text',
+			sprintf(
+				'<a class="button" href="https://www.getbeans.io/contact/?compiler_report=1" target="_blanc">%s</a>',
+				__( 'Contact Beans Support', 'tm-beans' )
+			)
+		);
 
-		$html .= beans_output( 'beans_compiler_error_report_text', sprintf(
-			'<p style="margin-top: 12px; font-size: 12px;"><a href="' . add_query_arg( 'beans_send_compiler_report', true ) . '">%1$s</a>. %2$s</p>',
-			__( 'Send us an automatic report', 'tm-beans' ),
-			__( 'We respect your time and understand you might not be able to contact us.', 'tm-beans' )
-		) );
+		$html .= beans_output(
+			'beans_compiler_error_report_text',
+			sprintf(
+				'<p style="margin-top: 12px; font-size: 12px;"><a href="' . add_query_arg( 'beans_send_compiler_report', true ) . '">%1$s</a>. %2$s</p>',
+				__( 'Send us an automatic report', 'tm-beans' ),
+				__( 'We respect your time and understand you might not be able to contact us.', 'tm-beans' )
+			)
+		);
 
 		wp_die( wp_kses_post( $html ) );
 	}

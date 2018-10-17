@@ -132,7 +132,7 @@ final class _Beans_Image_Editor {
 		}
 
 		if ( $edited_image_exists ) {
-			list( $width, $height ) = @getimagesize( $this->rebuilt_path ); // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged -- Valid use case.
+			list( $width, $height ) = @getimagesize( $this->rebuilt_path ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- Valid use case.
 		} else {
 			$width  = null;
 			$height = null;
@@ -165,7 +165,7 @@ final class _Beans_Image_Editor {
 	private function rebuild_image_path() {
 		$upload_dir = beans_get_images_dir();
 		$info       = pathinfo( preg_replace( '#\?.*#', '', $this->src ) );
-		$query      = substr( md5( @serialize( $this->args ) ), 0, 7 ); // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged, WordPress.PHP.DiscouragedPHPFunctions.serialize_serialize -- Valid use case.
+		$query      = substr( md5( @serialize( $this->args ) ), 0, 7 ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.PHP.DiscouragedPHPFunctions.serialize_serialize -- Valid use case.
 		$extension  = $info['extension'];
 		$filename   = str_replace( '.' . $extension, '', $info['basename'] );
 

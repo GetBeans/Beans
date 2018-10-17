@@ -22,10 +22,11 @@ beans_add_smart_action( 'beans_field_textarea', 'beans_field_textarea' );
  * }
  */
 function beans_field_textarea( array $field ) {
-	printf( '<textarea id="%s" name="%s" %s>%s</textarea>',
+	printf(
+		'<textarea id="%s" name="%s" %s>%s</textarea>',
 		esc_attr( $field['id'] ),
 		esc_attr( $field['name'] ),
-		beans_esc_attributes( $field['attributes'] ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaping is handled in the function.
+		beans_esc_attributes( $field['attributes'] ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped, PEAR.Functions.FunctionCallSignature.MultipleArguments -- Escaping is handled in the function, and this comment is not an argument.
 		esc_textarea( $field['value'] )
 	);
 }

@@ -217,7 +217,7 @@ function beans_flush_compiler( $id, $file_format = false, $admin = false ) {
 	foreach ( beans_scandir( $dir ) as $item ) {
 
 		if ( beans_str_ends_with( $item, ".{$file_format}" ) ) {
-			@unlink( trailingslashit( $dir ) . $item ); // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged -- Valid use case.
+			@unlink( trailingslashit( $dir ) . $item ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- Valid use case.
 		}
 	}
 }
