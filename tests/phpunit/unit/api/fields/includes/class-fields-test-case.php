@@ -136,7 +136,7 @@ abstract class Fields_Test_Case extends Test_Case {
 					$string .= $attribute . '="' . $value . '" ';
 				}
 
-					return trim( $string );
+				return trim( $string );
 			}
 		);
 

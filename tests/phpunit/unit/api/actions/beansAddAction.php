@@ -140,10 +140,10 @@ class Tests_BeansAddAction extends Actions_Test_Case {
 				->with( $beans_id, array_merge( $original_action, $replaced_action ), 'added', true )
 				->andReturnUsing(
 					function( $id, $action ) {
-							global $_beans_registered_actions;
-							$_beans_registered_actions['added'][ $id ] = $action;
+						global $_beans_registered_actions;
+						$_beans_registered_actions['added'][ $id ] = $action;
 
-							return $action;
+						return $action;
 					}
 				);
 			Monkey\Actions\expectAdded( $original_action['hook'] )
