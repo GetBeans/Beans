@@ -194,7 +194,7 @@ function beans_comment_links() {
 			array_merge(
 				$comment->args,
 				array(
-					'add_below' => 'comment-content',
+					'add_below' => 'div-comment',
 					'depth'     => $comment->depth,
 					'max_depth' => $comment->args['max_depth'],
 					'before'    => beans_open_markup( 'beans_comment_item[_reply]', 'li' ),
