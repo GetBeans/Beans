@@ -27,7 +27,7 @@ beans_open_markup_e( 'beans_html', 'html', str_replace( ' ', '&', str_replace( '
 		wp_head();
 
 	beans_close_markup_e( 'beans_head', 'head' );
-	beans_build_skip_links();
+
 	beans_open_markup_e(
 		'beans_body',
 		'body',
@@ -38,6 +38,8 @@ beans_open_markup_e( 'beans_html', 'html', str_replace( ' ', '&', str_replace( '
 
 		)
 	);
+
+		beans_build_skip_links();
 
 		beans_open_markup_e( 'beans_site', 'div', array( 'class' => 'tm-site' ) );
 
