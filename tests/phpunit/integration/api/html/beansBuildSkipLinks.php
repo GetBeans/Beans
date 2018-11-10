@@ -265,4 +265,46 @@ EOB;
 
 		$this->assertContains( $this->format_the_html( $expected ), $this->format_the_html( $actual ) );
 	}
+
+	/**
+	 * Test beans_build_skip_links() should return false when no skip links because beans_skip_links_list filter unsets the array.
+	 */
+	public function test_should_return_false_when_filter_unsets_the_array_of_skip_links() {
+		add_filter(
+			'beans_default_layout',
+			function( $default_layout ) {
+				return 'c_sp';
+			}
+		);
+
+		$this->assertEquals( beans_get_layout(), 'c_sp' );
+
+		add_filter(
+			'beans_skip_links_list',
+			function( $skip_links ) {
+				unset( $skip_links['beans-content'], $skip_links['beans-primary-sidebar'] );
+				return $skip_links;
+			}
+		);
+
+		$this->assertFalse( beans_build_skip_links() );
+	}
+
+	/**
+	 * Test beans_build_skip_links() should return false when beans_skip_links_list filter returns null.
+	 */
+	public function test_should_return_false_when_filter_returns_null() {
+		add_filter(
+			'beans_default_layout',
+			function( $default_layout ) {
+				return 'c';
+			}
+		);
+
+		$this->assertEquals( beans_get_layout(), 'c' );
+
+		add_filter( 'beans_skip_links_list', '__return_null' );
+		$this->assertFalse( beans_build_skip_links() );
+	}
+
 }
