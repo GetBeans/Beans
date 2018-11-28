@@ -37,17 +37,6 @@ do_action( 'beans_before_loop' );
 				'itemscope' => 'itemscope',
 				'itemtype'  => 'https://schema.org/CreativeWork',
 			);
-
-			// Blog specifc attributes.
-			if ( 'post' === get_post_type() ) {
-
-				$article_attributes['itemtype'] = 'https://schema.org/BlogPosting';
-
-				// Only add to blogPost attribute to the main query.
-				if ( is_main_query() && ! is_search() ) {
-					$article_attributes['itemprop'] = 'blogPost';
-				}
-			}
 			// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 
 			beans_open_markup_e( 'beans_post', 'article', $article_attributes );
@@ -63,7 +52,7 @@ do_action( 'beans_before_loop' );
 
 				beans_close_markup_e( 'beans_post_header', 'header' );
 
-				beans_open_markup_e( 'beans_post_body', 'div', array( 'itemprop' => 'articleBody' ) );
+				beans_open_markup_e( 'beans_post_body', 'div', array( 'itemprop' => 'text' ) );
 
 					/**
 					 * Fires in the post body.
