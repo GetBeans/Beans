@@ -42,7 +42,7 @@ class Tests_BeansEditImage extends Image_Test_Case {
 	 * Test beans_edit_image() should return original src when the image does not exist.
 	 */
 	public function test_should_return_original_src_when_no_image() {
-		$src = 'path/does/not/exist/image.jpg';
+		$src = 'http://example.org/path/does/not/exist/image.jpg';
 
 		// Run the tests.
 		$this->assertFileNotExists( $src );
@@ -53,7 +53,7 @@ class Tests_BeansEditImage extends Image_Test_Case {
 	 * Test beans_edit_image() should return an indexed array with the original src when the image does not exist.
 	 */
 	public function test_should_return_indexed_array_with_original_src_when_no_image() {
-		$src = 'path/does/not/exist/image.jpg';
+		$src = 'http://example.org/path/does/not/exist/image.jpg';
 
 		// Run the tests.
 		$this->assertFileNotExists( $src );
@@ -67,7 +67,7 @@ class Tests_BeansEditImage extends Image_Test_Case {
 	 * Test beans_edit_image() should return an object with the original src when the image does not exist.
 	 */
 	public function test_should_return_object_with_original_src_when_no_image() {
-		$src = 'path/does/not/exist/image.jpg';
+		$src = 'http://example.org/path/does/not/exist/image.jpg';
 
 		// Run the tests.
 		$this->assertFileNotExists( $src );
@@ -82,7 +82,7 @@ class Tests_BeansEditImage extends Image_Test_Case {
 	 * Test beans_edit_image() should return an associative array with the original src when the image does not exist.
 	 */
 	public function test_should_return_associative_array_with_original_src_when_no_image() {
-		$src = 'path/does/not/exist/image.jpg';
+		$src = 'http://example.org/path/does/not/exist/image.jpg';
 
 		// Run the tests.
 		$this->assertFileNotExists( $src );
