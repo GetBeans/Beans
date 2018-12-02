@@ -72,7 +72,7 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 	 * Test _Beans_Image_Editor::run() should return original src when the image does not exist.
 	 */
 	public function test_should_return_original_src_when_no_image() {
-		$src    = 'path/does/not/exist/image.jpg';
+		$src    = 'http://example.org/path/does/not/exist/image.jpg';
 		$editor = new _Beans_Image_Editor( $src, [ 'resize' => [ 800, false ] ] );
 
 		// Run the tests.
@@ -138,7 +138,7 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 	 * Test _Beans_Image_Editor::run() should return an indexed array with the original src when the image does not exist.
 	 */
 	public function test_should_return_indexed_array_with_original_src_when_no_image() {
-		$src    = 'path/does/not/exist/image.jpg';
+		$src    = 'http://example.org/path/does/not/exist/image.jpg';
 		$editor = new _Beans_Image_Editor( $src, [ 'resize' => [ 800, false ] ], ARRAY_N );
 
 		// Run the tests.
@@ -207,7 +207,7 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 	 * Test _Beans_Image_Editor::run() should return an object with the original src when the image does not exist.
 	 */
 	public function test_should_return_object_with_original_src_when_no_image() {
-		$src    = 'path/does/not/exist/image.jpg';
+		$src    = 'http://example.org/path/does/not/exist/image.jpg';
 		$editor = new _Beans_Image_Editor( $src, [ 'resize' => [ 800, false ] ], OBJECT );
 
 		// Run the tests.
@@ -289,7 +289,7 @@ class Tests_BeansImageEditor_Run extends Image_Test_Case {
 	 * Test _Beans_Image_Editor::run() should return an array with the original src when the image does not exist.
 	 */
 	public function test_should_return_associative_array_with_original_src_when_no_image() {
-		$src    = 'path/does/not/exist/image.jpg';
+		$src    = 'http://example.org/path/does/not/exist/image.jpg';
 		$editor = new _Beans_Image_Editor( $src, [ 'resize' => [ 800, false ] ], ARRAY_A );
 
 		// Run the tests.

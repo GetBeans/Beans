@@ -83,7 +83,7 @@ final class _Beans_Image_Editor {
 			return $this->get_image_info( beans_path_to_url( $this->rebuilt_path ), true );
 		}
 
-		return $this->get_image_info( $this->src );
+		return $this->get_image_info( beans_path_to_url( $this->src ) );
 	}
 
 	/**
