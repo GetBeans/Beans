@@ -16,6 +16,7 @@
 
 .tm-main {
     word-wrap: break-word;
+    overflow-x: hidden;
 }
 
 
@@ -232,4 +233,29 @@ article header > .tm-article-image:first-child {
 :focus {
 	color: #333;
 	outline: 1px #ccc solid;
+}
+
+
+/* Gutenberg
+ ========================================================================== */
+
+.wp-block-cover-image.alignfull,
+.wp-block-gallery.alignfull,
+.wp-block-image.alignfull img ,
+.wp-block-cover-image.alignfull,
+.wp-block-gallery.alignfull,
+.wp-block-image.alignfull img {
+    clear: both;
+    margin-left: ~"calc(50% - 50vw)";
+    margin-right: ~"calc(50% - 50vw)";
+    width: 100vw;
+}
+
+@media only screen and (min-width: 1062px) {
+
+    .alignwide {
+        margin-left: -10%;
+        margin-right: -10%;
+    }
+
 }
