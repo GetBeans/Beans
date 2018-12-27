@@ -11,7 +11,7 @@
 
 beans_output_e( 'beans_doctype', '<!DOCTYPE html>' );
 
-beans_open_markup_e( 'beans_html', 'html', str_replace( ' ', '&', str_replace( '"', '', beans_render_function( 'language_attributes' ) ) ) );
+beans_open_markup_e( 'beans_html', 'html', str_replace( '"', '', str_replace( '" ', '&', beans_render_function( 'language_attributes' ) ) ) );
 
 	beans_open_markup_e( 'beans_head', 'head' );
 
